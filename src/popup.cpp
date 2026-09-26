@@ -17,6 +17,10 @@
 class query_popup_impl : public cataimgui::window
 {
         short mouse_selected_option;
+        // Set when ImGui::Button reports a click. SELECT is swallowed while
+        // ImGui WantCaptureMouse is true (see sdltiles mouse handlers), so
+        // query_once must honor this flag the same way uilist uses clicked.
+        bool mouse_clicked_option;
         size_t msg_width;
         nc_color default_text_color;
         query_popup *parent;
@@ -38,12 +42,18 @@ class query_popup_impl : public cataimgui::window
             keyboard_selected_option = 0;
             last_keyboard_selected_option = -1;
             mouse_selected_option = -1;
+            mouse_clicked_option = false;
         }
 
         void on_resized() override;
 
         int get_mouse_selected_option() const {
             return mouse_selected_option;
+        }
+        bool consume_mouse_click() {
+            const bool was = mouse_clicked_option;
+            mouse_clicked_option = false;
+            return was;
         }
     protected:
         void draw_controls() override;
@@ -68,9 +78,14 @@ void query_popup_impl::draw_controls()
                 ImGui::SameLine();
             }
             ImGui::SetCursorPosX( float( parent->buttons[ind].pos.x ) );
-            ImGui::Button( remove_color_tags( parent->buttons[ind].text ).c_str() );
-            if( ImGui::IsItemHovered() ) {
-                mouse_selected_option = ind;
+            // Prefer Button()'s click return: sdltiles suppresses SELECT / mouse
+            // button events while ImGui::WantCaptureMouse, so hover-only + SELECT
+            // never activates Yes/No. Keyboard CONFIRM / Y/N are unchanged.
+            if( ImGui::Button( remove_color_tags( parent->buttons[ind].text ).c_str() ) ) {
+                mouse_selected_option = static_cast<short>( ind );
+                mouse_clicked_option = true;
+            } else if( ImGui::IsItemHovered() ) {
+                mouse_selected_option = static_cast<short>( ind );
             }
             if( keyboard_selected_option != last_keyboard_selected_option &&
                 keyboard_selected_option == short( ind ) && ImGui::IsWindowFocused() ) {
@@ -326,9 +341,14 @@ query_popup::result query_popup::query_once()
         res.action = ctxt.handle_input( 50 );
         res.evt = ctxt.get_raw_input();
 
-        // If we're tracking mouse movement
-        if( !options.empty() && res.action == "SELECT" && impl->get_mouse_selected_option() != -1 ) {
-            // Left-click to confirm selection
+        // Mouse activation: ImGui Button click (preferred) or legacy SELECT if
+        // it was not swallowed by WantCaptureMouse.
+        if( !options.empty() && impl->consume_mouse_click() &&
+            impl->get_mouse_selected_option() != -1 ) {
+            res.action = "CONFIRM";
+            cur = size_t( impl->get_mouse_selected_option() );
+        } else if( !options.empty() && res.action == "SELECT" &&
+                   impl->get_mouse_selected_option() != -1 ) {
             res.action = "CONFIRM";
             cur = size_t( impl->get_mouse_selected_option() );
         } else if( res.action == "CONFIRM" && impl->keyboard_selected_option != -1 ) {

@@ -154,6 +154,7 @@
 #include "maptile_fwd.h"
 #include "memorial_logger.h"
 #include "messages.h"
+#include "mouse_toolbar.h"
 #include "mission.h"
 #include "mod_manager.h"
 #include "monexamine.h"
@@ -490,6 +491,7 @@ game::game() :
 
 game::~game()
 {
+    mouse_toolbar::hide();
     // event_bus_ptr about to die; let debug_capture drop its sticky
     // subscribe flag and release the JSONL file. Without this, a later
     // `game` instance would never resubscribe.

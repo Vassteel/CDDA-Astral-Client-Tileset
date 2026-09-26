@@ -1068,6 +1068,11 @@ SDL_Window_Ptr CreateGameWindow( const char *title, const int display, const int
     // SDL_CreateWindow takes (title, w, h, flags) -- no position params.
     SDL_Window_Ptr result( SDL_CreateWindow( title, w, h, flags ) );
     printErrorIf( !result, "SDL_CreateWindow failed" );
+    // Maximized (and similar) flags are applied asynchronously; sync so
+    // WinCreate's immediate GetWindowSize sees the settled geometry.
+    if( result && ( flags & ( SDL_WINDOW_MAXIMIZED | SDL_WINDOW_FULLSCREEN ) ) ) {
+        SDL_SyncWindow( result.get() );
+    }
     return result;
 }
 
@@ -1077,21 +1082,32 @@ bool SetWindowFullscreen( SDL_Window *window, const FullscreenMode mode )
     if( !window ) {
         return false;
     }
+    bool ok = false;
     switch( mode ) {
         case FullscreenMode::windowed:
-            return SDL_SetWindowFullscreen( window, false );
+            ok = SDL_SetWindowFullscreen( window, false );
+            break;
         case FullscreenMode::fullscreen_desktop:
-            return SDL_SetWindowFullscreen( window, true );
+            ok = SDL_SetWindowFullscreen( window, true );
+            break;
         case FullscreenMode::fullscreen_exclusive: {
             SDL_DisplayID disp = SDL_GetDisplayForWindow( window );
             const SDL_DisplayMode *dm = SDL_GetDesktopDisplayMode( disp );
             if( dm ) {
                 SDL_SetWindowFullscreenMode( window, dm );
             }
-            return SDL_SetWindowFullscreen( window, true );
+            ok = SDL_SetWindowFullscreen( window, true );
+            break;
         }
     }
-    return false;
+    // SDL applies fullscreen/maximize asynchronously on X11/Wayland. Without
+    // SyncWindow, GetWindowSize immediately after still returns the pre-change
+    // size, so WinCreate seeds TERMINAL/display_buffer too small and the
+    // integer-scale present path letterboxes (black bars + mouse offset).
+    if( ok ) {
+        SDL_SyncWindow( window );
+    }
+    return ok;
 }
 
 

@@ -69,6 +69,7 @@
 #include "math_parser_diag_value.h"
 #include "mdarray.h"
 #include "messages.h"
+#include "mouse_toolbar.h"
 #include "monster.h"
 #include "move_mode.h"
 #include "mtype.h"
@@ -241,6 +242,10 @@ class user_turn
 input_context game::get_player_input( std::string &action )
 {
     map &here = get_map();
+    mouse_toolbar::set_default_mode_wait( true );
+    on_out_of_scope toolbar_wait_guard( []() {
+        mouse_toolbar::set_default_mode_wait( false );
+    } );
 
     const tripoint_bub_ms pos = u.pos_bub( here );
 
@@ -457,12 +462,20 @@ input_context game::get_player_input( std::string &action )
             }
 
             ui_manager::redraw_invalidated();
+            if( mouse_toolbar::has_pending_action() ) {
+                action = "TIMEOUT";
+                break;
+            }
         } while( handle_mouseview( ctxt, action ) && uquit != QUIT_WATCH
                  && ( action != "TIMEOUT" || !current_turn.has_timeout_elapsed() ) );
         ctxt.reset_timeout();
     } else {
         ctxt.set_timeout( 125 );
         while( handle_mouseview( ctxt, action ) ) {
+            if( mouse_toolbar::has_pending_action() ) {
+                action = "TIMEOUT";
+                break;
+            }
             if( action == "TIMEOUT" && current_turn.has_timeout_elapsed() ) {
                 break;
             }
@@ -3189,6 +3202,11 @@ bool game::handle_action()
     } else {
         // No auto-move, ask player for input
         ctxt = get_player_input( action );
+        // Toolbar click during the wait: prefer it over TIMEOUT / empty input.
+        if( const std::optional<action_id> toolbar_act = mouse_toolbar::take_pending_action() ) {
+            act = *toolbar_act;
+            action = action_ident( act );
+        }
     }
 
     // Remove asynchronous animations if any action taken before the input timeout

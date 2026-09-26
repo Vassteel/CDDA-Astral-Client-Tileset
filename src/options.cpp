@@ -372,6 +372,14 @@ void options_manager::add( const std::string &sNameIn, const std::string &sPageI
     thisOpt.hide = opt_hide;
     thisOpt.vItems = sItemsIn;
 
+    // Empty item lists used to dereference vItems[0] and SIGSEGV during
+    // options init (seen on Deck when portrait tileset was missing from gfx/).
+    if( thisOpt.vItems.empty() ) {
+        debugmsg( "Option '%s' has no selectable values; inserting placeholder.", sNameIn );
+        thisOpt.vItems.emplace_back( sDefaultIn.empty() ? "none" : sDefaultIn,
+                                     to_translation( sDefaultIn.empty() ? "none" : sDefaultIn ) );
+    }
+
     if( thisOpt.getItemPos( sDefaultIn ) == -1 ) {
         sDefaultIn = thisOpt.vItems[0].first;
     }
@@ -1318,6 +1326,10 @@ std::vector<options_manager::id_and_option> options_manager::build_tilesets_list
             } else {
                 ++iter;
             }
+        }
+        // Keep options init alive if gfx/ has no portrait pack (bindist sync miss).
+        if( result.empty() ) {
+            result.emplace_back( "Test_Portrait_Pack", to_translation( "Test_Portrait_Pack" ) );
         }
     }
 
@@ -2319,6 +2331,13 @@ void options_manager::add_options_interface()
         },
         30, 30, COPT_CURSES_HIDE );
         get_option( "EDGE_SCROLL" ).setPrerequisite( "ENABLE_MOUSE" );
+
+        add( "MOUSE_TOOLBAR", page_id, to_translation( "On-screen mouse toolbar" ),
+             to_translation( "If true, show a compact clickable toolbar during normal play "
+                             "(Inventory, Craft, Build, Map, Character, Wait, Log, Zones). "
+                             "Keyboard bindings are unchanged." ),
+             true, COPT_CURSES_HIDE );
+        get_option( "MOUSE_TOOLBAR" ).setPrerequisite( "ENABLE_MOUSE" );
     } );
 
     add_empty_line();

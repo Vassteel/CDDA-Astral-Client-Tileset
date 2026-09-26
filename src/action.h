@@ -611,11 +611,10 @@ action_id handle_action_menu( map &here );
 /**
  * Show a right-click / tile-scoped context menu of actions applicable at @p p.
  *
- * Filters to safe world actions that make sense for the clicked tile (examine,
- * open/close, smash, pickup, grab, butcher, peek, look, wait, fire, move here).
- * Returns ACTION_NULL if cancelled or nothing applies.  Returns
- * static_cast<action_id>( NUM_ACTIONS + 1 ) for the synthetic "Move here" entry.
- * Uses plain English labels with no letter hotkeys (mouse-native UX).
+ * Filters with can_interact_at / situation checks. Ordering: interactives →
+ * combat/look → inventory/craft → move/wait. Plain English labels, no letter
+ * hotkeys (uilist key 0). Returns ACTION_NULL if cancelled or nothing applies.
+ * Returns static_cast<action_id>( NUM_ACTIONS + 1 ) for synthetic "Move here".
  */
 action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p );
 

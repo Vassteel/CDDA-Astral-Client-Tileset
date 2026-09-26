@@ -1117,7 +1117,20 @@ SDL_Point window_to_display_buffer_coords( SDL_Point window_pt )
         static_cast<int>( static_cast<int64_t>( window_pt.y - dstrect.y ) * buf_h / dstrect.h )
     };
 #else
-    // Use the SDL provided translation of scaling and casting for SDL3 builds
+    // Invert get_display_buffer_render_rect (integer-scale top-left blit with
+    // black remainder). SDL_RenderCoordinatesFromWindow only knows about SDL
+    // logical presentation, which we do not set — trusting it left mouse hits
+    // misaligned whenever drawable != buffer (HiDPI / letterbox / SyncWindow
+    // races). Match the Android path: map window px through the present rect.
+    {
+        const SDL_Rect dstrect = get_display_buffer_render_rect();
+        if( dstrect.w > 0 && dstrect.h > 0 ) {
+            return SDL_Point{
+                static_cast<int>( static_cast<int64_t>( window_pt.x - dstrect.x ) * buf_w / dstrect.w ),
+                static_cast<int>( static_cast<int64_t>( window_pt.y - dstrect.y ) * buf_h / dstrect.h )
+            };
+        }
+    }
     if( renderer ) {
         float rx = 0.0f;
         float ry = 0.0f;

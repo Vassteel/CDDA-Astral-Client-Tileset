@@ -764,12 +764,12 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
         entries.emplace_back( id, true, 0, label );
     };
 
-    // 1) Interactives first: open / close / examine / pickup / grab / butcher
+    // 1) Interactives: open / close / examine / pickup / grab / haul / butcher / talk
     if( is_adjacent && can_interact_at( ACTION_OPEN, here, p ) ) {
-        add_action( ACTION_OPEN, _( "Open door" ) );
+        add_action( ACTION_OPEN, _( "Open" ) );
     }
     if( is_adjacent && can_interact_at( ACTION_CLOSE, here, p ) ) {
-        add_action( ACTION_CLOSE, _( "Close door" ) );
+        add_action( ACTION_CLOSE, _( "Close" ) );
     }
     if( ( is_adjacent || is_self ) && can_interact_at( ACTION_EXAMINE, here, p ) ) {
         add_action( ACTION_EXAMINE, _( "Examine" ) );
@@ -786,8 +786,18 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
             add_action( ACTION_GRAB, _( "Grab" ) );
         }
     }
-    if( is_self && can_interact_at( ACTION_BUTCHER, here, p ) ) {
+    // Haul is always from the player's tile.
+    if( is_self && here.has_haulable_items( p ) ) {
+        add_action( ACTION_HAUL, _( "Haul items" ) );
+    }
+    if( player_character.is_hauling() && is_self ) {
+        add_action( ACTION_HAUL_TOGGLE, _( "Stop hauling" ) );
+    }
+    if( ( is_adjacent || is_self ) && can_interact_at( ACTION_BUTCHER, here, p ) ) {
         add_action( ACTION_BUTCHER, _( "Butcher" ) );
+    }
+    if( ( is_adjacent || is_self ) && can_interact_at( ACTION_CHAT, here, p ) ) {
+        add_action( ACTION_CHAT, _( "Talk" ) );
     }
 
     // 2) Combat / look
@@ -798,16 +808,47 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
         add_action( ACTION_PEEK, _( "Peek" ) );
     }
     add_action( ACTION_LOOK, _( "Look around" ) );
-    if( const monster *const mon = get_creature_tracker().creature_at<monster>( p ) ) {
-        if( player_character.sees( here, *mon ) ) {
-            const item_location weapon = player_character.get_wielded_item();
-            if( weapon && weapon->is_gun() ) {
+    {
+        const item_location weapon = player_character.get_wielded_item();
+        const bool wielding_gun = weapon && weapon->is_gun();
+        if( const monster *const mon = get_creature_tracker().creature_at<monster>( p ) ) {
+            if( player_character.sees( here, *mon ) && wielding_gun ) {
                 add_action( ACTION_FIRE, _( "Fire" ) );
+            }
+        } else if( !is_self && wielding_gun && player_character.sees( here, p ) ) {
+            // Aiming UI still lets the player pick the final target.
+            add_action( ACTION_FIRE, _( "Fire" ) );
+        }
+        if( is_self && weapon ) {
+            if( weapon->is_reloadable() ) {
+                add_action( ACTION_RELOAD_WIELDED, _( "Reload wielded" ) );
+            }
+            // Apply / use whatever is in hand when the item itself is usable.
+            if( !weapon->is_gun() && !weapon->is_armor() ) {
+                add_action( ACTION_USE_WIELDED, _( "Apply wielded" ) );
             }
         }
     }
 
-    // 3) Move / wait
+    // 3) Inventory / craft / zones (self or as Action Menu exposes them)
+    if( is_self ) {
+        add_action( ACTION_INVENTORY, _( "Inventory" ) );
+        add_action( ACTION_DROP, _( "Drop" ) );
+        add_action( ACTION_CRAFT, _( "Craft" ) );
+        if( !player_character.in_vehicle ) {
+            add_action( ACTION_CONSTRUCT, _( "Construct" ) );
+        }
+        add_action( ACTION_LOOT, _( "Loot zone" ) );
+        add_action( ACTION_ZONES, _( "Zones" ) );
+        add_action( ACTION_MAP, _( "Map" ) );
+        add_action( ACTION_PL_INFO, _( "Character info" ) );
+        add_action( ACTION_MESSAGES, _( "Message log" ) );
+    } else if( is_adjacent ) {
+        // Directional drop onto the clicked adjacent tile.
+        add_action( ACTION_DIR_DROP, _( "Drop here" ) );
+    }
+
+    // 4) Move / wait
     if( !is_self ) {
         entries.emplace_back( MOVE_HERE, true, 0, _( "Move here" ) );
     }
