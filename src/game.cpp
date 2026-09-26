@@ -2817,35 +2817,35 @@ bool game::try_get_right_click_action( action_id &act, const tripoint_bub_ms &mo
         return false;
     }
 
-    const bool is_adjacent = square_dist( mouse_target.xy(), u.pos_bub().xy() ) <= 1;
-    const bool is_self = square_dist( mouse_target.xy(), u.pos_bub().xy() ) <= 0;
-    if( const monster *const mon = get_creature_tracker().creature_at<monster>( mouse_target ) ) {
-        if( !u.sees( here, *mon ) ) {
-            add_msg( _( "Nothing relevant here." ) );
-            return false;
-        }
-
-        if( !u.get_wielded_item() || !u.get_wielded_item()->is_gun() ) {
-            add_msg( m_info, _( "You are not wielding a ranged weapon." ) );
-            return false;
-        }
-
-        // TODO: Add weapon range check. This requires weapon to be reloaded.
-
-        act = ACTION_FIRE;
-    } else if( is_adjacent &&
-               here.close_door( tripoint_bub_ms( mouse_target.xy(), u.posz() ),
-                                !here.is_outside( u.pos_bub() ), true ) ) {
-        act = ACTION_CLOSE;
-    } else if( is_self ) {
-        act = ACTION_PICKUP;
-    } else if( is_adjacent ) {
-        act = ACTION_EXAMINE;
-    } else {
-        add_msg( _( "Nothing relevant here." ) );
+    // Phase A mouse-first controls: show a tile-scoped context menu instead of
+    // auto-picking a single action.  Left-click move and all keyboard bindings
+    // are unchanged.  SEC_SELECT in other input contexts (dialogs) still means
+    // cancel — only DEFAULTMODE map clicks reach this function.
+    constexpr int MOVE_HERE = NUM_ACTIONS + 1;
+    const action_id chosen = handle_tile_context_menu( here, mouse_target );
+    if( chosen == ACTION_NULL ) {
         return false;
     }
 
+    if( static_cast<int>( chosen ) == MOVE_HERE ) {
+        const std::optional<std::vector<tripoint_bub_ms>> try_route =
+        safe_route_to( u, mouse_target, 0, []( const std::string & msg ) {
+            add_msg( msg );
+        } );
+        if( !try_route.has_value() || try_route->empty() ) {
+            return false;
+        }
+        // Start traveling immediately from the menu (no second click required).
+        u.set_destination( *try_route );
+        act = u.get_next_auto_move_direction();
+        if( act == ACTION_NULL ) {
+            u.clear_destination();
+            return false;
+        }
+        return true;
+    }
+
+    act = chosen;
     return true;
 }
 

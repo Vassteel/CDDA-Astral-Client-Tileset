@@ -1,0 +1,11 @@
+[
+  {
+    "type": "MOD_INFO",
+    "id": "limitless_backpack",
+    "name": "Limitless Backpack",
+    "authors": [ "Custom client" ],
+    "description": "A weightless backpack with unlimited storage and spoilage prevention.",
+    "category": "items",
+    "dependencies": [ "dda" ]
+  }
+]

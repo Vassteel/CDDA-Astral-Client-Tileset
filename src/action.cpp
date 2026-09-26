@@ -30,6 +30,7 @@
 #include "mapdata.h"
 #include "memory_fast.h"
 #include "messages.h"
+#include "monster.h"
 #include "options.h"
 #include "output.h"
 #include "path_info.h"
@@ -741,6 +742,101 @@ bool can_interact_at( action_id action, map &here, const tripoint_bub_ms &p )
         default:
             return false;
     }
+}
+
+
+action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
+{
+    // Synthetic retval for "Move here" — not a real action_id.
+    constexpr int MOVE_HERE = NUM_ACTIONS + 1;
+
+    Character &player_character = get_player_character();
+    const tripoint_bub_ms player_pos = player_character.pos_bub();
+    const int dist = square_dist( p.xy(), player_pos.xy() );
+    const bool is_self = dist <= 0;
+    const bool is_adjacent = dist <= 1;
+
+    std::vector<uilist_entry> entries;
+
+    // Mouse-native presentation: plain English labels, no keybind letters.
+    // uilist: key 0 / empty input_event() disables hotkey (nullopt would auto-assign a-z).
+    const auto add_action = [&]( action_id id, const std::string & label ) {
+        entries.emplace_back( id, true, 0, label );
+    };
+
+    // 1) Interactives first: open / close / examine / pickup / grab / butcher
+    if( is_adjacent && can_interact_at( ACTION_OPEN, here, p ) ) {
+        add_action( ACTION_OPEN, _( "Open door" ) );
+    }
+    if( is_adjacent && can_interact_at( ACTION_CLOSE, here, p ) ) {
+        add_action( ACTION_CLOSE, _( "Close door" ) );
+    }
+    if( ( is_adjacent || is_self ) && can_interact_at( ACTION_EXAMINE, here, p ) ) {
+        add_action( ACTION_EXAMINE, _( "Examine" ) );
+    }
+    if( ( is_adjacent || is_self ) && can_interact_at( ACTION_EXAMINE_AND_PICKUP, here, p ) ) {
+        add_action( ACTION_EXAMINE_AND_PICKUP, _( "Examine and pick up" ) );
+    }
+    if( ( is_adjacent || is_self ) && can_interact_at( ACTION_PICKUP, here, p ) ) {
+        add_action( ACTION_PICKUP, _( "Pick up items" ) );
+    }
+    if( is_adjacent && !is_self ) {
+        const optional_vpart_position vp = here.veh_at( p );
+        if( vp || ( here.has_furn( p ) && here.furn( p ).obj().is_movable() ) ) {
+            add_action( ACTION_GRAB, _( "Grab" ) );
+        }
+    }
+    if( is_self && can_interact_at( ACTION_BUTCHER, here, p ) ) {
+        add_action( ACTION_BUTCHER, _( "Butcher" ) );
+    }
+
+    // 2) Combat / look
+    if( is_adjacent && here.is_bashable( p ) ) {
+        add_action( ACTION_SMASH, _( "Smash" ) );
+    }
+    if( is_adjacent && !is_self && here.passable( p ) ) {
+        add_action( ACTION_PEEK, _( "Peek" ) );
+    }
+    add_action( ACTION_LOOK, _( "Look around" ) );
+    if( const monster *const mon = get_creature_tracker().creature_at<monster>( p ) ) {
+        if( player_character.sees( here, *mon ) ) {
+            const item_location weapon = player_character.get_wielded_item();
+            if( weapon && weapon->is_gun() ) {
+                add_action( ACTION_FIRE, _( "Fire" ) );
+            }
+        }
+    }
+
+    // 3) Move / wait
+    if( !is_self ) {
+        entries.emplace_back( MOVE_HERE, true, 0, _( "Move here" ) );
+    }
+    if( is_self && can_interact_at( ACTION_MOVE_UP, here, p ) ) {
+        add_action( ACTION_MOVE_UP, _( "Go up" ) );
+    }
+    if( is_self && can_interact_at( ACTION_MOVE_DOWN, here, p ) ) {
+        add_action( ACTION_MOVE_DOWN, _( "Go down" ) );
+    }
+    if( is_self ) {
+        add_action( ACTION_WAIT, _( "Wait" ) );
+        add_action( ACTION_PAUSE, _( "Pause" ) );
+    }
+
+    if( entries.empty() ) {
+        add_msg( _( "Nothing relevant here." ) );
+        return ACTION_NULL;
+    }
+
+    uilist smenu;
+    const std::string tile_name = here.name( p );
+    smenu.title = tile_name.empty() ? _( "Actions" ) : tile_name;
+    smenu.entries = entries;
+    smenu.query();
+
+    if( smenu.ret < 0 ) {
+        return ACTION_NULL;
+    }
+    return static_cast<action_id>( smenu.ret );
 }
 
 action_id handle_interact( map &here, const tripoint_bub_ms &pos )

@@ -2545,7 +2545,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             break;
 
         case ACTION_OPEN:
-            player_character.assign_activity( open_tile_activity_actor( std::nullopt ) );
+            player_character.assign_activity( open_tile_activity_actor( mouse_target ) );
             break;
 
         case ACTION_CLOSE:

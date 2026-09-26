@@ -1,0 +1,522 @@
+[
+  {
+    "type": "ITEM",
+    "id": "test_rc_raw",
+    "name": {
+      "str": "test recursive raw"
+    },
+    "description": "Test fixture for recursive crafting.",
+    "weight": "1 g",
+    "volume": "1 ml",
+    "symbol": "*",
+    "color": "white",
+    "material": [
+      "steel"
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "test_rc_other",
+    "name": {
+      "str": "test recursive other"
+    },
+    "description": "Test fixture for recursive crafting.",
+    "weight": "1 g",
+    "volume": "1 ml",
+    "symbol": "*",
+    "color": "white",
+    "material": [
+      "steel"
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "test_rc_unit",
+    "name": {
+      "str": "test recursive unit"
+    },
+    "description": "Test fixture for recursive crafting.",
+    "weight": "1 g",
+    "volume": "1 ml",
+    "symbol": "*",
+    "color": "white",
+    "material": [
+      "steel"
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "test_rc_part",
+    "name": {
+      "str": "test recursive part"
+    },
+    "description": "Test fixture for recursive crafting.",
+    "weight": "1 g",
+    "volume": "1 ml",
+    "symbol": "*",
+    "color": "white",
+    "material": [
+      "steel"
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "test_rc_target",
+    "name": {
+      "str": "test recursive target"
+    },
+    "description": "Test fixture for recursive crafting.",
+    "weight": "1 g",
+    "volume": "1 ml",
+    "symbol": "*",
+    "color": "white",
+    "material": [
+      "steel"
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "test_rc_cycle_a",
+    "name": {
+      "str": "test recursive cycle_a"
+    },
+    "description": "Test fixture for recursive crafting.",
+    "weight": "1 g",
+    "volume": "1 ml",
+    "symbol": "*",
+    "color": "white",
+    "material": [
+      "steel"
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "test_rc_cycle_b",
+    "name": {
+      "str": "test recursive cycle_b"
+    },
+    "description": "Test fixture for recursive crafting.",
+    "weight": "1 g",
+    "volume": "1 ml",
+    "symbol": "*",
+    "color": "white",
+    "material": [
+      "steel"
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "test_rc_dead",
+    "name": {
+      "str": "test recursive dead"
+    },
+    "description": "Test fixture for recursive crafting.",
+    "weight": "1 g",
+    "volume": "1 ml",
+    "symbol": "*",
+    "color": "white",
+    "material": [
+      "steel"
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "test_rc_tool",
+    "name": {
+      "str": "test recursive tool"
+    },
+    "description": "Test fixture for crafting charge reservations.",
+    "weight": "1 g",
+    "volume": "1 ml",
+    "symbol": ";",
+    "color": "white",
+    "max_charges": 1000,
+    "initial_charges": 0,
+    "subtypes": [
+      "TOOL"
+    ],
+    "material": [
+      "steel"
+    ]
+  },
+  {
+    "type": "recipe",
+    "result": "test_rc_unit",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "activity_level": "LIGHT_EXERCISE",
+    "difficulty": 0,
+    "time": "1 s",
+    "batch_time_factors": [
+      50,
+      2
+    ],
+    "autolearn": true,
+    "components": [
+      [
+        [
+          "test_rc_raw",
+          1
+        ]
+      ]
+    ],
+    "result_mult": 2
+  },
+  {
+    "type": "recipe",
+    "result": "test_rc_part",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "activity_level": "LIGHT_EXERCISE",
+    "difficulty": 0,
+    "time": "1 s",
+    "batch_time_factors": [
+      50,
+      2
+    ],
+    "autolearn": true,
+    "components": [
+      [
+        [
+          "test_rc_unit",
+          3
+        ]
+      ]
+    ]
+  },
+  {
+    "type": "recipe",
+    "result": "test_rc_target",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "activity_level": "LIGHT_EXERCISE",
+    "difficulty": 0,
+    "time": "1 s",
+    "batch_time_factors": [
+      50,
+      2
+    ],
+    "autolearn": true,
+    "components": [
+      [
+        [
+          "test_rc_unit",
+          3
+        ]
+      ]
+    ]
+  },
+  {
+    "type": "recipe",
+    "result": "test_rc_target",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "activity_level": "LIGHT_EXERCISE",
+    "difficulty": 0,
+    "time": "1 s",
+    "batch_time_factors": [
+      50,
+      2
+    ],
+    "autolearn": true,
+    "components": [
+      [
+        [
+          "test_rc_unit",
+          1
+        ]
+      ],
+      [
+        [
+          "test_rc_part",
+          1
+        ]
+      ]
+    ],
+    "id_suffix": "shared"
+  },
+  {
+    "type": "recipe",
+    "result": "test_rc_target",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "activity_level": "LIGHT_EXERCISE",
+    "difficulty": 0,
+    "time": "1 s",
+    "batch_time_factors": [
+      50,
+      2
+    ],
+    "autolearn": true,
+    "components": [
+      [
+        [
+          "test_rc_raw",
+          1
+        ],
+        [
+          "test_rc_other",
+          1
+        ]
+      ],
+      [
+        [
+          "test_rc_unit",
+          1
+        ]
+      ]
+    ],
+    "id_suffix": "backtrack"
+  },
+  {
+    "type": "recipe",
+    "result": "test_rc_target",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "activity_level": "LIGHT_EXERCISE",
+    "difficulty": 0,
+    "time": "1 s",
+    "batch_time_factors": [
+      50,
+      2
+    ],
+    "autolearn": true,
+    "components": [
+      [
+        [
+          "test_rc_unit",
+          1
+        ]
+      ],
+      [
+        [
+          "test_rc_raw",
+          1
+        ]
+      ]
+    ],
+    "id_suffix": "shortage"
+  },
+  {
+    "type": "recipe",
+    "result": "test_rc_unit",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "activity_level": "LIGHT_EXERCISE",
+    "difficulty": 0,
+    "time": "1 s",
+    "batch_time_factors": [
+      50,
+      2
+    ],
+    "autolearn": true,
+    "components": [
+      [
+        [
+          "test_rc_raw",
+          1
+        ]
+      ]
+    ],
+    "id_suffix": "powered",
+    "tools": [
+      [
+        [
+          "test_rc_tool",
+          5
+        ]
+      ]
+    ]
+  },
+  {
+    "type": "recipe",
+    "result": "test_rc_target",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "activity_level": "LIGHT_EXERCISE",
+    "difficulty": 0,
+    "time": "1 s",
+    "batch_time_factors": [
+      50,
+      2
+    ],
+    "autolearn": true,
+    "components": [
+      [
+        [
+          "test_rc_unit",
+          1
+        ]
+      ]
+    ],
+    "id_suffix": "powered",
+    "tools": [
+      [
+        [
+          "test_rc_tool",
+          5
+        ]
+      ]
+    ]
+  },
+  {
+    "type": "recipe",
+    "result": "test_rc_cycle_a",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "activity_level": "LIGHT_EXERCISE",
+    "difficulty": 0,
+    "time": "1 s",
+    "batch_time_factors": [
+      50,
+      2
+    ],
+    "autolearn": true,
+    "components": [
+      [
+        [
+          "test_rc_cycle_b",
+          1
+        ]
+      ]
+    ]
+  },
+  {
+    "type": "recipe",
+    "result": "test_rc_cycle_b",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "activity_level": "LIGHT_EXERCISE",
+    "difficulty": 0,
+    "time": "1 s",
+    "batch_time_factors": [
+      50,
+      2
+    ],
+    "autolearn": true,
+    "components": [
+      [
+        [
+          "test_rc_cycle_a",
+          1
+        ]
+      ]
+    ]
+  },
+  {
+    "type": "recipe",
+    "result": "test_rc_target",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "activity_level": "LIGHT_EXERCISE",
+    "difficulty": 0,
+    "time": "1 s",
+    "batch_time_factors": [
+      50,
+      2
+    ],
+    "autolearn": true,
+    "components": [
+      [
+        [
+          "test_rc_cycle_a",
+          1
+        ]
+      ]
+    ],
+    "id_suffix": "cycle"
+  },
+  {
+    "type": "recipe",
+    "result": "test_rc_target",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "activity_level": "LIGHT_EXERCISE",
+    "difficulty": 0,
+    "time": "1 s",
+    "batch_time_factors": [
+      50,
+      2
+    ],
+    "autolearn": true,
+    "components": [
+      [
+        [
+          "test_rc_dead",
+          1
+        ]
+      ]
+    ],
+    "id_suffix": "missing"
+  },
+  {
+    "type": "recipe",
+    "result": "nail",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "activity_level": "LIGHT_EXERCISE",
+    "difficulty": 0,
+    "time": "1 s",
+    "batch_time_factors": [
+      50,
+      2
+    ],
+    "autolearn": true,
+    "components": [
+      [
+        [
+          "test_rc_raw",
+          1
+        ]
+      ]
+    ],
+    "id_suffix": "recursive",
+    "charges": 3
+  },
+  {
+    "type": "recipe",
+    "result": "test_rc_target",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "activity_level": "LIGHT_EXERCISE",
+    "difficulty": 0,
+    "time": "1 s",
+    "batch_time_factors": [
+      50,
+      2
+    ],
+    "autolearn": true,
+    "components": [
+      [
+        [
+          "nail",
+          5
+        ]
+      ]
+    ],
+    "id_suffix": "charges"
+  },
+  {
+    "type": "recipe",
+    "result": "test_rc_unit",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "activity_level": "LIGHT_EXERCISE",
+    "difficulty": 0,
+    "time": "1 s",
+    "batch_time_factors": [
+      50,
+      2
+    ],
+    "autolearn": true,
+    "components": [
+      [
+        [
+          "test_rc_dead",
+          1
+        ]
+      ]
+    ],
+    "id_suffix": "a_dead_end"
+  }
+]

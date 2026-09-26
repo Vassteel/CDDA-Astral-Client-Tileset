@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=CDDA Tileset Picker
+Comment=Cataclysm: Dark Days Ahead with a main-menu tileset previewer
+Exec="/home/deck/Documents/ChatGPT/CDDA/Launch CDDA Tileset Picker.sh"
+Icon=/home/deck/Documents/ChatGPT/CDDA/artifacts/client/data/cataicon.ico
+Terminal=false
+Categories=Game;RolePlaying;

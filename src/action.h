@@ -609,6 +609,19 @@ point_rel_ms get_delta_from_movement_action( action_id act, iso_rotate rot );
 action_id handle_action_menu( map &here );
 
 /**
+ * Show a right-click / tile-scoped context menu of actions applicable at @p p.
+ *
+ * Filters to safe world actions that make sense for the clicked tile (examine,
+ * open/close, smash, pickup, grab, butcher, peek, look, wait, fire, move here).
+ * Returns ACTION_NULL if cancelled or nothing applies.  Returns
+ * static_cast<action_id>( NUM_ACTIONS + 1 ) for the synthetic "Move here" entry.
+ * Uses plain English labels with no letter hotkeys (mouse-native UX).
+ */
+action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p );
+
+
+
+/**
  * Show a context-sensitive action menu for a specific tile.
  *
  * If only one action is possible, it is returned immediately.
