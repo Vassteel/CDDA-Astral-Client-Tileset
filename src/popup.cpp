@@ -343,6 +343,11 @@ query_popup::result query_popup::query_once()
 
         // Mouse activation: ImGui Button click (preferred) or legacy SELECT if
         // it was not swallowed by WantCaptureMouse.
+        //
+        // Critical: sdltiles drops mouse button events while WantCaptureMouse,
+        // so handle_input returns timeout even when Button() reported a click.
+        // We must NOT keep looping on that timeout or the click is discarded
+        // (uilist avoids this by checking `clicked` before its TIMEOUT branch).
         if( !options.empty() && impl->consume_mouse_click() &&
             impl->get_mouse_selected_option() != -1 ) {
             res.action = "CONFIRM";
@@ -355,12 +360,16 @@ query_popup::result query_popup::query_once()
             cur = size_t( impl->keyboard_selected_option );
         }
     } while(
-        // Always ignore mouse movement
-        ( res.evt.type == input_event_t::mouse &&
-          res.evt.get_first_input() == static_cast<int>( MouseInput::Move ) ) ||
-        // Ignore window losing focus in SDL
-        ( res.evt.type == input_event_t::keyboard_char && res.evt.sequence.empty() ) ||
-        res.evt.type == input_event_t::timeout
+        // ImGui Button / SELECT already produced a confirm — exit even if the
+        // underlying evt is timeout (mouse was swallowed by WantCaptureMouse).
+        res.action != "CONFIRM" && (
+            // Always ignore mouse movement
+            ( res.evt.type == input_event_t::mouse &&
+              res.evt.get_first_input() == static_cast<int>( MouseInput::Move ) ) ||
+            // Ignore window losing focus in SDL
+            ( res.evt.type == input_event_t::keyboard_char && res.evt.sequence.empty() ) ||
+            res.evt.type == input_event_t::timeout
+        )
     );
 
     if( cancel && res.action == "QUIT" ) {
