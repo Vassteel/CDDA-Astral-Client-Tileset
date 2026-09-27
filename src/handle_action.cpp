@@ -2650,8 +2650,10 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
 
         case ACTION_INVENTORY:
             if( get_option<bool>( "RPG_EQUIPMENT_UI" ) ) {
+                DebugLog( D_INFO, D_MAIN ) << "rpg_eq_ctx: ACTION_INVENTORY → RPG equipment UI";
                 rpg_equipment_ui::open();
             } else {
+                DebugLog( D_INFO, D_MAIN ) << "rpg_eq_ctx: ACTION_INVENTORY → classic inv (option off)";
                 game_menus::inv::common();
             }
             break;

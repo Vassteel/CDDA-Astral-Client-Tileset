@@ -15,6 +15,7 @@
 #include "catacharset.h"
 #include "character.h"
 #include "color.h"
+#include "debug.h"
 #include "enums.h"
 #include "flag.h"
 #include "game.h"
@@ -246,6 +247,33 @@ static void imgui_cdda_tooltip( const std::string &tip )
     ImGui::EndTooltip();
 }
 
+
+// Temporary RMB context-menu diagnostics (remove after root-cause confirmed).
+// Always uses D_MAIN so lines reach config/debug.log without raising debug filters.
+static constexpr bool RPG_EQ_CTX_TELEM = true;
+
+static void rpg_eq_ctx_telem( std::string &ui_line, const std::string &msg )
+{
+    if( !RPG_EQ_CTX_TELEM ) {
+        return;
+    }
+    DebugLog( D_INFO, D_MAIN ) << "rpg_eq_ctx: " << msg;
+    ui_line = msg;
+}
+
+static std::string rpg_eq_short_tname( const item_location &loc )
+{
+    if( !loc || !loc.get_item() ) {
+        return "<none>";
+    }
+    std::string n = remove_color_tags( loc->tname( 1, false ) );
+    if( utf8_width( n ) > 24 ) {
+        n = utf8_truncate( n, 24 );
+    }
+    return n;
+}
+
+
 /**
  * Short readable grid / doll label: prefer type_name + count, word-boundary ellipsis.
  * Full identity stays in the tooltip via display_name().
@@ -471,6 +499,11 @@ class rpg_equipment_window : public cataimgui::window
         pending_action pending = pending_action::none;
         // Non-empty when context menu picked a typed use_methods key (Turn on/off).
         std::string pending_use_method;
+        // Temporary RMB telemetry / shared popup target (inv + doll).
+        std::string rmb_telem_line;
+        item_location ctx_menu_loc;
+        bool ctx_menu_from_worn = false;
+        int ctx_menu_slot = -1;
 
         void draw_paper_doll();
         void draw_inventory_grid();
@@ -851,6 +884,9 @@ void rpg_equipment_window::draw_paper_doll()
                                           static_cast<int>( ( slot_w - 90.f ) / std::max( 1.f,
                                                   ImGui::CalcTextSize( "W" ).x ) ) );
 
+    bool doll_ctx_request = false;
+    int doll_ctx_index = -1;
+    item_location doll_ctx_loc;
     for( int i = 0; i < static_cast<int>( slots.size() ); i++ ) {
         const doll_slot &slot = slots[i];
         item_location worn_loc = item_on_slot( *you, slot );
@@ -890,11 +926,22 @@ void rpg_equipment_window::draw_paper_doll()
                 selected_worn = item_location::nowhere;
             }
         }
-        const bool hovered = ImGui::IsItemHovered();
-        // Open RMB popup while slot Button is still LastItem (see inv grid note).
-        if( worn_loc && worn_loc.get_item() ) {
-            ImGui::OpenPopupOnItemClick( "rpg_doll_ctx",
-                                         ImGuiPopupFlags_MouseButtonRight );
+        const bool hovered = ImGui::IsItemHovered(
+                                  ImGuiHoveredFlags_AllowWhenBlockedByPopup );
+        const bool rmb_down = ImGui::IsMouseClicked( ImGuiMouseButton_Right );
+        const bool rmb_up = ImGui::IsMouseReleased( ImGuiMouseButton_Right );
+        const bool want_cap = ImGui::GetIO().WantCaptureMouse;
+        const ImGuiID slot_item_id = ImGui::GetItemID();
+        const ImGuiID per_slot_popup_id = ImGui::GetID( "rpg_doll_ctx" );
+
+        if( hovered && ( rmb_down || rmb_up ) ) {
+            rpg_eq_ctx_telem( rmb_telem_line, string_format(
+                                  "DOLL %s slot=%d id=0x%08X popupId=0x%08X wantCap=%d t='%s'",
+                                  rmb_down ? "RMB_DOWN" : "RMB_UP",
+                                  i, static_cast<unsigned>( slot_item_id ),
+                                  static_cast<unsigned>( per_slot_popup_id ),
+                                  want_cap ? 1 : 0,
+                                  rpg_eq_short_tname( worn_loc ) ) );
         }
 
         // Drag-drop target: inventory grid → this doll slot (needs Button LastItem).
@@ -909,6 +956,13 @@ void rpg_equipment_window::draw_paper_doll()
                 }
             }
             ImGui::EndDragDropTarget();
+        }
+
+        // Defer shared doll popup until after PopID (stable id under doll child).
+        if( hovered && rmb_up && worn_loc && worn_loc.get_item() ) {
+            doll_ctx_request = true;
+            doll_ctx_index = i;
+            doll_ctx_loc = worn_loc;
         }
 
         ui_hybrid_chrome::draw_item_bezel( selected, hovered, empty );
@@ -943,54 +997,6 @@ void rpg_equipment_window::draw_paper_doll()
             imgui_cdda_tooltip( tip );
         }
 
-        // Right-click worn / wielded item on this slot
-        if( ImGui::BeginPopup( "rpg_doll_ctx" ) ) {
-            selected_slot = i;
-            selected_worn = worn_loc;
-            selected_inv = item_location::nowhere;
-            refresh_selection_validity();
-            std::string use_method;
-            const item_context_menu::action chosen =
-                item_context_menu::draw_imgui_menu( *you, selected_worn, /*from_worn=*/true,
-                                                    &use_method );
-            switch( chosen ) {
-                case item_context_menu::action::consume:
-                    // Consume from worn container (e.g. waterskin on belt) — use worn loc
-                    selected_inv = selected_worn;
-                    pending = pending_action::ctx_consume;
-                    break;
-                case item_context_menu::action::use:
-                    selected_inv = selected_worn;
-                    pending = pending_action::use_item;
-                    pending_use_method = std::move( use_method );
-                    break;
-                case item_context_menu::action::read:
-                    selected_inv = selected_worn;
-                    pending = pending_action::ctx_read;
-                    break;
-                case item_context_menu::action::takeoff:
-                    pending = pending_action::takeoff;
-                    break;
-                case item_context_menu::action::unload:
-                    selected_inv = selected_worn;
-                    pending = pending_action::ctx_unload;
-                    break;
-                case item_context_menu::action::reload:
-                    selected_inv = selected_worn;
-                    pending = pending_action::ctx_reload;
-                    break;
-                case item_context_menu::action::examine:
-                    pending = pending_action::examine_item;
-                    break;
-                case item_context_menu::action::wear:
-                case item_context_menu::action::wield:
-                case item_context_menu::action::drop:
-                case item_context_menu::action::none:
-                    break;
-            }
-            ImGui::EndPopup();
-        }
-
         // Tint hint via draw-list (avoid TextUnformatted stealing LastItem).
         {
             const ImVec2 rmin = ImGui::GetItemRectMin();
@@ -1003,6 +1009,72 @@ void rpg_equipment_window::draw_paper_doll()
 
         ImGui::PopStyleColor( slot_cols );
         ImGui::PopID();
+    }
+
+    if( doll_ctx_request ) {
+        ctx_menu_loc = doll_ctx_loc;
+        ctx_menu_from_worn = true;
+        ctx_menu_slot = doll_ctx_index;
+        ImGui::OpenPopup( "rpg_doll_ctx" );
+        rpg_eq_ctx_telem( rmb_telem_line, string_format(
+                              "DOLL OpenPopup slot=%d sharedId=0x%08X IsPopupOpen=%d t='%s'",
+                              doll_ctx_index,
+                              static_cast<unsigned>( ImGui::GetID( "rpg_doll_ctx" ) ),
+                              ImGui::IsPopupOpen( "rpg_doll_ctx" ) ? 1 : 0,
+                              rpg_eq_short_tname( doll_ctx_loc ) ) );
+    }
+    const bool doll_popup_was_open = ImGui::IsPopupOpen( "rpg_doll_ctx" );
+    const bool doll_begin = ImGui::BeginPopup( "rpg_doll_ctx" );
+    if( doll_ctx_request ) {
+        rpg_eq_ctx_telem( rmb_telem_line, string_format(
+                              "DOLL BeginPopup=%d IsPopupOpen=%d slot=%d t='%s'",
+                              doll_begin ? 1 : 0, doll_popup_was_open ? 1 : 0,
+                              doll_ctx_index, rpg_eq_short_tname( ctx_menu_loc ) ) );
+    }
+    if( doll_begin ) {
+        selected_slot = ctx_menu_slot;
+        selected_worn = ctx_menu_loc;
+        selected_inv = item_location::nowhere;
+        refresh_selection_validity();
+        std::string use_method;
+        const item_context_menu::action chosen =
+            item_context_menu::draw_imgui_menu( *you, selected_worn, /*from_worn=*/true,
+                                                &use_method );
+        switch( chosen ) {
+            case item_context_menu::action::consume:
+                selected_inv = selected_worn;
+                pending = pending_action::ctx_consume;
+                break;
+            case item_context_menu::action::use:
+                selected_inv = selected_worn;
+                pending = pending_action::use_item;
+                pending_use_method = std::move( use_method );
+                break;
+            case item_context_menu::action::read:
+                selected_inv = selected_worn;
+                pending = pending_action::ctx_read;
+                break;
+            case item_context_menu::action::takeoff:
+                pending = pending_action::takeoff;
+                break;
+            case item_context_menu::action::unload:
+                selected_inv = selected_worn;
+                pending = pending_action::ctx_unload;
+                break;
+            case item_context_menu::action::reload:
+                selected_inv = selected_worn;
+                pending = pending_action::ctx_reload;
+                break;
+            case item_context_menu::action::examine:
+                pending = pending_action::examine_item;
+                break;
+            case item_context_menu::action::wear:
+            case item_context_menu::action::wield:
+            case item_context_menu::action::drop:
+            case item_context_menu::action::none:
+                break;
+        }
+        ImGui::EndPopup();
     }
 
     ImGui::EndChild();
@@ -1111,6 +1183,9 @@ void rpg_equipment_window::draw_inventory_grid()
     // rectangular (every cell lands in a fixed column under the one above).
     ImGui::PushStyleVar( ImGuiStyleVar_ItemSpacing, ImVec2( cell_gap, cell_gap ) );
     int col = 0;
+    bool inv_ctx_request = false;
+    int inv_ctx_index = -1;
+    item_location inv_ctx_loc;
     for( int i = 0; i < static_cast<int>( grid_items.size() ); i++ ) {
         grid_cell &cell = grid_items[i];
         ImGui::PushID( 1000 + i );
@@ -1136,20 +1211,48 @@ void rpg_equipment_window::draw_inventory_grid()
                 selected_inv = cell.loc;
             }
         }
-        const bool hovered = ImGui::IsItemHovered();
-        // CRITICAL: open RMB popup while the cell Button is still LastItem.
-        // Tooltips (BeginTooltip + Text) and drag-preview Text change
-        // LastItemData; BeginPopupContextItem after them attaches to the wrong
-        // item so right-click appears to do nothing.
-        ImGui::OpenPopupOnItemClick( "rpg_inv_ctx", ImGuiPopupFlags_MouseButtonRight );
+        const bool hovered = ImGui::IsItemHovered(
+                                  ImGuiHoveredFlags_AllowWhenBlockedByPopup );
+        const bool rmb_down = ImGui::IsMouseClicked( ImGuiMouseButton_Right );
+        const bool rmb_up = ImGui::IsMouseReleased( ImGuiMouseButton_Right );
+        const bool want_cap = ImGui::GetIO().WantCaptureMouse;
+        const ImGuiID cell_item_id = ImGui::GetItemID();
+        // Per-cell hashed id (old OpenPopupOnItemClick path) — log to compare
+        // against the shared popup id used after PopID.
+        const ImGuiID per_cell_popup_id = ImGui::GetID( "rpg_inv_ctx" );
 
-        // Drag source → doll slots (also needs Button as LastItem).
+        if( hovered && ( rmb_down || rmb_up ) ) {
+            rpg_eq_ctx_telem( rmb_telem_line, string_format(
+                                  "INV %s cell=%d id=0x%08X popupId=0x%08X wantCap=%d t='%s'",
+                                  rmb_down ? "RMB_DOWN" : "RMB_UP",
+                                  i, static_cast<unsigned>( cell_item_id ),
+                                  static_cast<unsigned>( per_cell_popup_id ),
+                                  want_cap ? 1 : 0,
+                                  rpg_eq_short_tname( cell.loc ) ) );
+        }
+
+        // Drag source → doll slots (needs Button as LastItem; LMB only).
+        bool dds_active = false;
         if( ImGui::BeginDragDropSource( ImGuiDragDropFlags_SourceAllowNullID ) ) {
+            dds_active = true;
             drag_payload = cell.loc;
             int token = i;
             ImGui::SetDragDropPayload( "RPG_EQ_ITEM", &token, sizeof( token ) );
             ImGui::TextUnformatted( cell.label.c_str() );
             ImGui::EndDragDropSource();
+        }
+        if( hovered && rmb_up && dds_active ) {
+            rpg_eq_ctx_telem( rmb_telem_line, string_format(
+                                  "INV RMB_UP+DDS CONFLICT cell=%d t='%s'",
+                                  i, rpg_eq_short_tname( cell.loc ) ) );
+        }
+
+        // Defer shared popup open until after PopID so OpenPopup/BeginPopup share
+        // one stable id (inv_grid child) — avoids PushID stack mismatch.
+        if( hovered && rmb_up ) {
+            inv_ctx_request = true;
+            inv_ctx_index = i;
+            inv_ctx_loc = cell.loc;
         }
 
         ui_hybrid_chrome::draw_item_bezel( is_sel, hovered, false );
@@ -1171,53 +1274,6 @@ void rpg_equipment_window::draw_inventory_grid()
             imgui_cdda_tooltip( cell.tip );
         }
 
-        // Shared builder mirrors vanilla inventory_item_menu eligibility (Drink/Eat/…).
-        if( ImGui::BeginPopup( "rpg_inv_ctx" ) ) {
-            selected_inv = cell.loc;
-            selected_worn = item_location::nowhere;
-            refresh_selection_validity();
-            std::string use_method;
-            const item_context_menu::action chosen =
-                item_context_menu::draw_imgui_menu( *you, selected_inv, /*from_worn=*/false,
-                                                    &use_method );
-            switch( chosen ) {
-                case item_context_menu::action::consume:
-                    pending = pending_action::ctx_consume;
-                    break;
-                case item_context_menu::action::use:
-                    pending = pending_action::use_item;
-                    pending_use_method = std::move( use_method );
-                    break;
-                case item_context_menu::action::read:
-                    pending = pending_action::ctx_read;
-                    break;
-                case item_context_menu::action::wear:
-                    pending = pending_action::ctx_wear;
-                    break;
-                case item_context_menu::action::wield:
-                    pending = pending_action::wield;
-                    break;
-                case item_context_menu::action::takeoff:
-                    pending = pending_action::takeoff;
-                    break;
-                case item_context_menu::action::drop:
-                    pending = pending_action::drop_item;
-                    break;
-                case item_context_menu::action::unload:
-                    pending = pending_action::ctx_unload;
-                    break;
-                case item_context_menu::action::reload:
-                    pending = pending_action::ctx_reload;
-                    break;
-                case item_context_menu::action::examine:
-                    pending = pending_action::examine_item;
-                    break;
-                case item_context_menu::action::none:
-                    break;
-            }
-            ImGui::EndPopup();
-        }
-
         ImGui::PopStyleColor( grid_cols );
         ImGui::PopID();
 
@@ -1229,6 +1285,74 @@ void rpg_equipment_window::draw_inventory_grid()
         }
     }
     ImGui::PopStyleVar(); // ItemSpacing
+
+    // Shared inventory RMB popup at inv_grid id-stack (no per-cell PushID).
+    if( inv_ctx_request ) {
+        ctx_menu_loc = inv_ctx_loc;
+        ctx_menu_from_worn = false;
+        ctx_menu_slot = -1;
+        ImGui::OpenPopup( "rpg_inv_ctx" );
+        rpg_eq_ctx_telem( rmb_telem_line, string_format(
+                              "INV OpenPopup cell=%d sharedId=0x%08X IsPopupOpen=%d t='%s'",
+                              inv_ctx_index,
+                              static_cast<unsigned>( ImGui::GetID( "rpg_inv_ctx" ) ),
+                              ImGui::IsPopupOpen( "rpg_inv_ctx" ) ? 1 : 0,
+                              rpg_eq_short_tname( inv_ctx_loc ) ) );
+    }
+    const bool inv_popup_was_open = ImGui::IsPopupOpen( "rpg_inv_ctx" );
+    const bool inv_begin = ImGui::BeginPopup( "rpg_inv_ctx" );
+    // Log BeginPopup only on the RMB open attempt (not every frame while open).
+    if( inv_ctx_request ) {
+        rpg_eq_ctx_telem( rmb_telem_line, string_format(
+                              "INV BeginPopup=%d IsPopupOpen=%d cell=%d t='%s'",
+                              inv_begin ? 1 : 0, inv_popup_was_open ? 1 : 0,
+                              inv_ctx_index, rpg_eq_short_tname( ctx_menu_loc ) ) );
+    }
+    if( inv_begin ) {
+        selected_inv = ctx_menu_loc;
+        selected_worn = item_location::nowhere;
+        refresh_selection_validity();
+        std::string use_method;
+        const item_context_menu::action chosen =
+            item_context_menu::draw_imgui_menu( *you, selected_inv, /*from_worn=*/false,
+                                                &use_method );
+        switch( chosen ) {
+            case item_context_menu::action::consume:
+                pending = pending_action::ctx_consume;
+                break;
+            case item_context_menu::action::use:
+                pending = pending_action::use_item;
+                pending_use_method = std::move( use_method );
+                break;
+            case item_context_menu::action::read:
+                pending = pending_action::ctx_read;
+                break;
+            case item_context_menu::action::wear:
+                pending = pending_action::ctx_wear;
+                break;
+            case item_context_menu::action::wield:
+                pending = pending_action::wield;
+                break;
+            case item_context_menu::action::takeoff:
+                pending = pending_action::takeoff;
+                break;
+            case item_context_menu::action::drop:
+                pending = pending_action::drop_item;
+                break;
+            case item_context_menu::action::unload:
+                pending = pending_action::ctx_unload;
+                break;
+            case item_context_menu::action::reload:
+                pending = pending_action::ctx_reload;
+                break;
+            case item_context_menu::action::examine:
+                pending = pending_action::examine_item;
+                break;
+            case item_context_menu::action::none:
+                break;
+        }
+        ImGui::EndPopup();
+    }
 
     ImGui::EndChild();
 }
@@ -1275,6 +1399,10 @@ void rpg_equipment_window::draw_action_bar()
                                 "Right-click for Drink/Eat, Turn on/off, Use, Read, Wear, Wield, Drop, Unload, Reload, Examine. "
                                 "Right-click worn slots too. Esc closes." ) );
     }
+    if( RPG_EQ_CTX_TELEM && !rmb_telem_line.empty() ) {
+        ImGui::TextColored( ImVec4( 0.95f, 0.75f, 0.25f, 1.f ),
+                            "RMB dbg: %s", rmb_telem_line.c_str() );
+    }
 }
 
 void rpg_equipment_window::draw_controls()
@@ -1297,6 +1425,9 @@ namespace rpg_equipment_ui
 
 void open()
 {
+    const bool opt = get_option<bool>( "RPG_EQUIPMENT_UI" );
+    DebugLog( D_INFO, D_MAIN ) << "rpg_eq_ctx: equipment UI open; RPG_EQUIPMENT_UI="
+                               << ( opt ? "true" : "false" );
     Character &you = get_player_character();
     rpg_equipment_window win( &you );
     win.execute();
