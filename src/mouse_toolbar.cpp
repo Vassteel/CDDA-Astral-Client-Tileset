@@ -68,6 +68,7 @@ class mouse_toolbar_window : public cataimgui::window
 
             static const std::vector<std::pair<action_id, translation>> buttons = {
                 { ACTION_INVENTORY, to_translation( "Inv" ) },
+                { ACTION_EAT, to_translation( "Consume" ) },
                 { ACTION_CRAFT, to_translation( "Craft" ) },
                 { ACTION_CONSTRUCT, to_translation( "Build" ) },
                 { ACTION_MAP, to_translation( "Map" ) },
