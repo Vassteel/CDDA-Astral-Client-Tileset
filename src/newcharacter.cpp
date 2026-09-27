@@ -1727,18 +1727,25 @@ const mutation_variant *variant_trait_selection_menu( const trait_id &cur_trait 
 
 void draw_profession_header( const avatar &u )
 {
-    const std::vector<profession_id> &sorted_profs = cc_uistate.sorted_professions;
-    const int selected_profession_index = cc_uistate.selected_profession_index;
-    const profession &selected_profession = sorted_profs[selected_profession_index].obj();
+    const profession *selected_profession = u.prof;
+    if( !cc_uistate.sorted_professions.empty() ) {
+        const int idx = cc_uistate.selected_profession_index;
+        if( idx >= 0 && idx < static_cast<int>( cc_uistate.sorted_professions.size() ) ) {
+            selected_profession = &cc_uistate.sorted_professions[idx].obj();
+        }
+    }
+    if( selected_profession == nullptr ) {
+        return;
+    }
 
-    draw_colored_text_wrap( get_origin( selected_profession.src ), COL_NOTE_MINOR );
+    draw_colored_text_wrap( get_origin( selected_profession->src ), COL_NOTE_MINOR );
 
     draw_spacer();
     draw_colored_text_wrap( _( "Profession story:" ), COL_HEADER );
-    if( !selected_profession.can_pick().success() ) {
-        draw_colored_text_wrap( selected_profession.can_pick().str(), c_red );
+    if( !selected_profession->can_pick().success() ) {
+        draw_colored_text_wrap( selected_profession->can_pick().str(), c_red );
     }
-    draw_colored_text_wrap( selected_profession.description( u.male ), COL_NOTE_MINOR );
+    draw_colored_text_wrap( selected_profession->description( u.male ), COL_NOTE_MINOR );
 }
 
 void draw_header( bool &drawn_anything, const std::string &title )
@@ -1840,9 +1847,17 @@ void draw_profession_missions( bool &drawn_anything, const std::string &header,
 
 void draw_profession_details()
 {
-    const std::vector<profession_id> &sorted_profs = cc_uistate.sorted_professions;
-    const int selected_profession_index = cc_uistate.selected_profession_index;
-    const profession &selected_profession = sorted_profs[selected_profession_index].obj();
+    const profession *selected_profession_ptr = nullptr;
+    if( !cc_uistate.sorted_professions.empty() ) {
+        const int idx = cc_uistate.selected_profession_index;
+        if( idx >= 0 && idx < static_cast<int>( cc_uistate.sorted_professions.size() ) ) {
+            selected_profession_ptr = &cc_uistate.sorted_professions[idx].obj();
+        }
+    }
+    if( selected_profession_ptr == nullptr ) {
+        return;
+    }
+    const profession &selected_profession = *selected_profession_ptr;
 
     bool drawn_anything = false;
 
@@ -1954,12 +1969,32 @@ void draw_profession_inventory_items( const std::string &category,
 
 void draw_profession_inventory( const avatar &u )
 {
-    const std::vector<profession_id> &sorted_profs = cc_uistate.sorted_professions;
-    const int selected_profession_index = cc_uistate.selected_profession_index;
-    const profession &selected_profession = sorted_profs[selected_profession_index].obj();
+    // Resolve which profession's kit to show. sorted_professions is only filled
+    // after visiting the Profession tab; Preset Character / template load jumps
+    // straight to SUMMARY with an empty vector, so indexing it SIGSEGVs in
+    // string_id<profession>::obj() → generic_factory::find_id.
+    // Summary always uses the avatar's committed profession; Profession tab uses
+    // the list highlight when that list is valid.
+    const profession *selected_profession = u.prof;
+    if( cc_uistate.selected_tab != CHARCREATOR_SUMMARY &&
+        !cc_uistate.sorted_professions.empty() ) {
+        const int idx = cc_uistate.selected_profession_index;
+        if( idx >= 0 && idx < static_cast<int>( cc_uistate.sorted_professions.size() ) ) {
+            selected_profession = &cc_uistate.sorted_professions[idx].obj();
+        }
+    }
+    if( selected_profession == nullptr ) {
+        draw_colored_text_wrap( _( "Profession items:" ), COL_HEADER );
+        draw_colored_text_wrap( pgettext( "set_profession_item", "None" ), COL_NOTE_MINOR );
+        return;
+    }
 
+    // Cache is cleared when entering SUMMARY (see upon_switching_tab) so a
+    // browsed-but-unconfirmed Profession-tab highlight cannot leak in. Fill
+    // only when empty to keep random item-group previews stable across frames.
     if( cc_uistate.cached_profession_inventory.empty() ) {
-        cc_uistate.cached_profession_inventory = selected_profession.items( outfit, u.get_mutations() );
+        cc_uistate.cached_profession_inventory = selected_profession->items( outfit,
+                u.get_mutations() );
     }
     const std::list<item> &prof_items = cc_uistate.cached_profession_inventory;
 
@@ -2768,6 +2803,10 @@ void character_creator_ui::set_current_tab_input( const input_context &new_input
 void character_creator_ui::upon_switching_tab()
 {
     setup_avatar();
+    if( cc_uistate.selected_tab == CHARCREATOR_SUMMARY ) {
+        // Drop Profession-tab browse cache so Summary rebuilds from u.prof.
+        cc_uistate.cached_profession_inventory.clear();
+    }
     update_uilist_entries();
 }
 
@@ -3552,9 +3591,12 @@ cataimgui::bounds character_creator_ui_impl::get_bounds()
 template<typename T>
 static int find_index( const std::vector<T> &vec, const T &obj )
 {
-    int ret = 0;
-    ret = std::distance( vec.begin(), std::find( vec.begin(), vec.end(), obj ) );
-    return ret;
+    const auto it = std::find( vec.begin(), vec.end(), obj );
+    if( it == vec.end() ) {
+        // Not found: return 0 so callers never index at vec.size() (OOB).
+        return 0;
+    }
+    return static_cast<int>( std::distance( vec.begin(), it ) );
 }
 
 void character_creator_uistate::recalc_scenario_list( const avatar &u )
@@ -3712,7 +3754,8 @@ void character_creator_uistate::set_initial_tab( character_creator_tab first_tab
 
 const scenario *character_creator_uistate::get_selected_scenario()
 {
-    if( selected_scenario_index < 0 ) {
+    if( selected_scenario_index < 0 ||
+        selected_scenario_index >= static_cast<int>( sorted_scenarios.size() ) ) {
         return nullptr;
     }
     return sorted_scenarios[selected_scenario_index];
@@ -3720,7 +3763,8 @@ const scenario *character_creator_uistate::get_selected_scenario()
 
 profession_id character_creator_uistate::get_selected_profession()
 {
-    if( selected_profession_index < 0 ) {
+    if( selected_profession_index < 0 ||
+        selected_profession_index >= static_cast<int>( sorted_professions.size() ) ) {
         return profession_id::NULL_ID();
     }
     return sorted_professions[selected_profession_index];
@@ -3728,7 +3772,8 @@ profession_id character_creator_uistate::get_selected_profession()
 
 profession_id character_creator_uistate::get_selected_hobby()
 {
-    if( selected_hobby_index < 0 ) {
+    if( selected_hobby_index < 0 ||
+        selected_hobby_index >= static_cast<int>( sorted_hobbies.size() ) ) {
         return profession_id::NULL_ID();
     }
     return sorted_hobbies[selected_hobby_index];
@@ -3736,7 +3781,8 @@ profession_id character_creator_uistate::get_selected_hobby()
 
 trait_id character_creator_uistate::get_selected_trait()
 {
-    if( selected_trait_index < 0 ) {
+    if( selected_trait_index < 0 ||
+        selected_trait_index >= static_cast<int>( sorted_traits.size() ) ) {
         return trait_id::NULL_ID();
     }
     return sorted_traits[selected_trait_index];
@@ -3744,7 +3790,8 @@ trait_id character_creator_uistate::get_selected_trait()
 
 skill_id character_creator_uistate::get_selected_skill()
 {
-    if( selected_skill_index < 0 ) {
+    if( selected_skill_index < 0 ||
+        selected_skill_index >= static_cast<int>( sorted_skills.size() ) ) {
         return skill_id::NULL_ID();
     }
     return sorted_skills[selected_skill_index]->ident();
@@ -3760,6 +3807,10 @@ void character_creator_uistate::clear_equipment_customization()
 
 void character_creator_uistate::ensure_equipment_pool( const avatar &u )
 {
+    if( u.prof == nullptr ) {
+        clear_equipment_customization();
+        return;
+    }
     const profession_id pid = u.prof->ident();
     if( equipment_locked &&
         equipment_source_prof == pid &&
@@ -3787,7 +3838,8 @@ void character_creator_uistate::ensure_equipment_pool( const avatar &u )
 
 bool character_creator_uistate::has_custom_starting_equipment( const avatar &u ) const
 {
-    return equipment_locked &&
+    return u.prof != nullptr &&
+           equipment_locked &&
            equipment_source_prof == u.prof->ident() &&
            equipment_source_outfit == outfit &&
            equipment_source_male == u.male;
