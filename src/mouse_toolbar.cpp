@@ -101,6 +101,7 @@ class mouse_toolbar_window : public cataimgui::window
                 const bool pickup_on = get_option<bool>( "AUTO_PICKUP" );
                 const bool forage_on = get_option<bool>( "AUTO_FEATURES" ) &&
                                        get_option<std::string>( "AUTO_FORAGING" ) != "off";
+                const bool combat_on = get_option<bool>( "AUTO_COMBAT" );
                 const std::string forage_mode = get_option<std::string>( "AUTO_FORAGING" );
 
                 auto draw_styled_button = [&]( const char *id, const std::string & label,
@@ -127,6 +128,7 @@ class mouse_toolbar_window : public cataimgui::window
                     // Hint active mode when not the default bushes setting.
                     forage_label += ":" + forage_mode.substr( 0, 1 );
                 }
+                const std::string combat_label = combat_on ? _( "Combat●" ) : _( "Combat" );
 
                 const auto pick_clicks = draw_styled_button( "tb_pick", pick_label, pickup_on );
                 if( pick_clicks.first ) {
@@ -172,6 +174,38 @@ class mouse_toolbar_window : public cataimgui::window
                     pick_mode( "trees", _( "Trees" ) );
                     pick_mode( "crops", _( "Crops" ) );
                     pick_mode( "all", _( "Everything" ) );
+                    ImGui::EndPopup();
+                }
+
+                const auto combat_clicks = draw_styled_button( "tb_combat", combat_label,
+                                           combat_on );
+                if( combat_clicks.first ) {
+                    pending = ACTION_TOGGLE_AUTO_COMBAT;
+                } else if( combat_clicks.second ) {
+                    ImGui::OpenPopup( "tb_combat_help" );
+                }
+
+                if( ImGui::BeginPopup( "tb_combat_help" ) ) {
+                    ImGui::TextUnformatted( _( "Auto combat" ) );
+                    ImGui::Separator();
+                    ImGui::TextWrapped( "%s",
+                                        _( "When Combat● is on, each of your turns fights "
+                                           "automatically if a hostile is in range.\n\n"
+                                           "Melee / reach: normal attack (martial style + "
+                                           "weapon + worn armor techniques).  Blocks and "
+                                           "dodges still use the normal defense path when "
+                                           "you are hit.\n\n"
+                                           "Ranged: aims/fires your wielded gun or bow "
+                                           "without the targeting UI.  Does not switch "
+                                           "weapons, throw, or cast spells.\n\n"
+                                           "If nothing is fightable, you keep normal "
+                                           "control so you can move.  Safe mode still "
+                                           "stops actions.  Toggle off to cancel." ) );
+                    ImGui::Spacing();
+                    if( ImGui::Selectable( _( "One-shot autoattack (Tab)" ) ) ) {
+                        pending = ACTION_AUTOATTACK;
+                        ImGui::CloseCurrentPopup();
+                    }
                     ImGui::EndPopup();
                 }
             }

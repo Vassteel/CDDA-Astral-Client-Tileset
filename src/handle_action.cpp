@@ -3167,6 +3167,17 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             break;
         }
 
+        case ACTION_TOGGLE_AUTO_COMBAT: {
+            set_next_option( "AUTO_COMBAT" );
+            if( get_option<bool>( "AUTO_COMBAT" ) ) {
+                add_msg( _( "Auto combat on.  Each turn fights hostiles in melee/reach "
+                            "or fires your wielded gun when in range.  Toggle off "
+                            "(Combat●) or clear safe mode to stop.  Right-click Combat "
+                            "for details." ) );
+            }
+            break;
+        }
+
         case ACTION_TOGGLE_HOUR_TIMER:
             toggle_debug_hour_timer();
             break;
@@ -3237,6 +3248,13 @@ bool game::handle_action()
         open_menu_tmp.value()();
         return false;
     } else {
+        // Soft-fork sticky AUTO_COMBAT: inject a combat action when a hostile is
+        // fightable; otherwise fall through to normal input (no pause spam).
+        if( get_option<bool>( "AUTO_COMBAT" ) && uquit != QUIT_WATCH &&
+            !player_character.is_dead_state() &&
+            avatar_action::auto_combat( player_character, here ) ) {
+            return true;
+        }
         // No auto-move, ask player for input
         ctxt = get_player_input( action );
         // Toolbar click during the wait: prefer it over TIMEOUT / empty input.

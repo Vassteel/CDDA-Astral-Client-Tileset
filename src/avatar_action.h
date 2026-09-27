@@ -33,6 +33,15 @@ void swim( map &m, avatar &you, const tripoint_bub_ms &p );
 
 void autoattack( avatar &you, map &m );
 
+/**
+ * Soft-fork sticky auto combat helper.
+ * If a hostile is targetable by melee/reach (vanilla autoattack path) or by the
+ * currently wielded gun (non-interactive fire_gun / aim), take that action and
+ * return true.  If nothing is fightable, return false so the caller can fall
+ * through to normal player input (no pause spam).
+ */
+bool auto_combat( avatar &you, map &m );
+
 void mend( avatar &you, item_location loc );
 
 /**

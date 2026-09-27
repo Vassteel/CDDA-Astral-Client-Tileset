@@ -380,6 +380,8 @@ std::string action_ident( action_id act )
             return "toggle_auto_foraging";
         case ACTION_TOGGLE_AUTO_PICKUP:
             return "toggle_auto_pickup";
+        case ACTION_TOGGLE_AUTO_COMBAT:
+            return "toggle_auto_combat";
         case ACTION_TOGGLE_PREVENT_OCCLUSION:
             return "toggle_prevent_occlusion";
         case ACTION_ACTIONMENU:
@@ -483,6 +485,8 @@ bool can_action_change_worldstate( const action_id act )
         case ACTION_TOGGLE_AUTO_PULP_BUTCHER:
         case ACTION_TOGGLE_AUTO_MINING:
         case ACTION_TOGGLE_AUTO_FORAGING:
+        case ACTION_TOGGLE_AUTO_PICKUP:
+        case ACTION_TOGGLE_AUTO_COMBAT:
             return false;
         default:
             return true;
@@ -1291,6 +1295,8 @@ action_id handle_action_menu( map &here )
             REGISTER_ACTION( ACTION_TOGGLE_AUTO_PULP_BUTCHER );
             REGISTER_ACTION( ACTION_TOGGLE_AUTO_MINING );
             REGISTER_ACTION( ACTION_TOGGLE_AUTO_FORAGING );
+            REGISTER_ACTION( ACTION_TOGGLE_AUTO_PICKUP );
+            REGISTER_ACTION( ACTION_TOGGLE_AUTO_COMBAT );
         } else if( category == _( "Craft" ) ) {
             REGISTER_ACTION( ACTION_CRAFT );
             REGISTER_ACTION( ACTION_RECRAFT );

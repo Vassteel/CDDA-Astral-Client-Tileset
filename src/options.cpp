@@ -2353,15 +2353,27 @@ void options_manager::add_options_interface()
              true, COPT_CURSES_HIDE );
 
         add( "MOUSE_TOOLBAR_AUTO_TOGGLES", page_id,
-             to_translation( "Toolbar auto pickup / forage buttons" ),
-             to_translation( "If true, the on-screen mouse toolbar shows Pick and Forage "
-                             "buttons.  Left-click Pick toggles auto pickup (seeds a Global "
+             to_translation( "Toolbar auto pickup / forage / combat buttons" ),
+             to_translation( "If true, the on-screen mouse toolbar shows Pick, Forage, and "
+                             "Combat buttons.  Left-click Pick toggles auto pickup (seeds a Global "
                              "* catch-all rule and enables adjacent pickup when rules were empty).  "
                              "Right-click Pick opens the Auto Pickup Manager.  Left-click "
                              "Forage cycles auto foraging; right-click picks a mode.  "
-                             "Forage requires Additional auto features (enabled automatically)." ),
+                             "Forage requires Additional auto features (enabled automatically).  "
+                             "Left-click Combat toggles sticky auto combat (Combat● when on); "
+                             "right-click Combat shows a short help tip." ),
              true, COPT_CURSES_HIDE );
         get_option( "MOUSE_TOOLBAR_AUTO_TOGGLES" ).setPrerequisite( "MOUSE_TOOLBAR" );
+
+        add( "AUTO_COMBAT", page_id, to_translation( "Auto combat" ),
+             to_translation( "If true, each player turn automatically takes a combat action when "
+                             "a hostile is fightable: melee/reach uses the normal attack path "
+                             "(martial style + weapon + worn armor techniques); ranged fires the "
+                             "wielded gun/bow without the aiming UI.  If nothing is in range, "
+                             "control returns to you so you can move.  Safe mode still blocks "
+                             "actions.  Toggle from the toolbar Combat button when toolbar auto "
+                             "toggles are enabled." ),
+             false, COPT_CURSES_HIDE );
     } );
 
     add_empty_line();

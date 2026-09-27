@@ -2707,6 +2707,7 @@ input_context get_default_mode_input_context()
         ctxt.register_action( "toggle_auto_mining" );
         ctxt.register_action( "toggle_auto_foraging" );
         ctxt.register_action( "toggle_auto_pickup" );
+        ctxt.register_action( "toggle_auto_combat" );
         ctxt.register_action( "toggle_thief_mode" );
         ctxt.register_action( "toggle_prevent_occlusion" );
         ctxt.register_action( "diary" );

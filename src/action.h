@@ -337,6 +337,8 @@ enum action_id : int {
     ACTION_TOGGLE_AUTO_FORAGING,
     /** Turn auto pickup on/off */
     ACTION_TOGGLE_AUTO_PICKUP,
+    /** Turn sticky auto combat on/off (soft-fork toolbar) */
+    ACTION_TOGGLE_AUTO_COMBAT,
     /** Toggle temperature map */
     ACTION_DISPLAY_TEMPERATURE,
     /** Toggle snow depth map */

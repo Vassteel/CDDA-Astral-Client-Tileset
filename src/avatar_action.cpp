@@ -814,6 +814,119 @@ void avatar_action::autoattack( avatar &you, map &m )
     }
 }
 
+static bool auto_combat_is_hostile( const avatar &you, const Creature &c )
+{
+    if( c.is_npc() ) {
+        return dynamic_cast<const npc &>( c ).is_enemy();
+    }
+    // Monsters already exclude FRIENDLY in get_targetable_creatures; keep hostiles + neutrals
+    // that vanilla autoattack would still swing at (same filter as autoattack for non-NPC).
+    static_cast<void>( you );
+    return true;
+}
+
+bool avatar_action::auto_combat( avatar &you, map &m )
+{
+    if( you.has_flag( json_flag_CANNOT_ATTACK ) ) {
+        return false;
+    }
+    // Respect safe mode the same way movement / Tab autoattack do: if the player
+    // has not cleared the warning, do not fight — leave control with them.
+    if( !g->check_safe_mode_allowed() ) {
+        return false;
+    }
+
+    const int moves_before = you.get_moves();
+    const item_location weapon = you.get_wielded_item();
+    const int melee_reach = weapon ? weapon->reach_range( you ).first : std::max( 1,
+                            static_cast<int>( you.calculate_by_enchantment( 1,
+                                    enchant_vals::mod::MELEE_RANGE_MODIFIER ) ) );
+
+    std::vector<Creature *> melee = you.get_targetable_creatures( melee_reach, true );
+    melee.erase( std::remove_if( melee.begin(), melee.end(), [&you, melee_reach]( const Creature * c ) {
+        if( c == nullptr ) {
+            return true;
+        }
+        if( melee_reach == 1 && !you.is_adjacent( c, true ) ) {
+            return true;
+        }
+        if( !you.can_reach_attack( *c ) ) {
+            return true;
+        }
+        return !auto_combat_is_hostile( you, *c );
+    } ), melee.end() );
+
+    if( !melee.empty() ) {
+        // Vanilla path: adjacent move-attack or reach_attack → melee_attack → pick_technique
+        // (style + weapon + worn armor).  Defensive techniques stay on the normal hit path.
+        autoattack( you, m );
+        return you.get_moves() < moves_before;
+    }
+
+    // Ranged: wielded gun / bow / crossbow only (is_gun).  No inventory swap, throw, or spells.
+    if( !weapon || weapon->is_gunmod() || !weapon->is_gun() ) {
+        return false;
+    }
+
+    const gun_mode mode = weapon->gun_current_mode();
+    if( !mode || mode.melee() ) {
+        return false;
+    }
+
+    // Silent readiness check — avoid can_fire_weapon message spam every turn.
+    std::vector<std::string> messages;
+    if( !gunmode_checks_common( you, m, messages, mode ) ||
+        !gunmode_checks_weapon( you, m, messages, mode ) ) {
+        return false;
+    }
+
+    const int gun_range = mode->gun_range( &you );
+    if( gun_range <= 0 ) {
+        return false;
+    }
+
+    std::vector<Creature *> ranged = you.get_targetable_creatures( gun_range, false );
+    ranged.erase( std::remove_if( ranged.begin(), ranged.end(), [&you]( const Creature * c ) {
+        return c == nullptr || !auto_combat_is_hostile( you, *c );
+    } ), ranged.end() );
+    if( ranged.empty() ) {
+        return false;
+    }
+
+    Creature &best = **std::max_element( ranged.begin(), ranged.end(),
+    []( const Creature * l, const Creature * r ) {
+        return rate_critter( *l ) < rate_critter( *r );
+    } );
+
+    const tripoint_bub_ms target = best.pos_bub();
+    const Target_attributes attrs( you.pos_bub(), target );
+    const aim_mods_cache aim_cache = you.gen_aim_mods_cache( *weapon );
+    const double min_recoil = calculate_aim_cap( you, target );
+
+    // NPC-style: if still unsteady at range, spend this turn's moves aiming; fire if
+    // moves remain.  Never opens the interactive aiming UI.
+    if( attrs.range > 1 && you.recoil > min_recoil + MIN_RECOIL_IMPROVEMENT ) {
+        const double first_aim = you.aim_per_move( *weapon, you.recoil, attrs, aim_cache );
+        if( first_aim > MIN_RECOIL_IMPROVEMENT ) {
+            while( you.recoil > min_recoil && you.get_moves() > 0 ) {
+                const double aim_amount = you.aim_per_move( *weapon, you.recoil, attrs, aim_cache );
+                if( aim_amount <= MIN_RECOIL_IMPROVEMENT ) {
+                    break;
+                }
+                you.mod_moves( -1 );
+                you.recoil = std::max( min_recoil, you.recoil - aim_amount );
+            }
+            if( you.get_moves() <= 0 ) {
+                return you.get_moves() < moves_before;
+            }
+        }
+    }
+
+    you.fire_gun( target, mode.qty );
+    // Only claim the turn if moves were spent (avoids an infinite handle_action loop).
+    return you.get_moves() < moves_before;
+}
+
 // TODO: Move data/functions related to targeting out of game class
 bool avatar_action::can_fire_weapon( avatar &you, const map &m, const item &weapon )
 {
