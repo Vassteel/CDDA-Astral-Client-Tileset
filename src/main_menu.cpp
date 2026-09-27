@@ -58,6 +58,38 @@
 #include "text_snippets.h"
 #include "translation.h"
 #include "translations.h"
+
+// Soft-fork D Hybrid main-menu chrome (curses path).
+// Matches ui_hybrid_chrome ImGui palette as closely as nc_color allows:
+// charcoal grit + bronze borders + muted amber selection accents (BG3-clarity).
+namespace hybrid_mm
+{
+static nc_color accent()
+{
+    return c_yellow; // muted amber hotkeys / accents
+}
+static nc_color accent_sel()
+{
+    return hilite( c_yellow );
+}
+static nc_color body()
+{
+    return c_light_gray; // warm body text on charcoal
+}
+static nc_color body_sel()
+{
+    return hilite( c_white );
+}
+static nc_color muted()
+{
+    return c_dark_gray; // version / quiet chrome
+}
+static nc_color bronze()
+{
+    return c_brown; // bronze borders / separators
+}
+} // namespace hybrid_mm
+
 #include "type_id.h"
 #include "uilist.h"
 #include "ui_manager.h"
@@ -141,8 +173,11 @@ std::vector<int> main_menu::print_menu_items( const catacurses::window &w_in,
         }
         ret.push_back( utf8_width_notags( text.c_str() ) );
 
-        std::string temp = shortcut_text( iSel == i ? hilite( c_yellow ) : c_yellow, vItems[i] );
-        text += string_format( "[%s]", colorize( temp, iSel == i ? hilite( c_white ) : c_white ) );
+        // Soft-fork Hybrid: bronze/amber strip — selected = amber hilite, idle = muted body.
+        std::string temp = shortcut_text( iSel == i ? hybrid_mm::accent_sel() : hybrid_mm::accent(),
+                                          vItems[i] );
+        text += string_format( "[%s]", colorize( temp,
+                                                 iSel == i ? hybrid_mm::body_sel() : hybrid_mm::body() ) );
     }
 
     int text_width = utf8_width_notags( text.c_str() );
@@ -195,7 +230,8 @@ void main_menu::display_sub_menu( int sel, const point &bottom_left, int sel_lin
             return;
         case main_menu_opts::SETTINGS:
             for( int i = 0; static_cast<size_t>( i ) < vSettingsSubItems.size(); ++i ) {
-                nc_color clr = i == sel2 ? hilite( c_yellow ) : c_yellow;
+                // Soft-fork Hybrid Settings chrome: amber selection, bronze idle hotkeys.
+                nc_color clr = i == sel2 ? hybrid_mm::accent_sel() : hybrid_mm::accent();
                 sub_opts.push_back( shortcut_text( clr, vSettingsSubItems[i] ) );
                 int len = utf8_width( shortcut_text( clr, vSettingsSubItems[i] ), true );
                 if( len > xlen ) {
@@ -273,7 +309,8 @@ void main_menu::display_sub_menu( int sel, const point &bottom_left, int sel_lin
 
     catacurses::window w_sub = catacurses::newwin( height + 2, xlen + 4, top_left );
     werase( w_sub );
-    draw_border( w_sub, c_white );
+    // Soft-fork Hybrid: bronze submenu bezel (was classic white).
+    draw_border( w_sub, hybrid_mm::bronze() );
 
     // Print as many options as decided previously, starting from the index sub_opt_offset
     for( int y = 0; y < height; y++ ) {
@@ -282,14 +319,15 @@ void main_menu::display_sub_menu( int sel, const point &bottom_left, int sel_lin
         std::string opt = ( is_selection ? "» " : "  " ) + sub_opts[opt_index];
         int padding = ( xlen + 2 ) - utf8_width( opt, true );
         opt.append( padding, ' ' );
-        nc_color clr = is_selection ? hilite( c_white ) : c_white;
+        // Selected row: amber hilite bar; idle: muted warm body.
+        nc_color clr = is_selection ? hybrid_mm::accent_sel() : hybrid_mm::body();
         trim_and_print( w_sub, point( 1, y + 1 ), xlen + 2, clr, opt );
         inclusive_rectangle<point> rec( top_left + point( 1, y  + 1 ),
                                         top_left + point( xlen + 2, y + 1 ) );
         main_menu_sub_button_map.emplace_back( rec, std::pair<int, int> { sel, y } );
     }
     if( static_cast<size_t>( height ) != sub_opts.size() ) {
-        draw_scrollbar( w_sub, sel2, height, sub_opts.size(), point::south, c_white,
+        draw_scrollbar( w_sub, sel2, height, sub_opts.size(), point::south, hybrid_mm::bronze(),
                         false );
     }
     wnoutrefresh( w_sub );
@@ -307,17 +345,17 @@ void main_menu::print_menu( const catacurses::window &w_open, int iSel, const po
     int window_width = getmaxx( w_open );
     int window_height = getmaxy( w_open );
 
-    // Draw horizontal line
-    mvwhline( w_open, point( 1, window_height - 4 ), c_white, LINE_OXOX, window_width - 2 );
+    // Soft-fork Hybrid: bronze separator above the menu strip (was classic white).
+    mvwhline( w_open, point( 1, window_height - 4 ), hybrid_mm::bronze(), LINE_OXOX, window_width - 2 );
 
     if( iSel == getopt( main_menu_opts::NEWCHAR ) ) {
-        center_print( w_open, window_height - 2, c_yellow, vNewGameHints[sel2] );
+        center_print( w_open, window_height - 2, hybrid_mm::accent(), vNewGameHints[sel2] );
     } else {
-        center_print( w_open, window_height - 2, c_red,
+        center_print( w_open, window_height - 2, c_light_red,
                       _( "Bugs?  Suggestions?  Use links in MOTD to report them." ) );
     }
 
-    center_print( w_open, window_height - 1, c_light_cyan, string_format( _( "Tip of the day: %s" ),
+    center_print( w_open, window_height - 1, hybrid_mm::muted(), string_format( _( "Tip of the day: %s" ),
                   vdaytip ) );
 
     int iLine = 0;
@@ -349,11 +387,11 @@ void main_menu::print_menu( const catacurses::window &w_open, int iSel, const po
             print_colored_text( w_open, point( iOffsetX, iLine++ ), cur_color, base_color, i_title );
         }
     } else {
-        center_print( w_open, iLine++, c_light_cyan, mmenu_title[0] );
+        center_print( w_open, iLine++, hybrid_mm::accent(), mmenu_title[0] );
     }
 
     iLine++;
-    center_print( w_open, iLine, c_light_blue, string_format( _( "Version: %s" ),
+    center_print( w_open, iLine, hybrid_mm::muted(), string_format( _( "Version: %s" ),
                   getVersionString() ) );
 
     int menu_length = 0;
