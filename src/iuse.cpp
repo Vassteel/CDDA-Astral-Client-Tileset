@@ -4291,7 +4291,7 @@ static int chop_moves( Character *p, item *it )
     return moves;
 }
 
-std::optional<int> iuse::chop_tree( Character *p, item *it, const tripoint_bub_ms & )
+std::optional<int> iuse::chop_tree( Character *p, item *it, const tripoint_bub_ms &target )
 {
     if( !p ) {
         debugmsg( "%s called action chop_tree that requires character but no character is present",
@@ -4309,12 +4309,16 @@ std::optional<int> iuse::chop_tree( Character *p, item *it, const tripoint_bub_m
         return here.has_flag( ter_furn_flag::TFLAG_TREE, pnt );
     };
 
-    const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent_highlight(
-                here, _( "Chop down which tree?" ), _( "There is no tree to chop down nearby." ), f, false );
-    if( !pnt_ ) {
-        return std::nullopt;
+    tripoint_bub_ms pnt = target;
+    // When activated from inventory (target == self), prompt; mouse/context passes the tile.
+    if( target == p->pos_bub() ) {
+        const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent_highlight(
+                    here, _( "Chop down which tree?" ), _( "There is no tree to chop down nearby." ), f, false );
+        if( !pnt_ ) {
+            return std::nullopt;
+        }
+        pnt = *pnt_;
     }
-    const tripoint_bub_ms &pnt = *pnt_;
     if( !f( pnt ) ) {
         if( pnt == p->pos_bub( here ) ) {
             p->add_msg_if_player( m_info, _( "You're not stern enough to shave yourself with THIS." ) );
@@ -4337,7 +4341,7 @@ std::optional<int> iuse::chop_tree( Character *p, item *it, const tripoint_bub_m
     return 1;
 }
 
-std::optional<int> iuse::chop_logs( Character *p, item *it, const tripoint_bub_ms & )
+std::optional<int> iuse::chop_logs( Character *p, item *it, const tripoint_bub_ms &target )
 {
     if( !p ) {
         debugmsg( "%s called action chop_logs that requires character but no character is present",
@@ -4360,12 +4364,15 @@ std::optional<int> iuse::chop_logs( Character *p, item *it, const tripoint_bub_m
         return is_allowed_terrain;
     };
 
-    const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent_highlight(
-                here, _( "Chop which tree trunk?" ), _( "There is no tree trunk to chop nearby." ), f, false );
-    if( !pnt_ ) {
-        return std::nullopt;
+    tripoint_bub_ms pnt = target;
+    if( target == p->pos_bub() ) {
+        const std::optional<tripoint_bub_ms> pnt_ = choose_adjacent_highlight(
+                    here, _( "Chop which tree trunk?" ), _( "There is no tree trunk to chop nearby." ), f, false );
+        if( !pnt_ ) {
+            return std::nullopt;
+        }
+        pnt = *pnt_;
     }
-    const tripoint_bub_ms &pnt = *pnt_;
     if( !f( pnt ) ) {
         p->add_msg_if_player( m_info, _( "You can't chop that." ) );
         return std::nullopt;

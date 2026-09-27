@@ -615,6 +615,9 @@ action_id handle_action_menu( map &here );
  * combat/look → inventory/craft → move/wait. Plain English labels, no letter
  * hotkeys (uilist key 0). Returns ACTION_NULL if cancelled or nothing applies.
  * Returns static_cast<action_id>( NUM_ACTIONS + 1 ) for synthetic "Move here".
+ * Tool-on-tile actions (CHOP_TREE, PICKAXE, …) are started inside the menu via
+ * Character::invoke_item using item_action_generator names; those return ACTION_NULL
+ * after the activity is assigned.
  */
 action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p );
 

@@ -24,6 +24,8 @@
 #include "input_enums.h"
 #include "item.h"
 #include "item_location.h"
+#include "itype.h"
+#include "item_action.h"
 #include "map.h"
 #include "map_iterator.h"
 #include "map_scale_constants.h"
@@ -45,6 +47,9 @@
 #include "vpart_position.h"
 
 static const itype_id itype_swim_fins( "swim_fins" );
+
+static const ter_str_id ter_t_stump( "t_stump" );
+static const ter_str_id ter_t_trunk( "t_trunk" );
 
 static const quality_id qual_BUTCHER( "BUTCHER" );
 static const quality_id qual_CUT_FINE( "CUT_FINE" );
@@ -747,8 +752,9 @@ bool can_interact_at( action_id action, map &here, const tripoint_bub_ms &p )
 
 action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
 {
-    // Synthetic retval for "Move here" — not a real action_id.
+    // Synthetic retvals — not real action_ids.
     constexpr int MOVE_HERE = NUM_ACTIONS + 1;
+    constexpr int TOOL_ACTION_BASE = NUM_ACTIONS + 10;
 
     Character &player_character = get_player_character();
     const tripoint_bub_ms player_pos = player_character.pos_bub();
@@ -757,6 +763,8 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
     const bool is_adjacent = dist <= 1;
 
     std::vector<uilist_entry> entries;
+    // Parallel list of tool use_actions offered for this tile (menu id >= TOOL_ACTION_BASE).
+    std::vector<std::pair<item_action_id, item *>> tool_actions;
 
     // Mouse-native presentation: plain English labels, no keybind letters.
     // uilist: key 0 / empty input_event() disables hotkey (nullopt would auto-assign a-z).
@@ -800,7 +808,51 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
         add_action( ACTION_CHAT, _( "Talk" ) );
     }
 
-    // 2) Combat / look
+    // 2) Tool-aware actions for this tile.
+    // Use the same item→action mapping as the Apply Item menu, then keep only
+    // use_actions that vanilla can apply *to this tile* (not construction UIs).
+    // Labels come from data/json/item_actions.json via get_action_name().
+    if( is_adjacent && !is_self ) {
+        const item_action_generator &gen = item_action_generator::generator();
+        const item_action_map available = gen.map_actions_to_items( player_character );
+        const bool mineable = here.has_flag_furn( ter_furn_flag::TFLAG_MINEABLE, p ) ||
+                              here.has_flag_ter( ter_furn_flag::TFLAG_MINEABLE, p );
+        const bool is_wall = here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_WALL, p );
+        const bool is_tree = here.has_flag( ter_furn_flag::TFLAG_TREE, p );
+        const ter_str_id ter_here = here.ter( p ).id();
+        const bool is_trunk_or_stump = ter_here == ter_t_trunk || ter_here == ter_t_stump;
+
+        const auto tile_allows = [&]( const item_action_id & method ) {
+            if( method == "CHOP_TREE" ) {
+                return is_tree;
+            }
+            if( method == "CHOP_LOGS" ) {
+                return is_trunk_or_stump;
+            }
+            if( method == "PICKAXE" ) {
+                // iuse::dig_tool / mine_activity: MINEABLE, no vehicle.
+                return mineable && !here.veh_at( p );
+            }
+            if( method == "JACKHAMMER" ) {
+                // dig_tool refuses walls with jackhammers.
+                return mineable && !is_wall && !here.veh_at( p );
+            }
+            // DIG / DIG_CHANNEL / FILL_PIT / CLEAR_RUBBLE / MAKEMOUND open the
+            // Construction placement UI rather than acting on this tile — omit.
+            return false;
+        };
+
+        for( const auto &entry : available ) {
+            if( !tile_allows( entry.first ) ) {
+                continue;
+            }
+            const int menu_id = TOOL_ACTION_BASE + static_cast<int>( tool_actions.size() );
+            tool_actions.emplace_back( entry.first, entry.second );
+            entries.emplace_back( menu_id, true, 0, gen.get_action_name( entry.first ) );
+        }
+    }
+
+    // 3) Combat / look
     if( is_adjacent && here.is_bashable( p ) ) {
         add_action( ACTION_SMASH, _( "Smash" ) );
     }
@@ -830,7 +882,7 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
         }
     }
 
-    // 3) Inventory / craft / zones (self or as Action Menu exposes them)
+    // 4) Inventory / craft / zones (self or as Action Menu exposes them)
     if( is_self ) {
         add_action( ACTION_INVENTORY, _( "Inventory" ) );
         add_action( ACTION_DROP, _( "Drop" ) );
@@ -848,7 +900,7 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
         add_action( ACTION_DIR_DROP, _( "Drop here" ) );
     }
 
-    // 4) Move / wait
+    // 5) Move / wait
     if( !is_self ) {
         entries.emplace_back( MOVE_HERE, true, 0, _( "Move here" ) );
     }
@@ -877,6 +929,21 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
     if( smenu.ret < 0 ) {
         return ACTION_NULL;
     }
+
+    // Tool-on-tile: invoke the mapped item use_action at this tile (activity may start).
+    if( smenu.ret >= TOOL_ACTION_BASE ) {
+        const int idx = smenu.ret - TOOL_ACTION_BASE;
+        if( idx >= 0 && idx < static_cast<int>( tool_actions.size() ) ) {
+            item *tool = tool_actions[idx].second;
+            const item_action_id &method = tool_actions[idx].first;
+            if( tool != nullptr ) {
+                player_character.invoke_item( tool, method, p );
+            }
+        }
+        // Activity (if any) is already assigned; no further action_id to dispatch.
+        return ACTION_NULL;
+    }
+
     return static_cast<action_id>( smenu.ret );
 }
 

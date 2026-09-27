@@ -2859,6 +2859,7 @@ bool game::try_get_right_click_action( action_id &act, const tripoint_bub_ms &mo
     constexpr int MOVE_HERE = NUM_ACTIONS + 1;
     const action_id chosen = handle_tile_context_menu( here, mouse_target );
     if( chosen == ACTION_NULL ) {
+        // Cancel, or a tool-on-tile action already started an activity inside the menu.
         return false;
     }
 
