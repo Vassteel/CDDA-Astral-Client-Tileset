@@ -2559,6 +2559,14 @@ void crafting_ui_impl::process_action( const std::string &action_in,
             last_line = line;
         }
         line += pending_wheel_delta;
+        // Clamp before auto-mark-read indexes current[line]. Keyboard UP/DOWN
+        // mutate line *after* that block; wheel applied it early and could leave
+        // line out of range → SIGSEGV in recipe_id compare / flat_set::insert.
+        if( current.empty() ) {
+            line = 0;
+        } else {
+            line = std::clamp( line, 0, static_cast<int>( current.size() ) - 1 );
+        }
         user_moved_line = highlight_unread;
         need_scroll_to_selected = true;
     }
@@ -2652,11 +2660,14 @@ void crafting_ui_impl::process_action( const std::string &action_in,
     // Auto-mark-read on cursor movement
     if( !handled_by_nav && highlight_unread && !current.empty() && user_moved_line ) {
         user_moved_line = false;
-        uistate.read_recipes.insert( current[line]->ident() );
-        if( last_line != -1 ) {
-            uistate.read_recipes.insert( current[last_line]->ident() );
-            last_line = -1;
+        const int cur_sz = static_cast<int>( current.size() );
+        if( line >= 0 && line < cur_sz && current[line] != nullptr ) {
+            uistate.read_recipes.insert( current[line]->ident() );
         }
+        if( last_line >= 0 && last_line < cur_sz && current[last_line] != nullptr ) {
+            uistate.read_recipes.insert( current[last_line]->ident() );
+        }
+        last_line = -1;
         recalc_unread = true;
     }
 
