@@ -809,12 +809,21 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
     }
 
     // 2) Tool-aware actions for this tile.
-    // Use the same item→action mapping as the Apply Item menu, then keep only
-    // use_actions that vanilla can apply *to this tile* (not construction UIs).
+    // Same mapping as game::item_action_menu: map_actions_to_items over inv_dump
+    // (wielded + worn gear + nested pocket tools) plus get_pseudo_items()
+    // (bionic/integrated toolsets). Prefer vanilla precedence; keep only
+    // use_actions that apply *to this tile* (not construction UIs).
     // Labels come from data/json/item_actions.json via get_action_name().
     if( is_adjacent && !is_self ) {
         const item_action_generator &gen = item_action_generator::generator();
-        const item_action_map available = gen.map_actions_to_items( player_character );
+        // Ugly const_cast: same as item_action_menu — menu needs non-const pointers.
+        std::vector<item *> pseudos;
+        const std::vector<const item *> pseudo_items = player_character.get_pseudo_items();
+        pseudos.reserve( pseudo_items.size() );
+        for( const item *pseudo : pseudo_items ) {
+            pseudos.push_back( const_cast<item *>( pseudo ) );
+        }
+        const item_action_map available = gen.map_actions_to_items( player_character, pseudos );
         const bool mineable = here.has_flag_furn( ter_furn_flag::TFLAG_MINEABLE, p ) ||
                               here.has_flag_ter( ter_furn_flag::TFLAG_MINEABLE, p );
         const bool is_wall = here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_WALL, p );
