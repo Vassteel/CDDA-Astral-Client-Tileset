@@ -42,6 +42,7 @@
 #include "input_enums.h"
 #include "input_popup.h"
 #include "item.h"
+#include "item_category.h"
 #include "item_factory.h"
 #include "itype.h"
 #include "json.h"
@@ -1128,22 +1129,50 @@ static void apply_equipment_category_flags( item &it, int category )
     }
 }
 
+// Map itype item_category id → chargen picker filter tab (layout C: flat CDDA names).
+// Wielded/Worn/Inventory slots use equipment_item_category — do not conflate with these.
 static std::string equipment_picker_bucket( const item &it )
 {
-    if( it.is_armor() ) {
+    const std::string id = it.get_category_shallow().get_id().str();
+    if( id == "clothing" ) {
+        return "clothing";
+    }
+    if( id == "armor" || id == "exosuit" ) {
         return "armor";
     }
-    if( it.is_gun() || it.is_melee() ) {
-        return "weapon";
+    if( id == "weapons" ) {
+        return "weapons";
     }
-    if( it.is_food() ) {
+    if( id == "guns" ) {
+        return "guns";
+    }
+    if( id == "ammo" ) {
+        return "ammo";
+    }
+    if( id == "magazines" || id == "tool_magazine" ) {
+        return "magazines";
+    }
+    if( id == "tools" ) {
+        return "tools";
+    }
+    if( id == "food" ) {
         return "food";
+    }
+    if( id == "drugs" || id == "mutagen" ) {
+        return "drugs";
+    }
+    if( id == "container" ) {
+        return "containers";
+    }
+    if( id == "manuals" || id == "books" || id == "ma_manuals" || id == "maps" ) {
+        return "manuals";
     }
     return "other";
 }
 
-// Searchable itype picker for EQUIPMENT Replace/Add. prefer_bucket may be
-// "armor"/"weapon"/"food"/"other"/"" — preselects that category when set.
+// Searchable itype picker for EQUIPMENT Replace/Add. prefer_bucket is a layout-C
+// tab key (clothing/armor/…/other) or "" — preselects that category when set.
+// uilist filtering (/) is enabled by default; title/text advertise it.
 static std::optional<item> chargen_pick_starting_item( const std::string &prefer_bucket )
 {
     struct pick_opt {
@@ -1169,53 +1198,53 @@ static std::optional<item> chargen_pick_starting_item( const std::string &prefer
         return localized_compare( a.name, b.name );
     } );
 
-    static const translation cat_all = to_translation( "ALL" );
-    static const translation cat_armor = to_translation( "ARMOR" );
-    static const translation cat_weapon = to_translation( "WEAPONS" );
-    static const translation cat_food = to_translation( "FOOD" );
-    static const translation cat_other = to_translation( "OTHER" );
+    // Category keys are stable (match equipment_picker_bucket); labels are translated.
+    static const char *const tab_keys[] = {
+        "all", "clothing", "armor", "weapons", "guns", "ammo", "magazines",
+        "tools", "food", "drugs", "containers", "manuals", "other",
+    };
 
     uilist menu;
-    menu.title = _( "Choose starting item" );
+    menu.title = _( "Choose starting item (press / to filter)" );
+    menu.text = _( "Category tabs filter the list. Press / to type a name filter; both apply together." );
     menu.desc_enabled = false;
-    menu.desired_bounds = { -1.0, -1.0, 0.85, 0.85 };
-    menu.add_category( cat_all.translated(), cat_all.translated() );
-    menu.add_category( cat_armor.translated(), cat_armor.translated() );
-    menu.add_category( cat_weapon.translated(), cat_weapon.translated() );
-    menu.add_category( cat_food.translated(), cat_food.translated() );
-    menu.add_category( cat_other.translated(), cat_other.translated() );
+    menu.filtering = true;
+    menu.filtering_nocase = true;
+    menu.desired_bounds = { -1.0, -1.0, 0.92, 0.85 };
+    menu.add_category( "all", _( "ALL" ) );
+    menu.add_category( "clothing", _( "Clothing" ) );
+    menu.add_category( "armor", _( "Armor" ) );
+    menu.add_category( "weapons", _( "Weapons" ) );
+    menu.add_category( "guns", _( "Guns" ) );
+    menu.add_category( "ammo", _( "Ammo" ) );
+    menu.add_category( "magazines", _( "Magazines" ) );
+    menu.add_category( "tools", _( "Tools" ) );
+    menu.add_category( "food", _( "Food" ) );
+    menu.add_category( "drugs", _( "Drugs" ) );
+    menu.add_category( "containers", _( "Containers" ) );
+    menu.add_category( "manuals", _( "Manuals" ) );
+    menu.add_category( "other", _( "Other" ) );
     menu.set_category_filter( [&]( const uilist_entry & entry, const std::string & key )->bool {
-        if( key == cat_all.translated() ) {
+        if( key == "all" ) {
             return true;
         }
         if( entry.retval < 0 || entry.retval >= static_cast<int>( opts.size() ) ) {
             return false;
         }
-        const std::string &bucket = opts[entry.retval].bucket;
-        if( key == cat_armor.translated() ) {
-            return bucket == "armor";
-        }
-        if( key == cat_weapon.translated() ) {
-            return bucket == "weapon";
-        }
-        if( key == cat_food.translated() ) {
-            return bucket == "food";
-        }
-        if( key == cat_other.translated() ) {
-            return bucket == "other";
-        }
-        return false;
+        return opts[entry.retval].bucket == key;
     } );
-    if( prefer_bucket == "armor" ) {
-        menu.set_category( cat_armor.translated() );
-    } else if( prefer_bucket == "weapon" ) {
-        menu.set_category( cat_weapon.translated() );
-    } else if( prefer_bucket == "food" ) {
-        menu.set_category( cat_food.translated() );
-    } else if( prefer_bucket == "other" ) {
-        menu.set_category( cat_other.translated() );
-    } else {
-        menu.set_category( cat_all.translated() );
+    bool found_prefer = false;
+    if( !prefer_bucket.empty() ) {
+        for( const char *key : tab_keys ) {
+            if( prefer_bucket == key ) {
+                menu.set_category( key );
+                found_prefer = true;
+                break;
+            }
+        }
+    }
+    if( !found_prefer ) {
+        menu.set_category( "all" );
     }
 
     for( size_t i = 0; i < opts.size(); i++ ) {
@@ -1233,14 +1262,9 @@ static std::optional<item> chargen_pick_starting_item( const std::string &prefer
     return item( opts[menu.ret].type, calendar::turn_zero );
 }
 
-static std::string chargen_prefer_bucket_for_category( int category, const item *hint )
+// Prefer the current item's CDDA category tab on Replace; slot category is separate.
+static std::string chargen_prefer_bucket_for_category( int /*category*/, const item *hint )
 {
-    if( category == 1 ) {
-        return "armor";
-    }
-    if( category == 0 ) {
-        return "weapon";
-    }
     if( hint != nullptr ) {
         return equipment_picker_bucket( *hint );
     }
