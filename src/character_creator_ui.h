@@ -27,10 +27,9 @@ enum character_creator_tab : int {
     character_creator_tab_LAST
 };
 
-// One profession starting-kit row in the EQUIPMENT chargen tab.
+// One starting-kit row in the EQUIPMENT chargen tab (editable loadout).
 struct character_creator_equipment_choice {
     item it;
-    bool enabled = true;
     // 0 = wielded, 1 = worn, 2 = inventory (matches auto_wield / armor / else)
     int category = 2;
 };
@@ -66,13 +65,17 @@ struct character_creator_uistate {
     //TODO: this inventory only exists as an example;
     // it is NOT the inventory used on game start
     std::list<item> cached_profession_inventory;
-    // Customized starting kit from the EQUIPMENT tab. When non-empty and matching
-    // the current profession/outfit/gender, add_profession_items() uses these
-    // (enabled entries only) instead of re-rolling profession item groups.
+    // Customized starting kit from the EQUIPMENT tab. When locked and matching
+    // the current profession/outfit/gender, add_profession_items() grants this
+    // list instead of re-rolling profession item groups. Profession defaults
+    // are only the seed; Replace/Add can introduce any non-blacklisted itype.
     std::vector<character_creator_equipment_choice> equipment_choices;
     profession_id equipment_source_prof = profession_id::NULL_ID();
     bool equipment_source_outfit = true;
     bool equipment_source_male = true;
+    // True after EQUIPMENT tab seeds or edits a kit for the current source.
+    // Distinguishes "empty customized kit" from "not yet visited".
+    bool equipment_locked = false;
     std::vector<profession_id> sorted_hobbies;
     std::vector<trait_id> sorted_traits;
     std::vector<const Skill *> sorted_skills;
@@ -130,7 +133,8 @@ struct character_creator_uistate {
     void recalc_trait_list( const avatar &u );
     void recalc_skill_list();
 
-    // Rebuild equipment_choices from the current profession kit when stale.
+    // Seed equipment_choices from the profession kit when unlocked/stale.
+    // Changing profession/outfit/gender/traits clears the lock and reseeds.
     void ensure_equipment_pool( const avatar &u );
     void clear_equipment_customization();
     // True when EQUIPMENT tab has locked a kit for the current prof/outfit/gender.

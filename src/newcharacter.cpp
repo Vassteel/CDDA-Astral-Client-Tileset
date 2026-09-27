@@ -21,6 +21,7 @@
 #include "achievement.h"
 #include "addiction.h"
 #include "bionics.h"
+#include "calendar.h"
 #include "calendar_ui.h"
 #include "cata_imgui.h"
 #include "cata_path.h"
@@ -41,6 +42,8 @@
 #include "input_enums.h"
 #include "input_popup.h"
 #include "item.h"
+#include "item_factory.h"
+#include "itype.h"
 #include "json.h"
 #include "loading_ui.h"
 #include "localized_comparator.h"
@@ -646,8 +649,8 @@ void Character::add_profession_items()
         return;
     }
 
-    // Prefer the EQUIPMENT-tab locked kit (same roll the player reviewed / toggled)
-    // when it still matches this avatar's profession, outfit gender, and sex.
+    // Prefer the EQUIPMENT-tab locked kit (profession seed plus Replace/Add/Remove)
+    // when it still matches this avatar's profession, outfit, and sex.
     std::list<item> prof_items;
     if( is_avatar() && cc_uistate.has_custom_starting_equipment( *as_avatar() ) ) {
         prof_items = cc_uistate.custom_starting_items();
@@ -1111,6 +1114,217 @@ static int equipment_item_category( const item &it )
         return 1;
     }
     return 2;
+}
+
+// Apply chargen slot intent so add_profession_items wears/wields correctly.
+static void apply_equipment_category_flags( item &it, int category )
+{
+    it.unset_flag( json_flag_auto_wield );
+    it.unset_flag( json_flag_no_auto_equip );
+    if( category == 0 ) {
+        it.set_flag( json_flag_auto_wield );
+    } else if( category == 2 && it.is_armor() ) {
+        it.set_flag( json_flag_no_auto_equip );
+    }
+}
+
+static std::string equipment_picker_bucket( const item &it )
+{
+    if( it.is_armor() ) {
+        return "armor";
+    }
+    if( it.is_gun() || it.is_melee() ) {
+        return "weapon";
+    }
+    if( it.is_food() ) {
+        return "food";
+    }
+    return "other";
+}
+
+// Searchable itype picker for EQUIPMENT Replace/Add. prefer_bucket may be
+// "armor"/"weapon"/"food"/"other"/"" — preselects that category when set.
+static std::optional<item> chargen_pick_starting_item( const std::string &prefer_bucket )
+{
+    struct pick_opt {
+        std::string name;
+        const itype *type;
+        std::string bucket;
+    };
+    std::vector<pick_opt> opts;
+    opts.reserve( 4096 );
+    for( const itype *ity : item_controller->all() ) {
+        if( ity == nullptr || item_is_blacklisted( ity->get_id() ) ) {
+            continue;
+        }
+        item sample( ity, calendar::turn_zero );
+        const std::string name = sample.tname( 1, false );
+        if( name.empty() ) {
+            continue;
+        }
+        opts.push_back( pick_opt{ name, ity, equipment_picker_bucket( sample ) } );
+    }
+    std::sort( opts.begin(), opts.end(),
+    []( const pick_opt & a, const pick_opt & b ) {
+        return localized_compare( a.name, b.name );
+    } );
+
+    static const translation cat_all = to_translation( "ALL" );
+    static const translation cat_armor = to_translation( "ARMOR" );
+    static const translation cat_weapon = to_translation( "WEAPONS" );
+    static const translation cat_food = to_translation( "FOOD" );
+    static const translation cat_other = to_translation( "OTHER" );
+
+    uilist menu;
+    menu.title = _( "Choose starting item" );
+    menu.desc_enabled = false;
+    menu.desired_bounds = { -1.0, -1.0, 0.85, 0.85 };
+    menu.add_category( cat_all.translated(), cat_all.translated() );
+    menu.add_category( cat_armor.translated(), cat_armor.translated() );
+    menu.add_category( cat_weapon.translated(), cat_weapon.translated() );
+    menu.add_category( cat_food.translated(), cat_food.translated() );
+    menu.add_category( cat_other.translated(), cat_other.translated() );
+    menu.set_category_filter( [&]( const uilist_entry & entry, const std::string & key )->bool {
+        if( key == cat_all.translated() ) {
+            return true;
+        }
+        if( entry.retval < 0 || entry.retval >= static_cast<int>( opts.size() ) ) {
+            return false;
+        }
+        const std::string &bucket = opts[entry.retval].bucket;
+        if( key == cat_armor.translated() ) {
+            return bucket == "armor";
+        }
+        if( key == cat_weapon.translated() ) {
+            return bucket == "weapon";
+        }
+        if( key == cat_food.translated() ) {
+            return bucket == "food";
+        }
+        if( key == cat_other.translated() ) {
+            return bucket == "other";
+        }
+        return false;
+    } );
+    if( prefer_bucket == "armor" ) {
+        menu.set_category( cat_armor.translated() );
+    } else if( prefer_bucket == "weapon" ) {
+        menu.set_category( cat_weapon.translated() );
+    } else if( prefer_bucket == "food" ) {
+        menu.set_category( cat_food.translated() );
+    } else if( prefer_bucket == "other" ) {
+        menu.set_category( cat_other.translated() );
+    } else {
+        menu.set_category( cat_all.translated() );
+    }
+
+    for( size_t i = 0; i < opts.size(); i++ ) {
+        menu.addentry( static_cast<int>( i ), true, 0, opts[i].name );
+        item ity( opts[i].type, calendar::turn_zero );
+        mvwzstr &extra = menu.entries[i].extratxt;
+        extra.txt = ity.symbol();
+        extra.color = ity.color();
+        extra.left = 1;
+    }
+    menu.query();
+    if( menu.ret < 0 || menu.ret >= static_cast<int>( opts.size() ) ) {
+        return std::nullopt;
+    }
+    return item( opts[menu.ret].type, calendar::turn_zero );
+}
+
+static std::string chargen_prefer_bucket_for_category( int category, const item *hint )
+{
+    if( category == 1 ) {
+        return "armor";
+    }
+    if( category == 0 ) {
+        return "weapon";
+    }
+    if( hint != nullptr ) {
+        return equipment_picker_bucket( *hint );
+    }
+    return "";
+}
+
+static void chargen_equipment_replace_at( int idx )
+{
+    if( idx < 0 || idx >= static_cast<int>( cc_uistate.equipment_choices.size() ) ) {
+        return;
+    }
+    character_creator_equipment_choice &ec = cc_uistate.equipment_choices[idx];
+    const std::string prefer = chargen_prefer_bucket_for_category( ec.category, &ec.it );
+    std::optional<item> picked = chargen_pick_starting_item( prefer );
+    if( !picked ) {
+        return;
+    }
+    const int keep_category = ec.category;
+    ec.it = std::move( *picked );
+    apply_equipment_category_flags( ec.it, keep_category );
+    // Keep the player's chosen slot even if the new itype would classify differently.
+    ec.category = keep_category;
+    cc_uistate.equipment_locked = true;
+    cc_uistate.selected_equipment_index = idx;
+}
+
+static void chargen_equipment_remove_at( int idx )
+{
+    if( idx < 0 || idx >= static_cast<int>( cc_uistate.equipment_choices.size() ) ) {
+        return;
+    }
+    cc_uistate.equipment_choices.erase( cc_uistate.equipment_choices.begin() + idx );
+    cc_uistate.equipment_locked = true;
+    if( cc_uistate.equipment_choices.empty() ) {
+        cc_uistate.selected_equipment_index = 0;
+    } else {
+        cc_uistate.selected_equipment_index = std::clamp( idx, 0,
+                static_cast<int>( cc_uistate.equipment_choices.size() ) - 1 );
+    }
+}
+
+static void chargen_equipment_add()
+{
+    std::optional<item> picked = chargen_pick_starting_item( "" );
+    if( !picked ) {
+        return;
+    }
+    character_creator_equipment_choice ec;
+    ec.it = std::move( *picked );
+    ec.category = equipment_item_category( ec.it );
+    apply_equipment_category_flags( ec.it, ec.category );
+    cc_uistate.equipment_choices.push_back( std::move( ec ) );
+    cc_uistate.equipment_locked = true;
+    cc_uistate.selected_equipment_index =
+        static_cast<int>( cc_uistate.equipment_choices.size() ) - 1;
+}
+
+static void chargen_equipment_action_menu( int idx )
+{
+    if( idx < 0 || idx >= static_cast<int>( cc_uistate.equipment_choices.size() ) ) {
+        // Nothing selected — offer Add only.
+        uilist act;
+        act.text = _( "Starting equipment" );
+        act.addentry( 0, true, 'a', _( "Add item…" ) );
+        act.query();
+        if( act.ret == 0 ) {
+            chargen_equipment_add();
+        }
+        return;
+    }
+    const std::string name = cc_uistate.equipment_choices[idx].it.display_name();
+    uilist act;
+    act.text = string_format( _( "Edit: %s" ), name );
+    act.addentry( 0, true, 'r', _( "Replace…" ) );
+    act.addentry( 1, true, 'd', _( "Remove" ) );
+    act.addentry( 2, true, 'a', _( "Add item…" ) );
+    act.query();
+    if( act.ret == 0 ) {
+        chargen_equipment_replace_at( idx );
+    } else if( act.ret == 1 ) {
+        chargen_equipment_remove_at( idx );
+    } else if( act.ret == 2 ) {
+        chargen_equipment_add();
+    }
 }
 
 namespace char_creation
@@ -1786,46 +2000,56 @@ void draw_equipment_details( const avatar &u )
 
     draw_colored_text_wrap( _( "Starting equipment:" ), COL_HEADER );
     draw_colored_text_wrap(
-        _( "Toggle items on/off. Disabled items are not granted at game start. "
-           "Kit comes from your profession (and trait substitutions); no freeform loot." ),
+        _( "Edit what you start with. Profession gear is the default seed — "
+           "Replace, Remove, or Add items. Changing profession, outfit, gender, "
+           "or traits reseeds from the new defaults." ),
         COL_NOTE_MINOR );
     draw_spacer();
 
+    if( ImGui::Button( _( "Add item…" ) ) ) {
+        cc_uistate.top_bar_button_action = "EQUIPMENT_ADD";
+    }
+    draw_spacer();
+
     if( choices.empty() ) {
-        draw_colored_text_wrap( _( "This profession starts with no items." ), COL_NOTE_MINOR );
+        draw_colored_text_wrap(
+            _( "Starting kit is empty. Use Add item to choose gear, or change "
+               "profession to reseed defaults." ),
+            COL_NOTE_MINOR );
         return;
     }
 
-    const int idx = cc_uistate.selected_equipment_index;
-    if( idx < 0 || idx >= static_cast<int>( choices.size() ) ) {
-        return;
-    }
+    const int idx = std::clamp( cc_uistate.selected_equipment_index, 0,
+                                static_cast<int>( choices.size() ) - 1 );
     const character_creator_equipment_choice &sel = choices[idx];
 
     draw_colored_text_wrap( string_format( _( "Selected: %s" ), sel.it.display_name() ),
-                            sel.enabled ? COL_SELECTED : COL_NOT_SELECTED );
+                            COL_SELECTED );
     draw_colored_text_wrap( string_format( _( "Slot: %s" ), equipment_category_label( sel.category ) ),
-                            COL_NOTE_MINOR );
-    draw_colored_text_wrap( sel.enabled ? _( "Status: included at start" )
-                            : _( "Status: excluded (will not be granted)" ),
-                            sel.enabled ? COL_SELECTED : c_red );
-    draw_spacer();
-    draw_colored_text_wrap( _( "Click / Confirm to toggle. Categories filter the list." ),
                             COL_NOTE_MINOR );
     draw_spacer();
 
-    // Full checklist (mouse-friendly) mirroring the left uilist
-    int enabled_count = 0;
-    for( const character_creator_equipment_choice &ec : choices ) {
-        if( ec.enabled ) {
-            ++enabled_count;
-        }
+    if( ImGui::Button( _( "Replace…" ) ) ) {
+        cc_uistate.selected_equipment_index = idx;
+        cc_uistate.top_bar_button_action = "EQUIPMENT_REPLACE";
     }
-    draw_colored_text_wrap( string_format( _( "Included: %d / %d" ), enabled_count,
+    ImGui::SameLine();
+    if( ImGui::Button( _( "Remove" ) ) ) {
+        cc_uistate.selected_equipment_index = idx;
+        cc_uistate.top_bar_button_action = "EQUIPMENT_REMOVE";
+    }
+    draw_spacer();
+    draw_colored_text_wrap(
+        _( "Confirm on the list opens Replace / Remove / Add. Type / to filter "
+           "in the item picker." ),
+        COL_NOTE_MINOR );
+    draw_spacer();
+
+    draw_colored_text_wrap( string_format( _( "Items in kit: %d" ),
                                            static_cast<int>( choices.size() ) ), c_white );
     draw_spacer();
 
-    auto draw_group = [&]( int category, const std::string &title ) {
+    auto draw_group = [&]( int category, const std::string & title ) {
         bool any = false;
         for( size_t i = 0; i < choices.size(); ++i ) {
             if( choices[i].category != category ) {
@@ -1835,17 +2059,22 @@ void draw_equipment_details( const avatar &u )
                 draw_colored_text_wrap( title, c_cyan );
                 any = true;
             }
-            bool enabled = choices[i].enabled;
             ImGui::PushID( static_cast<int>( i ) );
-            if( ImGui::Checkbox( choices[i].it.display_name().c_str(), &enabled ) ) {
-                cc_uistate.equipment_choices[i].enabled = enabled;
+            const bool selected = static_cast<int>( i ) == idx;
+            if( ImGui::Selectable( choices[i].it.display_name().c_str(), selected ) ) {
                 cc_uistate.selected_equipment_index = static_cast<int>( i );
             }
-            ImGui::PopID();
-            if( static_cast<int>( i ) == idx ) {
-                ImGui::SameLine();
-                cataimgui::draw_colored_text( _( " <" ), c_yellow );
+            ImGui::SameLine();
+            if( ImGui::SmallButton( _( "Replace" ) ) ) {
+                cc_uistate.selected_equipment_index = static_cast<int>( i );
+                cc_uistate.top_bar_button_action = "EQUIPMENT_REPLACE";
             }
+            ImGui::SameLine();
+            if( ImGui::SmallButton( _( "Remove" ) ) ) {
+                cc_uistate.selected_equipment_index = static_cast<int>( i );
+                cc_uistate.top_bar_button_action = "EQUIPMENT_REMOVE";
+            }
+            ImGui::PopID();
         }
     };
     draw_group( 0, _( "Wielded:" ) );
@@ -2692,6 +2921,11 @@ void character_creator_ui::setup_new_uilist()
                 new_uilist->add_category( _( "INVENTORY" ), _( "INVENTORY" ) );
                 new_uilist->set_category_filter( []( const uilist_entry & entry,
                 const std::string & key )->bool {
+                    // Always show the Add sentinel entry.
+                    if( entry.retval == -2 )
+                    {
+                        return true;
+                    }
                     if( key == CHARACTER_CREATOR_UILIST_ALL.translated() )
                     {
                         return true;
@@ -2828,16 +3062,24 @@ void character_creator_ui::update_uilist_entries()
             const int equip_count = static_cast<int>( cc_uistate.equipment_choices.size() );
             for( int i = 0; i < equip_count; i++ ) {
                 const character_creator_equipment_choice &ec = cc_uistate.equipment_choices[i];
-                const std::string mark = ec.enabled ? _( "[x] " ) : _( "[ ] " );
-                uilist_entry entry = get_uilist_entry( mark + ec.it.display_name() );
+                const std::string label = string_format( "%s (%s)", ec.it.display_name(),
+                                          equipment_category_label( ec.category ) );
+                uilist_entry entry = get_uilist_entry( label );
                 entry.retval = i;
-                entry.text_color = ec.enabled ? COL_SELECTED : COL_NOT_SELECTED;
+                entry.text_color = COL_SELECTED;
                 menu->addentry( entry );
             }
+            uilist_entry add_entry = get_uilist_entry( _( "[+ Add item…]" ) );
+            add_entry.retval = -2;
+            add_entry.text_color = c_green;
+            menu->addentry( add_entry );
             if( equip_count > 0 ) {
                 cc_uistate.selected_equipment_index = std::clamp(
                         cc_uistate.selected_equipment_index, 0, equip_count - 1 );
                 set_uilist_selected( menu, cc_uistate.selected_equipment_index );
+            } else {
+                // Highlight the Add entry when the kit is empty.
+                set_uilist_selected( menu, 0 );
             }
             break;
         }
@@ -3278,25 +3520,17 @@ void character_creator_ui_impl::draw_summary()
         bool dummy = true;
         char_creation::draw_profession_bionics( dummy, _( "Bionics" ), *who.prof );
         draw_spacer();
-        // Reflect EQUIPMENT-tab choices on Summary when a kit was locked in.
+        // Reflect EQUIPMENT-tab loadout on Summary when a kit was locked in.
         if( cc_uistate.has_custom_starting_equipment( u ) ) {
             draw_colored_text_wrap( _( "Starting equipment (customized):" ), COL_HEADER );
-            for( const character_creator_equipment_choice &ec : cc_uistate.equipment_choices ) {
-                if( !ec.enabled ) {
-                    continue;
+            if( cc_uistate.equipment_choices.empty() ) {
+                draw_colored_text_wrap( _( "(empty kit)" ), c_red );
+            } else {
+                for( const character_creator_equipment_choice &ec : cc_uistate.equipment_choices ) {
+                    draw_colored_text_wrap( string_format( "• %s (%s)", ec.it.display_name(),
+                                            equipment_category_label( ec.category ) ),
+                                            COL_NOTE_MINOR );
                 }
-                draw_colored_text_wrap( string_format( "• %s", ec.it.display_name() ),
-                                        COL_NOTE_MINOR );
-            }
-            int excluded = 0;
-            for( const character_creator_equipment_choice &ec : cc_uistate.equipment_choices ) {
-                if( !ec.enabled ) {
-                    ++excluded;
-                }
-            }
-            if( excluded > 0 ) {
-                draw_colored_text_wrap( string_format( _( "(%d item(s) excluded)" ), excluded ),
-                                        c_red );
             }
         } else {
             char_creation::draw_profession_inventory( u );
@@ -3520,13 +3754,14 @@ void character_creator_uistate::clear_equipment_customization()
 {
     equipment_choices.clear();
     equipment_source_prof = profession_id::NULL_ID();
+    equipment_locked = false;
     selected_equipment_index = 0;
 }
 
 void character_creator_uistate::ensure_equipment_pool( const avatar &u )
 {
     const profession_id pid = u.prof->ident();
-    if( !equipment_choices.empty() &&
+    if( equipment_locked &&
         equipment_source_prof == pid &&
         equipment_source_outfit == outfit &&
         equipment_source_male == u.male ) {
@@ -3537,6 +3772,7 @@ void character_creator_uistate::ensure_equipment_pool( const avatar &u )
     equipment_source_prof = pid;
     equipment_source_outfit = outfit;
     equipment_source_male = u.male;
+    equipment_locked = true;
     selected_equipment_index = 0;
 
     cached_profession_inventory = u.prof->items( outfit, u.get_mutations() );
@@ -3544,7 +3780,6 @@ void character_creator_uistate::ensure_equipment_pool( const avatar &u )
     for( const item &it : cached_profession_inventory ) {
         character_creator_equipment_choice ec;
         ec.it = it;
-        ec.enabled = true;
         ec.category = equipment_item_category( it );
         equipment_choices.push_back( std::move( ec ) );
     }
@@ -3552,7 +3787,7 @@ void character_creator_uistate::ensure_equipment_pool( const avatar &u )
 
 bool character_creator_uistate::has_custom_starting_equipment( const avatar &u ) const
 {
-    return !equipment_choices.empty() &&
+    return equipment_locked &&
            equipment_source_prof == u.prof->ident() &&
            equipment_source_outfit == outfit &&
            equipment_source_male == u.male;
@@ -3562,9 +3797,7 @@ std::list<item> character_creator_uistate::custom_starting_items() const
 {
     std::list<item> result;
     for( const character_creator_equipment_choice &ec : equipment_choices ) {
-        if( ec.enabled ) {
-            result.push_back( ec.it );
-        }
+        result.push_back( ec.it );
     }
     return result;
 }
@@ -3756,6 +3989,18 @@ bool character_creator_ui::handle_action( const std::string &action )
         outfit = !outfit;
         cc_uistate.cached_profession_inventory.clear();
         cc_uistate.clear_equipment_customization();
+        update_uilist_entries();
+    } else if( action == "EQUIPMENT_ADD" ) {
+        cc_uistate.ensure_equipment_pool( you );
+        chargen_equipment_add();
+        update_uilist_entries();
+    } else if( action == "EQUIPMENT_REPLACE" ) {
+        cc_uistate.ensure_equipment_pool( you );
+        chargen_equipment_replace_at( cc_uistate.selected_equipment_index );
+        update_uilist_entries();
+    } else if( action == "EQUIPMENT_REMOVE" ) {
+        cc_uistate.ensure_equipment_pool( you );
+        chargen_equipment_remove_at( cc_uistate.selected_equipment_index );
         update_uilist_entries();
     } else if( action == "CHANGE_START_OF_CATACLYSM" ) {
         const scenario *scen = get_scenario();
@@ -4099,10 +4344,16 @@ void character_creator_callback::confirm( uilist *menu )
         }
         case CHARCREATOR_EQUIPMENT: {
             select( menu );
-            const int idx = cc_uistate.selected_equipment_index;
-            if( idx >= 0 && idx < static_cast<int>( cc_uistate.equipment_choices.size() ) ) {
-                cc_uistate.equipment_choices[idx].enabled =
-                    !cc_uistate.equipment_choices[idx].enabled;
+            int chosen = menu->ret;
+            if( chosen == -1 && menu->selected >= 0 &&
+                menu->selected < static_cast<int>( menu->entries.size() ) ) {
+                chosen = menu->entries[menu->selected].retval;
+            }
+            if( chosen == -2 ) {
+                chargen_equipment_add();
+            } else {
+                const int idx = cc_uistate.selected_equipment_index;
+                chargen_equipment_action_menu( idx );
             }
             break;
         }
@@ -4141,7 +4392,11 @@ void character_creator_callback::select( uilist *menu )
             break;
         }
         case CHARCREATOR_EQUIPMENT: {
-            cc_uistate.selected_equipment_index = menu_selected < 0 ? 0 : menu_selected;
+            if( menu_selected >= 0 &&
+                menu_selected < static_cast<int>( menu->entries.size() ) &&
+                menu->entries[menu_selected].retval >= 0 ) {
+                cc_uistate.selected_equipment_index = menu->entries[menu_selected].retval;
+            }
             break;
         }
         default:
