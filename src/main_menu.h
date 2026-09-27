@@ -63,6 +63,8 @@ class main_menu
         bool new_character_tab();
         bool load_character_tab( const std::string &worldname );
         void world_tab( const std::string &worldname );
+        /** Main-menu Settings -> Tileset picker (TILES option + load_tileset). */
+        void pick_tileset();
 
         /*
          * Load character templates from template folder

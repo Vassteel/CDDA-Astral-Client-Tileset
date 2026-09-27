@@ -43,6 +43,9 @@
 #include "messages.h"
 #include "music.h"
 #include "options.h"
+#if defined(TILES)
+#include "sdltiles.h"
+#endif
 #include "output.h"
 #include "overmapbuffer.h"
 #include "path_info.h"
@@ -518,6 +521,7 @@ void main_menu::init_strings()
 
     vSettingsSubItems.clear();
     vSettingsSubItems.emplace_back( pgettext( "Main Menu|Settings", "<O|o>ptions" ) );
+    vSettingsSubItems.emplace_back( pgettext( "Main Menu|Settings", "<T|t>ileset" ) );
     vSettingsSubItems.emplace_back( pgettext( "Main Menu|Settings", "Ke<y|Y>bindings" ) );
     vSettingsSubItems.emplace_back( pgettext( "Main Menu|Settings", "A<u|U>topickup" ) );
     vSettingsSubItems.emplace_back( pgettext( "Main Menu|Settings", "Sa<f|F>emode" ) );
@@ -880,19 +884,21 @@ bool main_menu::opening_screen()
                         get_options().show( false );
                         // The language may have changed- gracefully handle this.
                         init_strings();
-                    } else if( sel2 == 1 ) { /// Keybindings
+                    } else if( sel2 == 1 ) { /// Tileset
+                        pick_tileset();
+                    } else if( sel2 == 2 ) { /// Keybindings
                         input_context ctxt_default = get_default_mode_input_context();
                         ctxt_default.display_menu();
-                    } else if( sel2 == 2 ) { /// Autopickup
+                    } else if( sel2 == 3 ) { /// Autopickup
                         get_auto_pickup().show();
-                    } else if( sel2 == 3 ) { /// Safemode
+                    } else if( sel2 == 4 ) { /// Safemode
                         get_safemode().show();
-                    } else if( sel2 == 4 ) { /// Colors
+                    } else if( sel2 == 5 ) { /// Colors
                         all_colors.show_gui();
-                    } else if( sel2 == 5 ) {
+                    } else if( sel2 == 6 ) { /// ImGui styles
                         style_picker picker;
                         picker.show();
-                    } else if( sel2 == 6 ) { /// ImGui demo
+                    } else if( sel2 == 7 ) { /// ImGui demo
                         imgui_demo_ui demo;
                         demo.run();
                     }
@@ -1297,4 +1303,59 @@ std::string main_menu::halloween_graves()
         ";   ;  |     | ,'---',"; // NOLINT(cata-text-style)
 
     return graves;
+}
+
+void main_menu::pick_tileset()
+{
+#if defined(TILES)
+    // Same list Options → Graphics → TILES uses (already populated at init).
+    const std::vector<options_manager::id_and_option> tilesets =
+        get_options().get_option( "TILES" ).getItems();
+    if( tilesets.empty() ) {
+        popup( _( "No tilesets found." ) );
+        return;
+    }
+
+    const std::string current = get_option<std::string>( "TILES" );
+    uilist menu;
+    menu.title = _( "Choose tileset" );
+    menu.footer_text = string_format( _( "Current: %s" ), current );
+
+    int selected = 0;
+    for( size_t i = 0; i < tilesets.size(); ++i ) {
+        const std::string &id = tilesets[i].first;
+        const std::string name = tilesets[i].second.translated();
+        const std::string label = name.empty() || name == id
+                                  ? id
+                                  : string_format( "%s  [%s]", name, id );
+        menu.entries.emplace_back( static_cast<int>( i ), true, MENU_AUTOASSIGN, label );
+        if( id == current ) {
+            selected = static_cast<int>( i );
+        }
+    }
+    menu.set_selected( selected );
+    menu.query();
+
+    if( menu.ret < 0 || static_cast<size_t>( menu.ret ) >= tilesets.size() ) {
+        return;
+    }
+
+    const std::string chosen = tilesets[menu.ret].first;
+    if( chosen == current ) {
+        return;
+    }
+
+    get_options().get_option( "TILES" ).setValue( chosen );
+    get_options().save();
+
+    // Disable UIs below to avoid accessing tile context mid-load (same as Options).
+    ui_adaptor dummy( ui_adaptor::disable_uis_below {} );
+    try {
+        load_tileset();
+    } catch( const std::exception &err ) {
+        popup( _( "Loading the tileset failed: %s" ), err.what() );
+    }
+#else
+    popup( _( "Tilesets require a graphical (TILES) build." ) );
+#endif // TILES
 }
