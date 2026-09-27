@@ -21,6 +21,7 @@
 #include "imgui/imgui.h"
 #include "input_context.h"
 #include "item.h"
+#include "item_context_menu.h"
 #include "item_location.h"
 #include "itype.h"
 #include "messages.h"
@@ -285,7 +286,13 @@ enum class pending_action {
     use_item,
     drop_item,
     examine_item,
-    drag_equip
+    drag_equip,
+    // Shared item_context_menu actions (inv grid + paper-doll)
+    ctx_consume,
+    ctx_read,
+    ctx_unload,
+    ctx_reload,
+    ctx_wear
 };
 
 class rpg_equipment_window : public cataimgui::window
@@ -414,6 +421,50 @@ void rpg_equipment_window::flush_pending_action()
         case pending_action::drag_equip:
             try_drag_equip();
             break;
+        case pending_action::ctx_consume:
+        case pending_action::ctx_read:
+        case pending_action::ctx_unload:
+        case pending_action::ctx_reload:
+        case pending_action::ctx_wear: {
+            refresh_selection_validity();
+            item_location loc = selected_inv;
+            if( ( !loc || !loc.get_item() ) && selected_worn ) {
+                loc = selected_worn;
+            }
+            if( !loc || !loc.get_item() ) {
+                status_line = _( "Select an item first." );
+                break;
+            }
+            item_context_menu::action ctx = item_context_menu::action::none;
+            switch( act ) {
+                case pending_action::ctx_consume:
+                    ctx = item_context_menu::action::consume;
+                    break;
+                case pending_action::ctx_read:
+                    ctx = item_context_menu::action::read;
+                    break;
+                case pending_action::ctx_unload:
+                    ctx = item_context_menu::action::unload;
+                    break;
+                case pending_action::ctx_reload:
+                    ctx = item_context_menu::action::reload;
+                    break;
+                case pending_action::ctx_wear:
+                    ctx = item_context_menu::action::wear;
+                    break;
+                default:
+                    break;
+            }
+            // Nested consume/use/read UIs need the equipment window closed first.
+            if( ctx == item_context_menu::action::consume ||
+                ctx == item_context_menu::action::read ||
+                ctx == item_context_menu::action::use ) {
+                want_close = true;
+            }
+            clear_selections();
+            status_line = item_context_menu::perform( *you, loc, ctx );
+            break;
+        }
         case pending_action::none:
             break;
     }
@@ -717,6 +768,52 @@ void rpg_equipment_window::draw_paper_doll()
             ImGui::EndDragDropTarget();
         }
 
+        // Right-click worn / wielded item on this slot
+        if( worn_loc && worn_loc.get_item() &&
+            ImGui::BeginPopupContextItem( "rpg_doll_ctx" ) ) {
+            selected_slot = i;
+            selected_worn = worn_loc;
+            selected_inv = item_location::nowhere;
+            refresh_selection_validity();
+            const item_context_menu::action chosen =
+                item_context_menu::draw_imgui_menu( *you, selected_worn, /*from_worn=*/true );
+            switch( chosen ) {
+                case item_context_menu::action::consume:
+                    // Consume from worn container (e.g. waterskin on belt) — use worn loc
+                    selected_inv = selected_worn;
+                    pending = pending_action::ctx_consume;
+                    break;
+                case item_context_menu::action::use:
+                    selected_inv = selected_worn;
+                    pending = pending_action::use_item;
+                    break;
+                case item_context_menu::action::read:
+                    selected_inv = selected_worn;
+                    pending = pending_action::ctx_read;
+                    break;
+                case item_context_menu::action::takeoff:
+                    pending = pending_action::takeoff;
+                    break;
+                case item_context_menu::action::unload:
+                    selected_inv = selected_worn;
+                    pending = pending_action::ctx_unload;
+                    break;
+                case item_context_menu::action::reload:
+                    selected_inv = selected_worn;
+                    pending = pending_action::ctx_reload;
+                    break;
+                case item_context_menu::action::examine:
+                    pending = pending_action::examine_item;
+                    break;
+                case item_context_menu::action::wear:
+                case item_context_menu::action::wield:
+                case item_context_menu::action::drop:
+                case item_context_menu::action::none:
+                    break;
+            }
+            ImGui::EndPopup();
+        }
+
         // Keep inventory-tint hint as a tiny colored marker (chrome stays Hybrid).
         ImGui::PushStyleColor( ImGuiCol_Text, tint );
         ImGui::TextUnformatted( " " );
@@ -858,25 +955,46 @@ void rpg_equipment_window::draw_inventory_grid()
         }
 
         // Right-click context menu (BeginPopupContextItem keeps ID with this cell).
+        // Shared builder mirrors vanilla inventory_item_menu eligibility (Drink/Eat/…).
         if( ImGui::BeginPopupContextItem( "rpg_inv_ctx" ) ) {
             selected_inv = cell.loc;
+            selected_worn = item_location::nowhere;
             refresh_selection_validity();
-            const bool has = selected_inv && selected_inv.get_item();
-            const bool usable = has && item_looks_usable( *selected_inv );
-            if( ImGui::MenuItem( _( "Use" ), nullptr, false, usable ) ) {
-                pending = pending_action::use_item;
-            }
-            if( ImGui::MenuItem( _( "Wear / Wield" ), nullptr, false, has ) ) {
-                pending = pending_action::equip;
-            }
-            if( ImGui::MenuItem( _( "Wield" ), nullptr, false, has ) ) {
-                pending = pending_action::wield;
-            }
-            if( ImGui::MenuItem( _( "Drop" ), nullptr, false, has ) ) {
-                pending = pending_action::drop_item;
-            }
-            if( ImGui::MenuItem( _( "Examine" ), nullptr, false, has ) ) {
-                pending = pending_action::examine_item;
+            const item_context_menu::action chosen =
+                item_context_menu::draw_imgui_menu( *you, selected_inv, /*from_worn=*/false );
+            switch( chosen ) {
+                case item_context_menu::action::consume:
+                    pending = pending_action::ctx_consume;
+                    break;
+                case item_context_menu::action::use:
+                    pending = pending_action::use_item;
+                    break;
+                case item_context_menu::action::read:
+                    pending = pending_action::ctx_read;
+                    break;
+                case item_context_menu::action::wear:
+                    pending = pending_action::ctx_wear;
+                    break;
+                case item_context_menu::action::wield:
+                    pending = pending_action::wield;
+                    break;
+                case item_context_menu::action::takeoff:
+                    pending = pending_action::takeoff;
+                    break;
+                case item_context_menu::action::drop:
+                    pending = pending_action::drop_item;
+                    break;
+                case item_context_menu::action::unload:
+                    pending = pending_action::ctx_unload;
+                    break;
+                case item_context_menu::action::reload:
+                    pending = pending_action::ctx_reload;
+                    break;
+                case item_context_menu::action::examine:
+                    pending = pending_action::examine_item;
+                    break;
+                case item_context_menu::action::none:
+                    break;
             }
             ImGui::EndPopup();
         }
@@ -934,8 +1052,8 @@ void rpg_equipment_window::draw_action_bar()
     } else {
         ImGui::TextDisabled( "%s",
                              _( "Drag inventory → doll slot to equip. Click item again to Use (or Wear/Wield). "
-                                "Right-click for Use / Wear-Wield / Drop / Examine. "
-                                "Click a worn slot twice to take off. Esc closes." ) );
+                                "Right-click for Drink/Eat, Use, Read, Wear, Wield, Drop, Unload, Reload, Examine. "
+                                "Right-click worn slots too. Esc closes." ) );
     }
 }
 
