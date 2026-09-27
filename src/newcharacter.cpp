@@ -1327,6 +1327,9 @@ static std::optional<item> chargen_pick_starting_item( const std::string &prefer
             continue;
         }
         item sample( ity, calendar::turn_zero );
+        // Catalog preview: auto-FIT VARSIZE so tname() does not spam "(poor fit)"
+        // for gear we will FIT on add. Morphotype (too small)/(too big) still show.
+        chargen_auto_fit_varsize( sample );
         const std::string name = sample.tname( 1, false );
         if( name.empty() ) {
             continue;
