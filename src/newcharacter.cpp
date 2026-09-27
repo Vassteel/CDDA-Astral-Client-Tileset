@@ -1189,9 +1189,40 @@ static std::string equipment_picker_bucket( const item &it )
     return "other";
 }
 
+// True ammo/fuel capacity across MAGAZINE *and* CONTAINER ammo_restriction
+// pockets (quivers, bandoliers, ammo pouches). item::ammo_capacity only sees
+// MAGAZINE / MAGAZINE_WELL via pocket_for_ammo, so quivers report 0 there.
+static int chargen_ammo_restriction_capacity( const item &it, const ammotype &ammo )
+{
+    int cap = 0;
+    for( const item_pocket *pk : it.get_pockets( []( const item_pocket & p ) {
+        return p.get_pocket_data() != nullptr &&
+               !p.get_pocket_data()->ammo_restriction.empty();
+    } ) ) {
+        cap += pk->ammo_capacity( ammo );
+    }
+    return cap;
+}
+
+// Dedicated liquid vessels for chargen Fill (waterskin, bottle, canteen, barrel…).
+// Incidental watertight pockets on weapons (survival-knife hollow handle) must
+// NOT open the liquid catalog — those are category "weapons" with weapon_category.
+static bool chargen_is_liquid_vessel( const item &it )
+{
+    if( !it.is_watertight_container() ) {
+        return false;
+    }
+    if( !it.type->weapon_category.empty() ) {
+        return false;
+    }
+    const std::string cat = it.get_category_shallow().get_id().str();
+    return cat == "container" || cat == "clothing";
+}
+
 // After Add/Replace picks a container/tool/magazine (or quiver-style ammo pouch),
-// offer fill type + amount using vanilla ammo_set / fill_with. Cancel / "Leave
-// empty" keeps 0/N. Plain stackables keep the Amount path above instead.
+// offer fill type + amount using vanilla ammo_set / fill_with / put_in. Cancel /
+// "Leave empty" keeps 0/N. Plain stackables keep the Amount path above instead.
+// Fill is gated: ammo_types (tools/mags/guns/quivers) OR dedicated liquid vessels.
 static void chargen_maybe_fill_contents( item &it )
 {
     struct fill_opt {
@@ -1201,6 +1232,7 @@ static void chargen_maybe_fill_contents( item &it )
     std::vector<fill_opt> opts;
 
     const std::set<ammotype> ammos = it.ammo_types();
+    const bool liquid_vessel = ammos.empty() && chargen_is_liquid_vessel( it );
     if( !ammos.empty() ) {
         for( const itype *ity : item_controller->all() ) {
             if( ity == nullptr || ity->ammo == nullptr ||
@@ -1217,7 +1249,7 @@ static void chargen_maybe_fill_contents( item &it )
             }
             opts.push_back( fill_opt{ ity->get_id(), name } );
         }
-    } else if( it.is_watertight_container() ) {
+    } else if( liquid_vessel ) {
         for( const itype *ity : item_controller->all() ) {
             if( ity == nullptr || item_is_blacklisted( ity->get_id() ) ) {
                 continue;
@@ -1278,11 +1310,17 @@ static void chargen_maybe_fill_contents( item &it )
     const bool use_ammo_set = it.is_magazine() || it.magazine_integral() ||
                               ( it.is_tool() && !it.ammo_types().empty() ) ||
                               it.has_pocket_type( pocket_type::MAGAZINE_WELL );
+    int ammo_restr_cap = 0;
     if( fill_type->ammo != nullptr ) {
         max_amount = it.ammo_capacity( fill_type->ammo->type );
+        ammo_restr_cap = chargen_ammo_restriction_capacity( it, fill_type->ammo->type );
+        if( max_amount <= 0 ) {
+            // Quivers / ammo pouches: capacity lives on CONTAINER ammo_restriction.
+            max_amount = ammo_restr_cap;
+        }
     }
-    if( max_amount <= 0 ) {
-        // Volume/weight liquid containers (waterskins) and CONTAINER ammo pouches.
+    if( max_amount <= 0 && liquid_vessel ) {
+        // Volume/weight liquid containers (waterskins, bottles).
         item probe = it;
         item liquid( fill_id, calendar::turn_zero, 1 );
         max_amount = probe.fill_with( liquid, item::INFINITE_CHARGES );
@@ -1304,6 +1342,14 @@ static void chargen_maybe_fill_contents( item &it )
     if( use_ammo_set && fill_type->ammo != nullptr &&
         it.ammo_capacity( fill_type->ammo->type ) > 0 ) {
         it.ammo_set( fill_id, amount );
+    } else if( fill_type->ammo != nullptr && ammo_restr_cap > 0 ) {
+        // Profession kits use put_in into CONTAINER for quivers/ammo pouches.
+        // fill_with(…, INFINITE_CHARGES) as a capacity probe is unsafe here when
+        // item::ammo_capacity is 0 — prefer an exact-count put_in.
+        item ammo_stack( fill_id, calendar::turn_zero, amount );
+        if( !it.put_in( ammo_stack, pocket_type::CONTAINER ).success() ) {
+            it.fill_with( ammo_stack, amount );
+        }
     } else {
         item liquid( fill_id, calendar::turn_zero, amount );
         it.fill_with( liquid, amount );
