@@ -21,6 +21,12 @@ class query_popup_impl : public cataimgui::window
         // ImGui WantCaptureMouse is true (see sdltiles mouse handlers), so
         // query_once must honor this flag the same way uilist uses clicked.
         bool mouse_clicked_option;
+        // Sticky index captured with the click. draw_controls resets
+        // mouse_selected_option to -1 every frame; an extra redraw during
+        // handle_input (or the next loop iteration) would otherwise make
+        // consume_mouse_click see clicked=true with selected=-1 and drop
+        // the Yes/No activation.
+        short mouse_clicked_index;
         size_t msg_width;
         nc_color default_text_color;
         query_popup *parent;
@@ -43,6 +49,7 @@ class query_popup_impl : public cataimgui::window
             last_keyboard_selected_option = -1;
             mouse_selected_option = -1;
             mouse_clicked_option = false;
+            mouse_clicked_index = -1;
         }
 
         void on_resized() override;
@@ -50,10 +57,16 @@ class query_popup_impl : public cataimgui::window
         int get_mouse_selected_option() const {
             return mouse_selected_option;
         }
-        bool consume_mouse_click() {
-            const bool was = mouse_clicked_option;
+        bool consume_mouse_click( short *out_index = nullptr ) {
+            if( !mouse_clicked_option ) {
+                return false;
+            }
             mouse_clicked_option = false;
-            return was;
+            if( out_index ) {
+                *out_index = mouse_clicked_index;
+            }
+            mouse_clicked_index = -1;
+            return true;
         }
     protected:
         void draw_controls() override;
@@ -83,13 +96,18 @@ void query_popup_impl::draw_controls()
             // never activates Yes/No. Keyboard CONFIRM / Y/N are unchanged.
             if( ImGui::Button( remove_color_tags( parent->buttons[ind].text ).c_str() ) ) {
                 mouse_selected_option = static_cast<short>( ind );
+                mouse_clicked_index = static_cast<short>( ind );
                 mouse_clicked_option = true;
             } else if( ImGui::IsItemHovered() ) {
                 mouse_selected_option = static_cast<short>( ind );
             }
+            // Focus the keyboard-highlighted button once when selection changes —
+            // NOT every frame (last_keyboard was never updated, so this used to
+            // call SetKeyboardFocusHere every draw and fight mouse ActiveId).
             if( keyboard_selected_option != last_keyboard_selected_option &&
                 keyboard_selected_option == short( ind ) && ImGui::IsWindowFocused() ) {
                 ImGui::SetKeyboardFocusHere( -1 );
+                last_keyboard_selected_option = keyboard_selected_option;
             }
             current_line = parent->buttons[ind].pos.y;
         }
@@ -338,20 +356,32 @@ query_popup::result query_popup::query_once()
     res.wait_input = !anykey;
     do {
         ui_manager::redraw();
+
+        // Clicks are registered during redraw (ImGui::Button) from mouse events
+        // queued in the previous handle_input. Honor them before waiting again
+        // so a Yes/No click does not depend on another 50ms timeout trip — and
+        // use the sticky clicked index (survives extra redraws that clear
+        // mouse_selected_option).
+        short clicked_idx = -1;
+        if( !options.empty() && impl->consume_mouse_click( &clicked_idx ) &&
+            clicked_idx >= 0 ) {
+            res.action = "CONFIRM";
+            cur = size_t( clicked_idx );
+            res.evt = input_event();
+            break;
+        }
+
         res.action = ctxt.handle_input( 50 );
         res.evt = ctxt.get_raw_input();
 
-        // Mouse activation: ImGui Button click (preferred) or legacy SELECT if
-        // it was not swallowed by WantCaptureMouse.
-        //
-        // Critical: sdltiles drops mouse button events while WantCaptureMouse,
-        // so handle_input returns timeout even when Button() reported a click.
-        // We must NOT keep looping on that timeout or the click is discarded
-        // (uilist avoids this by checking `clicked` before its TIMEOUT branch).
-        if( !options.empty() && impl->consume_mouse_click() &&
-            impl->get_mouse_selected_option() != -1 ) {
+        // Mouse events arriving during handle_input are applied on the next
+        // redraw; also accept a late sticky click here, plus legacy SELECT if
+        // WantCaptureMouse did not swallow the button.
+        clicked_idx = -1;
+        if( !options.empty() && impl->consume_mouse_click( &clicked_idx ) &&
+            clicked_idx >= 0 ) {
             res.action = "CONFIRM";
-            cur = size_t( impl->get_mouse_selected_option() );
+            cur = size_t( clicked_idx );
         } else if( !options.empty() && res.action == "SELECT" &&
                    impl->get_mouse_selected_option() != -1 ) {
             res.action = "CONFIRM";
