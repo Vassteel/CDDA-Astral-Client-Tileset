@@ -818,8 +818,8 @@ void game::draw_tile_info_imgui( const tripoint_bub_ms &lp, const visibility_var
                                                "%s is the name of the item.  %d is the quantity of that item.",
                                                "%s [%d]" ), entry.first.c_str(), entry.second.first );
                 }
-                ImGui::TextColored( cataimgui::imvec4_from_color( entry.second.second ), "%s",
-                                    label.c_str() );
+                // Keep CDDA <color_…> markup parseable; do not dump raw tags into ImGui.
+                cataimgui::draw_colored_text( label, ImGui::GetContentRegionAvail().x );
                 ++shown;
             }
         }

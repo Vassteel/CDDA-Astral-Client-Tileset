@@ -227,6 +227,18 @@ static item_location item_on_slot( Character &you, const doll_slot &slot )
     }
 }
 
+
+static void imgui_cdda_tooltip( const std::string &tip )
+{
+    if( tip.empty() ) {
+        return;
+    }
+    // Parse CDDA <color_…> tags into real ImGui colors (hides raw markup; greens ++).
+    ImGui::BeginTooltip();
+    cataimgui::draw_colored_text( tip, ImGui::GetFontSize() * 35.0f );
+    ImGui::EndTooltip();
+}
+
 /**
  * Short readable grid / doll label: prefer type_name + count, word-boundary ellipsis.
  * Full identity stays in the tooltip via display_name().
@@ -236,7 +248,9 @@ static std::string cell_label( const item &it, int stack_count = 1, int max_char
     // type_name is usually shorter / cleaner than full tname with prefixes.
     std::string name = it.type_name( 1, /*use_variant=*/true );
     if( name.empty() ) {
-        name = it.tname( 1, false );
+        name = remove_color_tags( it.tname( 1, false ) );
+    } else {
+        name = remove_color_tags( name );
     }
     std::string count_suffix;
     if( it.count_by_charges() && it.charges > 1 ) {
@@ -686,7 +700,7 @@ void rpg_equipment_window::draw_paper_doll()
         const bool hovered = ImGui::IsItemHovered();
         ui_hybrid_chrome::draw_item_bezel( selected, hovered, empty );
         if( hovered && !tip.empty() ) {
-            ImGui::SetTooltip( "%s", tip.c_str() );
+            imgui_cdda_tooltip( tip );
         }
 
         // Drag-drop target: inventory grid → this doll slot
@@ -831,7 +845,7 @@ void rpg_equipment_window::draw_inventory_grid()
         const bool hovered = ImGui::IsItemHovered();
         ui_hybrid_chrome::draw_item_bezel( is_sel, hovered, false );
         if( hovered ) {
-            ImGui::SetTooltip( "%s", cell.tip.c_str() );
+            imgui_cdda_tooltip( cell.tip );
         }
 
         // Drag source → drop on paper-doll slots

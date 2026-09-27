@@ -10,6 +10,7 @@
 #include <utility>
 
 #include "avatar.h"
+#include "avatar_action.h"
 #include "cached_options.h" // IWYU pragma: keep
 #include "cata_utility.h"
 #include "character.h"
@@ -26,6 +27,7 @@
 #include "item_location.h"
 #include "itype.h"
 #include "item_action.h"
+#include "magic_enchantment.h"
 #include "map.h"
 #include "map_iterator.h"
 #include "map_scale_constants.h"
@@ -33,6 +35,7 @@
 #include "memory_fast.h"
 #include "messages.h"
 #include "monster.h"
+#include "npc.h"
 #include "options.h"
 #include "output.h"
 #include "path_info.h"
@@ -45,6 +48,10 @@
 #include "ui_manager.h"
 #include "vehicle.h"
 #include "vpart_position.h"
+
+static const efftype_id effect_pet( "pet" );
+static const json_character_flag json_flag_CANNOT_ATTACK( "CANNOT_ATTACK" );
+
 
 static const itype_id itype_swim_fins( "swim_fins" );
 
@@ -754,6 +761,7 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
 {
     // Synthetic retvals — not real action_ids.
     constexpr int MOVE_HERE = NUM_ACTIONS + 1;
+    constexpr int ATTACK_CREATURE = NUM_ACTIONS + 2;
     constexpr int TOOL_ACTION_BASE = NUM_ACTIONS + 10;
 
     Character &player_character = get_player_character();
@@ -806,6 +814,37 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
     }
     if( ( is_adjacent || is_self ) && can_interact_at( ACTION_CHAT, here, p ) ) {
         add_action( ACTION_CHAT, _( "Talk" ) );
+    }
+    // Melee/reach Attack against a creature on this tile (real bump-attack / reach path).
+    if( !is_self ) {
+        Creature *const critter = get_creature_tracker().creature_at( p );
+        if( critter != nullptr && !critter->is_avatar() &&
+            player_character.sees( here, *critter ) &&
+            player_character.can_reach_attack( *critter ) ) {
+            bool offer_attack = false;
+            if( const monster *const mon = critter->as_monster() ) {
+                // Same gate as avatar_action::move bump-attack.
+                offer_attack = mon->friendly == 0 && !mon->has_effect( effect_pet );
+            } else if( critter->as_npc() != nullptr ) {
+                // npc_menu always offers Attack.
+                offer_attack = true;
+            }
+            if( offer_attack ) {
+                const item_location weapon = player_character.get_wielded_item();
+                int reach = 1;
+                if( weapon ) {
+                    reach = weapon->reach_range( player_character ).first;
+                } else {
+                    reach = std::max( 1, static_cast<int>(
+                                          player_character.calculate_by_enchantment(
+                                              1, enchant_vals::mod::MELEE_RANGE_MODIFIER ) ) );
+                }
+                const int dist_xy = square_dist( p.xy(), player_pos.xy() );
+                if( dist_xy <= reach ) {
+                    entries.emplace_back( ATTACK_CREATURE, true, 0, _( "Attack" ) );
+                }
+            }
+        }
     }
 
     // 2) Tool-aware actions for this tile.
@@ -936,6 +975,24 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
     smenu.query();
 
     if( smenu.ret < 0 ) {
+        return ACTION_NULL;
+    }
+
+    // Attack creature on the clicked tile via the real melee/reach path.
+    if( smenu.ret == ATTACK_CREATURE ) {
+        Creature *const critter = get_creature_tracker().creature_at( p );
+        if( critter != nullptr && !critter->is_avatar() ) {
+            avatar &you = get_avatar();
+            if( you.has_flag( json_flag_CANNOT_ATTACK ) ) {
+                add_msg( m_info, _( "You are incapable of attacking!" ) );
+            } else if( you.is_adjacent( critter, true ) ) {
+                // Adjacent: same as walking into them (safe-mode / pet / NPC checks inside).
+                const tripoint_rel_ms diff = critter->pos_bub() - you.pos_bub();
+                avatar_action::move( you, here, tripoint_rel_ms( diff.xy(), 0 ) );
+            } else {
+                you.reach_attack( critter->pos_bub() );
+            }
+        }
         return ACTION_NULL;
     }
 
