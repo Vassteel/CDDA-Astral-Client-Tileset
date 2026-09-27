@@ -93,14 +93,23 @@ static item_location item_on_slot( Character &you, const doll_slot &slot )
     return worn_on_slot( you, slot.bp );
 }
 
-static std::string cell_label( const item &it )
+static std::string cell_label( const item &it, int stack_count = 1 )
 {
-    std::string name = it.tname( 1, false );
+    // quantity > 1 pluralizes via tname; charge items keep quantity 1 here because
+    // their count is shown from charges below (same as classic inventory).
+    const unsigned int tname_qty = ( !it.count_by_charges() && stack_count > 1 )
+                                   ? static_cast<unsigned int>( stack_count ) : 1u;
+    std::string name = it.tname( tname_qty, false );
     if( name.size() > 18 ) {
         name = name.substr( 0, 16 ) + "…";
     }
+    // Single charge-counted object already carries its own total (rock×27, water×6).
     if( it.count_by_charges() && it.charges > 1 ) {
         return string_format( "%s×%d", name, it.charges );
+    }
+    // Aggregated display stack of separate item instances (pinecone×11, etc.).
+    if( stack_count > 1 ) {
+        return string_format( "%s×%d", name, stack_count );
     }
     if( it.count() > 1 ) {
         return string_format( "%s×%d", name, it.count() );
@@ -408,8 +417,13 @@ void rpg_equipment_window::draw_inventory_grid()
 
     // Snapshot labels up front so ImGui never sees a temporary .c_str(), and so
     // a later deferred wear/takeoff cannot leave dangling item* mid-draw.
+    // Aggregate visually identical stackables with item::display_stacked_with
+    // (classic inventory rules): charge-counted objects stay separate cells and
+    // already show ×charges via cell_label; non-charge siblings that stacks_with
+    // fold into one cell. Wear/Wield/selection use the first location in the group.
     struct grid_cell {
-        item_location loc;
+        item_location loc;                 // representative for Wear / Wield
+        std::vector<item_location> locs;   // full display stack
         std::string label;
         std::string tip;
     };
@@ -425,11 +439,35 @@ void rpg_equipment_window::draw_inventory_grid()
         if( you->is_wielding( *loc ) ) {
             continue;
         }
+
+        bool folded = false;
+        for( grid_cell &existing : grid_items ) {
+            // display_stacked_with excludes count_by_charges and requires stacks_with
+            // (same type, rot/dirty, contents, mods, etc.) — do not merge unlike items.
+            if( loc->display_stacked_with( *existing.loc ) ) {
+                existing.locs.push_back( loc );
+                folded = true;
+                break;
+            }
+        }
+        if( folded ) {
+            continue;
+        }
+
         grid_cell cell;
         cell.loc = loc;
-        cell.label = cell_label( *loc );
-        cell.tip = loc->display_name();
+        cell.locs.push_back( loc );
         grid_items.push_back( std::move( cell ) );
+    }
+
+    for( grid_cell &cell : grid_items ) {
+        const int stack_n = static_cast<int>( cell.locs.size() );
+        cell.label = cell_label( *cell.loc, stack_n );
+        cell.tip = cell.loc->display_name( static_cast<unsigned int>( std::max( 1, stack_n ) ) );
+        if( stack_n > 1 ) {
+            cell.tip = string_format( _( "%s\nStack of %d — Wear/Wield uses one item." ),
+                                      cell.tip, stack_n );
+        }
     }
 
     if( grid_items.empty() ) {
@@ -445,7 +483,10 @@ void rpg_equipment_window::draw_inventory_grid()
         grid_cell &cell = grid_items[i];
         ImGui::PushID( 1000 + i );
 
-        const bool is_sel = selected_inv && selected_inv == cell.loc;
+        const bool is_sel = selected_inv && std::any_of( cell.locs.begin(), cell.locs.end(),
+        [&]( const item_location &l ) {
+            return selected_inv == l;
+        } );
         if( is_sel ) {
             ImGui::PushStyleColor( ImGuiCol_Button, ImVec4( 0.25f, 0.40f, 0.55f, 1.f ) );
         }
@@ -455,6 +496,7 @@ void rpg_equipment_window::draw_inventory_grid()
                 // Double-click-ish: second click equips onto selected doll slot
                 pending = pending_action::equip;
             } else {
+                // Operate on the first / representative item of the display stack.
                 selected_inv = cell.loc;
             }
         }
