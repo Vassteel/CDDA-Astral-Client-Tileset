@@ -2959,7 +2959,12 @@ talk_topic dialogue::opt_imgui( dialogue_imgui_impl &d_img, const talk_topic &to
             }
 
             input_event evt = ctxt.get_raw_input();
-            if( evt.type == input_event_t::error || evt.type == input_event_t::timeout ) {
+            // ImGui response buttons set user_clicked_response_button during redraw,
+            // but sdltiles drops mouse buttons while WantCaptureMouse — handle_input
+            // then returns timeout. Do not discard an already-resolved CONFIRM/QUIT
+            // (same pattern as query_popup / uilist clicked handling).
+            if( ( evt.type == input_event_t::error || evt.type == input_event_t::timeout ) &&
+                action != "CONFIRM" && action != "QUIT" ) {
                 continue;
             }
             if( action == "HELP_KEYBINDINGS" ) {
