@@ -646,7 +646,14 @@ void Character::add_profession_items()
         return;
     }
 
-    std::list<item> prof_items = prof->items( outfit, get_mutations() );
+    // Prefer the EQUIPMENT-tab locked kit (same roll the player reviewed / toggled)
+    // when it still matches this avatar's profession, outfit gender, and sex.
+    std::list<item> prof_items;
+    if( is_avatar() && cc_uistate.has_custom_starting_equipment( *as_avatar() ) ) {
+        prof_items = cc_uistate.custom_starting_items();
+    } else {
+        prof_items = prof->items( outfit, get_mutations() );
+    }
     std::list<item> try_adding_again;
 
     auto attempt_add_items = [this]( std::list<item> &prof_items, std::list<item> &failed_to_add ) {
@@ -1078,6 +1085,32 @@ void avatar::initialize( character_type type )
         world_origin = world_origin.value_or( point_abs_om() ) + offset;
     }
 
+}
+
+static const char *equipment_category_label( int category )
+{
+    switch( category ) {
+        case 0:
+            return _( "Wielded" );
+        case 1:
+            return _( "Worn" );
+        default:
+            return _( "Inventory" );
+    }
+}
+
+static int equipment_item_category( const item &it )
+{
+    if( it.has_flag( json_flag_no_auto_equip ) ) {
+        return 2;
+    }
+    if( it.has_flag( json_flag_auto_wield ) ) {
+        return 0;
+    }
+    if( it.is_armor() ) {
+        return 1;
+    }
+    return 2;
 }
 
 namespace char_creation
@@ -1744,6 +1777,80 @@ void draw_profession_inventory( const avatar &u )
         draw_profession_inventory_items( _( "Worn:" ), assembled_worn );
         draw_profession_inventory_items( _( "Inventory:" ), assembled_inventory );
     }
+}
+
+void draw_equipment_details( const avatar &u )
+{
+    cc_uistate.ensure_equipment_pool( u );
+    const std::vector<character_creator_equipment_choice> &choices = cc_uistate.equipment_choices;
+
+    draw_colored_text_wrap( _( "Starting equipment:" ), COL_HEADER );
+    draw_colored_text_wrap(
+        _( "Toggle items on/off. Disabled items are not granted at game start. "
+           "Kit comes from your profession (and trait substitutions); no freeform loot." ),
+        COL_NOTE_MINOR );
+    draw_spacer();
+
+    if( choices.empty() ) {
+        draw_colored_text_wrap( _( "This profession starts with no items." ), COL_NOTE_MINOR );
+        return;
+    }
+
+    const int idx = cc_uistate.selected_equipment_index;
+    if( idx < 0 || idx >= static_cast<int>( choices.size() ) ) {
+        return;
+    }
+    const character_creator_equipment_choice &sel = choices[idx];
+
+    draw_colored_text_wrap( string_format( _( "Selected: %s" ), sel.it.display_name() ),
+                            sel.enabled ? COL_SELECTED : COL_NOT_SELECTED );
+    draw_colored_text_wrap( string_format( _( "Slot: %s" ), equipment_category_label( sel.category ) ),
+                            COL_NOTE_MINOR );
+    draw_colored_text_wrap( sel.enabled ? _( "Status: included at start" )
+                            : _( "Status: excluded (will not be granted)" ),
+                            sel.enabled ? COL_SELECTED : c_red );
+    draw_spacer();
+    draw_colored_text_wrap( _( "Click / Confirm to toggle. Categories filter the list." ),
+                            COL_NOTE_MINOR );
+    draw_spacer();
+
+    // Full checklist (mouse-friendly) mirroring the left uilist
+    int enabled_count = 0;
+    for( const character_creator_equipment_choice &ec : choices ) {
+        if( ec.enabled ) {
+            ++enabled_count;
+        }
+    }
+    draw_colored_text_wrap( string_format( _( "Included: %d / %d" ), enabled_count,
+                                           static_cast<int>( choices.size() ) ), c_white );
+    draw_spacer();
+
+    auto draw_group = [&]( int category, const std::string &title ) {
+        bool any = false;
+        for( size_t i = 0; i < choices.size(); ++i ) {
+            if( choices[i].category != category ) {
+                continue;
+            }
+            if( !any ) {
+                draw_colored_text_wrap( title, c_cyan );
+                any = true;
+            }
+            bool enabled = choices[i].enabled;
+            ImGui::PushID( static_cast<int>( i ) );
+            if( ImGui::Checkbox( choices[i].it.display_name().c_str(), &enabled ) ) {
+                cc_uistate.equipment_choices[i].enabled = enabled;
+                cc_uistate.selected_equipment_index = static_cast<int>( i );
+            }
+            ImGui::PopID();
+            if( static_cast<int>( i ) == idx ) {
+                ImGui::SameLine();
+                cataimgui::draw_colored_text( _( " <" ), c_yellow );
+            }
+        }
+    };
+    draw_group( 0, _( "Wielded:" ) );
+    draw_group( 1, _( "Worn:" ) );
+    draw_group( 2, _( "Inventory:" ) );
 }
 
 void draw_hobby_header( const avatar &u )
@@ -2576,6 +2683,41 @@ void character_creator_ui::setup_new_uilist()
                 } );
                 break;
             }
+            case CHARCREATOR_EQUIPMENT: {
+                new_uilist->filtering = false;
+                new_uilist->add_category( CHARACTER_CREATOR_UILIST_ALL.translated(),
+                                          CHARACTER_CREATOR_UILIST_ALL.translated() );
+                new_uilist->add_category( _( "WIELDED" ), _( "WIELDED" ) );
+                new_uilist->add_category( _( "WORN" ), _( "WORN" ) );
+                new_uilist->add_category( _( "INVENTORY" ), _( "INVENTORY" ) );
+                new_uilist->set_category_filter( []( const uilist_entry & entry,
+                const std::string & key )->bool {
+                    if( key == CHARACTER_CREATOR_UILIST_ALL.translated() )
+                    {
+                        return true;
+                    }
+                    if( entry.retval < 0 ||
+                        entry.retval >= static_cast<int>( cc_uistate.equipment_choices.size() ) )
+                    {
+                        return false;
+                    }
+                    const int cat = cc_uistate.equipment_choices[entry.retval].category;
+                    if( key == _( "WIELDED" ) )
+                    {
+                        return cat == 0;
+                    }
+                    if( key == _( "WORN" ) )
+                    {
+                        return cat == 1;
+                    }
+                    if( key == _( "INVENTORY" ) )
+                    {
+                        return cat == 2;
+                    }
+                    return false;
+                } );
+                break;
+            }
             default:
                 // do nothing; doesn't use a uilist
                 break;
@@ -2678,6 +2820,24 @@ void character_creator_ui::update_uilist_entries()
                                                cc_uistate.sorted_skills[i]->ident(), u ) );
                 skill_entry.retval = i;
                 menu->addentry( skill_entry );
+            }
+            break;
+        }
+        case CHARCREATOR_EQUIPMENT: {
+            cc_uistate.ensure_equipment_pool( u );
+            const int equip_count = static_cast<int>( cc_uistate.equipment_choices.size() );
+            for( int i = 0; i < equip_count; i++ ) {
+                const character_creator_equipment_choice &ec = cc_uistate.equipment_choices[i];
+                const std::string mark = ec.enabled ? _( "[x] " ) : _( "[ ] " );
+                uilist_entry entry = get_uilist_entry( mark + ec.it.display_name() );
+                entry.retval = i;
+                entry.text_color = ec.enabled ? COL_SELECTED : COL_NOT_SELECTED;
+                menu->addentry( entry );
+            }
+            if( equip_count > 0 ) {
+                cc_uistate.selected_equipment_index = std::clamp(
+                        cc_uistate.selected_equipment_index, 0, equip_count - 1 );
+                set_uilist_selected( menu, cc_uistate.selected_equipment_index );
             }
             break;
         }
@@ -2796,6 +2956,12 @@ void character_creator_ui_impl::draw_controls()
                                  tab_selected[static_cast<int>( CHARCREATOR_SKILLS )] ) ) {
             check_new_tab( CHARCREATOR_SKILLS );
             draw_skills();
+            ImGui::EndTabItem();
+        }
+        if( ImGui::BeginTabItem( _( "EQUIPMENT" ), nullptr,
+                                 tab_selected[static_cast<int>( CHARCREATOR_EQUIPMENT )] ) ) {
+            check_new_tab( CHARCREATOR_EQUIPMENT );
+            draw_equipment();
             ImGui::EndTabItem();
         }
         if( ImGui::BeginTabItem( _( "SUMMARY" ), nullptr,
@@ -3059,6 +3225,25 @@ void character_creator_ui_impl::draw_skills()
     }
 }
 
+void character_creator_ui_impl::draw_equipment()
+{
+    const avatar &u = get_avatar();
+    cc_uistate.ensure_equipment_pool( u );
+    if( ImGui::BeginTable( "EQUIPMENT_MAIN", 2, CHARACTER_CREATOR_TABLE_FLAGS ) ) {
+        if( !cc_uistate.equipment_choices.empty() ) {
+            const int idx = std::clamp( cc_uistate.selected_equipment_index, 0,
+                                        static_cast<int>( cc_uistate.equipment_choices.size() ) - 1 );
+            const item &it = cc_uistate.equipment_choices[idx].it;
+            setup_list_detail_ui( it.display_name() );
+            char_creation::draw_equipment_details( u );
+        } else {
+            setup_list_detail_ui( _( "Starting equipment" ) );
+            char_creation::draw_equipment_details( u );
+        }
+        ImGui::EndTable();
+    }
+}
+
 void character_creator_ui_impl::draw_summary()
 {
     const avatar &u = get_avatar();
@@ -3092,6 +3277,30 @@ void character_creator_ui_impl::draw_summary()
         draw_spacer();
         bool dummy = true;
         char_creation::draw_profession_bionics( dummy, _( "Bionics" ), *who.prof );
+        draw_spacer();
+        // Reflect EQUIPMENT-tab choices on Summary when a kit was locked in.
+        if( cc_uistate.has_custom_starting_equipment( u ) ) {
+            draw_colored_text_wrap( _( "Starting equipment (customized):" ), COL_HEADER );
+            for( const character_creator_equipment_choice &ec : cc_uistate.equipment_choices ) {
+                if( !ec.enabled ) {
+                    continue;
+                }
+                draw_colored_text_wrap( string_format( "• %s", ec.it.display_name() ),
+                                        COL_NOTE_MINOR );
+            }
+            int excluded = 0;
+            for( const character_creator_equipment_choice &ec : cc_uistate.equipment_choices ) {
+                if( !ec.enabled ) {
+                    ++excluded;
+                }
+            }
+            if( excluded > 0 ) {
+                draw_colored_text_wrap( string_format( _( "(%d item(s) excluded)" ), excluded ),
+                                        c_red );
+            }
+        } else {
+            char_creation::draw_profession_inventory( u );
+        }
 
         set_detail_scroll();
 
@@ -3307,11 +3516,65 @@ skill_id character_creator_uistate::get_selected_skill()
     return sorted_skills[selected_skill_index]->ident();
 }
 
+void character_creator_uistate::clear_equipment_customization()
+{
+    equipment_choices.clear();
+    equipment_source_prof = profession_id::NULL_ID();
+    selected_equipment_index = 0;
+}
+
+void character_creator_uistate::ensure_equipment_pool( const avatar &u )
+{
+    const profession_id pid = u.prof->ident();
+    if( !equipment_choices.empty() &&
+        equipment_source_prof == pid &&
+        equipment_source_outfit == outfit &&
+        equipment_source_male == u.male ) {
+        return;
+    }
+
+    equipment_choices.clear();
+    equipment_source_prof = pid;
+    equipment_source_outfit = outfit;
+    equipment_source_male = u.male;
+    selected_equipment_index = 0;
+
+    cached_profession_inventory = u.prof->items( outfit, u.get_mutations() );
+    equipment_choices.reserve( cached_profession_inventory.size() );
+    for( const item &it : cached_profession_inventory ) {
+        character_creator_equipment_choice ec;
+        ec.it = it;
+        ec.enabled = true;
+        ec.category = equipment_item_category( it );
+        equipment_choices.push_back( std::move( ec ) );
+    }
+}
+
+bool character_creator_uistate::has_custom_starting_equipment( const avatar &u ) const
+{
+    return !equipment_choices.empty() &&
+           equipment_source_prof == u.prof->ident() &&
+           equipment_source_outfit == outfit &&
+           equipment_source_male == u.male;
+}
+
+std::list<item> character_creator_uistate::custom_starting_items() const
+{
+    std::list<item> result;
+    for( const character_creator_equipment_choice &ec : equipment_choices ) {
+        if( ec.enabled ) {
+            result.push_back( ec.it );
+        }
+    }
+    return result;
+}
+
 void character_creator_uistate::reset()
 {
     sorted_scenarios.clear();
     sorted_professions.clear();
     cached_profession_inventory.clear();
+    clear_equipment_customization();
     sorted_hobbies.clear();
     sorted_traits.clear();
     sorted_skills.clear();
@@ -3328,6 +3591,7 @@ void character_creator_uistate::reset()
     selected_stat_index = 0;
     selected_trait_index = 0;
     selected_skill_index = 0;
+    selected_equipment_index = 0;
 
     recalc_rating = true;
     recalc_scenarios = true;
@@ -3485,8 +3749,14 @@ bool character_creator_ui::handle_action( const std::string &action )
         update_uilist_entries();
     } else if( action == "CHANGE_GENDER" ) {
         you.male = !you.male;
+        cc_uistate.cached_profession_inventory.clear();
+        cc_uistate.clear_equipment_customization();
+        update_uilist_entries();
     } else if( action == "CHANGE_OUTFIT" ) {
         outfit = !outfit;
+        cc_uistate.cached_profession_inventory.clear();
+        cc_uistate.clear_equipment_customization();
+        update_uilist_entries();
     } else if( action == "CHANGE_START_OF_CATACLYSM" ) {
         const scenario *scen = get_scenario();
         scen->change_start_of_cataclysm( calendar_ui::select_time_point( scen->start_of_cataclysm(),
@@ -3619,6 +3889,8 @@ void character_creator_callback::confirm( uilist *menu )
             cc_uistate.recalc_professions = true;
             cc_uistate.recalc_hobbies = true;
             cc_uistate.recalc_traits = true;
+            cc_uistate.cached_profession_inventory.clear();
+            cc_uistate.clear_equipment_customization();
             break;
         }
         case CHARCREATOR_PROFESSION: {
@@ -3659,6 +3931,7 @@ void character_creator_callback::confirm( uilist *menu )
             cc_uistate.recalc_hobbies = true;
             cc_uistate.recalc_traits = true;
             cc_uistate.cached_profession_inventory.clear();
+            cc_uistate.clear_equipment_customization();
             break;
         }
         case CHARCREATOR_BACKGROUND: {
@@ -3803,6 +4076,9 @@ void character_creator_callback::confirm( uilist *menu )
             //inc_type is either -1 or 1, so we can just multiply by it to invert
             if( inc_type != 0 ) {
                 u.toggle_trait_deps( cur_trait, variant );
+                // Trait substitutions can rewrite profession kits.
+                cc_uistate.cached_profession_inventory.clear();
+                cc_uistate.clear_equipment_customization();
             }
             break;
         }
@@ -3818,6 +4094,15 @@ void character_creator_callback::confirm( uilist *menu )
                 const int skill_result_clamped = std::clamp( skill_queried_result, MIN_SKILL, MAX_SKILL );
                 u.set_skill_level( skill_queried, skill_result_clamped );
                 u.set_knowledge_level( skill_queried, skill_result_clamped );
+            }
+            break;
+        }
+        case CHARCREATOR_EQUIPMENT: {
+            select( menu );
+            const int idx = cc_uistate.selected_equipment_index;
+            if( idx >= 0 && idx < static_cast<int>( cc_uistate.equipment_choices.size() ) ) {
+                cc_uistate.equipment_choices[idx].enabled =
+                    !cc_uistate.equipment_choices[idx].enabled;
             }
             break;
         }
@@ -3838,6 +4123,8 @@ void character_creator_callback::select( uilist *menu )
         case CHARCREATOR_PROFESSION:
             cc_uistate.selected_profession_index = menu_selected;
             cc_uistate.cached_profession_inventory.clear();
+            // Don't clear equipment customization while merely highlighting a profession;
+            // confirm() clears it when the profession is actually applied.
             break;
         case CHARCREATOR_BACKGROUND:
             cc_uistate.selected_hobby_index = menu_selected;
@@ -3851,6 +4138,10 @@ void character_creator_callback::select( uilist *menu )
         }
         case CHARCREATOR_SKILLS: {
             cc_uistate.selected_skill_index = menu_selected;
+            break;
+        }
+        case CHARCREATOR_EQUIPMENT: {
+            cc_uistate.selected_equipment_index = menu_selected < 0 ? 0 : menu_selected;
             break;
         }
         default:

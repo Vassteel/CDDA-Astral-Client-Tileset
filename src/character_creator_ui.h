@@ -6,7 +6,7 @@
 #include "uilist.h"
 #include "scenario.h"
 
-const int CHARACTER_CREATOR_TAB_COUNT = 7;
+const int CHARACTER_CREATOR_TAB_COUNT = 8;
 const int CHARACTER_CREATOR_SUMMARY_LINES = 5;
 const ImGuiTableFlags_ CHARACTER_CREATOR_TABLE_FLAGS = ImGuiTableFlags_ScrollY;
 const translation CHARACTER_CREATOR_UILIST_ALL = to_translation( "ALL" );
@@ -22,8 +22,17 @@ enum character_creator_tab : int {
     CHARCREATOR_STATS,
     CHARCREATOR_TRAITS,
     CHARCREATOR_SKILLS,
+    CHARCREATOR_EQUIPMENT,
     CHARCREATOR_SUMMARY,
     character_creator_tab_LAST
+};
+
+// One profession starting-kit row in the EQUIPMENT chargen tab.
+struct character_creator_equipment_choice {
+    item it;
+    bool enabled = true;
+    // 0 = wielded, 1 = worn, 2 = inventory (matches auto_wield / armor / else)
+    int category = 2;
 };
 
 class character_creator_ui;
@@ -57,6 +66,13 @@ struct character_creator_uistate {
     //TODO: this inventory only exists as an example;
     // it is NOT the inventory used on game start
     std::list<item> cached_profession_inventory;
+    // Customized starting kit from the EQUIPMENT tab. When non-empty and matching
+    // the current profession/outfit/gender, add_profession_items() uses these
+    // (enabled entries only) instead of re-rolling profession item groups.
+    std::vector<character_creator_equipment_choice> equipment_choices;
+    profession_id equipment_source_prof = profession_id::NULL_ID();
+    bool equipment_source_outfit = true;
+    bool equipment_source_male = true;
     std::vector<profession_id> sorted_hobbies;
     std::vector<trait_id> sorted_traits;
     std::vector<const Skill *> sorted_skills;
@@ -74,6 +90,7 @@ struct character_creator_uistate {
     int selected_stat_index = 0;
     int selected_trait_index = 0;
     int selected_skill_index = 0;
+    int selected_equipment_index = 0;
 
     // the currently selected tab
     character_creator_tab selected_tab = CHARCREATOR_SCENARIO;
@@ -112,6 +129,13 @@ struct character_creator_uistate {
     void recalc_hobbies_taken_list( const avatar &u );
     void recalc_trait_list( const avatar &u );
     void recalc_skill_list();
+
+    // Rebuild equipment_choices from the current profession kit when stale.
+    void ensure_equipment_pool( const avatar &u );
+    void clear_equipment_customization();
+    // True when EQUIPMENT tab has locked a kit for the current prof/outfit/gender.
+    bool has_custom_starting_equipment( const avatar &u ) const;
+    std::list<item> custom_starting_items() const;
 
     bool hobby_conflict_check( const avatar &u );
     void reset();
@@ -165,6 +189,7 @@ class character_creator_ui_impl : public cataimgui::window
         void draw_stats();
         void draw_traits();
         void draw_skills();
+        void draw_equipment();
         void draw_summary();
 
     protected:
@@ -217,6 +242,7 @@ void draw_profession_details();
 void draw_profession_inventory_items( const std::string &category,
                                       const std::vector<std::string> &item_names );
 void draw_profession_inventory( const avatar &u );
+void draw_equipment_details( const avatar &u );
 void draw_hobby_header( const avatar &u );
 void draw_hobby_details();
 void draw_hobby_selected( const avatar &u );
