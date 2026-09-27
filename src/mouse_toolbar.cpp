@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "cata_imgui.h"
+#include "action.h"
 #include "game.h"
 #include "imgui/imgui.h"
 #include "options.h"
@@ -84,13 +85,15 @@ class mouse_toolbar_window : public cataimgui::window
             }
 
             // Compact auto-action toggles (upstream AUTO_PICKUP / AUTO_FORAGING).
+            // Left-click: toggle / cycle.  Right-click: configure (manager / mode menu).
             if( get_option<bool>( "MOUSE_TOOLBAR_AUTO_TOGGLES" ) ) {
                 const bool pickup_on = get_option<bool>( "AUTO_PICKUP" );
                 const bool forage_on = get_option<bool>( "AUTO_FEATURES" ) &&
                                        get_option<std::string>( "AUTO_FORAGING" ) != "off";
+                const std::string forage_mode = get_option<std::string>( "AUTO_FORAGING" );
 
-                auto draw_toggle = [&]( const char *id, const std::string &label, bool active,
-                action_id act ) {
+                auto draw_styled_button = [&]( const char *id, const std::string &label,
+                bool active ) {
                     if( !first ) {
                         ImGui::SameLine();
                     }
@@ -104,20 +107,70 @@ class mouse_toolbar_window : public cataimgui::window
                                                ImVec4( 0.15f, 0.35f, 0.20f, 1.f ) );
                     }
                     ImGui::PushID( id );
-                    if( ImGui::Button( label.c_str() ) ) {
-                        pending = act;
-                    }
+                    ImGui::Button( label.c_str() );
+                    const bool left = ImGui::IsItemClicked( ImGuiMouseButton_Left );
+                    const bool right = ImGui::IsItemClicked( ImGuiMouseButton_Right );
                     ImGui::PopID();
                     if( active ) {
                         ImGui::PopStyleColor( 3 );
                     }
+                    return std::pair<bool, bool>{ left, right };
                 };
 
                 // Stable owned labels (avoid temporary .c_str() lifetime issues).
                 const std::string pick_label = pickup_on ? _( "Pick●" ) : _( "Pick" );
-                const std::string forage_label = forage_on ? _( "Forage●" ) : _( "Forage" );
-                draw_toggle( "tb_pick", pick_label, pickup_on, ACTION_TOGGLE_AUTO_PICKUP );
-                draw_toggle( "tb_forage", forage_label, forage_on, ACTION_TOGGLE_AUTO_FORAGING );
+                std::string forage_label = forage_on ? _( "Forage●" ) : _( "Forage" );
+                if( forage_on && forage_mode != "bushes" ) {
+                    // Hint active mode when not the default bushes setting.
+                    forage_label += ":" + forage_mode.substr( 0, 1 );
+                }
+
+                const auto pick_clicks = draw_styled_button( "tb_pick", pick_label, pickup_on );
+                if( pick_clicks.first ) {
+                    pending = ACTION_TOGGLE_AUTO_PICKUP;
+                } else if( pick_clicks.second ) {
+                    // Open existing Auto Pickup Manager (filters / Global vs Character rules).
+                    pending = ACTION_AUTOPICKUP;
+                }
+
+                const auto forage_clicks = draw_styled_button( "tb_forage", forage_label,
+                                                               forage_on );
+                if( forage_clicks.first ) {
+                    pending = ACTION_TOGGLE_AUTO_FORAGING;
+                } else if( forage_clicks.second ) {
+                    ImGui::OpenPopup( "tb_forage_modes" );
+                }
+
+                if( ImGui::BeginPopup( "tb_forage_modes" ) ) {
+                    ImGui::TextUnformatted( _( "Auto forage mode" ) );
+                    ImGui::Separator();
+                    ImGui::TextWrapped( "%s",
+                                        _( "Requires Additional auto features.  "
+                                           "Runs on adjacent tiles while walking; "
+                                           "paused when monsters are visible." ) );
+                    ImGui::Spacing();
+                    auto pick_mode = [&]( const char *id, const char *label ) {
+                        const bool selected = forage_mode == id;
+                        if( ImGui::Selectable( label, selected ) ) {
+                            get_options().get_option( "AUTO_FORAGING" ).setValue( id );
+                            if( std::string( id ) != "off" &&
+                                !get_option<bool>( "AUTO_FEATURES" ) ) {
+                                get_options().get_option( "AUTO_FEATURES" ).setValue( "true" );
+                            }
+                            get_options().save();
+                            ImGui::CloseCurrentPopup();
+                        }
+                        if( selected ) {
+                            ImGui::SetItemDefaultFocus();
+                        }
+                    };
+                    pick_mode( "off", _( "Off" ) );
+                    pick_mode( "bushes", _( "Bushes" ) );
+                    pick_mode( "trees", _( "Trees" ) );
+                    pick_mode( "crops", _( "Crops" ) );
+                    pick_mode( "all", _( "Everything" ) );
+                    ImGui::EndPopup();
+                }
             }
             ImGui::PopStyleVar( 2 );
         }

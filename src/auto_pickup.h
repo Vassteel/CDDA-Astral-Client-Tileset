@@ -136,6 +136,10 @@ class player_settings : public base_settings
 
         void clear_character_rules();
 
+        // Seed a Global include-all "*" rule when no rules exist (toolbar Pick UX).
+        // Returns true if a rule was added.  Does not enable AUTO_PICKUP itself.
+        bool ensure_toolbar_defaults();
+
         void show();
         bool save_character();
         bool save_global();

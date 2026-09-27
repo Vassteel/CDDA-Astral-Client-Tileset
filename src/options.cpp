@@ -2355,9 +2355,11 @@ void options_manager::add_options_interface()
         add( "MOUSE_TOOLBAR_AUTO_TOGGLES", page_id,
              to_translation( "Toolbar auto pickup / forage buttons" ),
              to_translation( "If true, the on-screen mouse toolbar shows Pick and Forage "
-                             "buttons that toggle Auto pickup and Auto foraging.  "
-                             "Full settings live under Options → General → Auto pickup / "
-                             "Auto features (enable 'Additional auto features' for forage)." ),
+                             "buttons.  Left-click Pick toggles auto pickup (seeds a Global "
+                             "* catch-all rule and enables adjacent pickup when rules were empty).  "
+                             "Right-click Pick opens the Auto Pickup Manager.  Left-click "
+                             "Forage cycles auto foraging; right-click picks a mode.  "
+                             "Forage requires Additional auto features (enabled automatically)." ),
              true, COPT_CURSES_HIDE );
         get_option( "MOUSE_TOOLBAR_AUTO_TOGGLES" ).setPrerequisite( "MOUSE_TOOLBAR" );
     } );

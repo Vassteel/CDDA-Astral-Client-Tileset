@@ -735,6 +735,20 @@ bool player_settings::empty() const
     return global_rules.empty() && character_rules.empty();
 }
 
+bool player_settings::ensure_toolbar_defaults()
+{
+    if( !empty() ) {
+        return false;
+    }
+    // Catch-all include: matches any non-empty item name via wildcard_match.
+    // Stored as a Global rule so it persists across characters (config/auto_pickup.json).
+    // Players can refine or replace it in the Auto Pickup Manager (Help menu).
+    global_rules.emplace_back( "*", true, false );
+    invalidate();
+    save_global();
+    return true;
+}
+
 bool check_special_rule( const std::map<material_id, int> &materials, std::string_view rule )
 {
     char type = ' ';

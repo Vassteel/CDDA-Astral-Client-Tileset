@@ -3124,25 +3124,48 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             }
             break;
 
-        case ACTION_TOGGLE_AUTO_FORAGING:
-            // Set Auto Foraging to x
+        case ACTION_TOGGLE_AUTO_FORAGING: {
+            // Cycle: off → bushes → trees → crops → all → off.
+            // When leaving "off", force AUTO_FEATURES on (classic footgun otherwise).
             set_next_option( "AUTO_FORAGING" );
-            // Forage requires AUTO_FEATURES; enable it when turning forage on so the
-            // toolbar / keybind toggle is immediately useful (Deck / mouse UX).
-            if( get_option<std::string>( "AUTO_FORAGING" ) != "off" &&
-                !get_option<bool>( "AUTO_FEATURES" ) ) {
-                get_options().get_option( "AUTO_FEATURES" ).setValue( "true" );
-                get_options().save();
-                add_msg( _( "Also enabled Additional auto features (required for auto forage)." ) );
+            const std::string forage = get_option<std::string>( "AUTO_FORAGING" );
+            if( forage != "off" ) {
+                if( !get_option<bool>( "AUTO_FEATURES" ) ) {
+                    get_options().get_option( "AUTO_FEATURES" ).setValue( "true" );
+                    get_options().save();
+                    add_msg( _( "Also enabled Additional auto features (required for auto forage)." ) );
+                }
+                add_msg( _( "Auto forage examines adjacent harvestables while you walk "
+                            "(paused if monsters are visible).  Right-click Forage on the "
+                            "toolbar to pick a mode." ) );
             } else {
                 auto_features_warn();
             }
             break;
+        }
 
-        case ACTION_TOGGLE_AUTO_PICKUP:
-            // Set Auto pickup enabled to x
+        case ACTION_TOGGLE_AUTO_PICKUP: {
+            // Toggle AUTO_PICKUP; when enabling, also turn on adjacent pickup and seed
+            // a Global "*" catch-all rule if the manager has no rules yet (empty rules =
+            // never pick anything up — the usual reason the toolbar ● did nothing).
             set_next_option( "AUTO_PICKUP" );
+            if( get_option<bool>( "AUTO_PICKUP" ) ) {
+                if( !get_option<bool>( "AUTO_PICKUP_ADJACENT" ) ) {
+                    get_options().get_option( "AUTO_PICKUP_ADJACENT" ).setValue( "true" );
+                    get_options().save();
+                    add_msg( _( "Also enabled Auto pickup adjacent (1-tile around you)." ) );
+                }
+                if( get_auto_pickup().ensure_toolbar_defaults() ) {
+                    add_msg( _( "Seeded Global auto-pickup rule * (pick up everything).  "
+                                "Right-click Pick on the toolbar (or Help → Auto pickup manager) "
+                                "to edit filters." ) );
+                } else {
+                    add_msg( _( "Auto pickup on.  Right-click Pick (or Help → Auto pickup "
+                                "manager) to edit filters." ) );
+                }
+            }
             break;
+        }
 
         case ACTION_TOGGLE_HOUR_TIMER:
             toggle_debug_hour_timer();
