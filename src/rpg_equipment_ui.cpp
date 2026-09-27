@@ -10,6 +10,7 @@
 #include "avatar_action.h"
 #include "bodypart.h"
 #include "cata_imgui.h"
+#include "ui_hybrid_chrome.h"
 #include "catacharset.h"
 #include "character.h"
 #include "color.h"
@@ -78,7 +79,7 @@ static std::string ellipsize_label( const std::string &raw, int max_cells )
 static std::vector<doll_slot> make_doll_slots( Character &you )
 {
     std::vector<doll_slot> slots;
-    const auto add_bp = [&]( const bodypart_str_id &id, const char *fallback_label ) {
+    const auto add_bp = [&]( const bodypart_str_id & id, const char *fallback_label ) {
         if( !you.has_part( id.id() ) ) {
             return;
         }
@@ -287,6 +288,12 @@ class rpg_equipment_window : public cataimgui::window
         bool execute();
 
     protected:
+        void draw() override {
+            // Push Hybrid chrome before Begin so WindowBg / borders apply.
+            ui_hybrid_chrome::push();
+            cataimgui::window::draw();
+            ui_hybrid_chrome::pop();
+        }
         void draw_controls() override;
         cataimgui::bounds get_bounds() override {
             const float window_width = std::clamp( float( str_width_to_pixels( EVEN_MINIMUM_TERM_WIDTH ) ),
@@ -630,7 +637,8 @@ void rpg_equipment_window::draw_paper_doll()
 {
     ImGui::BeginChild( "paper_doll", ImVec2( ImGui::GetContentRegionAvail().x * 0.44f, 0 ),
                        ImGuiChildFlags_Borders );
-    ImGui::TextUnformatted( _( "Equipment (paper doll)" ) );
+    ImGui::TextColored( ui_hybrid_chrome::palette::accent(), "%s",
+                        _( "Equipped (slots)" ) );
     ImGui::Separator();
 
     const float slot_w = ImGui::GetContentRegionAvail().x;
@@ -657,11 +665,10 @@ void rpg_equipment_window::draw_paper_doll()
         }
 
         const bool selected = ( selected_slot == i );
+        const bool empty = !worn_loc;
 
         ImGui::PushID( i );
-        if( selected ) {
-            ImGui::PushStyleColor( ImGuiCol_Button, ImVec4( 0.35f, 0.45f, 0.25f, 1.f ) );
-        }
+        const int slot_cols = ui_hybrid_chrome::push_slot_button( selected, empty );
 
         const std::string row = string_format( "%-9s %s", slot.label, right );
         if( ImGui::Button( row.c_str(), ImVec2( -1.f, 0.f ) ) ) {
@@ -676,7 +683,9 @@ void rpg_equipment_window::draw_paper_doll()
                 selected_worn = item_location::nowhere;
             }
         }
-        if( ImGui::IsItemHovered() && !tip.empty() ) {
+        const bool hovered = ImGui::IsItemHovered();
+        ui_hybrid_chrome::draw_item_bezel( selected, hovered, empty );
+        if( hovered && !tip.empty() ) {
             ImGui::SetTooltip( "%s", tip.c_str() );
         }
 
@@ -694,13 +703,12 @@ void rpg_equipment_window::draw_paper_doll()
             ImGui::EndDragDropTarget();
         }
 
+        // Keep inventory-tint hint as a tiny colored marker (chrome stays Hybrid).
         ImGui::PushStyleColor( ImGuiCol_Text, tint );
         ImGui::TextUnformatted( " " );
         ImGui::PopStyleColor();
 
-        if( selected ) {
-            ImGui::PopStyleColor();
-        }
+        ImGui::PopStyleColor( slot_cols );
         ImGui::PopID();
     }
 
@@ -710,7 +718,8 @@ void rpg_equipment_window::draw_paper_doll()
 void rpg_equipment_window::draw_inventory_grid()
 {
     ImGui::BeginChild( "inv_grid", ImVec2( 0, 0 ), ImGuiChildFlags_Borders );
-    ImGui::TextUnformatted( _( "Inventory (grid)" ) );
+    ImGui::TextColored( ui_hybrid_chrome::palette::accent(), "%s",
+                        _( "Inventory" ) );
     ImGui::Separator();
 
     // Snapshot labels up front so ImGui never sees a temporary .c_str(), and so
@@ -759,17 +768,20 @@ void rpg_equipment_window::draw_inventory_grid()
         grid_items.push_back( std::move( cell ) );
     }
 
-    // Flexible cell width: aim ~4–8 columns, min ~140px so labels stay readable.
+    // Dense BG3-style grid: smaller cells, more columns (chrome-only phase;
+    // icon atlases come later). Equipped gear stays on the doll only — no
+    // duplicate equipped-item list beside the slot ring.
     const float avail = ImGui::GetContentRegionAvail().x;
-    const float min_cell = 140.f;
-    const float max_cell = 200.f;
-    int columns = std::max( 1, static_cast<int>( avail / ( min_cell + 8.f ) ) );
-    columns = std::min( columns, 8 );
-    float cell_w = ( avail - 8.f * static_cast<float>( columns ) ) /
+    const float min_cell = 88.f;
+    const float max_cell = 120.f;
+    const float cell_gap = 4.f;
+    int columns = std::max( 1, static_cast<int>( avail / ( min_cell + cell_gap ) ) );
+    columns = std::min( columns, 12 );
+    float cell_w = ( avail - cell_gap * static_cast<float>( columns ) ) /
                    static_cast<float>( columns );
     cell_w = std::clamp( cell_w, min_cell, max_cell );
-    const int label_chars = std::max( 10,
-                                      static_cast<int>( ( cell_w - 12.f ) /
+    const int label_chars = std::max( 6,
+                                      static_cast<int>( ( cell_w - 8.f ) /
                                               std::max( 1.f, ImGui::CalcTextSize( "W" ).x ) ) );
 
     for( grid_cell &cell : grid_items ) {
@@ -801,11 +813,9 @@ void rpg_equipment_window::draw_inventory_grid()
         [&]( const item_location & l ) {
             return selected_inv == l;
         } );
-        if( is_sel ) {
-            ImGui::PushStyleColor( ImGuiCol_Button, ImVec4( 0.25f, 0.40f, 0.55f, 1.f ) );
-        }
+        const int grid_cols = ui_hybrid_chrome::push_grid_button( is_sel );
 
-        if( ImGui::Button( cell.label.c_str(), ImVec2( cell_w, 44.f ) ) ) {
+        if( ImGui::Button( cell.label.c_str(), ImVec2( cell_w, 32.f ) ) ) {
             if( is_sel ) {
                 // Second click: Use when applicable, otherwise equip onto selected doll slot
                 if( cell.usable ) {
@@ -818,7 +828,9 @@ void rpg_equipment_window::draw_inventory_grid()
                 selected_inv = cell.loc;
             }
         }
-        if( ImGui::IsItemHovered() ) {
+        const bool hovered = ImGui::IsItemHovered();
+        ui_hybrid_chrome::draw_item_bezel( is_sel, hovered, false );
+        if( hovered ) {
             ImGui::SetTooltip( "%s", cell.tip.c_str() );
         }
 
@@ -855,9 +867,7 @@ void rpg_equipment_window::draw_inventory_grid()
             ImGui::EndPopup();
         }
 
-        if( is_sel ) {
-            ImGui::PopStyleColor();
-        }
+        ImGui::PopStyleColor( grid_cols );
         ImGui::PopID();
 
         col++;
@@ -873,27 +883,35 @@ void rpg_equipment_window::draw_inventory_grid()
 
 void rpg_equipment_window::draw_action_bar()
 {
-    if( ImGui::Button( _( "Wear / Wield" ) ) ) {
+    auto action_btn = []( const char *label ) {
+        const int n = ui_hybrid_chrome::push_toolbar_button( false );
+        const bool clicked = ImGui::Button( label );
+        ui_hybrid_chrome::draw_item_bezel( false, ImGui::IsItemHovered(), false );
+        ImGui::PopStyleColor( n );
+        return clicked;
+    };
+
+    if( action_btn( _( "Wear / Wield" ) ) ) {
         pending = pending_action::equip;
     }
     ImGui::SameLine();
-    if( ImGui::Button( _( "Take Off" ) ) ) {
+    if( action_btn( _( "Take Off" ) ) ) {
         pending = pending_action::takeoff;
     }
     ImGui::SameLine();
-    if( ImGui::Button( _( "Wield" ) ) ) {
+    if( action_btn( _( "Wield" ) ) ) {
         pending = pending_action::wield;
     }
     ImGui::SameLine();
-    if( ImGui::Button( _( "Use" ) ) ) {
+    if( action_btn( _( "Use" ) ) ) {
         pending = pending_action::use_item;
     }
     ImGui::SameLine();
-    if( ImGui::Button( _( "Classic Inv…" ) ) ) {
+    if( action_btn( _( "Classic Inv…" ) ) ) {
         open_classic = true;
     }
     ImGui::SameLine();
-    if( ImGui::Button( _( "Close" ) ) ) {
+    if( action_btn( _( "Close" ) ) ) {
         want_close = true;
     }
 

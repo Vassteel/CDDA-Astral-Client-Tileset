@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "cata_imgui.h"
+#include "ui_hybrid_chrome.h"
 #include "action.h"
 #include "game.h"
 #include "imgui/imgui.h"
@@ -51,6 +52,13 @@ class mouse_toolbar_window : public cataimgui::window
             return { x < 8.f ? 8.f : x, y < 8.f ? 8.f : y, -1.f, -1.f };
         }
 
+        void draw() override {
+            // Hybrid chrome before Begin so the strip WindowBg matches.
+            ui_hybrid_chrome::push();
+            cataimgui::window::draw();
+            ui_hybrid_chrome::pop();
+        }
+
         void draw_controls() override {
             hide_ui = !should_draw();
             hide_if_hidden();
@@ -79,9 +87,12 @@ class mouse_toolbar_window : public cataimgui::window
                 first = false;
                 // Own the label string — ImGui may keep the pointer until end of frame.
                 const std::string label = btn.second.translated();
+                const int tb_cols = ui_hybrid_chrome::push_toolbar_button( false );
                 if( ImGui::Button( label.c_str() ) ) {
                     pending = btn.first;
                 }
+                ui_hybrid_chrome::draw_item_bezel( false, ImGui::IsItemHovered(), false );
+                ImGui::PopStyleColor( tb_cols );
             }
 
             // Compact auto-action toggles (upstream AUTO_PICKUP / AUTO_FORAGING).
@@ -92,29 +103,21 @@ class mouse_toolbar_window : public cataimgui::window
                                        get_option<std::string>( "AUTO_FORAGING" ) != "off";
                 const std::string forage_mode = get_option<std::string>( "AUTO_FORAGING" );
 
-                auto draw_styled_button = [&]( const char *id, const std::string &label,
+                auto draw_styled_button = [&]( const char *id, const std::string & label,
                 bool active ) {
                     if( !first ) {
                         ImGui::SameLine();
                     }
                     first = false;
-                    if( active ) {
-                        ImGui::PushStyleColor( ImGuiCol_Button,
-                                               ImVec4( 0.20f, 0.45f, 0.25f, 1.f ) );
-                        ImGui::PushStyleColor( ImGuiCol_ButtonHovered,
-                                               ImVec4( 0.25f, 0.55f, 0.30f, 1.f ) );
-                        ImGui::PushStyleColor( ImGuiCol_ButtonActive,
-                                               ImVec4( 0.15f, 0.35f, 0.20f, 1.f ) );
-                    }
+                    const int n = ui_hybrid_chrome::push_toolbar_button( active );
                     ImGui::PushID( id );
                     ImGui::Button( label.c_str() );
                     const bool left = ImGui::IsItemClicked( ImGuiMouseButton_Left );
                     const bool right = ImGui::IsItemClicked( ImGuiMouseButton_Right );
+                    ui_hybrid_chrome::draw_item_bezel( active, ImGui::IsItemHovered(), false );
                     ImGui::PopID();
-                    if( active ) {
-                        ImGui::PopStyleColor( 3 );
-                    }
-                    return std::pair<bool, bool>{ left, right };
+                    ImGui::PopStyleColor( n );
+                    return std::pair<bool, bool> { left, right };
                 };
 
                 // Stable owned labels (avoid temporary .c_str() lifetime issues).
@@ -134,7 +137,7 @@ class mouse_toolbar_window : public cataimgui::window
                 }
 
                 const auto forage_clicks = draw_styled_button( "tb_forage", forage_label,
-                                                               forage_on );
+                                           forage_on );
                 if( forage_clicks.first ) {
                     pending = ACTION_TOGGLE_AUTO_FORAGING;
                 } else if( forage_clicks.second ) {

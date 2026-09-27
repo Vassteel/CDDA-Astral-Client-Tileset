@@ -96,6 +96,8 @@ static const character_portrait_id character_portrait_AVATAR( "AVATAR" );
 static const character_portrait_id character_portrait_GENERIC_NPC( "GENERIC_NPC" );
 
 static const flag_id json_flag_WET( "WET" );
+static const flag_id json_flag_FIT( "FIT" );
+static const flag_id json_flag_VARSIZE( "VARSIZE" );
 static const flag_id json_flag_auto_wield( "auto_wield" );
 static const flag_id json_flag_no_auto_equip( "no_auto_equip" );
 
@@ -1117,6 +1119,15 @@ static int equipment_item_category( const item &it )
     return 2;
 }
 
+// Chargen kit must never show "(poor fit)": auto-fit any VARSIZE armor/clothing.
+// Leaves morphotype wrong-size (XS/XXXL) handling alone.
+static void chargen_auto_fit_varsize( item &it )
+{
+    if( it.has_flag( json_flag_VARSIZE ) ) {
+        it.set_flag( json_flag_FIT );
+    }
+}
+
 // Apply chargen slot intent so add_profession_items wears/wields correctly.
 static void apply_equipment_category_flags( item &it, int category )
 {
@@ -1127,6 +1138,7 @@ static void apply_equipment_category_flags( item &it, int category )
     } else if( category == 2 && it.is_armor() ) {
         it.set_flag( json_flag_no_auto_equip );
     }
+    chargen_auto_fit_varsize( it );
 }
 
 // Map itype item_category id → chargen picker filter tab (layout C: flat CDDA names).
@@ -1206,7 +1218,8 @@ static std::optional<item> chargen_pick_starting_item( const std::string &prefer
 
     uilist menu;
     menu.title = _( "Choose starting item (press / to filter)" );
-    menu.text = _( "Category tabs filter the list. Press / to type a name filter; both apply together." );
+    menu.text =
+        _( "Category tabs filter the list. Press / to type a name filter; both apply together." );
     menu.desc_enabled = false;
     menu.filtering = true;
     menu.filtering_nocase = true;
@@ -1225,10 +1238,12 @@ static std::optional<item> chargen_pick_starting_item( const std::string &prefer
     menu.add_category( "manuals", _( "Manuals" ) );
     menu.add_category( "other", _( "Other" ) );
     menu.set_category_filter( [&]( const uilist_entry & entry, const std::string & key )->bool {
-        if( key == "all" ) {
+        if( key == "all" )
+        {
             return true;
         }
-        if( entry.retval < 0 || entry.retval >= static_cast<int>( opts.size() ) ) {
+        if( entry.retval < 0 || entry.retval >= static_cast<int>( opts.size() ) )
+        {
             return false;
         }
         return opts[entry.retval].bucket == key;
@@ -1302,7 +1317,7 @@ static void chargen_equipment_remove_at( int idx )
         cc_uistate.selected_equipment_index = 0;
     } else {
         cc_uistate.selected_equipment_index = std::clamp( idx, 0,
-                static_cast<int>( cc_uistate.equipment_choices.size() ) - 1 );
+                                              static_cast<int>( cc_uistate.equipment_choices.size() ) - 1 );
     }
 }
 
@@ -3591,7 +3606,7 @@ void character_creator_ui_impl::draw_summary()
             } else {
                 for( const character_creator_equipment_choice &ec : cc_uistate.equipment_choices ) {
                     draw_colored_text_wrap( string_format( "• %s (%s)", ec.it.display_name(),
-                                            equipment_category_label( ec.category ) ),
+                                                           equipment_category_label( ec.category ) ),
                                             COL_NOTE_MINOR );
                 }
             }
@@ -3856,6 +3871,7 @@ void character_creator_uistate::ensure_equipment_pool( const avatar &u )
         character_creator_equipment_choice ec;
         ec.it = it;
         ec.category = equipment_item_category( it );
+        chargen_auto_fit_varsize( ec.it );
         equipment_choices.push_back( std::move( ec ) );
     }
 }
