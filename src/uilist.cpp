@@ -1,5 +1,7 @@
 #include "uilist.h"
 
+#include <cmath>
+
 #include <cctype>
 #include <algorithm>
 #include <climits>
@@ -95,8 +97,10 @@ void uilist_impl::draw_controls()
 
         float entry_height = ImGui::GetTextLineHeightWithSpacing();
         ImGuiStyle &style = ImGui::GetStyle();
+        // NoScrollWithMouse: wheel moves highlight/selection (shared list UX);
+        // viewport follows via need_to_scroll / SetScrollHereY.
         if( ImGui::BeginChild( "scroll", parent.calculated_menu_size, ImGuiChildFlags_None,
-                               ImGuiWindowFlags_NoNavInputs ) ) {
+                               ImGuiWindowFlags_NoNavInputs | ImGuiWindowFlags_NoScrollWithMouse ) ) {
             if( ImGui::BeginTable( "menu items", 3, ImGuiTableFlags_SizingFixedFit ) ) {
                 ImGui::TableSetupColumn( "hotkey", ImGuiTableColumnFlags_WidthFixed,
                                          parent.calculated_hotkey_width );
@@ -177,6 +181,13 @@ void uilist_impl::draw_controls()
                     }
                 }
                 ImGui::EndTable();
+            }
+            // Mouse wheel over the list advances selection (not only the viewport).
+            if( ImGui::IsWindowHovered() && ImGui::GetIO().MouseWheel != 0.0f ) {
+                const int delta = static_cast<int>( std::lround( -ImGui::GetIO().MouseWheel ) );
+                if( delta != 0 ) {
+                    parent.scrollby( uilist::scroll_amount::wrapped( delta ) );
+                }
             }
         }
         ImGui::EndChild();

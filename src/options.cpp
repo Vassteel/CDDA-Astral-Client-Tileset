@@ -1548,7 +1548,9 @@ void options_manager::add_options_general()
                                         to_translation( "Options regarding auto pickup." ) ),
     [&]( const std::string & page_id ) {
         add( "AUTO_PICKUP", page_id, to_translation( "Auto pickup enabled" ),
-             to_translation( "If true, enable item auto pickup.  Change pickup rules with the Auto pickup manager." ),
+             to_translation( "If true, enable item auto pickup (also toggleable from the mouse "
+                             "toolbar Pick button when enabled).  Change pickup rules with the "
+                             "Auto pickup manager." ),
              false
            );
 
@@ -1640,7 +1642,12 @@ void options_manager::add_options_general()
         get_option( "AUTO_MOPPING" ).setPrerequisite( "AUTO_FEATURES" );
 
         add( "AUTO_FORAGING", page_id, to_translation( "Auto foraging" ),
-             to_translation( "Action to perform when 'Auto foraging' is enabled.  Bushes: Only forage bushes.  - Trees: Only forage trees.  - Crops: Only forage crops.  - Everything: Forage bushes, trees, crops, and everything else including flowers, cattails etc." ),
+             to_translation( "Action to perform when 'Auto foraging' is enabled (also cycled from "
+                             "the mouse toolbar Forage button when enabled).  Requires "
+                             "'Additional auto features'.  Bushes: Only forage bushes.  - Trees: "
+                             "Only forage trees.  - Crops: Only forage crops.  - Everything: "
+                             "Forage bushes, trees, crops, and everything else including flowers, "
+                             "cattails etc." ),
         { { "off", to_translation( "options", "Disabled" ) }, { "bushes", to_translation( "Bushes" ) }, { "trees", to_translation( "Trees" ) }, { "crops", to_translation( "Crops" ) }, { "all", to_translation( "Everything" ) } },
         "off"
            );
@@ -2344,6 +2351,15 @@ void options_manager::add_options_interface()
                              "grid equipment window. Classic inventory remains available from "
                              "a button inside that window, or by disabling this option." ),
              true, COPT_CURSES_HIDE );
+
+        add( "MOUSE_TOOLBAR_AUTO_TOGGLES", page_id,
+             to_translation( "Toolbar auto pickup / forage buttons" ),
+             to_translation( "If true, the on-screen mouse toolbar shows Pick and Forage "
+                             "buttons that toggle Auto pickup and Auto foraging.  "
+                             "Full settings live under Options → General → Auto pickup / "
+                             "Auto features (enable 'Additional auto features' for forage)." ),
+             true, COPT_CURSES_HIDE );
+        get_option( "MOUSE_TOOLBAR_AUTO_TOGGLES" ).setPrerequisite( "MOUSE_TOOLBAR" );
     } );
 
     add_empty_line();

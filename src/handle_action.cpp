@@ -3127,7 +3127,16 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
         case ACTION_TOGGLE_AUTO_FORAGING:
             // Set Auto Foraging to x
             set_next_option( "AUTO_FORAGING" );
-            auto_features_warn();
+            // Forage requires AUTO_FEATURES; enable it when turning forage on so the
+            // toolbar / keybind toggle is immediately useful (Deck / mouse UX).
+            if( get_option<std::string>( "AUTO_FORAGING" ) != "off" &&
+                !get_option<bool>( "AUTO_FEATURES" ) ) {
+                get_options().get_option( "AUTO_FEATURES" ).setValue( "true" );
+                get_options().save();
+                add_msg( _( "Also enabled Additional auto features (required for auto forage)." ) );
+            } else {
+                auto_features_warn();
+            }
             break;
 
         case ACTION_TOGGLE_AUTO_PICKUP:

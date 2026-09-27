@@ -1,5 +1,7 @@
 #include "crafting_gui.h"
 
+#include <cmath>
+
 #include <imgui/imgui.h>
 #include <algorithm>
 #include <array>
@@ -490,6 +492,7 @@ class crafting_ui_impl : public cataimgui::window
         int pending_tab_index = -1;
         int pending_subtab_index = -1;
         int pending_line_click = -1;
+        int pending_wheel_delta = 0;   // mouse wheel over recipe list (±lines)
         int pending_batch_delta = 0;    // +1/-1 from inline batch buttons
         bool pending_enter_batch = false;
         bool pending_exit_batch = false;
@@ -892,9 +895,12 @@ void crafting_ui_impl::draw_recipe_list()
         }
     }
 
+    // NoScrollWithMouse: wheel advances selection (clears NEW!) instead of only
+    // scrolling the ImGui child viewport. Viewport follows via SetScrollHereY.
     if( ImGui::BeginChild( "##RECIPES", ImVec2( avail_width,
                            ImGui::GetContentRegionAvail().y ),
-                           ImGuiChildFlags_FrameStyle, ImGuiWindowFlags_NoNav ) ) {
+                           ImGuiChildFlags_FrameStyle,
+                           ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoScrollWithMouse ) ) {
         ImGuiListClipper clipper;
         clipper.Begin( static_cast<int>( current.size() ) );
         if( need_scroll_to_selected && line >= 0
@@ -948,6 +954,13 @@ void crafting_ui_impl::draw_recipe_list()
                     ImGui::Unindent( indent_px );
                 }
                 ImGui::PopID();
+            }
+        }
+        // Mouse wheel over the recipe list moves the highlight (and marks seen).
+        if( ImGui::IsWindowHovered() && ImGui::GetIO().MouseWheel != 0.0f ) {
+            const int delta = static_cast<int>( std::lround( -ImGui::GetIO().MouseWheel ) );
+            if( delta != 0 ) {
+                pending_wheel_delta += delta;
             }
         }
     }
@@ -2540,6 +2553,17 @@ void crafting_ui_impl::process_action( const std::string &action_in,
     }
     pending_line_click = -1;
 
+    // Consume mouse-wheel selection movement (from draw_recipe_list)
+    if( pending_wheel_delta != 0 && !info_nav_active ) {
+        if( !previously_toggled_unread ) {
+            last_line = line;
+        }
+        line += pending_wheel_delta;
+        user_moved_line = highlight_unread;
+        need_scroll_to_selected = true;
+    }
+    pending_wheel_delta = 0;
+
     // Consume pending batch view toggles
     if( pending_enter_batch && !batch && !current.empty() &&
         line >= 0 && line < static_cast<int>( current.size() ) &&
@@ -2684,18 +2708,20 @@ void crafting_ui_impl::process_action( const std::string &action_in,
         recalc = true;
         force_select_tab = true;
         force_select_subtab = true;
-    } else if( action == "DOWN" ) {
+    } else if( action == "DOWN" || action == "SCROLL_DOWN" ) {
         if( !previously_toggled_unread ) {
             last_line = line;
         }
         line++;
         user_moved_line = highlight_unread;
-    } else if( action == "UP" ) {
+        need_scroll_to_selected = true;
+    } else if( action == "UP" || action == "SCROLL_UP" ) {
         if( !previously_toggled_unread ) {
             last_line = line;
         }
         line--;
         user_moved_line = highlight_unread;
+        need_scroll_to_selected = true;
     } else if( action == "PAGE_UP" || action == "PAGE_DOWN" ) {
         if( recmax > 0 ) {
             line = inc_clamp( line, action == "PAGE_UP" ? -scroll_rate : scroll_rate, recmax - 1 );

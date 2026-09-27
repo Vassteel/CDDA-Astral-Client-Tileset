@@ -44,7 +44,7 @@ class mouse_toolbar_window : public cataimgui::window
         cataimgui::bounds get_bounds() override {
             // Bottom-center strip: keep the map center clear on Deck/720p.
             const ImVec2 display = ImGui::GetMainViewport()->Size;
-            const float approx_w = 560.f;
+            const float approx_w = 720.f;
             const float x = ( display.x - approx_w ) * 0.5f;
             const float y = display.y - 52.f;
             return { x < 8.f ? 8.f : x, y < 8.f ? 8.f : y, -1.f, -1.f };
@@ -76,10 +76,48 @@ class mouse_toolbar_window : public cataimgui::window
                     ImGui::SameLine();
                 }
                 first = false;
+                // Own the label string — ImGui may keep the pointer until end of frame.
                 const std::string label = btn.second.translated();
                 if( ImGui::Button( label.c_str() ) ) {
                     pending = btn.first;
                 }
+            }
+
+            // Compact auto-action toggles (upstream AUTO_PICKUP / AUTO_FORAGING).
+            if( get_option<bool>( "MOUSE_TOOLBAR_AUTO_TOGGLES" ) ) {
+                const bool pickup_on = get_option<bool>( "AUTO_PICKUP" );
+                const bool forage_on = get_option<bool>( "AUTO_FEATURES" ) &&
+                                       get_option<std::string>( "AUTO_FORAGING" ) != "off";
+
+                auto draw_toggle = [&]( const char *id, const std::string &label, bool active,
+                action_id act ) {
+                    if( !first ) {
+                        ImGui::SameLine();
+                    }
+                    first = false;
+                    if( active ) {
+                        ImGui::PushStyleColor( ImGuiCol_Button,
+                                               ImVec4( 0.20f, 0.45f, 0.25f, 1.f ) );
+                        ImGui::PushStyleColor( ImGuiCol_ButtonHovered,
+                                               ImVec4( 0.25f, 0.55f, 0.30f, 1.f ) );
+                        ImGui::PushStyleColor( ImGuiCol_ButtonActive,
+                                               ImVec4( 0.15f, 0.35f, 0.20f, 1.f ) );
+                    }
+                    ImGui::PushID( id );
+                    if( ImGui::Button( label.c_str() ) ) {
+                        pending = act;
+                    }
+                    ImGui::PopID();
+                    if( active ) {
+                        ImGui::PopStyleColor( 3 );
+                    }
+                };
+
+                // Stable owned labels (avoid temporary .c_str() lifetime issues).
+                const std::string pick_label = pickup_on ? _( "Pick●" ) : _( "Pick" );
+                const std::string forage_label = forage_on ? _( "Forage●" ) : _( "Forage" );
+                draw_toggle( "tb_pick", pick_label, pickup_on, ACTION_TOGGLE_AUTO_PICKUP );
+                draw_toggle( "tb_forage", forage_label, forage_on, ACTION_TOGGLE_AUTO_FORAGING );
             }
             ImGui::PopStyleVar( 2 );
         }
