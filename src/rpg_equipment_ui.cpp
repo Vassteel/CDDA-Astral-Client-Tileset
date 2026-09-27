@@ -36,7 +36,7 @@
 
 #if defined(TILES)
 #  include "cata_tiles.h"
-#  include "imgui_texture.h"
+#  include "sdltiles.h"
 #endif
 
 namespace
@@ -304,23 +304,49 @@ static std::string cell_fallback_glyph( const item &it )
     return utf8_truncate( name, 1 );
 }
 
+/** Compact ×N / ×Nk / ×N.NM for corner badges that must fit inside a cell. */
+static std::string format_stack_badge( int n )
+{
+    if( n < 1000 ) {
+        return string_format( "×%d", n );
+    }
+    if( n < 1000000 ) {
+        const int whole = n / 1000;
+        const int frac = ( n % 1000 ) / 100;
+        if( frac == 0 ) {
+            return string_format( "×%dk", whole );
+        }
+        return string_format( "×%d.%dk", whole, frac );
+    }
+    const int whole = n / 1000000;
+    const int frac = ( n % 1000000 ) / 100000;
+    if( frac == 0 ) {
+        return string_format( "×%dM", whole );
+    }
+    return string_format( "×%d.%dM", whole, frac );
+}
+
 /**
- * After an ImGui button/item: overlay the default tileset ITEM sprite centered
- * in the last item rect (Hybrid bezel stays). Falls back to centered glyph /
- * label when tiles are off or the texture is missing. Optional ×N badge.
- * Restores the ImGui cursor so SameLine / layout stay intact.
+ * After an ImGui button/item: paint the default tileset ITEM sprite (and optional
+ * ×N badge / text fallback) via the window draw list — NEVER ImGui::Image /
+ * TextUnformatted. Those submit new items that become GetItemRect* for
+ * SameLine / BeginDragDropSource / BeginPopupContextItem, which staggered the
+ * inventory grid and ate right-click + drag hits. Draw-list overlays leave the
+ * Button as the sole interactive + layout item (Hybrid bezel stays).
  */
 static void overlay_item_sprite_on_last_item( const item &it, int stack_count,
         const std::string &fallback_label, float icon_pad = 4.f )
 {
     const ImVec2 rmin = ImGui::GetItemRectMin();
     const ImVec2 rmax = ImGui::GetItemRectMax();
-    const ImVec2 restore = ImGui::GetCursorScreenPos();
     const float cw = rmax.x - rmin.x;
     const float ch = rmax.y - rmin.y;
     if( cw < 4.f || ch < 4.f ) {
         return;
     }
+
+    ImDrawList *dl = ImGui::GetWindowDrawList();
+    const ImU32 text_col = ImGui::GetColorU32( ImGuiCol_Text );
 
     bool drew_sprite = false;
 #if defined(TILES)
@@ -333,35 +359,42 @@ static void overlay_item_sprite_on_last_item( const item &it, int stack_count,
                                                     tripoint_bub_ms() );
             if( data ) {
                 const float sz = std::max( 8.f, std::min( cw, ch ) - icon_pad * 2.f );
-                const ImVec2 pos( rmin.x + ( cw - sz ) * 0.5f,
-                                  rmin.y + ( ch - sz ) * 0.5f );
-                ImGui::SetCursorScreenPos( pos );
-                cataimgui::draw_texture( iid, tripoint_bub_ms(), ImVec2( sz, sz ) );
+                const ImVec2 p0( rmin.x + ( cw - sz ) * 0.5f,
+                                 rmin.y + ( ch - sz ) * 0.5f );
+                const ImVec2 p1( p0.x + sz, p0.y + sz );
+                dl->AddImage( reinterpret_cast<ImTextureID>( data->texture ), p0, p1,
+                              ImVec2( data->uv0.first, data->uv0.second ),
+                              ImVec2( data->uv1.first, data->uv1.second ) );
                 drew_sprite = true;
             }
         }
     }
 #endif
+    // Text fallback only when no tile — hide truncated names under successful sprites.
     if( !drew_sprite ) {
         const std::string &fb = !fallback_label.empty() ? fallback_label
                                 : cell_fallback_glyph( it );
         if( !fb.empty() ) {
             const ImVec2 ts = ImGui::CalcTextSize( fb.c_str() );
-            ImGui::SetCursorScreenPos( ImVec2( rmin.x + ( cw - ts.x ) * 0.5f,
-                                               rmin.y + ( ch - ts.y ) * 0.5f ) );
-            ImGui::TextUnformatted( fb.c_str() );
+            dl->AddText( ImVec2( rmin.x + ( cw - ts.x ) * 0.5f,
+                                 rmin.y + ( ch - ts.y ) * 0.5f ),
+                         text_col, fb.c_str() );
         }
     }
 
     const int badge_n = cell_stack_badge( it, stack_count );
     if( badge_n > 1 ) {
-        const std::string badge = string_format( "×%d", badge_n );
-        const ImVec2 ts = ImGui::CalcTextSize( badge.c_str() );
-        ImGui::SetCursorScreenPos( ImVec2( rmax.x - ts.x - 3.f, rmin.y + 2.f ) );
-        ImGui::TextUnformatted( badge.c_str() );
+        const std::string badge = format_stack_badge( badge_n );
+        ImFont *font = ImGui::GetFont();
+        const float fs = ImGui::GetFontSize() * 0.80f;
+        const ImVec2 ts = font->CalcTextSizeA( fs, FLT_MAX, 0.f, badge.c_str() );
+        // Clip to cell bezel so huge counts cannot spill into neighbors.
+        dl->PushClipRect( rmin, rmax, true );
+        dl->AddText( font, fs,
+                     ImVec2( rmax.x - ts.x - 2.f, rmin.y + 1.f ),
+                     text_col, badge.c_str() );
+        dl->PopClipRect();
     }
-
-    ImGui::SetCursorScreenPos( restore );
 }
 
 static bool item_looks_usable( const item &it )
@@ -851,14 +884,12 @@ void rpg_equipment_window::draw_paper_doll()
         const bool hovered = ImGui::IsItemHovered();
         ui_hybrid_chrome::draw_item_bezel( selected, hovered, empty );
         if( worn_loc && worn_loc.get_item() ) {
-            // Small default ITEM sprite on the left of the slot row; text falls
-            // back when tiles are off / missing. Interactions stay on the Button.
+            // Draw-list sprite only — ImGui::Image would steal last-item from the
+            // slot Button and break drag-drop target + right-click context.
             const ImVec2 rmin = ImGui::GetItemRectMin();
             const ImVec2 rmax = ImGui::GetItemRectMax();
-            const ImVec2 restore = ImGui::GetCursorScreenPos();
             const float row_h = rmax.y - rmin.y;
             const float icon_sz = std::clamp( row_h - 4.f, 14.f, 28.f );
-            bool drew = false;
 #if defined(TILES)
             if( get_option<bool>( "USE_TILES" ) && tilecontext ) {
                 const itype_id &iid = worn_loc->typeId();
@@ -867,18 +898,17 @@ void rpg_equipment_window::draw_paper_doll()
                         tilecontext->get_texture_draw_data( iid.str(), TILE_CATEGORY::ITEM,
                                                             tripoint_bub_ms() );
                     if( data ) {
-                        ImGui::SetCursorScreenPos(
-                            ImVec2( rmin.x + 4.f,
-                                    rmin.y + ( row_h - icon_sz ) * 0.5f ) );
-                        cataimgui::draw_texture( iid, tripoint_bub_ms(),
-                                                 ImVec2( icon_sz, icon_sz ) );
-                        drew = true;
+                        const ImVec2 p0( rmin.x + 4.f,
+                                         rmin.y + ( row_h - icon_sz ) * 0.5f );
+                        const ImVec2 p1( p0.x + icon_sz, p0.y + icon_sz );
+                        ImGui::GetWindowDrawList()->AddImage(
+                            reinterpret_cast<ImTextureID>( data->texture ), p0, p1,
+                            ImVec2( data->uv0.first, data->uv0.second ),
+                            ImVec2( data->uv1.first, data->uv1.second ) );
                     }
                 }
             }
 #endif
-            ( void )drew;
-            ImGui::SetCursorScreenPos( restore );
         }
         if( hovered && !tip.empty() ) {
             imgui_cdda_tooltip( tip );
@@ -1010,17 +1040,26 @@ void rpg_equipment_window::draw_inventory_grid()
     }
 
     // Dense pack of square-ish cells (~48–64px). Default CDDA tileset ITEM
-    // sprites via cataimgui::draw_texture; Hybrid bezel chrome stays.
+    // sprites via draw-list AddImage (Button stays last item); Hybrid bezel stays.
     // Equipped gear on doll/slots only — no duplicate equipped-item list.
     const float avail = ImGui::GetContentRegionAvail().x;
     const float min_cell = 48.f;
     const float max_cell = 64.f;
     const float cell_gap = 3.f;
-    int columns = std::max( 1, static_cast<int>( avail / ( min_cell + cell_gap ) ) );
+    int columns = std::max( 1, static_cast<int>( ( avail + cell_gap ) /
+                              ( min_cell + cell_gap ) ) );
     columns = std::min( columns, 16 );
-    float cell_w = ( avail - cell_gap * static_cast<float>( columns ) ) /
+    // N cells share (N-1) gaps; keep cell_w fixed so every row aligns to the same columns.
+    float cell_w = ( avail - cell_gap * static_cast<float>( columns - 1 ) ) /
                    static_cast<float>( columns );
     cell_w = std::clamp( cell_w, min_cell, max_cell );
+    // If clamp hit max_cell, recompute how many fixed-size cells actually fit.
+    if( cell_w >= max_cell - 0.01f ) {
+        columns = std::max( 1, static_cast<int>( ( avail + cell_gap ) /
+                              ( max_cell + cell_gap ) ) );
+        columns = std::min( columns, 16 );
+        cell_w = max_cell;
+    }
     const float cell_h = cell_w; // square-ish inventory cells
     const int label_chars = std::max( 4,
                                       static_cast<int>( ( cell_w - 6.f ) /
@@ -1046,6 +1085,9 @@ void rpg_equipment_window::draw_inventory_grid()
         ImGui::TextDisabled( "%s", _( "No carried items in containers." ) );
     }
 
+    // Match SameLine spacing to the gap baked into column math so rows stay
+    // rectangular (every cell lands in a fixed column under the one above).
+    ImGui::PushStyleVar( ImGuiStyleVar_ItemSpacing, ImVec2( cell_gap, cell_gap ) );
     int col = 0;
     for( int i = 0; i < static_cast<int>( grid_items.size() ); i++ ) {
         grid_cell &cell = grid_items[i];
@@ -1150,11 +1192,12 @@ void rpg_equipment_window::draw_inventory_grid()
 
         col++;
         if( col < columns ) {
-            ImGui::SameLine();
+            ImGui::SameLine( 0.f, cell_gap );
         } else {
             col = 0;
         }
     }
+    ImGui::PopStyleVar(); // ItemSpacing
 
     ImGui::EndChild();
 }
