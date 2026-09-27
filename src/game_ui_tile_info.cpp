@@ -369,8 +369,7 @@ void game::print_fields_info( const tripoint_bub_ms &lp, const catacurses::windo
     }
 
     // Header.
-    ++line;
-    print_tile_section_header( w_look, column, line, _( "Fields" ) );
+    mvwprintz( w_look, point( column, ++line ), c_yellow, _( "Fields" ) );
     for( const auto &fld : tmpfield ) {
         const field_entry &cur = fld.second;
         if( fld.first.obj().has_fire && ( here.has_flag( ter_furn_flag::TFLAG_FIRE_CONTAINER, lp ) ||
@@ -401,8 +400,7 @@ void game::print_trap_info( const tripoint_bub_ms &lp, const catacurses::window 
 
     if( tr.can_see( lp, u ) ) {
         // Header. Only printed if we actually know there's a trap there. ;)
-        ++line;
-        print_tile_section_header( w_look, column, line, _( "Trap" ) );
+        mvwprintz( w_look, point( column, ++line ), c_yellow, _( "Trap" ) );
 
         mvwprintz( w_look, point( column, ++line ), tr.color, tr.name() );
 
@@ -448,11 +446,9 @@ void game::print_vehicle_info( const vehicle *veh, int veh_part, const catacurse
     if( veh ) {
         // Print the name of the vehicle.
         if( veh->is_appliance() ) {
-            ++line;
-            print_tile_section_header( w_look, column, line, _( "Appliance" ) );
+            mvwprintz( w_look, point( column, ++line ), c_yellow, _( "Appliance" ) );
         } else {
-            ++line;
-            print_tile_section_header( w_look, column, line, _( "Vehicle" ) );
+            mvwprintz( w_look, point( column, ++line ), c_yellow, _( "Vehicle" ) );
         }
         mvwprintz( w_look, point( column, ++line ), c_white, "%s", veh->name );
         // Then the list of parts on that tile.
