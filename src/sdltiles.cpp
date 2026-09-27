@@ -3103,7 +3103,15 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
                     id = "unexplored_terrain";
                 }
             } else if( vision == om_vision_level::unseen ) {
-                id = "unknown_terrain";
+                // Soft-fork: draw the real OMT tile for display only, then overlay
+                // classic hatch at ~50% opacity below. Do NOT change
+                // overmap_buffer.seen / explored — Toggle explored stays as-is
+                // on already-seen tiles. Map extras stay hidden on unseen OMTs.
+                bool is_omt = false;
+                std::tie( id, is_omt ) = get_omt_id_rotation_and_subtile( omp, rotation, subtile );
+                if( !is_omt ) {
+                    category = TILE_CATEGORY::OVERMAP_VISION_LEVEL;
+                }
             } else {
                 bool is_omt = false;
                 std::tie( id, is_omt ) = get_omt_id_rotation_and_subtile( omp, rotation, subtile );
@@ -3118,6 +3126,40 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
             draw_from_id_string( id, category,
                                  category == TILE_CATEGORY::OVERMAP_TERRAIN ? "overmap_terrain" : "",
                                  omp, subtile, rotation, ll, false, height_3d );
+            // Soft-fork: after the real terrain sprite, overlay classic
+            // unknown_terrain-style diagonal hatch at ~50% opacity (alpha 128)
+            // on unseen OMTs. Pattern matches Larwick unknown_terrain (5px gray
+            // / 3px gap, diagonal \\). Flush the sprite shader first (same rule
+            // as other untextured geometry draws). Notes/vehicles drawn later
+            // in this iteration still appear above the hatch veil.
+            if( vision == om_vision_level::unseen && !viewing_weather ) {
+                flush_sprite_shader_for_untextured_draw();
+                const point screen = player_to_screen( global_omt_to_draw_position( omp ).xy() );
+                SDL_BlendMode prev_blend = SDL_BLENDMODE_NONE;
+                GetRenderDrawBlendMode( renderer, prev_blend );
+                SetRenderDrawBlendMode( renderer, SDL_BLENDMODE_BLEND );
+                // Larwick unknown_terrain uses gray (99,99,99); alpha 128 = 50%.
+                const SDL_Color hatch{ 99, 99, 99, 128 };
+                constexpr int stripe = 5;
+                constexpr int gap = 3;
+                constexpr int period = stripe + gap;
+                for( int y = 0; y < tile_height; y++ ) {
+                    int x = 0;
+                    while( x < tile_width ) {
+                        const int d = ( ( x - y ) % period + period ) % period;
+                        if( d < stripe ) {
+                            const int run = std::min( stripe - d, tile_width - x );
+                            geometry->rect( renderer,
+                                            SDL_Rect{ screen.x + x, screen.y + y, run, 1 },
+                                            hatch );
+                            x += run;
+                        } else {
+                            x += period - d;
+                        }
+                    }
+                }
+                SetRenderDrawBlendMode( renderer, prev_blend );
+            }
             if( !mx.is_empty() && mx->visibility != map_extra_visibility::none ) {
                 draw_from_id_string( mx.str(), TILE_CATEGORY::MAP_EXTRA, "map_extra", omp,
                                      0, 0, ll, false );
