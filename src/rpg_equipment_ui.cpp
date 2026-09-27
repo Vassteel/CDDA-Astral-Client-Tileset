@@ -112,6 +112,13 @@ static std::string cell_label( const item &it )
     return name;
 }
 
+enum class pending_action {
+    none,
+    equip,
+    takeoff,
+    wield
+};
+
 class rpg_equipment_window : public cataimgui::window
 {
     public:
@@ -148,6 +155,7 @@ class rpg_equipment_window : public cataimgui::window
         bool open_classic = false;
         bool want_close = false;
         std::string status_line;
+        pending_action pending = pending_action::none;
 
         void draw_paper_doll();
         void draw_inventory_grid();
@@ -156,7 +164,15 @@ class rpg_equipment_window : public cataimgui::window
         void try_takeoff_selected();
         void try_wield_selected();
         void refresh_selection_validity();
+        void clear_selections();
+        void flush_pending_action();
 };
+
+void rpg_equipment_window::clear_selections()
+{
+    selected_inv = item_location::nowhere;
+    selected_worn = item_location::nowhere;
+}
 
 bool rpg_equipment_window::execute()
 {
@@ -167,6 +183,9 @@ bool rpg_equipment_window::execute()
 
     while( true ) {
         ui_manager::redraw_invalidated();
+        // Inventory mutations must run after ImGui finishes the frame so tooltips /
+        // remaining grid cells never touch dangling item_location pointers.
+        flush_pending_action();
         last_action = ctxt.handle_input();
 
         if( want_close ) {
@@ -188,6 +207,25 @@ bool rpg_equipment_window::execute()
         game_menus::inv::common();
     }
     return false;
+}
+
+void rpg_equipment_window::flush_pending_action()
+{
+    const pending_action act = pending;
+    pending = pending_action::none;
+    switch( act ) {
+        case pending_action::equip:
+            try_equip_selected();
+            break;
+        case pending_action::takeoff:
+            try_takeoff_selected();
+            break;
+        case pending_action::wield:
+            try_wield_selected();
+            break;
+        case pending_action::none:
+            break;
+    }
 }
 
 void rpg_equipment_window::refresh_selection_validity()
@@ -225,7 +263,7 @@ void rpg_equipment_window::try_equip_selected()
             return;
         }
         item_location loc = selected_inv;
-        selected_inv = item_location::nowhere;
+        clear_selections();
         if( you->wear( loc ) ) {
             status_line = _( "Worn." );
         } else {
@@ -252,7 +290,7 @@ void rpg_equipment_window::try_wield_selected()
         return;
     }
     item_location loc = selected_inv;
-    selected_inv = item_location::nowhere;
+    clear_selections();
     if( you->wield( loc ) ) {
         status_line = _( "Wielded." );
     } else {
@@ -267,7 +305,7 @@ void rpg_equipment_window::try_takeoff_selected()
     if( !loc && selected_slot >= 0 && selected_slot < static_cast<int>( slots.size() ) ) {
         loc = item_on_slot( *you, slots[selected_slot] );
     }
-    if( !loc ) {
+    if( !loc || !loc.get_item() ) {
         status_line = _( "Select a worn / wielded item to remove." );
         return;
     }
@@ -275,7 +313,7 @@ void rpg_equipment_window::try_takeoff_selected()
     if( you->is_wielding( *loc ) ) {
         if( you->can_unwield( *loc ).success() && you->unwield() ) {
             status_line = _( "Unwielded." );
-            selected_worn = item_location::nowhere;
+            clear_selections();
         } else {
             status_line = you->can_unwield( *loc ).str();
         }
@@ -293,7 +331,7 @@ void rpg_equipment_window::try_takeoff_selected()
         return;
     }
     item_location obtained = loc.obtain( *you );
-    selected_worn = item_location::nowhere;
+    clear_selections();
     if( you->takeoff( obtained ) ) {
         status_line = _( "Taken off." );
     } else {
@@ -311,6 +349,20 @@ void rpg_equipment_window::draw_paper_doll()
     for( int i = 0; i < static_cast<int>( slots.size() ); i++ ) {
         const doll_slot &slot = slots[i];
         item_location worn_loc = item_on_slot( *you, slot );
+        // Resolve names into owned strings before any ImGui call that may hold
+        // a const char* past this expression (SetTooltip keeps until end of frame).
+        std::string right;
+        std::string tip;
+        ImVec4 tint = ImVec4( 0.7f, 0.7f, 0.7f, 1.f );
+        if( worn_loc && worn_loc.get_item() ) {
+            right = cell_label( *worn_loc );
+            tip = worn_loc->display_name();
+            tint = cataimgui::imvec4_from_color( worn_loc->color_in_inventory( you ) );
+        } else {
+            right = _( "— empty —" );
+            worn_loc = item_location::nowhere;
+        }
+
         const bool selected = ( selected_slot == i );
 
         ImGui::PushID( i );
@@ -318,30 +370,21 @@ void rpg_equipment_window::draw_paper_doll()
             ImGui::PushStyleColor( ImGuiCol_Button, ImVec4( 0.35f, 0.45f, 0.25f, 1.f ) );
         }
 
-        std::string right;
-        ImVec4 tint = ImVec4( 0.7f, 0.7f, 0.7f, 1.f );
-        if( worn_loc ) {
-            right = cell_label( *worn_loc );
-            tint = cataimgui::imvec4_from_color( worn_loc->color_in_inventory( you ) );
-        } else {
-            right = _( "— empty —" );
-        }
-
         const std::string row = string_format( "%-10s  %s", slot.label, right );
         if( ImGui::Button( row.c_str(), ImVec2( -1.f, 0.f ) ) ) {
             selected_slot = i;
             if( worn_loc ) {
                 selected_worn = worn_loc;
-                // Click worn item again (already selected) → take off
+                // Click worn item again (already selected) → take off after frame
                 if( selected && selected_worn ) {
-                    try_takeoff_selected();
+                    pending = pending_action::takeoff;
                 }
             } else {
                 selected_worn = item_location::nowhere;
             }
         }
-        if( ImGui::IsItemHovered() && worn_loc ) {
-            ImGui::SetTooltip( "%s", worn_loc->display_name().c_str() );
+        if( ImGui::IsItemHovered() && !tip.empty() ) {
+            ImGui::SetTooltip( "%s", tip.c_str() );
         }
         // Colored underline hint
         ImGui::PushStyleColor( ImGuiCol_Text, tint );
@@ -363,9 +406,16 @@ void rpg_equipment_window::draw_inventory_grid()
     ImGui::TextUnformatted( _( "Inventory (grid)" ) );
     ImGui::Separator();
 
-    std::vector<item_location> grid_items;
+    // Snapshot labels up front so ImGui never sees a temporary .c_str(), and so
+    // a later deferred wear/takeoff cannot leave dangling item* mid-draw.
+    struct grid_cell {
+        item_location loc;
+        std::string label;
+        std::string tip;
+    };
+    std::vector<grid_cell> grid_items;
     for( item_location &loc : you->all_items_loc() ) {
-        if( !loc ) {
+        if( !loc || !loc.get_item() ) {
             continue;
         }
         // Skip worn clothing / wielded weapon (those live on the doll).
@@ -375,7 +425,11 @@ void rpg_equipment_window::draw_inventory_grid()
         if( you->is_wielding( *loc ) ) {
             continue;
         }
-        grid_items.push_back( loc );
+        grid_cell cell;
+        cell.loc = loc;
+        cell.label = cell_label( *loc );
+        cell.tip = loc->display_name();
+        grid_items.push_back( std::move( cell ) );
     }
 
     if( grid_items.empty() ) {
@@ -388,29 +442,28 @@ void rpg_equipment_window::draw_inventory_grid()
 
     int col = 0;
     for( int i = 0; i < static_cast<int>( grid_items.size() ); i++ ) {
-        item_location &loc = grid_items[i];
+        grid_cell &cell = grid_items[i];
         ImGui::PushID( 1000 + i );
 
-        const bool is_sel = selected_inv && selected_inv == loc;
+        const bool is_sel = selected_inv && selected_inv == cell.loc;
         if( is_sel ) {
             ImGui::PushStyleColor( ImGuiCol_Button, ImVec4( 0.25f, 0.40f, 0.55f, 1.f ) );
         }
 
-        const std::string label = cell_label( *loc );
-        if( ImGui::Button( label.c_str(), ImVec2( cell_w, 40.f ) ) ) {
+        if( ImGui::Button( cell.label.c_str(), ImVec2( cell_w, 40.f ) ) ) {
             if( is_sel ) {
                 // Double-click-ish: second click equips onto selected doll slot
-                try_equip_selected();
+                pending = pending_action::equip;
             } else {
-                selected_inv = loc;
+                selected_inv = cell.loc;
             }
         }
         if( ImGui::IsItemHovered() ) {
-            ImGui::SetTooltip( "%s", loc->display_name().c_str() );
+            ImGui::SetTooltip( "%s", cell.tip.c_str() );
         }
         if( ImGui::IsItemClicked( ImGuiMouseButton_Right ) ) {
-            selected_inv = loc;
-            try_equip_selected();
+            selected_inv = cell.loc;
+            pending = pending_action::equip;
         }
 
         if( is_sel ) {
@@ -432,15 +485,15 @@ void rpg_equipment_window::draw_inventory_grid()
 void rpg_equipment_window::draw_action_bar()
 {
     if( ImGui::Button( _( "Wear / Wield" ) ) ) {
-        try_equip_selected();
+        pending = pending_action::equip;
     }
     ImGui::SameLine();
     if( ImGui::Button( _( "Take Off" ) ) ) {
-        try_takeoff_selected();
+        pending = pending_action::takeoff;
     }
     ImGui::SameLine();
     if( ImGui::Button( _( "Wield" ) ) ) {
-        try_wield_selected();
+        pending = pending_action::wield;
     }
     ImGui::SameLine();
     if( ImGui::Button( _( "Classic Inv…" ) ) ) {
