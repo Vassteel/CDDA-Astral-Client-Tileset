@@ -42,6 +42,9 @@
 #include "input_enums.h"
 #include "input_popup.h"
 #include "item.h"
+#include "enums.h"
+#include "pocket_type.h"
+#include "visitable.h"
 #include "item_category.h"
 #include "item_factory.h"
 #include "itype.h"
@@ -1119,13 +1122,17 @@ static int equipment_item_category( const item &it )
     return 2;
 }
 
-// Chargen kit must never show "(poor fit)": auto-fit any VARSIZE armor/clothing.
+// Chargen kit must never show "(poor fit)": auto-fit any VARSIZE armor/clothing,
+// including nested contents (e.g. clothing inside a container in the kit list).
 // Leaves morphotype wrong-size (XS/XXXL) handling alone.
 static void chargen_auto_fit_varsize( item &it )
 {
-    if( it.has_flag( json_flag_VARSIZE ) ) {
-        it.set_flag( json_flag_FIT );
-    }
+    it.visit_items( []( item * node, item * ) {
+        if( node != nullptr && node->has_flag( json_flag_VARSIZE ) ) {
+            node->set_flag( json_flag_FIT );
+        }
+        return VisitResponse::NEXT;
+    } );
 }
 
 // Apply chargen slot intent so add_profession_items wears/wields correctly.
@@ -1182,6 +1189,127 @@ static std::string equipment_picker_bucket( const item &it )
     return "other";
 }
 
+// After Add/Replace picks a container/tool/magazine (or quiver-style ammo pouch),
+// offer fill type + amount using vanilla ammo_set / fill_with. Cancel / "Leave
+// empty" keeps 0/N. Plain stackables keep the Amount path above instead.
+static void chargen_maybe_fill_contents( item &it )
+{
+    struct fill_opt {
+        itype_id id;
+        std::string name;
+    };
+    std::vector<fill_opt> opts;
+
+    const std::set<ammotype> ammos = it.ammo_types();
+    if( !ammos.empty() ) {
+        for( const itype *ity : item_controller->all() ) {
+            if( ity == nullptr || ity->ammo == nullptr ||
+                item_is_blacklisted( ity->get_id() ) ) {
+                continue;
+            }
+            if( ammos.count( ity->ammo->type ) == 0 ) {
+                continue;
+            }
+            item sample( ity, calendar::turn_zero );
+            const std::string name = sample.tname( 1, false );
+            if( name.empty() ) {
+                continue;
+            }
+            opts.push_back( fill_opt{ ity->get_id(), name } );
+        }
+    } else if( it.is_watertight_container() ) {
+        for( const itype *ity : item_controller->all() ) {
+            if( ity == nullptr || item_is_blacklisted( ity->get_id() ) ) {
+                continue;
+            }
+            if( ity->phase != phase_id::LIQUID ) {
+                continue;
+            }
+            item sample( ity, calendar::turn_zero, 1 );
+            if( !sample.made_of( phase_id::LIQUID ) &&
+                !sample.made_of_from_type( phase_id::LIQUID ) ) {
+                continue;
+            }
+            if( !it.can_contain_partial( sample ).success() ) {
+                continue;
+            }
+            const std::string name = sample.tname( 1, false );
+            if( name.empty() ) {
+                continue;
+            }
+            opts.push_back( fill_opt{ ity->get_id(), name } );
+        }
+    } else {
+        return;
+    }
+
+    if( opts.empty() ) {
+        return;
+    }
+    std::sort( opts.begin(), opts.end(),
+    []( const fill_opt & a, const fill_opt & b ) {
+        return localized_compare( a.name, b.name );
+    } );
+
+    uilist fill_menu;
+    fill_menu.title = string_format( _( "Fill %s?" ), it.tname( 1, false ) );
+    fill_menu.text =
+        _( "Pick fuel, liquid, or ammo to load. Leave empty to keep 0/capacity. "
+           "Press / to filter." );
+    fill_menu.filtering = true;
+    fill_menu.filtering_nocase = true;
+    fill_menu.desired_bounds = { -1.0, -1.0, 0.7, 0.75 };
+    fill_menu.addentry( -1, true, '0', _( "Leave empty" ) );
+    for( size_t i = 0; i < opts.size(); i++ ) {
+        fill_menu.addentry( static_cast<int>( i ), true, 0, opts[i].name );
+    }
+    fill_menu.query();
+    if( fill_menu.ret < 0 || fill_menu.ret >= static_cast<int>( opts.size() ) ) {
+        return;
+    }
+
+    const itype_id fill_id = opts[fill_menu.ret].id;
+    const itype *fill_type = item::find_type( fill_id );
+    if( fill_type == nullptr ) {
+        return;
+    }
+
+    int max_amount = 0;
+    const bool use_ammo_set = it.is_magazine() || it.magazine_integral() ||
+                              ( it.is_tool() && !it.ammo_types().empty() ) ||
+                              it.has_pocket_type( pocket_type::MAGAZINE_WELL );
+    if( fill_type->ammo != nullptr ) {
+        max_amount = it.ammo_capacity( fill_type->ammo->type );
+    }
+    if( max_amount <= 0 ) {
+        // Volume/weight liquid containers (waterskins) and CONTAINER ammo pouches.
+        item probe = it;
+        item liquid( fill_id, calendar::turn_zero, 1 );
+        max_amount = probe.fill_with( liquid, item::INFINITE_CHARGES );
+    }
+    if( max_amount <= 0 ) {
+        return;
+    }
+
+    int amount = max_amount;
+    if( !query_int( amount, true,
+                    _( "Amount?  (1-%d; full = %d)" ),
+                    max_amount, max_amount ) ||
+        amount <= 0 ) {
+        // Cancel amount → leave empty (item itself was already accepted).
+        return;
+    }
+    amount = std::clamp( amount, 1, max_amount );
+
+    if( use_ammo_set && fill_type->ammo != nullptr &&
+        it.ammo_capacity( fill_type->ammo->type ) > 0 ) {
+        it.ammo_set( fill_id, amount );
+    } else {
+        item liquid( fill_id, calendar::turn_zero, amount );
+        it.fill_with( liquid, amount );
+    }
+}
+
 // Searchable itype picker for EQUIPMENT Replace/Add. prefer_bucket is a layout-C
 // tab key (clothing/armor/…/other) or "" — preselects that category when set.
 // uilist filtering (/) is enabled by default; title/text advertise it.
@@ -1220,7 +1348,8 @@ static std::optional<item> chargen_pick_starting_item( const std::string &prefer
     menu.title = _( "Choose starting item (press / to filter)" );
     menu.text =
         _( "Category tabs filter the list. Press / to type a name filter; both apply together. "
-           "Stackable ammo/items ask for Amount after you confirm." );
+           "Stackables ask for Amount; containers/tools that hold fuel, liquid, or ammo "
+           "can be filled after you confirm (or left empty)." );
     menu.desc_enabled = false;
     menu.filtering = true;
     menu.filtering_nocase = true;
@@ -1289,10 +1418,15 @@ static std::optional<item> chargen_pick_starting_item( const std::string &prefer
             return std::nullopt;
         }
         amount = std::clamp( amount, 1, max_amount );
-        return item( chosen, calendar::turn_zero, amount );
+        item stack( chosen, calendar::turn_zero, amount );
+        chargen_auto_fit_varsize( stack );
+        return stack;
     }
-    // Unique gear / non-stackables: default construction (no quantity UI).
-    return item( chosen, calendar::turn_zero );
+    // Unique gear / non-stackables: default construction, then optional fill.
+    item result( chosen, calendar::turn_zero );
+    chargen_auto_fit_varsize( result );
+    chargen_maybe_fill_contents( result );
+    return result;
 }
 
 // Prefer the current item's CDDA category tab on Replace; slot category is separate.
@@ -2052,6 +2186,9 @@ void draw_profession_inventory( const avatar &u )
     if( cc_uistate.cached_profession_inventory.empty() ) {
         cc_uistate.cached_profession_inventory = selected_profession->items( outfit,
                 u.get_mutations() );
+        for( item &pit : cc_uistate.cached_profession_inventory ) {
+            chargen_auto_fit_varsize( pit );
+        }
     }
     const std::list<item> &prof_items = cc_uistate.cached_profession_inventory;
 
@@ -3873,6 +4010,11 @@ void character_creator_uistate::ensure_equipment_pool( const avatar &u )
         equipment_source_prof == pid &&
         equipment_source_outfit == outfit &&
         equipment_source_male == u.male ) {
+        // Re-normalize FIT on an already-locked kit (covers kits seeded before
+        // auto-FIT, nested VARSIZE, and any path that skipped the helper).
+        for( character_creator_equipment_choice &ec : equipment_choices ) {
+            chargen_auto_fit_varsize( ec.it );
+        }
         return;
     }
 
@@ -3907,7 +4049,10 @@ std::list<item> character_creator_uistate::custom_starting_items() const
 {
     std::list<item> result;
     for( const character_creator_equipment_choice &ec : equipment_choices ) {
-        result.push_back( ec.it );
+        item copy = ec.it;
+        // const method: fit a copy so wear/start never shows (poor fit)
+        chargen_auto_fit_varsize( copy );
+        result.push_back( std::move( copy ) );
     }
     return result;
 }
