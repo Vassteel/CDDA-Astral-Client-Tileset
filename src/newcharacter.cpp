@@ -1538,6 +1538,84 @@ static void chargen_equipment_add()
         static_cast<int>( cc_uistate.equipment_choices.size() ) - 1;
 }
 
+// Edit-menu Count: stackables adjust charges (same as picker Amount); discrete
+// gear sets how many identical itype+slot kit rows exist (profession convention).
+// N < 1 is rejected — use Remove. Max 9999 charges / 99 discrete copies.
+static void chargen_equipment_set_count_at( int idx )
+{
+    if( idx < 0 || idx >= static_cast<int>( cc_uistate.equipment_choices.size() ) ) {
+        return;
+    }
+    // Copy fields we need before any vector mutation invalidates references.
+    const item selected_it = cc_uistate.equipment_choices[idx].it;
+    const int category = cc_uistate.equipment_choices[idx].category;
+
+    if( selected_it.count_by_charges() ) {
+        constexpr int max_amount = 9999;
+        int amount = std::max( 1, selected_it.charges );
+        if( !query_int( amount, true,
+                        _( "Amount?  (1-%d; current %d)" ),
+                        max_amount, selected_it.charges ) ||
+            amount <= 0 ) {
+            return;
+        }
+        amount = std::clamp( amount, 1, max_amount );
+        cc_uistate.equipment_choices[idx].it.charges = amount;
+        cc_uistate.equipment_locked = true;
+        cc_uistate.selected_equipment_index = idx;
+        return;
+    }
+
+    constexpr int max_count = 99;
+    const itype_id tid = selected_it.typeId();
+    int current = 0;
+    for( const character_creator_equipment_choice &other : cc_uistate.equipment_choices ) {
+        if( other.it.typeId() == tid && other.category == category ) {
+            ++current;
+        }
+    }
+    current = std::max( 1, current );
+    int count = current;
+    if( !query_int( count, true,
+                    _( "Count?  (1-%d; currently %d)" ),
+                    max_count, current ) ||
+        count <= 0 ) {
+        return;
+    }
+    count = std::clamp( count, 1, max_count );
+    if( count == current ) {
+        return;
+    }
+
+    if( count > current ) {
+        const character_creator_equipment_choice prototype = cc_uistate.equipment_choices[idx];
+        const int add = count - current;
+        for( int i = 0; i < add; ++i ) {
+            cc_uistate.equipment_choices.insert(
+                cc_uistate.equipment_choices.begin() + idx + 1 + i, prototype );
+        }
+    } else {
+        int need_remove = current - count;
+        for( int i = static_cast<int>( cc_uistate.equipment_choices.size() ) - 1;
+             i >= 0 && need_remove > 0; --i ) {
+            if( i == idx ) {
+                continue;
+            }
+            const character_creator_equipment_choice &other = cc_uistate.equipment_choices[i];
+            if( other.it.typeId() == tid && other.category == category ) {
+                cc_uistate.equipment_choices.erase( cc_uistate.equipment_choices.begin() + i );
+                --need_remove;
+                if( i < idx ) {
+                    --idx;
+                }
+            }
+        }
+    }
+    cc_uistate.equipment_locked = true;
+    cc_uistate.selected_equipment_index = std::clamp( idx, 0,
+                                          static_cast<int>( cc_uistate.equipment_choices.size() ) - 1 );
+}
+
 static void chargen_equipment_action_menu( int idx )
 {
     if( idx < 0 || idx >= static_cast<int>( cc_uistate.equipment_choices.size() ) ) {
@@ -1556,13 +1634,16 @@ static void chargen_equipment_action_menu( int idx )
     act.text = string_format( _( "Edit: %s" ), name );
     act.addentry( 0, true, 'r', _( "Replace…" ) );
     act.addentry( 1, true, 'd', _( "Remove" ) );
-    act.addentry( 2, true, 'a', _( "Add item…" ) );
+    act.addentry( 2, true, 'c', _( "Count…" ) );
+    act.addentry( 3, true, 'a', _( "Add item…" ) );
     act.query();
     if( act.ret == 0 ) {
         chargen_equipment_replace_at( idx );
     } else if( act.ret == 1 ) {
         chargen_equipment_remove_at( idx );
     } else if( act.ret == 2 ) {
+        chargen_equipment_set_count_at( idx );
+    } else if( act.ret == 3 ) {
         chargen_equipment_add();
     }
 }
@@ -2279,7 +2360,7 @@ void draw_equipment_details( const avatar &u )
     draw_colored_text_wrap( _( "Starting equipment:" ), COL_HEADER );
     draw_colored_text_wrap(
         _( "Edit what you start with. Profession gear is the default seed — "
-           "Replace, Remove, or Add items. Changing profession, outfit, gender, "
+           "Replace, Remove, Count, or Add items. Changing profession, outfit, gender, "
            "or traits reseeds from the new defaults." ),
         COL_NOTE_MINOR );
     draw_spacer();
@@ -2316,9 +2397,14 @@ void draw_equipment_details( const avatar &u )
         cc_uistate.selected_equipment_index = idx;
         cc_uistate.top_bar_button_action = "EQUIPMENT_REMOVE";
     }
+    ImGui::SameLine();
+    if( ImGui::Button( _( "Count…" ) ) ) {
+        cc_uistate.selected_equipment_index = idx;
+        cc_uistate.top_bar_button_action = "EQUIPMENT_COUNT";
+    }
     draw_spacer();
     draw_colored_text_wrap(
-        _( "Confirm on the list opens Replace / Remove / Add. Type / to filter "
+        _( "Confirm on the list opens Replace / Remove / Count / Add. Type / to filter "
            "in the item picker." ),
         COL_NOTE_MINOR );
     draw_spacer();
@@ -4305,6 +4391,10 @@ bool character_creator_ui::handle_action( const std::string &action )
     } else if( action == "EQUIPMENT_REMOVE" ) {
         cc_uistate.ensure_equipment_pool( you );
         chargen_equipment_remove_at( cc_uistate.selected_equipment_index );
+        update_uilist_entries();
+    } else if( action == "EQUIPMENT_COUNT" ) {
+        cc_uistate.ensure_equipment_pool( you );
+        chargen_equipment_set_count_at( cc_uistate.selected_equipment_index );
         update_uilist_entries();
     } else if( action == "CHANGE_START_OF_CATACLYSM" ) {
         const scenario *scen = get_scenario();
