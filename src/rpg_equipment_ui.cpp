@@ -768,20 +768,20 @@ void rpg_equipment_window::draw_inventory_grid()
         grid_items.push_back( std::move( cell ) );
     }
 
-    // Dense BG3-style grid: smaller cells, more columns (chrome-only phase;
-    // icon atlases come later). Equipped gear stays on the doll only — no
-    // duplicate equipped-item list beside the slot ring.
+    // ~50% smaller than BG3 mock showcase icons: dense pack of small cells
+    // (chrome-only; icon atlases later). Equipped gear on doll/slots only —
+    // no duplicate equipped-item list beside the slot ring.
     const float avail = ImGui::GetContentRegionAvail().x;
-    const float min_cell = 88.f;
-    const float max_cell = 120.f;
-    const float cell_gap = 4.f;
+    const float min_cell = 48.f;
+    const float max_cell = 64.f;
+    const float cell_gap = 3.f;
     int columns = std::max( 1, static_cast<int>( avail / ( min_cell + cell_gap ) ) );
-    columns = std::min( columns, 12 );
+    columns = std::min( columns, 16 );
     float cell_w = ( avail - cell_gap * static_cast<float>( columns ) ) /
                    static_cast<float>( columns );
     cell_w = std::clamp( cell_w, min_cell, max_cell );
-    const int label_chars = std::max( 6,
-                                      static_cast<int>( ( cell_w - 8.f ) /
+    const int label_chars = std::max( 4,
+                                      static_cast<int>( ( cell_w - 6.f ) /
                                               std::max( 1.f, ImGui::CalcTextSize( "W" ).x ) ) );
 
     for( grid_cell &cell : grid_items ) {
@@ -815,7 +815,7 @@ void rpg_equipment_window::draw_inventory_grid()
         } );
         const int grid_cols = ui_hybrid_chrome::push_grid_button( is_sel );
 
-        if( ImGui::Button( cell.label.c_str(), ImVec2( cell_w, 32.f ) ) ) {
+        if( ImGui::Button( cell.label.c_str(), ImVec2( cell_w, 22.f ) ) ) {
             if( is_sel ) {
                 // Second click: Use when applicable, otherwise equip onto selected doll slot
                 if( cell.usable ) {

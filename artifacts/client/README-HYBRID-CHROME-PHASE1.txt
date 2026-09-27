@@ -11,7 +11,7 @@ What changed
 - Character Equipment: Hybrid window/child/button chrome; amber section
   headers; slot + dense inventory cell bezels; equipped gear ONLY on the
   paper-doll/slot list (no duplicate equipped-item panel).
-- Inventory grid denser: ~88–120px cells, up to 12 columns, 32px tall
+- Inventory grid denser: ~48–64px cells, up to 16 columns, 22px tall (~50% of mock)
   (text labels for now — icon atlases are a later phase).
 - Mouse toolbar: same accent language (active Pick/Forage bronze-amber).
 - Chargen EQUIPMENT: auto-set FIT on VARSIZE items when seeding the kit
