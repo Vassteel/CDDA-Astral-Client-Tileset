@@ -1219,7 +1219,8 @@ static std::optional<item> chargen_pick_starting_item( const std::string &prefer
     uilist menu;
     menu.title = _( "Choose starting item (press / to filter)" );
     menu.text =
-        _( "Category tabs filter the list. Press / to type a name filter; both apply together." );
+        _( "Category tabs filter the list. Press / to type a name filter; both apply together. "
+           "Stackable ammo/items ask for Amount after you confirm." );
     menu.desc_enabled = false;
     menu.filtering = true;
     menu.filtering_nocase = true;
@@ -1274,7 +1275,24 @@ static std::optional<item> chargen_pick_starting_item( const std::string &prefer
     if( menu.ret < 0 || menu.ret >= static_cast<int>( opts.size() ) ) {
         return std::nullopt;
     }
-    return item( opts[menu.ret].type, calendar::turn_zero );
+    const itype *const chosen = opts[menu.ret].type;
+    // Stackables (ammo, liquids, charge-counted food, etc.) store quantity in
+    // item::charges. Prompt once so Add/Replace can create a single stack.
+    if( chosen->count_by_charges() ) {
+        constexpr int max_amount = 9999;
+        int amount = 1;
+        const int def_stack = chosen->charges_default();
+        if( !query_int( amount, true,
+                        _( "Amount?  (1-%d; default stack size %d)" ),
+                        max_amount, std::max( 1, def_stack ) ) ||
+            amount <= 0 ) {
+            return std::nullopt;
+        }
+        amount = std::clamp( amount, 1, max_amount );
+        return item( chosen, calendar::turn_zero, amount );
+    }
+    // Unique gear / non-stackables: default construction (no quantity UI).
+    return item( chosen, calendar::turn_zero );
 }
 
 // Prefer the current item's CDDA category tab on Replace; slot category is separate.
