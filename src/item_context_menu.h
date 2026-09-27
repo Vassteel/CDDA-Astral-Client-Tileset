@@ -35,15 +35,21 @@ enum class action {
 /**
  * Draw ImGui MenuItem entries for @p loc into an already-open popup.
  * @param from_worn true when the item is selected from the paper-doll (worn/wielded).
+ * @param chosen_use_method if non-null and the user picked a type->use_methods entry
+ *        (e.g. transform "Turn on"/"Turn off"), receives that method key for invoke.
  * @return chosen action, or action::none if the user clicked nothing.
  */
-action draw_imgui_menu( Character &you, const item_location &loc, bool from_worn );
+action draw_imgui_menu( Character &you, const item_location &loc, bool from_worn,
+                        std::string *chosen_use_method = nullptr );
 
 /**
  * Execute a chosen action. May start activities / nested UIs.
+ * @param use_method optional type->use_methods key when act == action::use
+ *        (empty → avatar_action::use_item default / method picker).
  * @return short status string for the caller UI (may be empty).
  */
-std::string perform( Character &you, item_location loc, action act );
+std::string perform( Character &you, item_location loc, action act,
+                     const std::string &use_method = {} );
 
 } // namespace item_context_menu
 

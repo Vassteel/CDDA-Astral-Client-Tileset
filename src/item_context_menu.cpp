@@ -14,6 +14,7 @@
 #include "item.h"
 #include "itype.h"
 #include "messages.h"
+#include "ret_val.h"
 #include "translations.h"
 #include "ui_iteminfo.h"
 #include "visitable.h"
@@ -152,8 +153,12 @@ static bool menu_entry( const char *label, bool enabled )
 
 } // namespace
 
-action draw_imgui_menu( Character &you, const item_location &loc, bool from_worn )
+action draw_imgui_menu( Character &you, const item_location &loc, bool from_worn,
+                        std::string *chosen_use_method )
 {
+    if( chosen_use_method ) {
+        chosen_use_method->clear();
+    }
     if( !loc || !loc.get_item() ) {
         return action::none;
     }
@@ -168,9 +173,28 @@ action draw_imgui_menu( Character &you, const item_location &loc, bool from_worn
         }
     }
 
-    const bool can_use = item_looks_activatable( it );
-    if( menu_entry( _( "Use" ), can_use ) ) {
-        chosen = action::use;
+    // Surface each itype use_methods entry under its real CDDA label
+    // (iuse_transform::get_name → menu_text, else item_actions.json name —
+    // e.g. flashlight transform defaults to "Turn on", on-state menu_text
+    // "Turn off"). Mirrors avatar::invoke_item's method list.
+    bool listed_use_method = false;
+    for( const auto &e : it.type->use_methods ) {
+        listed_use_method = true;
+        const ret_val<void> can = e.second.can_call( you, it, you.pos_bub() );
+        const std::string label = e.second.get_name();
+        if( menu_entry( label.c_str(), can.success() ) ) {
+            chosen = action::use;
+            if( chosen_use_method ) {
+                *chosen_use_method = e.first;
+            }
+        }
+    }
+    // Books / medical / relics / recursive uses without a typed use_methods map.
+    if( !listed_use_method ) {
+        const bool can_use = item_looks_activatable( it );
+        if( menu_entry( _( "Use" ), can_use ) ) {
+            chosen = action::use;
+        }
     }
 
     if( rate_read( you, it ) != hint_rating::cant ) {
@@ -223,7 +247,8 @@ action draw_imgui_menu( Character &you, const item_location &loc, bool from_worn
     return chosen;
 }
 
-std::string perform( Character &you, item_location loc, action act )
+std::string perform( Character &you, item_location loc, action act,
+                     const std::string &use_method )
 {
     if( act == action::none || !loc || !loc.get_item() ) {
         return {};
@@ -251,6 +276,12 @@ std::string perform( Character &you, item_location loc, action act )
         case action::use: {
             if( av == nullptr ) {
                 return _( "Only the player can use items here." );
+            }
+            // Specific use_methods key (Turn on/off transform, etc.) — skip
+            // comestible/book shortcuts so the typed iuse runs.
+            if( !use_method.empty() ) {
+                avatar_action::use_item( *av, loc, use_method );
+                return _( "Used." );
             }
             if( loc->is_comestible() || loc->is_medical_tool() ) {
                 avatar_action::eat_or_use( *av, loc );

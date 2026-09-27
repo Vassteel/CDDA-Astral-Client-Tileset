@@ -469,6 +469,8 @@ class rpg_equipment_window : public cataimgui::window
         bool want_close = false;
         std::string status_line;
         pending_action pending = pending_action::none;
+        // Non-empty when context menu picked a typed use_methods key (Turn on/off).
+        std::string pending_use_method;
 
         void draw_paper_doll();
         void draw_inventory_grid();
@@ -476,7 +478,7 @@ class rpg_equipment_window : public cataimgui::window
         void try_equip_selected();
         void try_takeoff_selected();
         void try_wield_selected();
-        void try_use_selected();
+        void try_use_selected( const std::string &use_method = {} );
         void try_drop_selected();
         void try_examine_selected();
         void try_drag_equip();
@@ -529,6 +531,8 @@ void rpg_equipment_window::flush_pending_action()
 {
     const pending_action act = pending;
     pending = pending_action::none;
+    const std::string use_method = std::move( pending_use_method );
+    pending_use_method.clear();
     switch( act ) {
         case pending_action::equip:
             try_equip_selected();
@@ -540,7 +544,7 @@ void rpg_equipment_window::flush_pending_action()
             try_wield_selected();
             break;
         case pending_action::use_item:
-            try_use_selected();
+            try_use_selected( use_method );
             break;
         case pending_action::drop_item:
             try_drop_selected();
@@ -752,7 +756,7 @@ void rpg_equipment_window::try_takeoff_selected()
     }
 }
 
-void rpg_equipment_window::try_use_selected()
+void rpg_equipment_window::try_use_selected( const std::string &use_method )
 {
     refresh_selection_validity();
     if( !selected_inv || !selected_inv.get_item() ) {
@@ -768,6 +772,11 @@ void rpg_equipment_window::try_use_selected()
     clear_selections();
     // Close before nested use UIs / activities (eat, apply, read) take over.
     want_close = true;
+    if( !use_method.empty() ) {
+        avatar_action::use_item( *av, loc, use_method );
+        status_line = _( "Used." );
+        return;
+    }
     if( loc->is_comestible() || loc->is_medical_tool() ) {
         avatar_action::eat_or_use( *av, loc );
         status_line = _( "Using…" );
@@ -882,6 +891,26 @@ void rpg_equipment_window::draw_paper_doll()
             }
         }
         const bool hovered = ImGui::IsItemHovered();
+        // Open RMB popup while slot Button is still LastItem (see inv grid note).
+        if( worn_loc && worn_loc.get_item() ) {
+            ImGui::OpenPopupOnItemClick( "rpg_doll_ctx",
+                                         ImGuiPopupFlags_MouseButtonRight );
+        }
+
+        // Drag-drop target: inventory grid → this doll slot (needs Button LastItem).
+        if( ImGui::BeginDragDropTarget() ) {
+            if( const ImGuiPayload *payload =
+                    ImGui::AcceptDragDropPayload( "RPG_EQ_ITEM" ) ) {
+                ( void )payload;
+                if( drag_payload && drag_payload.get_item() ) {
+                    selected_inv = drag_payload;
+                    selected_slot = i;
+                    pending = pending_action::drag_equip;
+                }
+            }
+            ImGui::EndDragDropTarget();
+        }
+
         ui_hybrid_chrome::draw_item_bezel( selected, hovered, empty );
         if( worn_loc && worn_loc.get_item() ) {
             // Draw-list sprite only — ImGui::Image would steal last-item from the
@@ -914,29 +943,16 @@ void rpg_equipment_window::draw_paper_doll()
             imgui_cdda_tooltip( tip );
         }
 
-        // Drag-drop target: inventory grid → this doll slot
-        if( ImGui::BeginDragDropTarget() ) {
-            if( const ImGuiPayload *payload =
-                    ImGui::AcceptDragDropPayload( "RPG_EQ_ITEM" ) ) {
-                ( void )payload;
-                if( drag_payload && drag_payload.get_item() ) {
-                    selected_inv = drag_payload;
-                    selected_slot = i;
-                    pending = pending_action::drag_equip;
-                }
-            }
-            ImGui::EndDragDropTarget();
-        }
-
         // Right-click worn / wielded item on this slot
-        if( worn_loc && worn_loc.get_item() &&
-            ImGui::BeginPopupContextItem( "rpg_doll_ctx" ) ) {
+        if( ImGui::BeginPopup( "rpg_doll_ctx" ) ) {
             selected_slot = i;
             selected_worn = worn_loc;
             selected_inv = item_location::nowhere;
             refresh_selection_validity();
+            std::string use_method;
             const item_context_menu::action chosen =
-                item_context_menu::draw_imgui_menu( *you, selected_worn, /*from_worn=*/true );
+                item_context_menu::draw_imgui_menu( *you, selected_worn, /*from_worn=*/true,
+                                                    &use_method );
             switch( chosen ) {
                 case item_context_menu::action::consume:
                     // Consume from worn container (e.g. waterskin on belt) — use worn loc
@@ -946,6 +962,7 @@ void rpg_equipment_window::draw_paper_doll()
                 case item_context_menu::action::use:
                     selected_inv = selected_worn;
                     pending = pending_action::use_item;
+                    pending_use_method = std::move( use_method );
                     break;
                 case item_context_menu::action::read:
                     selected_inv = selected_worn;
@@ -974,10 +991,15 @@ void rpg_equipment_window::draw_paper_doll()
             ImGui::EndPopup();
         }
 
-        // Keep inventory-tint hint as a tiny colored marker (chrome stays Hybrid).
-        ImGui::PushStyleColor( ImGuiCol_Text, tint );
-        ImGui::TextUnformatted( " " );
-        ImGui::PopStyleColor();
+        // Tint hint via draw-list (avoid TextUnformatted stealing LastItem).
+        {
+            const ImVec2 rmin = ImGui::GetItemRectMin();
+            const ImVec2 rmax = ImGui::GetItemRectMax();
+            ImGui::GetWindowDrawList()->AddRectFilled(
+                ImVec2( rmax.x - 5.f, rmin.y + 3.f ),
+                ImVec2( rmax.x - 2.f, rmax.y - 3.f ),
+                ImGui::ColorConvertFloat4ToU32( tint ) );
+        }
 
         ImGui::PopStyleColor( slot_cols );
         ImGui::PopID();
@@ -1105,6 +1127,7 @@ void rpg_equipment_window::draw_inventory_grid()
                 // Second click: Use when applicable, otherwise equip onto selected doll slot
                 if( cell.usable ) {
                     pending = pending_action::use_item;
+                    pending_use_method.clear();
                 } else {
                     pending = pending_action::equip;
                 }
@@ -1114,6 +1137,21 @@ void rpg_equipment_window::draw_inventory_grid()
             }
         }
         const bool hovered = ImGui::IsItemHovered();
+        // CRITICAL: open RMB popup while the cell Button is still LastItem.
+        // Tooltips (BeginTooltip + Text) and drag-preview Text change
+        // LastItemData; BeginPopupContextItem after them attaches to the wrong
+        // item so right-click appears to do nothing.
+        ImGui::OpenPopupOnItemClick( "rpg_inv_ctx", ImGuiPopupFlags_MouseButtonRight );
+
+        // Drag source → doll slots (also needs Button as LastItem).
+        if( ImGui::BeginDragDropSource( ImGuiDragDropFlags_SourceAllowNullID ) ) {
+            drag_payload = cell.loc;
+            int token = i;
+            ImGui::SetDragDropPayload( "RPG_EQ_ITEM", &token, sizeof( token ) );
+            ImGui::TextUnformatted( cell.label.c_str() );
+            ImGui::EndDragDropSource();
+        }
+
         ui_hybrid_chrome::draw_item_bezel( is_sel, hovered, false );
         // Default tileset ITEM sprite (looks_like / variants via get_texture_draw_data).
         // Fallback: truncated label / first glyph. Stack ×N badge when stacked.
@@ -1133,29 +1171,22 @@ void rpg_equipment_window::draw_inventory_grid()
             imgui_cdda_tooltip( cell.tip );
         }
 
-        // Drag source → drop on paper-doll slots
-        if( ImGui::BeginDragDropSource( ImGuiDragDropFlags_SourceAllowNullID ) ) {
-            drag_payload = cell.loc;
-            int token = i;
-            ImGui::SetDragDropPayload( "RPG_EQ_ITEM", &token, sizeof( token ) );
-            ImGui::TextUnformatted( cell.label.c_str() );
-            ImGui::EndDragDropSource();
-        }
-
-        // Right-click context menu (BeginPopupContextItem keeps ID with this cell).
         // Shared builder mirrors vanilla inventory_item_menu eligibility (Drink/Eat/…).
-        if( ImGui::BeginPopupContextItem( "rpg_inv_ctx" ) ) {
+        if( ImGui::BeginPopup( "rpg_inv_ctx" ) ) {
             selected_inv = cell.loc;
             selected_worn = item_location::nowhere;
             refresh_selection_validity();
+            std::string use_method;
             const item_context_menu::action chosen =
-                item_context_menu::draw_imgui_menu( *you, selected_inv, /*from_worn=*/false );
+                item_context_menu::draw_imgui_menu( *you, selected_inv, /*from_worn=*/false,
+                                                    &use_method );
             switch( chosen ) {
                 case item_context_menu::action::consume:
                     pending = pending_action::ctx_consume;
                     break;
                 case item_context_menu::action::use:
                     pending = pending_action::use_item;
+                    pending_use_method = std::move( use_method );
                     break;
                 case item_context_menu::action::read:
                     pending = pending_action::ctx_read;
@@ -1241,7 +1272,7 @@ void rpg_equipment_window::draw_action_bar()
     } else {
         ImGui::TextDisabled( "%s",
                              _( "Drag inventory → doll slot to equip. Click item again to Use (or Wear/Wield). "
-                                "Right-click for Drink/Eat, Use, Read, Wear, Wield, Drop, Unload, Reload, Examine. "
+                                "Right-click for Drink/Eat, Turn on/off, Use, Read, Wear, Wield, Drop, Unload, Reload, Examine. "
                                 "Right-click worn slots too. Esc closes." ) );
     }
 }
