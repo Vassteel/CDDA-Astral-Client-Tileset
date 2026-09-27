@@ -2772,6 +2772,39 @@ void game::setremoteveh( vehicle *veh )
 
 bool game::try_get_left_click_action( action_id &act, const tripoint_bub_ms &mouse_target )
 {
+    map &here = get_map();
+    const tripoint_bub_ms player_pos = u.pos_bub();
+    const int dist = square_dist( mouse_target.xy(), player_pos.xy() );
+    const bool is_self = dist <= 0;
+    const bool is_adjacent = dist <= 1;
+
+    // RPG UI shell: left-click primary world interact when in range (Stardew/Elin).
+    // Priority: talk → open → close → pickup → examine(+pickup) → examine.
+    // Distant / empty tiles keep path-preview move. ImGui capture already drops
+    // mouse buttons in sdltiles before we get here.
+    if( is_adjacent || is_self ) {
+        static const action_id primary[] = {
+            ACTION_CHAT,
+            ACTION_OPEN,
+            ACTION_CLOSE,
+            ACTION_PICKUP,
+            ACTION_EXAMINE_AND_PICKUP,
+            ACTION_EXAMINE,
+        };
+        for( const action_id candidate : primary ) {
+            if( ( candidate == ACTION_OPEN || candidate == ACTION_CLOSE ) && is_self ) {
+                continue;
+            }
+            if( !can_interact_at( candidate, here, mouse_target ) ) {
+                continue;
+            }
+            destination_preview.clear();
+            u.clear_destination();
+            act = candidate;
+            return true;
+        }
+    }
+
     bool new_destination = true;
     if( !destination_preview.empty() ) {
         auto &final_destination = destination_preview.back();

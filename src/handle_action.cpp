@@ -70,6 +70,7 @@
 #include "mdarray.h"
 #include "messages.h"
 #include "mouse_toolbar.h"
+#include "rpg_equipment_ui.h"
 #include "monster.h"
 #include "move_mode.h"
 #include "mtype.h"
@@ -2648,7 +2649,11 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             break;
 
         case ACTION_INVENTORY:
-            game_menus::inv::common();
+            if( get_option<bool>( "RPG_EQUIPMENT_UI" ) ) {
+                rpg_equipment_ui::open();
+            } else {
+                game_menus::inv::common();
+            }
             break;
 
         case ACTION_COMPARE:

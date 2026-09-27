@@ -2338,6 +2338,12 @@ void options_manager::add_options_interface()
                              "Keyboard bindings are unchanged." ),
              true, COPT_CURSES_HIDE );
         get_option( "MOUSE_TOOLBAR" ).setPrerequisite( "ENABLE_MOUSE" );
+
+        add( "RPG_EQUIPMENT_UI", page_id, to_translation( "RPG equipment UI (paper doll)" ),
+             to_translation( "If true, Inventory (i / toolbar Inv) opens the paper-doll + "
+                             "grid equipment window. Classic inventory remains available from "
+                             "a button inside that window, or by disabling this option." ),
+             true, COPT_CURSES_HIDE );
     } );
 
     add_empty_line();
