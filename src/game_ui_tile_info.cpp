@@ -53,6 +53,12 @@
 #include "vehicle.h"
 #include "vpart_position.h"
 
+#if defined(TILES)
+#  include "cata_imgui.h"
+#  include "imgui/imgui.h"
+#  include "ui_hybrid_chrome.h"
+#endif
+
 enum class om_vision_level : int8_t;
 
 static const json_character_flag json_flag_BLIND( "BLIND" );
@@ -62,6 +68,13 @@ static const ter_str_id ter_t_pit( "t_pit" );
 static const ter_str_id ter_t_pit_shallow( "t_pit_shallow" );
 
 static const trait_id trait_ILLITERATE( "ILLITERATE" );
+
+/** Non-ASCII section label for look-around / tile-info curses panes. */
+static void print_tile_section_header( const catacurses::window &w_look, int column, int &line,
+                                       const std::string &title )
+{
+    mvwprintz( w_look, point( column, line++ ), c_yellow, title );
+}
 
 void game::print_all_tile_info( const tripoint_bub_ms &lp, const catacurses::window &w_look,
                                 const std::string_view area_name, int column,
@@ -204,7 +217,7 @@ void game::print_terrain_info( const tripoint_bub_ms &lp, const catacurses::wind
         }
     }
     mvwprintz( w_look, point( column, line++ ), c_yellow, area );
-    mvwprintz( w_look, point( column, line++ ), c_light_blue, _( "-----TERRAIN-----" ) );
+    print_tile_section_header( w_look, column, line, _( "Terrain" ) );
     mvwprintz( w_look, point( column, line++ ), c_white, tile );
     std::string desc = string_format( terrain.description.translated() );
     std::vector<std::string> lines = foldstring( desc, max_width );
@@ -304,7 +317,7 @@ void game::print_furniture_info( const tripoint_bub_ms &lp, const catacurses::wi
     // Print an empty line as padding IF and only if we're going to print any furniture info.
     mvwprintw( w_look, point( column, line++ ), "" );
 
-    mvwprintz( w_look, point( column, line++ ), c_light_blue, _( "-----FURNITURE-----" ) );
+    print_tile_section_header( w_look, column, line, _( "Furniture" ) );
 
     const furn_id &f = visible ? here.furn( lp ) : f_memory.id();
     // Print furniture name in white
@@ -356,7 +369,8 @@ void game::print_fields_info( const tripoint_bub_ms &lp, const catacurses::windo
     }
 
     // Header.
-    mvwprintz( w_look, point( column, ++line ), c_light_blue, _( "-----FIELDS-----" ) );
+    ++line;
+    print_tile_section_header( w_look, column, line, _( "Fields" ) );
     for( const auto &fld : tmpfield ) {
         const field_entry &cur = fld.second;
         if( fld.first.obj().has_fire && ( here.has_flag( ter_furn_flag::TFLAG_FIRE_CONTAINER, lp ) ||
@@ -387,7 +401,8 @@ void game::print_trap_info( const tripoint_bub_ms &lp, const catacurses::window 
 
     if( tr.can_see( lp, u ) ) {
         // Header. Only printed if we actually know there's a trap there. ;)
-        mvwprintz( w_look, point( column, ++line ), c_light_blue, _( "-----TRAP-----" ) );
+        ++line;
+        print_tile_section_header( w_look, column, line, _( "Trap" ) );
 
         mvwprintz( w_look, point( column, ++line ), tr.color, tr.name() );
 
@@ -433,9 +448,11 @@ void game::print_vehicle_info( const vehicle *veh, int veh_part, const catacurse
     if( veh ) {
         // Print the name of the vehicle.
         if( veh->is_appliance() ) {
-            mvwprintz( w_look, point( column, ++line ), c_light_blue, _( "-----APPLIANCE-----" ) );
+            ++line;
+            print_tile_section_header( w_look, column, line, _( "Appliance" ) );
         } else {
-            mvwprintz( w_look, point( column, ++line ), c_light_blue, _( "-----VEHICLE-----" ) );
+            ++line;
+            print_tile_section_header( w_look, column, line, _( "Vehicle" ) );
         }
         mvwprintz( w_look, point( column, ++line ), c_white, "%s", veh->name );
         // Then the list of parts on that tile.
@@ -554,3 +571,271 @@ void game::pre_print_all_tile_info( const tripoint_bub_ms &lp, const catacurses:
     const std::string area_name = cur_ter_m->get_name( vision );
     print_all_tile_info( lp, w_info, area_name, 1, first_line, last_line, cache );
 }
+
+
+#if defined(TILES)
+
+namespace
+{
+
+void imgui_wrap_text( const std::string &text, const ImVec4 &col )
+{
+    const float wrap = ImGui::GetContentRegionAvail().x;
+    ImGui::PushTextWrapPos( ImGui::GetCursorPos().x + wrap );
+    ImGui::TextColored( col, "%s", text.c_str() );
+    ImGui::PopTextWrapPos();
+}
+
+void imgui_wrap_colored( const std::string &text )
+{
+    const float wrap = ImGui::GetContentRegionAvail().x;
+    cataimgui::draw_colored_text( text, wrap );
+}
+
+} // namespace
+
+void game::draw_tile_info_imgui( const tripoint_bub_ms &lp, const visibility_variables &cache )
+{
+    map &here = get_map();
+
+    // Area (OMT) name — same source as pre_print_all_tile_info.
+    tripoint_abs_omt omp( coords::project_to<coords::omt>( here.get_abs( lp ) ) );
+    const oter_id &cur_ter_m = overmap_buffer.ter( omp );
+    om_vision_level vision = overmap_buffer.seen( omp );
+    std::string area_name = uppercase_first_letter( cur_ter_m->get_name( vision ) );
+    if( const timed_event *e = get_timed_events().get( timed_event_type::OVERRIDE_PLACE ) ) {
+        area_name = e->string_id;
+    }
+
+    visibility_type visibility = visibility_type::HIDDEN;
+    const bool inbounds = here.inbounds( lp );
+    if( inbounds ) {
+        visibility = here.get_visibility( here.apparent_light_at( lp, cache ), cache );
+    }
+    const Creature *creature = get_creature_tracker().creature_at( lp, true );
+    const bool visible = visibility == visibility_type::CLEAR;
+
+    ImGui::TextColored( ui_hybrid_chrome::palette::accent(), "%s", area_name.c_str() );
+
+    if( !visible && !get_avatar().has_memory_at( here.get_abs( lp ) ) ) {
+        // Visibility-only message when nothing memorized.
+        const char *visibility_message = _( "Unseen." );
+        switch( visibility ) {
+            case visibility_type::BOOMER:
+                visibility_message = _( "A bright pink blur." );
+                break;
+            case visibility_type::BOOMER_DARK:
+                visibility_message = _( "A pink blur." );
+                break;
+            case visibility_type::DARK:
+                visibility_message = _( "Darkness." );
+                break;
+            case visibility_type::LIT:
+                visibility_message = _( "Bright light." );
+                break;
+            case visibility_type::CLEAR:
+                visibility_message = _( "Clearly visible." );
+                break;
+            case visibility_type::HIDDEN:
+            default:
+                break;
+        }
+        ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", visibility_message );
+        return;
+    }
+
+    // --- Terrain ---
+    ui_hybrid_chrome::section_header( _( "Terrain" ) );
+    const ter_t &terrain = visible
+                           ? here.ter( lp ).obj()
+                           : ter_str_id( get_avatar().get_memorized_tile( here.get_abs( lp ) ).get_ter_id() ).id().obj();
+    ImGui::TextColored( ui_hybrid_chrome::palette::text(), "%s",
+                        uppercase_first_letter( terrain.name() ).c_str() );
+    imgui_wrap_text( terrain.description.translated(), ui_hybrid_chrome::palette::text_muted() );
+
+    // --- Furniture ---
+    const furn_str_id &f_memory = furn_str_id( get_avatar().get_memorized_tile( here.get_abs( lp ) )
+                                  .get_dec_id() );
+    if( ( visible && here.has_furn( lp ) ) || ( !visible && f_memory.is_valid() ) ) {
+        ui_hybrid_chrome::section_header( _( "Furniture" ) );
+        const furn_id &f = visible ? here.furn( lp ) : f_memory.id();
+        ImGui::TextColored( ui_hybrid_chrome::palette::text(), "%s",
+                            uppercase_first_letter( visible ? here.furnname( lp ) : f.obj().name() ).c_str() );
+        imgui_wrap_text( f.obj().description.translated(), ui_hybrid_chrome::palette::text_muted() );
+    }
+
+    if( !visible ) {
+        const char *visibility_message = _( "Unseen." );
+        switch( visibility ) {
+            case visibility_type::BOOMER:
+                visibility_message = _( "A bright pink blur." );
+                break;
+            case visibility_type::BOOMER_DARK:
+                visibility_message = _( "A pink blur." );
+                break;
+            case visibility_type::DARK:
+                visibility_message = _( "Darkness." );
+                break;
+            case visibility_type::LIT:
+                visibility_message = _( "Bright light." );
+                break;
+            case visibility_type::CLEAR:
+                visibility_message = _( "Clearly visible." );
+                break;
+            case visibility_type::HIDDEN:
+            default:
+                break;
+        }
+        ImGui::Spacing();
+        ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", visibility_message );
+        return;
+    }
+
+    ImGui::Spacing();
+    ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                        string_format( _( "Concealment: %d%%" ), here.coverage( lp ) ).c_str() );
+
+    if( here.has_flag( ter_furn_flag::TFLAG_TREE, lp ) ) {
+        imgui_wrap_colored( _( "Can be <color_green>cut down</color> with the right tools." ) );
+    }
+
+    const std::string features = here.features( lp );
+    if( !features.empty() ) {
+        imgui_wrap_text( features, ui_hybrid_chrome::palette::text_muted() );
+    }
+
+    if( here.impassable( lp ) ) {
+        ImGui::TextColored( ImVec4( 0.90f, 0.35f, 0.30f, 1.f ), "%s", _( "Impassable" ) );
+    } else {
+        ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                            string_format( _( "Move cost: %d" ), here.move_cost( lp ) * 50 ).c_str() );
+    }
+
+    std::string signage = here.get_signage( lp );
+    if( !signage.empty() ) {
+        std::string sign_string = u.has_trait( trait_ILLITERATE ) ? "???" : signage;
+        imgui_wrap_text( string_format( _( "Sign: %s" ), sign_string ),
+                         ui_hybrid_chrome::palette::text_muted() );
+    }
+
+    std::pair<std::string, nc_color> ll = get_light_level( std::max( 1.0,
+                                          LIGHT_AMBIENT_LIT - here.ambient_light_at( lp ) + 1.0 ) );
+    ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", _( "Lighting: " ) );
+    ImGui::SameLine( 0, 0 );
+    ImGui::TextColored( cataimgui::imvec4_from_color( ll.second ), "%s", ll.first.c_str() );
+
+    // --- Fields ---
+    const field &tmpfield = here.field_at( lp );
+    if( std::distance( tmpfield.begin(), tmpfield.end() ) > 0 ) {
+        ui_hybrid_chrome::section_header( _( "Fields" ) );
+        for( const auto &fld : tmpfield ) {
+            const field_entry &cur = fld.second;
+            ImGui::TextColored( cataimgui::imvec4_from_color( cur.color() ), "%s",
+                                cur.name().c_str() );
+        }
+    }
+
+    // --- Trap ---
+    const trap &tr = here.tr_at( lp );
+    if( !tr.is_null() && tr.can_see( lp, u ) ) {
+        ui_hybrid_chrome::section_header( _( "Trap" ) );
+        ImGui::TextColored( cataimgui::imvec4_from_color( tr.color ), "%s", tr.name().c_str() );
+    }
+
+    // --- Partial construction ---
+    partial_con *pc = here.partial_con_at( lp );
+    if( pc != nullptr ) {
+        const construction &built = pc->id.obj();
+        imgui_wrap_text( string_format( _( "Unfinished task: %s, %d%% complete" ),
+                                        built.group->name(), pc->counter / 100000 ),
+                         ui_hybrid_chrome::palette::text() );
+        const float frac = std::clamp( pc->counter / 10000000.f, 0.f, 1.f );
+        ui_hybrid_chrome::progress_meter( frac,
+                                          string_format( "%d%%", pc->counter / 100000 ).c_str() );
+    }
+
+    // --- Creature ---
+    if( creature != nullptr && ( u.sees( here, *creature ) || creature == &u ) ) {
+        ui_hybrid_chrome::section_header( _( "Creature" ) );
+        ImGui::TextColored( ui_hybrid_chrome::palette::text(), "%s",
+                            creature->disp_name( false, true ).c_str() );
+        const int hp = creature->get_hp();
+        const int hp_max = creature->get_hp_max();
+        if( hp_max > 0 ) {
+            const float frac = static_cast<float>( hp ) / static_cast<float>( hp_max );
+            const std::string overlay = string_format( _( "HP %d/%d" ), hp, hp_max );
+            ui_hybrid_chrome::progress_meter( frac, overlay.c_str() );
+        }
+    }
+
+    // --- Vehicle / appliance ---
+    const optional_vpart_position vp = here.veh_at( lp );
+    if( vp ) {
+        vehicle *const veh = &vp->vehicle();
+        ui_hybrid_chrome::section_header( veh->is_appliance() ? _( "Appliance" ) : _( "Vehicle" ) );
+        ImGui::TextColored( ui_hybrid_chrome::palette::text(), "%s", veh->name.c_str() );
+        const int part = vp->part_index();
+        if( part >= 0 ) {
+            std::vector<int> pl = veh->parts_at_relative( veh->part( part ).mount, true );
+            int shown = 0;
+            for( int idx : pl ) {
+                if( shown >= 8 ) {
+                    ImGui::TextColored( ui_hybrid_chrome::palette::accent(), "%s",
+                                        _( "More parts here…" ) );
+                    break;
+                }
+                const vehicle_part &vprt = veh->part( idx );
+                if( !vprt.is_real_or_active_fake() ) {
+                    continue;
+                }
+                ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                                    vprt.name().c_str() );
+                ++shown;
+            }
+        }
+    }
+
+    // --- Items ---
+    if( here.sees_some_items( lp, u ) ) {
+        if( here.has_flag( ter_furn_flag::TFLAG_CONTAINER, lp ) && !here.could_see_items( lp, u ) ) {
+            ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                                _( "You cannot see what is inside of it." ) );
+        } else if( u.has_effect_with_flag( json_flag_BLIND ) || u.worn_with_flag( flag_BLIND ) ) {
+            ImGui::TextColored( ui_hybrid_chrome::palette::accent(), "%s",
+                                _( "There's something there, but you can't see what it is." ) );
+        } else {
+            ui_hybrid_chrome::section_header( _( "Items" ) );
+            std::map<std::string, std::pair<int, nc_color>> item_names;
+            for( const item &it : here.i_at( lp ) ) {
+                add_visible_items_recursive( item_names, it );
+            }
+            int shown = 0;
+            for( const auto &entry : item_names ) {
+                if( shown >= 12 ) {
+                    ImGui::TextColored( ui_hybrid_chrome::palette::accent(), "%s",
+                                        _( "More items here…" ) );
+                    break;
+                }
+                std::string label = entry.first;
+                if( entry.second.first > 1 ) {
+                    label = string_format( pgettext(
+                                               "%s is the name of the item.  %d is the quantity of that item.",
+                                               "%s [%d]" ), entry.first.c_str(), entry.second.first );
+                }
+                ImGui::TextColored( cataimgui::imvec4_from_color( entry.second.second ), "%s",
+                                    label.c_str() );
+                ++shown;
+            }
+        }
+    }
+
+    // --- Graffiti ---
+    if( here.has_graffiti_at( lp ) ) {
+        imgui_wrap_text( string_format(
+                             here.ter( lp ) == ter_t_grave_new ? _( "Graffiti: %s" ) : _( "Inscription: %s" ),
+                             here.graffiti_at( lp ) ),
+                         ui_hybrid_chrome::palette::text_muted() );
+    }
+}
+
+#endif // TILES

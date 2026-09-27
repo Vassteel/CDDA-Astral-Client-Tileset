@@ -73,6 +73,18 @@ int push_grid_button( bool selected );
  */
 int push_toolbar_button( bool active );
 
+/**
+ * Amber section label + ImGui separator (replaces -----SECTION----- ASCII bars).
+ * Call inside an open ImGui window after push().
+ */
+void section_header( const char *title );
+
+/**
+ * Hybrid-styled horizontal meter (ImGui ProgressBar). fraction in [0,1]
+ * (values outside are clamped). overlay_text may be null for default %.
+ */
+void progress_meter( float fraction, const char *overlay_text = nullptr );
+
 } // namespace ui_hybrid_chrome
 
 #endif // CATA_SRC_UI_HYBRID_CHROME_H

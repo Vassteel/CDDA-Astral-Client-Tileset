@@ -758,6 +758,11 @@ class game
                                   std::string_view area_name, int column,
                                   int &line, int last_line, const visibility_variables &cache );
 
+#if defined(TILES)
+        /** Hybrid ImGui mouse-view / tile-info pane (no ----- ASCII section bars). */
+        void draw_tile_info_imgui( const tripoint_bub_ms &lp, const visibility_variables &cache );
+#endif
+
         void draw_look_around_cursor( const tripoint_bub_ms &lp, const visibility_variables &cache );
 
         /** Long description of (visible) things at tile. */

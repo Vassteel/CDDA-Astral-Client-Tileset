@@ -4,10 +4,17 @@
 
 #include <memory>
 
-#include "cursesdef.h"
 #include "point.h"
 
+#if defined(TILES)
+namespace cataimgui
+{
+class window;
+}
+#else
+#include "cursesdef.h"
 class ui_adaptor;
+#endif
 
 class live_view
 {
@@ -23,8 +30,12 @@ class live_view
     private:
         tripoint mouse_position;
 
+#if defined(TILES)
+        std::unique_ptr<cataimgui::window> imgui_win;
+#else
         catacurses::window win;
         std::unique_ptr<ui_adaptor> ui;
+#endif
 };
 
 #endif // CATA_SRC_LIVE_VIEW_H

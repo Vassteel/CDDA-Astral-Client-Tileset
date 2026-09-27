@@ -153,6 +153,9 @@ void push()
     push_col( ImGuiCol_TabHovered, palette::header_hovered() );
     push_col( ImGuiCol_TabSelected, palette::slot_selected() );
     push_col( ImGuiCol_TextSelectedBg, ImVec4( 0.45f, 0.35f, 0.15f, 0.45f ) );
+    // ProgressBar / plot fill (sidebar meters, HP, carry weight, etc.)
+    push_col( ImGuiCol_PlotHistogram, palette::accent() );
+    push_col( ImGuiCol_PlotHistogramHovered, palette::border_accent() );
 
     ImGui::PushStyleVar( ImGuiStyleVar_WindowRounding, 4.f );
     ImGui::PushStyleVar( ImGuiStyleVar_ChildRounding, 3.f );
@@ -261,6 +264,32 @@ int push_toolbar_button( bool active )
     ImGui::PushStyleColor( ImGuiCol_ButtonHovered, palette::button_hovered() );
     ImGui::PushStyleColor( ImGuiCol_ButtonActive, palette::button_active() );
     return 3;
+}
+
+void section_header( const char *title )
+{
+    if( title == nullptr || title[0] == '\0' ) {
+        return;
+    }
+    ImGui::Spacing();
+    ImGui::TextColored( palette::accent(), "%s", title );
+    ImGui::PushStyleColor( ImGuiCol_Separator, palette::separator() );
+    ImGui::Separator();
+    ImGui::PopStyleColor();
+}
+
+void progress_meter( float fraction, const char *overlay_text )
+{
+    float f = fraction;
+    if( f < 0.f ) {
+        f = 0.f;
+    } else if( f > 1.f ) {
+        f = 1.f;
+    }
+    ImGui::PushStyleColor( ImGuiCol_PlotHistogram, palette::accent() );
+    ImGui::PushStyleColor( ImGuiCol_FrameBg, palette::button() );
+    ImGui::ProgressBar( f, ImVec2( -1.f, 0.f ), overlay_text );
+    ImGui::PopStyleColor( 2 );
 }
 
 } // namespace ui_hybrid_chrome
