@@ -3,6 +3,7 @@
 #if defined(TILES)
 
 #include <algorithm>
+#include <cmath>
 #include <cstdio>
 #include <memory>
 #include <optional>
@@ -11,6 +12,11 @@
 #include <vector>
 
 #include "avatar.h"
+#include "avatar_action.h"
+#include "mission.h"
+#include "action.h"
+#include "cached_options.h"
+#include "mouse_toolbar.h"
 #include "bodypart.h"
 #include "calendar.h"
 #include "cata_imgui.h"
@@ -64,6 +70,7 @@ void hp_meter_row( Character &u, const bodypart_id &bp, const char *label )
     char value_buf[32];
     std::snprintf( value_buf, sizeof( value_buf ), "%d/%d", cur, mx );
 
+    ImGui::BeginGroup();
     ImGui::TextColored( sidebar_label_col(), "%-6s", label );
     ImGui::SameLine();
 
@@ -89,6 +96,13 @@ void hp_meter_row( Character &u, const bodypart_id &bp, const char *label )
     ImGui::PopStyleColor( 2 );
     ImGui::SameLine( 0.f, ImGui::GetStyle().ItemSpacing.x );
     ImGui::TextColored( ui_hybrid_chrome::palette::text(), "%s", value_buf );
+    ImGui::EndGroup();
+    if( ImGui::IsItemHovered() ) {
+        ImGui::SetTooltip( "%s", _( "Click for health and treatment details." ) );
+    }
+    if( ImGui::IsItemClicked() ) {
+        mouse_toolbar::queue_action( ACTION_MEDICAL );
+    }
 }
 
 class hybrid_sidebar_window : public cataimgui::window
@@ -99,12 +113,18 @@ class hybrid_sidebar_window : public cataimgui::window
                                  ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove |
                                  ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav |
                                  ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize |
+                                 ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse |
                                  ImGuiWindowFlags_NoBringToFrontOnFocus ) {
             force_to_back = true;
         }
 
     protected:
         void draw() override {
+            // Loading and returning to the menu can temporarily clear the
+            // avatar. Never enter ImGui or sort body parts in that state.
+            if( !g || get_avatar().get_body().empty() ) {
+                return;
+            }
             ui_hybrid_chrome::push();
             cataimgui::window::draw();
             ui_hybrid_chrome::pop();
@@ -118,7 +138,7 @@ class hybrid_sidebar_window : public cataimgui::window
             const ImVec2 display = ImGui::GetMainViewport()->Size;
             const float x = sidebar_right ? std::max( 0.f, display.x - w ) : 0.f;
             return { x, 0.f, w, std::max( 1.f, display.y -
-                        ui_hybrid_sidebar::minimap_height() * fontheight ) };
+                                          ui_hybrid_sidebar::minimap_height() * fontheight ) };
         }
 
         void draw_controls() override {
@@ -129,28 +149,100 @@ class hybrid_sidebar_window : public cataimgui::window
 
             const auto &panels = panel_manager::get_manager().get_current_layout().panels();
             const bool show_log = std::any_of( panels.begin(), panels.end(),
-            []( const window_panel &panel ) {
+            []( const window_panel & panel ) {
                 return panel.get_id() == "Log" && panel.toggle && panel.render();
             } );
-            // Keep the log and map reachable even when a small screen cannot
-            // show every enabled status panel at once.
+            // Keep the section sizes independent of the previous frame's
+            // content. Scrollbar changes must not resize the status/log split.
+            // Keep a stopped safe mode visible even when status rows are scrolled.
+            if( g->safe_mode == SAFE_MODE_STOP ) {
+                ImGui::TextColored( cataimgui::imvec4_from_color( c_light_red ), "%s",
+                                    _( "Safe mode: danger detected" ) );
+                if( ImGui::SmallButton( _( "Ignore threat" ) ) ) {
+                    mouse_toolbar::queue_action( ACTION_IGNORE_ENEMY );
+                }
+            }
+            if( mission *objective = u.get_active_mission() ) {
+                ImGui::TextWrapped( "%s", objective->name().c_str() );
+                if( ImGui::IsItemClicked() ) {
+                    mouse_toolbar::queue_action( ACTION_MISSIONS );
+                }
+            }
+            if( get_option<bool>( "AUTO_PICKUP" ) ) {
+                const char *state = u.is_mounted() ? _( "Paused while mounted" ) :
+                                    u.is_hauling() ? _( "Paused while hauling" ) :
+                                    get_option<bool>( "AUTO_PICKUP_SAFEMODE" ) &&
+                                    u.get_mon_visible().has_dangerous_creature_in_proximity ?
+                                    _( "Paused near danger" ) : _( "On movement; pickup rules apply" );
+                ImGui::TextWrapped( "%s", string_format( _( "Pick: %s" ), state ).c_str() );
+            }
+            if( get_option<std::string>( "AUTO_FORAGING" ) != "off" ) {
+                const char *state = !get_option<bool>( "AUTO_FEATURES" ) ? _( "Auto features disabled" ) :
+                                    u.is_mounted() ? _( "Paused while mounted" ) :
+                                    g->mostseen > 0 ? _( "Paused while creatures are visible" ) :
+                                    _( "On movement; selected plants only" );
+                ImGui::TextWrapped( "%s", string_format( _( "Forage: %s" ), state ).c_str() );
+            }
+            if( get_option<bool>( "AUTO_COMBAT" ) ) {
+                ImGui::TextWrapped( "%s", string_format( _( "Combat: %s" ),
+                                    avatar_action::auto_combat_status() ).c_str() );
+            }
+            if( get_option<bool>( "AUTO_EAT" ) ) {
+                ImGui::TextWrapped( "%s", string_format( _( "Eat: %s" ),
+                                    avatar_action::auto_eat_status() ).c_str() );
+            }
+            if( ImGui::SmallButton( _( "HUD settings" ) ) ) {
+                ImGui::OpenPopup( "hud_settings" );
+            }
+            if( ImGui::BeginPopup( "hud_settings" ) ) {
+                bool overview = get_option<bool>( "HYBRID_HP_OVERVIEW" );
+                if( ImGui::Checkbox( _( "Health overview" ), &overview ) ) {
+                    get_options().get_option( "HYBRID_HP_OVERVIEW" ).setValue( overview ? "true" : "false" );
+                    get_options().save();
+                }
+                int percent = get_option<int>( "HYBRID_STATUS_PERCENT" );
+                if( ImGui::SliderInt( _( "Status height (%)" ), &percent, 20, 80 ) ) {
+                    get_options().get_option( "HYBRID_STATUS_PERCENT" ).setValue( std::to_string( percent ) );
+                }
+                if( ImGui::IsItemDeactivatedAfterEdit() ) {
+                    get_options().save();
+                }
+                if( ImGui::MenuItem( _( "Sidebar panels…" ) ) ) {
+                    mouse_toolbar::queue_action( ACTION_PANEL_MGMT );
+                }
+                ImGui::EndPopup();
+            }
             const float available = ImGui::GetContentRegionAvail().y;
-            const float stats_height = show_log ? std::min( last_stats_height,
-                                       std::max( 1.f, available * 0.65f ) ) : available;
+            const float stats_height = show_log ? std::max( 1.f,
+                                       std::floor( available * get_option<int>( "HYBRID_STATUS_PERCENT" ) / 100.f ) ) :
+                                       available;
             ImGui::BeginChild( "hybrid_status", ImVec2( 0.f, stats_height ),
-                               ImGuiChildFlags_None, ImGuiWindowFlags_HorizontalScrollbar );
-            const float start_y = ImGui::GetCursorPosY();
+                               ImGuiChildFlags_None, ImGuiWindowFlags_AlwaysVerticalScrollbar |
+                               ImGuiWindowFlags_AlwaysHorizontalScrollbar );
             ui_hybrid_chrome::section_header( _( "Character" ) );
-            for( const bodypart_id &bp :
-                 u.get_all_body_parts( get_body_part_flags::only_main |
-                                       get_body_part_flags::sorted ) ) {
-                const std::string label = body_part_name_as_heading( bp, 1 );
-                hp_meter_row( u, bp, label.c_str() );
+            if( get_option<bool>( "HYBRID_HP_OVERVIEW" ) ) {
+                for( const bodypart_id &bp :
+                     u.get_all_body_parts( get_body_part_flags::only_main |
+                                           get_body_part_flags::sorted ) ) {
+                    const std::string label = body_part_name_as_heading( bp, 1 );
+                    hp_meter_row( u, bp, label.c_str() );
+                }
+            }
+            if( ImGui::SmallButton( _( "Health" ) ) ) {
+                mouse_toolbar::queue_action( ACTION_MEDICAL );
+            }
+            ImGui::SameLine();
+            if( ImGui::SmallButton( _( "Mood" ) ) ) {
+                mouse_toolbar::queue_action( ACTION_MORALE );
+            }
+            ImGui::SameLine();
+            if( ImGui::SmallButton( _( "Gear" ) ) ) {
+                mouse_toolbar::queue_action( ACTION_INVENTORY );
             }
             ui_hybrid_chrome::section_header( _( "Status" ) );
             const float text_width = ImGui::GetContentRegionAvail().x;
             const int columns = std::max( 1, static_cast<int>( text_width /
-                                         ImGui::CalcTextSize( "X" ).x ) );
+                                          ImGui::CalcTextSize( "X" ).x ) );
             for( const window_panel &panel : panels ) {
                 if( !panel.toggle || !panel.render() || !panel.get_widget().is_valid() ) {
                     continue;
@@ -159,21 +251,23 @@ class hybrid_sidebar_window : public cataimgui::window
                 // label widths as vanilla, including mod-provided panels.
                 widget row = panel.get_widget().obj();
                 const std::string text = row.layout( u, columns, row._label_width,
-                                         row.has_flag( "W_NO_PADDING" ) );
+                                                     row.has_flag( "W_NO_PADDING" ) );
                 if( !text.empty() ) {
-                    const float natural_width = ImGui::CalcTextSize( remove_color_tags( text ).c_str() ).x;
-                    // Fixed-width vanilla rows need a little room for Hybrid
-                    // padding and the scrollbar. Preserve their columns; very
-                    // wide mod panels can scroll horizontally instead.
-                    const float font_scale = std::clamp( text_width / std::max( 1.f, natural_width ),
-                                                       0.85f, 1.f );
-                    ImGui::SetWindowFontScale( font_scale );
+                    // Keep one readable font size as values change. Reserved
+                    // scrollbar space keeps columns stable; wide rows scroll.
+                    ImGui::BeginGroup();
                     cataimgui::draw_colored_text( text );
-                    ImGui::SetWindowFontScale( 1.f );
+                    ImGui::EndGroup();
+                    if( ImGui::IsItemHovered() ) {
+                        ImGui::SetTooltip( "%s", _( "Click for character details. Right-click for actions." ) );
+                    }
+                    if( ImGui::IsItemClicked() ) {
+                        mouse_toolbar::queue_action( ACTION_PL_INFO );
+                    } else if( ImGui::IsItemClicked( ImGuiMouseButton_Right ) ) {
+                        mouse_toolbar::queue_action( ACTION_ACTIONMENU );
+                    }
                 }
             }
-            last_stats_height = ImGui::GetCursorPosY() - start_y +
-                                ImGui::GetStyle().WindowPadding.y * 2.f;
             ImGui::EndChild();
             if( show_log ) {
                 draw_message_log();
@@ -181,24 +275,28 @@ class hybrid_sidebar_window : public cataimgui::window
         }
 
     private:
-        float last_stats_height = 1000.f;
-
         void draw_message_log() {
             ui_hybrid_chrome::section_header( _( "Messages" ) );
             // Remaining vertical space for the scrollable log
             const float remain = std::max( 1.f, ImGui::GetContentRegionAvail().y );
             ImGui::BeginChild( "hybrid_msg_log", ImVec2( 0.f, remain ),
-                               ImGuiChildFlags_Borders, ImGuiWindowFlags_None );
-            const auto msgs = Messages::recent_messages( 40 );
+                               ImGuiChildFlags_Borders, ImGuiWindowFlags_AlwaysVerticalScrollbar );
+            const bool follow = log_from_top ? ImGui::GetScrollY() <= 4.f :
+                                ImGui::GetScrollY() >= ImGui::GetScrollMaxY() - 4.f;
+            const auto msgs = Messages::sidebar_messages( 200 );
             for( const auto &entry : msgs ) {
                 // entry: { time_of_day, message_text }
-                ImGui::TextColored( sidebar_label_col(), "%s", entry.first.c_str() );
+                ImGui::TextColored( sidebar_label_col(), "%s", entry.time.c_str() );
                 ImGui::SameLine();
-                cataimgui::draw_colored_text( entry.second, ImGui::GetContentRegionAvail().x );
+                cataimgui::draw_colored_text( entry.text, entry.color, ImGui::GetContentRegionAvail().x );
             }
             // Keep scrolled to bottom for newest messages
-            if( ImGui::GetScrollY() >= ImGui::GetScrollMaxY() - 4.f ) {
-                ImGui::SetScrollHereY( 1.f );
+            if( follow ) {
+                if( log_from_top ) {
+                    ImGui::SetScrollY( 0.f );
+                } else {
+                    ImGui::SetScrollHereY( 1.f );
+                }
             }
             ImGui::EndChild();
         }

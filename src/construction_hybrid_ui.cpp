@@ -395,11 +395,16 @@ class construction_hybrid_ui : public cataimgui::window
             if( !ImGui::BeginTabBar( "##CON_CATS", ImGuiTabBarFlags_FittingPolicyScroll ) ) {
                 return;
             }
+            // ImGui may still report the old tab active while a programmatic
+            // switch is pending. Keep the requested index stable throughout
+            // this loop, including when Search creates a new FILTER tab.
+            const int requested_tab = force_tab ? tabindex : -1;
+            bool requested_tab_active = false;
             for( size_t i = 0; i < cats.size(); ++i ) {
                 if( cats[i].id == construction_category_FILTER && filter.empty() ) {
                     continue;
                 }
-                const bool should = force_tab && ( tabindex == static_cast<int>( i ) );
+                const bool should = requested_tab == static_cast<int>( i );
                 // Stable ImGui IDs (###) so changing "Search: …" label does not
                 // remount the FILTER tab and fight selection every keystroke.
                 std::string tab_id;
@@ -410,8 +415,13 @@ class construction_hybrid_ui : public cataimgui::window
                     tab_id = string_format( "%s###CON_CAT_%s", cats[i].name().c_str(),
                                             cats[i].id.c_str() );
                 }
-                if( cataimgui::BeginTabItem( tab_id.c_str(), should ) ) {
-                    if( tabindex != static_cast<int>( i ) ) {
+                // Search is created while typing; keep it before the regular
+                // categories instead of appending it to ImGui's tab list.
+                const ImGuiTabItemFlags flags = cats[i].id == construction_category_FILTER ?
+                                                ImGuiTabItemFlags_Leading : ImGuiTabItemFlags_None;
+                if( cataimgui::BeginTabItem( tab_id.c_str(), should, nullptr, flags ) ) {
+                    requested_tab_active = requested_tab_active || should;
+                    if( requested_tab < 0 && tabindex != static_cast<int>( i ) ) {
                         // ImGui click: apply immediately (Character sheet pattern).
                         // Do NOT set force_tab — that SetSelected loop was fighting
                         // ImGui/nav and flipping categories rapidly on Deck.
@@ -422,7 +432,7 @@ class construction_hybrid_ui : public cataimgui::window
                     ImGui::EndTabItem();
                 }
             }
-            force_tab = false;
+            force_tab = requested_tab >= 0 && !requested_tab_active;
             ImGui::EndTabBar();
         }
 

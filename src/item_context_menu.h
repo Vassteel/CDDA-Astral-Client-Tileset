@@ -27,12 +27,14 @@ enum class action {
     wield,
     takeoff,
     drop,
+    drop_stack,
     pickup,    // soft-fork: take from ground / vehicle cargo into inventory
     unload,
     reload,
     examine,
     always_pickup,
-    never_pickup
+    never_pickup,
+    more_actions
 };
 
 /**

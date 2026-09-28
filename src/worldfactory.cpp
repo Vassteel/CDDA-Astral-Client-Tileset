@@ -238,7 +238,7 @@ int worldfactory::show_worldgen_advanced( WORLD *world )
         const int width = std::min( TERMX, 100 );
         const int height = std::min( TERMY, 38 );
         wf_win = catacurses::newwin( height, width,
-                                    point( ( TERMX - width ) / 2, ( TERMY - height ) / 2 ) );
+                                     point( ( TERMX - width ) / 2, ( TERMY - height ) / 2 ) );
         ui.position_from_window( wf_win );
     };
     init_windows( ui );
@@ -516,7 +516,7 @@ WORLD *worldfactory::pick_world( bool show_prompt, bool empty_only )
 
     const auto init_windows = [&]( ui_adaptor & ui ) {
         iContentHeight = std::max( 1, std::min( { static_cast<int>( world_names.size() ),
-                                      18, TERMY - 3 - iTooltipHeight } ) );
+                                                18, TERMY - 3 - iTooltipHeight } ) );
         int desired_width = 64;
         for( const std::string &name : world_names ) {
             desired_width = std::max( desired_width, utf8_width( name ) + 16 );
@@ -603,7 +603,8 @@ WORLD *worldfactory::pick_world( bool show_prompt, bool empty_only )
                 wprintz( w_worlds, c_yellow, "  " );
             }
 
-            const std::string txt = utf8_truncate( string_format( "%s (%lu)", world_name, saves_num ), world_list_width - 6 );
+            const std::string txt = utf8_truncate( string_format( "%s (%lu)", world_name, saves_num ),
+                                                   world_list_width - 6 );
             const int remaining = world_list_width - ( utf8_width( txt, true ) + 6 );
             wprintz( w_worlds, sel_this ? hilite( c_white ) : c_white, txt );
             if( sel_this && remaining > 0 ) {
@@ -627,7 +628,8 @@ WORLD *worldfactory::pick_world( bool show_prompt, bool empty_only )
 
         wnoutrefresh( w_worlds_header );
 
-        fold_and_print( w_worlds_tooltip, point::zero, getmaxx( w_worlds_tooltip ), c_white, _( "Pick a world to enter game" ) );
+        fold_and_print( w_worlds_tooltip, point::zero, getmaxx( w_worlds_tooltip ), c_white,
+                        _( "Pick a world to enter game" ) );
         wnoutrefresh( w_worlds_tooltip );
 
         wnoutrefresh( w_worlds );
@@ -932,7 +934,8 @@ void worldfactory::show_active_world_mods( const std::vector<mod_id> &world_mods
     const auto init_windows = [&]( ui_adaptor & ui ) {
         recalc_start = true;
         const int width = std::min( TERMX, 90 );
-        const int height = std::min( TERMY, std::clamp( static_cast<int>( world_mods.size() ) + 2, 6, 26 ) );
+        const int height = std::min( TERMY, std::clamp( static_cast<int>( world_mods.size() ) + 2, 6,
+                                     26 ) );
         const point origin( ( TERMX - width ) / 2, ( TERMY - height ) / 2 );
         w_border = catacurses::newwin( height, width, origin );
         w_mods = catacurses::newwin( height - 2, width - 2, origin + point( 1, 1 ) );
@@ -1013,6 +1016,8 @@ int worldfactory::show_worldgen_tab_modselection( const catacurses::window &win,
     ctxt.register_action( "LEFT", to_translation( "Switch to other list" ) );
     ctxt.register_action( "RIGHT", to_translation( "Switch to other list" ) );
     ctxt.register_action( "HELP_KEYBINDINGS" );
+    // Prefer contextual mouse actions over QUIT's right-click binding.
+    ctxt.register_action( "SEC_SELECT" );
     ctxt.register_action( "QUIT" );
     ctxt.register_action( "NEXT_CATEGORY_TAB" );
     ctxt.register_action( "PREV_CATEGORY_TAB" );
@@ -1200,6 +1205,9 @@ int worldfactory::show_worldgen_tab_modselection( const catacurses::window &win,
             wattroff( win, c_light_gray );
         }
         draw_modselection_borders( win, ctxt );
+        trim_and_print( win, point( 2, getmaxy( win ) - 1 ), getmaxx( win ) - 4,
+                        c_yellow, _( "[ Actions… ]" ) );
+        wnoutrefresh( win );
 
         // Redraw headers
         for( size_t i = 0; i < headers.size(); ++i ) {
@@ -1316,6 +1324,35 @@ int worldfactory::show_worldgen_tab_modselection( const catacurses::window &win,
         recalc_start = false;
 
         std::string action = ctxt.handle_input();
+        if( action == "SELECT" ) {
+            const auto mouse = ctxt.get_coordinates_text( win );
+            if( mouse && mouse->y == getmaxy( win ) - 1 ) {
+                action = "SEC_SELECT";
+            }
+        }
+        if( action == "SEC_SELECT" ) {
+            const std::vector<std::pair<std::string, std::string>> actions = {
+                { "CONFIRM", _( "Activate / deactivate selected mod" ) },
+                { "MOVE_MOD_UP", _( "Move selected mod up" ) },
+                { "MOVE_MOD_DOWN", _( "Move selected mod down" ) },
+                { "SAVE_DEFAULT_MODS", _( "Save default mods" ) },
+                { "VIEW_MOD_DESCRIPTION", _( "Full mod description" ) },
+                { "FILTER", _( "Filter mods" ) },
+                { "NEXT_CATEGORY_TAB", _( "Next category" ) },
+                { "PREV_CATEGORY_TAB", _( "Previous category" ) },
+                { "NEXT_TAB", _( "Next step" ) },
+                { "PREV_TAB", _( "Previous step" ) }
+            };
+            uilist menu;
+            menu.title = _( "Mod actions" );
+            for( size_t i = 0; i < actions.size(); ++i ) {
+                const bool step = actions[i].first == "NEXT_TAB" || actions[i].first == "PREV_TAB";
+                menu.addentry( static_cast<int>( i ), !step || with_tabs, MENU_AUTOASSIGN, actions[i].second );
+            }
+            menu.query();
+            action = menu.ret >= 0 && menu.ret < static_cast<int>( actions.size() ) ?
+                     actions[menu.ret].first : "TIMEOUT";
+        }
         size_t recmax = active_header == 0 ? static_cast<int>( all_tabs[iCurrentTab].mods.size() ) :
                         static_cast<int>( active_mod_order.size() );
         size_t scroll_rate = recmax > 20 ? 10 : 3;
@@ -1543,7 +1580,7 @@ int worldfactory::show_worldgen_basic( WORLD *world )
         const int width = std::min( TERMX, 96 );
         const int height = std::min( TERMY, 32 );
         w_confirmation = catacurses::newwin( height, width,
-                         point( ( TERMX - width ) / 2, ( TERMY - height ) / 2 ) );
+                                             point( ( TERMX - width ) / 2, ( TERMY - height ) / 2 ) );
 
         win_height = getmaxy( w_confirmation );
         content_height = win_height - namebar_pos.y - 10;

@@ -15,6 +15,7 @@
 #include "options.h"
 #include "panels.h"
 #include "output.h"
+#include "string_formatter.h"
 #include "translations.h"
 #include "ui_manager.h"
 
@@ -24,6 +25,7 @@ namespace
 {
 
 bool in_default_mode_wait = false;
+std::optional<action_id> hud_pending;
 
 const std::vector<std::pair<action_id, translation>> &toolbar_buttons()
 {
@@ -38,6 +40,9 @@ const std::vector<std::pair<action_id, translation>> &toolbar_buttons()
         { ACTION_WAIT, to_translation( "Wait" ) },
         { ACTION_MESSAGES, to_translation( "Log" ) },
         { ACTION_ZONES, to_translation( "Zones" ) },
+        { ACTION_OPEN_MOVEMENT, to_translation( "Move" ) },
+        { ACTION_TOGGLE_SAFEMODE, to_translation( "Safe" ) },
+        { ACTION_ACTIONMENU, to_translation( "More" ) },
     };
     return buttons;
 }
@@ -74,7 +79,7 @@ class mouse_toolbar_window : public cataimgui::window
             float row_width = 0.f;
             float widest = 0.f;
             int rows = 1;
-            auto measure = [&]( const std::string &label ) {
+            auto measure = [&]( const std::string & label ) {
                 const float width = ImGui::CalcTextSize( label.c_str() ).x + 20.f;
                 if( row_width > 0.f && row_width + 6.f + width > max_content ) {
                     widest = std::max( widest, row_width );
@@ -124,7 +129,7 @@ class mouse_toolbar_window : public cataimgui::window
             ImGui::PushStyleVar( ImGuiStyleVar_FramePadding, ImVec2( 10.f, 6.f ) );
             ImGui::PushStyleVar( ImGuiStyleVar_ItemSpacing, ImVec2( 6.f, 4.f ) );
             bool first = true;
-            auto place_button = [&]( const std::string &label ) {
+            auto place_button = [&]( const std::string & label ) {
                 const float width = ImGui::CalcTextSize( label.c_str() ).x + 20.f;
                 if( !first && ImGui::GetItemRectMax().x + 6.f + width <=
                     ImGui::GetWindowPos().x + ImGui::GetWindowContentRegionMax().x ) {
@@ -136,9 +141,13 @@ class mouse_toolbar_window : public cataimgui::window
                 // Own the label string — ImGui may keep the pointer until end of frame.
                 const std::string label = btn.second.translated();
                 place_button( label );
-                const int tb_cols = ui_hybrid_chrome::push_toolbar_button( false );
+                const int tb_cols = ui_hybrid_chrome::push_toolbar_button(
+                                        btn.first == ACTION_TOGGLE_SAFEMODE && g->safe_mode != SAFE_MODE_OFF );
                 if( ImGui::Button( label.c_str() ) ) {
                     pending = btn.first;
+                }
+                if( ImGui::IsItemHovered() ) {
+                    ImGui::SetTooltip( "%s", press_x( btn.first ).c_str() );
                 }
                 ui_hybrid_chrome::draw_item_bezel( false, ImGui::IsItemHovered(), false );
                 ImGui::PopStyleColor( tb_cols );
@@ -162,6 +171,9 @@ class mouse_toolbar_window : public cataimgui::window
                     ImGui::Button( label.c_str() );
                     const bool left = ImGui::IsItemClicked( ImGuiMouseButton_Left );
                     const bool right = ImGui::IsItemClicked( ImGuiMouseButton_Right );
+                    if( ImGui::IsItemHovered() ) {
+                        ImGui::SetTooltip( "%s", _( "Left-click: toggle. Right-click: settings and help." ) );
+                    }
                     ui_hybrid_chrome::draw_item_bezel( active, ImGui::IsItemHovered(), false );
                     ImGui::PopID();
                     ImGui::PopStyleColor( n );
@@ -250,7 +262,8 @@ class mouse_toolbar_window : public cataimgui::window
                                            "control so you can move.  Safe mode still "
                                            "stops actions.  Toggle off to cancel." ) );
                     ImGui::Spacing();
-                    if( ImGui::Selectable( _( "One-shot autoattack (Tab)" ) ) ) {
+                    if( ImGui::Selectable( string_format( "%s (%s)", _( "One-shot autoattack" ),
+                                                          press_x( ACTION_AUTOATTACK ) ).c_str() ) ) {
                         pending = ACTION_AUTOATTACK;
                         ImGui::CloseCurrentPopup();
                     }
@@ -324,6 +337,7 @@ void ensure_shown()
 
 void hide()
 {
+    hud_pending.reset();
     in_default_mode_wait = false;
     g_toolbar.reset();
 }
@@ -336,8 +350,18 @@ void set_default_mode_wait( bool waiting )
     }
 }
 
+void queue_action( action_id action )
+{
+    hud_pending = action;
+}
+
 std::optional<action_id> take_pending_action()
 {
+    if( hud_pending ) {
+        const auto result = hud_pending;
+        hud_pending.reset();
+        return result;
+    }
     ensure_shown();
     if( !g_toolbar ) {
         return std::nullopt;
@@ -347,7 +371,7 @@ std::optional<action_id> take_pending_action()
 
 bool has_pending_action()
 {
-    return g_toolbar && g_toolbar->has_pending();
+    return hud_pending.has_value() || ( g_toolbar && g_toolbar->has_pending() );
 }
 
 } // namespace mouse_toolbar
@@ -358,6 +382,7 @@ namespace mouse_toolbar
 {
 
 void ensure_shown() {}
+void queue_action( action_id ) {}
 void hide() {}
 void set_default_mode_wait( bool ) {}
 std::optional<action_id> take_pending_action()

@@ -3279,8 +3279,10 @@ bool game::handle_action()
         ctxt = get_player_input( action );
         // Toolbar click during the wait: prefer it over TIMEOUT / empty input.
         if( const std::optional<action_id> toolbar_act = mouse_toolbar::take_pending_action() ) {
-            act = *toolbar_act;
-            action = action_ident( act );
+            // Run the same preprocessing as a keybinding, including nested
+            // action/main menus and the world-state action counter.
+            action = action_ident( *toolbar_act );
+            act = ACTION_NULL;
         }
     }
 

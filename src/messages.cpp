@@ -438,6 +438,29 @@ std::vector<std::pair<std::string, std::string>> Messages::recent_messages( cons
     return player_messages.recent_messages( count );
 }
 
+std::vector<Messages::sidebar_message> Messages::sidebar_messages( size_t count )
+{
+    std::vector<sidebar_message> result;
+    for( auto it = player_messages.messages.rbegin();
+         it != player_messages.messages.rend() && result.size() < count; ++it ) {
+        if( message_exceeds_ttl( *it ) ) {
+            break;
+        }
+        if( it->is_in_cooldown() ) {
+            continue;
+        }
+        const std::string text = it->is_recent( player_messages.curmes ) ?
+                                 it->get_with_count() : remove_color_tags( it->get_with_count() );
+        result.push_back( { to_string_time_of_day( it->timestamp_in_turns ), text,
+                            it->get_color( player_messages.curmes ) } );
+    }
+    if( !log_from_top ) {
+        std::reverse( result.begin(), result.end() );
+    }
+    player_messages.curmes = calendar::turn;
+    return result;
+}
+
 bool Messages::has_debug_filter( debugmode::debug_filter type )
 {
     return debug_mode && debugmode::enabled_filters.count( type ) == 1;
@@ -927,12 +950,18 @@ std::vector<std::string> Messages::dialog::filter_help_text( int width )
 static nc_color hybrid_message_color( game_message_type type )
 {
     switch( type ) {
-        case m_good: return c_light_green;
-        case m_bad: return c_light_red;
-        case m_warning: return c_yellow;
-        case m_info: return c_light_cyan;
-        case m_mixed: return c_pink;
-        default: return c_light_gray;
+        case m_good:
+            return c_light_green;
+        case m_bad:
+            return c_light_red;
+        case m_warning:
+            return c_yellow;
+        case m_info:
+            return c_light_cyan;
+        case m_mixed:
+            return c_pink;
+        default:
+            return c_light_gray;
     }
 }
 
@@ -961,7 +990,7 @@ static void show_hybrid_messages()
             }
             for( size_t i = 0; i < types.size(); ++i ) {
                 if( ImGui::Selectable( pgettext( "message type", types[i].second ),
-                                      category == static_cast<int>( i ) ) ) {
+                                       category == static_cast<int>( i ) ) ) {
                     category = i;
                 }
             }
@@ -1013,10 +1042,11 @@ static void show_hybrid_messages()
             }
         }
         ImGui::Text( "%s", string_format( _( "%d matching entries. Repeated messages show their count." ),
-                                         matching.size() ).c_str() );
+                                          matching.size() ).c_str() );
         if( ImGui::BeginTable( "messages", 3, ImGuiTableFlags_RowBg | ImGuiTableFlags_ScrollY |
-                              ImGuiTableFlags_Resizable,
-                              ImVec2( 0, std::max( 80.f, ImGui::GetContentRegionAvail().y - ImGui::GetFrameHeightWithSpacing() ) ) ) ) {
+                               ImGuiTableFlags_Resizable,
+                               ImVec2( 0, std::max( 80.f, ImGui::GetContentRegionAvail().y -
+                                       ImGui::GetFrameHeightWithSpacing() ) ) ) ) {
             ImGui::TableSetupColumn( _( "Time" ), ImGuiTableColumnFlags_WidthFixed, 100.f );
             ImGui::TableSetupColumn( _( "Type" ), ImGuiTableColumnFlags_WidthFixed, 75.f );
             ImGui::TableSetupColumn( _( "Message" ), ImGuiTableColumnFlags_WidthStretch );
@@ -1040,7 +1070,8 @@ static void show_hybrid_messages()
                     }
                 }
                 ImGui::TableSetColumnIndex( 2 );
-                ImGui::PushStyleColor( ImGuiCol_Text, cataimgui::imvec4_from_color( hybrid_message_color( msg.type ) ) );
+                ImGui::PushStyleColor( ImGuiCol_Text,
+                                       cataimgui::imvec4_from_color( hybrid_message_color( msg.type ) ) );
                 ImGui::TextWrapped( "%s", remove_color_tags( msg.get_with_count() ).c_str() );
                 ImGui::PopStyleColor();
             }

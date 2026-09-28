@@ -2346,6 +2346,13 @@ void options_manager::add_options_interface()
              true, COPT_CURSES_HIDE );
         get_option( "MOUSE_TOOLBAR" ).setPrerequisite( "ENABLE_MOUSE" );
 
+        add( "HYBRID_HP_OVERVIEW", page_id, to_translation( "HUD health overview" ),
+             to_translation( "Show the extra graphical health bars above the sidebar widgets." ),
+             true, COPT_CURSES_HIDE );
+        add( "HYBRID_STATUS_PERCENT", page_id, to_translation( "HUD status height (%)" ),
+             to_translation( "Share of sidebar space used for status rather than messages." ),
+             20, 80, 55, COPT_CURSES_HIDE );
+
         add( "RPG_EQUIPMENT_UI", page_id, to_translation( "RPG equipment UI (paper doll)" ),
              to_translation( "If true, Inventory (i / toolbar Inv) opens the paper-doll + "
                              "grid equipment window. Classic inventory remains available from "

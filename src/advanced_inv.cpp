@@ -144,6 +144,15 @@ void temp_hide_advanced_inv()
     }
 }
 
+void create_nearby_storage()
+{
+    if( !advinv ) {
+        advinv = std::make_unique<advanced_inventory>();
+    }
+    advinv->init_nearby_storage();
+    create_advanced_inv();
+}
+
 // *INDENT-OFF*
 advanced_inventory::advanced_inventory()
     : recalc( true )
@@ -292,6 +301,43 @@ void advanced_inventory::init()
     if( panes[src].get_area() == AIM_ALL && panes[dest].get_area() == AIM_ALL ) {
         panes[dest].set_area( AIM_INVENTORY );
     }
+}
+
+void advanced_inventory::init_nearby_storage()
+{
+    init();
+#if defined(TILES)
+    hybrid_initialized = true;
+    hybrid_selection.clear();
+#endif
+    src = left;
+    dest = right;
+    aim_location storage = AIM_CENTER;
+    bool cargo = false;
+    const map &here = get_map();
+    for( const advanced_inv_area &area : squares ) {
+        if( area.id < AIM_AROUND_BEGIN || area.id > AIM_AROUND_END || !area.canputitems() ) {
+            continue;
+        }
+        if( area.can_store_in_vehicle() || here.has_furn( area.pos ) ||
+            here.has_flag( ter_furn_flag::TFLAG_CONTAINER, area.pos ) ||
+            here.has_flag( ter_furn_flag::TFLAG_PLACE_ITEM, area.pos ) ) {
+            storage = area.id;
+            cargo = area.can_store_in_vehicle();
+            break;
+        }
+    }
+    panes[left].container = item_location::nowhere;
+    panes[right].container = item_location::nowhere;
+    panes[left].set_area( squares[AIM_INVENTORY], false );
+    panes[right].set_area( squares[storage], cargo );
+    for( side p : { left, right } ) {
+        panes[p].container_base_loc = NUM_AIM_LOCATIONS;
+        panes[p].set_filter( "" );
+        panes[p].index = 0;
+        panes[p].recalc = true;
+    }
+    recalc = true;
 }
 
 void advanced_inventory::print_items( side p, bool active )
@@ -752,6 +798,12 @@ void advanced_inventory::recalc_pane( side p )
     advanced_inventory_pane &there = panes[-p + 1];
     advanced_inv_area &other = squares[there.get_area()];
     avatar &player_character = get_avatar();
+    // Specialized/closed fixtures can be selected by the mouse UI for their
+    // native management menu, but must not expose their sealed contents here.
+    if( pane.get_area() >= AIM_AROUND_BEGIN && pane.get_area() <= AIM_AROUND_END &&
+        !squares[pane.get_area()].canputitems() && !pane.container ) {
+        return;
+    }
     if( pane.container &&
         pane.container_base_loc >= AIM_SOUTHWEST && pane.container_base_loc <= AIM_ALL ) {
 
@@ -2059,22 +2111,33 @@ void advanced_inventory::process_action( const std::string &input_action )
 }
 
 #if defined(TILES)
-// Use the actual storage name where one exists. Keep directions for bare
-// ground, and expose them separately as tooltips when storage names repeat.
+// Name both furniture and terrain storage, and distinguish identical neighbors.
 static std::string hybrid_area_name( const advanced_inv_area &area, bool cargo )
 {
     if( cargo && area.can_store_in_vehicle() ) {
-        return remove_color_tags( area.id == AIM_DRAGGED ? area.desc[0] : area.desc[1] );
+        return string_format( _( "%s (%s)" ),
+                              remove_color_tags( area.id == AIM_DRAGGED ? area.desc[0] : area.desc[1] ),
+                              area.shortname );
     }
     if( area.id >= AIM_AROUND_BEGIN && area.id <= AIM_AROUND_END ) {
-        const map &here = get_map();
-        const furn_t &furniture = here.furn( area.pos ).obj();
-        if( furniture.has_flag( ter_furn_flag::TFLAG_CONTAINER ) ||
-            furniture.has_flag( ter_furn_flag::TFLAG_PLACE_ITEM ) ) {
-            return furniture.name();
+        map &here = get_map();
+        if( here.has_furn( area.pos ) ||
+            here.has_flag( ter_furn_flag::TFLAG_CONTAINER, area.pos ) ||
+            here.has_flag( ter_furn_flag::TFLAG_PLACE_ITEM, area.pos ) ) {
+            return string_format( _( "%s (%s)" ), here.name( area.pos ), area.shortname );
         }
     }
     return area.name;
+}
+
+static bool hybrid_can_manage( const advanced_inv_area &area )
+{
+    if( area.id < AIM_AROUND_BEGIN || area.id > AIM_AROUND_END ) {
+        return false;
+    }
+    const map &here = get_map();
+    return here.furn( area.pos ).obj().can_examine( area.pos ) ||
+           here.ter( area.pos ).obj().can_examine( area.pos );
 }
 
 void advanced_inventory::display_hybrid()
@@ -2095,6 +2158,8 @@ void advanced_inventory::display_hybrid()
     ctxt.register_action( "ANY_INPUT" );
     ctxt.set_timeout( 16 );
     std::string queued_action;
+    std::optional<std::pair<side, aim_location>> queued_location;
+    std::optional<tripoint_bub_ms> queued_manage;
     std::string use_method;
     item_location action_item;
     item_context_menu::action item_action = item_context_menu::action::none;
@@ -2104,9 +2169,9 @@ void advanced_inventory::display_hybrid()
         return pane.container ? remove_color_tags( pane.container->tname( 1, false ) ) :
                hybrid_area_name( squares[pane.get_area()], pane.in_vehicle() );
     };
-    hybrid_window window( _( "Loot and transfer" ), [&]() {
-        ImGui::TextDisabled( "%s", _( "Choose a source and destination. Mark stacks, then transfer; quantities use the selected row." ) );
-        const float body_height = std::max( 260.f, ImGui::GetContentRegionAvail().y -
+    hybrid_window window( _( "Storage and transfer" ), [&]() {
+        ImGui::TextWrapped( "%s", _( "Choose storage, then select items to move. Use Load / manage for buildables." ) );
+        const float body_height = std::max( 100.f, ImGui::GetContentRegionAvail().y -
                                           ImGui::GetTextLineHeightWithSpacing() * 8.f );
         for( side p : { left, right } ) {
             if( p == right ) {
@@ -2121,6 +2186,7 @@ void advanced_inventory::display_hybrid()
             const auto activate = [&]() {
                 if( src != p ) {
                     hybrid_selection.clear();
+                    recalc = true;
                 }
                 src = p;
                 dest = p == left ? right : left;
@@ -2130,7 +2196,7 @@ void advanced_inventory::display_hybrid()
             }
             const std::string location_name = pane_name( p );
             ImGui::SetNextItemWidth( -1 );
-            if( ImGui::BeginCombo( "##location", location_name.c_str() ) ) {
+            if( ImGui::BeginCombo( "##location", location_name.c_str(), ImGuiComboFlags_HeightLarge ) ) {
                 for( const advanced_inv_area &choice : squares ) {
                     if( choice.id == AIM_PARENT || choice.id == AIM_CONTAINER ) {
                         continue;
@@ -2138,11 +2204,14 @@ void advanced_inventory::display_hybrid()
                     const std::string choice_name = hybrid_area_name( choice,
                                                     choice.can_store_in_vehicle() );
                     ImGui::PushID( static_cast<int>( choice.id ) );
+                    const bool available = choice.canputitems() || hybrid_can_manage( choice );
+                    ImGui::BeginDisabled( !available );
                     if( ImGui::Selectable( choice_name.c_str(), pane.get_area() == choice.id ) ) {
-                        activate();
-                        hybrid_selection.clear();
-                        queued_action = choice.actionname;
+                        // Choosing a destination must not reverse the transfer direction.
+                        // Use the actual area ID; keyboard directions may rotate isometrically.
+                        queued_location = std::make_pair( p, choice.id );
                     }
+                    ImGui::EndDisabled();
                     if( ImGui::IsItemHovered() ) {
                         ImGui::SetTooltip( "%s", choice.name.c_str() );
                     }
@@ -2169,11 +2238,18 @@ void advanced_inventory::display_hybrid()
                     queued_action = "TOGGLE_VEH";
                 }
             }
+            if( !pane.container && !pane.in_vehicle() && hybrid_can_manage( area ) ) {
+                if( ImGui::Button( _( "Load / manage" ) ) ) {
+                    queued_manage = area.pos;
+                }
+            }
             const std::string description = pane.container ?
                                             string_format( _( "Contents of %s" ), pane.container->type_name() ) :
                                             area.desc[pane.in_vehicle() ? 1 : 0];
             ImGui::TextWrapped( "%s", remove_color_tags( description ).c_str() );
-            if( pane.get_area() != AIM_ALL ) {
+            if( !area.canputitems( pane.container ) ) {
+                ImGui::TextWrapped( "%s", _( "Use Load / manage for this fixture's loading, fuel and access options." ) );
+            } else if( pane.get_area() != AIM_ALL ) {
                 ImGui::Text( "%s", string_format( _( "Free space: %.2f L" ),
                              units::to_milliliter( pane.free_volume( area ) ) / 1000.0 ).c_str() );
             } else {
@@ -2261,13 +2337,20 @@ void advanced_inventory::display_hybrid()
             }
             ImGui::SameLine();
         };
-        button( _( "Move one" ), "MOVE_SINGLE_ITEM" );
+        const bool storing = panes[src].get_area() == AIM_INVENTORY &&
+                             panes[dest].get_area() != AIM_INVENTORY;
+        const bool taking = panes[dest].get_area() == AIM_INVENTORY &&
+                            panes[src].get_area() != AIM_INVENTORY;
+        ImGui::BeginDisabled( !squares[panes[src].get_area()].canputitems( panes[src].container ) ||
+                              !squares[panes[dest].get_area()].canputitems( panes[dest].container ) );
+        button( storing ? _( "Store" ) : taking ? _( "Take" ) : _( "Move one" ), "MOVE_SINGLE_ITEM" );
         button( _( "Quantity…" ), "MOVE_VARIABLE_ITEM" );
-        button( _( "Move stack" ), "MOVE_ITEM_STACK" );
+        button( storing ? _( "Store stack" ) : taking ? _( "Take stack" ) : _( "Move stack" ), "MOVE_ITEM_STACK" );
         ImGui::BeginDisabled( hybrid_selection.empty() );
         button( _( "Move marked" ), "HYBRID_MOVE_MARKED" );
         ImGui::EndDisabled();
         button( _( "Move all shown" ), "MOVE_ALL_ITEMS" );
+        ImGui::EndDisabled();
         button( _( "Close" ), "QUIT" );
         ImGui::NewLine();
         advanced_inv_listitem *entry = panes[src].get_cur_item_ptr();
@@ -2321,6 +2404,43 @@ void advanced_inventory::display_hybrid()
         if( !queued_action.empty() ) {
             action = std::exchange( queued_action, std::string() );
         }
+        if( queued_location ) {
+            const auto [p, location] = *queued_location;
+            queued_location.reset();
+            window.set_hidden( true );
+            if( !squares[location].canputitems() && hybrid_can_manage( squares[location] ) ) {
+                panes[p].container = item_location::nowhere;
+                panes[p].container_base_loc = NUM_AIM_LOCATIONS;
+                panes[p].set_area( squares[location], false );
+                panes[p].index = 0;
+            } else {
+                change_square( location, panes[p == left ? right : left], panes[p] );
+            }
+            window.set_hidden( false );
+            hybrid_selection.clear();
+            recalc = true;
+            continue;
+        }
+        if( queued_manage ) {
+            const tripoint_bub_ms target = *queued_manage;
+            queued_manage.reset();
+            window.set_hidden( true );
+            if( rl_dist( get_avatar().pos_bub(), target ) <= 1 ) {
+                map &here = get_map();
+                if( here.furn( target ).obj().can_examine( target ) ) {
+                    here.furn( target ).obj().examine( get_avatar(), target );
+                } else if( here.ter( target ).obj().can_examine( target ) ) {
+                    here.ter( target ).obj().examine( get_avatar(), target );
+                }
+            }
+            window.set_hidden( false );
+            recalc = true;
+            if( !get_avatar().activity.is_null() ) {
+                do_return_entry();
+                return;
+            }
+            continue;
+        }
         if( action == "FILTER" ) {
             focus_filter = true;
             continue;
@@ -2341,6 +2461,7 @@ void advanced_inventory::display_hybrid()
             window.set_hidden( false );
             if( previous_src != src || previous_area != panes[src].get_area() || action == "RESET_FILTER" ) {
                 hybrid_selection.clear();
+                recalc = true;
             }
         }
     }

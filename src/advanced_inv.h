@@ -20,6 +20,8 @@ class ui_adaptor;
 struct advanced_inv_save_state;
 
 void create_advanced_inv();
+/** Open mouse storage transfer with carried items and nearby storage selected. */
+void create_nearby_storage();
 
 /**
  * Cancels ongoing move all action.
@@ -37,6 +39,7 @@ class advanced_inventory
         void temp_hide();
 
         void init();
+        void init_nearby_storage();
 
         void process_action( const std::string &input_action );
         /**

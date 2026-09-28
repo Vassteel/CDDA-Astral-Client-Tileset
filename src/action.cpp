@@ -674,6 +674,29 @@ bool can_butcher_at( map &here, const tripoint_bub_ms &p )
     return has_corpse || has_item;
 }
 
+// ACTION_BUTCHER opens the shared corpse/disassembly picker. Name the
+// operation from the available targets instead of calling ordinary items meat.
+static std::string butcher_menu_label( map &here, const tripoint_bub_ms &p )
+{
+    Character &you = get_player_character();
+    const bool has_butchery_tool = you.max_quality( qual_BUTCHER, PICKUP_RANGE ) != INT_MIN ||
+                                   you.max_quality( qual_CUT_FINE, PICKUP_RANGE ) != INT_MIN;
+    const temp_crafting_inventory &crafting_inv = you.crafting_inventory();
+    bool has_corpse = false;
+    bool has_disassembly = false;
+    for( const item &it : here.i_at( p ) ) {
+        if( it.is_corpse() ) {
+            has_corpse |= has_butchery_tool;
+        } else if( you.can_disassemble( it, crafting_inv ).success() ) {
+            has_disassembly = true;
+        }
+    }
+    if( has_disassembly ) {
+        return has_corpse ? _( "Butcher / disassemble" ) : _( "Disassemble" );
+    }
+    return _( "Butcher" );
+}
+
 bool can_move_vertical_at( const map &here, const tripoint_bub_ms &p, int movez )
 {
     if( p.z() + movez < -OVERMAP_DEPTH || p.z() + movez > OVERMAP_HEIGHT ) {
@@ -787,6 +810,7 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
     // Synthetic retvals — not real action_ids.
     constexpr int MOVE_HERE = NUM_ACTIONS + 1;
     constexpr int ATTACK_CREATURE = NUM_ACTIONS + 2;
+    constexpr int CONTINUE_CONSTRUCTION = NUM_ACTIONS + 3;
     constexpr int TOOL_ACTION_BASE = NUM_ACTIONS + 10;
     // Fireplace examine choices (ids match iexamine::fireplace_do).
     constexpr int FIREPLACE_ACTION_BASE = NUM_ACTIONS + 200;
@@ -821,6 +845,13 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
         entries.emplace_back( id, true, 0, label );
     };
 
+    // Make unfinished work discoverable without hiding it behind Examine.
+    // The existing resume prompt retains the saved progress and requirements.
+    if( is_adjacent && p.z() == player_pos.z() && here.partial_con_at( p ) != nullptr &&
+        can_interact_at( ACTION_EXAMINE, here, p ) ) {
+        entries.emplace_back( CONTINUE_CONSTRUCTION, true, 0, _( "Continue construction" ) );
+    }
+
     // 1) Interactives: open / close / examine / pickup / grab / haul / butcher / talk
     if( is_adjacent && can_interact_at( ACTION_OPEN, here, p ) ) {
         add_action( ACTION_OPEN, _( "Open" ) );
@@ -836,7 +867,7 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
         ( here.furn( p ).obj().has_examine( iexamine::fireplace ) ||
           here.ter( p ).obj().has_examine( iexamine::fireplace ) ) ) {
         const iexamine::fireplace_ui_state fst = iexamine::fireplace_query_ui( player_character,
-                                                p );
+                p );
         fireplace_expanded = true;
         if( fst.has_items ) {
             entries.emplace_back( FIREPLACE_ACTION_BASE + 0, true, 0, _( "Get items" ) );
@@ -868,7 +899,7 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
     // neighboring tiles the tall-grass sprite may have stolen the click from).
     if( is_adjacent || is_self ) {
         std::vector<tripoint_bub_ms> item_tiles;
-        const auto tile_has_reachable_items = [&]( const tripoint_bub_ms &tp ) {
+        const auto tile_has_reachable_items = [&]( const tripoint_bub_ms & tp ) {
             if( here.has_flag( ter_furn_flag::TFLAG_SEALED, tp ) ) {
                 return false;
             }
@@ -909,7 +940,7 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
                     // Same tile: dispatch via normal action_ids + mouse_target.
                     if( it.is_corpse() && !offered_same_tile_butcher &&
                         can_butcher_at( here, tp ) ) {
-                        add_action( ACTION_BUTCHER, string_format( _( "Butcher %s" ), iname ) );
+                        add_action( ACTION_BUTCHER, butcher_menu_label( here, tp ) );
                         offered_same_tile_butcher = true;
                     }
                     if( !offered_same_tile_pickup ) {
@@ -920,20 +951,12 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
                 } else {
                     // Neighbor tile: synthetic actions that call pickup/butcher/examine
                     // on that tile directly (mouse_target stays on the grass).
-                    if( it.is_corpse() && can_butcher_at( here, tp ) ) {
-                        const int mid = ITEM_TILE_ACTION_BASE +
-                                        static_cast<int>( item_tile_acts.size() );
-                        item_tile_acts.push_back( { tp, item_tile_kind::butcher } );
-                        entries.emplace_back( mid, true, 0,
-                                              string_format( _( "Butcher %s (adjacent)" ),
-                                                      iname ) );
-                    }
                     const int mid = ITEM_TILE_ACTION_BASE +
                                     static_cast<int>( item_tile_acts.size() );
                     item_tile_acts.push_back( { tp, item_tile_kind::pickup } );
                     entries.emplace_back( mid, true, 0,
                                           string_format( _( "Pick up %s (adjacent)" ),
-                                                  iname ) );
+                                                         iname ) );
                     listed++;
                     // One pickup entry per neighbor tile is enough.
                     break;
@@ -945,8 +968,14 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
                 offered_same_tile_pickup = true;
             }
             if( same && !offered_same_tile_butcher && can_butcher_at( here, tp ) ) {
-                add_action( ACTION_BUTCHER, _( "Butcher" ) );
+                add_action( ACTION_BUTCHER, butcher_menu_label( here, tp ) );
                 offered_same_tile_butcher = true;
+            }
+            if( !same && can_butcher_at( here, tp ) ) {
+                const int mid = ITEM_TILE_ACTION_BASE + static_cast<int>( item_tile_acts.size() );
+                item_tile_acts.push_back( { tp, item_tile_kind::butcher } );
+                entries.emplace_back( mid, true, 0,
+                                      string_format( _( "%s (adjacent)" ), butcher_menu_label( here, tp ) ) );
             }
         }
     }
@@ -1035,7 +1064,7 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
             }
         }
         if( !already ) {
-            add_action( ACTION_BUTCHER, _( "Butcher" ) );
+            add_action( ACTION_BUTCHER, butcher_menu_label( here, p ) );
         }
     }
     if( ( is_adjacent || is_self ) && can_interact_at( ACTION_CHAT, here, p ) ) {
@@ -1202,6 +1231,11 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
     smenu.query();
 
     if( smenu.ret < 0 ) {
+        return ACTION_NULL;
+    }
+
+    if( smenu.ret == CONTINUE_CONSTRUCTION ) {
+        prompt_partial_construction( player_character, p );
         return ACTION_NULL;
     }
 

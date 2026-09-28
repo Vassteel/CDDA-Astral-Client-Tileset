@@ -9,6 +9,8 @@ class Character;
  * Preserves all vanilla info panels: stats, encumbrance, speed, skills,
  * traits, bionics, effects, proficiencies.
  */
+void change_armor_sprite( Character &you );
+
 void player_display_hybrid( Character &you, bool customize_character );
 
 #endif // CATA_SRC_PLAYER_DISPLAY_HYBRID_H

@@ -214,6 +214,10 @@ void zone_manager_ui::display_zone_manager()
     ui.mark_resize();
 
     input_context ctxt( "ZONES_MANAGER" );
+    ctxt.register_action( "SELECT" );
+    ctxt.register_action( "SEC_SELECT" );
+    ctxt.register_action( "SCROLL_UP" );
+    ctxt.register_action( "SCROLL_DOWN" );
     ctxt.register_navigate_ui_list();
     ctxt.register_action( "CONFIRM" );
     ctxt.register_action( "QUIT" );
@@ -420,6 +424,9 @@ void zone_manager_ui::display_zone_manager()
         }
         zones_manager_draw_borders( w_zones_border, w_zones_info_border, zone_ui_height, zone_ui_width );
         zones_manager_shortcuts( w_zones_info, zones_faction, show_all_zones, ctxt, zone_ui_width );
+        trim_and_print( w_zones_info, point( 1, 0 ), getmaxx( w_zones_info ) - 2,
+                        c_yellow, _( "[ Actions… ]  Right-click for actions" ) );
+        wnoutrefresh( w_zones_info );
 
         if( zone_cnt == 0 ) {
             werase( w_zones );
@@ -505,7 +512,52 @@ void zone_manager_ui::display_zone_manager()
         ui_manager::redraw();
 
         //Wait for input
-        const std::string action = ctxt.handle_input();
+        std::string action = ctxt.handle_input();
+        if( action == "SCROLL_UP" ) {
+            action = "UP";
+        } else if( action == "SCROLL_DOWN" ) {
+            action = "DOWN";
+        }
+        if( action == "SELECT" || action == "SEC_SELECT" ) {
+            const auto mouse = ctxt.get_coordinates_text( w_zones );
+            if( mouse && mouse->x >= 0 && mouse->x < getmaxx( w_zones ) &&
+                mouse->y >= 0 && mouse->y < max_rows && start_index + mouse->y < zone_cnt ) {
+                active_index = start_index + mouse->y;
+            }
+            const auto info_mouse = ctxt.get_coordinates_text( w_zones_info );
+            if( action == "SELECT" && info_mouse && info_mouse->y == 0 &&
+                info_mouse->x >= 0 && info_mouse->x < getmaxx( w_zones_info ) ) {
+                action = "SEC_SELECT";
+            }
+        }
+        if( action == "SEC_SELECT" ) {
+            const std::vector<std::pair<std::string, std::string>> actions = {
+                { "ADD_ZONE", _( "Add zone" ) },
+                { "ADD_PERSONAL_ZONE", _( "Add personal zone" ) },
+                { "CONFIRM", _( "Edit selected zone" ) },
+                { "REMOVE_ZONE", _( "Remove selected zone" ) },
+                { "MOVE_ZONE_UP", _( "Move up" ) },
+                { "MOVE_ZONE_DOWN", _( "Move down" ) },
+                { "ENABLE_ZONE", _( "Enable selected zone" ) },
+                { "DISABLE_ZONE", _( "Disable selected zone" ) },
+                { "SHOW_ZONE_ON_MAP", _( "Show on map" ) },
+                { "SHOW_ALL_ZONES", _( "Show all / nearby zones" ) },
+                { "TOGGLE_ZONE_DISPLAY", _( "Toggle zone display" ) },
+                { "ENABLE_PERSONAL_ZONES", _( "Enable personal zones" ) },
+                { "DISABLE_PERSONAL_ZONES", _( "Disable personal zones" ) },
+                { "ENABLE_VEHICLE_ZONES", _( "Enable vehicle zones" ) },
+                { "DISABLE_VEHICLE_ZONES", _( "Disable vehicle zones" ) },
+                { "QUIT", _( "Close" ) }
+            };
+            uilist menu;
+            menu.title = _( "Zone actions" );
+            for( size_t i = 0; i < actions.size(); ++i ) {
+                menu.addentry( static_cast<int>( i ), true, MENU_AUTOASSIGN, actions[i].second );
+            }
+            menu.query();
+            action = menu.ret >= 0 && menu.ret < static_cast<int>( actions.size() ) ?
+                     actions[menu.ret].first : "TIMEOUT";
+        }
 
         if( action == "ADD_ZONE" ) {
             do { // not a loop, just for quick bailing out if canceled

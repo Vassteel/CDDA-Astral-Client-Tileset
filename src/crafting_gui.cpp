@@ -503,6 +503,7 @@ class crafting_ui_impl : public cataimgui::window
         int pending_batch_delta = 0;    // +1/-1 from inline batch buttons
         bool pending_enter_batch = false;
         bool pending_exit_batch = false;
+        std::string pending_footer_action;
         bool pending_craft_x = false;   // Soft-fork: prompt for explicit Craft X amount
         bool need_scroll_to_selected = false;
         bool need_scroll_to_selected_recipe_details = false;
@@ -642,7 +643,8 @@ cataimgui::bounds crafting_ui_impl::get_bounds()
 {
     const ImVec2 actual = ImGui::GetMainViewport()->Size;
     const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
-    ImVec2 viewport( std::min( actual.x, 1440.f * scale ), std::min( actual.y * 0.94f, 840.f * scale ) );
+    ImVec2 viewport( std::min( actual.x, 1440.f * scale ), std::min( actual.y * 0.94f,
+                     840.f * scale ) );
     float char_w = ImGui::CalcTextSize( "X" ).x;
     float full_screen_w = 80.f * char_w;
 
@@ -1211,7 +1213,7 @@ void crafting_ui_impl::draw_recipe_info_panel()
             // Soft-fork: explicit time-to-finish for selected batch (wall-clock approx)
             if( !recp.is_nested() ) {
                 const int expected_turns_hdr = crafter->expected_time_to_craft( recp, batch_size )
-                                              / to_moves<int>( 1_turns );
+                                               / to_moves<int>( 1_turns );
                 ui_hybrid_chrome::section_header( _( "Time to finish" ) );
                 const std::string finish_line = string_format(
                                                     //~ %1$d: batch size, %2$s: approximate craft duration
@@ -2440,6 +2442,31 @@ void crafting_ui_impl::rebuild_keybinding_tips()
 void crafting_ui_impl::draw_keybinding_footer()
 {
     ImGui::Separator();
+    if( ImGui::Button( _( "Recipe actions…" ) ) ) {
+        ImGui::OpenPopup( "recipe_actions" );
+    }
+    if( ImGui::BeginPopup( "recipe_actions" ) ) {
+        const std::vector<std::pair<std::string, std::string>> actions = {
+            { "HELP_RECIPE", _( "Describe" ) },
+            { "TOGGLE_FAVORITE", _( "Favorite / unfavorite" ) },
+            { "HIDE_SHOW_RECIPE", _( "Hide / show" ) },
+            { "RELATED_RECIPES", _( "Related recipes" ) },
+            { "CHOOSE_CRAFTER", _( "Choose crafter" ) },
+            { "PRIORITIZE_MISSING_COMPONENTS", _( "Prioritize missing components" ) },
+            { "DEPRIORITIZE_COMPONENTS", _( "Deprioritize components" ) },
+            { "TOGGLE_RECIPE_UNREAD", _( "Read / unread" ) },
+            { "MARK_ALL_RECIPES_READ", _( "Mark all read" ) },
+            { "TOGGLE_UNREAD_RECIPES_FIRST", _( "Unread first" ) },
+            { "FILTER", _( "Filter" ) },
+            { "RESET_FILTER", _( "Reset filter" ) }
+        };
+        for( const auto &entry : actions ) {
+            if( ImGui::MenuItem( entry.second.c_str() ) ) {
+                pending_footer_action = entry.first;
+            }
+        }
+        ImGui::EndPopup();
+    }
     cataimgui::TextColoredParagraph( c_dark_gray, keybinding_tips );
 }
 
@@ -2601,7 +2628,8 @@ void crafting_ui_impl::invalidate_info_panels()
 void crafting_ui_impl::process_action( const std::string &action_in,
                                        input_context &ctxt )
 {
-    std::string action = action_in;
+    std::string action = pending_footer_action.empty() ? action_in : pending_footer_action;
+    pending_footer_action.clear();
 
     // Snapshot state before mutation
     int prev_line = line;
@@ -3122,7 +3150,12 @@ std::pair<Character *, const recipe *> select_crafter_and_crafting_recipe( int &
 
     while( !impl.is_done() ) {
         ui_manager::redraw_invalidated();
+        const bool popup_open = ImGui::IsPopupOpen( nullptr,
+                                ImGuiPopupFlags_AnyPopupId | ImGuiPopupFlags_AnyPopupLevel );
         std::string action = ctxt.handle_input();
+        if( popup_open && action == "QUIT" ) {
+            action = "TIMEOUT";
+        }
         if( !impl.get_is_open() ) {
             return { nullptr, nullptr };
         }

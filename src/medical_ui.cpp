@@ -159,7 +159,7 @@ bool medical_ui::execute()
 
     while( true ) {
         ui_manager::redraw_invalidated();
-        last_action = ctxt.handle_input();
+        last_action = has_button_action() ? get_button_action() : ctxt.handle_input();
         if( last_action == "QUIT" || !get_is_open() ) {
             break;
         }
@@ -642,6 +642,17 @@ void medical_ui::limb_tab( const std::vector<bodypart_id> &bodyparts )
 
 void medical_ui::draw_hint_section()
 {
+    if( ImGui::Button( _( "Use item" ) ) ) {
+        button_action = "APPLY";
+    }
+    ImGui::SameLine();
+    if( ImGui::Button( _( "Treat selected limb" ) ) ) {
+        button_action = "CONFIRM";
+    }
+    ImGui::SameLine();
+    if( ImGui::Button( _( "Close" ) ) ) {
+        button_action = "QUIT";
+    }
     const std::string desc = string_format(
                                  _( "[<color_yellow>%s</color>] Use item [<color_yellow>%s</color>] Treat, [<color_yellow>%s</color>] Keybindings" ),
                                  ctxt.get_desc( "APPLY" ), ctxt.get_desc( "CONFIRM" ), ctxt.get_desc( "HELP_KEYBINDINGS" ) );

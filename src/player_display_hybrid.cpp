@@ -15,6 +15,8 @@
 #include "calendar.h"
 #include "cata_imgui.h"
 #include "character.h"
+#include "cata_scope_helpers.h"
+#include "bodygraph.h"
 #include "color.h"
 #include "display.h"
 #include "effect.h"
@@ -115,6 +117,29 @@ class player_display_hybrid_ui : public cataimgui::window
         }
 
         void flush_deferred_ui() {
+            if( !pending_detail.empty() ) {
+                restore_on_out_of_scope<bool> restore_visibility( hide_ui );
+                hide_ui = true;
+                const std::string detail = std::exchange( pending_detail, {} );
+                if( detail == "profession" ) {
+                    string_input_popup_imgui popup( 50, you.custom_profession, _( "Profession name" ) );
+                    const std::string result = popup.query();
+                    if( !popup.cancelled() ) {
+                        you.custom_profession = result;
+                    }
+                } else if( detail == "armor" ) {
+                    change_armor_sprite( you );
+                } else if( detail == "body" ) {
+                    display_bodygraph( you );
+                } else if( detail == "proficiency" ) {
+                    show_proficiencies_window( you, line < profs.size() ?
+                                               std::make_optional( profs[line].id ) : std::nullopt );
+                } else if( detail == "variant" && line < traits.size() ) {
+                    const mutation_variant *variant = traits[line].trait->pick_variant_menu();
+                    you.set_mut_variant( traits[line].trait, variant );
+                }
+                rebuild();
+            }
             // Nested dialogs AFTER ImGui::End — avoids Begin/End re-entry CTD.
             // Morale / Body / Medical / Customize are now in-sheet tabs; only
             // true nested UIs (use item, treat, rename) remain deferred.
@@ -172,6 +197,14 @@ class player_display_hybrid_ui : public cataimgui::window
             }
             if( action == "QUIT" ) {
                 done = true;
+            } else if( action == "CHANGE_PROFESSION_NAME" ) {
+                pending_detail = "profession";
+            } else if( action == "CHANGE_ARMOR_SPRITE" ) {
+                pending_detail = "armor";
+            } else if( action == "SELECT_TRAIT_VARIANT" && curtab == sheet_tab::traits ) {
+                pending_detail = "variant";
+            } else if( action == "VIEW_PROFICIENCIES" ) {
+                pending_detail = "proficiency";
             } else if( action == "morale" ) {
                 select_tab( sheet_tab::morale );
             } else if( action == "MEDICAL_MENU" ) {
@@ -218,7 +251,17 @@ class player_display_hybrid_ui : public cataimgui::window
         }
 
         void draw_controls() override {
-            hide_if_hidden();
+            if( hide_ui ) {
+                hide_if_hidden();
+                return;
+            }
+            if( ImGui::SmallButton( _( "Profession name…" ) ) ) {
+                pending_detail = "profession";
+            }
+            ImGui::SameLine();
+            if( ImGui::SmallButton( _( "Armor appearance…" ) ) ) {
+                pending_detail = "armor";
+            }
             if( !get_is_open() ) {
                 done = true;
                 return;
@@ -327,6 +370,7 @@ class player_display_hybrid_ui : public cataimgui::window
         bool pending_name_edit = false;
         bool pending_use_item = false;
         bool pending_treat = false;
+        std::string pending_detail;
         bodygraph_var bodygraph_mode = bodygraph_var::hp;
         sheet_tab curtab = sheet_tab::stats;
         unsigned line = 0;
@@ -554,18 +598,29 @@ class player_display_hybrid_ui : public cataimgui::window
             const float list_w = avail * 0.42f;
             if( ImGui::BeginChild( "##STAT_LIST", ImVec2( list_w, 0 ), ImGuiChildFlags_Borders ) ) {
                 ui_hybrid_chrome::section_header( _( "STATS" ) );
-                struct row_t { const char *label; std::string value; };
+                struct row_t {
+                    const char *label;
+                    std::string value;
+                };
                 const std::string blood = io::enum_to_string( you.my_blood_type ) +
                                           ( you.blood_rh_factor ? "+" : "-" );
                 const row_t rows[] = {
-                    { translate_marker( "Strength" ),
-                      string_format( "%d (%d)", you.get_str(), you.get_str_base() ) },
-                    { translate_marker( "Dexterity" ),
-                      string_format( "%d (%d)", you.get_dex(), you.get_dex_base() ) },
-                    { translate_marker( "Intelligence" ),
-                      string_format( "%d (%d)", you.get_int(), you.get_int_base() ) },
-                    { translate_marker( "Perception" ),
-                      string_format( "%d (%d)", you.get_per(), you.get_per_base() ) },
+                    {
+                        translate_marker( "Strength" ),
+                        string_format( "%d (%d)", you.get_str(), you.get_str_base() )
+                    },
+                    {
+                        translate_marker( "Dexterity" ),
+                        string_format( "%d (%d)", you.get_dex(), you.get_dex_base() )
+                    },
+                    {
+                        translate_marker( "Intelligence" ),
+                        string_format( "%d (%d)", you.get_int(), you.get_int_base() )
+                    },
+                    {
+                        translate_marker( "Perception" ),
+                        string_format( "%d (%d)", you.get_per(), you.get_per_base() )
+                    },
                     { translate_marker( "Weight" ), display::weight_string( you ) },
                     { translate_marker( "Lifestyle" ), display::health_string( you ) },
                     { translate_marker( "Height" ), you.height_string() },
@@ -595,7 +650,7 @@ class player_display_hybrid_ui : public cataimgui::window
         }
 
         void draw_stats_detail( unsigned line_idx ) {
-            const auto detail_text = []( const std::string &text, const nc_color &color ) {
+            const auto detail_text = []( const std::string & text, const nc_color & color ) {
                 cataimgui::draw_colored_text( text, color, ImGui::GetContentRegionAvail().x );
             };
             // Mirrors vanilla draw_stats_info content.
@@ -720,6 +775,9 @@ class player_display_hybrid_ui : public cataimgui::window
 
         void draw_bodygraph() {
             ui_hybrid_chrome::section_header( _( "BODY GRAPH" ) );
+            if( ImGui::Button( _( "Inspect body parts…" ) ) ) {
+                pending_detail = "body";
+            }
             static const char *mode_labels[] = {
                 translate_marker( "HP" ),
                 translate_marker( "Temp" ),
@@ -832,7 +890,7 @@ class player_display_hybrid_ui : public cataimgui::window
                                                        body_part_name_as_heading( bp, 1 ),
                                                        hp_cur, hp_max, flags );
                     ImGui::PushStyleColor( ImGuiCol_Text, cataimgui::imvec4_from_color(
-                                              i == line ? hilite( state ) : state ) );
+                                               i == line ? hilite( state ) : state ) );
                     if( ImGui::Selectable( label.c_str(), i == line ) ) {
                         line = static_cast<unsigned>( i );
                     }
@@ -1010,7 +1068,7 @@ class player_display_hybrid_ui : public cataimgui::window
                     }
                     label += string_format( "(%+d)", warmth );
                     ImGui::PushStyleColor( ImGuiCol_Text, cataimgui::imvec4_from_color(
-                                              i == line ? hilite( enc_col ) : enc_col ) );
+                                               i == line ? hilite( enc_col ) : enc_col ) );
                     if( ImGui::Selectable( label.c_str(), i == line ) ) {
                         line = static_cast<unsigned>( i );
                     }
@@ -1145,6 +1203,9 @@ class player_display_hybrid_ui : public cataimgui::window
 
         void draw_traits() {
             ui_hybrid_chrome::section_header( _( "TRAITS" ) );
+            if( !traits.empty() && ImGui::Button( _( "Choose appearance variant…" ) ) ) {
+                pending_detail = "variant";
+            }
             if( traits.empty() ) {
                 ImGui::TextDisabled( "%s", _( "None" ) );
                 return;
@@ -1159,7 +1220,7 @@ class player_display_hybrid_ui : public cataimgui::window
                     const bool sel = ( i == line );
                     const nc_color col = traits[i].trait->get_display_color();
                     ImGui::PushStyleColor( ImGuiCol_Text, cataimgui::imvec4_from_color(
-                                              sel ? hilite( col ) : col ) );
+                                               sel ? hilite( col ) : col ) );
                     if( ImGui::Selectable( traits[i].name().c_str(), sel ) ) {
                         line = static_cast<unsigned>( i );
                     }
@@ -1239,6 +1300,9 @@ class player_display_hybrid_ui : public cataimgui::window
 
         void draw_proficiencies() {
             ui_hybrid_chrome::section_header( _( "PROFICIENCIES" ) );
+            if( ImGui::Button( _( "Proficiency details…" ) ) ) {
+                pending_detail = "proficiency";
+            }
             if( profs.empty() ) {
                 ImGui::TextDisabled( "%s", _( "None" ) );
                 return;
@@ -1285,6 +1349,10 @@ void player_display_hybrid( Character &you, bool customize_character )
     ctxt.register_action( "HELP_KEYBINDINGS" );
     ctxt.register_action( "morale" );
     ctxt.register_action( "VIEW_BODYSTAT" );
+    ctxt.register_action( "CHANGE_PROFESSION_NAME" );
+    ctxt.register_action( "CHANGE_ARMOR_SPRITE" );
+    ctxt.register_action( "SELECT_TRAIT_VARIANT" );
+    ctxt.register_action( "VIEW_PROFICIENCIES" );
     ctxt.register_action( "MEDICAL_MENU" );
     ctxt.register_action( "ANY_INPUT" );
     if( customize_character ) {

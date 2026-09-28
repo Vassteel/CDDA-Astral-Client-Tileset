@@ -247,6 +247,19 @@ void mission_ui_impl::draw_controls()
     }
     adjust_selected |= selected_mission != previous_selected_mission;
 
+    if( num_entries > 0 ) {
+        if( ( selected_tab == mission_ui_tab_enum::ACTIVE ||
+              selected_tab == mission_ui_tab_enum::POINTS_OF_INTEREST ) &&
+            ImGui::Button( _( "Track selected" ) ) ) {
+            last_action = "CONFIRM";
+        }
+        if( selected_tab == mission_ui_tab_enum::POINTS_OF_INTEREST ) {
+            ImGui::SameLine();
+            if( ImGui::Button( _( "Delete point of interest" ) ) ) {
+                last_action = "DELETE_POINT_OF_INTEREST";
+            }
+        }
+    }
     // This action needs to be after umissions is populated
     if( last_action == "CONFIRM" ) {
         if( selected_tab == mission_ui_tab_enum::ACTIVE && !umissions.empty() ) {
@@ -260,6 +273,9 @@ void mission_ui_impl::draw_controls()
     if( last_action == "DELETE_POINT_OF_INTEREST" &&
         selected_tab == mission_ui_tab_enum::POINTS_OF_INTEREST && !upoints_of_interest.empty() ) {
         get_avatar().delete_point_of_interest( upoints_of_interest[selected_mission].pos );
+        upoints_of_interest = get_avatar().get_points_of_interest();
+        selected_mission = 0;
+        last_action.clear();
     }
 
     if( ( selected_tab != mission_ui_tab_enum::POINTS_OF_INTEREST && umissions.empty() ) ||

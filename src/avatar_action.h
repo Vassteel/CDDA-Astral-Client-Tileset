@@ -32,6 +32,9 @@ bool move( avatar &you, map &m, const tripoint_rel_ms &d );
 void swim( map &m, avatar &you, const tripoint_bub_ms &p );
 
 void autoattack( avatar &you, map &m );
+/** Last automatic-action assessment, for HUD feedback without repeating actions. */
+const std::string &auto_combat_status();
+const std::string &auto_eat_status();
 
 /**
  * Soft-fork sticky auto combat helper.

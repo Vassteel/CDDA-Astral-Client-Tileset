@@ -32,6 +32,7 @@
 #include "debug.h"
 #include "enums.h"
 #include "filesystem.h"
+#include <filesystem>
 #include "game.h"
 #include "gamemode.h"
 #include "get_version.h"
@@ -41,10 +42,12 @@
 #include "mapbuffer.h"
 #include "mapsharing.h"
 #include "messages.h"
+#include "mouse_toolbar.h"
 #include "music.h"
 #include "options.h"
 #if defined(TILES)
 #include "sdltiles.h"
+#include "ui_hybrid_sidebar.h"
 #endif
 #include "output.h"
 #include "overmapbuffer.h"
@@ -177,7 +180,7 @@ std::vector<int> main_menu::print_menu_items( const catacurses::window &w_in,
         std::string temp = shortcut_text( iSel == i ? hybrid_mm::accent_sel() : hybrid_mm::accent(),
                                           vItems[i] );
         text += string_format( "[%s]", colorize( temp,
-                                                 iSel == i ? hybrid_mm::body_sel() : hybrid_mm::body() ) );
+                               iSel == i ? hybrid_mm::body_sel() : hybrid_mm::body() ) );
     }
 
     int text_width = utf8_width_notags( text.c_str() );
@@ -350,8 +353,9 @@ void main_menu::print_menu( const catacurses::window &w_open, int iSel, const po
                       _( "Bugs?  Suggestions?  Use links in MOTD to report them." ) );
     }
 
-    center_print( w_open, window_height - 1, hybrid_mm::muted(), string_format( _( "Tip of the day: %s" ),
-                  vdaytip ) );
+    center_print( w_open, window_height - 1, hybrid_mm::muted(),
+                  string_format( _( "Tip of the day: %s" ),
+                                 vdaytip ) );
 
     int iLine = 0;
     const int iOffsetX = ( window_width - FULL_SCREEN_WIDTH ) / 2;
@@ -422,16 +426,18 @@ void main_menu::print_menu( const catacurses::window &w_open, int iSel, const po
         draw_border( button, selected ? hybrid_mm::accent() : hybrid_mm::bronze() );
         const nc_color body = selected ? hybrid_mm::body_sel() : hybrid_mm::body();
         const std::string label = shortcut_text( selected ? hybrid_mm::accent_sel() : hybrid_mm::accent(),
-                                                vMenuItems[index] );
+                                  vMenuItems[index] );
         mvwprintz( button, point( 1, 1 ), body, "%s", std::string( button_width - 2, ' ' ) );
         const int label_x = std::max( 1, ( button_width - utf8_width( label, true ) ) / 2 );
         trim_and_print( button, point( label_x, 1 ), button_width - label_x - 1, body, label );
         main_menu_button_map.emplace_back( inclusive_rectangle<point>( start,
-                                          start + point( button_width - 1, 2 ) ), index );
+                                           start + point( button_width - 1, 2 ) ), index );
         wnoutrefresh( button );
     }
     const auto anchor = std::find_if( main_menu_button_map.begin(), main_menu_button_map.end(),
-    [iSel]( const auto &button ) { return button.second == iSel; } );
+    [iSel]( const auto & button ) {
+        return button.second == iSel;
+    } );
     if( anchor != main_menu_button_map.end() ) {
         display_sub_menu( iSel, anchor->first.p_min + point::north, sel_line );
     }
@@ -676,7 +682,12 @@ void main_menu::load_char_templates()
 
 bool main_menu::opening_screen()
 {
+    // Gameplay overlays outlive the terrain UI. Remove them before resetting
+    // the avatar or reloading world data, so menu redraws cannot inspect an
+    // empty body or stale map through a leftover sidebar/mouse-view window.
+    mouse_toolbar::hide();
 #if defined(TILES)
+    ui_hybrid_sidebar::hide();
     on_out_of_scope clear_background( []() {
         set_main_menu_background( catacurses::window() );
     } );
@@ -829,7 +840,7 @@ bool main_menu::opening_screen()
         if( action == "SELECT" || action == "MOUSE_MOVE" ) {
             std::optional<point> coord = ctxt.get_coordinates_text( catacurses::stdscr );
             const bool over_submenu = coord && std::any_of( main_menu_sub_button_map.begin(),
-            main_menu_sub_button_map.end(), [&]( const auto &button ) {
+            main_menu_sub_button_map.end(), [&]( const auto & button ) {
                 return button.first.contains( *coord );
             } );
             for( const auto &it : main_menu_button_map ) {
@@ -841,7 +852,8 @@ bool main_menu::opening_screen()
                         on_move();
                     }
                     if( action == "SELECT" &&
-                        ( sel1 == getopt( main_menu_opts::HELP ) || sel1 == getopt( main_menu_opts::QUIT ) ) ) {
+                        ( sel1 == getopt( main_menu_opts::HELP ) || sel1 == getopt( main_menu_opts::QUIT ) ||
+                          sel1 == getopt( main_menu_opts::TUTORIAL ) ) ) {
                         action = "CONFIRM";
                     }
                     ui_manager::redraw();
@@ -1226,6 +1238,69 @@ static std::optional<std::chrono::seconds> get_playtime_from_save( const WORLD *
     return pt_seconds;
 }
 
+// Keep character removal reversible and never touch shared world/map files.
+static bool archive_character_save( const WORLD &world, const save_t &save )
+{
+    namespace fs = std::filesystem;
+    const fs::path root = world.folder_path().get_unrelative_path();
+    const std::string prefix = save.base_path() + ".";
+    std::error_code ec;
+    const fs::path primary = root / ( prefix + "sav" );
+    if( !fs::is_regular_file( primary, ec ) || ec ) {
+        popup( _( "Could not find the character save. Nothing was removed." ) );
+        return false;
+    }
+    fs::path archive;
+    for( unsigned index = 1; ; ++index ) {
+        archive = root / "deleted_characters" / ( save.base_path() + "-" + std::to_string( index ) );
+        if( !fs::exists( archive, ec ) ) {
+            break;
+        }
+        if( ec ) {
+            return false;
+        }
+    }
+    std::vector<fs::path> sources;
+    fs::directory_iterator iter( root, ec );
+    if( ec ) {
+        popup( _( "Could not read the save folder. Nothing was removed." ) );
+        return false;
+    }
+    for( const fs::directory_entry &entry : iter ) {
+        if( entry.path().filename().u8string().compare( 0, prefix.size(), prefix ) == 0 ) {
+            sources.push_back( entry.path() );
+        }
+    }
+    // Move the .sav last; a partial failure must not hide a playable character.
+    std::stable_sort( sources.begin(), sources.end(), [&]( const fs::path & a, const fs::path & b ) {
+        return ( a == primary ) < ( b == primary );
+    } );
+    fs::create_directories( archive, ec );
+    if( ec ) {
+        popup( _( "Could not create the backup folder. Nothing was removed." ) );
+        return false;
+    }
+    std::vector<fs::path> moved;
+    for( const fs::path &source : sources ) {
+        fs::rename( source, archive / source.filename(), ec );
+        if( ec ) {
+            bool restored = true;
+            for( auto it = moved.rbegin(); it != moved.rend(); ++it ) {
+                std::error_code restore_error;
+                fs::rename( archive / it->filename(), *it, restore_error );
+                restored &= !restore_error;
+            }
+            popup( restored ? _( "Removal failed; the character files were restored." ) :
+                   _( "Removal failed. Some character files remain in the backup folder: %s" ),
+                   archive.u8string() );
+            return false;
+        }
+        moved.push_back( source );
+    }
+    popup( _( "Character removed from Load. Backup: %s" ), archive.u8string() );
+    return true;
+}
+
 bool main_menu::load_character_tab( const std::string &worldname )
 {
     WORLD *cur_world = world_generator->get_world( worldname );
@@ -1237,14 +1312,10 @@ bool main_menu::load_character_tab( const std::string &worldname )
         savegames.erase( new_end, savegames.end() );
     }
 
-    if( savegames.empty() ) {
-        on_error();
-        //~ %s = world name
-        popup( _( "%s has no characters to load!" ), worldname );
-        return false;
-    }
-
     uilist mmenu;
+    if( savegames.empty() ) {
+        mmenu.text = _( "No characters in this world. World management is still available." );
+    }
     mmenu.title = string_format( _( "Load character from \"%s\"" ), worldname );
     mmenu.border_color = c_white;
     int opt_val = 0;
@@ -1263,14 +1334,39 @@ bool main_menu::load_character_tab( const std::string &worldname )
         // TODO: Replace this API to allow adding context without an empty description.
         mmenu.entries.emplace_back( opt_val++, true, MENU_AUTOASSIGN, save_str, "", playtime_str );
     }
+    const int manage_world = opt_val++;
+    mmenu.entries.emplace_back( manage_world, true, 'm', _( "Manage world…" ) );
     mmenu.entries.emplace_back( opt_val, true, 'q', _( "<- Back to Main Menu" ), c_yellow, c_yellow );
     mmenu.query();
     opt_val = mmenu.ret;
+    if( opt_val == manage_world ) {
+        const int previous = sel2;
+        sel2 = 1;
+        world_tab( worldname );
+        sel2 = previous;
+        return false;
+    }
     if( opt_val < 0 || static_cast<size_t>( opt_val ) >= savegames.size() ) {
         return false;
     }
 
-    return main_menu::load_game( worldname, savegames[opt_val] );
+    const save_t selected = savegames[opt_val];
+    uilist actions;
+    actions.title = selected.decoded_name();
+    actions.addentry( 0, true, 'l', _( "Load character" ) );
+    actions.addentry( 1, true, 'd', _( "Delete character…" ) );
+    actions.addentry( 2, true, 'q', _( "Back" ) );
+    actions.query();
+    if( actions.ret == 0 ) {
+        return main_menu::load_game( worldname, selected );
+    }
+    if( actions.ret == 1 && query_yn(
+            _( "Remove %s from Load? A backup will be kept. The world and other characters will remain." ),
+            selected.decoded_name() ) && archive_character_save( *cur_world, selected ) ) {
+        auto &saves = cur_world->world_saves;
+        saves.erase( std::remove( saves.begin(), saves.end(), selected ), saves.end() );
+    }
+    return false;
 }
 
 void main_menu::world_tab( const std::string &worldname )

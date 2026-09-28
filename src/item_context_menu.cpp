@@ -14,6 +14,7 @@
 #include "flag.h"
 #include "activity_actor_definitions.h"
 #include "game_inventory.h"
+#include "game.h"
 #include "imgui/imgui.h"
 #include "item.h"
 #include "itype.h"
@@ -240,6 +241,9 @@ action draw_imgui_menu( Character &you, const item_location &loc, bool from_worn
             if( menu_entry( _( "Drop" ), can_drop ) ) {
                 chosen = action::drop;
             }
+            if( menu_entry( _( "Drop stack" ), can_drop && loc.held_by( you ) ) ) {
+                chosen = action::drop_stack;
+            }
         }
     }
 
@@ -255,6 +259,9 @@ action draw_imgui_menu( Character &you, const item_location &loc, bool from_worn
         }
     }
 
+    if( menu_entry( _( "More item actions…" ), true ) ) {
+        chosen = action::more_actions;
+    }
     if( menu_entry( _( "Examine" ), true ) ) {
         chosen = action::examine;
     }
@@ -278,8 +285,8 @@ action draw_inspector( Character &you, const item_location &loc, std::string *ch
     }
     ImGui::TextWrapped( "%s", remove_color_tags( loc->display_name() ).c_str() );
     ImGui::Text( "%s", string_format( _( "Weight %.2f kg   Volume %.2f L" ),
-                 units::to_gram( loc->weight() ) / 1000.0,
-                 units::to_milliliter( loc->volume() ) / 1000.0 ).c_str() );
+                                      units::to_gram( loc->weight() ) / 1000.0,
+                                      units::to_milliliter( loc->volume() ) / 1000.0 ).c_str() );
     if( loc->is_armor() && !you.is_worn( *loc ) ) {
         const ret_val<void> wear = you.can_wear( *loc );
         if( !wear.success() ) {
@@ -296,7 +303,7 @@ action draw_inspector( Character &you, const item_location &loc, std::string *ch
     }
     if( ImGui::BeginPopup( "item_actions" ) ) {
         const action clicked = draw_imgui_menu( you, loc, you.is_worn( *loc ) ||
-                               you.is_wielding( *loc ), chosen_use_method );
+                                                you.is_wielding( *loc ), chosen_use_method );
         if( clicked != action::none ) {
             chosen = clicked;
         }
@@ -312,13 +319,18 @@ std::string perform( Character &you, item_location loc, action act,
         return {};
     }
     static const char *const names[] = { "none", "consume", "use", "read", "wear", "wield",
-        "takeoff", "drop", "pickup", "unload", "reload", "examine", "always_pickup", "never_pickup" };
+                                         "takeoff", "drop", "drop_stack", "pickup", "unload", "reload", "examine", "always_pickup", "never_pickup", "more_actions"
+                                       };
     const ui_telemetry::scope trace( "item.action", {{ "action", names[static_cast<int>( act )] },
         { "type", loc->typeId().str() }, { "charges", std::to_string( loc->charges ) },
-        { "method", use_method }} );
+        { "method", use_method }
+    } );
     avatar *av = you.as_avatar();
 
     switch( act ) {
+        case action::more_actions:
+            g->inventory_item_menu( loc );
+            return {};
         case action::always_pickup:
         case action::never_pickup:
             get_auto_pickup().remove_rule( &*loc );
@@ -422,6 +434,29 @@ std::string perform( Character &you, item_location loc, action act,
             you.drop( loc, you.pos_bub() );
             return _( "Dropped." );
         }
+        case action::drop_stack: {
+            if( !loc.held_by( you ) || you.is_worn( *loc ) || you.is_wielding( *loc ) ) {
+                return _( "Select a stack in your inventory." );
+            }
+            const ret_val<void> can = you.can_drop( *loc );
+            if( !can.success() ) {
+                add_msg( m_info, can.str() );
+                return can.str();
+            }
+            // Match the equipment grid's display stack, including items in
+            // different pockets, but never include equipped or unlike items.
+            // Charge-counted items occupy one cell; count() drops every charge.
+            drop_locations what;
+            for( const item_location &candidate : you.all_items_loc() ) {
+                if( candidate && !you.is_worn( *candidate ) && !you.is_wielding( *candidate ) &&
+                    ( candidate == loc || candidate->display_stacked_with( *loc ) ) ) {
+                    what.emplace_back( candidate, candidate->count() );
+                }
+            }
+            you.drop( what, you.pos_bub() );
+            you.invalidate_inventory_validity_cache();
+            return _( "Dropping stack." );
+        }
         case action::pickup: {
             const item_location::type where = loc.where();
             if( where != item_location::type::map &&
@@ -465,20 +500,20 @@ std::string perform( Character &you, item_location loc, action act,
                 }
             }
             DebugLog( D_INFO, D_MAIN ) << string_format(
-                                            "rpg_eq_ctx: select_ammo begin for '%s' "
-                                            "find_ammo=%zu list_ammo_match=%d list_ammo_size=%zu "
-                                            "can_reload_with_now accept=%d reject=%d "
-                                            "is_reloadable=%d rate=%d",
-                                            loc->tname(), found.size(), list_match ? 1 : 0,
-                                            ammo_list.size(), accept_now, reject_now,
-                                            loc->is_reloadable() ? 1 : 0,
-                                            static_cast<int>( you.rate_action_reload( *loc ) ) );
+                                           "rpg_eq_ctx: select_ammo begin for '%s' "
+                                           "find_ammo=%zu list_ammo_match=%d list_ammo_size=%zu "
+                                           "can_reload_with_now accept=%d reject=%d "
+                                           "is_reloadable=%d rate=%d",
+                                           loc->tname(), found.size(), list_match ? 1 : 0,
+                                           ammo_list.size(), accept_now, reject_now,
+                                           loc->is_reloadable() ? 1 : 0,
+                                           static_cast<int>( you.rate_action_reload( *loc ) ) );
             item::reload_option opt = you.select_ammo( loc, /*prompt=*/true );
             if( !opt || opt.ammo.get_item() == nullptr ) {
                 DebugLog( D_INFO, D_MAIN ) << string_format(
-                                                "rpg_eq_ctx: select_ammo empty/canceled for '%s' "
-                                                "(find_ammo=%zu list_ammo_size=%zu)",
-                                                loc->tname(), found.size(), ammo_list.size() );
+                                               "rpg_eq_ctx: select_ammo empty/canceled for '%s' "
+                                               "(find_ammo=%zu list_ammo_size=%zu)",
+                                               loc->tname(), found.size(), ammo_list.size() );
                 // If the ammo UI came up empty but list_ammo found candidates
                 // (nested-UI / filter glitch), fall back to the best list option.
                 if( !ammo_list.empty() ) {

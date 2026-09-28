@@ -2457,7 +2457,20 @@ bool game::handle_mouseview( input_context &ctxt, std::string &action )
     std::optional<tripoint_bub_ms> liveview_pos;
 
     do {
+#if defined(TILES)
+        // Remember ownership before input can close a HUD popup. In particular,
+        // Escape must close settings without also opening the game menu.
+        const bool hud_popup = ImGui::GetCurrentContext() &&
+                               ImGui::IsPopupOpen( nullptr, ImGuiPopupFlags_AnyPopupId |
+                                       ImGuiPopupFlags_AnyPopupLevel );
+#endif
         action = ctxt.handle_input();
+#if defined(TILES)
+        if( hud_popup ) {
+            action = "TIMEOUT";
+            return true;
+        }
+#endif
         if( action == "MOUSE_MOVE" ) {
             const std::optional<tripoint_bub_ms> mouse_pos = ctxt.get_coordinates( w_terrain,
                     ter_view_p.raw().xy(),
@@ -3452,7 +3465,7 @@ void game::draw_panels( bool force_draw )
     // Soft-fork: Hybrid ImGui right-info column replaces the classic ASCII
     // panel_manager sidebar stack (HP ||||| bars, -----SECTION-----, etc.).
     // Left/right width from panel_manager still insets the terrain window.
-    (void) force_draw;
+    ( void ) force_draw;
     ui_hybrid_sidebar::ensure();
     const int map_height = ui_hybrid_sidebar::minimap_height();
     if( map_height > 0 ) {
@@ -3460,7 +3473,7 @@ void game::draw_panels( bool force_draw )
         const bool right = get_option<std::string>( "SIDEBAR_POSITION" ) == "right";
         const int width = right ? mgr.get_width_right() : mgr.get_width_left();
         const catacurses::window map_window = catacurses::newwin( map_height, width,
-                point( right ? TERMX - width : 0, TERMY - map_height ) );
+                                              point( right ? TERMX - width : 0, TERMY - map_height ) );
         werase( map_window );
         draw_pixel_minimap( map_window );
         wnoutrefresh( map_window );

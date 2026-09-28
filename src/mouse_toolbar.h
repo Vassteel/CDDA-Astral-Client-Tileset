@@ -17,6 +17,9 @@ namespace mouse_toolbar
 /** Ensure the toolbar UI adaptor exists when the option is enabled. */
 void ensure_shown();
 
+/** Defer a HUD action until normal input dispatch, outside ImGui drawing. */
+void queue_action( action_id action );
+
 /** Tear down the toolbar (e.g. leaving the world). */
 void hide();
 

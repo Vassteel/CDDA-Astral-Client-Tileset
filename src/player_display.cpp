@@ -1163,7 +1163,7 @@ static void on_customize_character( Character &you )
     }
 }
 
-static void change_armor_sprite( Character &you )
+void change_armor_sprite( Character &you )
 {
     item_location target_loc;
     target_loc = game_menus::inv::change_sprite( you );

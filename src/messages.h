@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "coords_fwd.h"
+#include "color.h"
 #include "debug.h"
 #include "enums.h"
 #include "string_formatter.h"
@@ -26,6 +27,13 @@ namespace Messages
 {
 
 std::vector<std::pair<std::string, std::string>> recent_messages( size_t count );
+struct sidebar_message {
+    std::string time;
+    std::string text;
+    nc_color color;
+};
+/** Native sidebar filtering, order and severity/age colors. Marks messages seen. */
+std::vector<sidebar_message> sidebar_messages( size_t count );
 bool has_debug_filter( debugmode::debug_filter type );
 void add_msg( std::string msg );
 void add_msg( const game_message_params &params, std::string msg );

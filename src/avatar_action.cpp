@@ -829,14 +829,33 @@ static bool auto_combat_is_hostile( const avatar &you, const Creature &c )
     return true;
 }
 
+namespace
+{
+std::string combat_status;
+std::string eat_status;
+}
+
+const std::string &avatar_action::auto_combat_status()
+{
+    return combat_status;
+}
+
+const std::string &avatar_action::auto_eat_status()
+{
+    return eat_status;
+}
+
 bool avatar_action::auto_combat( avatar &you, map &m )
 {
+    combat_status = _( "No hostile in reach" );
     if( you.has_flag( json_flag_CANNOT_ATTACK ) ) {
+        combat_status = _( "Cannot attack" );
         return false;
     }
     // Respect safe mode the same way movement / Tab autoattack do: if the player
     // has not cleared the warning, do not fight — leave control with them.
     if( !g->check_safe_mode_allowed() ) {
+        combat_status = _( "Blocked by safe mode" );
         return false;
     }
 
@@ -863,6 +882,7 @@ bool avatar_action::auto_combat( avatar &you, map &m )
     if( !melee.empty() ) {
         // Vanilla path: adjacent move-attack or reach_attack → melee_attack → pick_technique
         // (style + weapon + worn armor).  Defensive techniques stay on the normal hit path.
+        combat_status = _( "Attacking" );
         autoattack( you, m );
         return you.get_moves() < moves_before;
     }
@@ -881,6 +901,7 @@ bool avatar_action::auto_combat( avatar &you, map &m )
     std::vector<std::string> messages;
     if( !gunmode_checks_common( you, m, messages, mode ) ||
         !gunmode_checks_weapon( you, m, messages, mode ) ) {
+        combat_status = messages.empty() ? _( "Weapon not ready" ) : remove_color_tags( messages.front() );
         return false;
     }
 
@@ -912,6 +933,7 @@ bool avatar_action::auto_combat( avatar &you, map &m )
     if( attrs.range > 1 && you.recoil > min_recoil + MIN_RECOIL_IMPROVEMENT ) {
         const double first_aim = you.aim_per_move( *weapon, you.recoil, attrs, aim_cache );
         if( first_aim > MIN_RECOIL_IMPROVEMENT ) {
+            combat_status = _( "Aiming" );
             while( you.recoil > min_recoil && you.get_moves() > 0 ) {
                 const double aim_amount = you.aim_per_move( *weapon, you.recoil, attrs, aim_cache );
                 if( aim_amount <= MIN_RECOIL_IMPROVEMENT ) {
@@ -926,6 +948,7 @@ bool avatar_action::auto_combat( avatar &you, map &m )
         }
     }
 
+    combat_status = _( "Firing" );
     you.fire_gun( target, mode.qty );
     // Only claim the turn if moves were spent (avoids an infinite handle_action loop).
     return you.get_moves() < moves_before;
@@ -1110,23 +1133,28 @@ float auto_eat_score( const avatar &you, const item &it,
 
 bool avatar_action::auto_eat( avatar &you )
 {
+    eat_status = _( "Off" );
     if( !get_option<bool>( "AUTO_EAT" ) ) {
         return false;
     }
     if( you.is_dead_state() || !you.needs_food() ) {
+        eat_status = _( "Food not required" );
         return false;
     }
     // Don't interrupt an in-progress activity (including a prior consume).
     if( !you.activity.is_null() ) {
+        eat_status = _( "Waiting for current activity" );
         return false;
     }
     if( !g->check_safe_mode_allowed() ) {
+        eat_status = _( "Blocked by safe mode" );
         return false;
     }
 
     const bool need_food = auto_eat_needs_food( you );
     const bool need_drink = auto_eat_needs_drink( you );
     if( !need_food && !need_drink ) {
+        eat_status = _( "Not hungry or thirsty" );
         return false;
     }
 
@@ -1174,6 +1202,7 @@ bool avatar_action::auto_eat( avatar &you )
     }
 
     if( !best ) {
+        eat_status = _( "No suitable food or drink" );
         // One-shot subtle notice per toggle session (static latched).
         static bool warned = false;
         static bool last_on = false;
@@ -1198,6 +1227,7 @@ bool avatar_action::auto_eat( avatar &you )
     map &here = get_map();
     best.overflow( here );
     const int moves_before = you.get_moves();
+    eat_status = string_format( _( "Consuming %s" ), best->tname() );
     you.assign_activity( consume_activity_actor( best, /*reprompt_consume_menu=*/false ) );
     you.last_item = item( *best ).typeId();
     // Activity assigned; moves may not drop until it runs.  Claim the turn if
