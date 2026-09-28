@@ -1,0 +1,42 @@
+name: Astral Windows validation
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Optional client release to download and smoke test
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-2022
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+      - name: Validate updater with Windows PowerShell 5.1
+        shell: powershell
+        run: |
+          python tests/hybrid_updater/windows_fixtures.py "$env:RUNNER_TEMP/fixtures"
+          if ($LASTEXITCODE) { throw 'Fixture creation failed' }
+          & tests/hybrid_updater/test_windows_updater.ps1 -Fixtures "$env:RUNNER_TEMP/fixtures" -Updater "$PWD/tools/hybrid-updater/windows-updater.ps1"
+      - name: Validate published Windows package
+        if: inputs.release_tag != ''
+        shell: powershell
+        env:
+          ASTRAL_RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          & tests/hybrid_updater/test_windows_release.ps1 -ReleaseTag $env:ASTRAL_RELEASE_TAG -Output "$env:RUNNER_TEMP/astral-release-test"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always() && inputs.release_tag != ''
+        with:
+          name: astral-windows-validation
+          path: |
+            ${{ runner.temp }}/astral-release-test/*.log
+            ${{ runner.temp }}/astral-release-test/result.json
+            ${{ runner.temp }}/astral-release-test/profile/config/debug.log

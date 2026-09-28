@@ -7,11 +7,11 @@ from pathlib import Path
 import zipfile
 
 
-def build(binary, title, version, output):
-    sources = {'cataclysm-tiles': binary}
+def build(binary, title, version, output, platform="linux-x86_64"):
+    sources = {"cataclysm-tiles.exe" if platform == "windows-x86_64" else "cataclysm-tiles": binary}
     if title:
         sources['data/title/astral.png'] = title
-    manifest = {'schema': 1, 'platform': 'linux-x86_64', 'version': version, 'files': []}
+    manifest = {'schema': 1, 'platform': platform, 'version': version, 'files': []}
     for name, path in sources.items():
         manifest['files'].append({'path': name, 'size': path.stat().st_size,
                                   'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
@@ -24,6 +24,7 @@ def build(binary, title, version, output):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--platform', choices=['linux-x86_64', 'windows-x86_64'], default='linux-x86_64')
     parser.add_argument('--binary', type=Path, required=True)
     parser.add_argument('--title', type=Path)
     parser.add_argument('--version', required=True)
@@ -31,4 +32,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     if not args.version.startswith('client-v'):
         parser.error('client releases must use client-v tags')
-    print(json.dumps(build(args.binary, args.title, args.version, args.output), indent=2))
+    print(json.dumps(build(args.binary, args.title, args.version, args.output, args.platform), indent=2))

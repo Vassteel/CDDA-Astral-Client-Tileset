@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import tarfile
+from bundle_assets import copy_standard_assets
 
 
 def stage(source, binary, runtime, output, version):
@@ -24,7 +25,7 @@ def stage(source, binary, runtime, output, version):
         dest = root / name
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(p, dest)
-    shutil.copytree(runtime / 'gfx/UltimateCataclysm', root / 'gfx/UltimateCataclysm')
+    copy_standard_assets(runtime, root)
     for name in ['libSDL3.so.0', 'libSDL3_image.so.0', 'libSDL3_ttf.so.0', 'libSDL3_mixer.so.0']:
         dest = root / 'lib' / name
         dest.parent.mkdir(exist_ok=True)
@@ -59,7 +60,7 @@ exec python3 "$client_dir/tools/hybrid-updater/updater.py" gui --client "$client
     shutil.copy2(source / 'doc/hybrid/README.md', root / 'README.md')
     (root / 'START-HERE.txt').write_text('''Astral Client — Linux x86_64 / SteamOS
 
-Run "Launch Astral Client.sh". This distribution includes UltiCa; Astral Tileset
+Run "Launch Astral Client.sh". This distribution includes standard tilesets; Astral Tileset
 is a separate optional download. Extract that art package into this directory
 and select Astral in Graphics. Saves/config are created here on first launch.
 
@@ -68,8 +69,8 @@ Close CDDA before installing an update. Your tileset and saves are preserved.
 
 Requires a Linux desktop with X11/Wayland, glibc 2.38 or newer, libstdc++,
 FreeType, zlib and their normal system dependencies. SDL3 libraries are bundled.
-English content is included; compiled translation catalogues and sound packs
-are not bundled. Other distributions and conditional gameplay paths need testing.
+This Linux build uses English. Basic and CC-Sounds audio are bundled with their
+credits and licenses. Other distributions and conditional gameplay paths need testing.
 
 Source and independent client/art releases:
 https://github.com/Vassteel/CDDA-Astral-Client-Tileset

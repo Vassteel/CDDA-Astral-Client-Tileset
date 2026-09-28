@@ -2,7 +2,7 @@
 
 Two independent downloads, maintained in one public Cataclysm: Dark Days Ahead fork.
 
-- **Astral Client**: the Linux/SteamOS client, Hybrid interface, mouse controls, menu sizing, native sidebar information/minimap, and local diagnostic telemetry. Ships with the standard UltiCa fallback. Astral artwork is optional.
+- **Astral Client**: a mouse-friendly client for Linux/SteamOS and Windows, with standard tilesets and sound packs. Astral artwork is optional.
 - **Astral Tileset**: an art-only `gfx/Astral` package. Extract into a compatible CDDA installation and choose Astral in Graphics. It includes its own UltiCa fallback and does not replace the executable.
 
 [Downloads](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases)
@@ -10,6 +10,8 @@ Two independent downloads, maintained in one public Cataclysm: Dark Days Ahead f
 ## Client updates
 
 Run `Update Astral Client.sh` from an extracted client distribution. Python 3 and Zenity provide the updater; command-line use does not require Zenity. Public downloads work without signing in. An existing authenticated `gh` installation is used when available.
+
+On Windows, extract the entire ZIP and run `Launch Astral Client.cmd`. Use `Update Astral Client.cmd` for updates and `Rollback Astral Client.cmd` to restore the previous updater-managed version. These use Windows PowerShell 5.1, included with Windows 10/11; Python is not needed. Windows backups are stored beside the installation in `.<folder-name>-updates`.
 
 The updater only follows `client-v…` releases. Tileset releases use `tileset-v…` and never trigger a client update. Downloading while playing is supported; installation and rollback require the game to be closed. It never stops the game.
 
@@ -43,6 +45,6 @@ ninja -C build -j2 cataclysm-tiles
 python3 -m unittest discover -s tests/hybrid_updater -v
 ```
 
-Native checks used isolated profiles and copied fixtures. Compilation and representative mouse/layout checks are separate from exhaustive gameplay acceptance. Windows packages from earlier development do not contain this pass.
+Checks use isolated profiles and copied fixtures. Compilation, updater tests and representative mouse/layout checks are separate from exhaustive gameplay acceptance. Windows builds use MinGW with bundled runtime DLLs; Wine smoke tests do not replace native Windows gameplay testing.
 
 Original CDDA licensing and credits remain in the repository. Astral artwork attribution and license accompany the separate tileset package.
