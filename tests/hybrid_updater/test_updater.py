@@ -61,6 +61,20 @@ class UpdaterTest(unittest.TestCase):
         self.assertFalse((self.client / 'data/title/astral.png').exists())
         self.assertEqual(self.protected, {p: u.digest(p) for p in self.protected})
 
+    def test_full_release_does_not_fall_back_to_old_executable(self):
+        releases = [
+            {'tag_name': 'client-v0.1.2', 'html_url': 'https://example.test/new', 'assets': []},
+            {'tag_name': 'client-v0.1.1', 'html_url': 'https://example.test/old',
+             'assets': [{'name': 'old-linux-update.zip', 'size': 10}]},
+        ]
+        with patch.object(u, 'github_json', return_value=releases):
+            release = u.check('owner/repo')
+        self.assertEqual(release['version'], 'client-v0.1.2')
+        self.assertTrue(release['full_download_required'])
+        with self.assertRaisesRegex(u.UpdateError, 'full client download'):
+            u.download('owner/repo', release, self.state)
+        self.assertEqual(self.exe.read_bytes(), b'previous client')
+
     def test_corruption_does_not_touch_installation(self):
         package = self.package(lambda m: m['files'][1].update(sha256='0' * 64))
         with self.assertRaises(u.UpdateError):

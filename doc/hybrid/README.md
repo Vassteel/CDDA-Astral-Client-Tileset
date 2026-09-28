@@ -15,7 +15,7 @@ On Windows, extract the entire ZIP and run `Launch Astral Client.cmd`. Use `Upda
 
 The updater only follows `client-v…` releases. Tileset releases use `tileset-v…` and never trigger a client update. Downloading while playing is supported; installation and rollback require the game to be closed. It never stops the game.
 
-Current update archives replace the executable and optional title image only. They verify every file's SHA-256 before installation, retain an external backup, and preserve saves, settings, mods and tilesets. Runtime/data changes require a new full client distribution. Keep the updater state directory and backups if you want rollback.
+Current update archives replace the executable and optional title image only. They verify every file's SHA-256 before installation, retain an external backup, and preserve saves, settings, mods and tilesets. Runtime/data changes require a new full client distribution. The updater identifies those releases and directs you to the full download instead of selecting an older executable-only patch. Keep the updater state directory and backups if you want rollback.
 
 From this source checkout:
 

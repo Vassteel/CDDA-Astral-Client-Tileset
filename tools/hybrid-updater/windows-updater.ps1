@@ -166,10 +166,12 @@ function Get-Release([string]$Repo) {
         if ($release.draft -or $release.prerelease -or $release.tag_name -notmatch '^client-v') { continue }
         $assets = @($release.assets | Where-Object { $_.name.EndsWith('-windows-update.zip') })
         if ($assets.Count -eq 1) { return @{version=$release.tag_name; asset=$assets[0]} }
+        return @{version=$release.tag_name; full_download_required=$true; url=$release.html_url}
     }
     throw 'No Windows client update is available'
 }
 function Save-Download($Release, [string]$State) {
+    if ($Release.full_download_required) { throw "$($Release.version) requires the full client download: $($Release.url)" }
     $asset = $Release.asset
     if ($asset.size -lt 1 -or $asset.size -gt 536870912 -or $asset.id -notmatch '^\d+$') { throw 'Invalid download metadata' }
     if ($asset.browser_download_url -notmatch '^https://github\.com/') { throw 'Invalid download URL' }
@@ -224,6 +226,7 @@ function Invoke-Updater {
             [Windows.Forms.MessageBox]::Show('Astral Client is up to date.', 'Astral Client', 'OK', 'Information') | Out-Null
             return
         }
+        if ($release.full_download_required) { throw "$($release.version) includes new game data. Download the full client from $($release.url)" }
         $answer = [Windows.Forms.MessageBox]::Show("Download and install $($release.version)?`n`nClose the game before installation. Your saves and settings are preserved.", 'Astral Client', 'YesNo', 'Information')
         if ($answer -ne 'Yes') { return }
         $zip = Save-Download $release $state

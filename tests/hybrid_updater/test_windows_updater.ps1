@@ -25,6 +25,14 @@ function Must-Fail([scriptblock]$Run,[string]$Name) {
     Assert $failed $Name
 }
 try {
+    function Invoke-RestMethod {
+        @(@{tag_name='client-v0.1.2'; html_url='https://example.test/new'; assets=@()},
+          @{tag_name='client-v0.1.1'; html_url='https://example.test/old'; assets=@(@{name='old-windows-update.zip'})})
+    }
+    $fullRelease = Get-Release 'owner/repo'
+    Assert ($fullRelease.version -eq 'client-v0.1.2') 'full release does not select older update'
+    Assert $fullRelease.full_download_required 'full client requirement returned'
+    Must-Fail { Save-Download $fullRelease $state } 'full release cannot install old executable'
     $valid=Join-Path $Fixtures 'valid.zip'
     Write-Record @{version='0.1.0';executable_sha256=(Get-FileDigest $exe)} (Join-Path $client 'VERSION.json')
     Assert ((Get-InstalledVersion $client $state) -eq 'client-v0.1.0') 'recognize full distribution version'

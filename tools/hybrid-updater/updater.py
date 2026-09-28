@@ -292,11 +292,13 @@ def check(repo):
             continue
         assets = [a for a in release["assets"] if a["name"].endswith("-linux-update.zip")]
         if len(assets) != 1 or not 0 < assets[0]["size"] <= LIMIT:
-            continue
+            return {"version": release["tag_name"], "url": release["html_url"], "full_download_required": True}
         return {"version": release["tag_name"], "url": release["html_url"], "asset": assets[0]}
     raise UpdateError("No supported Astral Client release is available yet")
 
 def download(repo, release, state):
+    if release.get("full_download_required"):
+        raise UpdateError(f"{release['version']} requires the full client download: {release['url']}")
     state.mkdir(parents=True, exist_ok=True)
     asset = release["asset"]
     # The asset ID comes from authenticated GitHub metadata, never a local path.
@@ -363,6 +365,15 @@ def main():
             if not shutil.which("zenity"):
                 raise UpdateError("Graphical updater requires zenity; CLI commands remain available")
             release = check(args.repo)
+            version_file = client / "VERSION.json"
+            if version_file.is_file():
+                info = json.loads(version_file.read_text())
+                if ("client-v" + info.get("version", "") == release["version"] and
+                        info.get("executable_sha256") == digest(client / "cataclysm-tiles")):
+                    subprocess.run(["zenity", "--info", "--title=Astral Client Update", "--text", "Your Astral Client is up to date."])
+                    return 0
+            if release.get("full_download_required"):
+                raise UpdateError(f"{release['version']} includes new game data. Download the full client from {release['url']}")
             marker = state / "installed.json"
             if marker.exists():
                 installed = json.loads(marker.read_text())

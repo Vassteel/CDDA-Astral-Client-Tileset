@@ -16,7 +16,10 @@ function Download-Asset([string]$Suffix) {
     return $path
 }
 $full = Download-Asset '-windows-x64.zip'
-$update = Download-Asset '-windows-update.zip'
+$update = $null
+if (@($release.assets | Where-Object { $_.name.EndsWith('-windows-update.zip') }).Count -eq 1) {
+    $update = Download-Asset '-windows-update.zip'
+}
 Write-Host 'Extracting full client'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 [IO.Compression.ZipFile]::ExtractToDirectory($full, (Join-Path $Output 'unpacked'))
@@ -55,11 +58,21 @@ try {
         $image.Save((Join-Path $Output 'menu.png'), [Drawing.Imaging.ImageFormat]::Png)
     } finally { $graphics.Dispose(); $image.Dispose() }
     $blocked = $false
-    try { Invoke-Install $update $client $state | Out-Null }
+    try {
+        if ($update) { Invoke-Install $update $client $state | Out-Null }
+        else { Assert-GameClosed $client }
+    }
     catch { if ($_.Exception.Message -like 'Close Astral Client*') { $blocked = $true } else { throw } }
     if (!$blocked) { throw 'Running-game guard failed' }
 } finally {
     if (!$p.HasExited) { $p.CloseMainWindow() | Out-Null; if (!$p.WaitForExit(10000)) { $p.Kill(); $p.WaitForExit() } }
+}
+if (!$update) {
+    if ((Get-InstalledVersion $client $state) -ne $ReleaseTag) { throw 'Full distribution version mismatch' }
+    $latest = Get-Release 'Vassteel/CDDA-Astral-Client-Tileset'
+    if ($latest.version -ne $ReleaseTag -or !$latest.full_download_required) { throw 'Full download release routing failed' }
+    @{title=$title; data_check='passed'; process_guard='passed'; updater='full distribution recognized; fixture install/rollback tested separately'; powershell=$PSVersionTable.PSVersion.ToString()} | ConvertTo-Json | Set-Content (Join-Path $Output 'result.json')
+    exit 0
 }
 $before = Get-FileDigest $exe
 Write-Host 'Checking published update and rollback'

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Stage a clean client distribution from tracked data, never from player profiles."""
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import shutil
@@ -56,6 +57,7 @@ exec python3 "$client_dir/tools/hybrid-updater/updater.py" gui --client "$client
     for p in root.glob('*.sh'):
         p.chmod(0o755)
     (root / 'VERSION.json').write_text(json.dumps({'product': 'Astral Client', 'version': version,
+        'executable_sha256': hashlib.sha256((root / 'cataclysm-tiles').read_bytes()).hexdigest(),
         'source_commit': subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip()}, indent=2) + '\n')
     shutil.copy2(source / 'doc/hybrid/README.md', root / 'README.md')
     (root / 'START-HERE.txt').write_text('''Astral Client — Linux x86_64 / SteamOS
