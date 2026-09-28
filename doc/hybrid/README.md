@@ -45,6 +45,6 @@ ninja -C build -j2 cataclysm-tiles
 python3 -m unittest discover -s tests/hybrid_updater -v
 ```
 
-Checks use isolated profiles and copied fixtures. Compilation, updater tests and representative mouse/layout checks are separate from exhaustive gameplay acceptance. Windows builds use MinGW with bundled runtime DLLs; Wine smoke tests do not replace native Windows gameplay testing.
+Checks use isolated profiles and copied fixtures. Windows builds use MinGW with bundled runtime DLLs. Windows Server 2022 checks cover startup, core game data, PowerShell 5.1 updater installation, the running-game guard and rollback. These checks and representative mouse/layout checks are separate from exhaustive gameplay acceptance on Windows 10/11 hardware.
 
 Original CDDA licensing and credits remain in the repository. Astral artwork attribution and license accompany the separate tileset package.
