@@ -25,3 +25,5 @@ Automated tests cover verified install/rollback, mode restoration, preservation 
 The menu source inventory covers 112 files and 457 original entry-point matches. Shared sizing and control changes cover many callers; this is not exhaustive visual or gameplay acceptance of every NPC/trade/vehicle/debug/mod/localization/controller path. Trade/vehicle routing and conditional bionic operations require broader playtesting. Existing fixture tileset/mod warnings were not introduced by this pass. Windows has not been rebuilt.
 
 Astral Tileset 0.1.5 has independent atlas/configuration/package checks. Newly detailed autumn olive sprites remain pending in-game visual acceptance. The client and art packages are versioned independently.
+
+The clean Linux distribution launched from a separate test profile without Astral installed. Its packaged core data passed `--check-mods dda` with exit 0. The actual release update ZIP passed checksum validation, installation into a disposable client, save preservation and rollback. Client archive checks exclude player data, generated caches and Astral artwork.
