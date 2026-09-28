@@ -38,6 +38,7 @@
 #include "uilist.h"
 #include "units.h"
 #include "veh_appliance.h"
+#include "workstation_ui.h"
 #include "veh_interact.h"
 #include "veh_type.h"
 #include "veh_utils.h"
@@ -734,7 +735,7 @@ void veh_app_interact::app_loop( map &here )
             shared_ptr_fast<ui_adaptor> current_ui = create_or_get_ui_adaptor( here );
             ui_manager::redraw();
             shared_ptr_fast<uilist_impl> input_ui = imenu.create_or_get_ui();
-            imenu.query();
+            workstation_ui::query( imenu, veh->mount_to_tripoint( &here, a_point ) );
         }
 
         int ret = imenu.ret;

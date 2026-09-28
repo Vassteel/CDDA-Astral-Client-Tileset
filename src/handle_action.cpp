@@ -1,3 +1,4 @@
+#include "workstation_ui.h"
 #include "ui_telemetry.h"
 #include "game.h" // IWYU pragma: associated
 
@@ -3275,8 +3276,15 @@ bool game::handle_action()
             avatar_action::auto_eat( player_character ) ) {
             return true;
         }
+        // Resume only after native activities have completed and danger has cleared.
+        if( workstation_ui::resume_if_ready() ) {
+            return true;
+        }
         // No auto-move, ask player for input
         ctxt = get_player_input( action );
+        if( workstation_ui::process_request() ) {
+            return true;
+        }
         // Toolbar click during the wait: prefer it over TIMEOUT / empty input.
         if( const std::optional<action_id> toolbar_act = mouse_toolbar::take_pending_action() ) {
             // Run the same preprocessing as a keybinding, including nested
@@ -3430,6 +3438,11 @@ bool game::handle_action()
                 if( const std::optional<tripoint_bub_ms> rt = take_tile_menu_retarget() ) {
                     mouse_target = *rt;
                 }
+                // Context menus can complete an operation directly or be
+                // canceled. Neither is an unknown keyboard command.
+                if( act == ACTION_NULL ) {
+                    return false;
+                }
             }
         } else if( act != ACTION_TIMEOUT ) {
             // act has not been set for an auto-move, so clearing possible
@@ -3445,6 +3458,10 @@ bool game::handle_action()
 
     if( act == ACTION_NULL ) {
         const input_event &&evt = ctxt.get_raw_input();
+        // Unbound mouse press/release events are ordinary UI traffic.
+        if( evt.type == input_event_t::mouse ) {
+            return false;
+        }
         if( !evt.sequence.empty() ) {
             const int ch = evt.get_first_input();
             if( !get_option<bool>( "NO_UNKNOWN_COMMAND_MSG" ) ) {

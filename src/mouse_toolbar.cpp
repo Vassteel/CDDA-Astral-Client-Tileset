@@ -1,4 +1,5 @@
 #include "mouse_toolbar.h"
+#include "workstation_ui.h"
 
 #include <algorithm>
 #include <memory>
@@ -91,6 +92,7 @@ class mouse_toolbar_window : public cataimgui::window
             for( const auto &button : toolbar_buttons() ) {
                 measure( button.second.translated() );
             }
+            measure( _( "Stations" ) );
             if( get_option<bool>( "MOUSE_TOOLBAR_AUTO_TOGGLES" ) ) {
                 // Reserve enough room for the active state labels.
                 measure( _( "Pick●" ) );
@@ -151,6 +153,14 @@ class mouse_toolbar_window : public cataimgui::window
                 }
                 ui_hybrid_chrome::draw_item_bezel( false, ImGui::IsItemHovered(), false );
                 ImGui::PopStyleColor( tb_cols );
+            }
+
+            place_button( _( "Stations" ) );
+            if( ImGui::Button( _( "Stations" ) ) ) {
+                workstation_ui::request_nearby();
+            }
+            if( ImGui::IsItemHovered() ) {
+                ImGui::SetTooltip( "%s", _( "Manage nearby workstations: load, operate and unload." ) );
             }
 
             // Compact auto-action toggles (upstream AUTO_PICKUP / AUTO_FORAGING).
@@ -371,7 +381,8 @@ std::optional<action_id> take_pending_action()
 
 bool has_pending_action()
 {
-    return hud_pending.has_value() || ( g_toolbar && g_toolbar->has_pending() );
+    return workstation_ui::has_request() || hud_pending.has_value() ||
+           ( g_toolbar && g_toolbar->has_pending() );
 }
 
 } // namespace mouse_toolbar

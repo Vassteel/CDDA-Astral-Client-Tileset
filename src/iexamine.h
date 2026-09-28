@@ -123,6 +123,9 @@ void part_con( Character &you, const tripoint_bub_ms &examp );
 void water_source( Character &, const tripoint_bub_ms &examp );
 void finite_water_source( Character &, const tripoint_bub_ms &examp );
 void kiln_empty( Character &you, const tripoint_bub_ms &examp );
+void kiln_load_fuel( Character &you, const tripoint_bub_ms &examp );
+/** Loading rules for processing furniture; nullopt means ordinary storage. */
+std::optional<bool> furniture_accepts_item( const tripoint_bub_ms &examp, const item &it );
 bool kiln_prep( Character &you, const tripoint_bub_ms &examp );
 bool kiln_fire( Character &you, const tripoint_bub_ms &examp );
 void kiln_full( Character &you, const tripoint_bub_ms &examp );

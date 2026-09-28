@@ -1,5 +1,6 @@
 #include "ui_telemetry.h"
 #include "advanced_inv.h"
+#include "workstation_ui.h"
 
 #include <algorithm>
 #include <climits>
@@ -42,6 +43,7 @@
 #include "imgui/imgui.h"
 #include "input.h"
 #include "input_context.h"
+#include "iexamine.h"
 #include "inventory_ui.h"
 #include "item.h"
 #include "item_category.h"
@@ -858,6 +860,34 @@ void advanced_inventory::recalc_pane( side p )
         pane.add_items_from_area( squares[pane.get_area()] );
     }
 
+    // Only the source is filtered: destination contents stay visible so they
+    // can still be inspected or removed. This also limits Move all shown.
+#if defined(TILES)
+    if( hybrid_initialized && p == src ) {
+        const advanced_inventory_pane &destination = panes[dest];
+        const advanced_inv_area &target = squares[destination.get_area()];
+        pane.items.erase( std::remove_if( pane.items.begin(), pane.items.end(),
+        [&]( const advanced_inv_listitem & entry ) {
+            if( entry.items.empty() || !entry.items.front() ) {
+                return false;
+            }
+            const item &it = *entry.items.front();
+            if( destination.container ) {
+                item single = it;
+                if( single.count_by_charges() ) {
+                    single.charges = 1;
+                }
+                return !destination.container->can_contain( single ).success();
+            }
+            if( !destination.in_vehicle() && target.id >= AIM_AROUND_BEGIN &&
+                target.id <= AIM_AROUND_END ) {
+                return !iexamine::furniture_accepts_item( target.pos, it ).value_or( true );
+            }
+            return false;
+        } ), pane.items.end() );
+    }
+#endif
+
     // Sort all items
     std::stable_sort( pane.items.begin(), pane.items.end(), advanced_inv_sorter( pane.sortby ) );
 
@@ -1198,11 +1228,15 @@ bool advanced_inventory::move_all_items()
         units::volume src_volume = spane.in_vehicle() ? sarea.volume_veh : sarea.volume;
         units::mass src_weight = spane.in_vehicle() ? sarea.weight_veh : sarea.weight;
 #if defined(TILES)
-        if( hybrid_move_selected ) {
+        if( hybrid_initialized ) {
             src_volume = 0_ml;
             src_weight = 0_gram;
-            for( const item_location &loc : hybrid_selection ) {
-                if( loc ) {
+            for( const advanced_inv_listitem &entry : spane.items ) {
+                for( const item_location &loc : entry.items ) {
+                    if( !loc || ( hybrid_move_selected && std::find( hybrid_selection.begin(),
+                                  hybrid_selection.end(), loc ) == hybrid_selection.end() ) ) {
+                        continue;
+                    }
                     src_volume += loc->volume();
                     src_weight += loc->weight();
                 }
@@ -2170,7 +2204,7 @@ void advanced_inventory::display_hybrid()
                hybrid_area_name( squares[pane.get_area()], pane.in_vehicle() );
     };
     hybrid_window window( _( "Storage and transfer" ), [&]() {
-        ImGui::TextWrapped( "%s", _( "Choose storage, then select items to move. Use Load / manage for buildables." ) );
+        ImGui::TextWrapped( "%s", _( "Choose storage, then select items to move. Use Manage station for buildables." ) );
         const float body_height = std::max( 100.f, ImGui::GetContentRegionAvail().y -
                                           ImGui::GetTextLineHeightWithSpacing() * 8.f );
         for( side p : { left, right } ) {
@@ -2239,7 +2273,7 @@ void advanced_inventory::display_hybrid()
                 }
             }
             if( !pane.container && !pane.in_vehicle() && hybrid_can_manage( area ) ) {
-                if( ImGui::Button( _( "Load / manage" ) ) ) {
+                if( ImGui::Button( _( "Manage station" ) ) ) {
                     queued_manage = area.pos;
                 }
             }
@@ -2248,7 +2282,7 @@ void advanced_inventory::display_hybrid()
                                             area.desc[pane.in_vehicle() ? 1 : 0];
             ImGui::TextWrapped( "%s", remove_color_tags( description ).c_str() );
             if( !area.canputitems( pane.container ) ) {
-                ImGui::TextWrapped( "%s", _( "Use Load / manage for this fixture's loading, fuel and access options." ) );
+                ImGui::TextWrapped( "%s", _( "Use Manage station for this fixture's loading, fuel and access options." ) );
             } else if( pane.get_area() != AIM_ALL ) {
                 ImGui::Text( "%s", string_format( _( "Free space: %.2f L" ),
                              units::to_milliliter( pane.free_volume( area ) ) / 1000.0 ).c_str() );
@@ -2425,14 +2459,7 @@ void advanced_inventory::display_hybrid()
             const tripoint_bub_ms target = *queued_manage;
             queued_manage.reset();
             window.set_hidden( true );
-            if( rl_dist( get_avatar().pos_bub(), target ) <= 1 ) {
-                map &here = get_map();
-                if( here.furn( target ).obj().can_examine( target ) ) {
-                    here.furn( target ).obj().examine( get_avatar(), target );
-                } else if( here.ter( target ).obj().can_examine( target ) ) {
-                    here.ter( target ).obj().examine( get_avatar(), target );
-                }
-            }
+            workstation_ui::open( target );
             window.set_hidden( false );
             recalc = true;
             if( !get_avatar().activity.is_null() ) {

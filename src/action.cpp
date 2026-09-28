@@ -1,3 +1,4 @@
+#include "workstation_ui.h"
 #include "action.h"
 
 #include <algorithm>
@@ -812,8 +813,7 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
     constexpr int ATTACK_CREATURE = NUM_ACTIONS + 2;
     constexpr int CONTINUE_CONSTRUCTION = NUM_ACTIONS + 3;
     constexpr int TOOL_ACTION_BASE = NUM_ACTIONS + 10;
-    // Fireplace examine choices (ids match iexamine::fireplace_do).
-    constexpr int FIREPLACE_ACTION_BASE = NUM_ACTIONS + 200;
+    constexpr int MANAGE_WORKSTATION = NUM_ACTIONS + 200;
     // Soft-fork: cut-grass construction on this tile.
     constexpr int CUT_GRASS_ACTION = NUM_ACTIONS + 210;
     // Soft-fork: item actions targeting a (possibly neighboring) tile.
@@ -860,44 +860,15 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
         add_action( ACTION_CLOSE, _( "Close" ) );
     }
 
-    // Soft-fork: surface fireplace examine actions on the tile RMB (fire rings,
-    // fireplaces, braziers, etc.) instead of burying them behind Examine.
-    bool fireplace_expanded = false;
-    if( ( is_adjacent || is_self ) &&
-        ( here.furn( p ).obj().has_examine( iexamine::fireplace ) ||
-          here.ter( p ).obj().has_examine( iexamine::fireplace ) ) ) {
-        const iexamine::fireplace_ui_state fst = iexamine::fireplace_query_ui( player_character,
-                p );
-        fireplace_expanded = true;
-        if( fst.has_items ) {
-            entries.emplace_back( FIREPLACE_ACTION_BASE + 0, true, 0, _( "Get items" ) );
-        }
-        // Always offer Add fuel (enabled when usable fuel is available).
-        entries.emplace_back( FIREPLACE_ACTION_BASE + 5, fst.can_add_fuel, 0,
-                              fst.can_add_fuel ? _( "Add fuel" ) :
-                              _( "Add fuel… you'll need flammable items." ) );
-        if( !fst.on_fire ) {
-            entries.emplace_back( FIREPLACE_ACTION_BASE + 1, fst.can_start_fire, 0,
-                                  fst.can_start_fire ? _( "Start a fire" ) :
-                                  _( "Start a fire… you'll need a fire source." ) );
-            if( fst.can_cbm_start ) {
-                entries.emplace_back( FIREPLACE_ACTION_BASE + 2, true, 0,
-                                      _( "Use a CBM to start a fire" ) );
-            }
-        } else {
-            entries.emplace_back( FIREPLACE_ACTION_BASE + 4, fst.can_extinguish, 0,
-                                  fst.can_extinguish ? _( "Extinguish fire" ) :
-                                  _( "Extinguish fire (bashing item required)" ) );
-        }
-        if( fst.can_take_down ) {
-            entries.emplace_back( FIREPLACE_ACTION_BASE + 3, true, 0,
-                                  string_format( _( "Take down the %s" ), here.furnname( p ) ) );
-        }
+    const bool managed_station = workstation_ui::can_manage( p );
+    if( managed_station ) {
+        entries.emplace_back( MANAGE_WORKSTATION, true, 0,
+                              string_format( _( "Manage %s" ), workstation_ui::name( p ) ) );
     }
 
     // Soft-fork: surface items on this tile (and under tall foliage, items on
     // neighboring tiles the tall-grass sprite may have stolen the click from).
-    if( is_adjacent || is_self ) {
+    if( !managed_station && ( is_adjacent || is_self ) ) {
         std::vector<tripoint_bub_ms> item_tiles;
         const auto tile_has_reachable_items = [&]( const tripoint_bub_ms & tp ) {
             if( here.has_flag( ter_furn_flag::TFLAG_SEALED, tp ) ) {
@@ -1019,18 +990,19 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
         }
     }
 
-    // Generic Examine when we did not already expand a rich fireplace menu.
-    if( !fireplace_expanded && ( is_adjacent || is_self ) &&
+    // Station controls replace duplicate examine and transfer entries.
+    if( !managed_station && ( is_adjacent || is_self ) &&
         can_interact_at( ACTION_EXAMINE, here, p ) ) {
         add_action( ACTION_EXAMINE, _( "Examine" ) );
     }
-    if( !fireplace_expanded && ( is_adjacent || is_self ) &&
+    if( !managed_station && ( is_adjacent || is_self ) &&
         can_interact_at( ACTION_EXAMINE_AND_PICKUP, here, p ) ) {
         add_action( ACTION_EXAMINE_AND_PICKUP, _( "Examine and pick up" ) );
     }
     // Legacy generic pickup/butcher if the item pass above did not add them
     // (e.g. sealed containers handled only via can_interact_at).
-    if( ( is_adjacent || is_self ) && can_interact_at( ACTION_PICKUP, here, p ) ) {
+    if( !managed_station && ( is_adjacent || is_self ) &&
+        can_interact_at( ACTION_PICKUP, here, p ) ) {
         bool already = false;
         for( const uilist_entry &e : entries ) {
             if( e.retval == ACTION_PICKUP ) {
@@ -1199,7 +1171,7 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
         add_action( ACTION_MAP, _( "Map" ) );
         add_action( ACTION_PL_INFO, _( "Character info" ) );
         add_action( ACTION_MESSAGES, _( "Message log" ) );
-    } else if( is_adjacent ) {
+    } else if( is_adjacent && !managed_station ) {
         // Directional drop onto the clicked adjacent tile.
         add_action( ACTION_DIR_DROP, _( "Drop here" ) );
     }
@@ -1239,6 +1211,11 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
         return ACTION_NULL;
     }
 
+    if( smenu.ret == MANAGE_WORKSTATION ) {
+        workstation_ui::open( p );
+        return ACTION_NULL;
+    }
+
     // Attack creature on the clicked tile via the real melee/reach path.
     if( smenu.ret == ATTACK_CREATURE ) {
         Creature *const critter = get_creature_tracker().creature_at( p );
@@ -1254,12 +1231,6 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
                 you.reach_attack( critter->pos_bub() );
             }
         }
-        return ACTION_NULL;
-    }
-
-    // Soft-fork: fireplace actions execute inline (same as iexamine::fireplace).
-    if( smenu.ret >= FIREPLACE_ACTION_BASE && smenu.ret < FIREPLACE_ACTION_BASE + 10 ) {
-        iexamine::fireplace_do( player_character, p, smenu.ret - FIREPLACE_ACTION_BASE );
         return ACTION_NULL;
     }
 

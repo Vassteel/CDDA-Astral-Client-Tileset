@@ -1,3 +1,4 @@
+#include "workstation_ui.h"
 #include "main_menu.h"
 
 #include <algorithm>
@@ -685,6 +686,7 @@ bool main_menu::opening_screen()
     // Gameplay overlays outlive the terrain UI. Remove them before resetting
     // the avatar or reloading world data, so menu redraws cannot inspect an
     // empty body or stale map through a leftover sidebar/mouse-view window.
+    workstation_ui::reset();
     mouse_toolbar::hide();
 #if defined(TILES)
     ui_hybrid_sidebar::hide();
@@ -714,6 +716,8 @@ bool main_menu::opening_screen()
     ctxt.register_action( "PAGE_UP" );
     ctxt.register_action( "PAGE_DOWN" );
     ctxt.register_action( "CONFIRM" );
+    // Right-click opens contextual management before QUIT's mouse binding.
+    ctxt.register_action( "SEC_SELECT" );
     ctxt.register_action( "QUIT" );
 
     // for mouse selection
@@ -837,7 +841,7 @@ bool main_menu::opening_screen()
         }
 
         // handle mouse click
-        if( action == "SELECT" || action == "MOUSE_MOVE" ) {
+        if( action == "SELECT" || action == "SEC_SELECT" || action == "MOUSE_MOVE" ) {
             std::optional<point> coord = ctxt.get_coordinates_text( catacurses::stdscr );
             const bool over_submenu = coord && std::any_of( main_menu_sub_button_map.begin(),
             main_menu_sub_button_map.end(), [&]( const auto & button ) {
@@ -851,7 +855,10 @@ bool main_menu::opening_screen()
                         sel_line = 0;
                         on_move();
                     }
-                    if( action == "SELECT" &&
+                    if( action == "SEC_SELECT" && sel1 == getopt( main_menu_opts::LOADCHAR ) ) {
+                        // Open the character/save management window directly.
+                        action = "CONFIRM";
+                    } else if( action == "SELECT" &&
                         ( sel1 == getopt( main_menu_opts::HELP ) || sel1 == getopt( main_menu_opts::QUIT ) ||
                           sel1 == getopt( main_menu_opts::TUTORIAL ) ) ) {
                         action = "CONFIRM";
@@ -870,7 +877,8 @@ bool main_menu::opening_screen()
                         sel1 = it.second.first;
                         sel2 = it.second.second;
                         sel_line = 0;
-                        if( action == "SELECT" ) {
+                        if( action == "SELECT" ||
+                            ( action == "SEC_SELECT" && sel1 == getopt( main_menu_opts::LOADCHAR ) ) ) {
                             action = "CONFIRM";
                         }
                         ui_manager::redraw();

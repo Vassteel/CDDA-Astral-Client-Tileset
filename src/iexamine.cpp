@@ -1,3 +1,4 @@
+#include "workstation_ui.h"
 #include "iexamine.h"
 
 #include <algorithm>
@@ -8,6 +9,7 @@
 #include <cstdlib>
 #include <functional>
 #include <iterator>
+#include <limits>
 #include <map>
 #include <memory>
 #include <set>
@@ -3001,6 +3003,93 @@ static void pick_firestarter_and_fire( Character &you, const tripoint_bub_ms &ex
 }
 
 // Highly modified fermenting vat functions
+std::optional<bool> iexamine::furniture_accepts_item( const tripoint_bub_ms &examp,
+        const item &it )
+{
+    const furn_t &f = get_map().furn( examp ).obj();
+    if( f.has_examine( kiln_full ) || f.has_examine( arcfurnace_full ) ||
+        f.has_examine( autoclave_full ) || f.has_examine( fvat_full ) ||
+        f.has_examine( compost_full ) || f.id == furn_f_wind_mill_active ||
+        f.id == furn_f_water_mill_active || f.id == furn_f_smoking_rack_active ||
+        f.id == furn_f_metal_smoking_rack_active ) {
+        return false;
+    }
+    if( f.has_examine( kiln_empty ) ) {
+        static const std::set<material_id> kilnable{ material_wood, material_bone };
+        return it.typeId() != itype_charcoal && it.made_of_any( kilnable );
+    }
+    if( f.has_examine( smoker_options ) ) {
+        return it.typeId() == itype_charcoal || it.is_smokable();
+    }
+    if( f.has_examine( arcfurnace_empty ) ) {
+        return it.typeId() != itype_chem_carbide && it.made_of( material_cac2powder );
+    }
+    if( f.has_examine( autoclave_empty ) ) {
+        return it.is_bionic() && !it.has_flag( flag_FILTHY );
+    }
+    if( f.has_examine( fvat_empty ) ) {
+        return it.is_brewable();
+    }
+    if( f.has_examine( compost_empty ) ) {
+        return it.is_compostable();
+    }
+    if( f.has_examine( iexamine::reload_furniture ) ) {
+        const bool by_ammo_type = f.has_flag( ter_furn_flag::TFLAG_AMMOTYPE_RELOAD );
+        for( const itype *ammo : f.crafting_ammo_item_types() ) {
+            if( ammo && ( it.type == ammo ||
+                          ( by_ammo_type && ammo->ammo && it.ammo_type() == ammo->ammo->type ) ) ) {
+                return true;
+            }
+        }
+        return false;
+    }
+    if( f.has_examine( keg ) ) {
+        return it.made_of( phase_id::LIQUID );
+    }
+    if( f.id == furn_f_wind_mill || f.id == furn_f_water_mill ) {
+        if( !it.type->milling_data || it.type->milling_data->into_.is_null() ) {
+            return false;
+        }
+        const recipe &rec = *it.type->milling_data->recipe_;
+        if( rec.is_null() ) {
+            return false;
+        }
+        for( const auto &alternatives : rec.simple_requirements().get_components() ) {
+            for( const item_comp &comp : alternatives ) {
+                if( comp.type == it.typeId() ) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    if( f.has_examine( fireplace ) ) {
+        return it.flammable() && !it.made_of( phase_id::LIQUID ) &&
+               !it.has_flag( flag_NO_UNWIELD ) && !it.has_flag( flag_INTEGRATED );
+    }
+    return std::nullopt;
+}
+
+void iexamine::kiln_load_fuel( Character &you, const tripoint_bub_ms &examp )
+{
+    map &here = get_map();
+    if( !here.furn( examp ).obj().has_examine( kiln_empty ) ||
+        rl_dist( you.pos_bub(), examp ) > 1 || !here.can_put_items( examp ) ) {
+        return;
+    }
+    const item_location_filter fuel_filter = [&you, examp]( const item_location & loc ) {
+        return loc && furniture_accepts_item( examp, *loc ).value_or( false ) &&
+               you.can_drop( *loc ).success() &&
+               ( loc.held_by( you ) || loc.pos_bub( get_map() ) != examp );
+    };
+    const drop_locations selected = game_menus::inv::titled_multi_filter_menu(
+                                       fuel_filter, you, _( "Load kiln fuel" ), 1,
+                                       _( "You have no wood or bone suitable for this kiln." ), true );
+    if( !selected.empty() ) {
+        you.drop( selected, examp );
+    }
+}
+
 void iexamine::kiln_empty( Character &you, const tripoint_bub_ms &examp )
 {
     if( !kiln_prep( you, examp ) ) {
@@ -3564,7 +3653,10 @@ void iexamine::fireplace_add_fuel( Character &you, const tripoint_bub_ms &examp 
         return fireplace_fuel_loc_ok( you, loc, examp );
     };
 
-    drop_locations selected = game_menus::inv::titled_multi_filter_menu(
+    const auto chosen = workstation_ui::select_materials( examp, []( const item &it ) {
+        return fireplace_item_is_fuel( it ) ? std::numeric_limits<int>::max() : 0;
+    } );
+    drop_locations selected = chosen ? *chosen : game_menus::inv::titled_multi_filter_menu(
                                   fuel_filter, you, _( "Add fuel" ), 1,
                                   _( "You have no suitable fuel." ), true );
     if( selected.empty() ) {
@@ -3639,7 +3731,7 @@ void iexamine::fireplace_do( Character &you, const tripoint_bub_ms &examp, int c
     switch( choice ) {
         case 0:
             none( you, examp );
-            g->pickup( examp );
+            workstation_ui::unload( examp );
             return;
         case 1: {
             for( auto &firestarter : firestarters ) {
@@ -3716,7 +3808,7 @@ void iexamine::fireplace( Character &you, const tripoint_bub_ms &examp )
     selection_menu.text = _( "Select an action" );
     if( st.has_items ) {
         // Note: This is displayed regardless of whether "examine with pickup" was used
-        selection_menu.addentry( 0, true, 'g', _( "Get items" ) );
+        selection_menu.addentry( 0, true, 'g', _( "Unload contents" ) );
     }
     if( !st.on_fire ) {
         selection_menu.addentry( 1, st.can_start_fire, 'f',
@@ -3737,7 +3829,7 @@ void iexamine::fireplace( Character &you, const tripoint_bub_ms &examp )
     if( st.can_take_down ) {
         selection_menu.addentry( 3, true, 't', _( "Take down the %s" ), here.furnname( examp ) );
     }
-    selection_menu.query();
+    workstation_ui::query( selection_menu, examp );
 
     if( selection_menu.ret < 0 ) {
         none( you, examp );
@@ -3840,7 +3932,7 @@ void iexamine::fvat_empty( Character &you, const tripoint_bub_ms &examp )
         selectmenu.addentry( REMOVE_BREW, brew.made_of( phase_id::LIQUID ), MENU_AUTOASSIGN,
                              _( "Remove %s from the vat" ), brew.tname() );
         selectmenu.addentry( START_FERMENT, true, MENU_AUTOASSIGN, _( "Start fermenting cycle" ) );
-        selectmenu.query();
+        workstation_ui::query( selectmenu, examp );
         switch( selectmenu.ret ) {
             case ADD_BREW: {
                 to_deposit = true;
@@ -4071,7 +4163,7 @@ void iexamine::compost_empty( Character &you, const tripoint_bub_ms &examp )
         selectmenu.addentry( REMOVE_COMPOST, compost.made_of( phase_id::LIQUID ), MENU_AUTOASSIGN,
                              _( "Remove %s from the tank" ), compost.tname() );
         selectmenu.addentry( START_FERMENT, true, MENU_AUTOASSIGN, _( "Start anaerobic digestion" ) );
-        selectmenu.query();
+        workstation_ui::query( selectmenu, examp );
         switch( selectmenu.ret ) {
             case ADD_COMPOST: {
                 to_deposit = true;
@@ -4122,10 +4214,7 @@ void iexamine::compost_empty( Character &you, const tripoint_bub_ms &examp )
             add_msg( _( "You close the lid and start anaerobic digestion." ) );
         }
         // Set timer for biogas production
-        map &here = get_map();
-        map_stack items_here = here.i_at( examp );
-        item &ferm = *items_here.end();
-        ferm.set_birthday( calendar::turn );
+        here.i_at( examp ).only_item().set_var( "compost_last_gas", to_turn<int>( calendar::turn ) );
     }
 }
 
@@ -4153,8 +4242,10 @@ void iexamine::compost_full( Character &you, const tripoint_bub_ms &examp )
     }
 
     item &compost_i = *items_here.begin();
-    item &ferm = *items_here.end();
-    const time_duration last_open_time = ferm.age();
+    const time_point last_gas = time_point::from_turn( static_cast<int>(
+                                   compost_i.get_var( "compost_last_gas",
+                                           static_cast<double>( to_turn<int>( compost_i.birthday() ) ) ) ) );
+    const time_duration last_open_time = calendar::turn - last_gas;
     int fermented_days =  to_days<int>( last_open_time );
     // Biogas generating process starts after one month.
     int gas_gatherable =  fermented_days < 30 ? fermented_days : fermented_days - 30 ;
@@ -4209,7 +4300,7 @@ void iexamine::compost_full( Character &you, const tripoint_bub_ms &examp )
                     add_msg( n_gettext( "Biogas generating process started for about %d day.",
                                         "Biogas generating process started for about %d days.",
                                         max_gas_gatherable ), max_gas_gatherable );
-                    ferm.set_birthday( calendar::turn );
+                    compost_i.set_var( "compost_last_gas", to_turn<int>( calendar::turn ) );
                 }
             }
             return;
@@ -4419,7 +4510,7 @@ void iexamine::keg( Character &you, const tripoint_bub_ms &examp )
         selectmenu.addentry( HAVE_A_DRINK, drink.is_food() && drink.made_of( phase_id::LIQUID ),
                              MENU_AUTOASSIGN, _( "Have a drink" ) );
         selectmenu.addentry( REFILL, true, MENU_AUTOASSIGN, _( "Refill" ) );
-        selectmenu.query();
+        workstation_ui::query( selectmenu, examp );
 
         switch( selectmenu.ret ) {
             case DISPENSE: {
@@ -4996,6 +5087,40 @@ static void reload_furniture( Character &you, const tripoint_bub_ms &examp, bool
             return;
         }
     }
+    const auto chosen = workstation_ui::select_materials( examp, [&]( const item &it ) {
+        if( !it.is_ammo() || ( ammo_loaded && it.type != ammo_loaded ) ||
+            !iexamine::furniture_accepts_item( examp, it ).value_or( false ) ) {
+            return 0;
+        }
+        return item( pseudo_type ).ammo_capacity( it.ammo_type() ) - amount_in_furn;
+    } );
+    if( chosen ) {
+        for( const drop_location &entry : *chosen ) {
+            item_location original = entry.first;
+            item moved( *original );
+            moved.charges = entry.second;
+            // Stations forbid ordinary ground placement. Match the native
+            // reload path: merge existing fuel or place directly in the rack.
+            bool merged = false;
+            for( item &existing : here.i_at( examp ) ) {
+                if( existing.merge_charges( moved ) ) {
+                    merged = true;
+                    break;
+                }
+            }
+            if( !merged ) {
+                here.add_item( examp, moved );
+            }
+            you.mod_moves( -you.item_handling_cost( moved ) );
+            if( original->charges == entry.second ) {
+                original.remove_item();
+            } else {
+                original->charges -= entry.second;
+            }
+        }
+        you.invalidate_crafting_inventory();
+        return;
+    }
     item pseudo( pseudo_type );
     // maybe at some point we need a pseudo item_location or something
     // but for now this should at least work as intended
@@ -5018,9 +5143,8 @@ static void reload_furniture( Character &you, const tripoint_bub_ms &examp, bool
     const itype *opt_type = opt.ammo->type;
     const int max_amount = std::min( opt.qty(), max_reload_amount );
     int amount = max_amount;
-    query_int( amount, true, _( "Put how many of the %s into the %s?" ), opt_type->nname( max_amount ),
-               f.name() );
-    if( amount <= 0 || amount > max_amount ) {
+    if( !query_int( amount, true, _( "Put how many of the %s into the %s?" ),
+                    opt_type->nname( max_amount ), f.name() ) || amount <= 0 || amount > max_amount ) {
         return;
     }
 
@@ -6764,7 +6888,15 @@ static void smoker_load_food( Character &you, const tripoint_bub_ms &examp,
                                    sm_rack::MAX_FOOD_VOLUME;
     units::volume used_capacity = total_capacity - remaining_capacity;
 
-    drop_locations locs = game_menus::inv::smoke_food( you, total_capacity, used_capacity );
+    const auto chosen = workstation_ui::select_materials( examp, [&]( const item &it ) {
+        if( !it.is_smokable() ) {
+            return 0;
+        }
+        return it.count_by_charges() ? it.charges_per_volume( remaining_capacity ) :
+               static_cast<int>( remaining_capacity / it.volume() );
+    } );
+    drop_locations locs = chosen ? *chosen : game_menus::inv::smoke_food( you, total_capacity,
+                          used_capacity );
 
     units::volume vol = remaining_capacity;
     for( const drop_location &dloc : locs ) {
@@ -6803,6 +6935,31 @@ static void mill_load_food( Character &you, const tripoint_bub_ms &examp,
     if( f == furn_f_wind_mill_active ||
         f == furn_f_water_mill_active ) {
         you.add_msg_if_player( _( "You can't place more food while it's milling." ) );
+        return;
+    }
+    const auto chosen = workstation_ui::select_materials( examp, [&]( const item &it ) {
+        if( it.rotten() || !iexamine::furniture_accepts_item( examp, it ).value_or( false ) ) {
+            return 0;
+        }
+        return it.count_by_charges() ? it.charges_per_volume( remaining_capacity ) :
+               static_cast<int>( remaining_capacity / it.volume() );
+    }, PICKUP_RANGE );
+    if( chosen ) {
+        for( const drop_location &entry : *chosen ) {
+            item_location original = entry.first;
+            item moved( *original );
+            if( moved.count_by_charges() ) {
+                moved.charges = entry.second;
+            }
+            here.add_item( examp, moved );
+            you.mod_moves( -you.item_handling_cost( moved ) );
+            if( !original->count_by_charges() || original->charges == entry.second ) {
+                original.remove_item();
+            } else {
+                original->charges -= entry.second;
+            }
+        }
+        you.invalidate_crafting_inventory();
         return;
     }
     // filter millable food
@@ -7023,7 +7180,7 @@ void iexamine::quern_examine( Character &you, const tripoint_bub_ms &examp )
                              _( "Applying the brake will stop milling process." ) );
     }
 
-    smenu.query();
+    workstation_ui::query( smenu, examp );
 
     switch( smenu.ret ) {
         case 0: { //inspect mill
@@ -7237,7 +7394,7 @@ void iexamine::smoker_options( Character &you, const tripoint_bub_ms &examp )
                         string_format( _( "Remove %d charges of charcoal from smoking rack" ), coal_charges ) );
     }
 
-    smenu.query();
+    workstation_ui::query( smenu, examp );
 
     switch( smenu.ret ) {
         case 0: { //inspect smoking rack
