@@ -20,16 +20,17 @@ $client = (Get-ChildItem (Join-Path $Output 'unpacked') -Directory | Select-Obje
 $exe = Join-Path $client 'cataclysm-tiles.exe'
 $profile = Join-Path $Output 'profile'
 [IO.Directory]::CreateDirectory($profile) | Out-Null
+$profileArgument = '"' + $profile.Replace('\', '/') + '/"'
 $env:SDL_AUDIODRIVER = 'dummy'
 $env:SDL_VIDEO_DRIVER = 'windows'
 $env:SDL_VIDEODRIVER = 'windows'
-$p = Start-Process $exe -WorkingDirectory $client -ArgumentList @('--basepath', '""', '--userdir', ('"' + $profile + '\"'), '--check-mods', 'dda') -RedirectStandardOutput (Join-Path $Output 'data-check.log') -RedirectStandardError (Join-Path $Output 'data-check-errors.log') -PassThru
+$p = Start-Process $exe -WorkingDirectory $client -ArgumentList @('--basepath', '""', '--userdir', $profileArgument, '--check-mods', 'dda') -RedirectStandardOutput (Join-Path $Output 'data-check.log') -RedirectStandardError (Join-Path $Output 'data-check-errors.log') -PassThru
 if (!$p.WaitForExit(180000)) { $p.Kill(); throw 'Core data check timed out' }
 if ($p.ExitCode -ne 0) { throw "Core data check failed: $($p.ExitCode)" }
 . (Join-Path $client 'tools/hybrid-updater/windows-updater.ps1')
 $state = Join-Path $Output 'updater-state'
 [IO.Directory]::CreateDirectory($state) | Out-Null
-$p = Start-Process $exe -WorkingDirectory $client -ArgumentList @('--basepath', '""', '--userdir', ('"' + $profile + '\"')) -RedirectStandardOutput (Join-Path $Output 'menu.log') -RedirectStandardError (Join-Path $Output 'menu-errors.log') -PassThru
+$p = Start-Process $exe -WorkingDirectory $client -ArgumentList @('--basepath', '""', '--userdir', $profileArgument) -RedirectStandardOutput (Join-Path $Output 'menu.log') -RedirectStandardError (Join-Path $Output 'menu-errors.log') -PassThru
 try {
     Start-Sleep -Seconds 15
     $p.Refresh()
