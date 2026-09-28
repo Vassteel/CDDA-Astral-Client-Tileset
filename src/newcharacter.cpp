@@ -25,6 +25,7 @@
 #include "calendar_ui.h"
 #include "cata_imgui.h"
 #include "cata_path.h"
+#include "cata_scope_helpers.h"
 #include "cata_utility.h"
 #include "catacharset.h"
 #include "character.h"
@@ -136,6 +137,7 @@ static const trait_id trait_XS( "XS" );
 static const trait_id trait_XXXL( "XXXL" );
 
 static character_creator_uistate cc_uistate;
+static bool cc_modal_active = false;
 
 // Whether or not use Outfit (M) at character creation
 static bool outfit = true;
@@ -2122,8 +2124,6 @@ std::string get_character_stat_header( int selected_stat_index )
 
 const mutation_variant *variant_trait_selection_menu( const trait_id &cur_trait )
 {
-    // Because the keys will change on each loop if I clear the entries, and
-    // if I don't clear the entries, the menu bugs out
     static std::array<int, 60> keys = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                                         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
                                         'n', 'o', 'p',/*q */'r', 's', 't',/*u */'v', 'w', 'x', 'y', 'z',
@@ -2131,44 +2131,49 @@ const mutation_variant *variant_trait_selection_menu( const trait_id &cur_trait 
                                         'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
                                       };
     uilist menu;
-    const mutation_variant *ret = nullptr;
+    const mutation_variant *original = nullptr;
     avatar &pc = get_avatar();
     std::vector<const mutation_variant *> variants;
     variants.reserve( cur_trait->variants.size() );
     for( const std::pair<const std::string, mutation_variant> &pr : cur_trait->variants ) {
         if( pc.has_trait_variant( { cur_trait, pr.first } ) ) {
-            ret = &pr.second;
+            original = &pr.second;
         }
         variants.emplace_back( &pr.second );
     }
 
     menu.title = _( "Which trait?" );
     menu.desc_enabled = true;
-    menu.allow_cancel = false;
-    int idx;
-    do {
-        menu.entries.clear();
-        idx = 0;
-        menu.addentry_desc( idx, true, 'u', ret != nullptr ? _( "Unselect" ) :
-                            colorize( _( "Unselected" ), c_white ),
-                            _( "Remove this trait." ) );
+    menu.addentry_desc( 0, true, 'u', _( "Unselect" ), _( "Remove this trait." ) );
+    int idx = 1;
+    for( const mutation_variant *var : variants ) {
+        const std::string name = var->alt_name.translated();
+        menu.addentry_desc( idx, true, keys[( idx - 1 ) % keys.size()],
+                            original == var ? colorize( name, c_white ) : name,
+                            var->alt_description.translated() );
+        if( original == var ) {
+            menu.selected = idx;
+        }
         ++idx;
-        for( const mutation_variant *var : variants ) {
-            std::string name = var->alt_name.translated();
-            menu.addentry_desc( idx, true, keys[( idx - 1 ) % keys.size()],
-                                ( ret && ret == var ) ? colorize( name, c_white ) : name,
-                                var->alt_description.translated() );
-            ++idx;
+    }
+    menu.addentry_desc( idx, true, 'q', _( "Done" ), _( "Keep the current choice." ) );
+
+    // A title-bar close must end the input loop as well as hiding its window.
+    // Cancellation preserves the existing variant; only Unselect removes it.
+    const shared_ptr_fast<uilist_impl> picker = menu.create_or_get_ui();
+    do {
+        menu.query( false, 33 );
+        if( !picker->get_is_open() ) {
+            return original;
         }
-        menu.addentry_desc( idx, true, 'q', _( "Done" ), _( "Exit menu." ) );
-        menu.query();
-        if( menu.ret == 0 ) {
-            ret = nullptr;
-        } else if( menu.ret < idx ) {
-            ret = variants[menu.ret - 1];
-        }
-    } while( menu.ret != idx );
-    return ret;
+    } while( menu.ret == UILIST_WAIT_INPUT );
+    if( menu.ret == 0 ) {
+        return nullptr;
+    }
+    if( menu.ret > 0 && menu.ret < idx ) {
+        return variants[menu.ret - 1];
+    }
+    return original;
 }
 
 void draw_profession_header( const avatar &u )
@@ -3649,6 +3654,7 @@ void character_creator_ui::setup_avatar()
 
 void character_creator_ui_impl::draw_controls()
 {
+    ImGui::BeginDisabled( cc_modal_active );
     avatar &pc = get_avatar();
 
     const character_creator_tab switched_tab = cc_uistate.switched_tab;
@@ -3742,6 +3748,7 @@ void character_creator_ui_impl::draw_controls()
     char_creation::draw_action_button( cc_uistate.selected_tab == CHARCREATOR_SUMMARY ?
                                       _( "Finish" ) : _( "Next" ), "NEXT_TAB" );
     cc_uistate.previous_tab = cc_uistate.selected_tab;
+    ImGui::EndDisabled();
 }
 
 void character_creator_ui_impl::draw_top_bar( const avatar &u ) const
@@ -4473,6 +4480,8 @@ bool character_creator_callback::key( const input_context &ctxt, const input_eve
 
 bool character_creator_ui::handle_action( const std::string &action )
 {
+    restore_on_out_of_scope restore_modal( cc_modal_active );
+    cc_modal_active = true;
     avatar &you = get_avatar();
 
     auto mod_stat_base = [&you]( int mod_value ) {
@@ -4686,6 +4695,8 @@ bool character_creator_ui::handle_action( const std::string &action )
 
 void character_creator_callback::confirm( uilist *menu )
 {
+    restore_on_out_of_scope restore_modal( cc_modal_active );
+    cc_modal_active = true;
     avatar &u = get_avatar();
     int uilist_returned = menu->ret;
 

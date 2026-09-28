@@ -211,7 +211,8 @@ void uilist::draw_contents( bool embedded )
                 ImGui::EndTable();
             }
             // Mouse wheel over the list advances selection (not only the viewport).
-            if( ImGui::IsWindowHovered() && ImGui::GetIO().MouseWheel != 0.0f ) {
+            if( !( ImGui::GetCurrentContext()->CurrentItemFlags & ImGuiItemFlags_Disabled ) &&
+                ImGui::IsWindowHovered() && ImGui::GetIO().MouseWheel != 0.0f ) {
                 const int delta = static_cast<int>( std::lround( -ImGui::GetIO().MouseWheel ) );
                 if( delta != 0 ) {
                     parent.scrollby( uilist::scroll_amount::wrapped( delta ) );

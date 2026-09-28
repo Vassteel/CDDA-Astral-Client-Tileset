@@ -15,3 +15,11 @@ Character creation now embeds its selection list beside the details in one cente
 The staged executable, hashes, build logs and screenshots are under `artifacts/character-creator-ui-20260928`. The running installation was not modified. This is a shared-checkout development build containing concurrent progression changes, not a standalone release package. Windows and screen-reader acceptance were not tested in this pass.
 
 A separate observation remains for follow-up: resizing during creation can leave the main-menu backdrop partially painted until re-entering the menu; starting at the target resolution paints it correctly. The creation window itself stays centered.
+
+## Appearance picker follow-up
+
+Reproduced a hidden input trap: closing the hair variant list with its title-bar X hid the window without ending its query loop. Escape was disabled, and creation tabs could still change underneath the pending callback.
+
+The variant picker now exits on X or Escape and preserves the previous choice. Selecting a variant applies it immediately; Unselect explicitly removes it, and Done retains it. Negative menu results are checked before variant indexing. Creation controls and list-wheel selection are disabled during nested actions, then restored on return.
+
+Linux build and private 1280x800 interaction checks passed: X/Escape preserved gray long over-eye hair; clicking black applied it and returned to creation; background tab clicks were blocked while the picker was open; Unselect removed the hair; cancelling a new buzz-cut selection left it absent; keyboard `1` applied blond buzz cut, and `q` retained it. Summary confirmed each result. Screenshots and a newer staged executable are under `artifacts/character-appearance-fix-20260928`. Running installation untouched; Windows remains untested.
