@@ -20,7 +20,6 @@ $client = (Get-ChildItem (Join-Path $Output 'unpacked') -Directory | Select-Obje
 $exe = Join-Path $client 'cataclysm-tiles.exe'
 $profile = Join-Path $Output 'profile'
 [IO.Directory]::CreateDirectory($profile) | Out-Null
-$env:SDL_RENDER_DRIVER = 'software'
 $env:SDL_AUDIODRIVER = 'dummy'
 $env:SDL_VIDEO_DRIVER = 'windows'
 $env:SDL_VIDEODRIVER = 'windows'
@@ -36,6 +35,15 @@ try {
     $p.Refresh()
     if ($p.HasExited -or !$p.MainWindowHandle -or $p.MainWindowTitle -notlike '*Astral Client*') { throw 'Game window did not open' }
     $title = $p.MainWindowTitle
+    Add-Type -AssemblyName System.Drawing
+    Add-Type -AssemblyName System.Windows.Forms
+    $screen = [Windows.Forms.Screen]::PrimaryScreen.Bounds
+    $image = New-Object Drawing.Bitmap($screen.Width, $screen.Height)
+    $graphics = [Drawing.Graphics]::FromImage($image)
+    try {
+        $graphics.CopyFromScreen($screen.Location, [Drawing.Point]::Empty, $screen.Size)
+        $image.Save((Join-Path $Output 'menu.png'), [Drawing.Imaging.ImageFormat]::Png)
+    } finally { $graphics.Dispose(); $image.Dispose() }
     $blocked = $false
     try { Invoke-Install $update $client $state | Out-Null }
     catch { if ($_.Exception.Message -like 'Close Astral Client*') { $blocked = $true } else { throw } }

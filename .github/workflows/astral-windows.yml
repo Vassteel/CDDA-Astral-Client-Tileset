@@ -39,4 +39,5 @@ jobs:
           path: |
             ${{ runner.temp }}/astral-release-test/*.log
             ${{ runner.temp }}/astral-release-test/result.json
+            ${{ runner.temp }}/astral-release-test/menu.png
             ${{ runner.temp }}/astral-release-test/profile/config/debug.log
