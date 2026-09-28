@@ -1,5 +1,6 @@
 param([string]$ReleaseTag, [string]$Output)
 $ErrorActionPreference = 'Stop'
+$ProgressPreference = 'SilentlyContinue'
 if ($ReleaseTag -notmatch '^client-v[0-9.]+$') { throw 'Invalid release tag' }
 [IO.Directory]::CreateDirectory($Output) | Out-Null
 $release = Invoke-RestMethod "https://api.github.com/repos/Vassteel/CDDA-Astral-Client-Tileset/releases/tags/$ReleaseTag"
@@ -8,6 +9,7 @@ function Download-Asset([string]$Suffix) {
     if ($assets.Count -ne 1) { throw "Expected one $Suffix asset" }
     $asset = $assets[0]
     $path = Join-Path $Output $asset.name
+    Write-Host "Downloading $($asset.name)"
     Invoke-WebRequest -UseBasicParsing $asset.browser_download_url -OutFile $path
     if ((Get-Item $path).Length -ne $asset.size) { throw 'Incomplete archive' }
     if (('sha256:' + (Get-FileHash $path).Hash.ToLowerInvariant()) -cne $asset.digest) { throw 'Archive checksum mismatch' }
@@ -15,6 +17,7 @@ function Download-Asset([string]$Suffix) {
 }
 $full = Download-Asset '-windows-x64.zip'
 $update = Download-Asset '-windows-update.zip'
+Write-Host 'Extracting full client'
 Expand-Archive $full (Join-Path $Output 'unpacked')
 $client = (Get-ChildItem (Join-Path $Output 'unpacked') -Directory | Select-Object -First 1).FullName
 $exe = Join-Path $client 'cataclysm-tiles.exe'
@@ -24,12 +27,14 @@ $profileArgument = '"' + $profile.Replace('\', '/') + '/"'
 $env:SDL_AUDIODRIVER = 'dummy'
 $env:SDL_VIDEO_DRIVER = 'windows'
 $env:SDL_VIDEODRIVER = 'windows'
+Write-Host 'Checking core game data'
 $p = Start-Process $exe -WorkingDirectory $client -ArgumentList @('--basepath', '""', '--userdir', $profileArgument, '--check-mods', 'dda') -RedirectStandardOutput (Join-Path $Output 'data-check.log') -RedirectStandardError (Join-Path $Output 'data-check-errors.log') -PassThru
 if (!$p.WaitForExit(180000)) { $p.Kill(); throw 'Core data check timed out' }
 if ($p.ExitCode -ne 0) { throw "Core data check failed: $($p.ExitCode)" }
 . (Join-Path $client 'tools/hybrid-updater/windows-updater.ps1')
 $state = Join-Path $Output 'updater-state'
 [IO.Directory]::CreateDirectory($state) | Out-Null
+Write-Host 'Launching the default Windows renderer'
 $p = Start-Process $exe -WorkingDirectory $client -ArgumentList @('--basepath', '""', '--userdir', $profileArgument) -RedirectStandardOutput (Join-Path $Output 'menu.log') -RedirectStandardError (Join-Path $Output 'menu-errors.log') -PassThru
 try {
     Start-Sleep -Seconds 15
@@ -53,6 +58,7 @@ try {
     if (!$p.HasExited) { $p.CloseMainWindow() | Out-Null; if (!$p.WaitForExit(10000)) { $p.Kill(); $p.WaitForExit() } }
 }
 $before = Get-FileDigest $exe
+Write-Host 'Checking published update and rollback'
 Invoke-Install $update $client $state
 if ((Get-InstalledVersion $client $state) -ne $ReleaseTag) { throw 'Installed version mismatch' }
 Invoke-Rollback $client $state
