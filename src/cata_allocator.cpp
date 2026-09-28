@@ -4,8 +4,10 @@
 #define __has_feature(x) 0
 #endif
 
-// snmalloc isn't compatible with any sanitizers.
-#if !defined(__SANITIZE_ADDRESS__) && !__has_feature(address_sanitizer)
+// snmalloc isn't compatible with any sanitizers. Keep MinGW on the CRT allocator:
+// its snmalloc override faults during core-data validation under Wine, whereas
+// the default allocator completes the same validation.
+#if !defined(__MINGW32__) && !defined(__SANITIZE_ADDRESS__) && !__has_feature(address_sanitizer)
 #define CATA_USE_SNMALLOC
 #endif
 
