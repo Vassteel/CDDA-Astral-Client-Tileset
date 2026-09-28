@@ -18,7 +18,8 @@ function Download-Asset([string]$Suffix) {
 $full = Download-Asset '-windows-x64.zip'
 $update = Download-Asset '-windows-update.zip'
 Write-Host 'Extracting full client'
-Expand-Archive $full (Join-Path $Output 'unpacked')
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+[IO.Compression.ZipFile]::ExtractToDirectory($full, (Join-Path $Output 'unpacked'))
 $client = (Get-ChildItem (Join-Path $Output 'unpacked') -Directory | Select-Object -First 1).FullName
 $exe = Join-Path $client 'cataclysm-tiles.exe'
 $profile = Join-Path $Output 'profile'
@@ -29,7 +30,10 @@ $env:SDL_VIDEO_DRIVER = 'windows'
 $env:SDL_VIDEODRIVER = 'windows'
 Write-Host 'Checking core game data'
 $p = Start-Process $exe -WorkingDirectory $client -ArgumentList @('--basepath', '""', '--userdir', $profileArgument, '--check-mods', 'dda') -RedirectStandardOutput (Join-Path $Output 'data-check.log') -RedirectStandardError (Join-Path $Output 'data-check-errors.log') -PassThru
+# Keep a handle before waiting; PowerShell 5.1 otherwise loses ExitCode here.
+$null = $p.Handle
 if (!$p.WaitForExit(180000)) { $p.Kill(); throw 'Core data check timed out' }
+$p.Refresh()
 if ($p.ExitCode -ne 0) { throw "Core data check failed: $($p.ExitCode)" }
 . (Join-Path $client 'tools/hybrid-updater/windows-updater.ps1')
 $state = Join-Path $Output 'updater-state'
