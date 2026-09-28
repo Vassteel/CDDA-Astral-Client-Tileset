@@ -9,6 +9,9 @@ import tarfile
 
 
 def stage(source, binary, runtime, output, version):
+    for tool in ['git', 'strip', 'patchelf']:
+        if not shutil.which(tool):
+            raise SystemExit(f'Packaging requires {tool} on PATH')
     root = output / ('Astral-Client-' + version)
     if root.exists():
         raise SystemExit('Output already exists; use a new staging directory')
