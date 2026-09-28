@@ -79,13 +79,19 @@ extern "C" {
                  << "\nVERSION: " << getVersionString()
                  << "\nTYPE: " << type
                  << "\nMESSAGE: " << msg;
-#if defined(TILES)
-        if( SDL_ShowSimpleMessageBox( SDL_MESSAGEBOX_ERROR, "Error",
-                                      log_text.str().c_str(), nullptr ) != 0 ) {
-            log_text << "\nError creating SDL message box: " << SDL_GetError();
+#endif
+        // Write header immediately so exit-path / nested faults still leave a
+        // fresh crash.log even if backtrace or the SDL dialog never finishes.
+        // (Observed on Steam Deck: dialog shown, crash.log left stale.)
+        {
+            FILE *hdr = fopen( crash_log_file.c_str(), "w" );
+            if( hdr ) {
+                const std::string header = log_text.str();
+                fwrite( header.data(), 1, header.size(), hdr );
+                fflush( hdr );
+                fclose( hdr );
+            }
         }
-#endif
-#endif
         log_text << "\nSTACK TRACE:\n";
         debug_write_backtrace( log_text );
         std::cerr << log_text.str();
@@ -99,6 +105,12 @@ extern "C" {
                 std::cerr << "Error: closing log file failed: " << strerror( errno ) << "\n";
             }
         }
+#if defined(TILES) && !defined(__ANDROID__)
+        if( SDL_ShowSimpleMessageBox( SDL_MESSAGEBOX_ERROR, "Error",
+                                      log_text.str().c_str(), nullptr ) != 0 ) {
+            std::cerr << "Error creating SDL message box: " << SDL_GetError() << "\n";
+        }
+#endif
 #if defined(__ANDROID__)
         // Create a placeholder dummy file "config/crash.log.prompt"
         // to let the app show a dialog box at next start

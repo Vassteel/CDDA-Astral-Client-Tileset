@@ -41,6 +41,7 @@
 #include "magic_enchantment.h"
 #include "mutation.h"
 #include "output.h"
+#include "player_display_hybrid.h"
 #include "pimpl.h"
 #include "point.h"
 #include "proficiency.h"
@@ -1522,6 +1523,11 @@ static std::pair<unsigned, unsigned> calculate_shared_column_win_height(
 
 void Character::disp_info( bool customize_character )
 {
+#if defined( TILES )
+    // Soft-fork D Hybrid character sheet (ImGui charcoal/amber, all vanilla fields).
+    player_display_hybrid( *this, customize_character );
+    return;
+#else
     // Customizing any character is always enabled in debug mode
     customize_character |= debug_mode;
 
@@ -1975,4 +1981,5 @@ void Character::disp_info( bool customize_character )
                                              effect_name_and_text, skillslist, customize_character,
                                              windows, w_tip, tip_btn_highlight );
     } while( !done );
+#endif // !TILES
 }

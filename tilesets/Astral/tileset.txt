@@ -1,0 +1,6 @@
+# Astral 0.1.5
+NAME: Astral
+VIEW: Astral
+JSON: tile_config.json
+TILESET: tiles.png
+# Includes UltiCa fallback; see ULTICA-CREDITS.txt and ATTRIBUTION.md.

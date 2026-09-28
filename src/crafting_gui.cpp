@@ -25,6 +25,7 @@
 #include "bonuses.h"
 #include "calendar.h"
 #include "cata_imgui.h"
+#include "ui_hybrid_chrome.h"
 #include "cata_utility.h"
 #include "catacharset.h"
 #include "character.h"
@@ -445,6 +446,12 @@ class crafting_ui_impl : public cataimgui::window
         }
 
     protected:
+        // Soft-fork Hybrid chrome (charcoal + muted amber) matching Equipment / sidebar.
+        void draw() override {
+            ui_hybrid_chrome::push();
+            cataimgui::window::draw();
+            ui_hybrid_chrome::pop();
+        }
         void draw_controls() override;
         cataimgui::bounds get_bounds() override;
 
@@ -496,6 +503,7 @@ class crafting_ui_impl : public cataimgui::window
         int pending_batch_delta = 0;    // +1/-1 from inline batch buttons
         bool pending_enter_batch = false;
         bool pending_exit_batch = false;
+        bool pending_craft_x = false;   // Soft-fork: prompt for explicit Craft X amount
         bool need_scroll_to_selected = false;
         bool need_scroll_to_selected_recipe_details = false;
 
@@ -632,7 +640,9 @@ crafting_ui_impl::crafting_ui_impl( Character *crafter, const recipe_id &goto_re
 
 cataimgui::bounds crafting_ui_impl::get_bounds()
 {
-    ImVec2 viewport = ImGui::GetMainViewport()->Size;
+    const ImVec2 actual = ImGui::GetMainViewport()->Size;
+    const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
+    ImVec2 viewport( std::min( actual.x, 1440.f * scale ), std::min( actual.y * 0.94f, 840.f * scale ) );
     float char_w = ImGui::CalcTextSize( "X" ).x;
     float full_screen_w = 80.f * char_w;
 
@@ -645,8 +655,8 @@ cataimgui::bounds crafting_ui_impl::get_bounds()
         width = full_screen_w;
     }
 
-    float x = ( viewport.x - width ) / 2.f;
-    return { x, 0.f, width, viewport.y };
+    width = std::min( width, viewport.x );
+    return { -1.f, -1.f, width, viewport.y };
 }
 
 // --- draw_controls ---
@@ -866,10 +876,10 @@ void crafting_ui_impl::draw_recipe_list()
     }
     float avail_width = ImGui::GetContentRegionAvail().x;
 
-    // Recipes / Batch toggle buttons
+    // Recipes / Batch / Craft X toggle buttons (Hybrid soft-fork)
     {
         float spacing = ImGui::GetStyle().ItemSpacing.x;
-        float btn_w = ( avail_width - spacing ) / 2.f;
+        float btn_w = ( avail_width - 2.f * spacing ) / 3.f;
         bool can_batch = !current.empty() && line >= 0 &&
                          line < static_cast<int>( current.size() ) &&
                          !current[line]->is_nested();
@@ -879,19 +889,45 @@ void crafting_ui_impl::draw_recipe_list()
             ImGui::Button( _( "Recipes" ), ImVec2( btn_w, 0 ) );
             ImGui::EndDisabled();
             ImGui::SameLine();
-            ImGui::BeginDisabled( !can_batch );
-            if( ImGui::Button( _( "Batch" ), ImVec2( btn_w, 0 ) ) && can_batch ) {
-                pending_enter_batch = true;
+            {
+                const int n = ui_hybrid_chrome::push_toolbar_button( false );
+                ImGui::BeginDisabled( !can_batch );
+                if( ImGui::Button( _( "Batch" ), ImVec2( btn_w, 0 ) ) && can_batch ) {
+                    pending_enter_batch = true;
+                }
+                ImGui::EndDisabled();
+                ImGui::PopStyleColor( n );
             }
-            ImGui::EndDisabled();
+            ImGui::SameLine();
+            {
+                const int n = ui_hybrid_chrome::push_toolbar_button( false );
+                ImGui::BeginDisabled( !can_batch );
+                if( ImGui::Button( _( "Craft X" ), ImVec2( btn_w, 0 ) ) && can_batch ) {
+                    pending_craft_x = true;
+                }
+                ImGui::EndDisabled();
+                ImGui::PopStyleColor( n );
+            }
         } else {
             if( ImGui::Button( _( "Recipes" ), ImVec2( btn_w, 0 ) ) ) {
                 pending_exit_batch = true;
             }
             ImGui::SameLine();
-            ImGui::BeginDisabled();
-            ImGui::Button( _( "Batch" ), ImVec2( btn_w, 0 ) );
-            ImGui::EndDisabled();
+            {
+                const int n = ui_hybrid_chrome::push_toolbar_button( true );
+                ImGui::BeginDisabled();
+                ImGui::Button( _( "Batch" ), ImVec2( btn_w, 0 ) );
+                ImGui::EndDisabled();
+                ImGui::PopStyleColor( n );
+            }
+            ImGui::SameLine();
+            {
+                const int n = ui_hybrid_chrome::push_toolbar_button( false );
+                if( ImGui::Button( _( "Craft X" ), ImVec2( btn_w, 0 ) ) ) {
+                    pending_craft_x = true;
+                }
+                ImGui::PopStyleColor( n );
+            }
         }
     }
 
@@ -1057,6 +1093,30 @@ void crafting_ui_impl::draw_recipe_info_panel()
             cataimgui::PopGuiFont1_5x();
         }
 
+        // Soft-fork: mouse-friendly batch amount control (Craft X amount)
+        if( !recp.is_nested() ) {
+            ImGui::SetNextItemWidth( ImGui::CalcTextSize( "0000" ).x +
+                                     ImGui::GetFrameHeight() * 2.5f );
+            int batch_edit = manual_batch;
+            if( ImGui::InputInt( "##craft_batch_amt", &batch_edit, 1, 5 ) ) {
+                int clamped = std::clamp( batch_edit, 1, 50 );
+                if( clamped != manual_batch ) {
+                    pending_batch_delta = clamped - manual_batch;
+                }
+            }
+            ImGui::SameLine();
+            ImGui::TextColored( cataimgui::imvec4_from_color( c_light_gray ), "%s",
+                                _( "batch amount" ) );
+            ImGui::SameLine();
+            {
+                const int n = ui_hybrid_chrome::push_toolbar_button( false );
+                if( ImGui::SmallButton( _( "Craft X…" ) ) ) {
+                    pending_craft_x = true;
+                }
+                ImGui::PopStyleColor( n );
+            }
+        }
+
         // Batch size for all subsequent calculations
         const int batch_size = get_batch_size();
         float region_w = ImGui::GetContentRegionAvail().x;
@@ -1146,6 +1206,19 @@ void crafting_ui_impl::draw_recipe_info_panel()
                         ImGui::PopTextWrapPos();
                     }
                 }
+            }
+
+            // Soft-fork: explicit time-to-finish for selected batch (wall-clock approx)
+            if( !recp.is_nested() ) {
+                const int expected_turns_hdr = crafter->expected_time_to_craft( recp, batch_size )
+                                              / to_moves<int>( 1_turns );
+                ui_hybrid_chrome::section_header( _( "Time to finish" ) );
+                const std::string finish_line = string_format(
+                                                    //~ %1$d: batch size, %2$s: approximate craft duration
+                                                    _( "Batch x%1$d — %2$s (in-game)" ),
+                                                    batch_size, approx_craft_time( expected_turns_hdr ) );
+                cataimgui::draw_colored_text( colorize( finish_line, c_cyan ), c_cyan, region_w );
+                ImGui::Spacing();
             }
 
             // Line 3: centered natural-language stats
@@ -2592,6 +2665,31 @@ void crafting_ui_impl::process_action( const std::string &action_in,
         recalc = true;
     }
     pending_exit_batch = false;
+
+    // Soft-fork: Craft X — prompt for explicit batch amount, then enter batch mode
+    if( pending_craft_x ) {
+        pending_craft_x = false;
+        bool can_batch_here = !current.empty() &&
+                              line >= 0 && line < static_cast<int>( current.size() ) &&
+                              !current[line]->is_nested();
+        if( can_batch_here ) {
+            int amount = manual_batch > 0 ? manual_batch : 1;
+            if( query_int( amount, true, _( "Craft how many? (batch size 1–50)" ) ) ) {
+                amount = std::clamp( amount, 1, 50 );
+                chosen = current[line];
+                batch_line = line;
+                manual_batch = amount;
+                if( amount > 1 ) {
+                    batch = true;
+                }
+                recalc = true;
+                if( batch ) {
+                    line = manual_batch - 1;
+                    need_scroll_to_selected = true;
+                }
+            }
+        }
+    }
 
     // Consume pending batch size change from +/- buttons
     if( pending_batch_delta != 0 ) {

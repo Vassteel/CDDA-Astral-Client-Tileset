@@ -1,5 +1,8 @@
 #include "ui_hybrid_chrome.h"
 
+#include <utility>
+#include <vector>
+
 #include "imgui/imgui.h"
 
 namespace ui_hybrid_chrome
@@ -10,15 +13,15 @@ namespace palette
 // Warm dark wood / bronze panels (BG3-mock Hybrid): charcoal base + bronze grit.
 ImVec4 window_bg()
 {
-    return ImVec4( 0.09f, 0.07f, 0.05f, 0.97f );
+    return ImVec4( 0.098f, 0.102f, 0.106f, 1.0f );
 }
 ImVec4 child_bg()
 {
-    return ImVec4( 0.12f, 0.10f, 0.07f, 0.94f );
+    return ImVec4( 0.129f, 0.133f, 0.137f, 1.0f );
 }
 ImVec4 popup_bg()
 {
-    return ImVec4( 0.11f, 0.09f, 0.06f, 0.98f );
+    return ImVec4( 0.137f, 0.137f, 0.133f, 1.0f );
 }
 ImVec4 border()
 {
@@ -54,7 +57,7 @@ ImVec4 text()
 }
 ImVec4 text_muted()
 {
-    return ImVec4( 0.58f, 0.50f, 0.38f, 1.00f );
+    return ImVec4( 0.68f, 0.65f, 0.60f, 1.00f );
 }
 ImVec4 accent()
 {
@@ -106,19 +109,17 @@ ImVec4 toolbar_active_pressed()
 namespace
 {
 
-thread_local int g_push_color_count = 0;
-thread_local int g_push_var_count = 0;
+thread_local std::vector<std::pair<int, int>> style_stack;
 
 } // namespace
 
 void push()
 {
-    g_push_color_count = 0;
-    g_push_var_count = 0;
+    int color_count = 0;
 
     auto push_col = [&]( ImGuiCol idx, const ImVec4 & c ) {
         ImGui::PushStyleColor( idx, c );
-        ++g_push_color_count;
+        ++color_count;
     };
 
     push_col( ImGuiCol_Text, palette::text() );
@@ -138,6 +139,7 @@ void push()
     push_col( ImGuiCol_ScrollbarGrabHovered, palette::accent_dim() );
     push_col( ImGuiCol_ScrollbarGrabActive, palette::accent() );
     push_col( ImGuiCol_CheckMark, palette::accent() );
+    push_col( ImGuiCol_CheckboxSelectedBg, palette::slot_selected() );
     push_col( ImGuiCol_SliderGrab, palette::accent_dim() );
     push_col( ImGuiCol_SliderGrabActive, palette::accent() );
     push_col( ImGuiCol_Button, palette::button() );
@@ -156,6 +158,14 @@ void push()
     // ProgressBar / plot fill (sidebar meters, HP, carry weight, etc.)
     push_col( ImGuiCol_PlotHistogram, palette::accent() );
     push_col( ImGuiCol_PlotHistogramHovered, palette::border_accent() );
+    push_col( ImGuiCol_MenuBarBg, palette::child_bg() );
+    push_col( ImGuiCol_NavCursor, palette::accent() );
+    push_col( ImGuiCol_TableHeaderBg, palette::header() );
+    push_col( ImGuiCol_TableBorderStrong, palette::border() );
+    push_col( ImGuiCol_TableBorderLight, palette::separator() );
+    push_col( ImGuiCol_TableRowBgAlt, ImVec4( 0.3f, 0.28f, 0.23f, 0.16f ) );
+    push_col( ImGuiCol_TabDimmed, palette::button() );
+    push_col( ImGuiCol_TabDimmedSelected, palette::header() );
 
     ImGui::PushStyleVar( ImGuiStyleVar_WindowRounding, 4.f );
     ImGui::PushStyleVar( ImGuiStyleVar_ChildRounding, 3.f );
@@ -165,19 +175,25 @@ void push()
     ImGui::PushStyleVar( ImGuiStyleVar_FrameBorderSize, 1.f );
     ImGui::PushStyleVar( ImGuiStyleVar_ChildBorderSize, 1.f );
     ImGui::PushStyleVar( ImGuiStyleVar_WindowBorderSize, 1.f );
-    g_push_var_count = 8;
+    style_stack.emplace_back( color_count, 8 );
 }
 
 void pop()
 {
-    if( g_push_var_count > 0 ) {
-        ImGui::PopStyleVar( g_push_var_count );
-        g_push_var_count = 0;
+    if( !style_stack.empty() ) {
+        const auto counts = style_stack.back();
+        style_stack.pop_back();
+        ImGui::PopStyleVar( counts.second );
+        ImGui::PopStyleColor( counts.first );
     }
-    if( g_push_color_count > 0 ) {
-        ImGui::PopStyleColor( g_push_color_count );
-        g_push_color_count = 0;
-    }
+}
+
+void apply_defaults()
+{
+    push();
+    const ImGuiStyle themed = ImGui::GetStyle();
+    pop();
+    ImGui::GetStyle() = themed;
 }
 
 void draw_item_bezel( bool selected, bool hovered, bool empty )

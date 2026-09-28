@@ -12,6 +12,7 @@
 #include "cata_path.h"
 #include "cata_utility.h"
 #include "catacharset.h"
+#include "cuboid_rectangle.h"
 #include "character.h"
 #include "color.h"
 #include "cursesdef.h"
@@ -78,14 +79,16 @@ void safemode::show( const std::string &custom_name_in, bool is_safemode_in )
     ui_adaptor ui;
 
     const auto init_windows = [&]( ui_adaptor & ui ) {
-        content_height = TERMY - 2 - header_height;
-        const int min_screen_width = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
-        const int offset = TERMX > FULL_SCREEN_WIDTH ? ( TERMX - min_screen_width ) / 2 : 0;
+        const int height = std::min( TERMY, 36 );
+        content_height = height - 2 - header_height;
+        const int min_screen_width = std::min( TERMX, 110 );
+        const int offset = ( TERMX - min_screen_width ) / 2;
+        const int offset_y = ( TERMY - height ) / 2;
 
-        w_border = catacurses::newwin( TERMY, min_screen_width, point( offset, 0 ) );
-        w_header = catacurses::newwin( 10, min_screen_width - 2, point( 1 + offset, 1 ) );
+        w_border = catacurses::newwin( height, min_screen_width, point( offset, offset_y ) );
+        w_header = catacurses::newwin( 10, min_screen_width - 2, point( 1 + offset, offset_y + 1 ) );
         w = catacurses::newwin( content_height, min_screen_width - 2,
-                                point( 1 + offset, header_height + 1 ) );
+                                point( 1 + offset, offset_y + header_height + 1 ) );
 
         ui.position_from_window( w_border );
     };
@@ -119,6 +122,14 @@ void safemode::show( const std::string &custom_name_in, bool is_safemode_in )
         ctxt.register_action( "SWAP_RULE_GLOBAL_CHAR" );
     }
 
+    ctxt.register_action( "SELECT" );
+    ctxt.register_action( "SEC_SELECT" );
+    ctxt.register_action( "MOUSE_MOVE" );
+    ctxt.register_action( "COORDINATE" );
+    ctxt.register_action( "SCROLL_UP" );
+    ctxt.register_action( "SCROLL_DOWN" );
+    std::vector<std::pair<inclusive_rectangle<point>, std::string>> mouse_buttons;
+    std::map<int, int> mouse_columns;
     Character &player_character = get_player_character();
     ui.on_redraw( [&]( const ui_adaptor & ) {
 
@@ -142,6 +153,7 @@ void safemode::show( const std::string &custom_name_in, bool is_safemode_in )
 
         column_width[COLUMN_MOVEMENT_MODE] = getmaxx( w_border ) - column_pos[COLUMN_MOVEMENT_MODE] - 2;
 
+        mouse_columns = column_pos;
         draw_border( w_border, BORDER_COLOR, custom_name_in );
 
         wattron( w_border, c_light_gray );
@@ -149,31 +161,36 @@ void safemode::show( const std::string &custom_name_in, bool is_safemode_in )
         mvwaddch( w_border, point( getmaxx( w_border ) - 1, 4 ), LINE_XOXX ); // -|
 
         for( auto &column : column_pos ) {
-            mvwaddch( w_border, point( column.second + 1, TERMY - 1 ), LINE_XXOX ); // _|_
+            mvwaddch( w_border, point( column.second + 1, getmaxy( w_border ) - 1 ), LINE_XXOX ); // _|_
         }
         wattroff( w_border, c_light_gray );
 
         wnoutrefresh( w_border );
 
-        static const std::vector<std::string> hotkeys = {{
-                translate_marker( "<A>dd" ), translate_marker( "<R>emove" ),
-                translate_marker( "<C>opy" ), translate_marker( "<M>ove" ),
-                translate_marker( "<E>nable" ), translate_marker( "<D>isable" ),
-                translate_marker( "<T>est" )
+        mouse_buttons.clear();
+        const auto button_row = [&]( int y,
+        const std::vector<std::pair<std::string, std::string>> &buttons ) {
+            int x = 0;
+            for( const auto &button : buttons ) {
+                const std::string label = "[" + button.second + "]";
+                const int width = utf8_width( label );
+                if( x + width > getmaxx( w_header ) ) {
+                    break;
+                }
+                mvwprintz( w_header, point( x, y ), c_light_gray, "%s", label );
+                mouse_buttons.emplace_back( inclusive_rectangle<point>( point( x, y ),
+                                            point( x + width - 1, y ) ), button.first );
+                x += width + 1;
             }
         };
-
-        int tmpx = 0;
-        for( const std::string &hotkey : hotkeys ) {
-            tmpx += shortcut_print( w_header, point( tmpx, 0 ), c_white, c_light_green, _( hotkey ) ) + 2;
-        }
-
-        tmpx = 0;
-        tmpx += shortcut_print( w_header, point( tmpx, 1 ), c_white, c_light_green,
-                                _( "<+-> Move up/down" ) ) + 2;
-        tmpx += shortcut_print( w_header, point( tmpx, 1 ), c_white, c_light_green,
-                                _( "<Enter>-Edit" ) ) + 2;
-        shortcut_print( w_header, point( tmpx, 1 ), c_white, c_light_green, _( "<Tab>-Switch Page" ) );
+        button_row( 0, {{ "ADD_RULE", _( "Add" ) }, { "REMOVE_RULE", _( "Remove" ) },
+            { "COPY_RULE", _( "Copy" ) }, { "SWAP_RULE_GLOBAL_CHAR", _( "Move" ) },
+            { "ENABLE_RULE", _( "Enable" ) }, { "DISABLE_RULE", _( "Disable" ) },
+            { "TEST_RULE", _( "Test" ) }} );
+        button_row( 1, {{ "MOVE_RULE_UP", _( "Up" ) }, { "MOVE_RULE_DOWN", _( "Down" ) },
+            { "CONFIRM", _( "Edit" ) }, { "NEXT_TAB", _( "Page" ) },
+            { "ADD_DEFAULT_RULESET", _( "Defaults" ) }, { "HELP_KEYBINDINGS", _( "Keys" ) },
+            { "QUIT", _( "Close" ) }} );
 
         mvwhline( w_header, point( 0, 3 ), c_light_gray, LINE_OXOX,
                   getmaxx( w_header ) ); // Draw line under header
@@ -270,7 +287,39 @@ void safemode::show( const std::string &custom_name_in, bool is_safemode_in )
 
         ui_manager::redraw();
 
-        const std::string action = ctxt.handle_input();
+        std::string action = ctxt.handle_input();
+        if( action == "SELECT" || action == "SEC_SELECT" ) {
+            if( const auto point = ctxt.get_coordinates_text( w_header ) ) {
+                for( const auto &button : mouse_buttons ) {
+                    if( button.first.contains( *point ) ) {
+                        action = button.second;
+                        break;
+                    }
+                }
+            }
+            if( action == "SELECT" || action == "SEC_SELECT" ) {
+                if( const auto point = ctxt.get_coordinates_text( w ) ) {
+                    if( point->x >= 0 && point->x < getmaxx( w ) && point->y >= 0 &&
+                        point->y < getmaxy( w ) && point->y + start_pos <
+                        static_cast<int>( current_tab.size() ) ) {
+                        line = point->y + start_pos;
+                        for( const auto &cell : mouse_columns ) {
+                            if( point->x >= cell.second ) {
+                                column = cell.first;
+                            }
+                        }
+                        action = action == "SEC_SELECT" ? "CONFIRM" : "MOUSE_MOVE";
+                    }
+                }
+            }
+            if( action == "HELP_KEYBINDINGS" ) {
+                ctxt.display_menu();
+            }
+        } else if( action == "SCROLL_UP" ) {
+            action = "UP";
+        } else if( action == "SCROLL_DOWN" ) {
+            action = "DOWN";
+        }
         const int recmax = static_cast<int>( current_tab.size() );
         const int scroll_rate = recmax > 20 ? 10 : 3;
 
@@ -384,11 +433,12 @@ void safemode::show( const std::string &custom_name_in, bool is_safemode_in )
                     wnoutrefresh( w_help );
                 } );
 
-                current_tab[line].rule = wildcard_trim_rule( string_input_popup()
-                                         .title( _( "Safe Mode Rule:" ) )
-                                         .width( 30 )
-                                         .text( current_tab[line].rule )
-                                         .query_string() );
+                string_input_popup input;
+                input.title( _( "Safe Mode Rule:" ) ).width( 30 ).text( current_tab[line].rule );
+                const std::string rule = input.query_string();
+                if( !input.canceled() ) {
+                    current_tab[line].rule = wildcard_trim_rule( rule );
+                }
             } else if( column == COLUMN_WHITE_BLACKLIST ) {
                 current_tab[line].whitelist = !current_tab[line].whitelist;
             } else if( column == COLUMN_CATEGORY ) {
@@ -414,7 +464,8 @@ void safemode::show( const std::string &custom_name_in, bool is_safemode_in )
                 }
             } else if( column == COLUMN_PROXIMITY && ( current_tab[line].category == Categories::SOUND ||
                        !current_tab[line].whitelist ) ) {
-                const std::string text = string_input_popup()
+                string_input_popup input;
+                const std::string text = input
                                          .title( _( "Proximity Distance (0=max view distance)" ) )
                                          .width( 4 )
                                          .text( std::to_string( current_tab[line].proximity ) )
@@ -423,6 +474,9 @@ void safemode::show( const std::string &custom_name_in, bool is_safemode_in )
                                          .max_length( 3 )
                                          .only_digits( true )
                                          .query_string();
+                if( input.canceled() ) {
+                    continue;
+                }
                 if( text.empty() ) {
                     current_tab[line].proximity = get_option<int>( "SAFEMODEPROXIMITY" );
                 } else {

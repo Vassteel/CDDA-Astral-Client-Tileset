@@ -980,10 +980,10 @@ bool talk_function::display_and_choose_opts(
 
     ui_adaptor ui;
     ui.on_screen_resize( [&]( ui_adaptor & ui ) {
-        part_y = TERMY > FULL_SCREEN_HEIGHT ? ( TERMY - FULL_SCREEN_HEIGHT ) / 4 : 0;
-        part_x = TERMX > FULL_SCREEN_WIDTH ? ( TERMX - FULL_SCREEN_WIDTH ) / 4 : 0;
-        maxy = part_y ? TERMY - 2 * part_y : FULL_SCREEN_HEIGHT;
-        maxx = part_x ? TERMX - 2 * part_x : FULL_SCREEN_WIDTH;
+        maxy = std::min( TERMY - TITLE_TAB_HEIGHT, 36 );
+        maxx = std::min( TERMX, 120 );
+        part_y = ( TERMY - maxy - TITLE_TAB_HEIGHT ) / 2;
+        part_x = ( TERMX - maxx ) / 2;
         info_height = maxy - 3;
         info_width = maxx - 1 - MAX_FAC_NAME_SIZE;
 

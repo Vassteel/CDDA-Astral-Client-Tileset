@@ -2001,6 +2001,14 @@ class Character : public Creature, public visitable
         void disp_info( bool customize_character = false );
         /** Provides the window and detailed morale data */
         void disp_morale();
+        /** Hybrid Character sheet: morale tab rows (left/right/separator/favor). */
+        struct morale_sheet_row {
+            std::string left;
+            std::string right;
+            bool separator = false;
+            int favor = 0;
+        };
+        std::vector<morale_sheet_row> get_morale_sheet_rows();
         /** Opens the medical window. Returns true if window was closed */
         bool disp_medical();
         // return true if wound fix was successfully picked

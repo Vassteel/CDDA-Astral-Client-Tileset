@@ -215,25 +215,23 @@ void dialogue_imgui_impl::draw_controls()
         ImGui::SetWindowHiddenAndSkipItemsForCurrentFrame( w );
     }
 
-    ImGui::SetWindowSize( ImVec2( window_width, window_height ), ImGuiCond_Once );
+    const ImVec2 origin = ImGui::GetWindowPos();
     draw_dialogue_sidebar();
-    ImGui::SetNextWindowPos( ImVec2( sidebar_width() + border_size() * 3,
-                                     border_size() * 2 ) );
+    ImGui::SetNextWindowPos( ImVec2( origin.x + sidebar_width() + border_size() * 3,
+                                     origin.y + border_size() * 2 ) );
     draw_dialogue_history();
-    ImGui::SetNextWindowPos( ImVec2( sidebar_width() + border_size() * 3,
-                                     horizontal_separator_pos_y( window_height ) + border_size() * 2 ) );
+    ImGui::SetNextWindowPos( ImVec2( origin.x + sidebar_width() + border_size() * 3,
+                                     origin.y + horizontal_separator_pos_y( window_height ) + border_size() * 2 ) );
     draw_dialogue_responses();
 }
 
 cataimgui::bounds dialogue_imgui_impl::get_bounds()
 {
-    // This allows us to occupy all space except the sidebar.
-    ImVec2 viewport = ImGui::GetMainViewport()->WorkSize;
-    return { 0,
-             0,
-             window_width,
-             viewport.y
-           };
+    const ImVec2 vp = ImGui::GetMainViewport()->Size;
+    const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
+    window_width = std::min( vp.x * 0.94f, 1280.f * scale );
+    window_height = std::min( vp.y * 0.92f, 800.f * scale );
+    return { -1.f, -1.f, window_width, window_height };
 }
 
 void dialogue_imgui::draw_dialogue_imgui( bool is_computer, bool is_not_conversation,

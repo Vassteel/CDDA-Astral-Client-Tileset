@@ -42,12 +42,17 @@ string_input_popup::~string_input_popup() = default;
 
 void string_input_popup::create_window()
 {
+    title_height = 0;
+    description_height = 0;
     titlesize = utf8_width( remove_color_tags( _title ) ); // Occupied horizontal space
     if( _max_length <= 0 ) {
         _max_length = _width;
     }
     // 2 for border (top and bottom) and 1 for the input text line.
     w_height = 2 + 1;
+#if defined(TILES)
+    w_height += 2; // Visible Apply / Cancel controls for standalone prompts.
+#endif
 
     // |"w_width = width + titlesize (this text) + 5": _____  |
     w_width = FULL_SCREEN_WIDTH;
@@ -74,12 +79,20 @@ void string_input_popup::create_window()
         w_height += title_height;
     }
 
+#if defined(TILES)
+    w_width = std::max( w_width, std::min( TERMX,
+                       utf8_width( std::string( _( "Apply" ) ) ) +
+                       utf8_width( std::string( _( "Cancel" ) ) ) + 13 ) );
+#endif
     if( !_description.empty() ) {
         const int twidth = std::min( utf8_width( remove_color_tags( _description ) ), w_width - 4 );
         description_height = foldstring( _description, twidth ).size();
         w_height += description_height;
         if( w_height > TERMY ) {
             description_height = TERMY - 2 - title_height - 1;
+#if defined(TILES)
+            description_height -= 2;
+#endif
             w_height = TERMY;
         }
     }
@@ -101,7 +114,7 @@ void string_input_popup::create_window()
         desc_view_ptr = std::make_unique<scrolling_text_view>( w_description );
         desc_view_ptr->set_text( _description );
     }
-    w_title_and_entry = catacurses::newwin( w_height - description_height - 2, w_width - 2,
+    w_title_and_entry = catacurses::newwin( title_height + 1, w_width - 2,
                                             point( w_x + 1, w_y + 1 + description_height ) );
 
     custom_window = false;
@@ -236,6 +249,10 @@ void string_input_popup::draw( ui_adaptor *const ui, const utf8_wrapper &ret,
     if( !custom_window ) {
         werase( w_full );
         draw_border( w_full );
+#if defined(TILES)
+        mvwprintz( w_full, point( 2, w_height - 2 ), c_light_gray, "[ %s ] [ %s ]",
+                   _( "Apply" ), _( "Cancel" ) );
+#endif
         wnoutrefresh( w_full );
 
         if( !_title.empty() ) {
@@ -390,6 +407,12 @@ const std::string &string_input_popup::query_string( const bool loop, const bool
         create_context();
     }
 
+#if defined(TILES)
+    if( !custom_window ) {
+        ctxt->register_action( "SELECT" );
+        ctxt->register_action( "COORDINATE" );
+    }
+#endif
     if( desc_view_ptr ) {
         desc_view_ptr->set_up_navigation( *ctxt, scrolling_key_scheme::no_scheme, true );
     }
@@ -466,7 +489,22 @@ const std::string &string_input_popup::query_string( const bool loop, const bool
             return _text;
         }
 
-        const std::string action = ctxt->handle_input();
+        std::string action = ctxt->handle_input();
+#if defined(TILES)
+        if( !custom_window && action == "SELECT" ) {
+            if( const auto p = ctxt->get_coordinates_text( w_full ) ) {
+                const int apply_end = 2 + utf8_width( std::string( _( "Apply" ) ) ) + 4;
+                const int cancel_end = apply_end + 1 + utf8_width( std::string( _( "Cancel" ) ) ) + 4;
+                if( p->y == w_height - 2 ) {
+                    if( p->x >= 2 && p->x < apply_end ) {
+                        action = "TEXT.CONFIRM";
+                    } else if( p->x > apply_end && p->x < cancel_end ) {
+                        action = "TEXT.QUIT";
+                    }
+                }
+            }
+        }
+#endif
         const input_event ev = ctxt->get_raw_input();
         ch = ev.type == input_event_t::keyboard_char ? ev.get_first_input() : 0;
         _handled = true;

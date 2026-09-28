@@ -1,7 +1,10 @@
+#include "ui_telemetry.h"
 #include "auto_pickup.h"
 
 #include <algorithm>
 #include <cstddef>
+#include <cstdio>
+#include "ui_hybrid_window.h"
 #include <functional>
 #include <initializer_list>
 #include <iosfwd>
@@ -303,11 +306,197 @@ drop_locations auto_pickup::select_items(
     return result;
 }
 
+#if defined(TILES)
+static void show_hybrid_pickup_rules( user_interface &editor )
+{
+    size_t tab_index = 0;
+    int selected = -1;
+    std::string preview_pattern;
+    std::vector<std::string> matches;
+    bool save = false;
+    bool close = false;
+    bool changed = false;
+    bool pickup_enabled = get_option<bool>( "AUTO_PICKUP" );
+    const bool initial_enabled = pickup_enabled;
+    hybrid_window window( editor.title, [&]() {
+        ImGui::Checkbox( _( "Enable autopickup" ), &pickup_enabled );
+        ImGui::SameLine();
+        ImGui::TextDisabled( "%s", _( "Rules are evaluated in order; character rules follow global rules." ) );
+        for( size_t i = 0; i < editor.tabs.size(); ++i ) {
+            if( i != 0 ) {
+                ImGui::SameLine();
+            }
+            if( ImGui::Selectable( editor.tabs[i].title.c_str(), tab_index == i, 0,
+                                  ImVec2( 190.f, 0.f ) ) ) {
+                tab_index = i;
+                selected = -1;
+            }
+        }
+        rule_list &rules = editor.tabs[tab_index].new_rules;
+        const float body_height = std::max( 260.f, ImGui::GetContentRegionAvail().y -
+                                          ImGui::GetFrameHeightWithSpacing() * 2.f );
+        const float left_width = ImGui::GetContentRegionAvail().x * 0.53f;
+        ImGui::BeginChild( "rules", ImVec2( left_width, body_height ), ImGuiChildFlags_Borders );
+        if( ImGui::Button( _( "Add rule" ) ) ) {
+            rules.emplace_back( "", true, false );
+            selected = rules.size() - 1;
+            changed = true;
+        }
+        ImGui::SameLine();
+        ImGui::BeginDisabled( selected < 0 || selected >= static_cast<int>( rules.size() ) );
+        if( ImGui::Button( _( "Copy" ) ) ) {
+            const rule copy = rules[selected];
+            rules.insert( rules.begin() + selected + 1, copy );
+            ++selected;
+            changed = true;
+        }
+        ImGui::SameLine();
+        if( ImGui::Button( _( "Delete" ) ) ) {
+            rules.erase( rules.begin() + selected );
+            selected = std::min( selected, static_cast<int>( rules.size() ) - 1 );
+            changed = true;
+        }
+        ImGui::EndDisabled();
+        if( ImGui::BeginTable( "rule_list", 3, ImGuiTableFlags_ScrollY | ImGuiTableFlags_RowBg |
+                              ImGuiTableFlags_Resizable, ImVec2( 0, 0 ) ) ) {
+            ImGui::TableSetupColumn( _( "On" ), ImGuiTableColumnFlags_WidthFixed, 35.f );
+            ImGui::TableSetupColumn( _( "Rule" ), ImGuiTableColumnFlags_WidthStretch );
+            ImGui::TableSetupColumn( _( "Action" ), ImGuiTableColumnFlags_WidthFixed, 70.f );
+            ImGui::TableSetupScrollFreeze( 0, 1 );
+            ImGui::TableHeadersRow();
+            for( size_t i = 0; i < rules.size(); ++i ) {
+                rule &r = rules[i];
+                ImGui::PushID( i );
+                ImGui::TableNextRow();
+                ImGui::TableSetColumnIndex( 0 );
+                if( ImGui::Checkbox( "##enabled", &r.bActive ) ) {
+                    changed = true;
+                }
+                ImGui::TableSetColumnIndex( 1 );
+                if( ImGui::Selectable( r.sRule.empty() ? _( "New rule" ) : r.sRule.c_str(),
+                                      selected == static_cast<int>( i ) ) ) {
+                    selected = i;
+                }
+                ImGui::TableSetColumnIndex( 2 );
+                ImGui::TextUnformatted( r.bExclude ? _( "Leave" ) : _( "Pick up" ) );
+                ImGui::PopID();
+            }
+            ImGui::EndTable();
+        }
+        ImGui::EndChild();
+        ImGui::SameLine();
+        ImGui::BeginChild( "rule_details", ImVec2( 0, body_height ), ImGuiChildFlags_Borders );
+        if( selected >= 0 && selected < static_cast<int>( rules.size() ) ) {
+            rule &r = rules[selected];
+            char pattern[512];
+            std::snprintf( pattern, sizeof( pattern ), "%s", r.sRule.c_str() );
+            ImGui::SetNextItemWidth( -1 );
+            if( ImGui::InputTextWithHint( "##pattern", _( "Item name or pattern…" ), pattern, sizeof( pattern ) ) ) {
+                r.sRule = pattern;
+                changed = true;
+            }
+            if( ImGui::Checkbox( _( "Leave matching items behind" ), &r.bExclude ) ) {
+                changed = true;
+            }
+            ImGui::TextWrapped( "%s", _( "Use * for any text. Material rules: m:steel matches any steel; M:steel matches only steel." ) );
+            ImGui::BeginDisabled( selected == 0 );
+            if( ImGui::Button( _( "Move up" ) ) ) {
+                std::swap( rules[selected], rules[selected - 1] );
+                --selected;
+                changed = true;
+            }
+            ImGui::EndDisabled();
+            ImGui::SameLine();
+            ImGui::BeginDisabled( selected + 1 >= static_cast<int>( rules.size() ) );
+            if( ImGui::Button( _( "Move down" ) ) ) {
+                std::swap( rules[selected], rules[selected + 1] );
+                ++selected;
+                changed = true;
+            }
+            ImGui::EndDisabled();
+            if( editor.tabs.size() == 2 && ImGui::Button( _( "Move to other ruleset" ) ) ) {
+                editor.tabs[1 - tab_index].new_rules.push_back( rules[selected] );
+                rules.erase( rules.begin() + selected );
+                selected = -1;
+                changed = true;
+            }
+            // Reacquire after reorder/erase; vector references may have changed.
+            const std::string current_pattern = selected >= 0 ? rules[selected].sRule : "";
+            if( current_pattern != preview_pattern ) {
+                preview_pattern = current_pattern;
+                matches.clear();
+                if( !current_pattern.empty() ) {
+                    for( const itype *type : item_controller->all() ) {
+                        const std::string name = type->nname( 1 );
+                        if( check_special_rule( type->materials, current_pattern ) ||
+                            wildcard_match( name, current_pattern ) ) {
+                            matches.push_back( name );
+                        }
+                    }
+                    std::sort( matches.begin(), matches.end() );
+                }
+            }
+            ImGui::Separator();
+            ImGui::Text( "%s", string_format( _( "Pattern matches: %d item types" ), matches.size() ).c_str() );
+            ImGui::TextDisabled( "%s", _( "Preview of this pattern; other rules and pickup limits still apply." ) );
+            ImGui::BeginChild( "matches" );
+            ImGuiListClipper clipper;
+            clipper.Begin( matches.size() );
+            while( clipper.Step() ) {
+                for( int i = clipper.DisplayStart; i < clipper.DisplayEnd; ++i ) {
+                    ImGui::TextUnformatted( matches[i].c_str() );
+                }
+            }
+            ImGui::EndChild();
+        } else {
+            ImGui::TextWrapped( "%s", _( "Select a rule to edit its pattern and see matching items." ) );
+        }
+        ImGui::EndChild();
+        if( ImGui::Button( _( "Save changes" ) ) ) {
+            save = true;
+            close = true;
+        }
+        ImGui::SameLine();
+        if( ImGui::Button( _( "Cancel" ) ) ) {
+            close = true;
+        }
+        ImGui::SameLine();
+        ImGui::TextDisabled( "%s", _( "Changes apply when saved." ) );
+    } );
+    input_context ctxt( "AUTO_PICKUP" );
+    ctxt.register_action( "QUIT" );
+    ctxt.register_action( "ANY_INPUT" );
+    ctxt.set_timeout( 16 );
+    while( window.get_is_open() && !close ) {
+        ui_manager::redraw_invalidated();
+        if( ctxt.handle_input() == "QUIT" && !cataimgui::client::want_text_input() ) {
+            close = true;
+        }
+    }
+    ui_telemetry::record( "autopickup.edit", {{ "saved", save ? "true" : "false" },
+        { "changed", changed ? "true" : "false" }, { "enabled", pickup_enabled ? "true" : "false" }} );
+    editor.bStuffChanged = save && changed;
+    if( save ) {
+        for( user_interface::tab &tab : editor.tabs ) {
+            tab.rules.get() = tab.new_rules;
+        }
+        if( pickup_enabled != initial_enabled ) {
+            get_options().get_option( "AUTO_PICKUP" ).setNext();
+            get_options().save();
+        }
+    }
+}
+#endif
+
 void user_interface::show()
 {
     if( tabs.empty() ) {
         return;
     }
+#if defined(TILES)
+    show_hybrid_pickup_rules( *this );
+    return;
+#endif
 
     const int iHeaderHeight = 4;
     int iContentHeight = 0;
@@ -753,7 +942,7 @@ bool check_special_rule( const std::map<material_id, int> &materials, std::strin
 {
     char type = ' ';
     std::vector<std::string> filter;
-    if( rule[1] == ':' ) {
+    if( rule.size() > 1 && rule[1] == ':' ) {
         type = rule[0];
         filter = string_split( rule.substr( 2 ), ',' );
     }

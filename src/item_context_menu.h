@@ -27,9 +27,12 @@ enum class action {
     wield,
     takeoff,
     drop,
+    pickup,    // soft-fork: take from ground / vehicle cargo into inventory
     unload,
     reload,
-    examine
+    examine,
+    always_pickup,
+    never_pickup
 };
 
 /**
@@ -41,6 +44,10 @@ enum class action {
  */
 action draw_imgui_menu( Character &you, const item_location &loc, bool from_worn,
                         std::string *chosen_use_method = nullptr );
+
+/** Compact shared inspection card. The returned action must be deferred. */
+action draw_inspector( Character &you, const item_location &loc,
+                       std::string *chosen_use_method = nullptr );
 
 /**
  * Execute a chosen action. May start activities / nested UIs.

@@ -195,10 +195,13 @@ class overmap_sidebar : public cataimgui::window
         overmap_sidebar( overmap_ui::overmap_draw_data_t &data, const input_context &ictxt );
 
         void init();
+        void draw() override;
         void draw_controls() override;
     protected:
         cataimgui::bounds get_bounds() override;
         void on_resized() override {
             init();
         };
+        /** Hybrid toolbar-styled action button (queues button_action). */
+        void option_button( const std::string &action, bool active = false );
 };

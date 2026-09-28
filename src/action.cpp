@@ -11,7 +11,9 @@
 
 #include "avatar.h"
 #include "avatar_action.h"
-#include "cached_options.h" // IWYU pragma: keep
+#include "cached_options.h"
+#include "construction.h"
+#include "construction_group.h" // IWYU pragma: keep
 #include "cata_utility.h"
 #include "character.h"
 #include "coordinates.h"
@@ -23,6 +25,8 @@
 #include "game_constants.h"
 #include "input_context.h"
 #include "input_enums.h"
+#include "iexamine.h"
+#include "string_formatter.h"
 #include "item.h"
 #include "item_location.h"
 #include "itype.h"
@@ -57,6 +61,20 @@ static const itype_id itype_swim_fins( "swim_fins" );
 
 static const ter_str_id ter_t_stump( "t_stump" );
 static const ter_str_id ter_t_trunk( "t_trunk" );
+
+static const construction_group_str_id construction_group_cut_grass( "cut_grass" );
+
+namespace
+{
+std::optional<tripoint_bub_ms> tile_menu_action_retarget;
+} // namespace
+
+std::optional<tripoint_bub_ms> take_tile_menu_retarget()
+{
+    std::optional<tripoint_bub_ms> r = tile_menu_action_retarget;
+    tile_menu_action_retarget.reset();
+    return r;
+}
 
 static const quality_id qual_BUTCHER( "BUTCHER" );
 static const quality_id qual_CUT_FINE( "CUT_FINE" );
@@ -382,6 +400,8 @@ std::string action_ident( action_id act )
             return "toggle_auto_pickup";
         case ACTION_TOGGLE_AUTO_COMBAT:
             return "toggle_auto_combat";
+        case ACTION_TOGGLE_AUTO_EAT:
+            return "toggle_auto_eat";
         case ACTION_TOGGLE_PREVENT_OCCLUSION:
             return "toggle_prevent_occlusion";
         case ACTION_ACTIONMENU:
@@ -487,6 +507,7 @@ bool can_action_change_worldstate( const action_id act )
         case ACTION_TOGGLE_AUTO_FORAGING:
         case ACTION_TOGGLE_AUTO_PICKUP:
         case ACTION_TOGGLE_AUTO_COMBAT:
+        case ACTION_TOGGLE_AUTO_EAT:
             return false;
         default:
             return true;
@@ -767,6 +788,12 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
     constexpr int MOVE_HERE = NUM_ACTIONS + 1;
     constexpr int ATTACK_CREATURE = NUM_ACTIONS + 2;
     constexpr int TOOL_ACTION_BASE = NUM_ACTIONS + 10;
+    // Fireplace examine choices (ids match iexamine::fireplace_do).
+    constexpr int FIREPLACE_ACTION_BASE = NUM_ACTIONS + 200;
+    // Soft-fork: cut-grass construction on this tile.
+    constexpr int CUT_GRASS_ACTION = NUM_ACTIONS + 210;
+    // Soft-fork: item actions targeting a (possibly neighboring) tile.
+    constexpr int ITEM_TILE_ACTION_BASE = NUM_ACTIONS + 300;
 
     Character &player_character = get_player_character();
     const tripoint_bub_ms player_pos = player_character.pos_bub();
@@ -777,6 +804,16 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
     std::vector<uilist_entry> entries;
     // Parallel list of tool use_actions offered for this tile (menu id >= TOOL_ACTION_BASE).
     std::vector<std::pair<item_action_id, item *>> tool_actions;
+    // Soft-fork: item actions that must run on a tile other than mouse_target
+    // (tall foliage click often hits grass while the corpse sits next door).
+    enum class item_tile_kind : int { pickup = 0, butcher = 1, examine = 2 };
+    struct item_tile_act {
+        tripoint_bub_ms pos;
+        item_tile_kind kind;
+    };
+    std::vector<item_tile_act> item_tile_acts;
+    const construction *cut_grass_con = nullptr;
+    tile_menu_action_retarget.reset();
 
     // Mouse-native presentation: plain English labels, no keybind letters.
     // uilist: key 0 / empty input_event() disables hotkey (nullopt would auto-assign a-z).
@@ -791,14 +828,190 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
     if( is_adjacent && can_interact_at( ACTION_CLOSE, here, p ) ) {
         add_action( ACTION_CLOSE, _( "Close" ) );
     }
-    if( ( is_adjacent || is_self ) && can_interact_at( ACTION_EXAMINE, here, p ) ) {
+
+    // Soft-fork: surface fireplace examine actions on the tile RMB (fire rings,
+    // fireplaces, braziers, etc.) instead of burying them behind Examine.
+    bool fireplace_expanded = false;
+    if( ( is_adjacent || is_self ) &&
+        ( here.furn( p ).obj().has_examine( iexamine::fireplace ) ||
+          here.ter( p ).obj().has_examine( iexamine::fireplace ) ) ) {
+        const iexamine::fireplace_ui_state fst = iexamine::fireplace_query_ui( player_character,
+                                                p );
+        fireplace_expanded = true;
+        if( fst.has_items ) {
+            entries.emplace_back( FIREPLACE_ACTION_BASE + 0, true, 0, _( "Get items" ) );
+        }
+        // Always offer Add fuel (enabled when usable fuel is available).
+        entries.emplace_back( FIREPLACE_ACTION_BASE + 5, fst.can_add_fuel, 0,
+                              fst.can_add_fuel ? _( "Add fuel" ) :
+                              _( "Add fuel… you'll need flammable items." ) );
+        if( !fst.on_fire ) {
+            entries.emplace_back( FIREPLACE_ACTION_BASE + 1, fst.can_start_fire, 0,
+                                  fst.can_start_fire ? _( "Start a fire" ) :
+                                  _( "Start a fire… you'll need a fire source." ) );
+            if( fst.can_cbm_start ) {
+                entries.emplace_back( FIREPLACE_ACTION_BASE + 2, true, 0,
+                                      _( "Use a CBM to start a fire" ) );
+            }
+        } else {
+            entries.emplace_back( FIREPLACE_ACTION_BASE + 4, fst.can_extinguish, 0,
+                                  fst.can_extinguish ? _( "Extinguish fire" ) :
+                                  _( "Extinguish fire (bashing item required)" ) );
+        }
+        if( fst.can_take_down ) {
+            entries.emplace_back( FIREPLACE_ACTION_BASE + 3, true, 0,
+                                  string_format( _( "Take down the %s" ), here.furnname( p ) ) );
+        }
+    }
+
+    // Soft-fork: surface items on this tile (and under tall foliage, items on
+    // neighboring tiles the tall-grass sprite may have stolen the click from).
+    if( is_adjacent || is_self ) {
+        std::vector<tripoint_bub_ms> item_tiles;
+        const auto tile_has_reachable_items = [&]( const tripoint_bub_ms &tp ) {
+            if( here.has_flag( ter_furn_flag::TFLAG_SEALED, tp ) ) {
+                return false;
+            }
+            if( here.only_liquid_in_liquidcont( tp ) ) {
+                return false;
+            }
+            return here.has_items( tp );
+        };
+        if( tile_has_reachable_items( p ) ) {
+            item_tiles.push_back( p );
+        } else if( here.has_flag( ter_furn_flag::TFLAG_SMALL_HIDE, p ) ||
+                   here.coverage( p ) >= 30 ) {
+            for( const tripoint_bub_ms &np : here.points_in_radius( p, 1 ) ) {
+                if( np == p || np.z() != p.z() ) {
+                    continue;
+                }
+                if( square_dist( np.xy(), player_pos.xy() ) > 1 ) {
+                    continue;
+                }
+                if( tile_has_reachable_items( np ) ) {
+                    item_tiles.push_back( np );
+                }
+            }
+        }
+        bool offered_same_tile_pickup = false;
+        bool offered_same_tile_butcher = false;
+        for( const tripoint_bub_ms &tp : item_tiles ) {
+            const bool same = ( tp == p );
+            map_stack stack = here.i_at( tp );
+            // Summarize corpses / first few items by name for clarity.
+            int listed = 0;
+            for( item &it : stack ) {
+                if( listed >= 6 ) {
+                    break;
+                }
+                const std::string iname = it.tname( 1, false );
+                if( same ) {
+                    // Same tile: dispatch via normal action_ids + mouse_target.
+                    if( it.is_corpse() && !offered_same_tile_butcher &&
+                        can_butcher_at( here, tp ) ) {
+                        add_action( ACTION_BUTCHER, string_format( _( "Butcher %s" ), iname ) );
+                        offered_same_tile_butcher = true;
+                    }
+                    if( !offered_same_tile_pickup ) {
+                        add_action( ACTION_PICKUP,
+                                    string_format( _( "Pick up items (%s…)" ), iname ) );
+                        offered_same_tile_pickup = true;
+                    }
+                } else {
+                    // Neighbor tile: synthetic actions that call pickup/butcher/examine
+                    // on that tile directly (mouse_target stays on the grass).
+                    if( it.is_corpse() && can_butcher_at( here, tp ) ) {
+                        const int mid = ITEM_TILE_ACTION_BASE +
+                                        static_cast<int>( item_tile_acts.size() );
+                        item_tile_acts.push_back( { tp, item_tile_kind::butcher } );
+                        entries.emplace_back( mid, true, 0,
+                                              string_format( _( "Butcher %s (adjacent)" ),
+                                                      iname ) );
+                    }
+                    const int mid = ITEM_TILE_ACTION_BASE +
+                                    static_cast<int>( item_tile_acts.size() );
+                    item_tile_acts.push_back( { tp, item_tile_kind::pickup } );
+                    entries.emplace_back( mid, true, 0,
+                                          string_format( _( "Pick up %s (adjacent)" ),
+                                                  iname ) );
+                    listed++;
+                    // One pickup entry per neighbor tile is enough.
+                    break;
+                }
+                listed++;
+            }
+            if( same && !offered_same_tile_pickup && tile_has_reachable_items( tp ) ) {
+                add_action( ACTION_PICKUP, _( "Pick up items" ) );
+                offered_same_tile_pickup = true;
+            }
+            if( same && !offered_same_tile_butcher && can_butcher_at( here, tp ) ) {
+                add_action( ACTION_BUTCHER, _( "Butcher" ) );
+                offered_same_tile_butcher = true;
+            }
+        }
+    }
+
+    // Soft-fork: Cut grass (construction group cut_grass) on this tile when the
+    // terrain matches and the player has a GRASS_CUT tool. Allowed underfoot.
+    if( is_adjacent || is_self ) {
+        const temp_crafting_inventory &cinv = player_character.crafting_inventory();
+        const std::string ter_str = here.ter( p ).id().str();
+        const construction *best = nullptr;
+        const construction *best_no_tool = nullptr;
+        bool blocked_by_items = !here.i_at( p ).empty();
+        for( const construction *con : constructions_by_group( construction_group_cut_grass ) ) {
+            if( con->pre_is_furniture ) {
+                continue;
+            }
+            if( !con->pre_terrain.empty() &&
+                con->pre_terrain.find( ter_str ) == con->pre_terrain.end() ) {
+                continue;
+            }
+            best_no_tool = con; // terrain matches at least one recipe
+            if( player_can_build( player_character, cinv, *con, true ) ) {
+                // Prefer the faster / higher-quality recipe when available.
+                if( best == nullptr || con->time < best->time ) {
+                    best = con;
+                }
+            }
+        }
+        if( best != nullptr && !blocked_by_items ) {
+            cut_grass_con = best;
+            entries.emplace_back( CUT_GRASS_ACTION, true, 0,
+                                  string_format( _( "Cut %s" ), here.tername( p ) ) );
+        } else if( best_no_tool != nullptr ) {
+            std::string reason;
+            if( blocked_by_items ) {
+                reason = _( "Cut grass… clear items on this tile first." );
+            } else {
+                reason = _( "Cut grass… need a grass-cutting tool." );
+            }
+            entries.emplace_back( CUT_GRASS_ACTION, false, 0, reason );
+        }
+    }
+
+    // Generic Examine when we did not already expand a rich fireplace menu.
+    if( !fireplace_expanded && ( is_adjacent || is_self ) &&
+        can_interact_at( ACTION_EXAMINE, here, p ) ) {
         add_action( ACTION_EXAMINE, _( "Examine" ) );
     }
-    if( ( is_adjacent || is_self ) && can_interact_at( ACTION_EXAMINE_AND_PICKUP, here, p ) ) {
+    if( !fireplace_expanded && ( is_adjacent || is_self ) &&
+        can_interact_at( ACTION_EXAMINE_AND_PICKUP, here, p ) ) {
         add_action( ACTION_EXAMINE_AND_PICKUP, _( "Examine and pick up" ) );
     }
+    // Legacy generic pickup/butcher if the item pass above did not add them
+    // (e.g. sealed containers handled only via can_interact_at).
     if( ( is_adjacent || is_self ) && can_interact_at( ACTION_PICKUP, here, p ) ) {
-        add_action( ACTION_PICKUP, _( "Pick up items" ) );
+        bool already = false;
+        for( const uilist_entry &e : entries ) {
+            if( e.retval == ACTION_PICKUP ) {
+                already = true;
+                break;
+            }
+        }
+        if( !already ) {
+            add_action( ACTION_PICKUP, _( "Pick up items" ) );
+        }
     }
     if( is_adjacent && !is_self ) {
         const optional_vpart_position vp = here.veh_at( p );
@@ -814,7 +1027,16 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
         add_action( ACTION_HAUL_TOGGLE, _( "Stop hauling" ) );
     }
     if( ( is_adjacent || is_self ) && can_interact_at( ACTION_BUTCHER, here, p ) ) {
-        add_action( ACTION_BUTCHER, _( "Butcher" ) );
+        bool already = false;
+        for( const uilist_entry &e : entries ) {
+            if( e.retval == ACTION_BUTCHER ) {
+                already = true;
+                break;
+            }
+        }
+        if( !already ) {
+            add_action( ACTION_BUTCHER, _( "Butcher" ) );
+        }
     }
     if( ( is_adjacent || is_self ) && can_interact_at( ACTION_CHAT, here, p ) ) {
         add_action( ACTION_CHAT, _( "Talk" ) );
@@ -857,7 +1079,8 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
     // (bionic/integrated toolsets). Prefer vanilla precedence; keep only
     // use_actions that apply *to this tile* (not construction UIs).
     // Labels come from data/json/item_actions.json via get_action_name().
-    if( is_adjacent && !is_self ) {
+    // Soft-fork: allow chop/mine tools on the player's own tile too (was adjacent-only).
+    if( is_adjacent ) {
         const item_action_generator &gen = item_action_generator::generator();
         // Ugly const_cast: same as item_action_menu — menu needs non-const pointers.
         std::vector<item *> pseudos;
@@ -995,6 +1218,44 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
                 avatar_action::move( you, here, tripoint_rel_ms( diff.xy(), 0 ) );
             } else {
                 you.reach_attack( critter->pos_bub() );
+            }
+        }
+        return ACTION_NULL;
+    }
+
+    // Soft-fork: fireplace actions execute inline (same as iexamine::fireplace).
+    if( smenu.ret >= FIREPLACE_ACTION_BASE && smenu.ret < FIREPLACE_ACTION_BASE + 10 ) {
+        iexamine::fireplace_do( player_character, p, smenu.ret - FIREPLACE_ACTION_BASE );
+        return ACTION_NULL;
+    }
+
+    // Soft-fork: cut grass on this tile (allows underfoot).
+    if( smenu.ret == CUT_GRASS_ACTION ) {
+        if( cut_grass_con != nullptr ) {
+            if( !place_construction_at( *cut_grass_con, p, /*allow_avatar_on_tile=*/true ) ) {
+                add_msg( m_info, _( "You can't cut the grass here right now." ) );
+            }
+        }
+        return ACTION_NULL;
+    }
+
+    // Soft-fork: item actions on a neighboring tile (foliage click steal).
+    // pickup() is public; butcher/examine are private — retarget mouse_target
+    // so handle_action dispatches them on the item tile.
+    if( smenu.ret >= ITEM_TILE_ACTION_BASE ) {
+        const int idx = smenu.ret - ITEM_TILE_ACTION_BASE;
+        if( idx >= 0 && idx < static_cast<int>( item_tile_acts.size() ) ) {
+            const item_tile_act &ita = item_tile_acts[idx];
+            switch( ita.kind ) {
+                case item_tile_kind::pickup:
+                    g->pickup( ita.pos );
+                    return ACTION_NULL;
+                case item_tile_kind::butcher:
+                    tile_menu_action_retarget = ita.pos;
+                    return ACTION_BUTCHER;
+                case item_tile_kind::examine:
+                    tile_menu_action_retarget = ita.pos;
+                    return ACTION_EXAMINE_AND_PICKUP;
             }
         }
         return ACTION_NULL;
@@ -1297,6 +1558,7 @@ action_id handle_action_menu( map &here )
             REGISTER_ACTION( ACTION_TOGGLE_AUTO_FORAGING );
             REGISTER_ACTION( ACTION_TOGGLE_AUTO_PICKUP );
             REGISTER_ACTION( ACTION_TOGGLE_AUTO_COMBAT );
+            REGISTER_ACTION( ACTION_TOGGLE_AUTO_EAT );
         } else if( category == _( "Craft" ) ) {
             REGISTER_ACTION( ACTION_CRAFT );
             REGISTER_ACTION( ACTION_RECRAFT );

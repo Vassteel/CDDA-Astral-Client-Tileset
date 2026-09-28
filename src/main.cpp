@@ -1,3 +1,4 @@
+#include "ui_telemetry.h"
 /* Main Loop for cataclysm
  * Linux only I guess
  * But maybe not
@@ -148,20 +149,32 @@ void exit_handler( int s )
     const int old_timeout = inp_mngr.get_timeout();
     inp_mngr.reset_timeout();
     if( s != 2 || query_yn( _( "Really Quit?  All unsaved changes will be lost." ) ) ) {
+        ui_telemetry::record( "shutdown.begin", {{ "reason", std::to_string( s ) }} );
         deinitDebug();
+
+#if !defined(_WIN32)
+        // Intentional shutdown: debug log is closed.  Disarm crash handlers
+        // BEFORE g.reset()/endwin()/exit() so teardown SIGABRT/SIGSEGV does
+        // not show "The program has crashed".  Android already did this for
+        // SIGABRT ("SIGABRT on exit problem"); Steam Deck soft-fork hits the
+        // same pattern — clean "Log shutdown." then ABRT with a stale
+        // crash.log and SDL crash dialog.
+        signal( SIGABRT, SIG_DFL );
+        signal( SIGSEGV, SIG_DFL );
+        signal( SIGILL, SIG_DFL );
+        signal( SIGFPE, SIG_DFL );
+#if defined(SIGBUS)
+        signal( SIGBUS, SIG_DFL );
+#endif
+#endif
 
         int exit_status = 0;
         g.reset();
 
         catacurses::endwin();
 
-#if defined(__ANDROID__)
-        // Avoid capturing SIGABRT on exit on Android in crash report
-        // Can be removed once the SIGABRT on exit problem is fixed
-        signal( SIGABRT, SIG_DFL );
-#endif
-
         imclient.reset();
+        ui_telemetry::shutdown();
         exit( exit_status );
     }
     inp_mngr.set_timeout( old_timeout );
@@ -702,6 +715,7 @@ void initialize_debugging()
 #else
     setupDebug( DebugOutput::file );
 #endif
+    ui_telemetry::initialize( PATH_INFO::config_dir() + "ui-telemetry.jsonl", getVersionString() );
     // NOLINTNEXTLINE(cata-tests-must-restore-global-state)
     json_error_output_colors = json_error_output_colors_t::color_tags;
 }

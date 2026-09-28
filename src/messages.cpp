@@ -11,6 +11,8 @@
 #include <unordered_set>
 
 #include "cached_options.h"
+#include "ui_hybrid_window.h"
+#include "cata_utility.h"
 #include "calendar.h"
 #include "catacharset.h"
 #include "character.h"
@@ -921,10 +923,154 @@ std::vector<std::string> Messages::dialog::filter_help_text( int width )
     return foldstring( string_format( help_fmt, type_text ), width );
 }
 
+#if defined(TILES)
+static nc_color hybrid_message_color( game_message_type type )
+{
+    switch( type ) {
+        case m_good: return c_light_green;
+        case m_bad: return c_light_red;
+        case m_warning: return c_yellow;
+        case m_info: return c_light_cyan;
+        case m_mixed: return c_pink;
+        default: return c_light_gray;
+    }
+}
+
+static void show_hybrid_messages()
+{
+    char search[256] = "";
+    int category = -1;
+    bool newest_first = true;
+    bool show_warnings = true;
+    bool close = false;
+    std::vector<int> matching;
+    std::string last_search;
+    int last_category = -2;
+    bool last_order = false;
+    const auto &types = msg_type_and_names();
+    hybrid_window window( _( "Message history" ), [&]() {
+        ImGui::SetNextItemWidth( ImGui::GetContentRegionAvail().x * 0.40f );
+        ImGui::InputTextWithHint( "##search", _( "Search messages…" ), search, sizeof( search ) );
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth( 150.f );
+        const char *category_name = category < 0 ? _( "All messages" ) :
+                                    pgettext( "message type", types[category].second );
+        if( ImGui::BeginCombo( "##category", category_name ) ) {
+            if( ImGui::Selectable( _( "All messages" ), category < 0 ) ) {
+                category = -1;
+            }
+            for( size_t i = 0; i < types.size(); ++i ) {
+                if( ImGui::Selectable( pgettext( "message type", types[i].second ),
+                                      category == static_cast<int>( i ) ) ) {
+                    category = i;
+                }
+            }
+            ImGui::EndCombo();
+        }
+        ImGui::SameLine();
+        ImGui::Checkbox( _( "Newest first" ), &newest_first );
+        ImGui::Checkbox( _( "Keep recent warnings visible" ), &show_warnings );
+        if( show_warnings ) {
+            ImGui::BeginChild( "recent_warnings", ImVec2( 0, ImGui::GetTextLineHeightWithSpacing() * 5.f ),
+                               ImGuiChildFlags_Borders );
+            ImGui::TextDisabled( "%s", _( "Latest warnings and bad events — independent of the filter" ) );
+            int shown = 0;
+            for( size_t i = 0; i < player_messages.messages.size() && shown < 3; ++i ) {
+                const game_message &msg = player_messages.history( i );
+                if( msg.type != m_warning && msg.type != m_bad ) {
+                    continue;
+                }
+                ImGui::TextColored( hybrid_message_color( msg.type ), "%s  %s",
+                                    to_string_time_of_day( msg.turn() ).c_str(),
+                                    remove_color_tags( msg.get_with_count() ).c_str() );
+                if( ImGui::IsItemHovered() ) {
+                    ImGui::SetTooltip( "%s", remove_color_tags( msg.get_with_count() ).c_str() );
+                }
+                ++shown;
+            }
+            if( shown == 0 ) {
+                ImGui::TextDisabled( "%s", _( "No warnings in recorded history." ) );
+            }
+            ImGui::EndChild();
+        }
+        if( last_search != search || last_category != category || last_order != newest_first ) {
+            last_search = search;
+            last_category = category;
+            last_order = newest_first;
+            matching.clear();
+            for( size_t i = 0; i < player_messages.messages.size(); ++i ) {
+                const game_message &msg = player_messages.messages[i];
+                if( category >= 0 && msg.type != types[category].first ) {
+                    continue;
+                }
+                if( !last_search.empty() && !lcmatch( remove_color_tags( msg.message ), last_search ) ) {
+                    continue;
+                }
+                matching.push_back( i );
+            }
+            if( newest_first ) {
+                std::reverse( matching.begin(), matching.end() );
+            }
+        }
+        ImGui::Text( "%s", string_format( _( "%d matching entries. Repeated messages show their count." ),
+                                         matching.size() ).c_str() );
+        if( ImGui::BeginTable( "messages", 3, ImGuiTableFlags_RowBg | ImGuiTableFlags_ScrollY |
+                              ImGuiTableFlags_Resizable,
+                              ImVec2( 0, std::max( 80.f, ImGui::GetContentRegionAvail().y - ImGui::GetFrameHeightWithSpacing() ) ) ) ) {
+            ImGui::TableSetupColumn( _( "Time" ), ImGuiTableColumnFlags_WidthFixed, 100.f );
+            ImGui::TableSetupColumn( _( "Type" ), ImGuiTableColumnFlags_WidthFixed, 75.f );
+            ImGui::TableSetupColumn( _( "Message" ), ImGuiTableColumnFlags_WidthStretch );
+            ImGui::TableSetupScrollFreeze( 0, 1 );
+            ImGui::TableHeadersRow();
+            // Wrapped rows have variable heights; don't use a fixed-height clipper.
+            for( const int index : matching ) {
+                const game_message &msg = player_messages.messages[index];
+                ImGui::TableNextRow();
+                ImGui::TableSetColumnIndex( 0 );
+                ImGui::TextUnformatted( to_string_time_of_day( msg.turn() ).c_str() );
+                if( ImGui::IsItemHovered() ) {
+                    ImGui::SetTooltip( "%s", to_string_clipped( calendar::turn - msg.turn() ).c_str() );
+                }
+                ImGui::TableSetColumnIndex( 1 );
+                for( const auto &type : types ) {
+                    if( type.first == msg.type ) {
+                        ImGui::TextColored( hybrid_message_color( msg.type ), "%s",
+                                            pgettext( "message type", type.second ) );
+                        break;
+                    }
+                }
+                ImGui::TableSetColumnIndex( 2 );
+                ImGui::PushStyleColor( ImGuiCol_Text, cataimgui::imvec4_from_color( hybrid_message_color( msg.type ) ) );
+                ImGui::TextWrapped( "%s", remove_color_tags( msg.get_with_count() ).c_str() );
+                ImGui::PopStyleColor();
+            }
+            ImGui::EndTable();
+        }
+        if( ImGui::Button( _( "Close" ) ) ) {
+            close = true;
+        }
+    } );
+    input_context ctxt( "MESSAGE_LOG" );
+    ctxt.register_action( "QUIT" );
+    ctxt.register_action( "ANY_INPUT" );
+    ctxt.set_timeout( 16 );
+    while( !close && window.get_is_open() ) {
+        ui_manager::redraw_invalidated();
+        if( ctxt.handle_input() == "QUIT" && !cataimgui::client::want_text_input() ) {
+            close = true;
+        }
+    }
+}
+#endif
+
 void Messages::display_messages()
 {
+#if defined(TILES)
+    show_hybrid_messages();
+#else
     dialog dlg;
     dlg.run();
+#endif
     player_messages.curmes = calendar::turn;
 }
 

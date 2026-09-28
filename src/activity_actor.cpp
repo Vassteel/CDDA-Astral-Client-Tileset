@@ -3080,6 +3080,36 @@ static void cancel_pickup( Character &who )
 
 void pickup_activity_actor::do_turn( player_activity &, Character &who )
 {
+    // Prune stale item_locations before pickup. Map stack mutation, item merge,
+    // or a prior pick in this ACT_PICKUP can invalidate sibling locations and
+    // used to spam player-facing debugmsg from Pickup::do_pickup.
+    if( target_items.size() == quantities.size() ) {
+        size_t dst = 0;
+        for( size_t src = 0; src < target_items.size(); ++src ) {
+            if( target_items[src] ) {
+                if( dst != src ) {
+                    target_items[dst] = std::move( target_items[src] );
+                    quantities[dst] = quantities[src];
+                }
+                ++dst;
+            }
+        }
+        if( dst < target_items.size() ) {
+            add_msg_debug( debugmode::DF_ACTIVITY,
+                           "ACT_PICKUP: pruned %zu stale item_locations",
+                           target_items.size() - dst );
+            target_items.resize( dst );
+            quantities.resize( dst );
+        }
+    } else {
+        // Parallel vectors out of sync - abort rather than pick blindly.
+        add_msg_debug( debugmode::DF_ACTIVITY,
+                       "ACT_PICKUP: target_items/quantities size mismatch (%zu vs %zu), canceling",
+                       target_items.size(), quantities.size() );
+        target_items.clear();
+        quantities.clear();
+    }
+
     // If we don't have target items bail out
     if( target_items.empty() ) {
         cancel_pickup( who );

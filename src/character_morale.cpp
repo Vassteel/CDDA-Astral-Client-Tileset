@@ -286,3 +286,28 @@ void Character::disp_morale()
 
     morale->display( equilibrium, pain_penalty, sleepiness_penalty, *this );
 }
+
+std::vector<Character::morale_sheet_row> Character::get_morale_sheet_rows()
+{
+    int equilibrium = calc_focus_equilibrium();
+
+    int sleepiness_penalty = 0;
+    const int sleepiness_cap = focus_equilibrium_sleepiness_cap( equilibrium );
+
+    if( sleepiness_cap < equilibrium ) {
+        sleepiness_penalty = equilibrium - sleepiness_cap;
+        equilibrium = sleepiness_cap;
+    }
+
+    int pain_penalty = 0;
+    if( get_perceived_pain() && !has_trait( trait_CENOBITE ) ) {
+        pain_penalty = calc_focus_equilibrium( true ) - equilibrium - sleepiness_penalty;
+    }
+
+    std::vector<morale_sheet_row> out;
+    for( const player_morale::ui_row &r : morale->get_ui_rows( equilibrium, pain_penalty,
+            sleepiness_penalty, *this ) ) {
+        out.push_back( { r.left, r.right, r.separator, r.favor } );
+    }
+    return out;
+}

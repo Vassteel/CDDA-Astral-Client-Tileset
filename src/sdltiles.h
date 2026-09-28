@@ -54,6 +54,8 @@ void load_tileset();
 void rescale_tileset( int size );
 bool save_screenshot( const std::string &file_path );
 void toggle_fullscreen_window();
+/** Bind a CPU-backed splash to this menu window; an empty window releases it. */
+bool set_main_menu_background( const catacurses::window &window, const std::string &path = {} );
 
 struct window_dimensions {
     point scaled_font_size;

@@ -367,6 +367,11 @@ bool ui_adaptor::has_imgui()
     return false;
 }
 
+bool ui_adaptor::top_is_imgui()
+{
+    return !ui_stack.empty() && ui_stack.back().get().is_imgui;
+}
+
 void ui_adaptor::redraw()
 {
     if( !ui_stack.empty() ) {
@@ -469,6 +474,30 @@ void ui_adaptor::redraw_invalidated( )
             }
         }
 
+        // TILES retained display_buffer: ImGui composites in-place. Floating
+        // ImGui windows (BeginTooltip, AlwaysAutoResize panels, popups) leave
+        // trails across the map when only is_imgui UIs redraw. Refresh every
+        // non-ImGui UI underneath whenever an ImGui frame will paint.
+#if defined(TILES)
+        if( !restart_redrawing ) {
+            bool will_draw_imgui = false;
+            for( auto it = first_enabled; it != ui_stack_orig->end(); ++it ) {
+                if( it->get().is_imgui && it->get().redraw_cb ) {
+                    will_draw_imgui = true;
+                    break;
+                }
+            }
+            if( will_draw_imgui ) {
+                for( auto it = first_enabled; it != ui_stack_orig->end(); ++it ) {
+                    ui_adaptor &ui = *it;
+                    if( !ui.is_imgui ) {
+                        ui.invalidated = true;
+                    }
+                }
+            }
+        }
+#endif
+
         // Redraw invalidated UIs.
         bool needs_redraw = false;
         if( !restart_redrawing ) {
@@ -491,6 +520,15 @@ void ui_adaptor::redraw_invalidated( )
             for( auto it = first_enabled; !restart_redrawing && it != ui_stack_orig->end(); ++it ) {
                 ui_adaptor &ui = *it;
                 ui.is_on_top = it == top_ui;
+                // SDL paints ImGui after the terminal layer. A terminal modal
+                // above an ImGui HUD must hide the lower ImGui windows for this
+                // frame, otherwise the sidebar covers the modal's rows/buttons.
+                if( ui.is_imgui && std::any_of( std::next( it ), ui_stack_orig->end(),
+                []( const auto &above ) {
+                    return !above.get().is_imgui && above.get().redraw_cb;
+                } ) ) {
+                    continue;
+                }
                 if( ui.invalidated || ui.is_imgui ) {
                     if( ui.redraw_cb ) {
                         ui.default_cursor();

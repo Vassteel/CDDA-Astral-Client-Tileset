@@ -1,5 +1,7 @@
 #include "game_inventory.h"
 
+#include "consume_hybrid_ui.h"
+
 #include <imgui/imgui.h>
 #include <algorithm>
 #include <climits>
@@ -1101,11 +1103,26 @@ item_location game_menus::inv::consume( const std::string &comestible_type_filte
 
     std::string none_message = you.activity.str_values.size() == 2 ?
                                _( "You have nothing else to consume." ) : _( "You have nothing to consume." );
+    const std::string hint = get_consume_needs_hint( you );
+#if defined(TILES)
+    // Soft-fork Hybrid ImGui consume menu (charcoal + muted amber).
+    // Always gather the full comestible set; category tabs filter in-UI.
+    // When opened via Food/Drink/Med submenu, start on that tab.
+    comestible_filtered_inventory_preset hybrid_preset( you, []( const item & ) {
+        return true;
+    } );
+    item_location returned_location = consume_hybrid::select(
+                                          you, hybrid_preset,
+                                          _( "Consume item" ), none_message, hint, loc,
+                                          uistate.consume_uistate.consume_menu_filter,
+                                          comestible_type );
+#else
     item_location returned_location = inv_internal( you, preset,
                                       _( "Consume item" ), 1,
                                       none_message,
-                                      get_consume_needs_hint( you ),
+                                      hint,
                                       loc, false, true );
+#endif
     if( returned_location == item_location::nowhere ) {
         uistate.consume_uistate.clear();
     }
@@ -2711,7 +2728,10 @@ void game_menus::inv::compare_item_menu::draw_controls()
 
 cataimgui::bounds game_menus::inv::compare_item_menu::get_bounds()
 {
-    return { 0.f, 0.f, ImGui::GetMainViewport()->Size.x, ImGui::GetMainViewport()->Size.y };
+    const ImVec2 vp = ImGui::GetMainViewport()->Size;
+    const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
+    return { -1.f, -1.f, std::min( vp.x * 0.94f, 1280.f * scale ),
+             std::min( vp.y * 0.92f, 800.f * scale ) };
 }
 
 bool game_menus::inv::compare_item_menu::show()

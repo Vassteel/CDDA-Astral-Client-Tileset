@@ -188,7 +188,7 @@ void follower_rules_ui_impl::rules_transfer_popup( bool &exporting_rules, bool &
                                       _( "Individual settings are colored if they already match to %s." ),
                                       guy->disp_name() ) );
     if( ImGui::BeginTable( "##SETTINGS_SWAP_TABLE", 8, ImGuiTableFlags_None,
-                           ImVec2( window_width, window_height ) ) ) {
+                           ImGui::GetContentRegionAvail() ) ) {
         ImGui::TableSetupColumn( _( "Name" ), ImGuiTableColumnFlags_WidthStretch,
                                  static_cast<float>( window_width / 8.0f ) );
         ImGui::TableSetupColumn( _( "Behaviors" ), ImGuiTableColumnFlags_WidthStretch,
@@ -363,7 +363,11 @@ void follower_rules_ui_impl::draw_controls()
         confirm_toggle = true;
     }
 
-    ImGui::SetWindowSize( ImVec2( window_width, window_height ), ImGuiCond_Once );
+    window_width = std::min( ImGui::GetMainViewport()->Size.x * 0.94f,
+                             1280.f * std::max( 1.f, ImGui::GetFontSize() / 16.f ) );
+    window_height = std::min( ImGui::GetMainViewport()->Size.y * 0.92f,
+                              800.f * std::max( 1.f, ImGui::GetFontSize() / 16.f ) );
+    ImGui::SetWindowSize( ImVec2( window_width, window_height ) );
 
     static bool exporting_rules = false;
     static bool in_popup = false;

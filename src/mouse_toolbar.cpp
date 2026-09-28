@@ -46,13 +46,18 @@ class mouse_toolbar_window : public cataimgui::window
         cataimgui::bounds get_bounds() override {
             // Bottom-center strip: keep the map center clear on Deck/720p.
             const ImVec2 display = ImGui::GetMainViewport()->Size;
-            const float approx_w = 720.f;
+            const float approx_w = 800.f;
             const float x = ( display.x - approx_w ) * 0.5f;
             const float y = display.y - 52.f;
             return { x < 8.f ? 8.f : x, y < 8.f ? 8.f : y, -1.f, -1.f };
         }
 
         void draw() override {
+            // Same Begin-then-hide flash as Hybrid mouse-view: skip Begin when
+            // the strip should not show (between DEFAULTMODE waits / menus).
+            if( !should_draw() ) {
+                return;
+            }
             // Hybrid chrome before Begin so the strip WindowBg matches.
             ui_hybrid_chrome::push();
             cataimgui::window::draw();
@@ -60,11 +65,7 @@ class mouse_toolbar_window : public cataimgui::window
         }
 
         void draw_controls() override {
-            hide_ui = !should_draw();
-            hide_if_hidden();
-            if( hide_ui ) {
-                return;
-            }
+            hide_ui = false;
 
             static const std::vector<std::pair<action_id, translation>> buttons = {
                 { ACTION_INVENTORY, to_translation( "Inv" ) },
@@ -103,6 +104,7 @@ class mouse_toolbar_window : public cataimgui::window
                 const bool forage_on = get_option<bool>( "AUTO_FEATURES" ) &&
                                        get_option<std::string>( "AUTO_FORAGING" ) != "off";
                 const bool combat_on = get_option<bool>( "AUTO_COMBAT" );
+                const bool eat_on = get_option<bool>( "AUTO_EAT" );
                 const std::string forage_mode = get_option<std::string>( "AUTO_FORAGING" );
 
                 auto draw_styled_button = [&]( const char *id, const std::string & label,
@@ -130,6 +132,7 @@ class mouse_toolbar_window : public cataimgui::window
                     forage_label += ":" + forage_mode.substr( 0, 1 );
                 }
                 const std::string combat_label = combat_on ? _( "Combat●" ) : _( "Combat" );
+                const std::string eat_label = eat_on ? _( "Eat●" ) : _( "Eat" );
 
                 const auto pick_clicks = draw_styled_button( "tb_pick", pick_label, pickup_on );
                 if( pick_clicks.first ) {
@@ -207,6 +210,33 @@ class mouse_toolbar_window : public cataimgui::window
                         pending = ACTION_AUTOATTACK;
                         ImGui::CloseCurrentPopup();
                     }
+                    ImGui::EndPopup();
+                }
+
+                const auto eat_clicks = draw_styled_button( "tb_eat", eat_label, eat_on );
+                if( eat_clicks.first ) {
+                    pending = ACTION_TOGGLE_AUTO_EAT;
+                } else if( eat_clicks.second ) {
+                    ImGui::OpenPopup( "tb_eat_help" );
+                }
+
+                if( ImGui::BeginPopup( "tb_eat_help" ) ) {
+                    ImGui::TextUnformatted( _( "Auto Eat / Drink" ) );
+                    ImGui::Separator();
+                    ImGui::TextWrapped( "%s",
+                                        _( "When Eat● is on, each turn automatically eats "
+                                           "or drinks from inventory if you are hungry or "
+                                           "thirsty.\n\n"
+                                           "Skips items that fail will_eat (inedible, "
+                                           "rotten, parasites, allergy, cannibalism, "
+                                           "nausea, already full) plus poison, strong "
+                                           "health penalties, addiction risk, and major "
+                                           "joy dumps.  Prefers items matching the "
+                                           "current need and vitamin deficiencies.  "
+                                           "Stops once Satisfied / not thirsty.  "
+                                           "Medications are never auto-taken.\n\n"
+                                           "If nothing safe is available, does nothing "
+                                           "(one info message).  Toggle off to cancel." ) );
                     ImGui::EndPopup();
                 }
             }

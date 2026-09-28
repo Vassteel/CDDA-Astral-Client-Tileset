@@ -1080,21 +1080,30 @@ bool item::can_reload_with( const item &ammo, bool now ) const
 
     if( now && ammo.is_magazine() && !ammo.empty() ) {
         const ammotype loaded_at = ammo.contents.first_ammo().ammo_type();
-        const bool tool_match = is_tool() && type->tool->ammo_id.count( loaded_at );
+        const bool tool_match = is_tool() && type->tool && type->tool->ammo_id.count( loaded_at );
         const bool gun_match = !is_tool() && ammo_types().count( loaded_at );
-        if( !tool_match && !gun_match ) {
+        // MAGAZINE_WELL item_restriction is authoritative for which magazines fit
+        // (covers TOOL-as-magazine like notched_stick that lack islot_magazine).
+        bool restriction_match = false;
+        for( const item_pocket *p : contents.get_all_reloadable_pockets() ) {
+            if( p->is_type( pocket_type::MAGAZINE_WELL ) &&
+                p->item_type_restrictions().count( ammo.typeId() ) ) {
+                restriction_match = true;
+                break;
+            }
+        }
+        if( !tool_match && !gun_match && !restriction_match ) {
             // Sibling MAGAZINE_WELLs may take auxiliary ammotypes outside the
             // host's declared `ammo` field. Accept if any well's allowed mags
             // have a MAGAZINE pocket restricted to this ammo type.
+            // Do NOT require mag_id->magazine (islot); TOOL magazines only have
+            // pocket_type::MAGAZINE + ammo_restriction (fire_drill / notched_stick).
             bool well_match = false;
             for( const item_pocket *p : contents.get_all_reloadable_pockets() ) {
                 if( !p->is_type( pocket_type::MAGAZINE_WELL ) ) {
                     continue;
                 }
                 for( const itype_id &mag_id : p->item_type_restrictions() ) {
-                    if( !mag_id->magazine ) {
-                        continue;
-                    }
                     for( const pocket_data &mp : mag_id->pockets ) {
                         if( mp.type == pocket_type::MAGAZINE &&
                             mp.ammo_restriction.count( loaded_at ) ) {

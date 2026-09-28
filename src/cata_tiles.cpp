@@ -2354,7 +2354,7 @@ std::optional<texture_draw_data> cata_tiles::get_texture_draw_data( const std::s
     const tile_type &ttype = lookup_res->tile();
     unsigned int seed = get_variant_seed( ttype, category, p, lookup_res->id() );
     const std::vector<int> *indices = ttype.fg.pick( seed );
-    if( !indices ) {
+    if( !indices || indices->empty() ) {
         return std::nullopt;
     }
     const texture *tile = tileset_ptr->get_tile( indices->front() );
@@ -2376,7 +2376,34 @@ std::optional<texture_draw_data> cata_tiles::get_texture_draw_data( const std::s
     std::pair<float, float> uv0{ rect.x / static_cast<float>( buf_w ), rect.y / static_cast<float>( buf_h ) };
     std::pair<float, float> uv1{ ( rect.x + rect.w ) / static_cast<float>( buf_w ), ( rect.y + rect.h ) / static_cast<float>( buf_h ) };
 
-    return texture_draw_data{ texture_ptr.get(), rect, uv0, uv1 };
+    return texture_draw_data{ texture_ptr.get(), rect, uv0, uv1, ttype.offset, ttype.pixelscale };
+}
+
+std::vector<texture_draw_data> cata_tiles::get_character_preview( const Character &ch )
+{
+    std::vector<texture_draw_data> result;
+    auto append = [&]( const std::string & id, TILE_CATEGORY category ) {
+        if( const auto data = get_texture_draw_data( id, category, ch.pos_bub() ) ) {
+            result.push_back( *data );
+        }
+    };
+    const auto look = ch.get_functioning_mutations( true, false,
+    []( const mutation_branch & mut ) { return mut.override_look.has_value(); } );
+    if( look.empty() ) {
+        append( ch.male ? "player_male" : "player_female", TILE_CATEGORY::NONE );
+    } else {
+        const auto &appearance = *look.front().obj().override_look;
+        const auto category = to_TILE_CATEGORY.find( appearance.tile_category );
+        append( appearance.id, category == to_TILE_CATEGORY.end() ? TILE_CATEGORY::NONE : category->second );
+    }
+    const auto overlays = look.empty() ? ch.get_overlay_ids() : ch.get_overlay_ids_when_override_look();
+    for( const auto &overlay : overlays ) {
+        std::string id;
+        if( find_overlay_looks_like( ch.male, overlay.first, overlay.second, id ) ) {
+            append( id, TILE_CATEGORY::NONE );
+        }
+    }
+    return result;
 }
 
 std::unordered_set<std::string> cata_tiles::get_all_portrait_tile_ids( bool male ) const

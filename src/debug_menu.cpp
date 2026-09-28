@@ -1504,6 +1504,7 @@ static void change_spells( Character &character )
 
     ui_adaptor spellsui;
     border_helper borders;
+    int dialog_height = std::min( TERMY, 40 );
 
     struct win_info {
         catacurses::window window;
@@ -1533,23 +1534,29 @@ static void change_spells( Character &character )
 
     spellsui.on_screen_resize( [&]( ui_adaptor & ui ) {
 
-        w_descborder.start = {w_level.start.x + w_level.width, 0};
-        w_descborder.width = TERMX - w_descborder.start.x;
+        const int dialog_width = std::min( TERMX, 140 );
+        dialog_height = std::min( TERMY, 40 );
+        const point origin( ( TERMX - dialog_width ) / 2, ( TERMY - dialog_height ) / 2 );
+        w_name.width = std::min( spname_len + 1, std::max( 16, dialog_width / 3 ) );
+        w_name.start = origin;
+        w_level.start = origin + point( w_name.width, 0 );
+        w_descborder.start = w_level.start + point( w_level.width, 0 );
+        w_descborder.width = dialog_width - w_name.width - w_level.width;
 
         w_desc.width = w_descborder.width - 4;
-        w_desc.start = {w_descborder.start.x + 2, 1};
+        w_desc.start = {w_descborder.start.x + 2, w_descborder.start.y + 1};
 
-        w_name.window = catacurses::newwin( TERMY, w_name.width, w_name.start );
-        w_level.window = catacurses::newwin( TERMY, w_level.width, w_level.start );
-        w_descborder.window = catacurses::newwin( TERMY, w_descborder.width, w_descborder.start );
-        w_desc.window = catacurses::newwin( TERMY - 2, w_desc.width, w_desc.start );
+        w_name.window = catacurses::newwin( dialog_height, w_name.width, w_name.start );
+        w_level.window = catacurses::newwin( dialog_height, w_level.width, w_level.start );
+        w_descborder.window = catacurses::newwin( dialog_height, w_descborder.width, w_descborder.start );
+        w_desc.window = catacurses::newwin( dialog_height - 2, w_desc.width, w_desc.start );
 
-        w_name.border->set( w_name.start, { w_name.width, TERMY } );
-        w_level.border->set( w_level.start, { w_level.width, TERMY } );
-        w_descborder.border->set( w_descborder.start, { w_descborder.width, TERMY } );
+        w_name.border->set( w_name.start, { w_name.width, dialog_height } );
+        w_level.border->set( w_level.start, { w_level.width, dialog_height } );
+        w_descborder.border->set( w_descborder.start, { w_descborder.width, dialog_height } );
 
-        scrllbr.viewport_size( TERMY - 2 );
-        ui.position( point::zero, { TERMX, TERMY } );
+        scrllbr.viewport_size( dialog_height - 2 );
+        ui.position( origin, { dialog_width, dialog_height } );
     } );
     spellsui.mark_resize();
 
@@ -1587,7 +1594,7 @@ static void change_spells( Character &character )
                 _( "<<color_white>[<color_yellow>%1$s</color>] Keybindings</color>>" ),
                 ctxt.get_desc( "HELP_KEYBINDINGS" ) );
         print_colored_text( w_descborder.window,
-                            point( w_descborder.width - help_keybindings.length() + 42, TERMY - 1 ),
+                            point( w_descborder.width - help_keybindings.length() + 42, dialog_height - 1 ),
                             magenta, magenta, help_keybindings );
 
         std::string help_filter;
@@ -1598,7 +1605,7 @@ static void change_spells( Character &character )
             help_filter = string_format( "<<color_white>%s</color>>", filterstring );
         }
 
-        print_colored_text( w_name.window, point( 1, TERMY - 1 ),
+        print_colored_text( w_name.window, point( 1, dialog_height - 1 ),
                             magenta, magenta, help_filter );
 
         const int relative_size = spells_relative.size();
@@ -1606,12 +1613,12 @@ static void change_spells( Character &character )
         scrllbr.viewport_pos( spell_selected );
         scrllbr.apply( w_name.window );
 
-        calcStartPos( spells_start, spell_selected, TERMY - 2, relative_size );
+        calcStartPos( spells_start, spell_selected, dialog_height - 2, relative_size );
 
         int line_number = 1;
         dialogue d( get_talker_for( get_player_character() ), nullptr );
         for( int i = spells_start; i < relative_size; ++i ) {
-            if( line_number == TERMY - 1 ) {
+            if( line_number == dialog_height - 1 ) {
                 break;
             }
 
@@ -1654,7 +1661,7 @@ static void change_spells( Character &character )
 
         // in case we don't find anything, keep selection in the middle of screen
         const size_t spells_relative_size = spells_relative.size();
-        spell_selected = std::min( ( TERMY - 2 ) / 2, static_cast<int>( spells_relative_size ) / 2 );
+        spell_selected = std::min( ( dialog_height - 2 ) / 2, static_cast<int>( spells_relative_size ) / 2 );
         for( size_t i = 0; i < spells_relative_size; ++i )
         {
             if( std::get<0>( *spells_relative[i] ).id == spellid ) {

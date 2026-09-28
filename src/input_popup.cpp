@@ -123,6 +123,10 @@ void input_popup::draw_controls()
         set_focus = false;
     }
     draw_input_control();
+    ImGui::Spacing();
+    action_button( "TEXT.CONFIRM", _( "Apply" ) );
+    ImGui::SameLine();
+    action_button( "TEXT.QUIT", _( "Cancel" ) );
 }
 
 bool input_popup::handle_custom_callbacks( const std::string &action )
@@ -340,6 +344,9 @@ std::string string_input_popup_imgui::query()
         ui_manager::redraw_invalidated();
 
         std::string action = ctxt.handle_input();
+        if( has_button_action() ) {
+            action = get_button_action();
+        }
         if( handle_custom_callbacks( action ) ) {
             continue;
         }
@@ -418,10 +425,14 @@ void number_input_popup<float>::draw_input_control()
 template<typename T>
 T number_input_popup<T>::query()
 {
+    is_cancelled = false;
 
     while( true ) {
         ui_manager::redraw_invalidated();
         std::string action = ctxt.handle_input();
+        if( has_button_action() ) {
+            action = get_button_action();
+        }
 
         if( handle_custom_callbacks( action ) ) {
             continue;
@@ -439,6 +450,7 @@ T number_input_popup<T>::query()
         }
     }
 
+    is_cancelled = true;
     return old_value;
 }
 

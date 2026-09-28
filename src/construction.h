@@ -115,6 +115,11 @@ struct construction {
 const std::vector<construction> &get_constructions();
 
 void place_construction( std::vector<construction_group_str_id> const &groups );
+/** Soft-fork: start a specific construction on an exact adjacent/self tile.
+ *  When allow_avatar_on_tile is true, the avatar standing on `p` does not fail
+ *  empty-tile checks (needed to cut grass underfoot). Returns false on failure. */
+bool place_construction_at( const construction &con, const tripoint_bub_ms &p,
+                            bool allow_avatar_on_tile = false );
 void load_construction( const JsonObject &jo, const std::string &src );
 void reset_constructions();
 construction_id construction_menu( bool blueprint );

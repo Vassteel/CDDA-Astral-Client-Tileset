@@ -75,8 +75,10 @@ class pocket_favorite_callback : public uilist_callback
                                            uilist &pocket_selector );
         void refresh( uilist *menu ) override;
         float desired_extra_space_right( ) override {
-            return std::max( ImGui::GetMainViewport()->Size.x / 2,
-                             ImGui::GetMainViewport()->Size.x - ( 50 * ImGui::CalcTextSize( "X" ).x ) );
+            const float available = std::min( ImGui::GetMainViewport()->Size.x * 0.9f,
+                                             1280.f * std::max( 1.f, ImGui::GetFontSize() / 16.f ) );
+            return std::max( available / 2.f,
+                             available - 50.f * ImGui::CalcTextSize( "X" ).x );
         }
         bool key( const input_context &, const input_event &event, int entnum, uilist *menu ) override;
 };

@@ -73,8 +73,10 @@ class scores_ui_impl : public cataimgui::window
         scores_ui_tab selected_tab = enum_traits<scores_ui_tab>::first;
         scores_ui_tab switch_tab = enum_traits<scores_ui_tab>::last;
 
-        size_t window_width = ImGui::GetMainViewport()->Size.x * 8 / 9;
-        size_t window_height = ImGui::GetMainViewport()->Size.y * 8 / 9;
+        size_t window_width = std::min( ImGui::GetMainViewport()->Size.x * 0.9f,
+                                      1280.f * std::max( 1.f, ImGui::GetFontSize() / 16.f ) );
+        size_t window_height = std::min( ImGui::GetMainViewport()->Size.y * 0.9f,
+                                       800.f * std::max( 1.f, ImGui::GetFontSize() / 16.f ) );
 
         bool monster_group_collapsed = false;
         bool npc_group_collapsed = false;

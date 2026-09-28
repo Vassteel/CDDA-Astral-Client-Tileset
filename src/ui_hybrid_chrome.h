@@ -5,8 +5,8 @@
 /**
  * Soft-fork "D Hybrid" ImGui chrome (BG3-mock reference): warm dark wood /
  * bronze panels + muted amber accents, charcoal grit. Phase-1 = colors /
- * frames / slot bezels / dense grid chrome only — no item-icon atlases,
- * centered silhouette art, or radial slot layout (later phases).
+ * frames / slot bezels / dense grid chrome shared by all menus. Equipment
+ * adds the active tileset's character overlays and surrounding body slots.
  *
  * Equipped gear lives ONLY on the paper-doll / slot ring — do not add a
  * duplicate equipped-item list beside the doll.
@@ -54,6 +54,17 @@ ImVec4 toolbar_active_pressed();
  */
 void push();
 void pop();
+/** Set the baseline for direct ImGui windows, popups and tooltips. */
+void apply_defaults();
+
+class scoped_style
+{
+    public:
+        scoped_style() { push(); }
+        ~scoped_style() { pop(); }
+        scoped_style( const scoped_style & ) = delete;
+        scoped_style &operator=( const scoped_style & ) = delete;
+};
 
 /**
  * Draw a thin chrome bezel around the last ImGui item.

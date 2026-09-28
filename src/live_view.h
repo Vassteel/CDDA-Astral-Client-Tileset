@@ -7,10 +7,7 @@
 #include "point.h"
 
 #if defined(TILES)
-namespace cataimgui
-{
-class window;
-}
+// TILES: mouse-view content is a sibling Hybrid panel (ui_hybrid_sidebar), beside the sidebar.
 #else
 #include "cursesdef.h"
 class ui_adaptor;
@@ -31,7 +28,7 @@ class live_view
         tripoint mouse_position;
 
 #if defined(TILES)
-        std::unique_ptr<cataimgui::window> imgui_win;
+        bool active = false;
 #else
         catacurses::window win;
         std::unique_ptr<ui_adaptor> ui;

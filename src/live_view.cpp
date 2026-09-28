@@ -14,74 +14,7 @@
 
 #if defined(TILES)
 
-#include "cata_imgui.h"
-#include "imgui/imgui.h"
-#include "ui_hybrid_chrome.h"
-
-namespace
-{
-
-class live_view_window : public cataimgui::window
-{
-    public:
-        live_view_window()
-            : cataimgui::window( "MOUSE_VIEW_HYBRID",
-                                 ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove |
-                                 ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav |
-                                 ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoInputs |
-                                 ImGuiWindowFlags_NoScrollbar ) {
-            force_to_back = true;
-        }
-
-        void set_tile( const tripoint &p ) {
-            mouse_position = p;
-            mark_resized();
-        }
-
-    protected:
-        void draw() override {
-            // Hybrid chrome before Begin so WindowBg / borders match Equipment + toolbar.
-            ui_hybrid_chrome::push();
-            cataimgui::window::draw();
-            ui_hybrid_chrome::pop();
-        }
-
-        cataimgui::bounds get_bounds() override {
-            panel_manager &mgr = panel_manager::get_manager();
-            const bool sidebar_right = get_option<std::string>( "SIDEBAR_POSITION" ) == "right";
-            const int width_cells = sidebar_right ? mgr.get_width_right() : mgr.get_width_left();
-            const float w = static_cast<float>( std::max<size_t>( 1, str_width_to_pixels( width_cells ) ) );
-            const ImVec2 display = ImGui::GetMainViewport()->Size;
-            const float x = sidebar_right ? std::max( 0.f, display.x - w ) : 0.f;
-            // Cap height like the old curses live_view (half screen when minimap on).
-            const float max_h = pixel_minimap_option ? display.y * 0.50f : display.y * 0.72f;
-            const float h = std::max( 96.f, max_h );
-            return { x, 0.f, w, h };
-        }
-
-        void draw_controls() override {
-            hide_ui = false;
-            hide_if_hidden();
-
-            ImGui::TextColored( ui_hybrid_chrome::palette::accent(), "%s", _( "Mouse view" ) );
-            ImGui::PushStyleColor( ImGuiCol_Separator, ui_hybrid_chrome::palette::separator() );
-            ImGui::Separator();
-            ImGui::PopStyleColor();
-
-            map &here = get_map();
-            const visibility_variables &cache = here.get_visibility_variables_cache();
-            const float body_h = std::max( 40.f, ImGui::GetContentRegionAvail().y );
-            ImGui::BeginChild( "mouse_view_body", ImVec2( 0.f, body_h ), ImGuiChildFlags_Borders,
-                               ImGuiWindowFlags_None );
-            g->draw_tile_info_imgui( tripoint_bub_ms( mouse_position ), cache );
-            ImGui::EndChild();
-        }
-
-    private:
-        tripoint mouse_position;
-};
-
-} // namespace
+#include "ui_hybrid_sidebar.h"
 
 live_view::live_view() = default;
 live_view::~live_view() = default;
@@ -93,21 +26,24 @@ void live_view::init()
 
 void live_view::hide()
 {
-    imgui_win.reset();
+    if( !active ) {
+        return;
+    }
+    active = false;
+    ui_hybrid_sidebar::clear_mouse_tile();
 }
 
 void live_view::show( const tripoint &p )
 {
     mouse_position = p;
-    if( !imgui_win ) {
-        imgui_win = std::make_unique<live_view_window>();
-    }
-    static_cast<live_view_window *>( imgui_win.get() )->set_tile( p );
+    active = true;
+    // Route tile info into the Hybrid mouse-view sibling panel (beside sidebar).
+    ui_hybrid_sidebar::set_mouse_tile( p );
 }
 
 bool live_view::is_enabled()
 {
-    return imgui_win != nullptr;
+    return active;
 }
 
 #else // !TILES

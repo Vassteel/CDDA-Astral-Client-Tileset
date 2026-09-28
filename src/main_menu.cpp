@@ -283,28 +283,18 @@ void main_menu::display_sub_menu( int sel, const point &bottom_left, int sel_lin
         return;
     }
 
-    point top_left( bottom_left + point( 0, -( sub_opts.size() + 1 ) ) );
-
-    // If sel2 somehow outgrew the options vector, clamp it back.
-    sel2 = std::min<int>( sel2, sub_opts.size() );
-
-    int height = sub_opts.size();
-    if( top_left.y < 0 ) {
-        // Options don't fit screen. Decrease height till they do.
-        height += top_left.y;
-        top_left.y = 0;
-
-        // Calculate an offset from which to draw the options
-        if( sel2 - 1 < sub_opt_off ) {
-            // Trying to go below the showed options, decrease our offset
-            sub_opt_off = sel2;
-        } else if( sel2 + 1 > sub_opt_off + height ) {
-            // We are going over the list the other way around - increase offset
-            sub_opt_off = sel2 - height + 1;
-        }
-    } else {
-        // Options fit the screen, no offset required.
-        sub_opt_off = 0;
+    // Anchor to the actual drawn button, not an unadjusted text offset.
+    // Keep the whole list on screen and map scrolled rows to their real index.
+    sel2 = std::clamp<int>( sel2, 0, sub_opts.size() - 1 );
+    xlen = std::min( xlen, TERMX - 4 );
+    const int height = std::min<int>( sub_opts.size(), std::max( 1, bottom_left.y - 1 ) );
+    const point top_left( std::clamp( bottom_left.x, 0, TERMX - xlen - 4 ),
+                          std::max( 0, bottom_left.y - height - 1 ) );
+    sub_opt_off = std::clamp( sub_opt_off, 0, static_cast<int>( sub_opts.size() ) - height );
+    if( sel2 < sub_opt_off ) {
+        sub_opt_off = sel2;
+    } else if( sel2 >= sub_opt_off + height ) {
+        sub_opt_off = sel2 - height + 1;
     }
 
     catacurses::window w_sub = catacurses::newwin( height + 2, xlen + 4, top_left );
@@ -318,13 +308,13 @@ void main_menu::display_sub_menu( int sel, const point &bottom_left, int sel_lin
         bool is_selection = sel2 == opt_index;
         std::string opt = ( is_selection ? "» " : "  " ) + sub_opts[opt_index];
         int padding = ( xlen + 2 ) - utf8_width( opt, true );
-        opt.append( padding, ' ' );
+        opt.append( std::max( 0, padding ), ' ' );
         // Selected row: amber hilite bar; idle: muted warm body.
         nc_color clr = is_selection ? hybrid_mm::accent_sel() : hybrid_mm::body();
         trim_and_print( w_sub, point( 1, y + 1 ), xlen + 2, clr, opt );
         inclusive_rectangle<point> rec( top_left + point( 1, y  + 1 ),
                                         top_left + point( xlen + 2, y + 1 ) );
-        main_menu_sub_button_map.emplace_back( rec, std::pair<int, int> { sel, y } );
+        main_menu_sub_button_map.emplace_back( rec, std::pair<int, int> { sel, opt_index } );
     }
     if( static_cast<size_t>( height ) != sub_opts.size() ) {
         draw_scrollbar( w_sub, sel2, height, sub_opts.size(), point::south, hybrid_mm::bronze(),
@@ -346,10 +336,15 @@ void main_menu::print_menu( const catacurses::window &w_open, int iSel, const po
     int window_height = getmaxy( w_open );
 
     // Soft-fork Hybrid: bronze separator above the menu strip (was classic white).
+#if !defined(TILES)
     mvwhline( w_open, point( 1, window_height - 4 ), hybrid_mm::bronze(), LINE_OXOX, window_width - 2 );
+#endif
 
     if( iSel == getopt( main_menu_opts::NEWCHAR ) ) {
         center_print( w_open, window_height - 2, hybrid_mm::accent(), vNewGameHints[sel2] );
+    } else if( titled_background ) {
+        center_print( w_open, window_height - 2, hybrid_mm::body(),
+                      string_format( _( "Cataclysm: Dark Days Ahead — %s" ), getVersionString() ) );
     } else {
         center_print( w_open, window_height - 2, c_light_red,
                       _( "Bugs?  Suggestions?  Use links in MOTD to report them." ) );
@@ -361,7 +356,7 @@ void main_menu::print_menu( const catacurses::window &w_open, int iSel, const po
     int iLine = 0;
     const int iOffsetX = ( window_width - FULL_SCREEN_WIDTH ) / 2;
 
-    if( get_option<bool>( "SEASONAL_TITLE" ) ) {
+    if( !titled_background && get_option<bool>( "SEASONAL_TITLE" ) ) {
         switch( current_holiday ) {
             case holiday::new_year:
             case holiday::easter:
@@ -380,7 +375,9 @@ void main_menu::print_menu( const catacurses::window &w_open, int iSel, const po
         }
     }
 
-    if( mmenu_title.size() > 1 ) {
+    if( titled_background ) {
+        iLine = window_height - 6;
+    } else if( mmenu_title.size() > 1 ) {
         for( const std::string &i_title : mmenu_title ) {
             nc_color cur_color = c_white;
             nc_color base_color = c_white;
@@ -391,8 +388,55 @@ void main_menu::print_menu( const catacurses::window &w_open, int iSel, const po
     }
 
     iLine++;
-    center_print( w_open, iLine, hybrid_mm::muted(), string_format( _( "Version: %s" ),
-                  getVersionString() ) );
+    if( !titled_background ) {
+        center_print( w_open, iLine, hybrid_mm::muted(), string_format( _( "Version: %s" ),
+                      getVersionString() ) );
+    }
+
+#if defined(TILES)
+    // A compact, centered bank of full-height buttons. Use the exact same
+    // rectangles for painting, mouse hits and submenu anchoring.
+    int button_width = 12;
+    for( const std::string &item : vMenuItems ) {
+        button_width = std::max( button_width, utf8_width( shortcut_text( c_white, item ), true ) + 4 );
+    }
+    const int available = std::min( window_width - 4, 144 );
+    button_width = std::min( button_width, available );
+    const int fit = std::max( 1, available / ( button_width + 1 ) );
+    const int count = static_cast<int>( vMenuItems.size() );
+    const int rows = ( count + fit - 1 ) / fit;
+    const int columns = ( count + rows - 1 ) / rows;
+    const int top = std::max( 1, window_height - 3 - ( rows * 4 - 1 ) );
+    mvwhline( w_open, point( 1, top - 1 ), hybrid_mm::bronze(), LINE_OXOX, window_width - 2 );
+    wnoutrefresh( w_open );
+    const point origin( getbegx( w_open ), getbegy( w_open ) );
+    for( int index = 0; index < count; ++index ) {
+        const int row = index / columns;
+        const int in_row = std::min( columns, count - row * columns );
+        const int x = ( window_width - ( in_row * ( button_width + 1 ) - 1 ) ) / 2 +
+                      ( index % columns ) * ( button_width + 1 );
+        const point start = origin + point( x, top + row * 4 );
+        catacurses::window button = catacurses::newwin( 3, button_width, start );
+        werase( button );
+        const bool selected = index == iSel;
+        draw_border( button, selected ? hybrid_mm::accent() : hybrid_mm::bronze() );
+        const nc_color body = selected ? hybrid_mm::body_sel() : hybrid_mm::body();
+        const std::string label = shortcut_text( selected ? hybrid_mm::accent_sel() : hybrid_mm::accent(),
+                                                vMenuItems[index] );
+        mvwprintz( button, point( 1, 1 ), body, "%s", std::string( button_width - 2, ' ' ) );
+        const int label_x = std::max( 1, ( button_width - utf8_width( label, true ) ) / 2 );
+        trim_and_print( button, point( label_x, 1 ), button_width - label_x - 1, body, label );
+        main_menu_button_map.emplace_back( inclusive_rectangle<point>( start,
+                                          start + point( button_width - 1, 2 ) ), index );
+        wnoutrefresh( button );
+    }
+    const auto anchor = std::find_if( main_menu_button_map.begin(), main_menu_button_map.end(),
+    [iSel]( const auto &button ) { return button.second == iSel; } );
+    if( anchor != main_menu_button_map.end() ) {
+        display_sub_menu( iSel, anchor->first.p_min + point::north, sel_line );
+    }
+    return;
+#endif
 
     int menu_length = 0;
     for( size_t i = 0; i < vMenuItems.size(); ++i ) {
@@ -414,7 +458,7 @@ void main_menu::print_menu( const catacurses::window &w_open, int iSel, const po
 
     const point p_offset( catacurses::getbegx( w_open ), catacurses::getbegy( w_open ) );
 
-    display_sub_menu( iSel, p_offset + point( offsets[iSel], offset.y - 2 ), sel_line );
+    display_sub_menu( iSel, p_offset + point( final_offset + offsets[iSel], offset.y - 2 ), sel_line );
 }
 
 std::vector<std::string> main_menu::load_file( const std::string &path,
@@ -453,13 +497,23 @@ void main_menu::init_windows()
     int extra_h = ( ( TERMY - FULL_SCREEN_HEIGHT ) / 2 ) - 1;
     extra_w = ( extra_w > 0 ? extra_w : 0 );
     extra_h = ( extra_h > 0 ? extra_h : 0 );
-    const int total_w = FULL_SCREEN_WIDTH + extra_w;
-    const int total_h = FULL_SCREEN_HEIGHT + extra_h;
+    int total_w = FULL_SCREEN_WIDTH + extra_w;
+    int total_h = FULL_SCREEN_HEIGHT + extra_h;
+#if defined(TILES)
+    const std::string splash_path = PATH_INFO::datadir() + "title/astral.png";
+    if( file_exist( splash_path ) ) {
+        total_w = TERMX;
+        total_h = TERMY;
+    }
+#endif
 
     // position of window within main display
     const point p0( ( TERMX - total_w ) / 2, ( TERMY - total_h ) / 2 );
 
     w_open = catacurses::newwin( total_h, total_w, p0 );
+#if defined(TILES)
+    titled_background = set_main_menu_background( w_open, splash_path );
+#endif
 
     menu_offset.y = total_h - 3;
     // note: if iMenuOffset is changed,
@@ -622,6 +676,11 @@ void main_menu::load_char_templates()
 
 bool main_menu::opening_screen()
 {
+#if defined(TILES)
+    on_out_of_scope clear_background( []() {
+        set_main_menu_background( catacurses::window() );
+    } );
+#endif
     // set holiday based on local system time
     current_holiday = get_holiday_from_time();
 
@@ -769,8 +828,12 @@ bool main_menu::opening_screen()
         // handle mouse click
         if( action == "SELECT" || action == "MOUSE_MOVE" ) {
             std::optional<point> coord = ctxt.get_coordinates_text( catacurses::stdscr );
+            const bool over_submenu = coord && std::any_of( main_menu_sub_button_map.begin(),
+            main_menu_sub_button_map.end(), [&]( const auto &button ) {
+                return button.first.contains( *coord );
+            } );
             for( const auto &it : main_menu_button_map ) {
-                if( coord.has_value() && it.first.contains( coord.value() ) ) {
+                if( !over_submenu && coord.has_value() && it.first.contains( coord.value() ) ) {
                     if( sel1 != it.second ) {
                         sel1 = it.second;
                         sel2 = sel1 == getopt( main_menu_opts::LOADCHAR ) ? last_world_pos : 0;
@@ -1386,13 +1449,9 @@ void main_menu::pick_tileset()
     get_options().get_option( "TILES" ).setValue( chosen );
     get_options().save();
 
-    // Disable UIs below to avoid accessing tile context mid-load (same as Options).
-    ui_adaptor dummy( ui_adaptor::disable_uis_below {} );
-    try {
-        load_tileset();
-    } catch( const std::exception &err ) {
-        popup( _( "Loading the tileset failed: %s" ), err.what() );
-    }
+    // World data is not loaded here, so furniture/terrain layering contexts
+    // cannot be validated yet.  DynamicDataLoader's finalization loads the
+    // saved tileset after the world's definitions and mod tilesets are ready.
 #else
     popup( _( "Tilesets require a graphical (TILES) build." ) );
 #endif // TILES

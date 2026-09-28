@@ -1,0 +1,41 @@
+#pragma once
+#ifndef CATA_SRC_UI_HYBRID_WINDOW_H
+#define CATA_SRC_UI_HYBRID_WINDOW_H
+
+#if defined(TILES)
+#include <algorithm>
+#include <functional>
+#include <utility>
+
+#include "cata_imgui.h"
+#include "imgui/imgui.h"
+
+/** Common resizable-viewport shell. Callbacks only render and queue actions;
+ * activities and nested interfaces must run after the frame has ended. */
+class hybrid_window : public cataimgui::window
+{
+    public:
+        hybrid_window( const std::string &title, std::function<void()> controls ) :
+            cataimgui::window( title, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize |
+                              ImGuiWindowFlags_NoMove ), controls( std::move( controls ) ) {}
+        void close() { is_open = false; }
+        void set_hidden( bool hidden ) { hide_ui = hidden; }
+    protected:
+        cataimgui::bounds get_bounds() override {
+            const ImVec2 vp = ImGui::GetMainViewport()->Size;
+            const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
+            return { -1.f, -1.f, std::min( vp.x * 0.94f, 1280.f * scale ),
+                     std::min( vp.y * 0.92f, 800.f * scale ) };
+        }
+        void draw_controls() override {
+            if( hide_ui ) {
+                hide_if_hidden();
+                return;
+            }
+            controls();
+        }
+    private:
+        std::function<void()> controls;
+};
+#endif
+#endif

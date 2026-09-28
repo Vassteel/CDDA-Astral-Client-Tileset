@@ -1,0 +1,9 @@
+{
+  "species": "Arachis hypogaea",
+  "source_page": "https://www.anbg.gov.au/cpbr/cd-keys/peakey/key/The%20Pea%20Key/Media/Html/Arachis_hypogea.html",
+  "image_url": "https://www.anbg.gov.au/cpbr/cd-keys/peakey/key/The%20Pea%20Key/Media/Images/arac_hypo1.jpg",
+  "purpose": "Botanical appearance reference for original sprite generation; not redistributed in tileset ZIP",
+  "observations": "Four oval leaflets in two pairs, yellow pea-like flowers, low herbaceous stems; pods develop underground.",
+  "additional_source": "https://www.kew.org/plants/peanut",
+  "state_policy": "Eight distinct sprites: four seasons each for normal and harvested terrain. Game retains a fruitless plant after harvest; use sparse foliage to distinguish it. Underground pods are never drawn above ground."
+}

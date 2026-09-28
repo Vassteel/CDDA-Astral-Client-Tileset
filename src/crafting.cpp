@@ -826,8 +826,13 @@ static item_location set_item_inventory( Character &p, item &newit )
         if( p.is_avatar() ) {
             p.as_avatar()->assign_empty_invlet( newit );
         }
+        // Soft-fork: prefer worn containers / backpack (can_stash) before volume drop.
         // We might not have space for the item
-        if( !p.can_pickVolume( newit ) ) { //Accounts for result_mult
+        if( p.can_stash( newit ) && p.can_pickWeight( newit, false ) ) {
+            ret_val = p.i_add( newit );
+            add_msg( m_info, "%c - %s", ret_val->invlet == 0 ? ' ' : ret_val->invlet,
+                     ret_val->tname() );
+        } else if( !p.can_pickVolume( newit ) ) { //Accounts for result_mult
             put_into_vehicle_or_drop( p, item_drop_reason::too_large, { newit } );
         } else if( !p.can_pickWeight( newit, false ) ) {
             put_into_vehicle_or_drop( p, item_drop_reason::too_heavy, { newit } );
@@ -979,43 +984,61 @@ static item_location place_craft_or_disassembly(
         } else if( !ch.has_wield_conflicts( craft ) || ch.is_npc() ) {
             craft_wield();
         } else {
-            enum option : int {
-                WIELD_CRAFT = 0,
-                DROP_CRAFT,
-                STASH,
-                DROP
-            };
-
-            uilist amenu;
-            amenu.text = string_format( pgettext( "in progress craft", "What to do with the %s?" ),
-                                        craft.display_name() );
-
-            amenu.addentry( WIELD_CRAFT, ch.can_unwield( *ch.get_wielded_item() ).success(),
-                            '1', _( "Dispose of your wielded %s and start working." ), ch.get_wielded_item()->tname() );
-            amenu.addentry( DROP_CRAFT, true, '2', _( "Put it down and start working." ) );
-            const bool can_stash = ch.can_pickVolume( craft ) &&
-                                   ch.can_pickWeight( craft, false );
-            amenu.addentry( STASH, can_stash, '3', _( "Store it in your inventory." ) );
-            amenu.addentry( DROP, true, '4', _( "Drop it on the ground." ) );
-
-            amenu.query();
-            const option choice = amenu.ret == UILIST_CANCEL ? DROP : static_cast<option>( amenu.ret );
-            switch( choice ) {
-                case WIELD_CRAFT: {
-                    craft_wield();
-                    break;
+            // Soft-fork: if the currently wielded item can go into inventory/backpack,
+            // auto-stow it and start the in-progress craft in hands — skip the
+            // clear-hands dispose uilist for the common backpack case.
+            item_location wielded = ch.get_wielded_item();
+            const bool can_auto_stow_weapon = wielded &&
+                                              ch.can_unwield( *wielded ).success() &&
+                                              ch.can_stash( *wielded ) &&
+                                              ch.can_pickWeight( *wielded, false );
+            if( can_auto_stow_weapon ) {
+                item stowed = ch.remove_weapon();
+                item_location stored = ch.i_add( stowed );
+                if( stored ) {
+                    ch.add_msg_if_player( m_info, _( "You store your %s and start working." ),
+                                          stored->tname() );
                 }
-                case DROP_CRAFT: {
-                    craft_in_world = set_item_map_or_vehicle( ch, ch.pos_bub(), craft );
-                    break;
-                }
-                case STASH: {
-                    set_item_inventory( ch, craft );
-                    break;
-                }
-                case DROP: {
-                    put_into_vehicle_or_drop( ch, item_drop_reason::deliberate, {craft} );
-                    break;
+                craft_wield();
+            } else {
+                enum option : int {
+                    WIELD_CRAFT = 0,
+                    DROP_CRAFT,
+                    STASH,
+                    DROP
+                };
+
+                uilist amenu;
+                amenu.text = string_format( pgettext( "in progress craft", "What to do with the %s?" ),
+                                            craft.display_name() );
+
+                amenu.addentry( WIELD_CRAFT, ch.can_unwield( *ch.get_wielded_item() ).success(),
+                                '1', _( "Dispose of your wielded %s and start working." ), ch.get_wielded_item()->tname() );
+                amenu.addentry( DROP_CRAFT, true, '2', _( "Put it down and start working." ) );
+                const bool can_stash = ch.can_stash( craft ) &&
+                                       ch.can_pickWeight( craft, false );
+                amenu.addentry( STASH, can_stash, '3', _( "Store it in your inventory." ) );
+                amenu.addentry( DROP, true, '4', _( "Drop it on the ground." ) );
+
+                amenu.query();
+                const option choice = amenu.ret == UILIST_CANCEL ? DROP : static_cast<option>( amenu.ret );
+                switch( choice ) {
+                    case WIELD_CRAFT: {
+                        craft_wield();
+                        break;
+                    }
+                    case DROP_CRAFT: {
+                        craft_in_world = set_item_map_or_vehicle( ch, ch.pos_bub(), craft );
+                        break;
+                    }
+                    case STASH: {
+                        set_item_inventory( ch, craft );
+                        break;
+                    }
+                    case DROP: {
+                        put_into_vehicle_or_drop( ch, item_drop_reason::deliberate, {craft} );
+                        break;
+                    }
                 }
             }
         }
@@ -3649,6 +3672,15 @@ static void spawn_items( Character &guy, std::vector<item> &results,
 
         if( newit.made_of( phase_id::LIQUID ) ) {
             liquid_handler::handle_all_or_npc_liquid( guy, newit, PICKUP_RANGE );
+            ++i;
+            continue;
+        }
+        // Soft-fork: prefer auto-stowing finished craft results into inventory /
+        // worn containers (backpack) when there is space. Avoid auto-wielding into
+        // free hands (and the clear-hands dispose menus that follow) for normal
+        // finishes — only fall back to wield / map / drop when stash cannot succeed.
+        if( guy.can_stash( newit ) && guy.can_pickWeight( newit, false ) ) {
+            set_item_inventory( guy, newit );
             ++i;
             continue;
         }

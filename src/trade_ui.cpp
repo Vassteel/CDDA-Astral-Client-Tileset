@@ -44,12 +44,15 @@ namespace
 {
 point _pane_orig( int side )
 {
-    return { side > 0 ? TERMX / 2 : 0, trade_ui::header_size };
+    const int width = std::min( TERMX, 160 );
+    const int height = std::min( TERMY, 42 );
+    return { ( TERMX - width ) / 2 + ( side > 0 ? width / 2 : 0 ),
+             ( TERMY - height ) / 2 + trade_ui::header_size };
 }
 
 point _pane_size()
 {
-    return { TERMX / 2, TERMY - _pane_orig( 0 ).y };
+    return { std::min( TERMX, 160 ) / 2, std::min( TERMY, 42 ) - trade_ui::header_size };
 }
 
 } // namespace
@@ -172,7 +175,10 @@ trade_ui::trade_ui( party_t &you, npc &trader, currency_t cost, std::string titl
     _panes[_you]->get_active_column().on_deactivate();
 
     _header_ui.on_screen_resize( [&]( ui_adaptor & ui ) {
-        _header_w = catacurses::newwin( header_size, TERMX, point::zero );
+        const int width = std::min( TERMX, 160 );
+        const int height = std::min( TERMY, 42 );
+        _header_w = catacurses::newwin( header_size, width,
+                                      point( ( TERMX - width ) / 2, ( TERMY - height ) / 2 ) );
         ui.position_from_window( _header_w );
         ui.invalidate_ui();
         resize();

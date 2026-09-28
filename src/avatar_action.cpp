@@ -23,7 +23,11 @@
 #include "creature_tracker.h"
 #include "debug.h"
 #include "enums.h"
+#include "stomach.h"
+#include "vitamin.h"
+#include "effect.h"
 #include "flag.h"
+#include "mutation.h"
 #include "game.h"
 #include "game_constants.h"
 #include "game_inventory.h"
@@ -925,6 +929,283 @@ bool avatar_action::auto_combat( avatar &you, map &m )
     you.fire_gun( target, mode.qty );
     // Only claim the turn if moves were spent (avoids an infinite handle_action loop).
     return you.get_moves() < moves_before;
+}
+
+
+// ---------------------------------------------------------------------------
+// Soft-fork sticky Auto Eat/Drink (toolbar Eat●) — mirrors NPC rate_food /
+// will_eat safety, with player-facing binge guards and vitamin preference.
+// ---------------------------------------------------------------------------
+namespace
+{
+
+static const efftype_id effect_ae_hunger_engorged( "hunger_engorged" );
+static const efftype_id effect_ae_hunger_full( "hunger_full" );
+static const efftype_id effect_ae_hunger_satisfied( "hunger_satisfied" );
+static const efftype_id effect_ae_hunger_hungry( "hunger_hungry" );
+static const efftype_id effect_ae_hunger_very_hungry( "hunger_very_hungry" );
+static const efftype_id effect_ae_hunger_near_starving( "hunger_near_starving" );
+static const efftype_id effect_ae_hunger_starving( "hunger_starving" );
+static const efftype_id effect_ae_hunger_famished( "hunger_famished" );
+static const trait_id trait_ae_SAPROPHAGE( "SAPROPHAGE" );
+static const trait_id trait_ae_SAPROVORE( "SAPROVORE" );
+static const itype_id itype_ae_water_clean( "water_clean" );
+static const flag_id json_flag_MARLOSS( "MARLOSS" );
+
+/** True when the player still needs food (not yet Satisfied/Full/Engorged). */
+bool auto_eat_needs_food( const avatar &you )
+{
+    if( you.has_effect( effect_ae_hunger_full ) ||
+        you.has_effect( effect_ae_hunger_engorged ) ||
+        you.has_effect( effect_ae_hunger_satisfied ) ) {
+        return false;
+    }
+    // Peckish / Hungry / worse, or calorie deficit with any hunger signal.
+    if( you.has_effect( effect_ae_hunger_hungry ) ||
+        you.has_effect( effect_ae_hunger_very_hungry ) ||
+        you.has_effect( effect_ae_hunger_near_starving ) ||
+        you.has_effect( effect_ae_hunger_starving ) ||
+        you.has_effect( effect_ae_hunger_famished ) ) {
+        return true;
+    }
+    // Mirror NPC: get_hunger()>0 or calorie deficit.
+    return you.get_hunger() > 40 || you.has_calorie_deficit();
+}
+
+/** True when thirst display would show Thirsty or worse (vanilla > 40). */
+bool auto_eat_needs_drink( const avatar &you )
+{
+    return you.get_thirst() > 40;
+}
+
+/**
+ * Reject items the player would notice as harmful / gross — uses will_eat
+ * (inedible, rotten, parasites, allergy, cannibalism, nausea, too full) plus
+ * extra soft-fork guards for poison, strong health penalty, addiction, and
+ * major joy dump.  RAW is allowed only as a last resort (scored lower).
+ */
+bool auto_eat_is_safe( const avatar &you, const item &it )
+{
+    if( !it.is_comestible() ) {
+        return false;
+    }
+    const auto &com = it.get_comestible();
+    if( !com ) {
+        return false;
+    }
+    // Never auto-medicate.
+    if( com->comesttype == "MED" || it.is_medication() || it.is_medical_tool() ) {
+        return false;
+    }
+    // will_eat covers can_eat + rotten / parasites / allergy / cannibalism /
+    // nausea / too-full.  interactive=false → first consequence fails.
+    if( !you.will_eat( it, false ).success() ) {
+        return false;
+    }
+    // Explicit poison use-action or residual poison points.
+    if( it.type->use_methods.count( "POISON" ) &&
+        !( you.has_trait( trait_ae_SAPROPHAGE ) ||
+           you.has_trait( trait_ae_SAPROVORE ) ) ) {
+        return false;
+    }
+    if( it.poison > 0 ) {
+        return false;
+    }
+    // Strong health penalty (junk / rotting meat tier).
+    if( com->healthy <= -2 ) {
+        return false;
+    }
+    // Major joy dump the player would notice (flour, hot sauce, etc.).
+    if( you.fun_for( it ).first <= -5 ) {
+        return false;
+    }
+    // Addiction risk: any non-trivial addiction potential.
+    for( const auto &add : com->addictions ) {
+        if( add.second >= 5 ) {
+            return false;
+        }
+    }
+    // Marloss / Mycus — let the player decide.
+    if( it.has_flag( flag_MYCUS_OK ) || it.has_flag( json_flag_MARLOSS ) ) {
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Score a safe comestible.  Higher is better.  Prefer items that address the
+ * active need; boost vitamin contribution when deficient; prefer healthier /
+ * fun food; deprioritize RAW when cooked options exist (caller passes flag).
+ */
+float auto_eat_score( const avatar &you, const item &it,
+                      bool need_food, bool need_drink, bool raw_penalty )
+{
+    const auto &com = it.get_comestible();
+    if( !com ) {
+        return -1.f;
+    }
+    const nutrients nutr = you.compute_effective_nutrients( it );
+    const int kcal = nutr.kcal();
+    const int quench = com->quench;
+    float score = 1.f;
+
+    if( need_drink && !need_food ) {
+        // Drink-focused: quench is king; ignore pure food.
+        if( quench <= 0 ) {
+            return -1.f;
+        }
+        score += static_cast<float>( quench ) * 2.f;
+        score += static_cast<float>( std::min( kcal, 50 ) ) * 0.05f;
+    } else if( need_food && !need_drink ) {
+        if( kcal <= 0 && com->get_default_nutr() <= 0 ) {
+            return -1.f;
+        }
+        score += static_cast<float>( std::max( kcal, com->get_default_nutr() ) );
+        // Mild quench is fine; heavy quench waste is mildly penalized.
+        if( quench > 20 ) {
+            score -= static_cast<float>( quench - 20 ) * 0.25f;
+        }
+    } else {
+        // Both needs: blend.
+        score += static_cast<float>( std::max( kcal, com->get_default_nutr() ) );
+        score += static_cast<float>( std::max( 0, quench ) ) * 1.5f;
+    }
+
+    // Prefer maintaining health.
+    score += static_cast<float>( com->healthy ) * 8.f;
+    score += static_cast<float>( you.fun_for( it ).first ) * 2.f;
+
+    // Prefer soon-to-rot perishables (same idea as NPC rate_food).
+    if( com->spoils > 0_turns && !it.rotten() ) {
+        score += static_cast<float>( it.get_relative_rot() ) * 10.f;
+    }
+
+    // Vitamin preference when deficient (vitamin_get < 0).
+    for( const auto &vpair : vitamin::all() ) {
+        if( vpair.first->type() != vitamin_type::VITAMIN ||
+            vpair.first->has_flag( "OBSOLETE" ) ) {
+            continue;
+        }
+        if( you.vitamin_get( vpair.first ) < 0 ) {
+            const int provided = nutr.get_vitamin( vpair.first );
+            if( provided > 0 ) {
+                score += static_cast<float>( provided ) * 3.f;
+            }
+        }
+    }
+
+    if( raw_penalty && it.has_flag( flag_RAW ) ) {
+        score *= 0.25f;
+    }
+
+    // Clean water bias when thirsty (NPC does the same).
+    if( need_drink && it.typeId() == itype_ae_water_clean ) {
+        score += 40.f;
+    }
+
+    return score;
+}
+
+} // namespace
+
+bool avatar_action::auto_eat( avatar &you )
+{
+    if( !get_option<bool>( "AUTO_EAT" ) ) {
+        return false;
+    }
+    if( you.is_dead_state() || !you.needs_food() ) {
+        return false;
+    }
+    // Don't interrupt an in-progress activity (including a prior consume).
+    if( !you.activity.is_null() ) {
+        return false;
+    }
+    if( !g->check_safe_mode_allowed() ) {
+        return false;
+    }
+
+    const bool need_food = auto_eat_needs_food( you );
+    const bool need_drink = auto_eat_needs_drink( you );
+    if( !need_food && !need_drink ) {
+        return false;
+    }
+
+    // Gather inventory foods (nested containers included via cache).
+    std::vector<item_location> candidates =
+        you.cache_get_items_with( "is_food", &item::is_food );
+    // Also consider drinks that may not flag is_food on some itype edge cases.
+    std::vector<item_location> drinks =
+        you.cache_get_items_with( "is_comestible", &item::is_comestible );
+    candidates.insert( candidates.end(), drinks.begin(), drinks.end() );
+
+    // Deduplicate by item pointer.
+    std::sort( candidates.begin(), candidates.end(),
+    []( const item_location & a, const item_location & b ) {
+        return a.get_item() < b.get_item();
+    } );
+    candidates.erase( std::unique( candidates.begin(), candidates.end(),
+    []( const item_location & a, const item_location & b ) {
+        return a.get_item() == b.get_item();
+    } ), candidates.end() );
+
+    // First pass: is there any safe non-RAW option?
+    bool have_cooked = false;
+    for( const item_location &loc : candidates ) {
+        if( !loc || !auto_eat_is_safe( you, *loc ) ) {
+            continue;
+        }
+        if( !loc->has_flag( flag_RAW ) ) {
+            have_cooked = true;
+            break;
+        }
+    }
+
+    float best_score = 0.f;
+    item_location best;
+    for( const item_location &loc : candidates ) {
+        if( !loc || !auto_eat_is_safe( you, *loc ) ) {
+            continue;
+        }
+        const float s = auto_eat_score( you, *loc, need_food, need_drink, have_cooked );
+        if( s > best_score ) {
+            best_score = s;
+            best = loc;
+        }
+    }
+
+    if( !best ) {
+        // One-shot subtle notice per toggle session (static latched).
+        static bool warned = false;
+        static bool last_on = false;
+        const bool on = get_option<bool>( "AUTO_EAT" );
+        if( on && !last_on ) {
+            warned = false; // reset when toggled back on
+        }
+        last_on = on;
+        if( !warned ) {
+            add_msg( m_info, _( "Auto Eat/Drink: no safe food or drink in inventory." ) );
+            warned = true;
+        }
+        return false;
+    }
+
+    // Consume directly — same activity as manual Eat, but NEVER reprompt the
+    // Hybrid Consume menu (eat() always passes reprompt_consume_menu=true for
+    // continuous menu flow; Auto Eat/Drink must stay headless).
+    if( !best ) {
+        return false;
+    }
+    map &here = get_map();
+    best.overflow( here );
+    const int moves_before = you.get_moves();
+    you.assign_activity( consume_activity_actor( best, /*reprompt_consume_menu=*/false ) );
+    you.last_item = item( *best ).typeId();
+    // Activity assigned; moves may not drop until it runs.  Claim the turn if
+    // an activity was assigned so handle_action doesn't re-enter.
+    if( !you.activity.is_null() || you.get_moves() < moves_before ) {
+        return true;
+    }
+    return false;
 }
 
 // TODO: Move data/functions related to targeting out of game class

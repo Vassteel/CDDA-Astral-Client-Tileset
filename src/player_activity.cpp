@@ -1,3 +1,4 @@
+#include "ui_telemetry.h"
 #include "player_activity.h"
 
 #include <algorithm>
@@ -348,6 +349,7 @@ void player_activity::do_turn( Character &you )
     }
 
     if( *this && moves_left <= 0 ) {
+        const ui_telemetry::scope trace( "activity.finish", {{ "activity", type.str() }}, you.is_avatar() );
         // Note: For some activities "finish" is a misnomer; that's why we explicitly check if the
         // type is ACT_NULL below.
         if( !type->completion_EOC.is_null() ) {

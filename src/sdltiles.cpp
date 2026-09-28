@@ -14,6 +14,7 @@
 #include <cmath>
 #include <cstdint>
 #include <cstdlib>
+#include <csignal>
 #include <cstring>
 #include <exception>
 #include <fstream>
@@ -81,6 +82,27 @@
 #include "cata_imgui.h"
 
 std::unique_ptr<cataimgui::client> imclient;
+
+namespace
+{
+catacurses::window main_menu_background_window;
+SDL_Surface_Ptr main_menu_background_surface;
+}
+
+bool set_main_menu_background( const catacurses::window &window, const std::string &path )
+{
+    main_menu_background_window = window;
+    main_menu_background_surface.reset();
+    if( path.empty() || !file_exist( path ) ) {
+        return false;
+    }
+    try {
+        main_menu_background_surface = load_image( path.c_str() );
+    } catch( const std::exception &error ) {
+        DebugLog( D_WARNING, D_MAIN ) << "Main-menu artwork: " << error.what();
+    }
+    return bool( main_menu_background_surface );
+}
 
 #if defined(_WIN32)
 #   if 1 // HACK: Hack to prevent reordering of #include "platform_win.h" by IWYU
@@ -3570,6 +3592,34 @@ static bool draw_window( Font_Ptr &font, const catacurses::window &w, const poin
     cata_cursesport::WINDOW *const win = w.get<cata_cursesport::WINDOW>();
 
     // TODO: Get this from UTF system to make sure it is exactly the kind of space we need
+    // Bring legacy menu surfaces into the same Hybrid palette as ImGui.
+    // World/overmap/minimap colors retain their gameplay meaning.
+    const bool hybrid_ui = !g || ( !( w == g->w_terrain ) && !( w == g->w_overmap ) &&
+                                  !( w == g->w_pixel_minimap ) );
+    const SDL_Color hybrid_background = { 25, 26, 27, 255 };
+    const SDL_Color hybrid_selection = { 58, 48, 34, 255 };
+    const bool splash = main_menu_background_surface && w == main_menu_background_window;
+    if( splash ) {
+        // Keep the approved composition intact at every aspect ratio. A CPU
+        // surface survives renderer recovery; the temporary texture never does.
+        const int width = win->width * font->width;
+        const int height = win->height * font->height;
+        geometry->rect( renderer, offset, width, height, hybrid_background );
+        const SDL_Surface_Ptr &surface = main_menu_background_surface;
+        const float scale = std::min( float( width ) / surface->w, float( height ) / surface->h );
+        const SDL_Rect dst = { offset.x + ( width - int( surface->w * scale ) ) / 2,
+                               offset.y + ( height - int( surface->h * scale ) ) / 2,
+                               int( surface->w * scale ), int( surface->h * scale ) };
+        const SDL_Texture_Ptr texture = CreateTextureFromSurface( renderer, surface );
+        if( texture ) {
+            RenderCopy( renderer, texture, nullptr, &dst );
+        }
+        geometry->rect( renderer, offset + point( 0, height - font->height * 5 ),
+                        width, font->height * 5, hybrid_background );
+    }
+    const auto background_color = [&]( catacurses::base_color color ) {
+        return hybrid_ui && color == catacurses::blue ? hybrid_selection : color_as_sdl( color );
+    };
     static const std::string space_string = " ";
 
     const bool option_use_draw_ascii_lines_routine = get_option<bool>( "USE_DRAW_ASCII_LINES_ROUTINE" );
@@ -3577,7 +3627,7 @@ static bool draw_window( Font_Ptr &font, const catacurses::window &w, const poin
     for( int j = 0; j < win->height; j++ ) {
         // force_full redraws every line after a renderer rebuild, ignoring the
         // per-line touched skip.
-        if( !force_full && !win->line[j].touched ) {
+        if( !force_full && !splash && !win->line[j].touched ) {
             continue;
         }
 
@@ -3586,9 +3636,11 @@ static bool draw_window( Font_Ptr &font, const catacurses::window &w, const poin
         // only clearing those lines that are touched, we avoid
         // clearing lines that were already drawn in a previous
         // window but are untouched in this one.
-        geometry->rect( renderer, point( win->pos.x * font->width, ( win->pos.y + j ) * font->height ),
+        if( !splash ) {
+            geometry->rect( renderer, point( win->pos.x * font->width, ( win->pos.y + j ) * font->height ),
                         win->width * font->width, font->height,
-                        color_as_sdl( catacurses::black ) );
+                        hybrid_ui ? hybrid_background : color_as_sdl( catacurses::black ) );
+        }
         update = true;
         win->line[j].touched = false;
         for( int i = 0; i < win->width; i++ ) {
@@ -3608,7 +3660,7 @@ static bool draw_window( Font_Ptr &font, const catacurses::window &w, const poin
             if( cell.ch == space_string ) {
                 if( cell.BG != catacurses::black ) {
                     geometry->rect( renderer, draw, font->width, font->height,
-                                    color_as_sdl( cell.BG ) );
+                                    background_color( cell.BG ) );
                 }
                 continue;
             }
@@ -3665,10 +3717,11 @@ static bool draw_window( Font_Ptr &font, const catacurses::window &w, const poin
             }
             if( cell.BG != catacurses::black ) {
                 geometry->rect( renderer, draw, font->width * cw, font->height,
-                                color_as_sdl( BG ) );
+                                background_color( BG ) );
             }
             if( use_draw_ascii_lines_routine ) {
-                font->draw_ascii_lines( renderer, geometry, uc, draw, FG );
+                font->draw_ascii_lines( renderer, geometry, uc, draw,
+                                        hybrid_ui ? catacurses::yellow : FG );
             } else {
                 font->OutputChar( renderer, geometry, cell.ch, draw, FG );
             }
@@ -6149,6 +6202,26 @@ static void CheckMessages()
         try_sdl_update();
     }
     if( quit ) {
+        // Soft-fork: SDL_EVENT_QUIT used to endwin()+exit(0) while `g` still
+        // owned Hybrid ImGui windows (sidebar / mouse-view / toolbar).
+        // endwin() → WinDestroy() → imclient.reset() → ImGui::DestroyContext();
+        // then exit(0) ran static ~unique_ptr<game> → ~game →
+        // ui_hybrid_sidebar::hide() → window dtor against a dead ImGui
+        // context → SIGSEGV (seen on Steam Deck while overmap was open;
+        // crash.log stack: hide @ ui_hybrid_sidebar.cpp:475 ← ~game ←
+        // libc exit ← overmap_ui::display).  Mirror main.cpp exit_handler:
+        // disarm crash handlers, destroy `g` (Hybrid UI) BEFORE endwin.
+#if !defined(_WIN32)
+        signal( SIGABRT, SIG_DFL );
+        signal( SIGSEGV, SIG_DFL );
+        signal( SIGILL, SIG_DFL );
+        signal( SIGFPE, SIG_DFL );
+#if defined(SIGBUS)
+        signal( SIGBUS, SIG_DFL );
+#endif
+#endif
+        deinitDebug();
+        g.reset();
         catacurses::endwin();
         exit( 0 );
     }

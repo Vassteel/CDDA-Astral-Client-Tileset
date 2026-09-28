@@ -339,6 +339,8 @@ enum action_id : int {
     ACTION_TOGGLE_AUTO_PICKUP,
     /** Turn sticky auto combat on/off (soft-fork toolbar) */
     ACTION_TOGGLE_AUTO_COMBAT,
+    /** Turn sticky auto eat/drink on/off (soft-fork toolbar) */
+    ACTION_TOGGLE_AUTO_EAT,
     /** Toggle temperature map */
     ACTION_DISPLAY_TEMPERATURE,
     /** Toggle snow depth map */
@@ -623,6 +625,8 @@ action_id handle_action_menu( map &here );
  * activity is assigned.
  */
 action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p );
+/** Soft-fork: if the tile RMB retargeted an adjacent item tile, consume that pos. */
+std::optional<tripoint_bub_ms> take_tile_menu_retarget();
 
 
 

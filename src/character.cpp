@@ -1,3 +1,4 @@
+#include "ui_telemetry.h"
 #include "character.h"
 
 #include <algorithm>
@@ -5326,6 +5327,8 @@ void Character::assign_activity( const activity_actor &actor )
 
 void Character::assign_activity( const player_activity &act )
 {
+    const ui_telemetry::scope trace( "activity.assign", {{ "from", activity.id().str() },
+        { "to", act.id().str() }, { "moves", std::to_string( act.moves_left ) }}, is_avatar() );
     bool resuming = false;
     if( !backlog.empty() && backlog.front().can_resume_with( act, *this ) ) {
         resuming = true;
@@ -5368,6 +5371,8 @@ bool Character::has_activity( const std::vector<activity_id> &types ) const
 
 void Character::cancel_activity()
 {
+    const ui_telemetry::scope trace( "activity.cancel", {{ "activity", activity.id().str() }},
+                                   is_avatar() );
     activity.canceled( *this );
     if( has_activity( ACT_MOVE_ITEMS ) && is_hauling() ) {
         stop_hauling();

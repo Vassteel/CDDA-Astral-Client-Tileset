@@ -1,0 +1,17 @@
+{
+  "real_grass": {
+    "page": "https://gobotany.nativeplanttrust.org/species/festuca/filiformis/",
+    "image": "https://newfs.s3.amazonaws.com/taxon-images-1000s1000/Poaceae/festuca-filiformis-ha-dcameron.jpg",
+    "purpose": "Narrow blades, upright stems and fine seed heads; photo reference only, not bundled into release"
+  },
+  "game_style": "UltiCa long/tall grass native sprites; extracted comparison in before-comparison.png",
+  "revision_target": "Astral long-grass; tall-grass retains UltiCa until separately authored",
+  "desired_changes": [
+    "taller and denser",
+    "thin upright blades",
+    "restrained olive green palette",
+    "32x64 native canvas with offset [0,-32]",
+    "all four seasons"
+  ],
+  "status": "in progress; outside client installation"
+}

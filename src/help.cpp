@@ -240,9 +240,6 @@ void help_window::draw_category()
     const bool scroll_title = ImGui::GetContentRegionAvail().y < 500.0f;
     const bool show_footer = is_space_for_two_cat();
 
-    int child_rows = TERMY;
-    child_rows -= scroll_title ? 0 : 5;
-    child_rows -= show_footer ? 5 : 0;
 
     if( !scroll_title ) {
         format_title( cat );
@@ -250,7 +247,8 @@ void help_window::draw_category()
 
     ImGui::Indent( one_em );
     if( ImGui::BeginChild( "HELP_PARAGRAPHS",
-                           ImVec2( -1, static_cast<float>( str_height_to_pixels( child_rows ) ) ) ) ) {
+                           ImVec2( -1.f, std::max( 1.f, ImGui::GetContentRegionAvail().y -
+                                   ( show_footer ? 5.f * ImGui::GetTextLineHeightWithSpacing() : 0.f ) ) ) ) ) {
 
         cataimgui::set_scroll( s );
         if( scroll_title ) {
@@ -300,12 +298,15 @@ void help_window::draw_category()
 
 cataimgui::bounds help_window::get_bounds()
 {
-    return {0, 0, 1.0, 1.0};
+    const ImVec2 vp = ImGui::GetMainViewport()->Size;
+    const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
+    return { -1.f, -1.f, std::min( vp.x * 0.94f, 1280.f * scale ),
+             std::min( vp.y * 0.92f, 800.f * scale ) };
 }
 
 float help_window::get_wrap_width()
 {
-    return static_cast<float>( str_width_to_pixels( TERMX - 6 ) );
+    return std::max( 1.f, ImGui::GetContentRegionAvail().x );
 }
 
 void help_window::show()

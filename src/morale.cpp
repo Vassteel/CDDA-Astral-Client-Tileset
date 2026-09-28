@@ -527,6 +527,97 @@ void player_morale::decay( const time_duration &ticks )
     invalidate();
 }
 
+std::vector<player_morale::ui_row> player_morale::get_ui_rows( int focus_eq,
+        int pain_penalty, int sleepiness_penalty, const Character &who )
+{
+    calculate_percentage();
+
+    const morale_mult mult = get_temper_mult();
+    std::vector<morale_point> positive_morale;
+    std::vector<morale_point> negative_morale;
+    for( const morale_point &mp : points ) {
+        const int bonus = mp.get_net_bonus( mult );
+        if( bonus > 0 ) {
+            positive_morale.emplace_back( mp );
+        } else if( bonus < 0 ) {
+            negative_morale.emplace_back( mp );
+        }
+    }
+
+    const auto sort_morale = []( const morale_point & lhs, const morale_point & rhs ) -> bool {
+        const int lhs_percent = lhs.get_percent_contribution();
+        const int rhs_percent = rhs.get_percent_contribution();
+        return localized_compare( std::make_pair( -lhs_percent, lhs.get_name() ),
+                                  std::make_pair( -rhs_percent, rhs.get_name() ) );
+    };
+    std::sort( positive_morale.begin(), positive_morale.end(), sort_morale );
+    std::sort( negative_morale.begin(), negative_morale.end(), sort_morale );
+
+    auto favor_of = []( int num ) -> int {
+        if( num > 0 ) {
+            return 1;
+        }
+        if( num < 0 ) {
+            return -1;
+        }
+        return 0;
+    };
+    auto signed_or_dash = []( int num ) -> std::string {
+        if( num == 0 ) {
+            return "-";
+        }
+        return string_format( "%+d", num );
+    };
+
+    std::vector<ui_row> rows;
+    rows.push_back( { _( "Source" ), _( "Value" ), false, 0 } );
+    rows.push_back( { {}, {}, true, 0 } );
+
+    if( positive_morale.empty() && negative_morale.empty() ) {
+        rows.push_back( { _( "Nothing affects your morale" ), {}, false, 0 } );
+    } else {
+        const int pos_total = get_total_positive_value();
+        rows.push_back( { _( "Total positive morale" ), signed_or_dash( pos_total ), false,
+                          favor_of( pos_total ) } );
+        for( const morale_point &mp : positive_morale ) {
+            const int pct = mp.get_percent_contribution();
+            rows.push_back( { mp.get_name(), string_format( "%d%%", pct ), false, favor_of( pct ) } );
+        }
+        rows.push_back( { {}, {}, false, 0 } );
+        const int neg_total = -get_total_negative_value();
+        rows.push_back( { _( "Total negative morale" ), signed_or_dash( neg_total ), false,
+                          favor_of( neg_total ) } );
+        for( const morale_point &mp : negative_morale ) {
+            // Negative sources: higher percent is "worse" → red
+            const int pct = mp.get_percent_contribution();
+            rows.push_back( { mp.get_name(), string_format( "%d%%", pct ), false, -1 } );
+        }
+    }
+
+    rows.push_back( { {}, {}, true, 0 } );
+    const int level = who.get_morale_level();
+    rows.push_back( { _( "Total morale:" ), signed_or_dash( level ), false, favor_of( level ) } );
+
+    std::string deaden_display_msg = _( "Deadened.  All morale modified to:" );
+    if( get_option<bool>( "CRAZY" ) ) {
+        deaden_display_msg = _( "Shits given:" );
+    }
+    rows.push_back( { deaden_display_msg,
+                      string_format( "%d%%",
+                                     static_cast<int>( who.get_modifier_for_ALL_morale() * 100.0 ) ),
+                      false, 0 } );
+    if( pain_penalty != 0 ) {
+        rows.push_back( { _( "Pain level:" ), signed_or_dash( -pain_penalty ), false,
+                          favor_of( -pain_penalty ) } );
+    }
+    if( sleepiness_penalty != 0 ) {
+        rows.push_back( { _( "Sleepiness level:" ), signed_or_dash( -sleepiness_penalty ), false,
+                          favor_of( -sleepiness_penalty ) } );
+    }
+    rows.push_back( { _( "Focus trends towards:" ), string_format( "%d", focus_eq ), false, 0 } );
+    return rows;
+}
+
 void player_morale::display( int focus_eq, int pain_penalty, int sleepiness_penalty,
                              Character &who )
 {

@@ -39,6 +39,7 @@
 #include "translations.h"
 #include "type_id.h"
 #include "ui_manager.h"
+#include "ui_mouse_actions.h"
 #include "uilist.h"
 #include "uistate.h"
 #include "units.h"
@@ -602,7 +603,7 @@ void avatar::power_bionics()
     bionic_tab_mode tab_mode = TAB_ACTIVE;
 
     //added title_tab_height for the tabbed bionic display
-    const int TITLE_HEIGHT = 4;
+    const int TITLE_HEIGHT = 7;
     const int TITLE_TAB_HEIGHT = 3;
     int HEIGHT = 0;
     int WIDTH = 0;
@@ -630,11 +631,11 @@ void avatar::power_bionics()
          * bottom frame line:                                      + 1
          * TOTAL: TITLE_HEIGHT + TITLE_TAB_HEIGHT + bionic_count + 2
          */
-        HEIGHT = std::min( TERMY,
+        HEIGHT = std::min( std::min( TERMY, 40 ),
                            std::max( FULL_SCREEN_HEIGHT,
                                      TITLE_HEIGHT + TITLE_TAB_HEIGHT +
                                      static_cast<int>( my_bionics->size() ) + 2 ) );
-        WIDTH = FULL_SCREEN_WIDTH + ( TERMX - FULL_SCREEN_WIDTH ) / 2;
+        WIDTH = std::min( TERMX, 120 );
         const point START( ( TERMX - WIDTH ) / 2, ( TERMY - HEIGHT ) / 2 );
         //wBio is the entire bionic window
         wBio = catacurses::newwin( HEIGHT, WIDTH, START );
@@ -689,6 +690,8 @@ void avatar::power_bionics()
     ctxt.register_action( "TOGGLE_SHUTDOWN" );
     ctxt.register_action( "TOGGLE_SPRITE" );
     ctxt.register_action( "SORT" );
+    mouse_action_bar buttons;
+    buttons.register_input( ctxt );
 
     ui.on_redraw( [&]( const ui_adaptor & ) {
         if( hide ) {
@@ -767,6 +770,16 @@ void avatar::power_bionics()
         draw_bionics_tabs( w_tabs, active.size(), passive.size(), tab_mode );
 
         draw_bionics_titlebar( w_title, this, menu_mode );
+        for( int y = 4; y < getmaxy( w_title ); ++y ) {
+            mvwhline( w_title, point( 0, y ), ' ', getmaxx( w_title ) );
+        }
+        buttons.draw( w_title, 4, {{ "QUIT", _( "Close" ) },
+            { "CONFIRM", _( "Use selected" ) }, { "TOGGLE_EXAMINE", _( "Inspect / use" ) },
+            { "NEXT_TAB", _( "Active / passive" ) }, { "SORT", _( "Sort" ) },
+            { "REASSIGN", _( "Assign key" ) }, { "TOGGLE_SAFE_FUEL", _( "Fuel saving" ) },
+            { "TOGGLE_SHUTDOWN", _( "Auto shutdown" ) }, { "TOGGLE_SPRITE", _( "Sprite" ) },
+            { "HELP_KEYBINDINGS", _( "Keys" ) }} );
+        wnoutrefresh( w_title );
         if( menu_mode == EXAMINING && !current_bionic_list->empty() ) {
             draw_description( w_description, *( *current_bionic_list )[cursor], get_all_body_parts().size(),
                               this );
@@ -780,7 +793,7 @@ void avatar::power_bionics()
         ::sorted_bionics *current_bionic_list = tab_mode == TAB_ACTIVE ? &active : &passive;
         max_scroll_position = std::max( 0, static_cast<int>( current_bionic_list->size() ) - LIST_HEIGHT );
         scroll_position = clamp( scroll_position, 0, max_scroll_position );
-        cursor = clamp<int>( cursor, 0, current_bionic_list->size() );
+        cursor = clamp<int>( cursor, 0, std::max( 0, static_cast<int>( current_bionic_list->size() ) - 1 ) );
 
 #if defined(__ANDROID__)
         ctxt.get_registered_manual_keys().clear();
@@ -790,7 +803,21 @@ void avatar::power_bionics()
         }
 #endif
 
-        const std::string action = ctxt.handle_input();
+        std::string action = buttons.process( ctxt, ctxt.handle_input() );
+        if( action == "SELECT" ) {
+            if( const auto p = ctxt.get_coordinates_text( wBio ) ) {
+                const int index = scroll_position + p->y - list_start_y;
+                if( buttons.contains( wBio, *p ) && p->y >= list_start_y &&
+                    p->y < list_start_y + LIST_HEIGHT && index >= 0 &&
+                    index < static_cast<int>( current_bionic_list->size() ) ) {
+                    cursor = index;
+                }
+            }
+            continue;
+        }
+        if( current_bionic_list->empty() && ( action == "UP" || action == "DOWN" ) ) {
+            continue;
+        }
         const int ch = ctxt.get_raw_input().get_first_input();
         bionic *tmp = nullptr;
 

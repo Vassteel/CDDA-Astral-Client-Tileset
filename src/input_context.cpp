@@ -1,3 +1,4 @@
+#include "ui_telemetry.h"
 #include "input_context.h"
 
 #include <algorithm>
@@ -530,6 +531,9 @@ const std::string &input_context::handle_input( const int timeout )
         // enters something proper.
     }
     inp_mngr.set_timeout( old_timeout );
+    if( ui_telemetry::meaningful_action( *result ) ) {
+        ui_telemetry::record( "input.action", {{ "context", category }, { "action", *result }} );
+    }
     return *result;
 }
 

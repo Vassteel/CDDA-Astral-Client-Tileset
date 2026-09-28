@@ -42,6 +42,15 @@ void autoattack( avatar &you, map &m );
  */
 bool auto_combat( avatar &you, map &m );
 
+/**
+ * Soft-fork sticky Auto Eat/Drink helper (toolbar Eat●).
+ * When hungry/thirsty, pick a safe inventory comestible via will_eat /
+ * nutritional scoring and start consume activity.  Returns true if a
+ * consume was started (caller should treat the turn as spent).  If nothing
+ * safe is available, returns false (optional one-shot debug msg).
+ */
+bool auto_eat( avatar &you );
+
 void mend( avatar &you, item_location loc );
 
 /**

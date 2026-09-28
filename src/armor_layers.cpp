@@ -13,6 +13,7 @@
 #include "body_part_set.h"
 #include "bodypart.h"
 #include "catacharset.h"
+#include "cuboid_rectangle.h"
 #include "character.h"
 #include "character_attire.h"
 #include "color.h"
@@ -645,11 +646,11 @@ void outfit::sort_armor( Character &guy )
 
     ui_adaptor ui;
     ui.on_screen_resize( [&]( ui_adaptor & ui ) {
-        win_h = TERMY;
-        win_w = FULL_SCREEN_WIDTH + ( TERMX - FULL_SCREEN_WIDTH ) * 3 / 4;
+        win_h = std::min( TERMY, 40 );
+        win_w = std::min( TERMX, 140 );
         win.x = TERMX / 2 - win_w / 2;
         win.y = TERMY / 2 - win_h / 2;
-        cont_h = win_h - 4;
+        cont_h = win_h - 7;
         left_w = ( win_w - 4 ) / 3;
         right_w = left_w;
         middle_w = ( win_w - 4 ) - left_w - right_w;
@@ -696,6 +697,12 @@ void outfit::sort_armor( Character &guy )
         };
     };
 
+    ctxt.register_action( "SELECT" );
+    ctxt.register_action( "MOUSE_MOVE" );
+    ctxt.register_action( "COORDINATE" );
+    ctxt.register_action( "SCROLL_UP" );
+    ctxt.register_action( "SCROLL_DOWN" );
+    std::vector<std::pair<inclusive_rectangle<point>, std::string>> mouse_buttons;
     int leftListSize = 0;
     int rightListSize = 0;
     mid_pane_status mid_pane;
@@ -914,6 +921,32 @@ void outfit::sort_armor( Character &guy )
         // Right footer
         mvwprintz( w_sort_right, point( 0, cont_h - 1 ), c_light_gray, _( "(Outermost)" ) );
 
+        mouse_buttons.clear();
+        const std::vector<std::pair<std::string, std::string>> buttons = {
+            { "QUIT", _( "Close" ) }, { "EQUIP_ARMOR", _( "Wear" ) },
+            { "REMOVE_ARMOR", _( "Remove" ) }, { "MOVE_ARMOR", _( "Move" ) },
+            { "UP", _( "Up" ) }, { "DOWN", _( "Down" ) },
+            { "PREV_TAB", _( "Prev part" ) }, { "NEXT_TAB", _( "Next part" ) },
+            { "CHANGE_SIDE", _( "Side" ) }, { "TOGGLE_CLOTH", _( "Hide sprite" ) },
+            { "SORT_ARMOR", _( "Sort" ) }, { "HELP_KEYBINDINGS", _( "Keys" ) }
+        };
+        int button_x = 2;
+        int button_y = win_h - 3;
+        for( const auto &button : buttons ) {
+            const std::string label = "[" + button.second + "]";
+            const int width = utf8_width( label );
+            if( button_x + width > win_w - 2 ) {
+                button_x = 2;
+                ++button_y;
+            }
+            if( button_y >= win_h - 1 ) {
+                break;
+            }
+            mvwprintz( w_sort_armor, point( button_x, button_y ), c_light_gray, "%s", label );
+            mouse_buttons.emplace_back( inclusive_rectangle<point>( point( button_x, button_y ),
+                                        point( button_x + width - 1, button_y ) ), button.first );
+            button_x += width + 1;
+        }
         // F5
         wnoutrefresh( w_sort_armor ); // Required to show scrollbars
         wnoutrefresh( w_sort_cat );
@@ -944,7 +977,35 @@ void outfit::sort_armor( Character &guy )
         }
 
         ui_manager::redraw();
-        const std::string action = ctxt.handle_input();
+        std::string action = ctxt.handle_input();
+        if( action == "SELECT" ) {
+            if( const auto point = ctxt.get_coordinates_text( w_sort_armor ) ) {
+                for( const auto &button : mouse_buttons ) {
+                    if( button.first.contains( *point ) ) {
+                        action = button.second;
+                        break;
+                    }
+                }
+            }
+            if( action == "SELECT" ) {
+                if( const auto point = ctxt.get_coordinates_text( w_sort_left ) ) {
+                    const int index = leftListOffset + point->y - 1;
+                    if( point->x >= 0 && point->x < getmaxx( w_sort_left ) && point->y > 0 &&
+                        point->y < getmaxy( w_sort_left ) &&
+                        point->y <= leftListLines && index >= 0 && index < leftListSize ) {
+                        leftListIndex = index;
+                        mid_pane.offset = 0;
+                    }
+                }
+            }
+            if( action == "HELP_KEYBINDINGS" ) {
+                ctxt.display_menu();
+            }
+        } else if( action == "SCROLL_UP" ) {
+            action = "UP";
+        } else if( action == "SCROLL_DOWN" ) {
+            action = "DOWN";
+        }
         if( guy.is_npc() && action == "ASSIGN_INVLETS" ) {
             // It doesn't make sense to assign invlets to NPC items
             continue;

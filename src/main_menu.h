@@ -63,7 +63,7 @@ class main_menu
         bool new_character_tab();
         bool load_character_tab( const std::string &worldname );
         void world_tab( const std::string &worldname );
-        /** Main-menu Settings -> Tileset picker (TILES option + load_tileset). */
+        /** Save the tileset choice; world loading applies it after data initialization. */
         void pick_tileset();
 
         /*
@@ -79,6 +79,7 @@ class main_menu
         size_t last_world_pos = 0;
         int sub_opt_off = 0;
         point LAST_TERM;
+        bool titled_background = false;
         catacurses::window w_open;
         point menu_offset;
         std::vector<std::string> templates;
@@ -126,4 +127,3 @@ class main_menu
 };
 
 #endif // CATA_SRC_MAIN_MENU_H
-

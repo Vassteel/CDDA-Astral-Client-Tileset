@@ -606,6 +606,8 @@ struct texture_draw_data {
     // avoiding ImVec2 here
     std::pair<float, float> uv0;
     std::pair<float, float> uv1;
+    point offset;
+    float pixelscale = 1.f;
 };
 
 /** type used for color blocks overlays.
@@ -647,6 +649,8 @@ class cata_tiles
 
         std::optional<texture_draw_data> get_texture_draw_data( const std::string &id,
                 TILE_CATEGORY category, const tripoint_bub_ms &p );
+        /** Base character and worn overlays, in world-renderer draw order. */
+        std::vector<texture_draw_data> get_character_preview( const Character &ch );
 
         std::unordered_set<std::string> get_all_portrait_tile_ids( bool male ) const;
 

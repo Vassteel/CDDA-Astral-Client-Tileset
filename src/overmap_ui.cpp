@@ -79,6 +79,7 @@
 #include "translation.h"
 #include "translations.h"
 #include "type_id.h"
+#include "ui_hybrid_chrome.h"
 #include "ui_manager.h"
 #include "uilist.h"
 #include "uistate.h"
@@ -184,10 +185,37 @@ void overmap_sidebar::draw_controls()
     ImGui::EndChild();
 }
 
+void overmap_sidebar::draw()
+{
+    // Soft-fork D Hybrid chrome (charcoal + muted amber) matching Craft / Equipment.
+    ui_hybrid_chrome::push();
+    cataimgui::window::draw();
+    ui_hybrid_chrome::pop();
+}
+
+void overmap_sidebar::option_button( const std::string &action, bool active )
+{
+    const int n = ui_hybrid_chrome::push_toolbar_button( active );
+    // Full-width-ish button with action name; keybind shown as tooltip.
+    const std::string label = ictxt.get_action_name( action );
+    const std::string tip = string_format( _( "Key: %s" ), ictxt.get_desc( action ) );
+    // Unique ImGui id per action so duplicate labels (if any) don't collide.
+    const std::string btn_id = string_format( "%s##om_%s", label, action );
+    if( ImGui::Button( btn_id.c_str(), ImVec2( -1.f, 0.f ) ) ) {
+        button_action = action;
+    }
+    if( ImGui::IsItemHovered( ImGuiHoveredFlags_DelayNormal ) ) {
+        ImGui::SetTooltip( "%s", tip.c_str() );
+    }
+    ImGui::PopStyleColor( n );
+}
+
 void overmap_sidebar::print_hint( const std::string &action, nc_color color )
 {
-    draw_sidebar_text( string_format( _( "%s - %s" ),
-                                      ictxt.get_desc( action ), ictxt.get_action_name( action ) ), color );
+    // Soft-fork: expose common options as Hybrid buttons (mouse-usable), not key-only hints.
+    // color still conveys active/inactive for debug/legacy callers; active = pink-ish on.
+    const bool active = ( color == c_pink );
+    option_button( action, active );
 }
 
 void overmap_sidebar::draw_tile_info()
@@ -271,40 +299,41 @@ void overmap_sidebar::draw_tile_info()
 
 void overmap_sidebar::draw_settings_info()
 {
+    ui_hybrid_chrome::section_header( _( "Settings" ) );
     print_hint( "TOGGLE_FAST_SCROLL", uistate.overmap_fast_scroll ? c_pink : c_magenta );
     print_hint( "TOGGLE_OVERMAP_ONLY_TRAVEL", uistate.overmap_only_auto_travel ? c_pink : c_magenta );
 }
 
 void overmap_sidebar::draw_quick_reference()
 {
-    draw_sidebar_text( _( "Use movement keys to pan." ), c_magenta );
-    draw_sidebar_text( string_format( _( "Press %s to preview efficient route." ),
-                                      ictxt.get_desc( "CHOOSE_DESTINATION" ) ), c_magenta );
-    draw_sidebar_text( string_format( _( "Press %s to preview direct route." ),
-                                      ictxt.get_desc( "CHOOSE_DESTINATION_DIRECT" ) ), c_magenta );
-    draw_sidebar_text( _( "Press route button again to confirm." ), c_magenta );
-    print_hint( "LEVEL_UP" );
-    print_hint( "LEVEL_DOWN" );
-    print_hint( "look" );
-    print_hint( "CENTER" );
-    print_hint( "CENTER_ON_DESTINATION" );
-    print_hint( "GO_TO_DESTINATION" );
-    print_hint( "SEARCH" );
-    print_hint( "CREATE_NOTE" );
-    print_hint( "DELETE_NOTE" );
-    print_hint( "MARK_DANGER" );
-    print_hint( "LIST_NOTES" );
-    print_hint( "CREATE_POINT_OF_INTEREST" );
-    print_hint( "MISSIONS" );
+    draw_sidebar_text( _( "Use movement keys or click the map to pan." ), c_light_gray );
+    draw_sidebar_text( _( "Route: press the button again to confirm." ), c_light_gray );
+    ui_hybrid_chrome::section_header( _( "Navigate" ) );
+    option_button( "LEVEL_UP" );
+    option_button( "LEVEL_DOWN" );
+    option_button( "CENTER" );
+    option_button( "look" );
+    option_button( "CHOOSE_DESTINATION" );
+    option_button( "CHOOSE_DESTINATION_DIRECT" );
+    option_button( "CENTER_ON_DESTINATION" );
+    option_button( "GO_TO_DESTINATION" );
+    ui_hybrid_chrome::section_header( _( "Notes & Search" ) );
+    option_button( "SEARCH" );
+    option_button( "CREATE_NOTE" );
+    option_button( "DELETE_NOTE" );
+    option_button( "MARK_DANGER" );
+    option_button( "LIST_NOTES" );
+    option_button( "CREATE_POINT_OF_INTEREST" );
+    option_button( "MISSIONS" );
 }
 
 void overmap_sidebar::draw_layer_info()
 {
-
     const tripoint_abs_omt &cursor_pos = draw_data.cursor_pos;
     const bool show_overlays = uistate.overmap_show_overlays || uistate.overmap_blinking;
     const bool is_explored = overmap_buffer.is_explored( cursor_pos );
 
+    ui_hybrid_chrome::section_header( _( "Layers" ) );
     print_hint( "TOGGLE_MAP_NOTES", uistate.overmap_show_map_notes ? c_pink : c_magenta );
     print_hint( "TOGGLE_BLINKING", uistate.overmap_blinking ? c_pink : c_magenta );
     print_hint( "TOGGLE_OVERLAYS", show_overlays ? c_pink : c_magenta );
@@ -313,8 +342,10 @@ void overmap_sidebar::draw_layer_info()
     print_hint( "TOGGLE_MAP_REVEALS", uistate.overmap_show_revealed_omts ? c_pink : c_magenta );
     print_hint( "TOGGLE_EXPLORED", is_explored ? c_pink : c_magenta );
     print_hint( "TOGGLE_FOREST_TRAILS", uistate.overmap_show_forest_trails ? c_pink : c_magenta );
+    // Weather toggle: still clickable; inactive style when indoors (handler no-ops / dark).
+    const bool outdoors = get_map().is_outside( get_player_character().pos_bub() );
     print_hint( "TOGGLE_OVERMAP_WEATHER",
-                !get_map().is_outside( get_player_character().pos_bub() ) ? c_dark_gray :
+                !outdoors ? c_dark_gray :
                 uistate.overmap_visible_weather ? c_pink : c_magenta );
 }
 
@@ -2186,17 +2217,22 @@ static tripoint_abs_omt display()
     do {
         ui->invalidate_ui();
         ui_manager::redraw();
+        // Soft-fork Hybrid: prefer sidebar option-button clicks over key input.
+        if( om_sidebar.has_button_action() ) {
+            action = om_sidebar.get_button_action();
+        } else {
 #if (defined TILES || defined _WIN32 || defined WINDOWS )
-        int scroll_timeout = get_option<int>( "EDGE_SCROLL" );
-        // If EDGE_SCROLL is disabled, it will have a value of -1.
-        // blinking won't work if handle_input() is passed a negative integer.
-        if( scroll_timeout < 0 ) {
-            scroll_timeout = 33;
-        }
-        action = ictxt.handle_input( scroll_timeout );
+            int scroll_timeout = get_option<int>( "EDGE_SCROLL" );
+            // If EDGE_SCROLL is disabled, it will have a value of -1.
+            // blinking won't work if handle_input() is passed a negative integer.
+            if( scroll_timeout < 0 ) {
+                scroll_timeout = 33;
+            }
+            action = ictxt.handle_input( scroll_timeout );
 #else
-        action = ictxt.handle_input( get_option<int>( "BLINK_SPEED" ) );
+            action = ictxt.handle_input( get_option<int>( "BLINK_SPEED" ) );
 #endif
+        }
         if( !display_path.empty() ) {
             std::chrono::time_point<std::chrono::steady_clock> now = std::chrono::steady_clock::now();
             // We go faster per-tile the more we have to go

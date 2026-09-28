@@ -1,3 +1,4 @@
+#include "ui_telemetry.h"
 #include "game.h" // IWYU pragma: associated
 
 #include <algorithm>
@@ -3180,6 +3181,17 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             break;
         }
 
+        case ACTION_TOGGLE_AUTO_EAT: {
+            set_next_option( "AUTO_EAT" );
+            if( get_option<bool>( "AUTO_EAT" ) ) {
+                add_msg( _( "Auto Eat/Drink on.  When hungry or thirsty, safely eats or "
+                            "drinks from inventory (skips poison, parasites, strong "
+                            "penalties).  Toggle off (Eat●) to stop.  Right-click Eat "
+                            "for details." ) );
+            }
+            break;
+        }
+
         case ACTION_TOGGLE_HOUR_TIMER:
             toggle_debug_hour_timer();
             break;
@@ -3255,6 +3267,12 @@ bool game::handle_action()
         if( get_option<bool>( "AUTO_COMBAT" ) && uquit != QUIT_WATCH &&
             !player_character.is_dead_state() &&
             avatar_action::auto_combat( player_character, here ) ) {
+            return true;
+        }
+        // Soft-fork sticky AUTO_EAT: consume a safe inventory item when hungry/thirsty.
+        if( get_option<bool>( "AUTO_EAT" ) && uquit != QUIT_WATCH &&
+            !player_character.is_dead_state() &&
+            avatar_action::auto_eat( player_character ) ) {
             return true;
         }
         // No auto-move, ask player for input
@@ -3405,6 +3423,11 @@ bool game::handle_action()
                 if( !try_get_right_click_action( act, *mouse_target ) ) {
                     return false;
                 }
+                // Soft-fork: tile RMB may retarget onto an adjacent item tile
+                // (tall grass / foliage click steal).
+                if( const std::optional<tripoint_bub_ms> rt = take_tile_menu_retarget() ) {
+                    mouse_target = *rt;
+                }
             }
         } else if( act != ACTION_TIMEOUT ) {
             // act has not been set for an auto-move, so clearing possible
@@ -3437,6 +3460,11 @@ bool game::handle_action()
         return false;
     }
 
+    const ui_telemetry::scope trace( "game.action", {{ "action", action_ident( act ) },
+        { "turn", std::to_string( to_turn<int>( calendar::turn ) ) },
+        { "moves", std::to_string( player_character.get_moves() ) },
+        { "activity", player_character.activity.id().str() }
+    }, act != ACTION_TIMEOUT );
     // This has no action unless we're in a special game mode.
     gamemode->pre_action( act );
 

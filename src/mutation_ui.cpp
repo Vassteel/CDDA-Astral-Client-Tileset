@@ -19,6 +19,7 @@
 #include "string_formatter.h"
 #include "translations.h"
 #include "ui_manager.h"
+#include "ui_mouse_actions.h"
 namespace
 {
 enum class mutation_menu_mode {
@@ -129,7 +130,7 @@ void avatar::power_mutations()
 
     // maximal number of rows in both columns
     const int mutations_count = std::max( passive.size(), active.size() );
-    const int TITLE_HEIGHT = 2;
+    const int TITLE_HEIGHT = 5;
 
     const int DESCRIPTION_HEIGHT = 5;
     // + lines with text in titlebar, local
@@ -190,9 +191,9 @@ void avatar::power_mutations()
 
     ui_adaptor ui;
     ui.on_screen_resize( [&]( ui_adaptor & ui ) {
-        HEIGHT = std::min( TERMY, std::max( FULL_SCREEN_HEIGHT,
+        HEIGHT = std::min( std::min( TERMY, 40 ), std::max( FULL_SCREEN_HEIGHT,
                                             TITLE_HEIGHT + mutations_count + DESCRIPTION_HEIGHT + 5 ) );
-        WIDTH = FULL_SCREEN_WIDTH + ( TERMX - FULL_SCREEN_WIDTH ) / 2;
+        WIDTH = std::min( TERMX, 120 );
         const point START( ( TERMX - WIDTH ) / 2, ( TERMY - HEIGHT ) / 2 );
         wBio = catacurses::newwin( HEIGHT, WIDTH, START );
 
@@ -211,7 +212,7 @@ void avatar::power_mutations()
         examine_pos = 0;
 
         // X-coordinate of the list of active mutations
-        second_column = 32 + ( TERMX - FULL_SCREEN_WIDTH ) / 4;
+        second_column = 32 + ( WIDTH - FULL_SCREEN_WIDTH ) / 2;
 
         ui.position_from_window( wBio );
     } );
@@ -239,6 +240,8 @@ void avatar::power_mutations()
     }
 #endif
 
+    mouse_action_bar buttons;
+    buttons.register_input( ctxt );
     std::optional<trait_id> examine_id;
 
     ui.on_redraw( [&]( const ui_adaptor & ) {
@@ -383,6 +386,14 @@ void avatar::power_mutations()
         }
         wnoutrefresh( wBio );
         show_mutations_titlebar( w_title, menu_mode, ctxt );
+        for( int y = 2; y < getmaxy( w_title ); ++y ) {
+            mvwhline( w_title, point( 0, y ), ' ', getmaxx( w_title ) );
+        }
+        buttons.draw( w_title, 2, {{ "QUIT", _( "Close" ) },
+            { "CONFIRM", _( "Use selected" ) }, { "TOGGLE_EXAMINE", _( "Inspect / use" ) },
+            { "TOGGLE_SPRITE", _( "Sprite" ) }, { "REASSIGN", _( "Assign key" ) },
+            { "NEXT_TAB", _( "Switch column" ) }, { "HELP_KEYBINDINGS", _( "Keys" ) }} );
+        wnoutrefresh( w_title );
         if( menu_mode == mutation_menu_mode::examining && examine_id.has_value() ) {
             wnoutrefresh( w_description );
         }
@@ -393,7 +404,23 @@ void avatar::power_mutations()
         recalc_max_scroll_position();
         ui_manager::redraw();
         bool handled = false;
-        const std::string action = ctxt.handle_input();
+        std::string action = buttons.process( ctxt, ctxt.handle_input() );
+        if( action == "SELECT" ) {
+            if( const auto p = ctxt.get_coordinates_text( wBio ) ) {
+                const int index = scroll_position + p->y - list_start_y;
+                const bool right = p->x >= second_column;
+                const auto &items = right ? active : passive;
+                if( buttons.contains( wBio, *p ) && p->y >= list_start_y &&
+                    p->y < list_start_y + list_height && index >= 0 &&
+                    index < static_cast<int>( items.size() ) ) {
+                    tab_mode = right ? mutation_tab_mode::active : mutation_tab_mode::passive;
+                    cursor = index;
+                    examine_id = items[index];
+                    examine_pos = 0;
+                }
+            }
+            continue;
+        }
         const input_event evt = ctxt.get_raw_input();
         if( evt.type == input_event_t::keyboard_char && !evt.sequence.empty() ) {
             const int ch = evt.get_first_input();

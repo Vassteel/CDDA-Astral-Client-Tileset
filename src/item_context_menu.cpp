@@ -1,9 +1,13 @@
+#include "ui_telemetry.h"
 #include "item_context_menu.h"
 
 #include <string>
 #include <vector>
 
 #include "avatar.h"
+#include "auto_pickup.h"
+#include "output.h"
+#include "units.h"
 #include "avatar_action.h"
 #include "character.h"
 #include "enums.h"
@@ -14,6 +18,8 @@
 #include "item.h"
 #include "itype.h"
 #include "messages.h"
+#include "debug.h"
+#include "string_formatter.h"
 #include "ret_val.h"
 #include "translations.h"
 #include "ui_iteminfo.h"
@@ -222,9 +228,18 @@ action draw_imgui_menu( Character &you, const item_location &loc, bool from_worn
     }
 
     if( !from_worn ) {
-        const bool can_drop = you.can_drop( it ).success();
-        if( menu_entry( _( "Drop" ), can_drop ) ) {
-            chosen = action::drop;
+        const item_location::type where = loc.where();
+        const bool on_ground = where == item_location::type::map ||
+                               where == item_location::type::vehicle;
+        if( on_ground ) {
+            if( menu_entry( _( "Pick up" ), true ) ) {
+                chosen = action::pickup;
+            }
+        } else {
+            const bool can_drop = you.can_drop( it ).success();
+            if( menu_entry( _( "Drop" ), can_drop ) ) {
+                chosen = action::drop;
+            }
         }
     }
 
@@ -244,6 +259,49 @@ action draw_imgui_menu( Character &you, const item_location &loc, bool from_worn
         chosen = action::examine;
     }
 
+    ImGui::Separator();
+    if( menu_entry( _( "Always pick up this item" ), true ) ) {
+        chosen = action::always_pickup;
+    }
+    if( menu_entry( _( "Never pick up this item" ), true ) ) {
+        chosen = action::never_pickup;
+    }
+
+    return chosen;
+}
+
+action draw_inspector( Character &you, const item_location &loc, std::string *chosen_use_method )
+{
+    if( !loc ) {
+        ImGui::TextDisabled( "%s", _( "Select an item to inspect it." ) );
+        return action::none;
+    }
+    ImGui::TextWrapped( "%s", remove_color_tags( loc->display_name() ).c_str() );
+    ImGui::Text( "%s", string_format( _( "Weight %.2f kg   Volume %.2f L" ),
+                 units::to_gram( loc->weight() ) / 1000.0,
+                 units::to_milliliter( loc->volume() ) / 1000.0 ).c_str() );
+    if( loc->is_armor() && !you.is_worn( *loc ) ) {
+        const ret_val<void> wear = you.can_wear( *loc );
+        if( !wear.success() ) {
+            ImGui::TextWrapped( "%s", wear.str().c_str() );
+        }
+    }
+    action chosen = action::none;
+    if( ImGui::Button( _( "Details" ) ) ) {
+        chosen = action::examine;
+    }
+    ImGui::SameLine();
+    if( ImGui::Button( _( "Item actions" ) ) ) {
+        ImGui::OpenPopup( "item_actions" );
+    }
+    if( ImGui::BeginPopup( "item_actions" ) ) {
+        const action clicked = draw_imgui_menu( you, loc, you.is_worn( *loc ) ||
+                               you.is_wielding( *loc ), chosen_use_method );
+        if( clicked != action::none ) {
+            chosen = clicked;
+        }
+        ImGui::EndPopup();
+    }
     return chosen;
 }
 
@@ -253,25 +311,39 @@ std::string perform( Character &you, item_location loc, action act,
     if( act == action::none || !loc || !loc.get_item() ) {
         return {};
     }
+    static const char *const names[] = { "none", "consume", "use", "read", "wear", "wield",
+        "takeoff", "drop", "pickup", "unload", "reload", "examine", "always_pickup", "never_pickup" };
+    const ui_telemetry::scope trace( "item.action", {{ "action", names[static_cast<int>( act )] },
+        { "type", loc->typeId().str() }, { "charges", std::to_string( loc->charges ) },
+        { "method", use_method }} );
     avatar *av = you.as_avatar();
 
     switch( act ) {
+        case action::always_pickup:
+        case action::never_pickup:
+            get_auto_pickup().remove_rule( &*loc );
+            get_auto_pickup().add_rule( &*loc, act == action::always_pickup );
+            get_auto_pickup().save_character();
+            return _( "Autopickup rule updated." );
         case action::consume: {
             if( av == nullptr ) {
                 return _( "Only the player can consume items here." );
             }
-            // Match game::inventory_item_menu 'E':
-            // non-container → eat directly; container → consume picker on contents.
-            if( !loc->is_container() ) {
-                avatar_action::eat( *av, loc );
-                return _( "Consuming…" );
+            // Soft-fork: inventory RMB Eat/Drink/Take must consume immediately.
+            // Never open Hybrid Consume UI from the context menu (containers
+            // used to call game_menus::inv::consume and jump to that tab).
+            item_location target = loc;
+            if( !av->can_consume_as_is( *loc ) && !loc->is_medical_tool() ) {
+                item &food = av->get_consumable_from( *loc );
+                if( food.is_null() ) {
+                    return _( "Nothing to consume." );
+                }
+                if( &food != loc.get_item() ) {
+                    target = item_location( loc, &food );
+                }
             }
-            item_location picked = game_menus::inv::consume( std::string(), loc );
-            if( picked ) {
-                avatar_action::eat_or_use( *av, picked );
-                return _( "Consuming…" );
-            }
-            return _( "Nothing to consume." );
+            avatar_action::eat_or_use( *av, target );
+            return _( "Consuming…" );
         }
         case action::use: {
             if( av == nullptr ) {
@@ -350,6 +422,18 @@ std::string perform( Character &you, item_location loc, action act,
             you.drop( loc, you.pos_bub() );
             return _( "Dropped." );
         }
+        case action::pickup: {
+            const item_location::type where = loc.where();
+            if( where != item_location::type::map &&
+                where != item_location::type::vehicle ) {
+                return _( "That item is not on the ground." );
+            }
+            drop_locations what;
+            const int qty = loc->count_by_charges() ? loc->charges : 0;
+            what.emplace_back( loc, qty );
+            you.pick_up( what );
+            return _( "Picking up…" );
+        }
         case action::unload: {
             if( you.unload( loc ) ) {
                 return _( "Unloaded." );
@@ -357,15 +441,56 @@ std::string perform( Character &you, item_location loc, action act,
             return _( "Could not unload." );
         }
         case action::reload: {
-            // Mirror the public path used by game::reload without calling the private method:
-            // select ammo, then assign reload_activity_actor.
+            // Mirror game::reload (public APIs only): select ammo, then
+            // reload_activity_actor. Soft-fork adds find_ammo / list_ammo
+            // telemetry so empty pickers for MAGAZINE_WELL tools (fire_drill)
+            // are diagnosable.
             if( loc->type->can_use( "holster" ) && loc->num_item_stacks() == 1 ) {
                 loc = item_location( loc, &loc->only_item() );
             }
+            const std::vector<item_location> found = you.find_ammo( *loc, /*empty=*/true, /*radius=*/1 );
+            std::vector<item::reload_option> ammo_list;
+            const bool list_match = you.list_ammo( loc, ammo_list, /*empty=*/true,
+                                                   /*per_well_targets=*/true );
+            int accept_now = 0;
+            int reject_now = 0;
+            for( const item_location &cand : found ) {
+                if( !cand || !cand.get_item() ) {
+                    continue;
+                }
+                if( loc->can_reload_with( *cand, true ) ) {
+                    ++accept_now;
+                } else {
+                    ++reject_now;
+                }
+            }
+            DebugLog( D_INFO, D_MAIN ) << string_format(
+                                            "rpg_eq_ctx: select_ammo begin for '%s' "
+                                            "find_ammo=%zu list_ammo_match=%d list_ammo_size=%zu "
+                                            "can_reload_with_now accept=%d reject=%d "
+                                            "is_reloadable=%d rate=%d",
+                                            loc->tname(), found.size(), list_match ? 1 : 0,
+                                            ammo_list.size(), accept_now, reject_now,
+                                            loc->is_reloadable() ? 1 : 0,
+                                            static_cast<int>( you.rate_action_reload( *loc ) ) );
             item::reload_option opt = you.select_ammo( loc, /*prompt=*/true );
             if( !opt || opt.ammo.get_item() == nullptr ) {
+                DebugLog( D_INFO, D_MAIN ) << string_format(
+                                                "rpg_eq_ctx: select_ammo empty/canceled for '%s' "
+                                                "(find_ammo=%zu list_ammo_size=%zu)",
+                                                loc->tname(), found.size(), ammo_list.size() );
+                // If the ammo UI came up empty but list_ammo found candidates
+                // (nested-UI / filter glitch), fall back to the best list option.
+                if( !ammo_list.empty() ) {
+                    DebugLog( D_INFO, D_MAIN ) << "rpg_eq_ctx: select_ammo fallback list_ammo[0]="
+                                               << ammo_list.front().ammo->tname();
+                    you.assign_activity( reload_activity_actor( std::move( ammo_list.front() ) ) );
+                    return _( "Reloading…" );
+                }
                 return _( "Reload canceled." );
             }
+            DebugLog( D_INFO, D_MAIN ) << "rpg_eq_ctx: select_ammo ok ammo="
+                                       << opt.ammo->tname();
             you.assign_activity( reload_activity_actor( std::move( opt ) ) );
             return _( "Reloading…" );
         }

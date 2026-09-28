@@ -22,6 +22,7 @@
 #include "point.h"
 #include "type_id.h"
 #include "units.h"
+#include "ui_mouse_actions.h"
 #include "vpart_position.h"
 
 class Character;
@@ -132,6 +133,7 @@ class veh_interact
         int pane_w = 25; // width of the center and right columns
         catacurses::window w_border;
         catacurses::window w_mode;
+        mouse_action_bar mouse_buttons;
         catacurses::window w_msg;
         catacurses::window w_disp;
         catacurses::window w_parts;

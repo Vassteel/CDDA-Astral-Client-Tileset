@@ -72,6 +72,12 @@ class advanced_inventory
             return panes[side];
         }
     private:
+#if defined(TILES)
+        void display_hybrid();
+        bool hybrid_initialized = false;
+        bool hybrid_move_selected = false;
+        std::vector<item_location> hybrid_selection;
+#endif
 
         static constexpr int head_height = 5;
         bool move_all_items_and_waiting_to_quit = false;

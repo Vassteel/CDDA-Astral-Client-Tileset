@@ -3508,12 +3508,78 @@ void iexamine::autoclave_full( Character &, const tripoint_bub_ms &examp )
     here.furn_set( examp, next_autoclave_type );
 }
 
-void iexamine::fireplace( Character &you, const tripoint_bub_ms &examp )
+static bool fireplace_item_is_fuel( const item &it )
+{
+    // Solid fuel only — liquids need pour handling; match try_fuel_fire skip.
+    return it.flammable() && !it.made_of( phase_id::LIQUID ) &&
+           !it.has_flag( flag_NO_UNWIELD ) && !it.has_flag( flag_INTEGRATED );
+}
+
+static bool fireplace_fuel_loc_ok( Character &you, const item_location &loc,
+                                   const tripoint_bub_ms &examp )
+{
+    if( !loc || !fireplace_item_is_fuel( *loc ) ) {
+        return false;
+    }
+    // Don't offer items already sitting in the fireplace.
+    if( loc.where() == item_location::type::map ||
+        loc.where() == item_location::type::vehicle ) {
+        if( loc.pos_bub( get_map() ) == examp ) {
+            return false;
+        }
+    }
+    return you.can_drop( *loc ).success();
+}
+
+bool iexamine::fireplace_has_fuel( Character &you, const tripoint_bub_ms &examp )
+{
+    for( item *it : you.items_with( fireplace_item_is_fuel ) ) {
+        if( it != nullptr && you.can_drop( *it ).success() ) {
+            return true;
+        }
+    }
+    map &here = get_map();
+    for( const tripoint_bub_ms &pos : closest_points_first( you.pos_bub(), 1 ) ) {
+        if( pos == examp ) {
+            continue;
+        }
+        for( item_location &it : here.items_with( pos, fireplace_item_is_fuel ) ) {
+            if( fireplace_fuel_loc_ok( you, it, examp ) ) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void iexamine::fireplace_add_fuel( Character &you, const tripoint_bub_ms &examp )
 {
     map &here = get_map();
-    const bool already_on_fire = here.has_nearby_fire( examp, 0 );
-    const bool furn_is_deployed = !here.furn( examp ).obj().deployed_item.is_empty();
+    if( !here.can_put_items( examp ) ) {
+        you.add_msg_if_player( m_info, _( "You can't place fuel there." ) );
+        return;
+    }
 
+    const item_location_filter fuel_filter = [&you, examp]( const item_location & loc ) {
+        return fireplace_fuel_loc_ok( you, loc, examp );
+    };
+
+    drop_locations selected = game_menus::inv::titled_multi_filter_menu(
+                                  fuel_filter, you, _( "Add fuel" ), 1,
+                                  _( "You have no suitable fuel." ) );
+    if( selected.empty() ) {
+        return;
+    }
+
+    you.drop( selected, examp );
+    you.add_msg_if_player( _( "You add fuel to the %s." ), here.furnname( examp ) );
+}
+
+static void fireplace_collect_tools( Character &you, const tripoint_bub_ms &examp,
+                                      std::multimap<int, item *> &firestarters,
+                                      std::vector<item *> &firequenchers )
+{
+    map &here = get_map();
     auto is_firestarter = []( const item & it ) {
         return it.has_flag( flag_FIRESTARTER ) || it.has_flag( flag_FIRE );
     };
@@ -3521,56 +3587,56 @@ void iexamine::fireplace( Character &you, const tripoint_bub_ms &examp )
         return it.damage_melee( damage_bash );
     };
 
-    std::multimap<int, item *> firestarters;
-    std::vector<item *> firequenchers = you.items_with( is_firequencher );
-
+    firequenchers = you.items_with( is_firequencher );
     for( item *it : you.items_with( is_firestarter ) ) {
         add_firestarter( it, firestarters, you, examp );
     }
 
     for( const tripoint_bub_ms &pos : closest_points_first( you.pos_bub(), PICKUP_RANGE ) ) {
         if( pos == examp ) {
-            // stuff in the fireplace can't light or quench itself
             continue;
         }
         for( item_location &it : here.items_with( pos, is_firestarter ) ) {
             add_firestarter( &*it, firestarters, you, examp );
         }
-        // anything is fine, so only check if we got nothing yet
         if( firequenchers.empty() ) {
             for( item_location &it : here.items_with( pos, is_firequencher ) ) {
                 firequenchers.push_back( &*it );
             }
         }
     }
+}
 
-    const bool has_firestarter = !firestarters.empty();
-    const bool has_bionic_firestarter = you.has_bionic( bio_lighter ) &&
-                                        you.enough_power_for( bio_lighter );
+iexamine::fireplace_ui_state iexamine::fireplace_query_ui( Character &you,
+        const tripoint_bub_ms &examp )
+{
+    map &here = get_map();
+    fireplace_ui_state st;
+    st.has_items = here.has_items( examp );
+    st.on_fire = here.has_nearby_fire( examp, 0 );
+    st.can_take_down = !here.furn( examp ).obj().deployed_item.is_empty();
+    st.can_add_fuel = fireplace_has_fuel( you, examp );
+    st.can_cbm_start = you.has_bionic( bio_lighter ) && you.enough_power_for( bio_lighter );
 
-    uilist selection_menu;
-    selection_menu.text = _( "Select an action" );
-    if( here.has_items( examp ) ) {
-        // Note: This is displayed regardless of whether "examine with pickup" was used
-        selection_menu.addentry( 0, true, 'g', _( "Get items" ) );
-    }
-    if( !already_on_fire ) {
-        selection_menu.addentry( 1, has_firestarter, 'f',
-                                 has_firestarter ? _( "Start a fire" ) : _( "Start a fire… you'll need a fire source." ) );
-        if( has_bionic_firestarter ) {
-            selection_menu.addentry( 2, true, 'b', _( "Use a CBM to start a fire" ) );
-        }
-    } else if( !firequenchers.empty() ) {
-        selection_menu.addentry( 4, true, 'e', _( "Extinguish fire" ) );
-    } else {
-        selection_menu.addentry( 4, false, 'e', _( "Extinguish fire (bashing item required)" ) );
-    }
-    if( furn_is_deployed ) {
-        selection_menu.addentry( 3, true, 't', _( "Take down the %s" ), here.furnname( examp ) );
-    }
-    selection_menu.query();
+    std::multimap<int, item *> firestarters;
+    std::vector<item *> firequenchers;
+    fireplace_collect_tools( you, examp, firestarters, firequenchers );
+    st.can_start_fire = !firestarters.empty();
+    st.can_extinguish = !firequenchers.empty();
+    return st;
+}
 
-    switch( selection_menu.ret ) {
+void iexamine::fireplace_do( Character &you, const tripoint_bub_ms &examp, int choice )
+{
+    map &here = get_map();
+    const bool already_on_fire = here.has_nearby_fire( examp, 0 );
+    const bool furn_is_deployed = !here.furn( examp ).obj().deployed_item.is_empty();
+
+    std::multimap<int, item *> firestarters;
+    std::vector<item *> firequenchers;
+    fireplace_collect_tools( you, examp, firestarters, firequenchers );
+
+    switch( choice ) {
         case 0:
             none( you, examp );
             g->pickup( examp );
@@ -3579,7 +3645,8 @@ void iexamine::fireplace( Character &you, const tripoint_bub_ms &examp )
             for( auto &firestarter : firestarters ) {
                 item *it = firestarter.second;
                 const use_function *usef = it->type->get_use( "firestarter" );
-                const firestarter_actor *actor = dynamic_cast<const firestarter_actor *>( usef->get_actor_ptr() );
+                const firestarter_actor *actor = dynamic_cast<const firestarter_actor *>
+                                                 ( usef->get_actor_ptr() );
                 you.add_msg_if_player( _( "You attempt to start a fire with your %s…" ), it->tname() );
                 const ret_val<void> can_use = actor->can_use( you, *it, &get_map(), examp );
                 if( can_use.success() ) {
@@ -3603,8 +3670,12 @@ void iexamine::fireplace( Character &you, const tripoint_bub_ms &examp )
             return;
         }
         case 3: {
+            if( !furn_is_deployed ) {
+                return;
+            }
             if( already_on_fire ) {
-                if( !query_yn( _( "Really take down the %s while it's on fire?" ), here.furnname( examp ) ) ) {
+                if( !query_yn( _( "Really take down the %s while it's on fire?" ),
+                               here.furnname( examp ) ) ) {
                     return;
                 }
             }
@@ -3616,16 +3687,63 @@ void iexamine::fireplace( Character &you, const tripoint_bub_ms &examp )
             return;
         }
         case 4: {
+            if( firequenchers.empty() ) {
+                you.add_msg_if_player( m_info, _( "You need a bashing item to extinguish the fire." ) );
+                return;
+            }
             here.remove_field( examp, fd_fire );
             you.mod_moves( -200 );
-            you.add_msg_if_player( m_info, _( "With a few determined moves you put out the fire in the %s." ),
+            you.add_msg_if_player( m_info,
+                                   _( "With a few determined moves you put out the fire in the %s." ),
                                    here.furnname( examp ) );
             return;
         }
+        case 5:
+            fireplace_add_fuel( you, examp );
+            return;
         default:
             none( you, examp );
             return;
     }
+}
+
+void iexamine::fireplace( Character &you, const tripoint_bub_ms &examp )
+{
+    map &here = get_map();
+    const fireplace_ui_state st = fireplace_query_ui( you, examp );
+
+    uilist selection_menu;
+    selection_menu.text = _( "Select an action" );
+    if( st.has_items ) {
+        // Note: This is displayed regardless of whether "examine with pickup" was used
+        selection_menu.addentry( 0, true, 'g', _( "Get items" ) );
+    }
+    if( !st.on_fire ) {
+        selection_menu.addentry( 1, st.can_start_fire, 'f',
+                                 st.can_start_fire ? _( "Start a fire" ) :
+                                 _( "Start a fire… you'll need a fire source." ) );
+        if( st.can_cbm_start ) {
+            selection_menu.addentry( 2, true, 'b', _( "Use a CBM to start a fire" ) );
+        }
+    } else if( st.can_extinguish ) {
+        selection_menu.addentry( 4, true, 'e', _( "Extinguish fire" ) );
+    } else {
+        selection_menu.addentry( 4, false, 'e', _( "Extinguish fire (bashing item required)" ) );
+    }
+    // Soft-fork: explicit add-fuel (vanilla relied on Drop / drop-to-tile).
+    selection_menu.addentry( 5, st.can_add_fuel, 'a',
+                             st.can_add_fuel ? _( "Add fuel" ) :
+                             _( "Add fuel… you'll need flammable items." ) );
+    if( st.can_take_down ) {
+        selection_menu.addentry( 3, true, 't', _( "Take down the %s" ), here.furnname( examp ) );
+    }
+    selection_menu.query();
+
+    if( selection_menu.ret < 0 ) {
+        none( you, examp );
+        return;
+    }
+    fireplace_do( you, examp, selection_menu.ret );
 }
 
 static void fvat_set_empty( const tripoint_bub_ms &pos )

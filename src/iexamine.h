@@ -133,6 +133,27 @@ void arcfurnace_full( Character &you, const tripoint_bub_ms &examp );
 void autoclave_empty( Character &you, const tripoint_bub_ms &examp );
 void autoclave_full( Character &, const tripoint_bub_ms &examp );
 void fireplace( Character &you, const tripoint_bub_ms &examp );
+/** Soft-fork: which fireplace actions the tile RMB / Examine menus should offer. */
+struct fireplace_ui_state {
+    bool has_items = false;
+    bool on_fire = false;
+    bool can_start_fire = false;
+    bool can_cbm_start = false;
+    bool can_extinguish = false;
+    bool can_take_down = false;
+    bool can_add_fuel = false;
+};
+fireplace_ui_state fireplace_query_ui( Character &you, const tripoint_bub_ms &examp );
+/** Soft-fork: whether usable solid fuel is in inventory or nearby (not on the tile). */
+bool fireplace_has_fuel( Character &you, const tripoint_bub_ms &examp );
+/** Soft-fork: pick flammable fuel and place it onto the fireplace tile. */
+void fireplace_add_fuel( Character &you, const tripoint_bub_ms &examp );
+/**
+ * Soft-fork: run one fireplace interaction without the Examine submenu.
+ * choice ids match the Examine uilist: 0 get items, 1 start fire, 2 CBM start,
+ * 3 take down, 4 extinguish, 5 add fuel.
+ */
+void fireplace_do( Character &you, const tripoint_bub_ms &examp, int choice );
 void fvat_empty( Character &you, const tripoint_bub_ms &examp );
 void fvat_full( Character &you, const tripoint_bub_ms &examp );
 void compost_empty( Character &you, const tripoint_bub_ms &examp );

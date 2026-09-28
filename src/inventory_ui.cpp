@@ -49,6 +49,7 @@
 #include "sdltiles.h"
 #include "string_formatter.h"
 #include "string_input_popup.h"
+#include "input_popup.h"
 #include "temp_crafting_inventory.h"
 #include "trade_ui.h"
 #include "translation.h"
@@ -58,6 +59,7 @@
 #include "uilist.h"
 #include "ui_iteminfo.h"
 #include "ui_manager.h"
+#include "ui_telemetry.h"
 #include "uistate.h"
 #include "units.h"
 #include "units_utility.h"
@@ -1659,7 +1661,11 @@ size_t inventory_column::get_entry_indent( const inventory_entry &entry ) const
         res += 2;
     }
     if( allows_selecting() && activatable() && multiselect ) {
+#if defined(TILES)
+        res += 4;
+#else
         res += 2;
+#endif
     }
     if( entry.is_item() ) {
         if( collate_entries() && entry.is_collation_entry() ) {
@@ -1847,6 +1853,12 @@ void inventory_column::draw( const catacurses::window &win, const point &p,
                 xx += 2;
             }
             if( allows_selecting() && activatable() && multiselect ) {
+#if defined(TILES)
+                const char *mark = entry.chosen_count == 0 ? "[ ]" :
+                                   entry.chosen_count >= entry.get_available_count() ? "[x]" : "[-]";
+                mvwprintz( win, point( xx, yy ), entry.chosen_count ? c_light_green : c_light_gray,
+                           "%s", mark );
+#else
                 if( entry.chosen_count == 0 ) {
                     mvwputch( win, point( xx, yy ), c_dark_gray, '-' );
                 } else if( entry.chosen_count >= entry.get_available_count() ) {
@@ -1854,6 +1866,7 @@ void inventory_column::draw( const catacurses::window &win, const point &p,
                 } else {
                     mvwputch( win, point( xx, yy ), c_light_green, '#' );
                 }
+#endif
             }
         }
     }
@@ -2590,15 +2603,17 @@ void inventory_selector::prepare_layout()
     };
 
     const int nc_width = 2 * ( 1 + border );
-    const int nc_height = get_header_height() + 1 + 2 * border;
+    const int nc_height = get_header_height() + 1 + 2 * border + mouse_toolbar_height();
 
-    prepare_layout( TERMX - nc_width, TERMY - nc_height );
+    const int max_width = _fixed_size.x < 0 ? std::min( TERMX, 144 ) : TERMX;
+    const int max_height = _fixed_size.y < 0 ? std::min( TERMY, 42 ) : TERMY;
+    prepare_layout( max_width - nc_width, max_height - nc_height );
 
     int const win_width =
-        _fixed_size.x < 0 ? snap( get_layout_width() + nc_width, TERMX ) : _fixed_size.x;
+        _fixed_size.x < 0 ? snap( get_layout_width() + nc_width, max_width ) : _fixed_size.x;
     int const win_height =
         _fixed_size.y < 0
-        ? snap( std::max<int>( get_layout_height() + nc_height, FULL_SCREEN_HEIGHT ), TERMY )
+        ? snap( std::max<int>( get_layout_height() + nc_height, 14 ), max_height )
         : _fixed_size.y;
 
     prepare_layout( win_width - nc_width, win_height - nc_height );
@@ -3248,6 +3263,15 @@ void inventory_selector::refresh_window()
 std::pair< bool, std::string > inventory_selector::query_string( const std::string &val,
         bool end_with_toggle )
 {
+#if defined(TILES)
+    if( !end_with_toggle ) {
+        string_input_popup_imgui popup( 48, val, _( "Filter items" ) );
+        popup.set_max_input_length( 256 );
+        popup.set_identifier( "item_filter" );
+        const std::string result = popup.query();
+        return { !popup.cancelled(), result };
+    }
+#endif
     spopup = std::make_unique<string_input_popup>();
     spopup->max_length( 256 )
     .text( val );
@@ -3291,6 +3315,16 @@ void inventory_selector::query_set_filter()
 
 int inventory_selector::query_count( char init, bool end_with_toggle )
 {
+#if defined(TILES)
+    if( !end_with_toggle ) {
+        const inventory_entry &selected = get_active_column().get_highlighted();
+        const int initial = selected.is_item() && selected.chosen_count > 0 ?
+                            static_cast<int>( selected.chosen_count ) : 1;
+        number_input_popup<int> popup( 38, initial, _( "Quantity" ) );
+        const int value = popup.query();
+        return popup.cancelled() ? -1 : std::max( 0, value );
+    }
+#endif
     std::string sinit = init != 0 ? std::string( 1, init ) : std::string();
     std::pair< bool, std::string > query = query_string( sinit, end_with_toggle );
     int ret = -1;
@@ -3380,8 +3414,90 @@ std::pair<std::string, nc_color> inventory_selector::get_footer( navigation_mode
     return std::make_pair( _( "There are no available choices" ), i_red );
 }
 
+std::vector<std::pair<std::string, std::string>> inventory_selector::mouse_actions() const
+{
+    std::vector<std::pair<std::string, std::string>> actions;
+#if defined(TILES)
+    const auto add = [&]( const std::string &action, const char *label ) {
+        actions.emplace_back( action, label );
+    };
+    add( "CONFIRM", _( "Confirm" ) );
+    add( "QUIT", _( "Cancel" ) );
+    add( "EXAMINE", _( "Inspect" ) );
+    add( "INVENTORY_FILTER", _( "Filter" ) );
+    if( mouse_multiselect ) {
+        add( "MARK_WITH_COUNT", _( "Quantity" ) );
+        add( "HYBRID_MARK_ALL", _( "Select all" ) );
+        add( "HYBRID_CLEAR_ALL", _( "Clear all" ) );
+    }
+    if( mouse_multiselect || mouse_ammo ) {
+        add( "INCREASE_COUNT", _( "+1" ) );
+        add( "DECREASE_COUNT", _( "-1" ) );
+    }
+    if( mouse_pickup ) {
+        add( "WIELD", _( "Wield" ) );
+        add( "WEAR", _( "Wear" ) );
+    }
+    if( mouse_trade ) {
+        add( trade_selector::ACTION_SWITCH_PANES, _( "Switch side" ) );
+        add( trade_selector::ACTION_AUTOBALANCE, _( "Balance" ) );
+        add( trade_selector::ACTION_BANKBALANCE, _( "Bank" ) );
+    }
+    add( "SHOW_HIDE_CONTENTS", _( "Contents" ) );
+    add( "SHOW_HIDE_CONTENTS_ALL", _( "All contents" ) );
+    add( "VIEW_CATEGORY_MODE", _( "Layout" ) );
+    add( "TOGGLE_FAVORITE", _( "Favorite" ) );
+    add( "HELP_KEYBINDINGS", _( "Keys" ) );
+#endif
+    return actions;
+}
+
+int inventory_selector::mouse_toolbar_height() const
+{
+#if defined(TILES)
+    // Calculate against the narrowest supported selector rather than a stale
+    // previous window width, so resize and translated labels never overlap rows.
+    const int width = std::max( 8, std::min( TERMX, FULL_SCREEN_WIDTH ) - 4 );
+    int x = 0;
+    int rows = 1;
+    for( const auto &action : mouse_actions() ) {
+        const int size = std::min( width, utf8_width( action.second ) + 4 );
+        if( x && x + size > width ) {
+            ++rows;
+            x = 0;
+        }
+        x += size + 1;
+    }
+    return rows + 1;
+#else
+    return 0;
+#endif
+}
+
 void inventory_selector::draw_footer( const catacurses::window &w ) const
 {
+    mouse_action_rects.clear();
+#if defined(TILES)
+    if( !spopup ) {
+        const int width = getmaxx( w ) - 4;
+        int x = 2;
+        int y = getmaxy( w ) - border - mouse_toolbar_height();
+        mvwhline( w, point( 1, y++ ), LINE_OXOX, getmaxx( w ) - 2 );
+        for( const auto &action : mouse_actions() ) {
+            const std::string label = "[ " + action.second + " ]";
+            const int size = std::min( width, utf8_width( label ) );
+            if( x > 2 && x + size > getmaxx( w ) - 2 ) {
+                x = 2;
+                ++y;
+            }
+            const inclusive_rectangle<point> rect( point( x, y ), point( x + size - 1, y ) );
+            trim_and_print( w, point( x, y ), size,
+                            rect.contains( mouse_hover ) ? h_white : c_light_gray, label );
+            mouse_action_rects.emplace_back( rect, action.first );
+            x += size + 1;
+        }
+    }
+#endif
     if( spopup ) {
         mvwprintz( w_inv, point( 2, getmaxy( w_inv ) - 1 ), c_cyan, "< " );
         mvwprintz( w_inv, point( ( getmaxx( w_inv ) / 2 ) - 4, getmaxy( w_inv ) - 1 ), c_cyan, " >" );
@@ -3454,6 +3570,7 @@ inventory_selector::inventory_selector( Character &u, const inventory_selector_p
     ctxt.register_action( "END", to_translation( "End" ) );
     ctxt.register_action( "CLICK_AND_DRAG" );
     ctxt.register_action( "SELECT" );
+    ctxt.register_action( "SEC_SELECT" );
     ctxt.register_action( "HELP_KEYBINDINGS" );
     ctxt.register_action( "VIEW_CATEGORY_MODE" );
     ctxt.register_action( "TOGGLE_NUMPAD_NAVIGATION" );
@@ -3532,7 +3649,11 @@ inventory_input inventory_selector::get_input()
 {
     std::string const &action = ctxt.handle_input();
     int const ch = ctxt.get_raw_input().get_first_input();
-    return process_input( action, ch );
+    const inventory_input input = process_input( action, ch );
+    if( ui_telemetry::meaningful_action( input.action ) ) {
+        ui_telemetry::record( "inventory.action", {{ "title", title }, { "action", input.action }} );
+    }
+    return input;
 }
 
 inventory_input inventory_selector::process_input( const std::string &action, int ch )
@@ -3540,12 +3661,28 @@ inventory_input inventory_selector::process_input( const std::string &action, in
     inventory_input res{ action, ch, nullptr };
 
     if( res.action == "SELECT" || res.action == "COORDINATE" || res.action == "MOUSE_MOVE" ||
-        res.action == "CLICK_AND_DRAG" ) {
+        res.action == "CLICK_AND_DRAG" || res.action == "SEC_SELECT" ) {
         std::optional<point> o_p = ctxt.get_coordinates_text( w_inv );
         if( o_p ) {
             point p = o_p.value();
+            mouse_hover = p;
             if( window_contains_point_relative( w_inv, p ) ) {
+                for( const auto &button : mouse_action_rects ) {
+                    if( button.first.contains( p ) ) {
+                        // Return an action, not the mouse button's raw keycode:
+                        // invlet handling must not accidentally choose an item.
+                        if( res.action == "SELECT" && button.second == "HELP_KEYBINDINGS" ) {
+                            ctxt.display_menu();
+                            return { "MOUSE_MOVE", 0, nullptr };
+                        }
+                        return { res.action == "SELECT" ? button.second : "MOUSE_MOVE", 0, nullptr };
+                    }
+                }
                 res.entry = find_entry_by_coordinate( p );
+                if( res.action == "SEC_SELECT" && res.entry && res.entry->is_item() ) {
+                    highlight( res.entry->any_item() );
+                    return { "EXAMINE", 0, nullptr };
+                }
                 if( res.entry != nullptr && res.entry->is_selectable() ) {
                     return res;
                 }
@@ -4006,6 +4143,7 @@ ammo_inventory_selector::ammo_inventory_selector( Character &you,
         const item_location &reload_loc, const inventory_selector_preset &preset ) :
     inventory_selector( you, preset ), reload_loc( reload_loc )
 {
+    mouse_ammo = true;
     ctxt.register_action( "INCREASE_COUNT" );
     ctxt.register_action( "DECREASE_COUNT" );
 
@@ -4088,21 +4226,32 @@ std::vector<reload_target> get_possible_reload_targets( const item_location &tar
 
 // Well and integral-magazine entries gate on owner-level (gun ammo type) AND
 // pocket-level (item id, fullness) compatibility. Loaded-mag delegates.
+// Soft-fork: MAGAZINE_WELL item_restriction is authoritative — pocket rules
+// alone accept TOOL-as-magazine (notched_stick/plank) that lack islot_magazine
+// and can trip the host ammo-type gate in item::can_reload_with.
 static bool reload_target_accepts( const reload_target &rt, const item_location &ammo )
 {
     if( rt.kind == reload_target::kind::well ||
         rt.kind == reload_target::kind::integral_magazine ) {
-        if( !rt.owner.can_reload_with( ammo, true ) ) {
-            return false;
-        }
         int idx = 0;
         for( const item_pocket *p : rt.owner->get_pockets( []( const item_pocket & ) {
         return true;
     } ) ) {
             if( idx == rt.pocket_index ) {
                 if( rt.kind == reload_target::kind::well ) {
-                    return p->is_type( pocket_type::MAGAZINE_WELL ) &&
-                           p->can_reload_with( *ammo, true );
+                    if( !p->is_type( pocket_type::MAGAZINE_WELL ) ) {
+                        return false;
+                    }
+                    if( !p->item_type_restrictions().empty() ) {
+                        return p->can_reload_with( *ammo, true );
+                    }
+                    if( !rt.owner.can_reload_with( ammo, true ) ) {
+                        return false;
+                    }
+                    return p->can_reload_with( *ammo, true );
+                }
+                if( !rt.owner.can_reload_with( ammo, true ) ) {
+                    return false;
                 }
                 return p->is_type( pocket_type::MAGAZINE ) &&
                        p->can_reload_with( *ammo, true );
@@ -4367,6 +4516,9 @@ inventory_multiselector::inventory_multiselector( Character &p,
     selection_col( new selection_column( "SELECTION_COLUMN", selection_column_title ) ),
     get_stats( get_stats )
 {
+    mouse_multiselect = true;
+    ctxt.register_action( "HYBRID_MARK_ALL", to_translation( "Select all visible items" ) );
+    ctxt.register_action( "HYBRID_CLEAR_ALL", to_translation( "Clear selection" ) );
     ctxt.register_action( "TOGGLE_ENTRY", to_translation( "Mark/unmark selected item" ) );
     ctxt.register_action( "MARK_WITH_COUNT",
                           to_translation( "Mark a specific amount of selected item" ) );
@@ -4581,7 +4733,10 @@ drop_locations inventory_multiselector::execute( bool allow_empty )
 }
 
 inventory_compare_selector::inventory_compare_selector( Character &p ) :
-    inventory_multiselector( p, default_preset, _( "ITEMS TO COMPARE" ) ) {}
+    inventory_multiselector( p, default_preset, _( "ITEMS TO COMPARE" ) )
+{
+    mouse_multiselect = false;
+}
 
 std::pair<const item *, const item *> inventory_compare_selector::execute()
 {
@@ -4760,6 +4915,25 @@ void inventory_multiselector::toggle_categorize_contained()
 
 void inventory_multiselector::on_input( const inventory_input &input )
 {
+    if( input.action == "HYBRID_MARK_ALL" || input.action == "HYBRID_CLEAR_ALL" ) {
+        const bool clear = input.action == "HYBRID_CLEAR_ALL";
+        for( inventory_column *column : get_all_columns() ) {
+            if( column == selection_col.get() || ( !clear && !column->visible() ) ) {
+                continue;
+            }
+            for( inventory_entry *entry : column->get_entries( return_item, clear ) ) {
+                if( entry->is_selectable() ) {
+                    set_chosen_count( *entry, clear ? 0 : max_chosen_count );
+                }
+            }
+        }
+        if( !allow_select_contained ) {
+            deselect_contained_items();
+        }
+        selection_col->prepare_paging();
+        on_toggle();
+        return;
+    }
     if( input.entry != nullptr ) { // Single Item from mouse
         highlight( input.entry->any_item() );
         if( input.action == "SELECT" || input.action == "ANY_INPUT" ) {
@@ -4981,6 +5155,7 @@ pickup_selector::pickup_selector( Character &p, const inventory_selector_preset 
                                   const std::string &selection_column_title, const std::set<tripoint_bub_ms> &where ) :
     inventory_multiselector( p, preset, selection_column_title ), where( where )
 {
+    mouse_pickup = true;
     ctxt.register_action( "WEAR" );
     ctxt.register_action( "WIELD" );
 #if defined(__ANDROID__)
@@ -4988,6 +5163,10 @@ pickup_selector::pickup_selector( Character &p, const inventory_selector_preset 
     ctxt.allow_text_entry = true;
 #endif
 
+#if defined(TILES)
+    set_hint( _( "Click a row to select it; use Quantity for a partial stack.\n"
+                 "Confirm picks up the selection. Keys shows keyboard assignments." ) );
+#else
     set_hint( string_format(
                   _( "<color_yellow>%s</color> Wield  <color_yellow>%s</color> Wear  <color_yellow>%s</color> Expand  <color_yellow>%s</color> All  <color_yellow>%s</color> Examine\n"
                      "Quantity: <color_yellow>%s</color> to mark selected  <color_yellow>%s</color>/<color_yellow>%s</color> to offset  type number then <color_yellow>%s</color> to set" ),
@@ -5000,6 +5179,7 @@ pickup_selector::pickup_selector( Character &p, const inventory_selector_preset 
                   ctxt.get_desc( "INCREASE_COUNT" ),
                   ctxt.get_desc( "DECREASE_COUNT" ),
                   ctxt.get_desc( "TOGGLE_ENTRY" ) ) );
+#endif
 }
 
 void pickup_selector::apply_selection( std::vector<drop_location> selection )
@@ -5204,8 +5384,10 @@ void inventory_examiner::draw_item_details( const item_location &sitem )
 void inventory_examiner::force_max_window_size()
 {
     constexpr int border_width = 1;
-    _fixed_size = { TERMX / 3 + 2 * border_width, TERMY };
-    _fixed_origin = point::zero;
+    const int width = std::min( TERMX, 144 );
+    const int height = std::min( TERMY, 42 );
+    _fixed_size = { width / 3 + 2 * border_width, height };
+    _fixed_origin = point( ( TERMX - width ) / 2, ( TERMY - height ) / 2 );
 }
 
 int inventory_examiner::execute()
@@ -5222,11 +5404,11 @@ int inventory_examiner::execute()
         force_max_window_size();
         ui->mark_resize();
 
-        int const width = TERMX - _fixed_size.x;
-        int const height = TERMY;
-        point const start_position = point( TERMX - width, 0 );
+        int const width = std::min( TERMX, 144 ) - _fixed_size.x;
+        int const height = _fixed_size.y;
+        point const start_position = _fixed_origin + point( _fixed_size.x, 0 );
 
-        scroll_item_info_lines = TERMY / 2;
+        scroll_item_info_lines = height / 2;
 
         w_examine = catacurses::newwin( height, width, start_position );
         ui_examine.position_from_window( w_examine );
@@ -5371,6 +5553,7 @@ trade_selector::trade_selector( trade_ui *parent, Character &u,
       _ctxt_trade( "INVENTORY", keyboard_mode::keychar )
 {
     _ctxt_trade.register_action( ACTION_SWITCH_PANES );
+    mouse_trade = true;
     _ctxt_trade.register_action( ACTION_TRADE_CANCEL );
     _ctxt_trade.register_action( ACTION_TRADE_OK );
     _ctxt_trade.register_action( ACTION_AUTOBALANCE );
@@ -5400,7 +5583,8 @@ void trade_selector::execute()
     while( !exit ) {
         _ui->invalidate_ui();
         ui_manager::redraw_invalidated();
-        std::string const &action = _ctxt_trade.handle_input();
+        const inventory_input input = get_input();
+        const std::string &action = input.action;
         if( action == ACTION_SWITCH_PANES ) {
             _parent->pushevent( trade_ui::event::SWITCH );
             get_active_column().on_deactivate();
@@ -5416,13 +5600,7 @@ void trade_selector::execute()
         } else if( action == ACTION_BANKBALANCE ) {
             _parent->bank_balance();
         } else {
-            input_event const iev = _ctxt_trade.get_raw_input();
-            inventory_input const input =
-                process_input( ctxt.input_to_action( iev ), iev.get_first_input() );
             inventory_drop_selector::on_input( input );
-            if( input.action == "HELP_KEYBINDINGS" ) {
-                ctxt.display_menu();
-            }
         }
     }
 }

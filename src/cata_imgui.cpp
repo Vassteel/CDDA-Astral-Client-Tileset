@@ -1,4 +1,6 @@
+#include "ui_telemetry.h"
 #include "cata_imgui.h"
+#include "ui_hybrid_chrome.h"
 
 #include <cmath>
 
@@ -675,7 +677,8 @@ bool cataimgui::client::any_window_shown()
 
 bool cataimgui::client::want_capture_mouse()
 {
-    return ImGui::GetCurrentContext() != nullptr && ImGui::GetIO().WantCaptureMouse;
+    return ui_adaptor::top_is_imgui() && ImGui::GetCurrentContext() != nullptr &&
+           ImGui::GetIO().WantCaptureMouse;
 }
 
 bool cataimgui::client::want_capture_keyboard()
@@ -897,6 +900,8 @@ class cataimgui::window_impl
         friend class cataimgui::window;
         cataimgui::window *win_base;
         bool is_resized;
+        ImVec2 logged_position = { -1.f, -1.f };
+        ImVec2 logged_size = { -1.f, -1.f };
         std::unique_ptr<ui_adaptor> window_adaptor;
     public:
         explicit window_impl( cataimgui::window *win ) {
@@ -935,13 +940,24 @@ cataimgui::window::window( const std::string &id_, int window_flags ) : window( 
     p_impl = std::make_unique<cataimgui::window_impl>( this );
     id = id_ + "##" + std::to_string( uint64_t( this ) );
     is_open = true;
+    ui_telemetry::record( "window.open", {{ "id", id }} );
 }
 
 cataimgui::window::~window()
 {
+    ui_telemetry::record( "window.close", {{ "id", id }} );
+    if( GImGui && GImGui->ActiveIdWindow == ImGui::FindWindowByName( id.c_str() ) ) {
+        ImGui::ClearActiveID();
+    }
     p_impl.reset();
     if( GImGui ) {
         ImGui::ClearWindowSettings( id.c_str() );
+#ifdef TILES
+        // Persistent HUD windows do not mean the closed modal's pixels are
+        // still valid. Repaint the complete background when returning to curses.
+        clear_screen = true;
+        ui_manager::invalidate_all_ui_adaptors();
+#endif
         if( !ui_adaptor::has_imgui() ) {
             ImGui::GetIO().ClearInputKeys();
             GImGui->InputEventsQueue.resize( 0 );
@@ -1038,6 +1054,9 @@ void cataimgui::window::draw()
     if( !is_open ) {
         return;
     }
+#if defined(TILES)
+    const ui_hybrid_chrome::scoped_style chrome;
+#endif
     bool handled_resize = false;
     if( is_bounds_changed() ) {
         cached_bounds = get_bounds();
@@ -1062,16 +1081,34 @@ void cataimgui::window::draw()
                cached_bounds.w <= 1.0 ) {
         ImGui::SetNextWindowSize( ImGui::GetMainViewport()->Size * ImVec2 { cached_bounds.w, cached_bounds.h } );
     }
+#if defined(TILES)
+    if( cached_bounds.x < 0.f || cached_bounds.y < 0.f ) {
+        const ImVec2 viewport = ImGui::GetMainViewport()->Size;
+        const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
+        ImGui::SetNextWindowSizeConstraints( ImVec2( 0.f, 0.f ),
+            ImVec2( std::min( viewport.x * 0.96f, 1440.f * scale ),
+                    std::min( viewport.y * 0.96f, 840.f * scale ) ) );
+    }
+#endif
     if( ImGui::Begin( id.c_str(), &is_open, window_flags ) ) {
         draw_controls();
-        if( p_impl->window_adaptor->is_on_top && !force_to_back ) {
+        if( p_impl->window_adaptor->is_on_top && !force_to_back &&
+            !ImGui::IsPopupOpen( nullptr, ImGuiPopupFlags_AnyPopupId | ImGuiPopupFlags_AnyPopupLevel ) ) {
             ImGui::BringWindowToDisplayFront( ImGui::GetCurrentWindow() );
+        }
+        ImVec2 impos = ImGui::GetWindowPos();
+        ImVec2 imsize = ImGui::GetWindowSize();
+        if( impos.x != p_impl->logged_position.x || impos.y != p_impl->logged_position.y ||
+            imsize.x != p_impl->logged_size.x || imsize.y != p_impl->logged_size.y ) {
+            ui_telemetry::record( "window.geometry", {{ "id", id },
+                { "x", std::to_string( impos.x ) }, { "y", std::to_string( impos.y ) },
+                { "width", std::to_string( imsize.x ) }, { "height", std::to_string( imsize.y ) }} );
+            p_impl->logged_position = impos;
+            p_impl->logged_size = imsize;
         }
         if( handled_resize ) {
             point catapos;
             point catasize;
-            ImVec2 impos = ImGui::GetWindowPos();
-            ImVec2 imsize = ImGui::GetWindowSize();
             imvec2_to_point( &impos, &catapos );
             imvec2_to_point( &imsize, &catasize );
             p_impl->window_adaptor->position_absolute( catapos, catasize );
@@ -1395,6 +1432,9 @@ void cataimgui::init_colors()
         debugmsg( "Failed to load imgui color data from \"%s\": %s",
                   style_path.generic_u8string(), err.what() );
     }
+#if defined(TILES)
+    ui_hybrid_chrome::apply_defaults();
+#endif
 }
 
 void cataimgui::TextKeybinding( const input_context &ctxt,

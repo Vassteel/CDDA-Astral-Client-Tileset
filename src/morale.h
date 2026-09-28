@@ -46,6 +46,16 @@ class player_morale
         void decay( const time_duration &ticks = 1_turns );
         /** Displays morale screen */
         void display( int focus_eq, int pain_penalty, int sleepiness_penalty, Character &who );
+        /** Hybrid Character sheet: same content as display(), for ImGui tabs. */
+        struct ui_row {
+            std::string left;
+            std::string right;
+            bool separator = false;
+            // -1 prefer red, 0 neutral/white, +1 prefer green
+            int favor = 0;
+        };
+        std::vector<ui_row> get_ui_rows( int focus_eq, int pain_penalty,
+                                         int sleepiness_penalty, const Character &who );
         // dumps the containment of all points into string, for debug purposes
         std::string to_string_writable();
         /** Returns false whether morale is inconsistent with the argument.

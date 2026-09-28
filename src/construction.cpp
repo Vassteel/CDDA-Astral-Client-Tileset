@@ -1,4 +1,5 @@
 #include "construction.h"
+#include "construction_hybrid_ui.h"
 
 #include <algorithm>
 #include <array>
@@ -26,6 +27,7 @@
 #include "craft_reservation.h"
 #include "crafting.h"
 #include "creature.h"
+#include "creature_tracker.h"
 #include "cursesdef.h"
 #include "debug.h"
 #include "enums.h"
@@ -518,6 +520,10 @@ static std::string has_pre_flags_colorize( const construction &con );
 
 construction_id construction_menu( const bool blueprint )
 {
+#if defined( TILES )
+    // Soft-fork D Hybrid Build menu (ImGui charcoal/amber + category tabs).
+    return construction_menu_hybrid( blueprint );
+#else
     // filter_mode: 0 = all, 1 = ready (skills & materials satisfied, but location not satisfied),
     // 2 = buildable here (skills & materials satisfied and location satisfied)
     static int filter_mode = 0;
@@ -1151,6 +1157,7 @@ construction_id construction_menu( const bool blueprint )
     uistate.construction_tab = int_id<construction_category>( tabindex ).id();
 
     return ret;
+#endif // !TILES
 }
 
 std::vector<const construction *> player_can_build_valid_constructions( Character &you,
@@ -1455,6 +1462,100 @@ void place_construction( std::vector<construction_group_str_id> const &groups )
     player_character.invalidate_crafting_inventory();
     player_character.invalidate_weight_carried_cache();
     player_character.assign_activity( build_construction_activity_actor( here.get_abs( pnt ) ) );
+}
+
+bool place_construction_at( const construction &con, const tripoint_bub_ms &p,
+                            bool allow_avatar_on_tile )
+{
+    avatar &player_character = get_avatar();
+    map &here = get_map();
+    const tripoint_bub_ms player_pos = player_character.pos_bub();
+    if( square_dist( p.xy(), player_pos.xy() ) > 1 || p.z() != player_pos.z() ) {
+        return false;
+    }
+    if( !player_can_build( player_character, player_character.crafting_inventory(), con, true ) ) {
+        return false;
+    }
+    // Terrain / flag prerequisites (same as can_construct, without pre_specials yet).
+    if( !has_pre_terrain( con, p ) ||
+        !has_pre_flags( con, here.furn( p ), here.ter( p ) ) ) {
+        return false;
+    }
+    if( !con.post_terrain.empty() ) {
+        if( con.post_is_furniture ) {
+            if( here.furn( p ) == furn_id( con.post_terrain ) ) {
+                return false;
+            }
+        } else if( here.ter( p ) == ter_id( con.post_terrain ) ) {
+            return false;
+        }
+    }
+    // Empty-lite style check; optionally allow the avatar to occupy the tile.
+    if( here.has_furn( p ) || here.veh_at( p ) || !here.tr_at( p ).is_null() ||
+        !here.i_at( p ).empty() ) {
+        return false;
+    }
+    if( !( here.passable( p ) || here.has_flag( ter_furn_flag::TFLAG_LIQUID, p ) ) ) {
+        return false;
+    }
+    Creature *const critter = get_creature_tracker().creature_at( p );
+    if( critter != nullptr &&
+        !( allow_avatar_on_tile && critter->is_avatar() ) ) {
+        return false;
+    }
+    // Cut-grass (and similar) only uses check_empty_lite / check_empty /
+    // check_unblocked as pre_specials; those are covered above. Any other
+    // pre_special must still pass.
+    for( const auto &fn : con.pre_specials ) {
+        // Re-evaluate; empty-style checks may fail solely because the avatar
+        // occupies the tile — accept that when allow_avatar_on_tile.
+        if( fn( p ) ) {
+            continue;
+        }
+        if( allow_avatar_on_tile ) {
+            // Empty-style failure with only the avatar present is OK.
+            Creature *const c2 = get_creature_tracker().creature_at( p );
+            if( c2 != nullptr && c2->is_avatar() &&
+                !here.has_furn( p ) && !here.veh_at( p ) && here.tr_at( p ).is_null() &&
+                here.i_at( p ).empty() &&
+                ( here.passable( p ) || here.has_flag( ter_furn_flag::TFLAG_LIQUID, p ) ) ) {
+                continue;
+            }
+        }
+        return false;
+    }
+
+    partial_con *pre_c = here.partial_con_at( p );
+    if( pre_c ) {
+        prompt_partial_construction( player_character, p );
+        return true;
+    }
+    std::list<item> used;
+    partial_con pc;
+    pc.id = con.id;
+    if( player_character.has_trait( trait_DEBUG_HS ) ) {
+        for( const auto &it : con.requirements->get_components() ) {
+            used.emplace_back( it.front().type );
+        }
+    } else {
+        for( const std::vector<item_comp> &it : con.requirements->get_components() ) {
+            std::list<item> tmp = player_character.consume_items( it, 1, is_crafting_component,
+                                  return_false<itype_id>, true );
+            if( tmp.empty() ) {
+                return false;
+            }
+            used.splice( used.end(), tmp );
+        }
+    }
+    pc.components = used;
+    here.partial_con_set( p, pc );
+    for( const auto &it : con.requirements->get_tools() ) {
+        player_character.consume_tools( it );
+    }
+    player_character.invalidate_crafting_inventory();
+    player_character.invalidate_weight_carried_cache();
+    player_character.assign_activity( build_construction_activity_actor( here.get_abs( p ) ) );
+    return true;
 }
 
 void build_construction_activity_actor::complete_construction( player_activity &act,

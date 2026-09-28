@@ -19,6 +19,7 @@
 #include "translations.h"
 #include "uilist.h"
 #include "ui_manager.h"
+#include "ui_mouse_actions.h"
 
 namespace
 {
@@ -166,9 +167,16 @@ void draw_diary_border( catacurses::window &win )
 
 static std::pair<point, point> diary_window_position()
 {
+    // Include the page list, header and information panel in the screen budget.
+    const int width = std::min( ( TERMX - 12 ) * 10 / 13, 100 );
+    const int height = std::min( TERMY - 19, 28 );
+    const int total_width = width + width * 3 / 10 + 10;
+    const int info_height = std::clamp( height / 2 - 4, 3, 7 );
+    const int total_height = height + 9 + ( height > 12 ) + info_height;
     return {
-        point( TERMX / 4, TERMY / 4 ),
-        point( TERMX / 2, TERMY / 2 )
+        point( ( TERMX - total_width ) / 2 + 5 + width * 3 / 10,
+               ( TERMY - total_height ) / 2 + 6 ),
+        point( width, height )
     };
 }
 
@@ -201,6 +209,8 @@ void diary::show_diary_ui( diary *c_diary )
     ctxt.register_action( "VIEW_SCORES" );
     ctxt.register_action( "HELP_KEYBINDINGS" );
 
+    mouse_action_bar buttons;
+    buttons.register_input( ctxt );
     ui_adaptor ui_diary;
     ui_diary.on_screen_resize( [&]( ui_adaptor & ui ) {
         const std::pair<point, point> beg_and_max = diary_window_position();
@@ -279,15 +289,11 @@ void diary::show_diary_ui( diary *c_diary )
 
         draw_border( w_desc );
         center_print( w_desc, 0, c_light_gray, string_format( _( "%s's Diary" ), c_diary->owner ) );
-        std::string desc = string_format( _( "%s, %s, %s, %s" ),
-                                          ctxt.get_desc( "NEW_PAGE", _( "New page" ), input_context::allow_all_keys ),
-                                          ctxt.get_desc( "CONFIRM", _( "Edit text" ), input_context::allow_all_keys ),
-                                          ctxt.get_desc( "DELETE PAGE", _( "Delete page" ), input_context::allow_all_keys ),
-                                          ctxt.get_desc( "EXPORT_DIARY", _( "Export diary" ), input_context::allow_all_keys )
-                                        );
-        center_print( w_desc, 1,  c_white, desc );
-        center_print( w_desc, 2,  c_white, ctxt.get_desc( "VIEW_SCORES",
-                      _( "View achievements, scores, and kills" ), input_context::allow_all_keys ) );
+        buttons.draw( w_desc, 1, {{ "QUIT", _( "Close" ) },
+            { "NEW_PAGE", _( "New page" ) }, { "CONFIRM", _( "Edit" ) },
+            { "DELETE PAGE", _( "Delete" ) }, { "EXPORT_DIARY", _( "Export" ) },
+            { "VIEW_SCORES", _( "Scores" ) }, { "PREV_TAB", _( "Previous pane" ) },
+            { "NEXT_TAB", _( "Next pane" ) }, { "HELP_KEYBINDINGS", _( "Keys" ) }} );
 
         wnoutrefresh( w_desc );
     } );
@@ -334,7 +340,19 @@ void diary::show_diary_ui( diary *c_diary )
         ui_desc.invalidate_ui();
         ui_info.invalidate_ui();
         ui_manager::redraw_invalidated();
-        const std::string action = ctxt.handle_input();
+        const std::string action = buttons.process( ctxt, ctxt.handle_input() );
+        if( action == "SELECT" ) {
+            for( const auto &pane : { std::make_pair( w_pages, window_mode::PAGE_WIN ),
+                                    std::make_pair( w_changes, window_mode::CHANGE_WIN ),
+                                    std::make_pair( w_text, window_mode::TEXT_WIN ) } ) {
+                if( const auto p = ctxt.get_coordinates_text( pane.first ) ) {
+                    if( buttons.contains( pane.first, *p ) ) {
+                        currwin = pane.second;
+                    }
+                }
+            }
+            continue;
+        }
         if( action == "LEFT" || action == "PREV_TAB" || action == "RIGHT" || action == "NEXT_TAB" ) {
             // necessary to use inc_clamp_wrap()
             static_assert( static_cast<int>( window_mode::FIRST_WIN ) == 0 );

@@ -233,6 +233,8 @@ class ui_adaptor
         static void redraw_invalidated();
         static void screen_resized();
         static size_t ui_stack_size();
+        // Only the top UI may let ImGui consume legacy mouse input.
+        static bool top_is_imgui();
     private:
         static void invalidation_consistency_and_optimization();
 

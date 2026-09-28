@@ -2353,7 +2353,7 @@ void options_manager::add_options_interface()
              true, COPT_CURSES_HIDE );
 
         add( "MOUSE_TOOLBAR_AUTO_TOGGLES", page_id,
-             to_translation( "Toolbar auto pickup / forage / combat buttons" ),
+             to_translation( "Toolbar auto pickup / forage / combat / eat buttons" ),
              to_translation( "If true, the on-screen mouse toolbar shows Pick, Forage, and "
                              "Combat buttons.  Left-click Pick toggles auto pickup (seeds a Global "
                              "* catch-all rule and enables adjacent pickup when rules were empty).  "
@@ -2373,6 +2373,16 @@ void options_manager::add_options_interface()
                              "control returns to you so you can move.  Safe mode still blocks "
                              "actions.  Toggle from the toolbar Combat button when toolbar auto "
                              "toggles are enabled." ),
+             false, COPT_CURSES_HIDE );
+
+        add( "AUTO_EAT", page_id, to_translation( "Auto eat / drink" ),
+             to_translation( "If true, when hungry or thirsty the character automatically eats or "
+                             "drinks a safe item from inventory (Eat● on the toolbar).  Skips "
+                             "poison, parasites, strong health penalties, addiction risk, major "
+                             "joy dumps, and other will_eat failures.  Prefers items that match "
+                             "the current need and help with vitamin deficiencies.  Stops once "
+                             "Satisfied / not thirsty.  Toggle from the toolbar Eat button when "
+                             "toolbar auto toggles are enabled." ),
              false, COPT_CURSES_HIDE );
     } );
 
@@ -3582,18 +3592,20 @@ std::string options_manager::show( bool ingame, const bool world_options_only, b
             }
         }
 
-        iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
-        const int iOffsetX = TERMX > FULL_SCREEN_WIDTH ? ( TERMX - iMinScreenWidth ) / 2 : 0;
-        iContentHeight = TERMY - 3 - iTooltipHeight - iWorldOffset;
+        iMinScreenWidth = std::min( TERMX, 100 );
+        const int height = std::min( TERMY, 38 );
+        const int iOffsetX = ( TERMX - iMinScreenWidth ) / 2;
+        const int iOffsetY = ( TERMY - height ) / 2;
+        iContentHeight = height - 3 - iTooltipHeight - iWorldOffset;
 
-        w_options_border  = catacurses::newwin( TERMY, iMinScreenWidth,
-                                                point( iOffsetX, 0 ) );
+        w_options_border  = catacurses::newwin( height, iMinScreenWidth,
+                                                point( iOffsetX, iOffsetY ) );
         w_options_tooltip = catacurses::newwin( iTooltipHeight, iMinScreenWidth - 2,
-                                                point( 1 + iOffsetX, 1 + iWorldOffset ) );
+                                                point( 1 + iOffsetX, iOffsetY + 1 + iWorldOffset ) );
         w_options_header  = catacurses::newwin( 1, iMinScreenWidth - 2,
-                                                point( 1 + iOffsetX, 1 + iTooltipHeight + iWorldOffset ) );
+                                                point( 1 + iOffsetX, iOffsetY + 1 + iTooltipHeight + iWorldOffset ) );
         w_options         = catacurses::newwin( iContentHeight, iMinScreenWidth - 2,
-                                                point( 1 + iOffsetX, iTooltipHeight + 2 + iWorldOffset ) );
+                                                point( 1 + iOffsetX, iOffsetY + iTooltipHeight + 2 + iWorldOffset ) );
 
         ui.position_from_window( w_options_border );
     };

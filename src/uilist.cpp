@@ -1,4 +1,5 @@
 #include "uilist.h"
+#include "ui_telemetry.h"
 
 #include <cmath>
 
@@ -613,7 +614,8 @@ void uilist::calc_data()
     const float frame_padding_y = s.FramePadding.y * 2.0;
     const float window_border = s.WindowBorderSize * 2.0;
     const float window_padding_x = s.WindowPadding.x * 2.0;
-    const float main_view_max_y = 0.9 * ImGui::GetMainViewport()->Size.y;
+    const float main_view_max_y = std::min( 0.9f * ImGui::GetMainViewport()->Size.y,
+                                        840.f * std::max( 1.f, ImGui::GetFontSize() / 16.f ) );
     const float item_double_spacing_y = s.ItemSpacing.y * 2.0;
 
     std::vector<int> autoassign;
@@ -898,6 +900,8 @@ shared_ptr_fast<uilist_impl> uilist::create_or_get_ui()
 
 shared_ptr_fast<uilist_impl> uilist::query( bool loop, int timeout, bool allow_unfiltered_hotkeys )
 {
+    const ui_telemetry::scope trace( "menu.list", {{ "title", title },
+        { "entries", std::to_string( entries.size() ) }} );
     input_context ctxt = create_main_input_context();
 
 #if defined(__ANDROID__)
@@ -916,6 +920,8 @@ shared_ptr_fast<uilist_impl> uilist::query( bool loop, int timeout, bool allow_u
         ui_manager::redraw();
         query_once( ctxt, timeout, allow_unfiltered_hotkeys );
     } while( loop && ret == UILIST_WAIT_INPUT );
+    ui_telemetry::record( "menu.result", {{ "result", std::to_string( ret ) },
+        { "selected", std::to_string( selected ) }} );
     return ui;
 }
 

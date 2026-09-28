@@ -1,0 +1,3785 @@
+{
+  "name": "Astral",
+  "version": "0.1.5",
+  "fallback": "UltiCa",
+  "baseline_config_sha256": "455b785c80f7dc5dd14c6c998618d156ebf6c7306d410beb8cddcb4270b3f267",
+  "baseline_sprite_slots": 18572,
+  "total_sprite_slots": 18956,
+  "replacements": [
+    {
+      "id": [
+        "t_grass",
+        "t_grass_season_spring"
+      ],
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_grass_season_summer",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_grass_season_autumn",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_grass_season_winter",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": [
+        "t_shrub",
+        "t_shrub_season_spring"
+      ],
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_shrub_season_summer",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_shrub_season_autumn",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_shrub_season_winter",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": [
+        "t_dirt",
+        "t_dirt_season_spring",
+        "t_dirt_season_summer",
+        "t_dirt_season_autumn",
+        "t_dirt_season_winter"
+      ],
+      "atlas": "astral_32.png",
+      "policy": "Neutral summer center in all seasons; UltiCa connected edges retained."
+    },
+    {
+      "id": [
+        "t_water_dp",
+        "t_water_dp_season_spring"
+      ],
+      "atlas": "astral_32.png",
+      "policy": "Four seasonal centers; UltiCa connected edges retained."
+    },
+    {
+      "id": "t_water_dp_season_summer",
+      "atlas": "astral_32.png",
+      "policy": "Four seasonal centers; UltiCa connected edges retained."
+    },
+    {
+      "id": "t_water_dp_season_autumn",
+      "atlas": "astral_32.png",
+      "policy": "Four seasonal centers; UltiCa connected edges retained."
+    },
+    {
+      "id": "t_water_dp_season_winter",
+      "atlas": "astral_32.png",
+      "policy": "Four seasonal centers; UltiCa connected edges retained."
+    },
+    {
+      "id": [
+        "t_tree",
+        "t_tree_season_spring"
+      ],
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_tree_season_summer",
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_tree_season_autumn",
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_tree_season_winter",
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": [
+        "t_tree_pine",
+        "t_tree_pine_season_spring"
+      ],
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_tree_pine_season_summer",
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_tree_pine_season_autumn",
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_tree_pine_season_winter",
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": [
+        "t_rock",
+        "t_rock_season_spring",
+        "t_rock_season_summer",
+        "t_rock_season_autumn",
+        "t_rock_season_winter"
+      ],
+      "atlas": "astral_32.png",
+      "policy": "Neutral summer center in all seasons; UltiCa connected edges retained."
+    },
+    {
+      "id": [
+        "t_pavement",
+        "t_pavement_season_spring",
+        "t_pavement_season_summer",
+        "t_pavement_season_autumn",
+        "t_pavement_season_winter"
+      ],
+      "atlas": "astral_32.png",
+      "policy": "Neutral summer center in all seasons; UltiCa connected edges retained."
+    },
+    {
+      "id": [
+        "t_underbrush",
+        "t_underbrush_season_spring"
+      ],
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_underbrush_season_summer",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_underbrush_season_autumn",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_underbrush_season_winter",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": [
+        "t_fern",
+        "t_fern_season_spring"
+      ],
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_fern_season_summer",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_fern_season_autumn",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_fern_season_winter",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": [
+        "f_cattails",
+        "f_cattails_season_spring"
+      ],
+      "atlas": "astral_64.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "f_cattails_season_summer",
+      "atlas": "astral_64.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "f_cattails_season_autumn",
+      "atlas": "astral_64.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "f_cattails_season_winter",
+      "atlas": "astral_64.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": [
+        "f_dandelion",
+        "f_dandelion_season_spring"
+      ],
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "f_dandelion_season_summer",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "f_dandelion_season_autumn",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "f_dandelion_season_winter",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": [
+        "t_shrub_blueberry",
+        "t_shrub_blueberry_season_spring"
+      ],
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_shrub_blueberry_season_summer",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_shrub_blueberry_season_autumn",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_shrub_blueberry_season_winter",
+      "atlas": "astral_32.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": [
+        "t_tree_birch",
+        "t_tree_birch_season_spring"
+      ],
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_tree_birch_season_summer",
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_tree_birch_season_autumn",
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_tree_birch_season_winter",
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": [
+        "t_tree_willow",
+        "t_tree_willow_season_spring"
+      ],
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_tree_willow_season_summer",
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_tree_willow_season_autumn",
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": "t_tree_willow_season_winter",
+      "atlas": "astral_96.png",
+      "policy": "Four-season native art; harvested and transparent states retain fallback."
+    },
+    {
+      "id": [
+        "t_water_sh",
+        "t_water_sh_season_spring"
+      ],
+      "atlas": "astral_shallow-water.png",
+      "policy": "Four-season connected terrain; seasonal grass backing."
+    },
+    {
+      "id": "t_water_sh_season_summer",
+      "atlas": "astral_shallow-water.png",
+      "policy": "Four-season connected terrain; seasonal grass backing."
+    },
+    {
+      "id": "t_water_sh_season_autumn",
+      "atlas": "astral_shallow-water.png",
+      "policy": "Four-season connected terrain; seasonal grass backing."
+    },
+    {
+      "id": "t_water_sh_season_winter",
+      "atlas": "astral_shallow-water.png",
+      "policy": "Four-season connected terrain; seasonal grass backing."
+    },
+    {
+      "id": [
+        "t_sand",
+        "t_sand_season_spring"
+      ],
+      "atlas": "astral_sand.png",
+      "policy": "Four-season connected terrain; seasonal grass backing."
+    },
+    {
+      "id": "t_sand_season_summer",
+      "atlas": "astral_sand.png",
+      "policy": "Four-season connected terrain; seasonal grass backing."
+    },
+    {
+      "id": "t_sand_season_autumn",
+      "atlas": "astral_sand.png",
+      "policy": "Four-season connected terrain; seasonal grass backing."
+    },
+    {
+      "id": "t_sand_season_winter",
+      "atlas": "astral_sand.png",
+      "policy": "Four-season connected terrain; seasonal grass backing."
+    },
+    {
+      "id": "mon_giant_beaver",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_giant_beaver_cub",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_large_claw_sloth",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_large_claw_sloth_cub",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_stagmoose",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_stagmoose_cub",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_mammoth",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_mammoth_cub",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_mastodon",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_mastodon_cub",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_shortface",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_shortface_cub",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_auk",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_auk_chick",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_glyptotherium",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_glyptotherium_young",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_american_zebra",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_zebra_foal",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": [
+        "mon_direwolf",
+        "mon_direwolf_dm"
+      ],
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_direwolf_cub",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": [
+        "mon_sabcat",
+        "mon_sabcat_dm"
+      ],
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_sabcat_cub",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": [
+        "mon_cave_lion",
+        "mon_cave_lion_dm"
+      ],
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_cave_lion_cub",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_bobcat",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_bobcat_cub",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": [
+        "mon_titanis_walleri",
+        "mon_titanis_walleri_dm"
+      ],
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_titanis_walleri_chick",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_shrubox",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_shrubox_calf",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_woodox",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_woodox_calf",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_soergoat",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_soergoat_kid",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_bison",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_bison_calf",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_scotts_horse",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_scotts_foal",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_giant_horse",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_giant_foal",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_camelops",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_camelops_foal",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_peccary_flathead",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_flathead_piglet",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_peccary_longnose",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": "mon_longnose_piglet",
+      "atlas": "astral_megafauna.png",
+      "policy": "Approved Megafauna native export; four Defense Mode aliases shared intentionally."
+    },
+    {
+      "id": [
+        "t_grass_long",
+        "t_grass_long_season_spring"
+      ],
+      "atlas": "astral_long_grass_v2.png",
+      "policy": "All seasonal, connection and random variants; UltiCa-matched height."
+    },
+    {
+      "id": "t_grass_long_season_summer",
+      "atlas": "astral_long_grass_v2.png",
+      "policy": "All seasonal, connection and random variants; UltiCa-matched height."
+    },
+    {
+      "id": "t_grass_long_season_autumn",
+      "atlas": "astral_long_grass_v2.png",
+      "policy": "All seasonal, connection and random variants; UltiCa-matched height."
+    },
+    {
+      "id": "t_grass_long_season_winter",
+      "atlas": "astral_long_grass_v2.png",
+      "policy": "All seasonal, connection and random variants; UltiCa-matched height."
+    },
+    {
+      "id": [
+        "t_shrub_peanut",
+        "t_shrub_peanut_season_spring"
+      ],
+      "atlas": "astral_peanut.png",
+      "policy": "Normal and harvested, all four seasons."
+    },
+    {
+      "id": "t_shrub_peanut_season_summer",
+      "atlas": "astral_peanut.png",
+      "policy": "Normal and harvested, all four seasons."
+    },
+    {
+      "id": "t_shrub_peanut_season_autumn",
+      "atlas": "astral_peanut.png",
+      "policy": "Normal and harvested, all four seasons."
+    },
+    {
+      "id": "t_shrub_peanut_season_winter",
+      "atlas": "astral_peanut.png",
+      "policy": "Normal and harvested, all four seasons."
+    },
+    {
+      "id": [
+        "t_shrub_peanut_harvested",
+        "t_shrub_peanut_harvested_season_spring"
+      ],
+      "atlas": "astral_peanut.png",
+      "policy": "Normal and harvested, all four seasons."
+    },
+    {
+      "id": "t_shrub_peanut_harvested_season_summer",
+      "atlas": "astral_peanut.png",
+      "policy": "Normal and harvested, all four seasons."
+    },
+    {
+      "id": "t_shrub_peanut_harvested_season_autumn",
+      "atlas": "astral_peanut.png",
+      "policy": "Normal and harvested, all four seasons."
+    },
+    {
+      "id": "t_shrub_peanut_harvested_season_winter",
+      "atlas": "astral_peanut.png",
+      "policy": "Normal and harvested, all four seasons."
+    },
+    {
+      "id": [
+        "t_shrub_autumn_olive",
+        "t_shrub_autumn_olive_season_spring"
+      ],
+      "atlas": "astral_autumn_olive_detail.png",
+      "policy": "Normal and harvested, all four seasons; 256px textures with 0.125 pixelscale."
+    },
+    {
+      "id": "t_shrub_autumn_olive_season_summer",
+      "atlas": "astral_autumn_olive_detail.png",
+      "policy": "Normal and harvested, all four seasons; 256px textures with 0.125 pixelscale."
+    },
+    {
+      "id": "t_shrub_autumn_olive_season_autumn",
+      "atlas": "astral_autumn_olive_detail.png",
+      "policy": "Normal and harvested, all four seasons; 256px textures with 0.125 pixelscale."
+    },
+    {
+      "id": "t_shrub_autumn_olive_season_winter",
+      "atlas": "astral_autumn_olive_detail.png",
+      "policy": "Normal and harvested, all four seasons; 256px textures with 0.125 pixelscale."
+    },
+    {
+      "id": [
+        "t_shrub_autumn_olive_harvested",
+        "t_shrub_autumn_olive_harvested_season_spring"
+      ],
+      "atlas": "astral_autumn_olive_detail.png",
+      "policy": "Normal and harvested, all four seasons; 256px textures with 0.125 pixelscale."
+    },
+    {
+      "id": "t_shrub_autumn_olive_harvested_season_summer",
+      "atlas": "astral_autumn_olive_detail.png",
+      "policy": "Normal and harvested, all four seasons; 256px textures with 0.125 pixelscale."
+    },
+    {
+      "id": "t_shrub_autumn_olive_harvested_season_autumn",
+      "atlas": "astral_autumn_olive_detail.png",
+      "policy": "Normal and harvested, all four seasons; 256px textures with 0.125 pixelscale."
+    },
+    {
+      "id": "t_shrub_autumn_olive_harvested_season_winter",
+      "atlas": "astral_autumn_olive_detail.png",
+      "policy": "Normal and harvested, all four seasons; 256px textures with 0.125 pixelscale."
+    }
+  ],
+  "native_assets": [
+    {
+      "family": "grass",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/native/grass-spring.png",
+      "sha256": "8fd327209db410b2e0f5dfdc8464b4c8e8536908062bde2d12c688a64bcb15e8"
+    },
+    {
+      "family": "grass",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/native/grass-summer.png",
+      "sha256": "2a38fdf83bdc1bf461f75dfca84f028f3f76d23bdafb1f8d8fe442f9cd806a6c"
+    },
+    {
+      "family": "grass",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/native/grass-autumn.png",
+      "sha256": "d7747a6c44157433660103465bbaaad1e07ff06e89de3b81747ff0609398b5cd"
+    },
+    {
+      "family": "grass",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/native/grass-winter.png",
+      "sha256": "ca4c906ce3f37f6475dacd1d78621774c65971ad670fef6e5bea9c0c6376b8c3"
+    },
+    {
+      "family": "shrub",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/native/shrub-spring.png",
+      "sha256": "4b5458f6169f20491bf0e05608b9e0682b9358a792bb36835d61394485f83f7e"
+    },
+    {
+      "family": "shrub",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/native/shrub-summer.png",
+      "sha256": "8a3da00ee73dbf0f6d542e5c540d3e84bd1658034565244058280b1d3bb4561c"
+    },
+    {
+      "family": "shrub",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/native/shrub-autumn.png",
+      "sha256": "ee18633deccce3fe2c633e27000e301b5c560ee1c99f0baa92797f47cf7b1851"
+    },
+    {
+      "family": "shrub",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/native/shrub-winter.png",
+      "sha256": "a5cf321b593945555735df354a201d5b3410d010e9a799af496d5ad0915fb725"
+    },
+    {
+      "family": "dirt",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/native/dirt-spring.png",
+      "sha256": "c4e8fd3e13e9433c2ae3b6cdb2a64b0e45f22fd0e8b5416fa0f9ac365ed7bbfa"
+    },
+    {
+      "family": "dirt",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/native/dirt-summer.png",
+      "sha256": "1ac67c3420c3ff2bed5bebe4aca95c714f9e1ba4e0c53ed69e0ab6d6f57ffa72"
+    },
+    {
+      "family": "dirt",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/native/dirt-autumn.png",
+      "sha256": "b61bfb6b3563beeeeeeb313267ebd83f4c9ce90da8e88653c23de04bdaf3f1bb"
+    },
+    {
+      "family": "dirt",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/native/dirt-winter.png",
+      "sha256": "b5635085c24535be916d98d172c59fd661118011b4be0c18d33425b122ba5601"
+    },
+    {
+      "family": "sand",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/native/sand-spring.png",
+      "sha256": "c388d764349ded5eaa5382ee2ba246213c126c473d92610bf9b95755e08b977a"
+    },
+    {
+      "family": "sand",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/native/sand-summer.png",
+      "sha256": "e466ea6ef09bc2b6b5413c2284584b6bbe16c1a89c05b85d0ee534ed7a959772"
+    },
+    {
+      "family": "sand",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/native/sand-autumn.png",
+      "sha256": "10c7a9b5373f99972c6fc3a40034b1e67cb244b0dcea623719b9c9c3c9543095"
+    },
+    {
+      "family": "sand",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/native/sand-winter.png",
+      "sha256": "9dd053b8fa8d930c956fbaf241cfcc4eaa37c17a4b6d90e907208e56355f80f0"
+    },
+    {
+      "family": "shallow-water",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/native/shallow-water-spring.png",
+      "sha256": "b4a486dc0a168f7a07453ba9de371acc18b069cd7beb4de69d62fbcced47b392"
+    },
+    {
+      "family": "shallow-water",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/native/shallow-water-summer.png",
+      "sha256": "7a644c388770fc556f81fa1c2a31190ea11d9a93f83bcbf2d41fc1e315a3378d"
+    },
+    {
+      "family": "shallow-water",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/native/shallow-water-autumn.png",
+      "sha256": "75602c89d57892de6f5bb744192df3e2cbad90cd3f6b58330e9baa022dea40a0"
+    },
+    {
+      "family": "shallow-water",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/native/shallow-water-winter.png",
+      "sha256": "a0a218ddc8b5f339ae39ed1e59daa38bdc2ee690566b50124261a6f55c87becc"
+    },
+    {
+      "family": "deep-water",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/native/deep-water-spring.png",
+      "sha256": "23ff9ec8bd3289cddd0e3dc732cfb570845373af0b6fadd73111dc84593d7108"
+    },
+    {
+      "family": "deep-water",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/native/deep-water-summer.png",
+      "sha256": "f172fd08d1ee3c40505ea647f5b7ce3bdd5fecadb10d2d766399f890daf3b5ac"
+    },
+    {
+      "family": "deep-water",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/native/deep-water-autumn.png",
+      "sha256": "63e0d57fcab0732b789b51bae13dbc364a146fea70e06ac72aec128408006b0a"
+    },
+    {
+      "family": "deep-water",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/native/deep-water-winter.png",
+      "sha256": "6f211dabca8ff2366bdad168c508ba27abf5db9d7bbab720b775282f37bbfb55"
+    },
+    {
+      "family": "deciduous-tree",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/native/deciduous-tree-spring.png",
+      "sha256": "5888941fd7cfdea3e1f96d992d0aad56b02483c4c4e88b26ae7577fba72f14df"
+    },
+    {
+      "family": "deciduous-tree",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/native/deciduous-tree-summer.png",
+      "sha256": "25e39b19b977aec356a1b090afd4d3a87c4a57e8bd6909ab2277d376eed8227b"
+    },
+    {
+      "family": "deciduous-tree",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/native/deciduous-tree-autumn.png",
+      "sha256": "22fc911f3f50f5cabb53a0f7cdb2fd4aee973f2ad34d4e3178ed9f51567235fa"
+    },
+    {
+      "family": "deciduous-tree",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/native/deciduous-tree-winter.png",
+      "sha256": "6ae62f9b15839d44b947bd7dffeb00b7738edde3ff3a469298ec366b04ad19ac"
+    },
+    {
+      "family": "pine-tree",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/native/pine-tree-spring.png",
+      "sha256": "4aab26c73d1a81dcdb82cfdd835bf2e6eab96cd2bd4e26bd74bc66728665a8d2"
+    },
+    {
+      "family": "pine-tree",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/native/pine-tree-summer.png",
+      "sha256": "7d05bb5b84e048ae204f6ae7604576417cae171dd2dfe279c8d50d03c37fb599"
+    },
+    {
+      "family": "pine-tree",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/native/pine-tree-autumn.png",
+      "sha256": "1d4fe537041567993bdd6ae6b9e6e6cf0e6eee6497618081a89ac6efb57eaf8e"
+    },
+    {
+      "family": "pine-tree",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/native/pine-tree-winter.png",
+      "sha256": "bf84b8c281c97980186cc76671a0820f37c50701362a7ea530ce55c9518c7fc9"
+    },
+    {
+      "family": "rock",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/native/rock-spring.png",
+      "sha256": "81e9fe9b8c2b97c2ca9bf9eae8486d97d1be9ec218f178470a9ddb98c494f7e9"
+    },
+    {
+      "family": "rock",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/native/rock-summer.png",
+      "sha256": "d5da436ce0003123073c10405263694eec1d01af80056316838373e136e0e18a"
+    },
+    {
+      "family": "rock",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/native/rock-autumn.png",
+      "sha256": "e8270655362b58441288c41c56fc73b739d94b005ac1f29e27b6f52367a96b37"
+    },
+    {
+      "family": "rock",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/native/rock-winter.png",
+      "sha256": "7d1b9d1218232845d3cbe06bb88e027877760bfadf372ddb16b4ef9cc5ca6284"
+    },
+    {
+      "family": "pavement",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/native/pavement-spring.png",
+      "sha256": "abbb392e50947a2ec02d8fcb2a8e82599a687693096ed647d2b445f3a90bf90f"
+    },
+    {
+      "family": "pavement",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/native/pavement-summer.png",
+      "sha256": "f63b0ce6c892b5adad16d437b23099b07a59a5d0a9f4d918689ce838651e498b"
+    },
+    {
+      "family": "pavement",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/native/pavement-autumn.png",
+      "sha256": "5ceb8c1ec45c299da6152e0947feea2af6e08efd9165171839387b20cc00b460"
+    },
+    {
+      "family": "pavement",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/native/pavement-winter.png",
+      "sha256": "530aa93ee5f7c4b1ee25bbd070e190a07e1b26d7352b1d30cb0be77b1b3540e9"
+    },
+    {
+      "family": "long-grass",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/flora/native/long-grass-spring.png",
+      "sha256": "792a171504b49b46c24374470ddcd4ff741001ec39a3f295200cdb15be6f53a7"
+    },
+    {
+      "family": "long-grass",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/flora/native/long-grass-summer.png",
+      "sha256": "39bf5ad616bb61f28b2026577e785bbeba0dc789630be357d4289d5e8b2b2139"
+    },
+    {
+      "family": "long-grass",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/flora/native/long-grass-autumn.png",
+      "sha256": "2b27227b1f6a6cb049737e478508349346d2cecf4a9d284fac96132f6d9dbcbd"
+    },
+    {
+      "family": "long-grass",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/flora/native/long-grass-winter.png",
+      "sha256": "ccf055ed849c17ea8ab7bc4b0f53b368958d2ca632290110c12437d33faef746"
+    },
+    {
+      "family": "underbrush",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/flora/native/underbrush-spring.png",
+      "sha256": "09c70167dc335d1dc74affc26fd33f50b7621d241a21868eeea6156fb2a07ac8"
+    },
+    {
+      "family": "underbrush",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/flora/native/underbrush-summer.png",
+      "sha256": "ba3540039cf7eca489aa6e71479d6a893e63e7660edb92ada651187c02b7e959"
+    },
+    {
+      "family": "underbrush",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/flora/native/underbrush-autumn.png",
+      "sha256": "f124da818a88aaee8c0d6a015cbf06a3a2e17caaa214cfb8e419a5704bc0e694"
+    },
+    {
+      "family": "underbrush",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/flora/native/underbrush-winter.png",
+      "sha256": "828ce3b42498b00b03e660a1b1ff28c7714e849ff1c51088fd3929b1c2920662"
+    },
+    {
+      "family": "fern",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/flora/native/fern-spring.png",
+      "sha256": "2b67c55c4b000bac5d8ce379e30f596c9bd97af44f9e396ccf937986cbfe578c"
+    },
+    {
+      "family": "fern",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/flora/native/fern-summer.png",
+      "sha256": "69ba0914cd29c0fc6606a4f74380336b02f2e85a3110432e04a2785ee228b170"
+    },
+    {
+      "family": "fern",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/flora/native/fern-autumn.png",
+      "sha256": "df6d92357b216da9e50e8f7ba7a178a0d82afc9fbce8eabca7881f0a178f6687"
+    },
+    {
+      "family": "fern",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/flora/native/fern-winter.png",
+      "sha256": "2680085318f96015fbdbdf95e23cac51aa6556531cdfc110c1b202019b4e6983"
+    },
+    {
+      "family": "cattails",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/flora/native/cattails-spring.png",
+      "sha256": "fca01c623b02618327e6d5bfc0c7f7fc56ca5ad6d77562c6be5fc9c67a778223"
+    },
+    {
+      "family": "cattails",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/flora/native/cattails-summer.png",
+      "sha256": "622a958dcba60bc93d83c094f832d912a4e6353623fbe3f5303cdbdd8b28a889"
+    },
+    {
+      "family": "cattails",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/flora/native/cattails-autumn.png",
+      "sha256": "1bbe68d9617dd8d67ab95cdcbd5860c57769396d131c49ac199077d132fc5a00"
+    },
+    {
+      "family": "cattails",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/flora/native/cattails-winter.png",
+      "sha256": "35a2d8f34083160460b6a14a6831df6fc9ae9a7a84551cbc95da879a5aee739d"
+    },
+    {
+      "family": "dandelion",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/flora/native/dandelion-spring.png",
+      "sha256": "4bef4adef5bbf5e93ab1747b500cb8598d84cc768d21ca370df6462500db0fe8"
+    },
+    {
+      "family": "dandelion",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/flora/native/dandelion-summer.png",
+      "sha256": "fd1d84033ca7566701c11ce6f85d3e6606490c7f7fbaaeddedc5aeabf8267347"
+    },
+    {
+      "family": "dandelion",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/flora/native/dandelion-autumn.png",
+      "sha256": "c5954fec3a1bd4960b0b5c9c7f602ae31fbf3c9058b0309fe9de65f075b5e6d9"
+    },
+    {
+      "family": "dandelion",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/flora/native/dandelion-winter.png",
+      "sha256": "89e9d946ba9b4a1c003675bd2f5be3f96eed3cfe25d3ecf2dd3f788ddedf1925"
+    },
+    {
+      "family": "blueberry",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/flora/native/blueberry-spring.png",
+      "sha256": "c264ab0ce9c4dc5fe9f51237c61b6abc3fe220b0c7b4793da66f76ba7c6223c1"
+    },
+    {
+      "family": "blueberry",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/flora/native/blueberry-summer.png",
+      "sha256": "c00d2531ba77c9e45b7d09b17d573b82dd77b1714b308c59b7353eb4cfbd06f0"
+    },
+    {
+      "family": "blueberry",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/flora/native/blueberry-autumn.png",
+      "sha256": "695b8dc28ae5fd75efdc095a2c31ef0826e2723c4dcc7004531029cfd8b0896e"
+    },
+    {
+      "family": "blueberry",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/flora/native/blueberry-winter.png",
+      "sha256": "bfdb608577f7e30e8ecc3875fdbf707d248e2fde7853bdeeca379f7e848a70b8"
+    },
+    {
+      "family": "birch",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/flora/native/birch-spring.png",
+      "sha256": "24194a2601349c612953ee4f2d037b681950fc61ebe6aca6d1a67ae00b1e831a"
+    },
+    {
+      "family": "birch",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/flora/native/birch-summer.png",
+      "sha256": "e6f49ae2538cd0f47a295066a81a7141eee65e65ba86231816bdaa3dd0031b8d"
+    },
+    {
+      "family": "birch",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/flora/native/birch-autumn.png",
+      "sha256": "ba46f57ec0777a059fcec1aaaab60f8449802f8b1bceab1449836d89e9fc1a15"
+    },
+    {
+      "family": "birch",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/flora/native/birch-winter.png",
+      "sha256": "dfc4693ef9edc2b08d146e0499c3cd1f0e201f69edfeea63a015ec696d7b6bfe"
+    },
+    {
+      "family": "willow",
+      "season": "spring",
+      "source": "artifacts/landscape-new-tileset/flora/native/willow-spring.png",
+      "sha256": "63c8102f3906fdb41eddf0320a81fff4972acd47a6e01377150bb7aaa4a9a412"
+    },
+    {
+      "family": "willow",
+      "season": "summer",
+      "source": "artifacts/landscape-new-tileset/flora/native/willow-summer.png",
+      "sha256": "5230de88667ad02199cddcfb9b47aad90e57403e04bd83c04a277e7777eba7aa"
+    },
+    {
+      "family": "willow",
+      "season": "autumn",
+      "source": "artifacts/landscape-new-tileset/flora/native/willow-autumn.png",
+      "sha256": "6b78d828870c7f22fd4c463ea5ed2bc2dced0eccaa43094cd8ca35ad774e95d8"
+    },
+    {
+      "family": "willow",
+      "season": "winter",
+      "source": "artifacts/landscape-new-tileset/flora/native/willow-winter.png",
+      "sha256": "3cf942915f8b0e2a9d03c28da45f2a31ae478c7eb4dfbe42ac266db94769feab"
+    }
+  ],
+  "policy": {
+    "shared_rock": "Neutral year-round; rock-floor unchanged.",
+    "dirt_pavement": "Neutral year-round until outdoor exposure support is available.",
+    "harvested_transparent": "Existing UltiCa mappings and game looks_like fallback retained."
+  },
+  "gameplay_review": "pending",
+  "files": {
+    "ATTRIBUTION.md": "ff77d888fad04d6eb07aaab7c7a0776b90af1f714e5ccbe49f193f5ce50ff550",
+    "AUTUMN-OLIVE-BEFORE-AFTER.png": "c532af055df3440a91471e11096e6d5de72f7d32d44d90e40d83006db0775b84",
+    "AUTUMN-OLIVE-PREVIEW.png": "faab2475d2a8058c945df2ef73a8d7c1c16f925461af4cbbe52e292a3434e616",
+    "AUTUMN-OLIVE-REFERENCES.json": "5137c6e0ee37c65a6ba13cc1c188575a56c3b83a32b12d802ed7bdd4a49c0022",
+    "AUTUMN-OLIVE-VALIDATION.json": "b89774853fce7603016de9ff83497e83a249d110c70a19fd93d51f010853e245",
+    "GRASS-REFERENCES.json": "b172cf8224aa95cdbf1734e246354790baf592205094986e616811e38866877b",
+    "LICENSE.txt": "6e3d17bae7a8f0dee4b0d0c6af5bdf4396a0e685455efa8c2ad4ce52acdd99e2",
+    "PEANUT-REFERENCES.json": "48b0d0d4b1a10c924411f55be53d8541b739c8700e115f960742d244a894ba45",
+    "PEANUT-VALIDATION.json": "055d245498f4c2e0d8a652d2ab5d6e380ff1eddf2cbcb8a6d8c38a6d5f2a9dcc",
+    "PROGRESS.md": "b5f530b22d53372c9c461624212de9793778a32a7c4562fe3f3377c27df59168",
+    "README.md": "4c911a1041abfd3ded983fa63d825437a6fd982f19193ece748c059d6cb4e869",
+    "ULTICA-CREDITS.txt": "c3ab2645b5ba2b1bfd2846ed197200474bfc5939da7e3ff75ed091572fcc459f",
+    "VALIDATION.md": "d3ea2d68543a8598bf19be7f5da087ac03db55f0b8e85d0d9a5fb239097981e3",
+    "astral_32.png": "c9ffdfa86ab0112df7540acd668b2f429ca4f8f4dacd2b867dceffe3c7a07875",
+    "astral_64.png": "1136afe5c1f6ef8ddf911872a3ff2a3024b39c3169202f2cd866833883e9317f",
+    "astral_96.png": "3a0f0fd88e7f28fa5ecbb7e12e62a02aaacf23769ea544ae02c48957eaccb147",
+    "astral_autumn-olive.png": "5320245bb02b229a9dd96ef83cdb2f9b3113508095d7f326c5c0690a02d41b9c",
+    "astral_autumn_olive_detail.png": "96d4cd0e6609ec800138eb7bd1d7b237e7bc97a71a1945908af42444d713e8c7",
+    "astral_autumn_olive_detail_ground.png": "aea3ab2a1edd35e93010479c313c85370b9c61a87e4ba5d761cb90913fd6b266",
+    "astral_long_grass_ground.png": "fdd25bdc80343a61188e5c494c8e07f2b652e28d9e0d668c828b97ddc11d05ca",
+    "astral_long_grass_v2.png": "3f66550c72f052c98eff8c8b0f2f3952deb5410f7c37ee0c070433c17170bb14",
+    "astral_megafauna.png": "e08468715f6ec2552020ceb6706605c25881693222fd282efee7de1fe6f461c0",
+    "astral_peanut.png": "ec7e120fa4cec6a6960a624426c36150310db2c77a0b369f96577e5cd3dd111e",
+    "astral_sand.png": "f643151d09aa4e67ef3daebb3d3bf0d42f940e6c7498aa28fb9c889f0d0ef695",
+    "astral_shallow-water.png": "6f63091b2c96f65651c4190f27cabec648508de3c7dc3e309def1ed189f9cf3d",
+    "centered.png": "4a2d582d0f373af23d013781d5a07711888338433d84d1238f38483d3330fb91",
+    "fallback.png": "6b5e206b0e2cc8bd9b0e9def660a669c56026c30457e19569401cd8d51a9164e",
+    "filler.png": "3cb1951b7c91030b43b8c1ab6852e394fb4c19ebaf06a8a527c2e422ee1116ab",
+    "filler_tall.png": "d2fcbaaa9d990625865ae7bafeeb2acef7cd0cf75751bcc71a841c10a7a1e880",
+    "fillergiant.png": "e46f469c40bf1087dda1f7d87420a89a32c812b17db9307645b49d8673a7108a",
+    "fillerhoder.png": "c33219a4553013e518859fda271f08f071b1f1955ed1e5e9bd836608632a8e1f",
+    "giant.png": "70eb1cf93bc6b783aede515b2c67a27435704b34932571d1b5d3fcad6cdac9c3",
+    "huge.png": "c6c2ab129c80e222daf7ec7bf24475591419c2cd5e7002117b6979eaa82f0aae",
+    "human_body.png": "d7bbca32bec6783e94e5f3aaedbba93d3784468442e7d748579fe4a1058fbc4a",
+    "human_body_plus.png": "a7ff9cbfa738d7ffdb289e56c856f8bf72754176885fcb3aca3fb6d87b83c8f8",
+    "incomplete.png": "b6b4b909be7d714b46583a118e430807fe7a53041bed96fb0471e7b85e3520ff",
+    "incomplete_body_plus.png": "558b8f508d0f1b5965c98e4b105330cb818cc18d70dd5275d83ab07817b038d0",
+    "incomplete_giant.png": "bec477bd50d60d82a0f9ec8ccf9373046cd6ad6bfc061df230a874271db5f4fe",
+    "incomplete_large.png": "250e675356a76f8480fe87257eaef14326f26143ce1d5a0da9f2c69a20b7b1f1",
+    "incomplete_small.png": "cd092069b53352219deb998e70d3b580d4d06c161d05a49a6003df9ada2b7f97",
+    "incomplete_tall.png": "db6c4ff61350b44b84e866e65bed5cc8f4200212a6069a665c77f8fe467dd4ea",
+    "large.png": "886f04077e58692341fe92d0aa5e2b1010bb3f412a08217005ef68d15e9a83a9",
+    "large_ridden.png": "c5718aeffe11cf514768bd7eb48e2db1ddfdb54f18609959b72900bbee9716fc",
+    "layering.json": "292ea8e8bae20f6e6b3128162982b89bf98c246421e68922c18ac081fed0a533",
+    "normal.png": "d52dfd3f52aa30e082ea8bda48a1663294613ee5eeb19eaa666fda2ac01f95cb",
+    "small.png": "86ad2cb257cfb2365b2c5483f1a5fe586b86a675bd6adf151e11b86d6fdcbde8",
+    "tall.png": "b88038c6e47147ba91c8392eebf1639e2615a4eb9415ebe845e06f2c926f50e1",
+    "tile_config.json": "26ef6664bb7effe617387ce7585b012d07fb6d0aa9c18b09006ea678947fc2a6",
+    "tileset.txt": "808825bacf35c79809ecf670cf135394a864e71d9c7ece8b09e2d4f265b49b7e"
+  },
+  "status": "Packaged separately; not installed",
+  "runtime_smoke": "0.1.5 not runtime tested; static checks passed",
+  "grass_revision": {
+    "id": "t_grass_long",
+    "sources": 88,
+    "variants_per_season": 22,
+    "native_cell": [
+      32,
+      64
+    ],
+    "offset": [
+      0,
+      -32
+    ],
+    "validation": {
+      "status": "passed",
+      "version": "0.1.2",
+      "source_variants": 88,
+      "seasons": 4,
+      "variants_per_season": 22,
+      "native_cell": [
+        32,
+        64
+      ],
+      "offset": [
+        0,
+        -32
+      ],
+      "exact_reference_bounds": true,
+      "distinct_native_sprites": 88,
+      "retained_checkpoint_files_verified": 96,
+      "post_checkpoint_variants_recreated": 56,
+      "discarded_art_reused": false,
+      "cardinal_connection_cases": 64,
+      "preserved_top_level_ids": 12209,
+      "sprite_references_checked": 24537,
+      "total_sprite_slots": 18928,
+      "all_other_mappings_unchanged": true,
+      "original_atlases_unchanged": true,
+      "layering_unchanged": true,
+      "shoreline_rotation_fix_preserved": true,
+      "shoreline_facing_checks": 128,
+      "client_modified": false,
+      "live_gameplay_review": "pending"
+    },
+    "assets": [
+      {
+        "key": "center-0-spring",
+        "shape": "center",
+        "variant": 0,
+        "season": "spring",
+        "source": "sources/center-0-spring.png",
+        "native": "native/center-0-spring.png",
+        "source_sha256": "bebdf02270dda0114d135aace92d6edde67fa80bda8d9fe50bc758b3eed088fa",
+        "native_sha256": "a0c3cb066ab60a9aa75c2d36e7f404fb5276b007f731d3fb69fed4f2648fa079",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 0
+      },
+      {
+        "key": "center-1-spring",
+        "shape": "center",
+        "variant": 1,
+        "season": "spring",
+        "source": "sources/center-1-spring.png",
+        "native": "native/center-1-spring.png",
+        "source_sha256": "86abbe2a8d50bf7ed6c6a69d7943ca824deca6f4e93b8b386773364f1e45cf85",
+        "native_sha256": "fdebda9af341e77d4692bc7ebcc91d631d2e62fe3738d2cbff2688aa987ac5da",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 1
+      },
+      {
+        "key": "center-2-spring",
+        "shape": "center",
+        "variant": 2,
+        "season": "spring",
+        "source": "sources/center-2-spring.png",
+        "native": "native/center-2-spring.png",
+        "source_sha256": "338077d3e9a3f44f35475a179bfe5b5ed98f0f7afc87608a58f1d0fbc0c591e7",
+        "native_sha256": "509ddd713a3db7255a1bc715f8896e083986a338a6f718a57e963d825b8f87be",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 2
+      },
+      {
+        "key": "center-3-spring",
+        "shape": "center",
+        "variant": 3,
+        "season": "spring",
+        "source": "sources/center-3-spring.png",
+        "native": "native/center-3-spring.png",
+        "source_sha256": "da888bad3a8bf0fded5c0caf1fb885bdcdbd8dbf489d4d7bd599390105848089",
+        "native_sha256": "c1e9874dea357ce2b119a86d11745df96e34b5a92badfa741925ca3bb0d7068e",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 3
+      },
+      {
+        "key": "corner-0-spring",
+        "shape": "corner",
+        "variant": 0,
+        "season": "spring",
+        "source": "sources/corner-0-spring.png",
+        "native": "native/corner-0-spring.png",
+        "source_sha256": "b7c65c5129de9daf825782e0ad3c54119d25b5e0dcaf5e78f2ab2e1fbfc02d3b",
+        "native_sha256": "2acbc6159c4c62a4f1ce0f02ce204703fcda97ba0cb3efe0393646ed9a7040e9",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 4
+      },
+      {
+        "key": "corner-1-spring",
+        "shape": "corner",
+        "variant": 1,
+        "season": "spring",
+        "source": "sources/corner-1-spring.png",
+        "native": "native/corner-1-spring.png",
+        "source_sha256": "31cbbb960a4acecfd93ea7efdfab511773c64cbb50605027f17fc5af5b6098c8",
+        "native_sha256": "491b8c63ea9224c883ae02aa66406e00d6dc8265304f66b598ca23ea1ea5e9ea",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 5
+      },
+      {
+        "key": "corner-2-spring",
+        "shape": "corner",
+        "variant": 2,
+        "season": "spring",
+        "source": "sources/corner-2-spring.png",
+        "native": "native/corner-2-spring.png",
+        "source_sha256": "ea340d48dc8a921bc1cb597b6b357798e6a5e617177b6088f19b9308cfa5498c",
+        "native_sha256": "360105c38a7cdd17984fb439e170c8ce09318729596413a75358e8688d7b5a39",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "slot": 6
+      },
+      {
+        "key": "corner-3-spring",
+        "shape": "corner",
+        "variant": 3,
+        "season": "spring",
+        "source": "sources/corner-3-spring.png",
+        "native": "native/corner-3-spring.png",
+        "source_sha256": "42d32dcb0c58535be8c1b763a9772d014db28de23aa9c90ee684e1b855ea2c13",
+        "native_sha256": "05c538d7a774c8b6bbc4dae25beef509bce468447582f39206e40a7a81ccfacd",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 7
+      },
+      {
+        "key": "t_connection-0-spring",
+        "shape": "t_connection",
+        "variant": 0,
+        "season": "spring",
+        "source": "sources/t_connection-0-spring.png",
+        "native": "native/t_connection-0-spring.png",
+        "source_sha256": "51b0536f73668fc2504631279acc3591347395b30fca55be624fde2db9864814",
+        "native_sha256": "068d9b8a643f16adf627f9eb7acbdbe96a544a44666c010338eed07dc063f02e",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 8
+      },
+      {
+        "key": "t_connection-1-spring",
+        "shape": "t_connection",
+        "variant": 1,
+        "season": "spring",
+        "source": "sources/t_connection-1-spring.png",
+        "native": "native/t_connection-1-spring.png",
+        "source_sha256": "18873fdcf828cd1dab295ecd0527d1425bb05748376b4cb100a2d2aff1e90e5d",
+        "native_sha256": "d7b165d9c555ddb9622b3a513300aadb04439937df0e75799d72694aacca34a3",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 9
+      },
+      {
+        "key": "t_connection-2-spring",
+        "shape": "t_connection",
+        "variant": 2,
+        "season": "spring",
+        "source": "sources/t_connection-2-spring.png",
+        "native": "native/t_connection-2-spring.png",
+        "source_sha256": "294e201c685eb5204e1b3db9aa5c33ab2204d4b4d47e519ac5571bec60863216",
+        "native_sha256": "21a6f0cb9b6b23eccbb5a0ef39446b2b794017c3a6b5d338d48118c4c5b262f3",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 10
+      },
+      {
+        "key": "t_connection-3-spring",
+        "shape": "t_connection",
+        "variant": 3,
+        "season": "spring",
+        "source": "sources/t_connection-3-spring.png",
+        "native": "native/t_connection-3-spring.png",
+        "source_sha256": "f3924cf4097babce9f0b7f83525ceb2aefa446c7c7d47f8d178490530241df42",
+        "native_sha256": "5de8fdafe703bb0d01d327f145b8680ded43add47404840181fb2ac59691215c",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 11
+      },
+      {
+        "key": "edge-0-spring",
+        "shape": "edge",
+        "variant": 0,
+        "season": "spring",
+        "source": "sources/edge-0-spring.png",
+        "native": "native/edge-0-spring.png",
+        "source_sha256": "2f429dd60a7cc7fc0081f6073e0cff732a4eba835f742295f2965be553c6e692",
+        "native_sha256": "f7688cf995d11ce8bb856fb323ef6bc22c59b0121c7cb2b0c911440675880e42",
+        "reference_bbox": [
+          0,
+          19,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          19,
+          32,
+          64
+        ],
+        "slot": 12
+      },
+      {
+        "key": "edge-1-spring",
+        "shape": "edge",
+        "variant": 1,
+        "season": "spring",
+        "source": "sources/edge-1-spring.png",
+        "native": "native/edge-1-spring.png",
+        "source_sha256": "78c30e0c56606b60210883072b242ef46770559572552e7e51150e758d92c457",
+        "native_sha256": "338f5ee23d38d94c4f64d2cbf36cbcd9eb72baf1806d39bfe08a55731b25cc98",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "slot": 13
+      },
+      {
+        "key": "end_piece-0-spring",
+        "shape": "end_piece",
+        "variant": 0,
+        "season": "spring",
+        "source": "sources/end_piece-0-spring.png",
+        "native": "native/end_piece-0-spring.png",
+        "source_sha256": "b606a98b44b6cb4704a5276a8f15661bab52322664a0a36b92b7389629f448fa",
+        "native_sha256": "0204725d4c2bc5fdadc5253ecf95cbcc6121226483250b85a70d22712f0c8359",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 14
+      },
+      {
+        "key": "end_piece-1-spring",
+        "shape": "end_piece",
+        "variant": 1,
+        "season": "spring",
+        "source": "sources/end_piece-1-spring.png",
+        "native": "native/end_piece-1-spring.png",
+        "source_sha256": "4e3071b11b10dabebacabf6d2a71362bc9e947b3ee565de4f6ce62cc5c34e867",
+        "native_sha256": "b6512754677225257ebcf154de77a362c79879986eed6509b0448086110dbee0",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 15
+      },
+      {
+        "key": "end_piece-2-spring",
+        "shape": "end_piece",
+        "variant": 2,
+        "season": "spring",
+        "source": "sources/end_piece-2-spring.png",
+        "native": "native/end_piece-2-spring.png",
+        "source_sha256": "8dff631488edc822ebc5707d174b3a876eccabd93e2bf420029ae21af1384aac",
+        "native_sha256": "f0f9bac5dfb520c7d358a999a0961cf4edb4431b0dee7692f4230615146b94d2",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 16
+      },
+      {
+        "key": "end_piece-3-spring",
+        "shape": "end_piece",
+        "variant": 3,
+        "season": "spring",
+        "source": "sources/end_piece-3-spring.png",
+        "native": "native/end_piece-3-spring.png",
+        "source_sha256": "46f282f471401babc6fdd1d98a4e2907a81c570161ec2aa3fb09b21b2e2edaf7",
+        "native_sha256": "d33c20c34ca156e31e08300d36af930305d48306a2986296ab6405e5551ebfe1",
+        "reference_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "slot": 17
+      },
+      {
+        "key": "unconnected-0-spring",
+        "shape": "unconnected",
+        "variant": 0,
+        "season": "spring",
+        "source": "sources/unconnected-0-spring.png",
+        "native": "native/unconnected-0-spring.png",
+        "source_sha256": "bd5b65e1b3448b0662819a04ba622359d07a07cdfe92dedc3771aaac6a2ca342",
+        "native_sha256": "15fc31c34814d91b0fcbf3fc1a5842878d73025c595b4da5e33c06d5fd48bd66",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 18
+      },
+      {
+        "key": "unconnected-1-spring",
+        "shape": "unconnected",
+        "variant": 1,
+        "season": "spring",
+        "source": "sources/unconnected-1-spring.png",
+        "native": "native/unconnected-1-spring.png",
+        "source_sha256": "53b4e62139ff89758f86933208ddef3c6f21fc2fc0d7010c01546e6ff75d8b6a",
+        "native_sha256": "8c274625adf1b909ef0c211ca3e790532b09050dda44e4773f65a35c714f76f2",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 19
+      },
+      {
+        "key": "unconnected-2-spring",
+        "shape": "unconnected",
+        "variant": 2,
+        "season": "spring",
+        "source": "sources/unconnected-2-spring.png",
+        "native": "native/unconnected-2-spring.png",
+        "source_sha256": "99184f7e2f180c9d2e9160354e8c41ba5d6aee3c3a468c781099906b66a1e29e",
+        "native_sha256": "7edec59a17b6e26094dcd9463e23c67e52326da651a703c09c5f86cfb582b77e",
+        "reference_bbox": [
+          0,
+          20,
+          31,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          31,
+          64
+        ],
+        "slot": 20
+      },
+      {
+        "key": "unconnected-3-spring",
+        "shape": "unconnected",
+        "variant": 3,
+        "season": "spring",
+        "source": "sources/unconnected-3-spring.png",
+        "native": "native/unconnected-3-spring.png",
+        "source_sha256": "c12436038c508b4920bea4369c8c46cee1baaa9b0f966ceb25ccfa3f8dc46a66",
+        "native_sha256": "43788b5680e2b8f9eb10ea106d432d2560e0fc3ce906d87ea41f29aeda02f1ea",
+        "reference_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "slot": 21
+      },
+      {
+        "key": "center-0-summer",
+        "shape": "center",
+        "variant": 0,
+        "season": "summer",
+        "source": "sources/center-0-summer.png",
+        "native": "native/center-0-summer.png",
+        "source_sha256": "59bfbb9099e2845bb94c65c7f2572854651295a586ea1167f7866853c734749b",
+        "native_sha256": "feb85dc834cd13398d2df58df0746f114574ee48c61e947c8cd550c6cb5c5cf0",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 22
+      },
+      {
+        "key": "center-1-summer",
+        "shape": "center",
+        "variant": 1,
+        "season": "summer",
+        "source": "sources/center-1-summer.png",
+        "native": "native/center-1-summer.png",
+        "source_sha256": "e11fddd1bf5b1a4bb4c781c642e38e6d5615a33e5054957e887321953b4cc35d",
+        "native_sha256": "bdd8b3676cbb92f2355b34bdc52fafafb9eab4351a00330b65267c4d0a860ef5",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 23
+      },
+      {
+        "key": "center-2-summer",
+        "shape": "center",
+        "variant": 2,
+        "season": "summer",
+        "source": "sources/center-2-summer.png",
+        "native": "native/center-2-summer.png",
+        "source_sha256": "ef0568cbd880377fe4d0dbb57d0d6c7aecbd652b5c9968e3002738308ca5d77f",
+        "native_sha256": "b9faa0d4e5d19c77b513bb87eae98395cca29c37f0d7bb0d34ec5a5273ad03c5",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 24
+      },
+      {
+        "key": "center-3-summer",
+        "shape": "center",
+        "variant": 3,
+        "season": "summer",
+        "source": "sources/center-3-summer.png",
+        "native": "native/center-3-summer.png",
+        "source_sha256": "7b5aa59334828aa3673cbbe185e825eb2a386433f3c191fff454eee387561a0d",
+        "native_sha256": "ac99dbaa6d0cf9155ccd8ed7e6428fa0bcee6d52bed4100eaf66b49fc319500a",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 25
+      },
+      {
+        "key": "corner-0-summer",
+        "shape": "corner",
+        "variant": 0,
+        "season": "summer",
+        "source": "sources/corner-0-summer.png",
+        "native": "native/corner-0-summer.png",
+        "source_sha256": "1ac14e077cec05ffdc3897a43b672ab37b22bf584278ffd6492e52a00b59527e",
+        "native_sha256": "9585cdaac282fbc6e7ad42c439a1a7e8d03742bc8d484f5712f4a4c494e69fe3",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 26
+      },
+      {
+        "key": "corner-1-summer",
+        "shape": "corner",
+        "variant": 1,
+        "season": "summer",
+        "source": "sources/corner-1-summer.png",
+        "native": "native/corner-1-summer.png",
+        "source_sha256": "3d03685b6924f67c63414405f8a25aaa18a96f1a5cc43a2a8e4af169296b68ce",
+        "native_sha256": "a11d2699abe16e412d47eb3a1fb241809cf2069e246fa7088dab7d8527583957",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 27
+      },
+      {
+        "key": "corner-2-summer",
+        "shape": "corner",
+        "variant": 2,
+        "season": "summer",
+        "source": "sources/corner-2-summer.png",
+        "native": "native/corner-2-summer.png",
+        "source_sha256": "870e4457052f89b484dc860727d9b59be8a841d9c3b1800158341970abf6f108",
+        "native_sha256": "a66149e4fc0ccbe02b233e1faee93f8d99783a65776d192074f96c7b16269a19",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "slot": 28
+      },
+      {
+        "key": "corner-3-summer",
+        "shape": "corner",
+        "variant": 3,
+        "season": "summer",
+        "source": "sources/corner-3-summer.png",
+        "native": "native/corner-3-summer.png",
+        "source_sha256": "1c088830a49fdd4d4097572e832d7417aecca08c4184dd889be948513eca5600",
+        "native_sha256": "6f61fb402c4752dbf04dd5c773590f75222b73784674cf3dcbd0c1ba04950f65",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 29
+      },
+      {
+        "key": "t_connection-0-summer",
+        "shape": "t_connection",
+        "variant": 0,
+        "season": "summer",
+        "source": "sources/t_connection-0-summer.png",
+        "native": "native/t_connection-0-summer.png",
+        "source_sha256": "9927016df1ae569275b30e3f268efc2a62fa9f2f19808ab6827506355b50c7c4",
+        "native_sha256": "08ee44763608cd35e186ac344b839cf8760bac56f5b8123a487dccaee465924b",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 30
+      },
+      {
+        "key": "t_connection-1-summer",
+        "shape": "t_connection",
+        "variant": 1,
+        "season": "summer",
+        "source": "sources/t_connection-1-summer.png",
+        "native": "native/t_connection-1-summer.png",
+        "source_sha256": "ca625ee584e4333c88904f009cff93d0c4d44d0afebbae03a56a4c7f766fc99e",
+        "native_sha256": "9f2bc366eb9b1386978a5d4eda31d6b5ae26c1e8bbbf1e3faedec548f30d6cdc",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 31
+      },
+      {
+        "key": "t_connection-2-summer",
+        "shape": "t_connection",
+        "variant": 2,
+        "season": "summer",
+        "source": "sources/t_connection-2-summer.png",
+        "native": "native/t_connection-2-summer.png",
+        "source_sha256": "c8bc1b3937c7cc285888868e7ba28e619bbba44758e154dcc39b7a9ed6a92bd6",
+        "native_sha256": "68c371f38a00ffc64bd31f26cadc548d3492f819f75e34cbcf81683504223daa",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 32
+      },
+      {
+        "key": "t_connection-3-summer",
+        "shape": "t_connection",
+        "variant": 3,
+        "season": "summer",
+        "source": "sources/t_connection-3-summer.png",
+        "native": "native/t_connection-3-summer.png",
+        "source_sha256": "dccb8cfeb8c6845ecbbe7d1446b9664749a75288b325de9f845400b68caac701",
+        "native_sha256": "7e0827c42431c4dd68e971ac0cb7a99b7e4d47f96929f3d6dcdb2cbaa7fcbe6e",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 33
+      },
+      {
+        "key": "edge-0-summer",
+        "shape": "edge",
+        "variant": 0,
+        "season": "summer",
+        "source": "sources/edge-0-summer.png",
+        "native": "native/edge-0-summer.png",
+        "source_sha256": "6a389378a5a64de262e4dd7df2afcc698013caa1fbfedfa0e5e07dde80768dd0",
+        "native_sha256": "ee1d3117861a304930809e006239b20661dda6fe505a015fe7acf313ef6b2b6f",
+        "reference_bbox": [
+          0,
+          19,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          19,
+          32,
+          64
+        ],
+        "slot": 34
+      },
+      {
+        "key": "edge-1-summer",
+        "shape": "edge",
+        "variant": 1,
+        "season": "summer",
+        "source": "sources/edge-1-summer.png",
+        "native": "native/edge-1-summer.png",
+        "source_sha256": "1518a453b28d678c3b722f14f484dbe6c44b69cab055283b58cd4456c6fc5913",
+        "native_sha256": "e70a1d5b87f8a90da6970b456259abd50ad22509aa521ee3f14835d111d6577f",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "slot": 35
+      },
+      {
+        "key": "end_piece-0-summer",
+        "shape": "end_piece",
+        "variant": 0,
+        "season": "summer",
+        "source": "sources/end_piece-0-summer.png",
+        "native": "native/end_piece-0-summer.png",
+        "source_sha256": "5dd7261e9eb307409b825dada046ac3e3e1ceb639b6d1098822efae2c799a866",
+        "native_sha256": "69a62ffb6ea7b0b1baacc380d0f95098c3cfb22aaeadb4c9ac49fdaaa77e48c2",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 36
+      },
+      {
+        "key": "end_piece-1-summer",
+        "shape": "end_piece",
+        "variant": 1,
+        "season": "summer",
+        "source": "sources/end_piece-1-summer.png",
+        "native": "native/end_piece-1-summer.png",
+        "source_sha256": "70661bbc9fbccc5caee54500b935779e1345166fd659b7f19e1440b654a64a89",
+        "native_sha256": "6941220a202995adb10ab9dd9f11daa352c215c590e3761a9512326954341648",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 37
+      },
+      {
+        "key": "end_piece-2-summer",
+        "shape": "end_piece",
+        "variant": 2,
+        "season": "summer",
+        "source": "sources/end_piece-2-summer.png",
+        "native": "native/end_piece-2-summer.png",
+        "source_sha256": "fda98d3f402f8532cd01b7efe5dcd9164de37823bf73a0223275975068f64e4b",
+        "native_sha256": "3a4f80c50777372d753b6f2571fc24591e19867e50fc7e7fd88d3d6cbb7e7b64",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 38
+      },
+      {
+        "key": "end_piece-3-summer",
+        "shape": "end_piece",
+        "variant": 3,
+        "season": "summer",
+        "source": "sources/end_piece-3-summer.png",
+        "native": "native/end_piece-3-summer.png",
+        "source_sha256": "2976a37d336390d6d9ccbb889000c08ead74c6314d1294fd6d2c4a2009149e94",
+        "native_sha256": "d2452ec154a4e0a11feacaaf085ad5ab0f9660d47cae6792b2f1bc1eea4380a9",
+        "reference_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "slot": 39
+      },
+      {
+        "key": "unconnected-0-summer",
+        "shape": "unconnected",
+        "variant": 0,
+        "season": "summer",
+        "source": "sources/unconnected-0-summer.png",
+        "native": "native/unconnected-0-summer.png",
+        "source_sha256": "bbb0bb1b05391348f971d5bd3c4bd6d919e5ddee9b9d827d672931cf019c0ce3",
+        "native_sha256": "3b4ce119adeb7cbe0554828e3892964e948a85a5a8d70466e0a1e5b5038811b0",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 40
+      },
+      {
+        "key": "unconnected-1-summer",
+        "shape": "unconnected",
+        "variant": 1,
+        "season": "summer",
+        "source": "sources/unconnected-1-summer.png",
+        "native": "native/unconnected-1-summer.png",
+        "source_sha256": "3804256c9f4f8f3580576dc3eb431e7cec8d7284f2e8dadc8a05376f087bbbe4",
+        "native_sha256": "7d97f68ecb8ad92069aedc64c90905f64d7cb2342ded6b28a352e4b1a1306a35",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 41
+      },
+      {
+        "key": "unconnected-2-summer",
+        "shape": "unconnected",
+        "variant": 2,
+        "season": "summer",
+        "source": "sources/unconnected-2-summer.png",
+        "native": "native/unconnected-2-summer.png",
+        "source_sha256": "2a2ac57176a1d33788c9338d473207e10d20edb0065e222b4fcf640b6e6e7139",
+        "native_sha256": "e5d27d3afb97af0eefd3e6783f24d3552a266dd05c789a45c122363aeca349bf",
+        "reference_bbox": [
+          0,
+          20,
+          31,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          31,
+          64
+        ],
+        "slot": 42
+      },
+      {
+        "key": "unconnected-3-summer",
+        "shape": "unconnected",
+        "variant": 3,
+        "season": "summer",
+        "source": "sources/unconnected-3-summer.png",
+        "native": "native/unconnected-3-summer.png",
+        "source_sha256": "dd4d6299fdf7268586f3bb81bb1458ba81af0982a8bb92c05c6fcd41b3098a1d",
+        "native_sha256": "1b94f0993cf9f73bc4e3a89c451091529bdf0d984a4836f8b72f366d796be585",
+        "reference_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "slot": 43
+      },
+      {
+        "key": "center-0-autumn",
+        "shape": "center",
+        "variant": 0,
+        "season": "autumn",
+        "source": "sources/center-0-autumn.png",
+        "native": "native/center-0-autumn.png",
+        "source_sha256": "30d4cb9d85b21e251d4df907e3351ffff7d487b7bfcb50122c603aaae3353a69",
+        "native_sha256": "89116d02515d4cc56fd9c423fecf6ea556240e3e87d6faeb18adef58118e6b80",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 44
+      },
+      {
+        "key": "center-1-autumn",
+        "shape": "center",
+        "variant": 1,
+        "season": "autumn",
+        "source": "sources/center-1-autumn.png",
+        "native": "native/center-1-autumn.png",
+        "source_sha256": "87cc98e05c4e327d5e4510127999a28ff0ec0370e77cf96218789bf9b11b60cd",
+        "native_sha256": "741adfaf4bcae571faab414b01af8352edd29683f02041eec7d908f8ba7ed833",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 45
+      },
+      {
+        "key": "center-2-autumn",
+        "shape": "center",
+        "variant": 2,
+        "season": "autumn",
+        "source": "sources/center-2-autumn.png",
+        "native": "native/center-2-autumn.png",
+        "source_sha256": "776caad2a7dedc1c59a22036ab7d780c3ae9d23845e80016bb0a6bb615a19a52",
+        "native_sha256": "d699fca62d7a830465a0125b2375f3af1c020516a0052d306914f05c27fa9821",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 46
+      },
+      {
+        "key": "center-3-autumn",
+        "shape": "center",
+        "variant": 3,
+        "season": "autumn",
+        "source": "sources/center-3-autumn.png",
+        "native": "native/center-3-autumn.png",
+        "source_sha256": "254673c853a5a231a77ef405c3c34e5227f6011d4f5617e321cd6f457a61bc86",
+        "native_sha256": "96c36c329b44cefb95bd2324b085c178e57e85a0c41ce919e8faa793f8c5bcb0",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 47
+      },
+      {
+        "key": "corner-0-autumn",
+        "shape": "corner",
+        "variant": 0,
+        "season": "autumn",
+        "source": "sources/corner-0-autumn.png",
+        "native": "native/corner-0-autumn.png",
+        "source_sha256": "7682a70752d38f5371c76fdc02f6bcab04f64d1a4caaab2d983399cad921df0c",
+        "native_sha256": "ffeafc4975285cdbfc2eeb8433814f5e030125c5d0dc35ee91ba881f9e491869",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 48
+      },
+      {
+        "key": "corner-1-autumn",
+        "shape": "corner",
+        "variant": 1,
+        "season": "autumn",
+        "source": "sources/corner-1-autumn.png",
+        "native": "native/corner-1-autumn.png",
+        "source_sha256": "49c103c229e040e4413438b757eaa2d78431cc0f6c765e452dfb4a1ca1520c93",
+        "native_sha256": "cfefeae778b32973d0603f8be6917cdac01d4a77a862545d358dd9de40a741cc",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 49
+      },
+      {
+        "key": "corner-2-autumn",
+        "shape": "corner",
+        "variant": 2,
+        "season": "autumn",
+        "source": "sources/corner-2-autumn.png",
+        "native": "native/corner-2-autumn.png",
+        "source_sha256": "06db6d47cdc5ef478bfc1b228597b175419b99960aeb24e3a9342f4a9b6df7f4",
+        "native_sha256": "84ef47e5f4cc9dfaa1477981e7bc43584fcc9872e292184aacaba62beda78caa",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "slot": 50
+      },
+      {
+        "key": "corner-3-autumn",
+        "shape": "corner",
+        "variant": 3,
+        "season": "autumn",
+        "source": "sources/corner-3-autumn.png",
+        "native": "native/corner-3-autumn.png",
+        "source_sha256": "1c5a7a2d893b472dfd6637d0f482710ad3bba58c2a343c7ff8e62fda32f098e5",
+        "native_sha256": "a46fe620d590874d5569e06e9396b0f95548fcfcd019ff5a2c19721c8293e064",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 51
+      },
+      {
+        "key": "t_connection-0-autumn",
+        "shape": "t_connection",
+        "variant": 0,
+        "season": "autumn",
+        "source": "sources/t_connection-0-autumn.png",
+        "native": "native/t_connection-0-autumn.png",
+        "source_sha256": "fffd27ef45c725f3c28253e54f013f19b4e1ca788e81ff174a7b83d266c91b52",
+        "native_sha256": "307d5d9030dde544e11f66d88fda5ebe449598ef55084e41a81b2d8939e9e438",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 52
+      },
+      {
+        "key": "t_connection-1-autumn",
+        "shape": "t_connection",
+        "variant": 1,
+        "season": "autumn",
+        "source": "sources/t_connection-1-autumn.png",
+        "native": "native/t_connection-1-autumn.png",
+        "source_sha256": "f4e969544eed9ba90b9d5268c36122ec5591c7fec3d9416fcb7654fe244f1ce9",
+        "native_sha256": "5bf261423334f86d4d88cf37f2d1e6bcf65280b7b71bd778c4c51c7406fe07e6",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 53
+      },
+      {
+        "key": "t_connection-2-autumn",
+        "shape": "t_connection",
+        "variant": 2,
+        "season": "autumn",
+        "source": "sources/t_connection-2-autumn.png",
+        "native": "native/t_connection-2-autumn.png",
+        "source_sha256": "03a7371a247446b4fb993330bd5a31d1e8d7eb89092984cab872ed4c1a75c7b5",
+        "native_sha256": "8ab2294a6d9ae343b35d615eb75e25bab0f3527a618314974fcf205494ba2b2b",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 54
+      },
+      {
+        "key": "t_connection-3-autumn",
+        "shape": "t_connection",
+        "variant": 3,
+        "season": "autumn",
+        "source": "sources/t_connection-3-autumn.png",
+        "native": "native/t_connection-3-autumn.png",
+        "source_sha256": "934385c260124dc996543f6cb51b68b9545f955e20e0f60e044567132828e4ba",
+        "native_sha256": "87aa4170245c5bd47926cbfdb1e8d80f0e2e5d3d30a963af8f7f2453e2a7d190",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 55
+      },
+      {
+        "key": "edge-0-autumn",
+        "shape": "edge",
+        "variant": 0,
+        "season": "autumn",
+        "source": "sources/edge-0-autumn.png",
+        "native": "native/edge-0-autumn.png",
+        "source_sha256": "c33ace2c1de9db131affdecb0b4c049eacaf85ab3fca54bb07644d29d65f9082",
+        "native_sha256": "b0f9ca8f01c0a8dcbde75722be3af269e7c04d4e92186a6ba4f5d497d935bed5",
+        "reference_bbox": [
+          0,
+          19,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          19,
+          32,
+          64
+        ],
+        "slot": 56
+      },
+      {
+        "key": "edge-1-autumn",
+        "shape": "edge",
+        "variant": 1,
+        "season": "autumn",
+        "source": "sources/edge-1-autumn.png",
+        "native": "native/edge-1-autumn.png",
+        "source_sha256": "2497b1ec0683de2219a7325cd4b38655114b9dea0b83628053b7878d76c77d04",
+        "native_sha256": "16b8beab14b4603b01692854d4d97ba1ddb55fe06ea796bfdbae17af271945c1",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "slot": 57
+      },
+      {
+        "key": "end_piece-0-autumn",
+        "shape": "end_piece",
+        "variant": 0,
+        "season": "autumn",
+        "source": "sources/end_piece-0-autumn.png",
+        "native": "native/end_piece-0-autumn.png",
+        "source_sha256": "6922964cae5b817d71314a7de01cd43e27338cf1527045ff5a906376414a03c8",
+        "native_sha256": "2b5a7a2b8bff84c181de010196f4a86b46351f300db1fa7c2b6d23a0aa3566a5",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 58
+      },
+      {
+        "key": "end_piece-1-autumn",
+        "shape": "end_piece",
+        "variant": 1,
+        "season": "autumn",
+        "source": "sources/end_piece-1-autumn.png",
+        "native": "native/end_piece-1-autumn.png",
+        "source_sha256": "233637495fca4ce8e4912256f5747c3de50f65d747efd6fb843be654c30946c4",
+        "native_sha256": "fd19b11a5d289362fc972f1dfbc1b4bfba6c7908a81b248db5d8fc966c55ced5",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 59
+      },
+      {
+        "key": "end_piece-2-autumn",
+        "shape": "end_piece",
+        "variant": 2,
+        "season": "autumn",
+        "source": "sources/end_piece-2-autumn.png",
+        "native": "native/end_piece-2-autumn.png",
+        "source_sha256": "e6ffb805553ded295fa229cdf49db3b72424209f1e3b2e9a84e1580e32a0cd55",
+        "native_sha256": "8bfda7e371a0339871d20c0c63d3380264d5d9b954a25e29445260bf85d01002",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 60
+      },
+      {
+        "key": "end_piece-3-autumn",
+        "shape": "end_piece",
+        "variant": 3,
+        "season": "autumn",
+        "source": "sources/end_piece-3-autumn.png",
+        "native": "native/end_piece-3-autumn.png",
+        "source_sha256": "7b606296cf06e2beadded7f2902d41a089b4ccb608da15e116eefbd67c0d928b",
+        "native_sha256": "b637b8f741e2aa719fb2cf5619b278267c5105bce75d4c87ef48c3e272753d10",
+        "reference_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "slot": 61
+      },
+      {
+        "key": "unconnected-0-autumn",
+        "shape": "unconnected",
+        "variant": 0,
+        "season": "autumn",
+        "source": "sources/unconnected-0-autumn.png",
+        "native": "native/unconnected-0-autumn.png",
+        "source_sha256": "b05c2f3c98b114cb0ae9ca251cf6ab3fe76e000551e506c1d588d4318f1574da",
+        "native_sha256": "4e8a6699cb26ad291737a3266b83995a16eda8f790f1dd714dc0dd11b2934e90",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 62
+      },
+      {
+        "key": "unconnected-1-autumn",
+        "shape": "unconnected",
+        "variant": 1,
+        "season": "autumn",
+        "source": "sources/unconnected-1-autumn.png",
+        "native": "native/unconnected-1-autumn.png",
+        "source_sha256": "b888ca32b51cd87b9cd892c5d5662d6255e8fe278bc9ec8e58414556b3163d39",
+        "native_sha256": "4713ba9696cfae60cfebc3d9c4ee1b368e70a52054ed86226fbb5b262ef6e8e0",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 63
+      },
+      {
+        "key": "unconnected-2-autumn",
+        "shape": "unconnected",
+        "variant": 2,
+        "season": "autumn",
+        "source": "sources/unconnected-2-autumn.png",
+        "native": "native/unconnected-2-autumn.png",
+        "source_sha256": "f0079ed2a2fc27db4b28cf2493d5845a6eb52d5fc905671ba8d64ecccea35c7c",
+        "native_sha256": "319e78de1309825ca9963eb6da7b4a7f75b03dbfc5a88df7c7b4475baf80cb95",
+        "reference_bbox": [
+          0,
+          20,
+          31,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          31,
+          64
+        ],
+        "slot": 64
+      },
+      {
+        "key": "unconnected-3-autumn",
+        "shape": "unconnected",
+        "variant": 3,
+        "season": "autumn",
+        "source": "sources/unconnected-3-autumn.png",
+        "native": "native/unconnected-3-autumn.png",
+        "source_sha256": "05e4bc3988221c1127fe05286d46cca7e4b32d3ddd97898a702eedac9fcb2bf5",
+        "native_sha256": "f3ed5a2f97f210bad1d26c868ba093439b1a05c82d1333b351b837a493aab39b",
+        "reference_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "slot": 65
+      },
+      {
+        "key": "center-0-winter",
+        "shape": "center",
+        "variant": 0,
+        "season": "winter",
+        "source": "sources/center-0-winter.png",
+        "native": "native/center-0-winter.png",
+        "source_sha256": "9762c51977c3ea306a5c41fe67fc557863691dd299f25f537292986dbdd24a27",
+        "native_sha256": "cda0ff2044e4d9690e9ed37cc2db8e75d6abd2f83631652dac3a90e7ee8ab8a4",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 66
+      },
+      {
+        "key": "center-1-winter",
+        "shape": "center",
+        "variant": 1,
+        "season": "winter",
+        "source": "sources/center-1-winter.png",
+        "native": "native/center-1-winter.png",
+        "source_sha256": "90e4375b76258b166ab4ac9067e4af8456e84d9dc480a8716a86a01e79a56bc5",
+        "native_sha256": "e99cfc542d69bae24974e68ff2a90c030bdfbb771a5a7d238f9eef0471ed63a8",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 67
+      },
+      {
+        "key": "center-2-winter",
+        "shape": "center",
+        "variant": 2,
+        "season": "winter",
+        "source": "sources/center-2-winter.png",
+        "native": "native/center-2-winter.png",
+        "source_sha256": "30749fd3e3401c71327eadb090841441bfaf48e2cd353d49f254caef9aca81a1",
+        "native_sha256": "fa06a7e82a0e907bfc2cc6ebf16e9ae8183f254ceb0f52dee6d56b3e7660a60a",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 68
+      },
+      {
+        "key": "center-3-winter",
+        "shape": "center",
+        "variant": 3,
+        "season": "winter",
+        "source": "sources/center-3-winter.png",
+        "native": "native/center-3-winter.png",
+        "source_sha256": "90fc8bba9a0308d16790d4723f58e73b8a2a0d1bde79a19c4c8b1daed19e68b7",
+        "native_sha256": "4847c13a02e6e350c35037c018a063cb9f494f8c434b5c936af789cf6cf9c809",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 69
+      },
+      {
+        "key": "corner-0-winter",
+        "shape": "corner",
+        "variant": 0,
+        "season": "winter",
+        "source": "sources/corner-0-winter.png",
+        "native": "native/corner-0-winter.png",
+        "source_sha256": "2cd2b1f30a3ece5029789bbdfb94a6af24d5be964a15940f960f1560dbbc17e2",
+        "native_sha256": "8257283ad24c668b9990e9ad0913dcd757b83649b4fa9411317796e3bf788672",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 70
+      },
+      {
+        "key": "corner-1-winter",
+        "shape": "corner",
+        "variant": 1,
+        "season": "winter",
+        "source": "sources/corner-1-winter.png",
+        "native": "native/corner-1-winter.png",
+        "source_sha256": "993bf850ddd665158bc5cfc2e3a8961bd0f3df8440e5ad8ead5bae25a83d3333",
+        "native_sha256": "58635720c10c92d3a6af434596467983636cd5d5c60bb3554af03fef8e205af3",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 71
+      },
+      {
+        "key": "corner-2-winter",
+        "shape": "corner",
+        "variant": 2,
+        "season": "winter",
+        "source": "sources/corner-2-winter.png",
+        "native": "native/corner-2-winter.png",
+        "source_sha256": "6cb317fb7a8d2974b50a1260007eb906d393348a201e8fc22af96f152e977794",
+        "native_sha256": "07808f5e9d7c578e30e13b8c8c0edbdfe01c3d69fe87f840f9e4d707b6926952",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "slot": 72
+      },
+      {
+        "key": "corner-3-winter",
+        "shape": "corner",
+        "variant": 3,
+        "season": "winter",
+        "source": "sources/corner-3-winter.png",
+        "native": "native/corner-3-winter.png",
+        "source_sha256": "88a70356296d696b9abb6d76270005506986291a9afa721fd60e01554112fcb7",
+        "native_sha256": "c921548051b0b5b63efb071e53c4756e0374389c218758e1e2cd9597bc999479",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 73
+      },
+      {
+        "key": "t_connection-0-winter",
+        "shape": "t_connection",
+        "variant": 0,
+        "season": "winter",
+        "source": "sources/t_connection-0-winter.png",
+        "native": "native/t_connection-0-winter.png",
+        "source_sha256": "d2bca509c437da09ec0a9a95529e83835ff4f82b0fb3e62574afdc4a66f2373d",
+        "native_sha256": "99f9ae71e1517f77c346c0daba9313eebfa58989cf337b4bc0269d57da6baf12",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 74
+      },
+      {
+        "key": "t_connection-1-winter",
+        "shape": "t_connection",
+        "variant": 1,
+        "season": "winter",
+        "source": "sources/t_connection-1-winter.png",
+        "native": "native/t_connection-1-winter.png",
+        "source_sha256": "198bcf4b858846d47745ffa517b07e9d5041b4d033975f83b8b8f109a130dd59",
+        "native_sha256": "834ed581a03a8a5899fd25003a3a45c65bcf53f0d094919478c53f5d67564af6",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 75
+      },
+      {
+        "key": "t_connection-2-winter",
+        "shape": "t_connection",
+        "variant": 2,
+        "season": "winter",
+        "source": "sources/t_connection-2-winter.png",
+        "native": "native/t_connection-2-winter.png",
+        "source_sha256": "e2395335c4bc7439b124042b174ad154b129ec1cd271f72971aedc066fde9386",
+        "native_sha256": "245c64df8e4cb9f64e01e3ac54187930adf0ffe327a232e2136a92595367b619",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 76
+      },
+      {
+        "key": "t_connection-3-winter",
+        "shape": "t_connection",
+        "variant": 3,
+        "season": "winter",
+        "source": "sources/t_connection-3-winter.png",
+        "native": "native/t_connection-3-winter.png",
+        "source_sha256": "7b6cf1116311d0c8bb6792bd7b5a03bc08d7a6165ff987598ee4c954da8556e6",
+        "native_sha256": "751d167a26f6ca3c4b8dcd5a9afdd5ae5d11abccc3d7c192897e768a4b735c47",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 77
+      },
+      {
+        "key": "edge-0-winter",
+        "shape": "edge",
+        "variant": 0,
+        "season": "winter",
+        "source": "sources/edge-0-winter.png",
+        "native": "native/edge-0-winter.png",
+        "source_sha256": "4d45ba03fe0e5da26154fa6df4b5068ed473ad78dd17ac29b5c15032c056c49b",
+        "native_sha256": "5e1e0165d52e1931046128fbeed2259ca3d15268680d28744412e67b437fb4b2",
+        "reference_bbox": [
+          0,
+          19,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          19,
+          32,
+          64
+        ],
+        "slot": 78
+      },
+      {
+        "key": "edge-1-winter",
+        "shape": "edge",
+        "variant": 1,
+        "season": "winter",
+        "source": "sources/edge-1-winter.png",
+        "native": "native/edge-1-winter.png",
+        "source_sha256": "2093f9dc997eb21417998e2bdeb8be722a8890c32f1ebdd9f9917929302c95bf",
+        "native_sha256": "e8ac80e4d6bc768bf6e9cb0137d9e96af6be03e037dcd3e85cab25cdec23686b",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          63
+        ],
+        "slot": 79
+      },
+      {
+        "key": "end_piece-0-winter",
+        "shape": "end_piece",
+        "variant": 0,
+        "season": "winter",
+        "source": "sources/end_piece-0-winter.png",
+        "native": "native/end_piece-0-winter.png",
+        "source_sha256": "ef4d384520d4a7c3c456546cae9366e353073c2739b99d546b27bafc057f9ade",
+        "native_sha256": "e1c2b071c6af082c4281af1603bd0d34fccf78edcd8087760f267a38d599efd1",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 80
+      },
+      {
+        "key": "end_piece-1-winter",
+        "shape": "end_piece",
+        "variant": 1,
+        "season": "winter",
+        "source": "sources/end_piece-1-winter.png",
+        "native": "native/end_piece-1-winter.png",
+        "source_sha256": "76ecf6db4dcfe466e8034176b47ed62f2bc58c936a2e425e1b61bff5fe1f3aea",
+        "native_sha256": "d64fcb9c51d62fb51a61d2c87149682b90a56cc4c3821f824bf838924aedc978",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 81
+      },
+      {
+        "key": "end_piece-2-winter",
+        "shape": "end_piece",
+        "variant": 2,
+        "season": "winter",
+        "source": "sources/end_piece-2-winter.png",
+        "native": "native/end_piece-2-winter.png",
+        "source_sha256": "81aa0cc068e0ac714a3155150bd9f5dd1a31e4d2343a186175ee6ac142418fad",
+        "native_sha256": "dcd71518e2c4d29ff56b81ee77c18d669b031c8261b6c51a55938ab93781b421",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 82
+      },
+      {
+        "key": "end_piece-3-winter",
+        "shape": "end_piece",
+        "variant": 3,
+        "season": "winter",
+        "source": "sources/end_piece-3-winter.png",
+        "native": "native/end_piece-3-winter.png",
+        "source_sha256": "cce6ca59cf23150cf5cb44b188980e5356bef00e7c5c7012880d8052ca51e04b",
+        "native_sha256": "a9314db2b8d4bc42b01136da169b9d19822ed5d5f6b81a0fb6a943d029a8b91c",
+        "reference_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "slot": 83
+      },
+      {
+        "key": "unconnected-0-winter",
+        "shape": "unconnected",
+        "variant": 0,
+        "season": "winter",
+        "source": "sources/unconnected-0-winter.png",
+        "native": "native/unconnected-0-winter.png",
+        "source_sha256": "c76391054ea91597cd19de432db1ce9651332e351f7bcdcc45c571d3d7830d1e",
+        "native_sha256": "6b77cdfeac55067ed786fe93e837335d5a26fb1336a7ee8237fce426b7ff37da",
+        "reference_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          21,
+          32,
+          64
+        ],
+        "slot": 84
+      },
+      {
+        "key": "unconnected-1-winter",
+        "shape": "unconnected",
+        "variant": 1,
+        "season": "winter",
+        "source": "sources/unconnected-1-winter.png",
+        "native": "native/unconnected-1-winter.png",
+        "source_sha256": "0ecaf4754e56260643a3681bc9a1d802fcd64c7953e81897db0e24b0127df2e4",
+        "native_sha256": "68d6166da372fba47493ff3c082a5934496b20fbd4becd10fbb568b8e320eade",
+        "reference_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          32,
+          64
+        ],
+        "slot": 85
+      },
+      {
+        "key": "unconnected-2-winter",
+        "shape": "unconnected",
+        "variant": 2,
+        "season": "winter",
+        "source": "sources/unconnected-2-winter.png",
+        "native": "native/unconnected-2-winter.png",
+        "source_sha256": "1e7f1b4c5f065a74381bc2c7e407a0e98a9bfd06f283920bd239a560f38ead79",
+        "native_sha256": "61099a5282640b7a4cfa3395a84c05c9c3a2b11e4618a6194ca689d80e7a816d",
+        "reference_bbox": [
+          0,
+          20,
+          31,
+          64
+        ],
+        "native_bbox": [
+          0,
+          20,
+          31,
+          64
+        ],
+        "slot": 86
+      },
+      {
+        "key": "unconnected-3-winter",
+        "shape": "unconnected",
+        "variant": 3,
+        "season": "winter",
+        "source": "sources/unconnected-3-winter.png",
+        "native": "native/unconnected-3-winter.png",
+        "source_sha256": "8ec27e49ed82f0d09423cb8b9fb89939ed9bbdc14bef94f8e1d412732303158a",
+        "native_sha256": "4e39c105d49bea9809a53cf50c8db94073966085d4a54d8780fa1b568c8954b7",
+        "reference_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "native_bbox": [
+          0,
+          22,
+          32,
+          64
+        ],
+        "slot": 87
+      }
+    ]
+  },
+  "peanut_revision": {
+    "assets": [
+      {
+        "family": "peanut",
+        "id": "t_shrub_peanut",
+        "season": "spring",
+        "source": "sources/peanut-spring.png",
+        "native": "native/peanut-spring.png",
+        "source_sha256": "52974a3413fb7863fba3d83783a1133a1ce25aadd587d4f61f439b1fd56b8723",
+        "native_sha256": "b76783476072ba1b94ab878193b2dfbd07af8013c722f6ccc9e5808c66633273",
+        "native_dimensions": [
+          32,
+          32
+        ],
+        "family_union_crop": [
+          132,
+          162,
+          1358,
+          979
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "source-art only; harvested states and exposure need separate handling"
+      },
+      {
+        "family": "peanut",
+        "id": "t_shrub_peanut",
+        "season": "summer",
+        "source": "sources/peanut-summer.png",
+        "native": "native/peanut-summer.png",
+        "source_sha256": "ae6c668807d6912b6f376ad277647ce9f7d097b89f3bd53b871137568fa78666",
+        "native_sha256": "8d657a548696108f0ba8a0a9140fe0f1a1e19a8ecf240415cba0f960d7846a77",
+        "native_dimensions": [
+          32,
+          32
+        ],
+        "family_union_crop": [
+          132,
+          162,
+          1358,
+          979
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "source-art only; harvested states and exposure need separate handling"
+      },
+      {
+        "family": "peanut",
+        "id": "t_shrub_peanut",
+        "season": "autumn",
+        "source": "sources/peanut-autumn.png",
+        "native": "native/peanut-autumn.png",
+        "source_sha256": "c45a5160ce5143fe6bfa05efc86533d0d60b2a04a5da71d7642a9e136a658cd5",
+        "native_sha256": "8b23b2e5555a5341cafc9284d47d951f85f0a32395af1ac7ffd80b3af8de2430",
+        "native_dimensions": [
+          32,
+          32
+        ],
+        "family_union_crop": [
+          132,
+          162,
+          1358,
+          979
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "source-art only; harvested states and exposure need separate handling"
+      },
+      {
+        "family": "peanut",
+        "id": "t_shrub_peanut",
+        "season": "winter",
+        "source": "sources/peanut-winter.png",
+        "native": "native/peanut-winter.png",
+        "source_sha256": "6b257724729c8980ef6a2d893a0a24a905bf52b3a286fee2a6c38d73ec6bcb1c",
+        "native_sha256": "22e1c8e69873566db6ff2e5175e67b36472b86c97441d032c10f027c36eafb32",
+        "native_dimensions": [
+          32,
+          32
+        ],
+        "family_union_crop": [
+          132,
+          162,
+          1358,
+          979
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "source-art only; harvested states and exposure need separate handling"
+      },
+      {
+        "family": "peanut-harvested",
+        "id": "t_shrub_peanut_harvested",
+        "season": "spring",
+        "source": "sources/peanut-harvested-spring.png",
+        "native": "native/peanut-harvested-spring.png",
+        "source_sha256": "8d0744eae46c1177d10345ef351bbb257a5b51a26dbbb4c84ea3ef746bce1238",
+        "native_sha256": "1227165832d5c4a6051124013e514a37642db807726d5caa188e2bfb8c3233b4",
+        "native_dimensions": [
+          32,
+          32
+        ],
+        "family_union_crop": [
+          144,
+          156,
+          1359,
+          980
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "source-art only; harvested states and exposure need separate handling"
+      },
+      {
+        "family": "peanut-harvested",
+        "id": "t_shrub_peanut_harvested",
+        "season": "summer",
+        "source": "sources/peanut-harvested-summer.png",
+        "native": "native/peanut-harvested-summer.png",
+        "source_sha256": "1ea6bd37c8d2729a2a2f1acbf2bf1b6e4f4a36e052926e8efd976c8077d12a75",
+        "native_sha256": "49236d67e8c37fb8a5eed7d89e735b869de72ce4dff3ac7bc31ced8e246d0584",
+        "native_dimensions": [
+          32,
+          32
+        ],
+        "family_union_crop": [
+          144,
+          156,
+          1359,
+          980
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "source-art only; harvested states and exposure need separate handling"
+      },
+      {
+        "family": "peanut-harvested",
+        "id": "t_shrub_peanut_harvested",
+        "season": "autumn",
+        "source": "sources/peanut-harvested-autumn.png",
+        "native": "native/peanut-harvested-autumn.png",
+        "source_sha256": "8396aeea3fd2d1acd9963d190f9bc20ba4f6fe3adebb96fbd4cb85bcb5f31b03",
+        "native_sha256": "b1c1482b0ebaa9a41441ebf9930beb5c7ad3a6742e063e711c2a39f78836762d",
+        "native_dimensions": [
+          32,
+          32
+        ],
+        "family_union_crop": [
+          144,
+          156,
+          1359,
+          980
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "source-art only; harvested states and exposure need separate handling"
+      },
+      {
+        "family": "peanut-harvested",
+        "id": "t_shrub_peanut_harvested",
+        "season": "winter",
+        "source": "sources/peanut-harvested-winter.png",
+        "native": "native/peanut-harvested-winter.png",
+        "source_sha256": "d33b670b6f399f1d878a80df7ab0874906a498faf94b1827228a886bbe6e535d",
+        "native_sha256": "1a8e847e7b2948020e259b3e7398fbe47afe7fd2d6161c105f43a9ce12d2bc1c",
+        "native_dimensions": [
+          32,
+          32
+        ],
+        "family_union_crop": [
+          144,
+          156,
+          1359,
+          980
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "source-art only; harvested states and exposure need separate handling"
+      }
+    ],
+    "validation": {
+      "status": "passed",
+      "version": "0.1.3",
+      "peanut_sources": 8,
+      "states": [
+        "normal",
+        "harvested"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "native_size": [
+        32,
+        32
+      ],
+      "distinct_native_sprites": 8,
+      "all_season_state_mappings": true,
+      "preserved_original_ids": 12209,
+      "all_other_mappings_and_atlases_unchanged": true,
+      "grass_88_variants_preserved": true,
+      "shoreline_fix_preserved": true,
+      "sprite_references_checked": 24543,
+      "total_sprite_slots": 18936,
+      "client_modified": false,
+      "visual_gameplay_acceptance": "pending"
+    }
+  },
+  "autumn_olive_revision": {
+    "assets": [
+      {
+        "family": "autumn-olive",
+        "id": "t_shrub_autumn_olive",
+        "season": "spring",
+        "source": "sources/autumn-olive-spring.png",
+        "native": "native/autumn-olive-spring.png",
+        "source_sha256": "752b4e4385c28eea4bca2b7f4419b87d084c73b8e3af3d35fc75f12ec24c782b",
+        "native_sha256": "32089d10134f503dbc2aabd816308b6af61fbdaa013b3f2792fc8d177986eb41",
+        "native_dimensions": [
+          256,
+          256
+        ],
+        "family_union_crop": [
+          113,
+          234,
+          1167,
+          1154
+        ],
+        "pixelscale": 0.125,
+        "display_dimensions": [
+          32.0,
+          32.0
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "packaged in Astral; gameplay review pending"
+      },
+      {
+        "family": "autumn-olive",
+        "id": "t_shrub_autumn_olive",
+        "season": "summer",
+        "source": "sources/autumn-olive-summer.png",
+        "native": "native/autumn-olive-summer.png",
+        "source_sha256": "95164045e965f7867fb7c57b5639f059ecd0ed234cc08c4df52ef1f9a6feb73d",
+        "native_sha256": "e2e31c43f215a06c6bbacb3549c6df945a705915b603ca758f894c553c0cb00b",
+        "native_dimensions": [
+          256,
+          256
+        ],
+        "family_union_crop": [
+          113,
+          234,
+          1167,
+          1154
+        ],
+        "pixelscale": 0.125,
+        "display_dimensions": [
+          32.0,
+          32.0
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "packaged in Astral; gameplay review pending"
+      },
+      {
+        "family": "autumn-olive",
+        "id": "t_shrub_autumn_olive",
+        "season": "autumn",
+        "source": "sources/autumn-olive-autumn.png",
+        "native": "native/autumn-olive-autumn.png",
+        "source_sha256": "f1cde7f094617e18c35d27ec0cf405398ab535ac821abcb1e80dc315adf3e8e3",
+        "native_sha256": "bd20e7b263e4ef777cfb358540f7a41e2e667467f3718d543bf612d72182e73e",
+        "native_dimensions": [
+          256,
+          256
+        ],
+        "family_union_crop": [
+          113,
+          234,
+          1167,
+          1154
+        ],
+        "pixelscale": 0.125,
+        "display_dimensions": [
+          32.0,
+          32.0
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "packaged in Astral; gameplay review pending"
+      },
+      {
+        "family": "autumn-olive",
+        "id": "t_shrub_autumn_olive",
+        "season": "winter",
+        "source": "sources/autumn-olive-winter.png",
+        "native": "native/autumn-olive-winter.png",
+        "source_sha256": "1394615d5ef644cd794295fa1677f9d3a4076eed8084f9275983696c2d57de53",
+        "native_sha256": "9a8e4ff996b7e6bc6972028d138317b12d2c813e38d7c77ba54840378bddbc1d",
+        "native_dimensions": [
+          256,
+          256
+        ],
+        "family_union_crop": [
+          113,
+          234,
+          1167,
+          1154
+        ],
+        "pixelscale": 0.125,
+        "display_dimensions": [
+          32.0,
+          32.0
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "packaged in Astral; gameplay review pending"
+      },
+      {
+        "family": "autumn-olive-harvested",
+        "id": "t_shrub_autumn_olive_harvested",
+        "season": "spring",
+        "source": "sources/autumn-olive-harvested-spring.png",
+        "native": "native/autumn-olive-harvested-spring.png",
+        "source_sha256": "735a118b6658abc34106a903350437eaac272ceca83bf3a2914c2cf8f4739b83",
+        "native_sha256": "d2150468bd662092ce377a04ef5dc5c7886fa19bb2164cd9b84b90fb72448aef",
+        "native_dimensions": [
+          256,
+          256
+        ],
+        "family_union_crop": [
+          113,
+          234,
+          1167,
+          1154
+        ],
+        "pixelscale": 0.125,
+        "display_dimensions": [
+          32.0,
+          32.0
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "packaged in Astral; gameplay review pending"
+      },
+      {
+        "family": "autumn-olive-harvested",
+        "id": "t_shrub_autumn_olive_harvested",
+        "season": "summer",
+        "source": "sources/autumn-olive-harvested-summer.png",
+        "native": "native/autumn-olive-harvested-summer.png",
+        "source_sha256": "f5f3c97b46dea119bbef5ab3ba5667cd7b1dfd69b17bf642a622b413c9778ce3",
+        "native_sha256": "453a9eb7516b129a0ffdd071433b867ed9b688471a24de8a5920b9d474e47e3f",
+        "native_dimensions": [
+          256,
+          256
+        ],
+        "family_union_crop": [
+          113,
+          234,
+          1167,
+          1154
+        ],
+        "pixelscale": 0.125,
+        "display_dimensions": [
+          32.0,
+          32.0
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "packaged in Astral; gameplay review pending"
+      },
+      {
+        "family": "autumn-olive-harvested",
+        "id": "t_shrub_autumn_olive_harvested",
+        "season": "autumn",
+        "source": "sources/autumn-olive-harvested-autumn.png",
+        "native": "native/autumn-olive-harvested-autumn.png",
+        "source_sha256": "9da9df89422a483a725635b83fa5b8b8c6b00b8ea19acf8a98046e9ebf809f69",
+        "native_sha256": "9a70c3a453c93a0072d09070b80d2be0e05f743794917f4e474ee1c08091c170",
+        "native_dimensions": [
+          256,
+          256
+        ],
+        "family_union_crop": [
+          113,
+          234,
+          1167,
+          1154
+        ],
+        "pixelscale": 0.125,
+        "display_dimensions": [
+          32.0,
+          32.0
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "packaged in Astral; gameplay review pending"
+      },
+      {
+        "family": "autumn-olive-harvested",
+        "id": "t_shrub_autumn_olive_harvested",
+        "season": "winter",
+        "source": "sources/autumn-olive-harvested-winter.png",
+        "native": "native/autumn-olive-harvested-winter.png",
+        "source_sha256": "cead979040be3bb1fd1506f19a52663de128488b78f58a44e289d3572f0647ce",
+        "native_sha256": "63a75a92c1b09d3fe81380e50d0faa5b6e75455a42517a50070d0aea52066f46",
+        "native_dimensions": [
+          256,
+          256
+        ],
+        "family_union_crop": [
+          113,
+          234,
+          1167,
+          1154
+        ],
+        "pixelscale": 0.125,
+        "display_dimensions": [
+          32.0,
+          32.0
+        ],
+        "proposed_offset": [
+          0,
+          0
+        ],
+        "mapping_status": "packaged in Astral; gameplay review pending"
+      }
+    ],
+    "validation": {
+      "status": "passed",
+      "version": "0.1.5",
+      "autumn_olive_sources": 8,
+      "states": [
+        "normal",
+        "harvested"
+      ],
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "texture_size": [
+        256,
+        256
+      ],
+      "map_footprint": [
+        32,
+        32
+      ],
+      "pixelscale": 0.125,
+      "ground_alignment_checks": 16,
+      "all_states_share_crop": true,
+      "distinct_native_sprites": 8,
+      "all_season_state_mappings": true,
+      "preserved_original_ids": 12224,
+      "all_other_mappings_and_atlases_unchanged": true,
+      "grass_88_variants_preserved": true,
+      "shoreline_fix_preserved": true,
+      "sprite_references_checked": 24559,
+      "total_sprite_slots": 18956,
+      "original_sources_unchanged": true,
+      "client_modified": false,
+      "visual_gameplay_acceptance": "pending"
+    },
+    "revision": "detail-v2",
+    "original_generated_sources_preserved": true
+  }
+}

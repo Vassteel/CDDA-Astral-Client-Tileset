@@ -1,3 +1,4 @@
+#include "ui_telemetry.h"
 #include "debug.h"
 
 #include <cctype>
@@ -318,6 +319,8 @@ static void debug_error_prompt(
     bool force )
 {
     cata_assert( catacurses::stdscr );
+    ui_telemetry::record( "debug.error", {{ "file", filename ? filename : "" },
+        { "line", line ? line : "" }, { "function", funcname ? funcname : "" }, { "message", text }} );
     cata_assert( filename != nullptr );
     cata_assert( line != nullptr );
     cata_assert( funcname != nullptr );

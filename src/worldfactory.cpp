@@ -235,9 +235,10 @@ int worldfactory::show_worldgen_advanced( WORLD *world )
     ui_adaptor ui;
 
     const auto init_windows = [&]( ui_adaptor & ui ) {
-        const int iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
-        const int iOffsetX = TERMX > FULL_SCREEN_WIDTH ? ( TERMX - iMinScreenWidth ) / 2 : 0;
-        wf_win = catacurses::newwin( TERMY, iMinScreenWidth, point( iOffsetX, 0 ) );
+        const int width = std::min( TERMX, 100 );
+        const int height = std::min( TERMY, 38 );
+        wf_win = catacurses::newwin( height, width,
+                                    point( ( TERMX - width ) / 2, ( TERMY - height ) / 2 ) );
         ui.position_from_window( wf_win );
     };
     init_windows( ui );
@@ -514,10 +515,18 @@ WORLD *worldfactory::pick_world( bool show_prompt, bool empty_only )
     };
 
     const auto init_windows = [&]( ui_adaptor & ui ) {
-        iContentHeight = TERMY - 3 - iTooltipHeight;
-        iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
-        const int iOffsetX = TERMX > FULL_SCREEN_WIDTH ? ( TERMX - iMinScreenWidth ) / 2 : 0;
-        num_pages = world_names.size() / iContentHeight + 1; // at least 1 page
+        iContentHeight = std::max( 1, std::min( { static_cast<int>( world_names.size() ),
+                                      18, TERMY - 3 - iTooltipHeight } ) );
+        int desired_width = 64;
+        for( const std::string &name : world_names ) {
+            desired_width = std::max( desired_width, utf8_width( name ) + 16 );
+        }
+        iMinScreenWidth = std::min( TERMX, std::min( 96, desired_width ) );
+        const int height = iContentHeight + 3 + iTooltipHeight;
+        const int iOffsetX = ( TERMX - iMinScreenWidth ) / 2;
+        const int iOffsetY = ( TERMY - height ) / 2;
+        num_pages = ( world_names.size() + iContentHeight - 1 ) / iContentHeight;
+        selpage = std::min( selpage, num_pages - 1 );
 
         world_pages.clear();
         size_t worldnum = 0;
@@ -527,14 +536,15 @@ WORLD *worldfactory::pick_world( bool show_prompt, bool empty_only )
             }
         }
 
-        w_worlds_border  = catacurses::newwin( TERMY, iMinScreenWidth,
-                                               point( iOffsetX, 0 ) );
+        sel = std::min( sel, static_cast<int>( world_pages[selpage].size() ) - 1 );
+        w_worlds_border  = catacurses::newwin( height, iMinScreenWidth,
+                                               point( iOffsetX, iOffsetY ) );
         w_worlds_tooltip = catacurses::newwin( iTooltipHeight, iMinScreenWidth - 2,
-                                               point( 1 + iOffsetX, 1 ) );
+                                               point( 1 + iOffsetX, iOffsetY + 1 ) );
         w_worlds_header  = catacurses::newwin( 1, iMinScreenWidth - 2,
-                                               point( 1 + iOffsetX, 1 + iTooltipHeight ) );
+                                               point( 1 + iOffsetX, iOffsetY + 1 + iTooltipHeight ) );
         w_worlds         = catacurses::newwin( iContentHeight, iMinScreenWidth - 2,
-                                               point( 1 + iOffsetX, iTooltipHeight + 2 ) );
+                                               point( 1 + iOffsetX, iOffsetY + iTooltipHeight + 2 ) );
 
         world_list_top_left = point( getbegx( w_worlds ), getbegy( w_worlds ) );
         world_list_width = iMinScreenWidth - 2;
@@ -552,7 +562,7 @@ WORLD *worldfactory::pick_world( bool show_prompt, bool empty_only )
         mvwaddch( w_worlds_border, point( iMinScreenWidth - 1, 4 ), LINE_XOXX ); // -|
 
         for( const int &mapLine : mapLines ) {
-            mvwaddch( w_worlds_border, point( mapLine + 1, TERMY - 1 ), LINE_XXOX ); // _|_
+            mvwaddch( w_worlds_border, point( mapLine + 1, getmaxy( w_worlds_border ) - 1 ), LINE_XXOX ); // _|_
         }
         wattroff( w_worlds_border, BORDER_COLOR );
 
@@ -593,7 +603,7 @@ WORLD *worldfactory::pick_world( bool show_prompt, bool empty_only )
                 wprintz( w_worlds, c_yellow, "  " );
             }
 
-            const std::string txt = string_format( "%s (%lu)", world_name, saves_num );
+            const std::string txt = utf8_truncate( string_format( "%s (%lu)", world_name, saves_num ), world_list_width - 6 );
             const int remaining = world_list_width - ( utf8_width( txt, true ) + 6 );
             wprintz( w_worlds, sel_this ? hilite( c_white ) : c_white, txt );
             if( sel_this && remaining > 0 ) {
@@ -617,7 +627,7 @@ WORLD *worldfactory::pick_world( bool show_prompt, bool empty_only )
 
         wnoutrefresh( w_worlds_header );
 
-        fold_and_print( w_worlds_tooltip, point::zero, 78, c_white, _( "Pick a world to enter game" ) );
+        fold_and_print( w_worlds_tooltip, point::zero, getmaxx( w_worlds_tooltip ), c_white, _( "Pick a world to enter game" ) );
         wnoutrefresh( w_worlds_tooltip );
 
         wnoutrefresh( w_worlds );
@@ -921,11 +931,11 @@ void worldfactory::show_active_world_mods( const std::vector<mod_id> &world_mods
 
     const auto init_windows = [&]( ui_adaptor & ui ) {
         recalc_start = true;
-        const int iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
-        const int iOffsetX = TERMX > FULL_SCREEN_WIDTH ? ( TERMX - iMinScreenWidth ) / 2 : 0;
-
-        w_border = catacurses::newwin( TERMY - 11, iMinScreenWidth, point( iOffsetX, 4 ) );
-        w_mods   = catacurses::newwin( TERMY - 13, iMinScreenWidth - 1, point( iOffsetX, 5 ) );
+        const int width = std::min( TERMX, 90 );
+        const int height = std::min( TERMY, std::clamp( static_cast<int>( world_mods.size() ) + 2, 6, 26 ) );
+        const point origin( ( TERMX - width ) / 2, ( TERMY - height ) / 2 );
+        w_border = catacurses::newwin( height, width, origin );
+        w_mods = catacurses::newwin( height - 2, width - 2, origin + point( 1, 1 ) );
 
         ui.position_from_window( w_border );
     };
@@ -1038,28 +1048,30 @@ int worldfactory::show_worldgen_tab_modselection( const catacurses::window &win,
 
     const auto init_windows = [&]( ui_adaptor & ui ) {
         recalc_start = true;
-        const int iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
-        const int iOffsetX = TERMX > FULL_SCREEN_WIDTH ? ( TERMX - iMinScreenWidth ) / 2 : 0;
+        const int iMinScreenWidth = getmaxx( win );
+        const int height = getmaxy( win );
+        const int iOffsetY = getbegy( win );
+        const int iOffsetX = getbegx( win );
 
         w_header1     = catacurses::newwin( 1, iMinScreenWidth / 2 - 5,
-                                            point( 1 + iOffsetX, 3 ) );
+                                            point( 1 + iOffsetX, iOffsetY + 3 ) );
         w_header2     = catacurses::newwin( 1, iMinScreenWidth / 2 - 4,
-                                            point( iMinScreenWidth / 2 + 3 + iOffsetX, 3 ) );
-        w_shift       = catacurses::newwin( TERMY - 14, 5,
-                                            point( iMinScreenWidth / 2 - 3 + iOffsetX, 3 ) );
-        w_list        = catacurses::newwin( TERMY - 16, iMinScreenWidth / 2 - 4,
-                                            point( iOffsetX, 5 ) );
-        w_active      = catacurses::newwin( TERMY - 16, iMinScreenWidth / 2 - 4,
-                                            point( iMinScreenWidth / 2 + 2 + iOffsetX, 5 ) );
+                                            point( iMinScreenWidth / 2 + 3 + iOffsetX, iOffsetY + 3 ) );
+        w_shift       = catacurses::newwin( height - 14, 5,
+                                            point( iMinScreenWidth / 2 - 3 + iOffsetX, iOffsetY + 3 ) );
+        w_list        = catacurses::newwin( height - 16, iMinScreenWidth / 2 - 4,
+                                            point( iOffsetX, iOffsetY + 5 ) );
+        w_active      = catacurses::newwin( height - 16, iMinScreenWidth / 2 - 4,
+                                            point( iMinScreenWidth / 2 + 2 + iOffsetX, iOffsetY + 5 ) );
         w_description = catacurses::newwin( 5, iMinScreenWidth - 4,
-                                            point( 1 + iOffsetX, TERMY - 6 ) );
+                                            point( 1 + iOffsetX, iOffsetY + height - 6 ) );
 
         header_windows.clear();
         header_windows.push_back( w_header1 );
         header_windows.push_back( w_header2 );
 
         // Specify where the popup's string would be printed
-        filter_pos = point( 2, TERMY - 11 );
+        filter_pos = point( 2, height - 11 );
         filter_view_len = iMinScreenWidth / 2 - 11;
         if( fpopup ) {
             point inner_pos = filter_pos + point( 2, 0 );
@@ -1528,10 +1540,10 @@ int worldfactory::show_worldgen_basic( WORLD *world )
     bool recalc_startpos = false;
     const auto init_windows = [&]( ui_adaptor & ui ) {
         recalc_startpos = true;
-        const int iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
-        const int iOffsetX = TERMX > FULL_SCREEN_WIDTH ? ( TERMX - iMinScreenWidth ) / 2 : 0;
-
-        w_confirmation = catacurses::newwin( TERMY, iMinScreenWidth, point( iOffsetX, 0 ) );
+        const int width = std::min( TERMX, 96 );
+        const int height = std::min( TERMY, 32 );
+        w_confirmation = catacurses::newwin( height, width,
+                         point( ( TERMX - width ) / 2, ( TERMY - height ) / 2 ) );
 
         win_height = getmaxy( w_confirmation );
         content_height = win_height - namebar_pos.y - 10;
@@ -1844,12 +1856,13 @@ void worldfactory::draw_modselection_borders( const catacurses::window &win,
         const input_context &ctxtp )
 {
 
-    const int iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
+    const int iMinScreenWidth = getmaxx( win );
+    const int height = getmaxy( win );
 
     // make appropriate lines: X & Y coordinate of starting point, length, horizontal/vertical type
     std::array<int, 5> xs = {{1, 1, iMinScreenWidth / 2 + 2, iMinScreenWidth / 2 - 4, iMinScreenWidth / 2 + 2}};
-    std::array<int, 5> ys = {{TERMY - 11, 4, 4, 3, 3}};
-    std::array<int, 5> ls = {{iMinScreenWidth - 2, iMinScreenWidth / 2 - 4, iMinScreenWidth / 2 - 2, TERMY - 14, 1}};
+    std::array<int, 5> ys = {{height - 11, 4, 4, 3, 3}};
+    std::array<int, 5> ls = {{iMinScreenWidth - 2, iMinScreenWidth / 2 - 4, iMinScreenWidth / 2 - 2, height - 14, 1}};
     std::array<bool, 5> hv = {{true, true, true, false, false}}; // horizontal line = true, vertical line = false
 
     wattron( win, BORDER_COLOR );
@@ -1865,23 +1878,23 @@ void worldfactory::draw_modselection_borders( const catacurses::window &win,
 
     // Add in connective characters
     mvwaddch( win, point( 0, 4 ), LINE_XXXO ); // |-
-    mvwaddch( win, point( 0, TERMY - 11 ), LINE_XXXO ); // |-
+    mvwaddch( win, point( 0, height - 11 ), LINE_XXXO ); // |-
     mvwaddch( win, point( iMinScreenWidth / 2 + 2, 4 ), LINE_XXXO ); // |-
 
     mvwaddch( win, point( iMinScreenWidth - 1, 4 ), LINE_XOXX ); // -|
-    mvwaddch( win, point( iMinScreenWidth - 1, TERMY - 11 ), LINE_XOXX ); // -|
+    mvwaddch( win, point( iMinScreenWidth - 1, height - 11 ), LINE_XOXX ); // -|
     mvwaddch( win, point( iMinScreenWidth / 2 - 4, 4 ), LINE_XOXX ); // -|
 
     mvwaddch( win, point( iMinScreenWidth / 2 - 4, 2 ), LINE_OXXX ); // -.-
     mvwaddch( win, point( iMinScreenWidth / 2 + 2, 2 ), LINE_OXXX ); // -.-
 
-    mvwaddch( win, point( iMinScreenWidth / 2 - 4, TERMY - 11 ), LINE_XXOX ); // _|_
-    mvwaddch( win, point( iMinScreenWidth / 2 + 2, TERMY - 11 ), LINE_XXOX ); // _|_
+    mvwaddch( win, point( iMinScreenWidth / 2 - 4, height - 11 ), LINE_XXOX ); // _|_
+    mvwaddch( win, point( iMinScreenWidth / 2 + 2, height - 11 ), LINE_XXOX ); // _|_
 
     wattroff( win, BORDER_COLOR );
 
     // Add tips & hints
-    fold_and_print( win, point( 2, TERMY - 10 ), getmaxx( win ) - 4, c_light_gray,
+    fold_and_print( win, point( 2, height - 10 ), getmaxx( win ) - 4, c_light_gray,
                     _( "[<color_yellow>%s</color>] = save <color_cyan>Mod Load Order</color> as default <color_red>|</color> "
                        "[<color_yellow>%s</color>/<color_yellow>%s</color>] = switch Main-Tab <color_red>|</color> "
                        "[<color_yellow>%s</color>/<color_yellow>%s</color>] = switch "

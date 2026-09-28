@@ -95,13 +95,17 @@ class mission_ui_impl : public cataimgui::window
         mission_ui_tab_enum selected_tab = mission_ui_tab_enum::ACTIVE;
         mission_ui_tab_enum switch_tab = mission_ui_tab_enum::num_tabs;
 
-        float window_width = std::clamp( float( str_width_to_pixels( EVEN_MINIMUM_TERM_WIDTH ) ),
-                                         ImGui::GetMainViewport()->Size.x / 2,
-                                         ImGui::GetMainViewport()->Size.x );
-        float window_height = std::clamp( float( str_height_to_pixels( EVEN_MINIMUM_TERM_HEIGHT ) ),
-                                          ImGui::GetMainViewport()->Size.y / 2,
-                                          ImGui::GetMainViewport()->Size.y );
-        float table_column_width = window_width / 2;
+        float window_width = 0.f;
+        float window_height = 0.f;
+        float table_column_width = 0.f;
+        cataimgui::bounds get_bounds() override {
+            const ImVec2 vp = ImGui::GetMainViewport()->Size;
+            const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
+            window_width = std::min( vp.x * 0.94f, 1200.f * scale );
+            window_height = std::min( vp.y * 0.92f, 720.f * scale );
+            table_column_width = window_width / 2;
+            return { -1.f, -1.f, window_width, window_height };
+        }
 
         cataimgui::scroll s = cataimgui::scroll::none;
 
@@ -144,7 +148,7 @@ void mission_ui::draw_mission_ui()
 
 void mission_ui_impl::draw_controls()
 {
-    ImGui::SetWindowSize( ImVec2( window_width, window_height ), ImGuiCond_Once );
+    // Bounds are recomputed on resize before drawing the columns.
     std::vector<mission *> umissions;
     std::vector<point_of_interest> upoints_of_interest;
 

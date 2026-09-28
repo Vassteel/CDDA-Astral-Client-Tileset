@@ -317,6 +317,7 @@ veh_interact::veh_interact( map &here, vehicle &veh, const point_rel_ms &p )
     main_context.register_action( "HELP_KEYBINDINGS" );
     main_context.register_action( "FILTER" );
     main_context.register_action( "ANY_INPUT" );
+    mouse_buttons.register_input( main_context );
 
     count_durability();
     cache_tool_availability();
@@ -329,11 +330,14 @@ veh_interact::~veh_interact() = default;
 void veh_interact::allocate_windows()
 {
     // grid window
-    const point grid( point::south_east );
-    const int grid_w = TERMX - 2; // exterior borders take 2
-    const int grid_h = TERMY - 2; // exterior borders take 2
+    const int width = std::min( TERMX, 150 );
+    const int height = std::min( TERMY, 42 );
+    const point origin( ( TERMX - width ) / 2, ( TERMY - height ) / 2 );
+    const point grid = origin + point::south_east;
+    const int grid_w = width - 2; // exterior borders take 2
+    const int grid_h = height - 2; // exterior borders take 2
 
-    const int mode_h  = 1;
+    const int mode_h  = 3;
     const int name_h  = 1;
 
     page_size = grid_h - ( mode_h + stats_h + name_h ) - 2;
@@ -360,7 +364,7 @@ void veh_interact::allocate_windows()
     const int details_w = grid.x + grid_w - details_x;
 
     // make the windows
-    w_border = catacurses::newwin( TERMY, TERMX, point::zero );
+    w_border = catacurses::newwin( height, width, origin );
     w_mode  = catacurses::newwin( mode_h,    grid_w, grid );
     w_msg   = catacurses::newwin( page_size, pane_w, point( msg_x, pane_y ) );
     w_disp  = catacurses::newwin( disp_h,    disp_w, point( grid.x, pane_y ) );
@@ -531,7 +535,15 @@ void veh_interact::do_main_loop( map &here )
         calc_overview( here );
         ui_manager::redraw();
         const int description_scroll_lines = catacurses::getmaxy( w_parts ) - 4;
-        const std::string action = main_context.handle_input();
+        std::string action = mouse_buttons.process( main_context, main_context.handle_input() );
+        if( action == "SELECT" ) {
+            if( const auto p = main_context.get_coordinates_text( w_disp ) ) {
+                if( mouse_buttons.contains( w_disp, *p ) ) {
+                    move_cursor( here, point_rel_ms( *p - point( getmaxx( w_disp ), getmaxy( w_disp ) ) / 2 ) );
+                }
+            }
+            continue;
+        }
         msg.reset();
         if( const std::optional<tripoint_rel_ms> vec = main_context.get_direction_rel_ms( action ) ) {
             move_cursor( here, vec->xy() );
@@ -1006,7 +1018,18 @@ void veh_interact::do_install( map &here )
         const bool can_install = update_part_requirements( here );
         ui_manager::redraw();
 
-        const std::string action = main_context.handle_input();
+        std::string action = mouse_buttons.process( main_context, main_context.handle_input() );
+        if( action == "SELECT" ) {
+            if( const auto p = main_context.get_coordinates_text( w_list ) ) {
+                const int lines = page_size - 2;
+                const int index = pos / lines * lines + p->y - 2;
+                if( mouse_buttons.contains( w_list, *p ) && p->y >= 2 &&
+                    index >= 0 && index < static_cast<int>( tab_vparts.size() ) ) {
+                    pos = index;
+                }
+            }
+            continue;
+        }
         msg.reset();
         if( action == "FILTER" ) {
             string_input_popup_imgui popup( 34 );
@@ -2285,12 +2308,12 @@ void veh_interact::display_grid()
     // |-
     mvwaddch( w_border, point( 0, y_mode ), LINE_XXXO );
     // -|
-    mvwaddch( w_border, point( TERMX - 1, y_mode ), LINE_XOXX );
-    const int y_list = getbegy( w_list ) + getmaxy( w_list );
+    mvwaddch( w_border, point( getmaxx( w_border ) - 1, y_mode ), LINE_XOXX );
+    const int y_list = getbegy( w_list ) - getbegy( w_border ) + getmaxy( w_list );
     // |-
     mvwaddch( w_border, point( 0, y_list ), LINE_XXXO );
     // -|
-    mvwaddch( w_border, point( TERMX - 1, y_list ), LINE_XOXX );
+    mvwaddch( w_border, point( getmaxx( w_border ) - 1, y_list ), LINE_XOXX );
 
     const int grid_w = getmaxx( w_border ) - 2;
 
@@ -2695,6 +2718,10 @@ void veh_interact::display_mode( const map &here )
         nc_color title_col = c_light_gray;
         // NOLINTNEXTLINE(cata-use-named-point-constants)
         print_colored_text( w_mode, point( 1, 0 ), title_col, title_col, title.value() );
+        mouse_buttons.draw( w_mode, 1, {{ "QUIT", _( "Back" ) },
+            { "CONFIRM", _( "Confirm" ) }, { "FILTER", _( "Filter" ) },
+            { "PREV_TAB", _( "Previous" ) }, { "NEXT_TAB", _( "Next" ) },
+            { "HELP_KEYBINDINGS", _( "Keys" ) }} );
     } else {
         constexpr size_t action_cnt = 12;
         const std::array<std::string, action_cnt> actions = { {
@@ -2737,17 +2764,14 @@ void veh_interact::display_mode( const map &here )
             }
         };
 
-        std::array < int, action_cnt + 1 > pos;
-        pos[0] = 0;
-        for( size_t i = 0; i < action_cnt; i++ ) {
-            pos[i + 1] = pos[i] + utf8_width( actions[i], true );
+        const std::array<std::string, action_cnt> ids = {{ "INSTALL", "REPAIR", "MEND",
+            "REFILL", "REMOVE", "SIPHON", "UNLOAD", "ASSIGN_CREW", "CHANGE_SHAPE",
+            "RENAME", "RELABEL", "QUIT" }};
+        std::vector<std::pair<std::string, std::string>> buttons;
+        for( size_t i = 0; i < action_cnt; ++i ) {
+            buttons.emplace_back( ids[i], actions[i] );
         }
-        const int space = std::max<int>( getmaxx( w_mode ) - pos.back(), action_cnt + 1 );
-        for( size_t i = 0; i < action_cnt; i++ ) {
-            nc_color dummy = c_white;
-            print_colored_text( w_mode, point( pos[i] + space * ( i + 1 ) / ( action_cnt + 1 ), 0 ),
-                                dummy, c_white, actions[i] );
-        }
+        mouse_buttons.draw( w_mode, 0, buttons );
     }
     wnoutrefresh( w_mode );
 }

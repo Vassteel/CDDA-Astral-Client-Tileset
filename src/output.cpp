@@ -1,4 +1,5 @@
 #include "output.h"
+#include "input_popup.h"
 
 #include <cctype>
 // IWYU pragma: no_include <sys/errno.h>
@@ -904,6 +905,15 @@ query_ynq_result query_ynq( const std::string &text )
 
 bool query_int( int &result, bool show_default, const std::string &text )
 {
+#if defined(TILES)
+    number_input_popup<int> popup( 48, show_default ? result : 0, text );
+    const int value = popup.query();
+    if( popup.cancelled() ) {
+        return false;
+    }
+    result = value;
+    return true;
+#else
     string_input_popup popup;
     popup.title( text );
     popup.text( show_default ? std::to_string( result ) : "" ).only_digits( true );
@@ -913,6 +923,7 @@ bool query_int( int &result, bool show_default, const std::string &text )
     }
     result = *temp;
     return true;
+#endif
 }
 
 std::vector<std::string> get_hotkeys( std::string_view s )

@@ -426,7 +426,10 @@ bool Pickup::do_pickup( std::vector<item_location> &targets, std::vector<int> &q
         quantities.pop_back();
 
         if( !target ) {
-            debugmsg( "lost target item of ACT_PICKUP" );
+            // Stale after map/stack mutation, merge, or concurrent removal.
+            // Player-facing debugmsg spammed soft-fork pickup / autopickup.
+            add_msg_debug( debugmode::DF_ACTIVITY,
+                           "ACT_PICKUP: skipping stale/null target item_location" );
             continue;
         }
         problem = !pick_one_up( target, quantity, got_water, got_gas, mapPickup, autopickup,
@@ -505,6 +508,10 @@ void Pickup::autopickup( const tripoint_bub_ms &p )
     quantities.reserve( selected_items.size() );
     for( drop_location selected : selected_items ) {
         item *it = selected.first.get_item();
+        // empty_autopickup_target / stack mutation can invalidate earlier locs
+        if( !it ) {
+            continue;
+        }
         if( player.can_pickWeight_partial( *it, false ) &&
             player.can_stash_partial( *it, false ) ) {
             target_items.push_back( selected.first );

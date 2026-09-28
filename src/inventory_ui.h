@@ -732,6 +732,10 @@ class inventory_selector
          * The input context for navigation, already contains some actions for movement.
          */
         input_context ctxt;
+        bool mouse_multiselect = false;
+        bool mouse_pickup = false;
+        bool mouse_ammo = false;
+        bool mouse_trade = false;
 
         const item_category *naturalize_category( const item_category &category,
                 const tripoint_bub_ms &pos );
@@ -889,6 +893,10 @@ class inventory_selector
 
         void draw_header( const catacurses::window &w ) const;
         void draw_footer( const catacurses::window &w ) const;
+        std::vector<std::pair<std::string, std::string>> mouse_actions() const;
+        int mouse_toolbar_height() const;
+        mutable std::vector<std::pair<inclusive_rectangle<point>, std::string>> mouse_action_rects;
+        point mouse_hover{ -1, -1 };
         void draw_columns( const catacurses::window &w );
         void draw_frame( const catacurses::window &w ) const;
         void _add_map_items( tripoint_bub_ms const &target, item_category const &cat, item_stack &items,

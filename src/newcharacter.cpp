@@ -35,6 +35,7 @@
 #include "debug.h"
 #include "enum_conversions.h"
 #include "enum_traits.h"
+#include "subbodypart.h"
 #include "flexbuffer_json.h"
 #include "game_constants.h"
 #include "imgui/imgui.h"
@@ -103,6 +104,21 @@ static const flag_id json_flag_FIT( "FIT" );
 static const flag_id json_flag_VARSIZE( "VARSIZE" );
 static const flag_id json_flag_auto_wield( "auto_wield" );
 static const flag_id json_flag_no_auto_equip( "no_auto_equip" );
+static const flag_id json_flag_BELTED( "BELTED" );
+static const sub_bodypart_str_id sub_body_part_torso_hanging_back( "torso_hanging_back" );
+static const itype_id itype_limitless_backpack( "limitless_backpack" );
+
+// Equipment kit loaded from a character template, applied after display() reset.
+struct template_equipment_kit {
+    bool present = false;
+    bool locked = false;
+    profession_id source_prof = profession_id::NULL_ID();
+    bool source_outfit = true;
+    bool source_male = true;
+    std::vector<character_creator_equipment_choice> choices;
+};
+static template_equipment_kit g_pending_template_equipment;
+
 
 static const json_character_flag json_flag_BIONIC_TOGGLED( "BIONIC_TOGGLED" );
 
@@ -663,6 +679,61 @@ void Character::add_profession_items()
     } else {
         prof_items = prof->items( outfit, get_mutations() );
     }
+
+    // Resolve torso_hanging_back / BELTED competition in a storage-first way:
+    // prefer wearing the best storage item (limitless backpack wins); demote any
+    // other hanging-back armor to inventory so it is not silently dropped when
+    // wear fails and pockets are not yet available.
+    auto covers_hanging_back = []( const item &it ) {
+        return it.is_armor() && it.covers( sub_body_part_torso_hanging_back.id() );
+    };
+    auto is_belted_hanging_back = [&]( const item &it ) {
+        return covers_hanging_back( it ) && it.has_flag( json_flag_BELTED );
+    };
+    auto storage_score = []( const item &it ) -> units::volume {
+        if( it.typeId() == itype_limitless_backpack ) {
+            return units::volume::max();
+        }
+        return it.get_biggest_pocket_capacity();
+    };
+
+    std::list<item>::iterator best_storage = prof_items.end();
+    units::volume best_score = 0_ml;
+    int hanging_back_count = 0;
+    for( auto it = prof_items.begin(); it != prof_items.end(); ++it ) {
+        if( !is_belted_hanging_back( *it ) ) {
+            continue;
+        }
+        ++hanging_back_count;
+        const units::volume score = storage_score( *it );
+        if( best_storage == prof_items.end() || score > best_score ) {
+            best_storage = it;
+            best_score = score;
+        }
+    }
+    if( hanging_back_count > 1 && best_storage != prof_items.end() &&
+        best_score > 0_ml ) {
+        for( auto it = prof_items.begin(); it != prof_items.end(); ++it ) {
+            if( it == best_storage ) {
+                // Ensure the chosen pack is worn, not forced to inventory.
+                it->unset_flag( json_flag_no_auto_equip );
+                continue;
+            }
+            if( covers_hanging_back( *it ) ) {
+                // Cape / extra pack / other back clothing → inventory (into the pack once worn).
+                it->set_flag( json_flag_no_auto_equip );
+            }
+        }
+        // Wear storage first so subsequent try_add calls have a pocket.
+        if( best_storage != prof_items.begin() ) {
+            prof_items.splice( prof_items.begin(), prof_items, best_storage );
+        }
+    } else if( best_storage != prof_items.end() && best_storage != prof_items.begin() &&
+               best_score > 0_ml ) {
+        // Even with a single pack, grant storage before bulky inventory items.
+        prof_items.splice( prof_items.begin(), prof_items, best_storage );
+    }
+
     std::list<item> try_adding_again;
 
     auto attempt_add_items = [this]( std::list<item> &prof_items, std::list<item> &failed_to_add ) {
@@ -673,25 +744,24 @@ void Character::add_profession_items()
             }
 
             item_location success;
-            item *wield_or_wear = nullptr;
             // TODO: debugmsg if food that isn't a seed is inedible
             if( it.has_flag( json_flag_no_auto_equip ) ) {
                 it.unset_flag( json_flag_no_auto_equip );
                 success = try_add( it, nullptr, nullptr, false );
             } else if( it.has_flag( json_flag_auto_wield ) ) {
                 it.unset_flag( json_flag_auto_wield );
-                if( !has_wield_conflicts( it ) ) {
-                    wield( it );
-                    wield_or_wear = &it;
-                    success = item_location( *this, wield_or_wear );
+                if( !has_wield_conflicts( it ) && wield( it ) ) {
+                    success = item_location( *this, &weapon );
                 } else {
                     success = try_add( it, nullptr, nullptr, false );
                 }
             } else if( it.is_armor() ) {
                 if( can_wear( it ).success() ) {
-                    wear_item( it, false, false );
-                    wield_or_wear = &it;
-                    success = item_location( *this, wield_or_wear );
+                    if( auto worn_it = wear_item( it, false, false ) ) {
+                        success = item_location( *this, &( **worn_it ) );
+                    } else {
+                        success = try_add( it, nullptr, nullptr, false );
+                    }
                 } else {
                     success = try_add( it, nullptr, nullptr, false );
                 }
@@ -709,20 +779,31 @@ void Character::add_profession_items()
         }
     };
 
-    //storage items may not be added first, so a second attempt is needed
+    // Storage items may not be added first, so a second attempt is needed.
     attempt_add_items( prof_items, try_adding_again );
     if( !try_adding_again.empty() ) {
         prof_items.clear();
         attempt_add_items( try_adding_again, prof_items );
-        //if there's one item left that still can't be added, attempt to wield it
-        if( prof_items.size() == 1 ) {
-            item last_item = prof_items.front();
-            if( !has_wield_conflicts( last_item ) ) {
-                bool success_wield = wield( last_item );
-                if( success_wield ) {
-                    prof_items.pop_front();
-                }
+    }
+
+    // Never silently discard leftover kit items: wield if possible, else try_add
+    // with wield allowed.  Map drop is unavailable here (player not placed yet).
+    if( !prof_items.empty() ) {
+        std::list<item> still_failed;
+        for( item &last_item : prof_items ) {
+            item_location success;
+            if( !has_wield_conflicts( last_item ) && wield( last_item ) ) {
+                success = item_location( *this, &weapon );
+            } else {
+                success = try_add( last_item, nullptr, nullptr, true );
             }
+            if( !success ) {
+                still_failed.emplace_back( last_item );
+            }
+        }
+        for( const item &lost : still_failed ) {
+            debugmsg( "Starting equipment could not be granted (no free pockets/hands): %s",
+                      lost.tname() );
         }
     }
 
@@ -1116,6 +1197,16 @@ static int equipment_item_category( const item &it )
     if( it.has_flag( json_flag_auto_wield ) ) {
         return 0;
     }
+    // Wearable guns/bows (ARMOR+GUN, BELTED torso_hanging_back) are primarily
+    // weapons. Default to Inventory so they don't compete with backpacks on the
+    // same back slot during chargen. Pure clothing/armor still returns Worn.
+    if( it.is_gun() ) {
+        return 2;
+    }
+    const std::string cat = it.get_category_shallow().get_id().str();
+    if( cat == "weapons" || cat == "guns" ) {
+        return 2;
+    }
     if( it.is_armor() ) {
         return 1;
     }
@@ -1498,11 +1589,12 @@ static void chargen_equipment_replace_at( int idx )
     if( !picked ) {
         return;
     }
-    const int keep_category = ec.category;
+    // Re-classify from the new itype so Replace sword→bow does not keep Worn;
+    // wielded→wielded still works when the new item carries auto_wield / isn't a
+    // wearable gun. Use Edit → Set slot… to override after Replace.
     ec.it = std::move( *picked );
-    apply_equipment_category_flags( ec.it, keep_category );
-    // Keep the player's chosen slot even if the new itype would classify differently.
-    ec.category = keep_category;
+    ec.category = equipment_item_category( ec.it );
+    apply_equipment_category_flags( ec.it, ec.category );
     cc_uistate.equipment_locked = true;
     cc_uistate.selected_equipment_index = idx;
 }
@@ -1616,6 +1708,31 @@ static void chargen_equipment_set_count_at( int idx )
                                           static_cast<int>( cc_uistate.equipment_choices.size() ) - 1 );
 }
 
+static void chargen_equipment_set_slot_at( int idx )
+{
+    if( idx < 0 || idx >= static_cast<int>( cc_uistate.equipment_choices.size() ) ) {
+        return;
+    }
+    character_creator_equipment_choice &ec = cc_uistate.equipment_choices[idx];
+    uilist slot;
+    slot.text = string_format( _( "Set slot: %s" ), ec.it.display_name() );
+    slot.addentry( 0, true, 'w', _( "Wielded" ) );
+    slot.addentry( 1, true, 'o', _( "Worn" ) );
+    slot.addentry( 2, true, 'i', _( "Inventory" ) );
+    // Highlight current category when possible.
+    if( ec.category >= 0 && ec.category <= 2 ) {
+        slot.selected = ec.category;
+    }
+    slot.query();
+    if( slot.ret < 0 || slot.ret > 2 ) {
+        return;
+    }
+    ec.category = slot.ret;
+    apply_equipment_category_flags( ec.it, ec.category );
+    cc_uistate.equipment_locked = true;
+    cc_uistate.selected_equipment_index = idx;
+}
+
 static void chargen_equipment_action_menu( int idx )
 {
     if( idx < 0 || idx >= static_cast<int>( cc_uistate.equipment_choices.size() ) ) {
@@ -1635,7 +1752,8 @@ static void chargen_equipment_action_menu( int idx )
     act.addentry( 0, true, 'r', _( "Replace…" ) );
     act.addentry( 1, true, 'd', _( "Remove" ) );
     act.addentry( 2, true, 'c', _( "Count…" ) );
-    act.addentry( 3, true, 'a', _( "Add item…" ) );
+    act.addentry( 3, true, 's', _( "Set slot…" ) );
+    act.addentry( 4, true, 'a', _( "Add item…" ) );
     act.query();
     if( act.ret == 0 ) {
         chargen_equipment_replace_at( idx );
@@ -1644,6 +1762,8 @@ static void chargen_equipment_action_menu( int idx )
     } else if( act.ret == 2 ) {
         chargen_equipment_set_count_at( idx );
     } else if( act.ret == 3 ) {
+        chargen_equipment_set_slot_at( idx );
+    } else if( act.ret == 4 ) {
         chargen_equipment_add();
     }
 }
@@ -3003,6 +3123,27 @@ void avatar::save_template( const std::string &name, pool_type pool )
             jsout.member( "start_location", start_location );
         }
         jsout.member( "outfit_gender", outfit );
+        // Persist EQUIPMENT-tab customized kit (profession seed + edits).
+        // Without this, templates / Last Character only store profession id and
+        // re-roll defaults on load, dropping Add/Replace/Remove choices.
+        if( cc_uistate.equipment_locked ) {
+            jsout.member( "equipment_kit" );
+            jsout.start_object();
+            jsout.member( "locked", cc_uistate.equipment_locked );
+            jsout.member( "source_prof", cc_uistate.equipment_source_prof );
+            jsout.member( "source_outfit", cc_uistate.equipment_source_outfit );
+            jsout.member( "source_male", cc_uistate.equipment_source_male );
+            jsout.member( "entries" );
+            jsout.start_array();
+            for( const character_creator_equipment_choice &ec : cc_uistate.equipment_choices ) {
+                jsout.start_object();
+                jsout.member( "category", ec.category );
+                jsout.member( "item", ec.it );
+                jsout.end_object();
+            }
+            jsout.end_array();
+            jsout.end_object();
+        }
         jsout.end_object();
 
         serialize( jsout );
@@ -3036,6 +3177,36 @@ bool avatar::load_template( const std::string &template_name, pool_type &pool )
             const std::string jobj_start_location = jobj.get_string( "start_location", "" );
 
             outfit = jobj.get_bool( "outfit_gender", true );
+
+            // Stash EQUIPMENT kit for display() to apply after its reset().
+            g_pending_template_equipment = template_equipment_kit{};
+            if( jobj.has_object( "equipment_kit" ) ) {
+                JsonObject kit = jobj.get_object( "equipment_kit" );
+                kit.allow_omitted_members();
+                g_pending_template_equipment.present = true;
+                g_pending_template_equipment.locked = kit.get_bool( "locked", true );
+                if( kit.has_string( "source_prof" ) ) {
+                    g_pending_template_equipment.source_prof =
+                        profession_id( kit.get_string( "source_prof" ) );
+                }
+                g_pending_template_equipment.source_outfit =
+                    kit.get_bool( "source_outfit", true );
+                g_pending_template_equipment.source_male =
+                    kit.get_bool( "source_male", true );
+                if( kit.has_array( "entries" ) ) {
+                    for( JsonValue entry_val : kit.get_array( "entries" ) ) {
+                        JsonObject entry = entry_val.get_object();
+                        entry.allow_omitted_members();
+                        character_creator_equipment_choice ec;
+                        ec.category = entry.get_int( "category", 2 );
+                        if( entry.has_member( "item" ) ) {
+                            entry.read( "item", ec.it );
+                        }
+                        apply_equipment_category_flags( ec.it, ec.category );
+                        g_pending_template_equipment.choices.push_back( std::move( ec ) );
+                    }
+                }
+            }
 
             // get_scenario()->allowed_start( loc.ident() ) is checked once scenario loads in avatar::load()
             for( const class start_location &loc : start_locations::get_all() ) {
@@ -3644,6 +3815,29 @@ void character_creator_ui_impl::draw_top_bar( const avatar &u ) const
 bool character_creator_ui::display()
 {
     cc_uistate.reset();
+    // Templates load their EQUIPMENT kit into g_pending before display(); restore
+    // it now so reset() does not wipe Add/Replace/Remove choices.
+    // Only apply for TEMPLATE generation so a canceled template load cannot leak
+    // into a subsequent Custom character.
+    if( g_pending_template_equipment.present &&
+        cc_uistate.generation_type == character_type::TEMPLATE ) {
+        const avatar &u = get_avatar();
+        cc_uistate.equipment_choices = std::move( g_pending_template_equipment.choices );
+        cc_uistate.equipment_locked = g_pending_template_equipment.locked;
+        // Bind kit to the loaded avatar's current prof/outfit/sex so
+        // has_custom_starting_equipment() succeeds after deserialize.
+        cc_uistate.equipment_source_prof = u.prof != nullptr ? u.prof->ident()
+                                           : g_pending_template_equipment.source_prof;
+        cc_uistate.equipment_source_outfit = outfit;
+        cc_uistate.equipment_source_male = u.male;
+        cc_uistate.selected_equipment_index = 0;
+        for( character_creator_equipment_choice &ec : cc_uistate.equipment_choices ) {
+            apply_equipment_category_flags( ec.it, ec.category );
+        }
+        g_pending_template_equipment = template_equipment_kit{};
+    } else {
+        g_pending_template_equipment = template_equipment_kit{};
+    }
     character_creator_ui_impl ccui( this );
 
     // setup all uilists/inputs
@@ -3913,8 +4107,10 @@ void character_creator_ui_impl::draw_summary()
 
 cataimgui::bounds character_creator_ui_impl::get_bounds()
 {
-    const ImVec2 viewport = ImGui::GetMainViewport()->WorkSize;
-    return { 0, 0, viewport.x, viewport.y };
+    const ImVec2 vp = ImGui::GetMainViewport()->Size;
+    const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
+    return { -1.f, -1.f, std::min( vp.x * 0.94f, 1280.f * scale ),
+             std::min( vp.y * 0.92f, 800.f * scale ) };
 }
 
 template<typename T>
@@ -4185,8 +4381,9 @@ std::list<item> character_creator_uistate::custom_starting_items() const
     std::list<item> result;
     for( const character_creator_equipment_choice &ec : equipment_choices ) {
         item copy = ec.it;
-        // const method: fit a copy so wear/start never shows (poor fit)
-        chargen_auto_fit_varsize( copy );
+        // Re-apply slot intent from the EQUIPMENT tab category so wear/wield/
+        // inventory flags cannot drift from what the player configured.
+        apply_equipment_category_flags( copy, ec.category );
         result.push_back( std::move( copy ) );
     }
     return result;

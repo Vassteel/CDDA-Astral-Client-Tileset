@@ -759,8 +759,15 @@ void Character::pick_up( const drop_locations &what, Pickup::pick_info &info )
     items.reserve( what.size() );
     quantities.reserve( what.size() );
     for( const drop_location &dl : what ) {
+        if( !dl.first ) {
+            // Soft-fork / menu paths must not enqueue null locs into ACT_PICKUP.
+            continue;
+        }
         items.emplace_back( dl.first );
         quantities.emplace_back( dl.second );
+    }
+    if( items.empty() ) {
+        return;
     }
 
     last_item = item( *items.back() ).typeId();

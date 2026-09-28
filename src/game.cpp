@@ -141,6 +141,7 @@
 #include "lightmap.h"
 #include "line.h"
 #include "live_view.h"
+#include "ui_hybrid_sidebar.h"
 #include "loading_ui.h"
 #include "magic.h"
 #include "magic_enchantment.h"
@@ -492,6 +493,9 @@ game::game() :
 game::~game()
 {
     mouse_toolbar::hide();
+#if defined(TILES)
+    ui_hybrid_sidebar::hide();
+#endif
     // event_bus_ptr about to die; let debug_capture drop its sticky
     // subscribe flag and release the JSONL file. Without this, a later
     // `game` instance would never resubscribe.
@@ -2708,6 +2712,7 @@ input_context get_default_mode_input_context()
         ctxt.register_action( "toggle_auto_foraging" );
         ctxt.register_action( "toggle_auto_pickup" );
         ctxt.register_action( "toggle_auto_combat" );
+        ctxt.register_action( "toggle_auto_eat" );
         ctxt.register_action( "toggle_thief_mode" );
         ctxt.register_action( "toggle_prevent_occlusion" );
         ctxt.register_action( "diary" );
@@ -3443,6 +3448,25 @@ void game::draw( ui_adaptor &ui )
 
 void game::draw_panels( bool force_draw )
 {
+#if defined(TILES)
+    // Soft-fork: Hybrid ImGui right-info column replaces the classic ASCII
+    // panel_manager sidebar stack (HP ||||| bars, -----SECTION-----, etc.).
+    // Left/right width from panel_manager still insets the terrain window.
+    (void) force_draw;
+    ui_hybrid_sidebar::ensure();
+    const int map_height = ui_hybrid_sidebar::minimap_height();
+    if( map_height > 0 ) {
+        panel_manager &mgr = panel_manager::get_manager();
+        const bool right = get_option<std::string>( "SIDEBAR_POSITION" ) == "right";
+        const int width = right ? mgr.get_width_right() : mgr.get_width_left();
+        const catacurses::window map_window = catacurses::newwin( map_height, width,
+                point( right ? TERMX - width : 0, TERMY - map_height ) );
+        werase( map_window );
+        draw_pixel_minimap( map_window );
+        wnoutrefresh( map_window );
+    }
+    return;
+#else
     static int previous_turn = -1;
     const int current_turn = to_turns<int>( calendar::turn - calendar::turn_zero );
     const bool draw_this_turn = current_turn > previous_turn || force_draw;
@@ -3515,6 +3539,7 @@ void game::draw_panels( bool force_draw )
         }
     }
     previous_turn = current_turn;
+#endif // !TILES
 }
 
 void game::draw_pixel_minimap( const catacurses::window &w )

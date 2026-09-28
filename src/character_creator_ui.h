@@ -69,6 +69,7 @@ struct character_creator_uistate {
     // the current profession/outfit/gender, add_profession_items() grants this
     // list instead of re-rolling profession item groups. Profession defaults
     // are only the seed; Replace/Add can introduce any non-blacklisted itype.
+    // Also serialized into character templates / Last Character as equipment_kit.
     std::vector<character_creator_equipment_choice> equipment_choices;
     profession_id equipment_source_prof = profession_id::NULL_ID();
     bool equipment_source_outfit = true;
