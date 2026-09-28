@@ -1165,6 +1165,12 @@ float item::simulate_burn( fire_data &frd ) const
         burn_added *= stack_burnt;
     }
 
+    // Extend all combustible item fuel by 44%: a fresh 50 L wooden log
+    // supplies about 24 hours in a fire container instead of 16 h 40 min.
+    // Leave material consumption, smoke and liquid extinguishing unchanged.
+    if( time_added > 0.0f ) {
+        time_added *= 1.44f;
+    }
     frd.fuel_produced += time_added;
     frd.smoke_produced += smoke_added;
     return burn_added;

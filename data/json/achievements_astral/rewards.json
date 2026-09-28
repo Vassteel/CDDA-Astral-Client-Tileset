@@ -1,0 +1,183 @@
+[
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_kill_zombie",
+    "category": "Combat",
+    "choices": [
+      {
+        "name": "First aid supplies (plant food)",
+        "items": [
+          {
+            "item": "bandages",
+            "count": 3
+          },
+          {
+            "item": "disinfectant",
+            "charges": 5
+          },
+          {
+            "item": "protein_bar_zero"
+          }
+        ],
+        "credits": {}
+      },
+      {
+        "name": "First aid supplies (meat food)",
+        "items": [
+          {
+            "item": "bandages",
+            "count": 3
+          },
+          {
+            "item": "disinfectant",
+            "charges": 5
+          },
+          {
+            "item": "jerky"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_kill_10_monsters",
+    "category": "Combat",
+    "choices": [
+      {
+        "name": "Medical parcel",
+        "items": [
+          {
+            "item": "bandages",
+            "count": 6
+          },
+          {
+            "item": "disinfectant",
+            "charges": 10
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_survive_one_day",
+    "category": "Survival",
+    "choices": [
+      {
+        "name": "Tomorrow is yours (plant food)",
+        "items": [
+          {
+            "item": "protein_bar_zero",
+            "count": 2
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      },
+      {
+        "name": "Tomorrow is yours (meat food)",
+        "items": [
+          {
+            "item": "jerky",
+            "count": 2
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_survive_7_days",
+    "category": "Survival",
+    "choices": [
+      {
+        "name": "A week of hope",
+        "items": [
+          {
+            "item": "oil_lamp",
+            "charges": 750
+          }
+        ],
+        "credits": {
+          "fresh_start": 1,
+          "field_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_kill_100_monsters",
+    "category": "Combat",
+    "choices": [
+      {
+        "name": "Hunting knife",
+        "items": [
+          {
+            "item": "knife_hunting"
+          }
+        ],
+        "credits": {}
+      },
+      {
+        "name": "Steel mace",
+        "items": [
+          {
+            "item": "mace"
+          }
+        ],
+        "credits": {}
+      },
+      {
+        "name": "Steel spear",
+        "items": [
+          {
+            "item": "spear_steel"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_kill_1000_monsters",
+    "category": "Combat",
+    "choices": [
+      {
+        "name": "Ashfall machete",
+        "items": [
+          {
+            "item": "astral_ashfall"
+          }
+        ],
+        "credits": {}
+      },
+      {
+        "name": "Gatekeeper mace",
+        "items": [
+          {
+            "item": "astral_gatekeeper"
+          }
+        ],
+        "credits": {}
+      },
+      {
+        "name": "Longwatch spear",
+        "items": [
+          {
+            "item": "astral_longwatch"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  }
+]

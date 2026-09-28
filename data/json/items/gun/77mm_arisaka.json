@@ -18,7 +18,7 @@
       {
         "id": "type99ld",
         "name": { "str": "Arisaka Type 99 rifle" },
-        "description": "Standing as a clear example of what happens when a country losing a war realizes that it's running out of resources and its rifles are ripe for corner-cutting, this Type 99 Arisaka, the standard service arm of imperial Japan from 1939, is a crewed end-of-war example.  Coated in machining marks, lacking an upper handguard, and with the early production anti-aircraft sights long since done away with, where early production Arisaka rifles are a feat in elegant engineering, this one is a last-ditch bang stick hammered together in a mostly bombed-out factory.  Aesthetics not withstanding, this weapon is still an effective and powerful shoulder arm, just… not the prettiest."
+        "description": "Standing as a clear example of what happens when a country losing a war realizes that it's running out of resources and its rifles are ripe for corner-cutting, this Type 99 Arisaka, the standard service arm of imperial Japan from 1939, is a crewed end-of-war example.  Coated in machining marks, lacking an upper handguard, and with the early production anti-aircraft sights long since done away with, where early production Arisaka rifles are a feat in elegant engineering, this one is a last-ditch bang stick hammered together in a mostly bombed-out factory.  Aesthetics not withstanding, this weapon is still an effective and powerful shoulder arm, just\u2026 not the prettiest."
       }
     ],
     "weight": "3790 g",
@@ -41,7 +41,7 @@
       [ "stock accessory", 1 ],
       [ "stock mount", 1 ]
     ],
-    "extend": { "flags": [ "BOLT_ACTION" ] },
+    "extend": { "flags": [ "BOLT_ACTION", "OLD_GUN" ] },
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE",
@@ -68,6 +68,7 @@
         "weight": 1
       }
     ],
-    "built_in_mods": [ "type99_scope" ]
+    "built_in_mods": [ "type99_scope" ],
+    "extend": { "flags": [ "OLD_GUN" ] }
   }
 ]

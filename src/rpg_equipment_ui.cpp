@@ -56,6 +56,8 @@
 #  include "sdltiles.h"
 #endif
 
+static const flag_id flag_ASTRAL_SHIELD( "ASTRAL_SHIELD" );
+
 rpg_equipment_ui::storage_slot rpg_equipment_ui::storage_slot_for( const item &it )
 {
     if( !it.is_armor() ) {
@@ -825,6 +827,12 @@ void rpg_equipment_window::try_equip_selected()
     }
 
     item &it = *selected_inv;
+    if( selected_slot >= 0 && selected_slot < static_cast<int>( slots.size() ) &&
+        slots[selected_slot].type == doll_slot::kind::offhand &&
+        !( it.has_flag( flag_BLOCK_WHILE_WORN ) && it.has_flag( flag_RESTRICT_HANDS ) ) ) {
+        status_line = _( "The off-hand slot takes a shield." );
+        return;
+    }
 
     // Weapon slot selected → prefer wield
     if( selected_slot >= 0 && selected_slot < static_cast<int>( slots.size() ) &&
@@ -866,6 +874,12 @@ void rpg_equipment_window::try_drag_equip()
         return;
     }
     const doll_slot &slot = slots[selected_slot];
+    if( slot.type == doll_slot::kind::offhand &&
+        !( selected_inv->has_flag( flag_BLOCK_WHILE_WORN ) &&
+           selected_inv->has_flag( flag_RESTRICT_HANDS ) ) ) {
+        status_line = _( "The off-hand slot takes a shield." );
+        return;
+    }
     // Dropping a compatible magazine/ammo onto an occupied doll slot (e.g.
     // notched stick → bow fire drill) should Reload, not try to replace the
     // wielded item (which only offers Store/Drop/Wear via dispose_item).

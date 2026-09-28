@@ -104,7 +104,12 @@
     "//COMMENT": "Basic salt, a little less fun than most seasonings(fun 3).",
     "fun": 2,
     "extend": { "flags": [ "NO_AUTO_CONSUME", "INEDIBLE" ] },
-    "color": "white"
+    "color": "white",
+    "use_action": {
+      "type": "effect_on_conditions",
+      "description": "Throw some salt over your shoulder.",
+      "effect_on_conditions": [ "EOC_PERK_ABSIT_INVIDIA_SALT" ]
+    }
   },
   {
     "id": "seasoning_italian",

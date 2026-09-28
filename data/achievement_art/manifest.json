@@ -1,0 +1,1272 @@
+{
+  "completed": 211,
+  "expected": 211,
+  "entries": [
+    {
+      "key": "achievement_kill_zombie",
+      "sha256": "557607d0cfe0cbbd85cda31f1be0dfb5c1fde619a39dcac333b27e2346fa9b44",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_kill_zombie.png",
+      "review": "Reviewed corrected source and 96px preview: protagonist matches the auburn-haired adult MAN at RIGHT of Innawoods; achievement action, equipment and pixel style preserved. Supersedes reversed-roster version. Live popup review pending."
+    },
+    {
+      "key": "achievement_kill_cyborg",
+      "sha256": "67db4fc298d04ba1665d77ec4ccb7420428c7ae8b98265f994518dcb61f99b45",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_kill_cyborg.png",
+      "review": "Reviewed corrected source and 96px preview: protagonist matches the auburn-haired adult MAN at RIGHT of Innawoods; achievement action, equipment and pixel style preserved. Supersedes reversed-roster version. Live popup review pending."
+    },
+    {
+      "key": "achievement_kill_nether",
+      "sha256": "a567e81e5cf0323eae5ad038a303195f47c8434f5c9e8ad64ea26a06ad9dac8b",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_kill_nether.png",
+      "review": "Reviewed corrected source and 96px preview against canonical Innawoods pair: BLONDE ADULT WOMAN on the LEFT. Hair/identity corrected while achievement subject, action, outfit and pixel shading retained. Live popup review pending."
+    },
+    {
+      "key": "achievement_kill_fungus",
+      "sha256": "a5d9c172f47dfddfedd1cb62caa433907864988c66717aa86022e6e01c478ba4",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_kill_fungus.png",
+      "review": "Reviewed corrected source and 96px preview against canonical Innawoods pair: BLONDE ADULT WOMAN on the LEFT. Hair/identity corrected while achievement subject, action, outfit and pixel shading retained. Live popup review pending."
+    },
+    {
+      "key": "achievement_kill_insect",
+      "sha256": "452163912a8edc1431fc5e36a1f8973c914af8266315f9e76c57cdad0c6b7625",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_kill_insect.png",
+      "review": "Reviewed corrected source and 96px preview against canonical Innawoods pair: AUBURN/RED-HAIRED ADULT MAN on the RIGHT. Hair/identity corrected while achievement subject, action, outfit and pixel shading retained. Live popup review pending."
+    },
+    {
+      "key": "achievement_kill_robot",
+      "sha256": "1fbed97b418eac97229e4f4f8389c7f6507e40f5b89db67ee75c6b0e5d023f9e",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_kill_robot.png",
+      "review": "Reviewed corrected source and 96px preview against canonical Innawoods pair: AUBURN/RED-HAIRED ADULT MAN on the RIGHT. Hair/identity corrected while achievement subject, action, outfit and pixel shading retained. Live popup review pending."
+    },
+    {
+      "key": "achievement_kill_in_first_minute",
+      "sha256": "cc93f2bf41ef135fe7a96704e70338f45717464516145a0ebc8e7324b05a8441",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_kill_in_first_minute.png",
+      "review": "Reviewed corrected source and 96px preview against canonical Innawoods pair: BLONDE ADULT WOMAN on the LEFT. Hair/identity corrected while achievement subject, action, outfit and pixel shading retained. Live popup review pending."
+    },
+    {
+      "key": "achievement_kill_10_monsters",
+      "sha256": "7d334c84ce82a3c51f84fb3dfee7d16896bda4efc522e7ec205aade6d83814b9",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_kill_10_monsters.png",
+      "review": "Reviewed corrected source and 96px preview against canonical Innawoods pair: AUBURN/RED-HAIRED ADULT MAN on the RIGHT. Hair/identity corrected while achievement subject, action, outfit and pixel shading retained. Live popup review pending."
+    },
+    {
+      "key": "achievement_kill_100_monsters",
+      "sha256": "ef363da0942d57b409236ac719a8fa37fb85303df5810920c6646925e4bb8b97",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_kill_100_monsters.png",
+      "review": "Reviewed corrected source and 96px preview against canonical Innawoods pair: BLONDE ADULT WOMAN on the LEFT. Hair/identity corrected while achievement subject, action, outfit and pixel shading retained. Live popup review pending."
+    },
+    {
+      "key": "achievement_kill_1000_monsters",
+      "sha256": "68753a8c82182e3bc16a7c654ad4768d7183cd1510c6d00b235203384b225a9d",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_kill_1000_monsters.png",
+      "review": "Reviewed corrected source and 96px preview against canonical Innawoods pair: AUBURN/RED-HAIRED ADULT MAN on the RIGHT. Hair/identity corrected while achievement subject, action, outfit and pixel shading retained. Live popup review pending."
+    },
+    {
+      "key": "achievement_kill_10000_monsters",
+      "sha256": "13d46b4cb9b029dd34047127143b2c8d25621e030a06de24058acbc22fe2302e",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_kill_10000_monsters.png",
+      "review": "Reviewed corrected source and 96px preview against canonical Innawoods pair: BLONDE ADULT WOMAN on the LEFT. Hair/identity corrected while achievement subject, action, outfit and pixel shading retained. Live popup review pending."
+    },
+    {
+      "key": "achievement_kill_100000_monsters",
+      "sha256": "187d511cc1c2fd7953b00a01d8db3aca5108740b304c9d59b43d22b723dd70c6",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_kill_100000_monsters.png",
+      "review": "Reviewed corrected source and 96px preview against canonical Innawoods pair: AUBURN/RED-HAIRED ADULT MAN on the RIGHT. Hair and identity corrected while achievement subject, action, outfit and pixel shading retained. Live popup review pending."
+    },
+    {
+      "key": "achievement_survive_one_day",
+      "sha256": "1b21bb79ad7eee43635946430f435cc5902829f6934665953d108523aba35b5e",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_survive_one_day.png",
+      "review": "Reviewed corrected source and 96px preview against canonical Innawoods pair: AUBURN/RED-HAIRED ADULT MAN on the RIGHT. Hair and identity corrected while achievement subject, action, outfit and pixel shading retained. Live popup review pending."
+    },
+    {
+      "key": "achievement_survive_7_days",
+      "sha256": "76c467c037b6bf6b8db4c03619cae90ccbcb0686905ddfd575ed25a3aa9a7c64",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_survive_7_days.png",
+      "review": "Reviewed corrected source and 96px preview against canonical Innawoods pair: BLONDE ADULT WOMAN on the LEFT. Hair and identity corrected while achievement subject, action, outfit and pixel shading retained. Live popup review pending."
+    },
+    {
+      "key": "achievement_survive_28_days",
+      "sha256": "828ef873673de1a66e2e327ac9a3dd7f3b27922134e1ad53a8efcdf3b80a1719",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_survive_28_days.png",
+      "review": "Reviewed corrected source and 96px preview against canonical Innawoods pair: AUBURN/RED-HAIRED ADULT MAN on the RIGHT. Hair and identity corrected while achievement subject, action, outfit and pixel shading retained. Live popup review pending."
+    },
+    {
+      "key": "achievement_survive_91_days",
+      "sha256": "d317180ecf89cc864560b9f71b6bcb99485b5c1c18d1f08a958f213a6e69d7e8",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_survive_91_days.png",
+      "review": "Inspected source and 96px preview: canonical blonde woman, autumn firewood scene retained; live popup review pending."
+    },
+    {
+      "key": "achievement_survive_365_days",
+      "sha256": "a6a49d90d6eecdda727b0b02b6c443af7521fdd4dd21080dac18c63ea932fd93",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_survive_365_days.png",
+      "review": "Inspected corrected source and 96px preview: canonical hair and identity retained, corrupted sky strip repaired, scene preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_marathon",
+      "sha256": "51842c11310247386dd83c94e86c87bdaf2b71fdd46dbc75392d0da3960466d4",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_marathon.png",
+      "review": "Inspected corrected source and 96px preview: canonical hair and identity retained, corrupted sky strip repaired, scene preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_walk_1000_miles",
+      "sha256": "366d9867bef6a6556ab5285907ad3538f822418fa1fb20facbbdfb7801565bc2",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_walk_1000_miles.png",
+      "review": "Inspected full generated source and 96px preview: specific walking, thorn, swimming, height/depth or driving subject remains legible, canonical blonde woman/auburn man matched where visible, opaque edges clean. Live popup review pending."
+    },
+    {
+      "key": "achievement_traverse_sharp_terrain",
+      "sha256": "9d2d75f3bb71f8982d792fb2cf32efddeaf63ed4a242f6e44d50ceda102d9e94",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_traverse_sharp_terrain.png",
+      "review": "Inspected full generated source and 96px preview: specific walking, thorn, swimming, height/depth or driving subject remains legible, canonical blonde woman/auburn man matched where visible, opaque edges clean. Live popup review pending."
+    },
+    {
+      "key": "achievement_swim_merit_badge",
+      "sha256": "2a0b9d6045bdf8e62f59b87b0e409696520388d1593bbf22c0eca1e78596fe2e",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_swim_merit_badge.png",
+      "review": "Inspected full generated source and 96px preview: specific walking, thorn, swimming, height/depth or driving subject remains legible, canonical blonde woman/auburn man matched where visible, opaque edges clean. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_max_z_level",
+      "sha256": "c33d848baaabaa24873868f42af78c50f074824993e184d3b2350d5677e34b41",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_max_z_level.png",
+      "review": "Inspected full generated source and 96px preview: specific walking, thorn, swimming, height/depth or driving subject remains legible, canonical blonde woman/auburn man matched where visible, opaque edges clean. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_min_z_level",
+      "sha256": "ecc124c86da068e866b6abd7d16b47e3ba0bf75897a469a808dcf04709b2ed6c",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_min_z_level.png",
+      "review": "Inspected full generated source and 96px preview: specific walking, thorn, swimming, height/depth or driving subject remains legible, canonical blonde woman/auburn man matched where visible, opaque edges clean. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_distance_gndv_berthabenz",
+      "sha256": "2cab80f7867d15803a4a4fb675214497dd9d2113ebbf8ce47d138300c2a77b74",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_distance_gndv_berthabenz.png",
+      "review": "Inspected full generated source and 96px preview: specific walking, thorn, swimming, height/depth or driving subject remains legible, canonical blonde woman/auburn man matched where visible, opaque edges clean. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_distance_gndv_daytona",
+      "sha256": "d79bc259a14ece8cb40f73528f88b3618340042d2f150c32c5a339acf8e27017",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_distance_gndv_daytona.png",
+      "review": "Inspected full source and 96px preview: distinct driving or boat-travel subject, recognizable vehicle silhouette, canonical hair colors where visible, clean opaque scene. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_distance_gndv_arcticsounds",
+      "sha256": "f605a2a88aea6e2d6a489e9483194fe83944f79688c1fece98e6542cc339c548",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_distance_gndv_arcticsounds.png",
+      "review": "Inspected full source and 96px preview: distinct driving or boat-travel subject, recognizable vehicle silhouette, canonical hair colors where visible, clean opaque scene. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_distance_gndv_route66",
+      "sha256": "865245bdcc0973818cd7e326bc94e32f823a7d85845ea0f15ed09ae348a213b5",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_distance_gndv_route66.png",
+      "review": "Inspected full source and 96px preview: distinct driving or boat-travel subject, recognizable vehicle silhouette, canonical hair colors where visible, clean opaque scene. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_distance_boat_hocr",
+      "sha256": "ab7aa79a1da69e1b076f1c34997f5851fb20425d09f8b6ca5f1f5a1eb7f58a2f",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_distance_boat_hocr.png",
+      "review": "Inspected full source and 96px preview: distinct driving or boat-travel subject, recognizable vehicle silhouette, canonical hair colors where visible, clean opaque scene. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_distance_boat_mayflower",
+      "sha256": "bcd3e88490d05cc643266cea2002e8bd4bc6d7d1a24233d28bd614f658a540fd",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_distance_boat_mayflower.png",
+      "review": "Inspected full source and 96px preview: distinct driving or boat-travel subject, recognizable vehicle silhouette, canonical hair colors where visible, clean opaque scene. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_distance_boat_circumnavigate",
+      "sha256": "b78c122b4984320ab4ddb016993d407a8ce6a865c10964f57ee7c578ab876945",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_distance_boat_circumnavigate.png",
+      "review": "Inspected full source and 96px preview: distinct driving or boat-travel subject, recognizable vehicle silhouette, canonical hair colors where visible, clean opaque scene. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_distance_acft_wright",
+      "sha256": "85e9dfe3f15343e2c0f2d9328e275f2c6e13bc00e2b783f5c95627ffae105e8c",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_distance_acft_wright.png",
+      "review": "Inspected source and 96px preview: aircraft, travel or remote-control scene reads clearly; canonical character hair visible where appropriate; no damaged image edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_distance_acft_bleriot",
+      "sha256": "e143e53eeb26bdda15c0fde608c3d4182a6cc1a9137cea648b2bee3712944150",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_distance_acft_bleriot.png",
+      "review": "Inspected source and 96px preview: aircraft, travel or remote-control scene reads clearly; canonical character hair visible where appropriate; no damaged image edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_distance_acft_lindbergh",
+      "sha256": "493842fb245f1ff69ace09043ec3648e93b98fa955a3dfeb4da909d9551ef9c9",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_distance_acft_lindbergh.png",
+      "review": "Inspected source and 96px preview: aircraft, travel or remote-control scene reads clearly; canonical character hair visible where appropriate; no damaged image edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_distance_acft_fosset",
+      "sha256": "36d37f6eff6c48f71b766ad73cc4d299bd9d915b0e3fdafdad22e9241e837dee",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_distance_acft_fosset.png",
+      "review": "Inspected source and 96px preview: aircraft, travel or remote-control scene reads clearly; canonical character hair visible where appropriate; no damaged image edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_distance_acft_flyergold",
+      "sha256": "a6dc2b8ad466739b623dbd04c94e69f9e9eb85a04a266f1fdd1066cf9eead589",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_distance_acft_flyergold.png",
+      "review": "Inspected source and 96px preview: aircraft, travel or remote-control scene reads clearly; canonical character hair visible where appropriate; no damaged image edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_onboard_rc",
+      "sha256": "d679879f337718cff60c141b0c3174ae9b54b67b3f562b0bfb2178dda18a42b1",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_onboard_rc.png",
+      "review": "Inspected source and 96px preview: aircraft, travel or remote-control scene reads clearly; canonical character hair visible where appropriate; no damaged image edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_distance_passenger",
+      "sha256": "354107657d373fcecad14d891b4e0bd32a0a8f70074959c0d0c49d2b361e4a4e",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_distance_passenger.png",
+      "review": "Inspected full source and 96px preview: vehicle action or crowbar remains legible, distinct subject silhouette and motion, canonical hair colors where visible, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_distance_skidding",
+      "sha256": "92cc20048312225b346db4bdfd6b41c4070bf797c81ad2b699c55d4ebb8450b4",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_distance_skidding.png",
+      "review": "Inspected full source and 96px preview: vehicle action or crowbar remains legible, distinct subject silhouette and motion, canonical hair colors where visible, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_velocity_gndv_42mph",
+      "sha256": "35eb2b68a452b88d18a8eb21758ca02a35a330a2da1d4306b20a79207e550d16",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_velocity_gndv_42mph.png",
+      "review": "Inspected full source and 96px preview: vehicle action or crowbar remains legible, distinct subject silhouette and motion, canonical hair colors where visible, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_velocity_gndv_135mph",
+      "sha256": "2297e2fadf53a56757596a2ddaef1614a5c0e3f8bc477fdfba9a2c374efab681",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_velocity_gndv_135mph.png",
+      "review": "Inspected full source and 96px preview: vehicle action or crowbar remains legible, distinct subject silhouette and motion, canonical hair colors where visible, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_velocity_rail_150mph",
+      "sha256": "7a6f28b1ba453ba00290b985800a2f642e6019790f69d8145772d9210ad75217",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_velocity_rail_150mph.png",
+      "review": "Inspected full source and 96px preview: vehicle action or crowbar remains legible, distinct subject silhouette and motion, canonical hair colors where visible, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_velocity_boat_71mph",
+      "sha256": "ad10ae56dd28bd45bb7f5b5c510cb9c6b4028f1b22bb33a840c73adc271ae0ce",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_velocity_boat_71mph.png",
+      "review": "Inspected full source and 96px preview: vehicle action or crowbar remains legible, distinct subject silhouette and motion, canonical hair colors where visible, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_velocity_boat_125mph",
+      "sha256": "beef536296d4b7eb433593f3e9ab43f5eacdeb4baf8fcdae57b7f3aaf9b56fd7",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_velocity_boat_125mph.png",
+      "review": "Inspected full source and 96px preview: vehicle action or crowbar remains legible, distinct subject silhouette and motion, canonical hair colors where visible, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_velocity_acft_mach1",
+      "sha256": "fd7d83a2120ea3e8362390ea9f318e7a0c8aaed9df333e35e8a75b94cee50015",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_velocity_acft_mach1.png",
+      "review": "Inspected full source and 96px preview: vehicle action or crowbar remains legible, distinct subject silhouette and motion, canonical hair colors where visible, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_acft_max_z_level",
+      "sha256": "b30fd327cbeced67ffcd150f57028851397c368cf26e13f4cf3bd6f1283dca80",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_acft_max_z_level.png",
+      "review": "Inspected full source and 96px preview: vehicle action or crowbar remains legible, distinct subject silhouette and motion, canonical hair colors where visible, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_velocity_drift_50mph",
+      "sha256": "da55cec43260e020af95e22af11ea2d5988cc7d5592794eb89a962df658aa0fc",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_velocity_drift_50mph.png",
+      "review": "Inspected full source and 96px preview: vehicle action or crowbar remains legible, distinct subject silhouette and motion, canonical hair colors where visible, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_vehicle_velocity_rail_human50mph",
+      "sha256": "df3e3f408b882191969f6da77217f4635d65b9d87ece72a8a47a059211d0c0d3",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_vehicle_velocity_rail_human50mph.png",
+      "review": "Inspected full source and 96px preview: vehicle action or crowbar remains legible, distinct subject silhouette and motion, canonical hair colors where visible, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_wield_crowbar",
+      "sha256": "8af77a4e89d5610f13f07b973bf4afc615c3fd71c608399759ccf9bdbc7f1147",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_wield_crowbar.png",
+      "review": "Inspected full source and 96px preview: vehicle action or crowbar remains legible, distinct subject silhouette and motion, canonical hair colors where visible, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_wear_power_armor",
+      "sha256": "0c249b69e7db8524d7c0ff1503acd96e498daba6c5c3edb44b5552fea50e2756",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_wear_power_armor.png",
+      "review": "Inspected full source and 96px preview: specific armor, exploration, woodcutting or grave subject remains legible; only canonical human pair used with correct blonde/auburn hair, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_lab_finale",
+      "sha256": "09eb0ac8557b3369866f56f52e0a227e455490f11409af0f6e923ba5c8e4b619",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_lab_finale.png",
+      "review": "Inspected full source and 96px preview: specific armor, exploration, woodcutting or grave subject remains legible; only canonical human pair used with correct blonde/auburn hair, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_refugee_center",
+      "sha256": "0e6c666f73ecce3413c0c076cb43ac83b94271be3b4fd6f95b6f24b36c9b6b95",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_refugee_center.png",
+      "review": "Inspected full source and 96px preview: specific armor, exploration, woodcutting or grave subject remains legible; only canonical human pair used with correct blonde/auburn hair, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_return_to_first_omt",
+      "sha256": "91c21470149449ce20b8984fe9533d19e163bfe3d419ced0f86b60e94a73aba3",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_return_to_first_omt.png",
+      "review": "Inspected full source and 96px preview: specific armor, exploration, woodcutting or grave subject remains legible; only canonical human pair used with correct blonde/auburn hair, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_cut_1_tree",
+      "sha256": "a11077e7c9e1c458006200445bf4c14495ad5f264888f94d197aeeb707aa9b52",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_cut_1_tree.png",
+      "review": "Inspected full source and 96px preview: specific armor, exploration, woodcutting or grave subject remains legible; only canonical human pair used with correct blonde/auburn hair, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_cut_100_trees",
+      "sha256": "13ea0103b73c7865714d280990e28b2121cf2a9c6a5165c26e335b97b3c746c2",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_cut_100_trees.png",
+      "review": "Inspected full source and 96px preview: specific armor, exploration, woodcutting or grave subject remains legible; only canonical human pair used with correct blonde/auburn hair, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_cut_1000_trees",
+      "sha256": "65e484f42bf5a526ac357122c242a6ede6f0d184edf6d94a24ae158cf07d127c",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_cut_1000_trees.png",
+      "review": "Inspected full source and 96px preview: specific armor, exploration, woodcutting or grave subject remains legible; only canonical human pair used with correct blonde/auburn hair, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_exhume_1_grave",
+      "sha256": "97b0c5f191d85a8a1bf77fa340666b4e06706744a4c4dab65857e40b310f7a1f",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_exhume_1_grave.png",
+      "review": "Inspected full source and 96px preview: specific armor, exploration, woodcutting or grave subject remains legible; only canonical human pair used with correct blonde/auburn hair, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_exhume_10_graves",
+      "sha256": "e5e6659a60e908edd831f8b2d5e5d8645a6b8ef373d9d40b6cdcb2b8ba009a6f",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_exhume_10_graves.png",
+      "review": "Inspected full source and 96px preview: specific armor, exploration, woodcutting or grave subject remains legible; only canonical human pair used with correct blonde/auburn hair, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_bury_1_corpse",
+      "sha256": "bcfa3088ab259ebc280629ac90ba56a474b337e7cea9d1a61d79b6130f177a34",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_bury_1_corpse.png",
+      "review": "Inspected full source and 96px preview: specific armor, exploration, woodcutting or grave subject remains legible; only canonical human pair used with correct blonde/auburn hair, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_bury_10_corpses",
+      "sha256": "6c5276dad121043ddb0e0c791eab5149b165c753e3facb49f8a085739e476882",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_bury_10_corpses.png",
+      "review": "Inspected full source and 96px preview: specific armor, exploration, woodcutting or grave subject remains legible; only canonical human pair used with correct blonde/auburn hair, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_bury_100_corpses",
+      "sha256": "13e64e0bff3e0dac15accf23192a6158b28fbfa9fdb250e0c0353fe7cc1dacf7",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_bury_100_corpses.png",
+      "review": "Inspected full source and 96px preview: specific armor, exploration, woodcutting or grave subject remains legible; only canonical human pair used with correct blonde/auburn hair, clean opaque edges. Live popup review pending."
+    },
+    {
+      "key": "achievement_install_1_cbm",
+      "sha256": "b364633e92957a495a1aad20ccadbc31fdb656a8c2d2fba21352e2b05f567318",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_install_1_cbm.png",
+      "review": "Reviewed generated source and 96px preview. Blonde woman examines her integrated arm port in a mirror. Canonical hair color retained; subject remains readable at popup scale. Live popup review pending."
+    },
+    {
+      "key": "achievement_install_10_cbms",
+      "sha256": "407e002d5dbe4bc9eec842775c19ee25631740b202babf170fc82381c68d75c4",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_install_10_cbms.png",
+      "review": "Reviewed generated source and 96px preview. Auburn-haired man shows multiple integrated limb and eye components. Canonical hair color retained; subject remains readable at popup scale. Live popup review pending."
+    },
+    {
+      "key": "achievement_crosses_mutation_threshold",
+      "sha256": "52d5b8743b6538ce9ed6037967c163a546ce2f2379e01163389197aedb0249fb",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_crosses_mutation_threshold.png",
+      "review": "Reviewed generated source and 96px preview. Three successive forms of the auburn-haired man cross a luminous mutation threshold. Canonical hair color retained; subject remains readable at popup scale. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_plant",
+      "sha256": "42961435d574fb94ac3969f715b2df562f3a088367ec88009fe09016fb83d6a8",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_plant.png",
+      "review": "Reviewed generated source and 96px preview. Blonde woman has leafy growth, bark limbs and root feet. Canonical hair color retained; subject remains readable at popup scale. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_rabbit",
+      "sha256": "7a77c4c58e1c0be52bc8b7bd6d01efd390feefb010a4078e7d38536ee9175cf7",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_rabbit.png",
+      "review": "Reviewed generated source and 96px preview. Blonde woman has rabbit ears and hind legs, bounding past a tortoise. Canonical hair color retained; subject remains readable at popup scale. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_insect",
+      "sha256": "efe73ad230158053237ae348976998cbd2feeeb0cbe614d26aca2948ee05abdc",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_insect.png",
+      "review": "Reviewed generated source and 96px preview. Auburn-haired man has compound eyes, antennae and a chitin body. Canonical hair color retained; subject remains readable at popup scale. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_spider",
+      "sha256": "aeba28e72eb906e90dd202d563195830b9c931c569c23464d18677eaf6efc2eb",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_spider.png",
+      "review": "Reviewed generated source and 96px preview. Blonde woman has arachnid limbs amid a web. Canonical hair color retained; subject remains readable at popup scale. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_slime",
+      "sha256": "d5be4eefe5ca94b5921c4eb6674f8c25385cbea6677d8d5ad889fb937c396a6f",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_slime.png",
+      "review": "Reviewed generated source and 96px preview. Auburn-haired man has translucent fluid limbs and pooled feet. Canonical hair color retained; subject remains readable at popup scale. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_fish",
+      "sha256": "e249a5edf44c31a6080dbdc532bd8b6b5f784c2fe43b7ba9a1e75ade88905862",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_fish.png",
+      "review": "Reviewed generated source and 96px preview. Blonde woman swims with gills, scales and fins. Canonical hair color retained; subject remains readable at popup scale. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_rat",
+      "sha256": "b216c623ca6f09c69cabc99f18852388e8ebd0dc429637f1b33d2feb5e26b3e1",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_rat.png",
+      "review": "Reviewed generated source and 96px preview. Auburn-haired man has rat ears, muzzle and tail in a culvert. Canonical hair color retained; subject remains readable at popup scale. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_beast",
+      "sha256": "0907f6ee05fe6a877ce51fdbc7528ba5da1cfa34d42a9f787eee076d887c5174",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_beast.png",
+      "review": "Reviewed generated source and 96px preview. Auburn-haired man has shaggy beast anatomy and large claws. Canonical hair color retained; subject remains readable at popup scale. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_ursine",
+      "sha256": "6f7cb4ec5308099cd090df6644077b2709cd717bfe29ba4f4c8990626fcba3ef",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_ursine.png",
+      "review": "Reviewed generated source and 96px preview. Auburn-haired man in bear form gathers berries. Canonical hair color retained; subject remains readable at popup scale. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_feline",
+      "sha256": "a096591397ac6708db57b4ef0f1e5d99b1e442c7ecd470e60baf10b5e79ed473",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_feline.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde feline woman balances on a ruined wall with visible ears and curled tail. Identity hair color and readable mutation silhouette preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_lupine",
+      "sha256": "4296add537004ea4278747769f3e173771c8f086ccc225e030c0f031371c6e16",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_lupine.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn wolf man stands above an ordinary wolf pack in moonlight. Identity hair color and readable mutation silhouette preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_cattle",
+      "sha256": "cf84e708269f38885606dd27a3cdbac4c70aea82b7561695c5579a6e4a9ba9b9",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_cattle.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn bovine man has clear horns, muzzle and hooves. Identity hair color and readable mutation silhouette preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_cephalapod",
+      "sha256": "27f035c4addb14fd92922f7e77a0bbbb5b59d15954f8a281325da38b56e51ad8",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_cephalapod.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man has a mantle and tentacle arms beside a tide pool. Identity hair color and readable mutation silhouette preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_bird",
+      "sha256": "de70d8c8c494624ef45d491e42420195c51ee300ce405413faf81269d061250b",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_bird.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde bird woman perches on a branch with wings and talons. Identity hair color and readable mutation silhouette preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_lizard",
+      "sha256": "8f392663bde765735f96697348533724c11b1c9f38d4b43751417c8e357dea6f",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_lizard.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn lizard man with scales and a long tail warms on a rock. Identity hair color and readable mutation silhouette preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_troglobite",
+      "sha256": "2cf82b5ee2d894ac1c1b3709649fe553706253690dfdaeae8dae9faf1c21ba40",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_troglobite.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde cave woman has pale skin and enlarged eyes among stalactites. Identity hair color and readable mutation silhouette preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_gastropod",
+      "sha256": "5cbc9f146c16bda828f47749ef8509af40cbb63a041a0c5a099672ec7bcbee7d",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_gastropod.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn snail man has eyestalks, shell and muscular foot. Identity hair color and readable mutation silhouette preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_batrachian",
+      "sha256": "12965caa784a8f11bfe44384f105fba80b9f56197b36ea51f4639666e04113bf",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_batrachian.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde frog woman leaps from a pond with webbed limbs. Identity hair color and readable mutation silhouette preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_alpha",
+      "sha256": "dcc522a5b85865008ac73e41a7f17fa3e4e7d51514624380aec5371963514b18",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_alpha.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman retains human form with enhanced physique outside a ruined lab. Identity hair color and readable mutation silhouette preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_medical",
+      "sha256": "6636763764e193febee6284eaf05bb6d36a6eb0091f8861fead8b444b3e3fb13",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_medical.png",
+      "review": "Reviewed full generated source and 96px preview. Pale auburn man tends an arm with altered vein-like markings. Identity hair color and readable mutation silhouette preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_chimera",
+      "sha256": "52d35817d3dd1d292984b2608fc610e0581d70614828d1f07e3213e32110ce8f",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_chimera.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man has a mixed horned, scaled and furred mutant body. Identity hair color and readable mutation silhouette preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_elfa",
+      "sha256": "0a13a96319cc7eef8d865a5a03e24699c1d24c23d97c69ef53fdd1c2e926dd58",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_elfa.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde Elf-A woman with pointed ears sits in woodland with a bird. Subject and canonical hair colors remain readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_raptor",
+      "sha256": "3884b9450662ae7cdd1d7d48a7416f7763d92a527d4d5658083fdadfd5428ff8",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_raptor.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde raptor woman has a long tail, clawed feet and feathered reptilian silhouette. Subject and canonical hair colors remain readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_mutation_threshold_mouse",
+      "sha256": "fb47b2fd439a25a470a56141d007442c13e3e78303647edf28d9cf3e30c436f2",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_mutation_threshold_mouse.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn mouse man stands beside an oversized boot, communicating small scale. Subject and canonical hair colors remain readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_break_major_limbs",
+      "sha256": "29b475267f99293cce88be02ce86ab0184f3f870a611ec7cee69b801ebb805f7",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_break_major_limbs.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man rests with both arms and both legs clearly splinted. Subject and canonical hair colors remain readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_speech",
+      "sha256": "b2d27564aaefaccf8d79f67c2420fa6e16feb98d56a4d138348a37c74608cc18",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_speech.png",
+      "review": "Reviewed full generated source and 96px preview. The blonde woman and auburn man exchange friendly gestures beside a lantern. Subject and canonical hair colors remain readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_speech",
+      "sha256": "73f55e2b7262485d27b6feb7fdbcf671c002541f79f5fea218c2fd5b86fcf31f",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_speech.png",
+      "review": "Reviewed full generated source and 96px preview. The blonde woman negotiates while the auburn man listens across a supply stall. Subject and canonical hair colors remain readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_speech",
+      "sha256": "d91f634742be09dcd6202b2411c288a2f3d56acbe96f5a7980707f9921ee3e2e",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_speech.png",
+      "review": "Reviewed full generated source and 96px preview. The canonical pair shake hands across a trade table in a fortified settlement. Subject and canonical hair colors remain readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_computer",
+      "sha256": "0a218d7d25a869bc64eb1f31f6fd4cc4a500f75eb259cb09c53b4f2c6329d33a",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_computer.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman reconnects a rugged laptop cable on a bench. Subject and canonical hair colors remain readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_computer",
+      "sha256": "fb0d9bf3d0333aeefca59d5dfc7711e8ba907f9f3835ee7d005bc85c0c43abe2",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_computer.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man connects his portable computer to a ruined security terminal. Subject and canonical hair colors remain readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_computer",
+      "sha256": "35e5b882ab3aac7cc2b8cc1c110dae4d462bc74299ebec6a253a68003135ebeb",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_computer.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman repairs linked hardware beneath multiple blank screens. Subject and canonical hair colors remain readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_firstaid",
+      "sha256": "48a69938064bdf9b19089ac189e5d87ed90f9729744dc4eaac64a8d9cdbf25fe",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_firstaid.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman bandages the auburn man's forearm. Subject and canonical hair colors remain readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_firstaid",
+      "sha256": "f3942c2cec638aec1ed3c39b83e3fe824af1131a88daf0ea792b6a7c9d15d860",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_firstaid.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn medic examines the blonde woman with a stethoscope. Subject and canonical hair colors remain readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_firstaid",
+      "sha256": "254e5c0ae4659a2b581a85748675a494f1f0dba73a3e8c4b3a05c64db4fe1e41",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_firstaid.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde physician shows a joint scan to the auburn-haired patient in an improvised clinic. Subject remains readable; canonical hair colors preserved where visible. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_mechanics",
+      "sha256": "3263e730da5fe4d61b6ac1e8c05e5937de17532a9f6af8ca015a27327d71d591",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_mechanics.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman works on a car wheel with a wrench. Subject remains readable; canonical hair colors preserved where visible. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_mechanics",
+      "sha256": "3c1403fe7425787082740376c94e3f3b836938e379acf66c6390cf6b1d96c8f5",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_mechanics.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man in coveralls works on a large engine stand. Subject remains readable; canonical hair colors preserved where visible. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_mechanics",
+      "sha256": "2face54ee87fb3abfae8288e7eb76e282a15aec96538e2e515e58d3cbbab8d99",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_mechanics.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman repairs a visibly salvaged, taped vehicle assembly. Subject remains readable; canonical hair colors preserved where visible. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_traps",
+      "sha256": "7bd2d793299ba3d1b386a7279fcce812f64bad10717b36409f6717a8847fb7a4",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_traps.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man checks a simple woodland snare. Subject remains readable; canonical hair colors preserved where visible. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_traps",
+      "sha256": "ad00570a0e58549af6d2713ba8919f9f5636b90276d1d236994a6c339bb864bd",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_traps.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman checks an empty mechanical trap beside a stream. Subject remains readable; canonical hair colors preserved where visible. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_traps",
+      "sha256": "59b4041973cd82ea6de010bcf60842ba29530af131b26a3cc950e07a23e2ddef",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_traps.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man in protective gear inspects an inert mine-shaped object. Subject remains readable; canonical hair colors preserved where visible. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_driving",
+      "sha256": "42c58c5a0aa854a24cd28d13a785acb26d2a9021adc71d78e12d215093188681",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_driving.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman steers around abandoned road obstacles, viewed inside the cabin. Subject remains readable; canonical hair colors preserved where visible. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_driving",
+      "sha256": "faabfb1e9ae0f0bd523109c01f9f61128d2f839e254011d3ac559fe2d34d5a94",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_driving.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man drives a loaded utility vehicle around a tight mountain bend. Subject remains readable; canonical hair colors preserved where visible. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_driving",
+      "sha256": "18769dbb0cacd1614ff1bd713eae052d5d9073cb41e4cd8b804bc2a415d150d7",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_driving.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde braid shows behind a helmet as the woman drives a buggy through barriers. Subject remains readable; canonical hair colors preserved where visible. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_swimming",
+      "sha256": "bfdede51735afc8095743eaca90d2f661504fcb84d6754631286cef4af3de861",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_swimming.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman paddles in calm lake water wearing a practical swimsuit. Subject remains readable; canonical hair colors preserved where visible. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_swimming",
+      "sha256": "85d04ee1c1c7da31ce849361212246ab2831d92def4cbfe320edbae0b8290bb0",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_swimming.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man swims a clear stroke across a river. Subject remains readable; canonical hair colors preserved where visible. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_swimming",
+      "sha256": "554a36d789cf4f249796640f13a6d64d4d5fbd56e237cf24c627e749f6c80bba",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_swimming.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman swims through choppy dark open water. Subject remains readable and canonical hair colors are preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_fabrication",
+      "sha256": "d8caeb930f08e27f011b97949fb764da25e86038fb3f3f7828e1169937b593f0",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_fabrication.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man hammers a wooden stool together. Subject remains readable and canonical hair colors are preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_fabrication",
+      "sha256": "01572cb73c548ce14ddd03da73ae3b1fd6600d0985e14b97bd7a20e3f010ea37",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_fabrication.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman fits metal hardware to a wooden mechanism. Subject remains readable and canonical hair colors are preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_fabrication",
+      "sha256": "aa8e77a41eb443dfee8b99ae8cb6103638975c31b13ea2b2b26a970dc37ad963",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_fabrication.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn craftsman finishes a wood, metal and binding survival tool beside an anvil. Subject remains readable and canonical hair colors are preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_cooking",
+      "sha256": "27f78f229df037c7678f8ef820cebafd9f7cd0d9c62944b0cf300bffa93aaa6e",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_cooking.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman tends a roast and vegetables in a camp pan. Subject remains readable and canonical hair colors are preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_cooking",
+      "sha256": "7fb45f26fe4716a7c2b950796c0435523d03129f74b2fed71be410a5cba80f36",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_cooking.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn cook glazes sliced tenderloin with herbs nearby. Subject remains readable and canonical hair colors are preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_cooking",
+      "sha256": "964e8f9bf6a094830631aaacd3d18e64c7f18b0281e3f821e5ce6c69bad98ecb",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_cooking.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde cook prepares stew, onion soup and caramelized custard. Subject remains readable and canonical hair colors are preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_tailor",
+      "sha256": "539b7a04f4376ff75600b9722d98df1ca62dae5f73779e79705e85e0e0c0788b",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_tailor.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man stitches a contrasting coat patch. Subject remains readable and canonical hair colors are preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_tailor",
+      "sha256": "930d7a50d80905b96ff80392f7f8c35980e452e42dd7157ac9ac99bf445a7b81",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_tailor.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman fits a jacket on a faceless dress form. Subject remains readable and canonical hair colors are preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_tailor",
+      "sha256": "4d4b711f5553cc44cac16a101edb0c48b047808c588d53df16c36cc6eaf6f7e5",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_tailor.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man adjusts the collar of a layered survival coat on a dress form. Subject remains readable and canonical hair colors are preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_survival",
+      "sha256": "180ea837534c1d03f5dd78a8977a3bafddd012e5113449f2f77c56c8c96a4860",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_survival.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman places a branch on a simple woodland shelter. Subject remains readable and canonical hair colors are preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_survival",
+      "sha256": "ac9e0983bc4ba4a60bed06b84d08da1c7991e67c82694b321d64dffe5606a25b",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_survival.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man tends a cooking pot in a camp with shelter and drying rack. Subject remains readable and canonical hair colors are preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_survival",
+      "sha256": "22a4a3fc551be00a7813c3c6c1b7e6472ddcdafd8d47ac833d1fa07ce49620d1",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_survival.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman shelters beneath rock beside a steady fire as rain falls beyond. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_electronics",
+      "sha256": "5e925e4b49bf96b0302eca66c1ebcb532938574aca9adba06d2450a9519772f4",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_electronics.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man connects a battery-powered lamp on a bench. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_electronics",
+      "sha256": "bb557ae6b4cd6ff87e8b15741b93e2b917c5e9c7b2e81356721b3dfccb157be3",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_electronics.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman tests a circuit board with a multimeter beside a radio. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_electronics",
+      "sha256": "dab89bc054f47c01201bd5394d35a9971d8eb5de88707d5ad4a30962bb5044c9",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_electronics.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man works on a copper coil apparatus with a small visible arc. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_archery",
+      "sha256": "195308ffc5b211233f9c36d7d104cfe81b685d62bfe8fc06bf4dddb9d88a4e8c",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_archery.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman draws a wooden bow toward a straw target. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_archery",
+      "sha256": "436c13b2922b1fb33822842b67d4537b7ab29c08428009ad3f1f75a835b34b06",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_archery.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn archer aims toward a tight arrow grouping. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_archery",
+      "sha256": "eea94cc8de159750c907b09c3abd8a72c207fc7f5f002234dd8a78540a4b3e3f",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_archery.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde archer lowers her bow beside a target; revised end-to-end arrows clearly split a shaft. Original incorrect side-by-side arrows archived. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_gun",
+      "sha256": "31a77e72125f750a04910c8c4f2c17ee39245bd6f1748d7e125795ef65c0391c",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_gun.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man aims at wooden range boards. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_gun",
+      "sha256": "0fd1f9f1a0e86504e24efa947ad09db210645516652117fe0efd34fa8aad48d8",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_gun.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman uses a supported scoped rifle toward a distant board target. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_gun",
+      "sha256": "cfa4fa6028b02cd667cba5c310d9c4e54a54ae8a5294dc7251174e50fbc1d711",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_gun.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man aims from a covered hide toward a grouped target. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_launcher",
+      "sha256": "b54af937fc11ce834cdf501bad88e550dcc56b1cd06d4bdfad13d632f13417ef",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_launcher.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman aims a compact launcher toward an empty berm. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_launcher",
+      "sha256": "82cc2118af560bed847028cc55997b8928195ec0dc5213163a713f821ec82d72",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_launcher.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man shoulders a launcher behind sandbags toward a wooden practice structure. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_launcher",
+      "sha256": "005c7596fce1dd9e67588222efbc73c33492336a56269495c206e6b7a911a83e",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_launcher.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman launches a rocket toward a remote ruin, visible smoke trail and backblast. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_pistol",
+      "sha256": "cdfdb08142a2627f7bed55bb4c3a06cce58be1ec4ead44730020debfff810e27",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_pistol.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man practices a two-handed pistol stance. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_pistol",
+      "sha256": "4cd6db1c7996024f61558da5e1a1a88c011d70fb1cb97fac25d4724c0aa82a05",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_pistol.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman aims a compact pistol toward a tight target grouping. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_pistol",
+      "sha256": "850d0825367de5d01cf8f219bd3f19da1b9433784d136eb0b1d6dc2d76e122f6",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_pistol.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man holds a distinct long-barreled revolver. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_rifle",
+      "sha256": "4ed7f1fb79988c403da56593513b55810b4d3c73aece206997f19429fa2b24c0",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_rifle.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman practices a standing rifle stance beside a wooden fence. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_rifle",
+      "sha256": "9205b4da3c90b8186d9f6f03091fca5334fa554837da6caf5670d5921c684657",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_rifle.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man kneels with a rifle beside a support rock. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_rifle",
+      "sha256": "7ce09f8f24a48db5a94962712f72f531263ffceb731bd429b36af39cf77518c1",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_rifle.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman maintains a service rifle above an orderly camp cloth and tools. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_shotgun",
+      "sha256": "1dabf953cdcd34e6a775df6211c256a99271280b1700fcdb2d1c5010d378f60f",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_shotgun.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man holds a pump shotgun beside a peppered practice target. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_shotgun",
+      "sha256": "ad0b08f4309237f2b9141fa99ea3d1d4a7ee56c7c9da00e74055b0d0734101d6",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_shotgun.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman reloads an open double-barreled shotgun, both shells visible. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_shotgun",
+      "sha256": "62786f8c739ca99effc4144b92cd183990235fa91626c0bbf3acf6fee3d49b46",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_shotgun.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man tracks a clay target above a marsh. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_smg",
+      "sha256": "5b11daec6f14194b9f9b191a66d07c10597ee75abcca4880d1c9189dd2767f96",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_smg.png",
+      "review": "Reviewed full generated source and 96px preview. Blonde woman fires a compact automatic weapon at a practice berm. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_smg",
+      "sha256": "6cb53bbd6a50bfb2ac75ef9878afa0eb163a52da07da67c4362ff7d1f645ac03",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_smg.png",
+      "review": "Reviewed full generated source and 96px preview. Auburn man fires a compact automatic weapon with visible ejected casings. Canonical hair colors preserved and subject readable. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_smg",
+      "sha256": "8c91b8db0803575328a578da0c216604eaeba2886a335c2a8615f6d884a7e302",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_smg.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor, compact firearm and range target read clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_throw",
+      "sha256": "3b405ff18443b400d300431650b21bf9cb237037edc9384f47d4dd5dbae09e57",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_throw.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor throwing toward the can is legible. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_throw",
+      "sha256": "7c156b92ce78a1671a70564a17f8e6d24da8661a87f042f8939e2da94e99d9a5",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_throw.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor and throwing silhouette read clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_throw",
+      "sha256": "a15f7085a13d540ec97a9dba68c7b6ecdf31a390cfffbcc283c855f82acfb7f2",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_throw.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor and inert practice grenade training scene are distinct. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_melee",
+      "sha256": "f6529ca72970396e40df8c37b7519c6876cee7a1a86928d2cb99b432841d540f",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_melee.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor practicing against padded dummy reads clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_melee",
+      "sha256": "9a5ad307b47cf69b75cd7dc5e9865fe5e2674a3f88a36127d16dd562cac675bc",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_melee.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor with improvised bottle and chair leg remains legible. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_melee",
+      "sha256": "0c68b57d5f50c044cc4410ea3de05b2bc0578b3f5afb62db3b4515271a69da0e",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_melee.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor in a balanced guard in the ruined alley is distinct. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_bashing",
+      "sha256": "3b63da2b44aeb46d109f174f2ecd03fed9eeb3c7d1050fb0fac0c069fd4f9af1",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_bashing.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor bat swing and suspended target read clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_bashing",
+      "sha256": "a4f5378c05ee57046d47e82955a1d4764b75bc48b63e9847b7583d74733e9d92",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_bashing.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor heavy club and reinforced post read clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_bashing",
+      "sha256": "0bacfd4e43525ded7ed38425f38a57b83c695c60384262401ef1f6a0dd78d68a",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_bashing.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor stone cudgel and battered log have strong silhouettes. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_cutting",
+      "sha256": "7bbe443a890bcb199051db9bb49c15cf76f758e59e5040b6d08dbd10fe397059",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_cutting.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor machete and cut straw target read clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_cutting",
+      "sha256": "0d60d97b59f2507d4d22f3ddeb5f420fb980856fa249a4da702207d0afafb12c",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_cutting.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor sword and severed straw target read clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_cutting",
+      "sha256": "317bc1816ba6725cd1096a4e385354ff4ef6629343144d6b62a653abec76b2ec",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_cutting.png",
+      "review": "Reviewed full source and 96px preview. Blonde woman with two swords and cut bamboo is clear. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_dodge",
+      "sha256": "64e316f2ee58f0abe40378a2115eb7f929d85f5c8e7ee7946beef5260171493b",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_dodge.png",
+      "review": "Reviewed full source and 96px preview. Blonde woman ducks the auburn man's padded practice staff; both identities are preserved. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_dodge",
+      "sha256": "cdec50b05892f3133edd27896b3690156d402f0fc83288e74bc34b9b0a5916a6",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_dodge.png",
+      "review": "Reviewed full source and 96px preview. Auburn man slips between distinct undead figures in a ruined alley. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_dodge",
+      "sha256": "b0dacc64562a3e1264a0b7be8041fae55faec855e0383584156852a78e2e0478",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_dodge.png",
+      "review": "Reviewed full source and 96px preview. Blonde woman bending beneath projectiles has a clear silhouette. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_stabbing",
+      "sha256": "15db7b845f44b3fb7b144d9b6af62ef12aed8fb1660d7deeed39faab2f2adf74",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_stabbing.png",
+      "review": "Reviewed full source and 96px preview. Auburn man's spear thrust toward straw target reads clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_stabbing",
+      "sha256": "0aea6968571f698fe0b02ca70b3f211d244b221ecbd7da05957211ad941ff5ed",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_stabbing.png",
+      "review": "Reviewed full source and 96px preview. Blonde woman's rapier lunge and padded target remain readable. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_stabbing",
+      "sha256": "434075b9ca177944170c42a09c504753e615fad435c53b5b0ab75ecfb000bb5d",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_stabbing.png",
+      "review": "Reviewed full source and 96px preview. Auburn man's dagger guard under a streetlamp is distinct. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_unarmed",
+      "sha256": "d6c030d93998469881207421daec11e051bdc1f5d122065747e4c2e11cc60fab",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_unarmed.png",
+      "review": "Reviewed full source and 96px preview. Blonde woman with wrapped fists beside a punch bag is readable. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_unarmed",
+      "sha256": "9cf5ee41316530b63f2ead2d86cd0e8116227f14496a679b3ff9c7c41523e1a2",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_unarmed.png",
+      "review": "Reviewed full source and 96px preview. Auburn man's palm strike against wooden dummy reads clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_unarmed",
+      "sha256": "e238caa2b91e5e08f41f9921a87ff3dba1dba2f4849f888e3b4e894ee2ba4e3f",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_unarmed.png",
+      "review": "Reviewed full source and 96px preview. Blonde woman's one-leg stance in an overgrown garden is clear. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_4_chemistry",
+      "sha256": "5cf0ef2f5df6668afb27434f6b12ec50c7736bcbe6ced05d6115ad8ae25e8fd4",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_4_chemistry.png",
+      "review": "Reviewed full source and 96px preview. Auburn man with goggles examines a test tube; glassware remains readable. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_7_chemistry",
+      "sha256": "b49b9ef709edc08ef205c1037d2a26fc68c53c8476a55db6b1ede5c265abc8d3",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_7_chemistry.png",
+      "review": "Reviewed full source and 96px preview. Blonde woman with goggles and gloves tends a distinct distillation setup. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_lvl_10_chemistry",
+      "sha256": "07e2876c3ebb2029e5baad7bae548d615b046c89b4477cc7e58c99813f87da1a",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_lvl_10_chemistry.png",
+      "review": "Reviewed full source and 96px preview. Auburn laboratory expert with goggles, gloves and large glassware reads clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_witnessed_portal_storm",
+      "sha256": "e7a9055fa390353a226374af00f977a2f8ae72705e4d2043cb8a44619ad83486",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_witnessed_portal_storm.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor sheltering from geometric portals remains clear at small size. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "escaped_the_cataclysm",
+      "sha256": "b75dc8743c66b6b68557b8ae9aa50158d1016e80b462274076ed63c0be726c72",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/escaped_the_cataclysm.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor dissolving into an otherworldly doorway has a distinct silhouette. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_officer_kill",
+      "sha256": "ee4a40e1253ffc5702341ef81746ffed46502d39b7b83ba9d1aca4f4a2e2aadd",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_officer_kill.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor facing a fading uniformed ghost is readable. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_arcade_mode",
+      "sha256": "bc3d3cee47b0e624412c1d09a1358aedb519df7d436b0e29631781aec83a2eae",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_arcade_mode.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor setting aside a reward token beside a joystick reads clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_exodii_base",
+      "sha256": "edaa32aca7bf0bd110e4fb200ec2ede39ee16c66a749450eb716ad6258f247bf",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_exodii_base.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor, angular fortified entrance and mechanical inhabitant are distinct. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_balthazar",
+      "sha256": "a6e7264e3597db9311edbfaf1aba52c9cf3f8aa4d4bbe0d060367f45736e8208",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_balthazar.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor greeting a large service robot at a bunker entrance reads clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_hub01",
+      "sha256": "355357b8240fe6864f7b9c1e7bc8678a6c35120358eb8e4cf7d90da578abc9d0",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_hub01.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor, intercom and security camera remain readable. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_new_england_church_retreat",
+      "sha256": "cfce9a5f71c664023d3fe6d9d27e927a13c13135bfdf805768d0d8255ac82b51",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_new_england_church_retreat.png",
+      "review": "Reviewed full source and 96px preview. Canonical pair outside a church remain recognizable; no extra human figures. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_isherwood_farms",
+      "sha256": "4ffd62d234e6bcccd5d4ed85f051761a6208f05feed9ab9b01467fbbd683f3fa",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_isherwood_farms.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor overlooking crop rows and farm buildings reads clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_aircraft_carrier",
+      "sha256": "3550d0f89cbb08247122d5b45e253e3bba9ea184bea09319a7c803ded36a088b",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_aircraft_carrier.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor arriving on a carrier deck with aircraft and ocean is distinct. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_nuclear_plant",
+      "sha256": "778cb718594dc4f5219dcbbc45393ec7c2407713bd0710ad12fcc8582624d71d",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_nuclear_plant.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor, fence and cooling towers give clear location cues. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_island_prison",
+      "sha256": "23418dafcc78a8427cfe4a1f4bdeaab5faa7a04e27879417e3109f18c57b185f",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_island_prison.png",
+      "review": "Reviewed full source and 96px preview. Canonical pair in a boat approaching a fortified island prison read clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_mi-Go_encampment",
+      "sha256": "97a555f58f93623b6c44e247313cb10b06e71c205edb7cc8cd814d2c578b4f8b",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_mi-Go_encampment.png",
+      "review": "Reviewed full source and 96px preview. Blonde observer, organic alien structures and winged creatures remain distinct. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_trans_coast_lab",
+      "sha256": "b35d347f5037cc17c52e1dfae93a3b40f6a2eecdd83d12bfdf54d37b1885c867",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_trans_coast_lab.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor entering a coastal laboratory with apparatus and sea view is clear. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_bastion_fort",
+      "sha256": "6816b51b9379b27acc42293add3ab43a91e87b12a37704a776f07e4b80bc5659",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_bastion_fort.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor, angled ramparts, gate and cannon establish the fort. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_military_base",
+      "sha256": "3352e7948fe4bf933534872c0041cc7c16b175777063ffa742ee29bf7650e4eb",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_military_base.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor scouts a military perimeter with distant undead silhouettes. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_military_bunker",
+      "sha256": "3e6d81f0c560a7400927b508593e5267cb5a26a2e945fbdf962f1d191c9905c9",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_military_bunker.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor at an armored bunker door with sandbags reads clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_triffid_grove",
+      "sha256": "a0e886a47c69b8ca4f5920c6c0048ca68dff06ec2fb4f49d00cf6170dffe3f87",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_triffid_grove.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor faces a towering carnivorous plant with strong silhouette. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_megastore",
+      "sha256": "461aebafd5181dd7fb43f87524293ccd115565b37f302578a6b3b4bcb2378521",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_megastore.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor with shopping cart in abandoned aisles reads clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_hospital",
+      "sha256": "8e2f1bf9f7f658b5d38e4877d2898c916f5a4d72bb864d39df00d2971c9b7f53",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_hospital.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor, hospital entrance and ambulance give clear location cues. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_mid_z_level",
+      "sha256": "4223546b0a473a735b88bfc0a0b6b7cad713d642b409f44e396a881ff434ab18",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_mid_z_level.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor above several lower city rooftops conveys height. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_negative_z_level",
+      "sha256": "e1ce0b1717fa97d8f22e12a3cd48f8f78f94e480357d0e7af697a5be667fd500",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_negative_z_level.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor with flashlight descending multiple stair landings reads clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_fungal_tower",
+      "sha256": "57fa6c5a1927e6451fb78c3531a6155d924db1c5732b787565931e2fa23efbc1",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_fungal_tower.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor dwarfed by pale fungal tower conveys the landmark. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_mansion",
+      "sha256": "5d6271d15177f6f5ecc5e5806cfb267ca14aae9e703c48c1ff8f6bbdac575480",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_mansion.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor, ornate gate and decaying mansion read clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_mine",
+      "sha256": "acd1348a9ea6c7ff186057e0e55dad9d77c4e8263b79fb04eb0645bdf47a1ac8",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_mine.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor with lantern beside mine rails and cart is clear. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_police_station",
+      "sha256": "979ab03143038e147ce66606b80401f04a910cdaea16b0e0113e9dfc771e22d9",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_police_station.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor, patrol car and barred station window establish the location. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_read_books_250",
+      "sha256": "1a6809070e13dd57693fc665d515d0864c2b7f2585cede44b815e6fc091ae012",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_read_books_250.png",
+      "review": "Reviewed full source and 96px preview. Auburn man reading beside a small book stack reads clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_read_books_500",
+      "sha256": "a64a2496b452cb82ebaaae0dee5d312a9c9aa8ec141a385d9fb601104f78cdab",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_read_books_500.png",
+      "review": "Reviewed full source and 96px preview. Blonde woman reading among several stacks gives a distinct middle tier. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_read_books_1000",
+      "sha256": "9f6586ea1f1ff28ef6c039227d34d0e0543695ef8566ce88714fab2daa23ff51",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_read_books_1000.png",
+      "review": "Reviewed full source and 96px preview. Auburn man surrounded by high bookshelves conveys extensive reading. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_break_3_bones",
+      "sha256": "bb99bcac60d5d2dfdc3a4273ed9c5f444c5bba0842f369d6520de4cbb71198aa",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_break_3_bones.png",
+      "review": "Reviewed full source and 96px preview. Blonde woman with sling and three discarded splints is clear. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_break_6_bones",
+      "sha256": "3c9de733bf214c00653be57550dcdc4df31a306f26e6937bc626ad8511b3ab0a",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_break_6_bones.png",
+      "review": "Reviewed full source and 96px preview. Auburn man with arm and leg splints beside old casts is distinct. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_break_10_bones",
+      "sha256": "c83f639e63b158621dd662ee0d4c26677b9d62e37823cd094e0d6a2786e007c8",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_break_10_bones.png",
+      "review": "Reviewed full source and 96px preview. Blonde woman adjusting a splint beside multiple braces is clear. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_heal_250_damage",
+      "sha256": "6454be76b5734cdc05eee64160c9865fea5a98dbf32c643aac0267d28c7b7f57",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_heal_250_damage.png",
+      "review": "Reviewed full source and 96px preview. Auburn man resting with a neatly dressed forearm beside a small first-aid pouch reads clearly. Successful routine-recovery revision; rejected prompt archived. Canonical hair colors preserved wherever characters appear. Live popup review pending."
+    },
+    {
+      "key": "achievement_heal_1000_damage",
+      "sha256": "d34c21cc8441856b93a23c08139ff8e97fd0cb122c9d3c320f0968febca2f198",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_heal_1000_damage.png",
+      "review": "Reviewed full source and 96px preview. Blonde woman dressing her arm beside a stocked medical kit reads clearly. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_heal_2500_damage",
+      "sha256": "91188f2655e0394deedee57eac47fcf584d806d6ad07c0b26bf443114a89cb92",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_heal_2500_damage.png",
+      "review": "Reviewed full source and 96px preview. Auburn man organizing a shelter medical cabinet conveys recovery experience. Canonical hair colors preserved. Live popup review pending."
+    },
+    {
+      "key": "achievement_heal_5000_damage",
+      "sha256": "f42d11bd88446593bbb700c35fc5e463aa7d4fd20ffb09d8477fa57001337443",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_heal_5000_damage.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor beside field clinic cot and abundant bandage rolls conveys extensive recovery. Canonical hair colors preserved wherever characters appear. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_LIXA",
+      "sha256": "5bfe12397f3475bf240284a46cb501198a86a47e9847ec0b7a32a870a3ea1f15",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_LIXA.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor and large circular dimensional apparatus remain distinct. Canonical hair colors preserved wherever characters appear. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_highlands",
+      "sha256": "d1b0b01d1c6845a917ab1d5b8950a376c3e2c8698ddb5b1942287a09fe22036d",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_highlands.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor at an alien lakeshore beneath two setting suns reads clearly. Canonical hair colors preserved wherever characters appear. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_string_dimension",
+      "sha256": "090f132c8a3140f6663c9beb172e2789e2a3974daf2cbd36decddf9e48fd889b",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_string_dimension.png",
+      "review": "Reviewed full source and 96px preview. Auburn survivor among floating terrain and luminous threads conveys the strange dimension. Canonical hair colors preserved wherever characters appear. Live popup review pending."
+    },
+    {
+      "key": "achievement_LIXA_finale",
+      "sha256": "440e53c61350444f1c2b781cc1b85c41e01397d0e4c8ed8beb8a9261dca9ba67",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_LIXA_finale.png",
+      "review": "Reviewed full source and 96px preview. Blonde observer watches a geometric entity unravel into escaping pale lights. Canonical hair colors preserved wherever characters appear. Live popup review pending."
+    },
+    {
+      "key": "achievement_exodii_hub_autodoc_death",
+      "sha256": "9a7ee8eef99cd9b990c73dc237681ad53872e4075d6693afe4112f08c6d3dac9",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_exodii_hub_autodoc_death.png",
+      "review": "Reviewed full source and 96px preview. Auburn patient beneath imposing automated surgical machinery conveys the ominous clinic. Canonical hair colors preserved wherever characters appear. Live popup review pending."
+    },
+    {
+      "key": "achievement_reach_labyrinth",
+      "sha256": "b6b742da3cddad03e4a108a07729f7014b252bd0aa6a84908fcad5e0d5e9ceb6",
+      "source": "artifacts/astral-progression-art-20260928/achievements/masters/achievement_reach_labyrinth.png",
+      "review": "Reviewed full source and 96px preview. Blonde survivor with lantern before impossible interlocking passages is clear. Canonical hair colors preserved wherever characters appear. Live popup review pending."
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+#include "achievement_rewards.h"
 #include "construction.h"
 #include "construction_hybrid_ui.h"
 
@@ -1652,6 +1653,7 @@ void build_construction_activity_actor::complete_construction( player_activity &
     for( const auto &special : built.post_specials ) {
         special( terp, you );
     }
+    achievement_rewards::on_construction( you, built, construction_location );
     // Players will not automatically resume backlog, other Characters will.
     if( you.is_avatar() && !you.backlog.empty() &&
         you.backlog.front().id() == ACT_MULTIPLE_CONSTRUCTION ) {

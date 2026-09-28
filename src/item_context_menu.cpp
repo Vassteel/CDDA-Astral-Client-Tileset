@@ -28,6 +28,8 @@
 
 namespace item_context_menu
 {
+static const flag_id flag_ASTRAL_SHIELD( "ASTRAL_SHIELD" );
+
 namespace
 {
 
@@ -212,7 +214,8 @@ action draw_imgui_menu( Character &you, const item_location &loc, bool from_worn
 
     if( !from_worn ) {
         if( rate_wear( you, it ) != hint_rating::cant ) {
-            if( menu_entry( _( "Wear" ), you.can_wear( it ).success() ) ) {
+            if( menu_entry( it.has_flag( flag_ASTRAL_SHIELD ) ? _( "Equip off-hand" ) : _( "Wear" ),
+                            you.can_wear( it ).success() ) ) {
                 chosen = action::wear;
             }
         }

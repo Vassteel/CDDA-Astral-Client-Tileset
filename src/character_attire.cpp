@@ -47,6 +47,8 @@
 #include "value_ptr.h"
 #include "viewer.h"
 
+static const flag_id flag_ASTRAL_SHIELD( "ASTRAL_SHIELD" );
+
 static const damage_type_id damage_heat( "heat" );
 
 static const efftype_id effect_bleed( "bleed" );
@@ -218,6 +220,10 @@ ret_val<void> Character::can_wear( const item &it, bool with_equip_change ) cons
             }
             return ret_val<void>::make_failure( msg );
         }
+    }
+
+    if( it.has_flag( flag_ASTRAL_SHIELD ) && !has_two_arms_lifting() ) {
+        return ret_val<void>::make_failure( _( "You need two working arms to equip an off-hand shield." ) );
     }
 
     if( it.has_flag( flag_RESTRICT_HANDS ) && !has_min_manipulators() ) {
@@ -2170,6 +2176,9 @@ item *outfit::best_shield()
     int best_val = 0;
     item *ret = nullptr;
     for( item &shield : worn ) {
+        if( shield.has_flag( flag_ASTRAL_SHIELD ) ) {
+            return &shield;
+        }
         const int block = melee::blocking_ability( shield );
         if( shield.has_flag( flag_BLOCK_WHILE_WORN ) && block >= best_val ) {
             best_val = block;

@@ -1,3 +1,4 @@
+#include "achievement_rewards.h"
 #include <algorithm>
 #include <climits>
 #include <cstddef>
@@ -2415,6 +2416,7 @@ void Character::on_item_acquire( const item &it )
 
     it.visit_items( [this, &check_for_zoom, &update_overmap_seen]( item * cont_it, item * ) {
         add_to_inv_search_caches( *cont_it );
+        achievement_rewards::on_item_acquire( *this, *cont_it );
         if( check_for_zoom && !update_overmap_seen && cont_it->has_flag( flag_ZOOM ) ) {
             update_overmap_seen = true;
         }

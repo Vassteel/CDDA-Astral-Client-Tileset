@@ -1,4 +1,5 @@
 from .parsers.achievement import parse_achievement
+from .parsers.achievement_reward import parse_achievement_reward
 from .parsers.activity_type import parse_activity_type
 from .parsers.addiction_type import parse_addiction_type
 from .parsers.ammunition_type import parse_ammunition_type
@@ -102,6 +103,7 @@ def dummy_parser(json, origin):
 
 parsers = {
     "achievement": parse_achievement,
+    "achievement_reward": parse_achievement_reward,
     "activity_type": parse_activity_type,
     "addiction_type": parse_addiction_type,
     "ammo_effect": dummy_parser,

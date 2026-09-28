@@ -28,7 +28,7 @@
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "color": "light_gray",
-    "symbol": "⨽",
+    "symbol": "\u2a3d",
     "name": { "str": "12-gauge Gatling gun" },
     "description": "An electrically driven six barrel Gatling shotgun, fed from handmade cloth belts.  Even properly mounted, this seems like an unwieldy beast, and the six separate barrels make for difficult zeroing.  The externally driven action means this is much less likely to jam.",
     "weight": "4980 g",
@@ -650,7 +650,7 @@
       {
         "id": "czb",
         "name": { "str": "CZ Bobwhite 12 gauge shotgun" },
-        "description": "A relatively modern double-barreled shotgun chambered in 12 gauge.  \"CZ\" stands for \"Česká zbrojovka\", or Czech armory.  CZ's weapons are either Czech imports or produced by their US based subsidiaries.  This specific model is the Bobwhite, with a wooden stock and black chrome barrels."
+        "description": "A relatively modern double-barreled shotgun chambered in 12 gauge.  \"CZ\" stands for \"\u010cesk\u00e1 zbrojovka\", or Czech armory.  CZ's weapons are either Czech imports or produced by their US based subsidiaries.  This specific model is the Bobwhite, with a wooden stock and black chrome barrels."
       }
     ],
     "ascii_picture": "2barrel_shotgun",
@@ -662,7 +662,8 @@
     "barrel_length": "660 mm",
     "price": "399 USD",
     "barrel_volume": "494 ml",
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 2 } } ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 2 } } ],
+    "extend": { "flags": [ "OLD_GUN" ] }
   },
   {
     "id": "shotgun_triple",
@@ -726,7 +727,8 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 1 } } ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 1 } } ],
+    "extend": { "flags": [ "OLD_GUN" ] }
   },
   {
     "id": "tavor_12",
@@ -842,7 +844,7 @@
       [ "underbarrel mount", 1 ]
     ],
     "default_mods": [ "sword_bayonet" ],
-    "extend": { "flags": [ "PUMP_ACTION" ] },
+    "extend": { "flags": [ "PUMP_ACTION", "OLD_GUN" ] },
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 6 } } ]
   },
   {

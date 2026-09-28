@@ -1,3 +1,4 @@
+#include "achievement_rewards_ui.h"
 #include "scores_ui.h"
 
 #include <imgui/imgui.h>
@@ -121,6 +122,11 @@ void scores_ui::draw_scores_ui()
         ui_manager::redraw_invalidated();
 
         p_impl.last_action = ctxt.handle_input();
+        // Text editing owns navigation and space while the search field is active.
+        if( cataimgui::client::want_text_input() ) {
+            p_impl.last_action.clear();
+        }
+        achievement_rewards_ui::process_actions();
 
         if( p_impl.last_action == "QUIT" || !p_impl.get_is_open() ) {
             break;
@@ -350,7 +356,7 @@ void scores_ui_impl::draw_controls()
     }
 
     if( selected_tab == scores_ui_tab::achievements ) {
-        draw_achievements_text();
+        achievement_rewards_ui::draw();
     }
     if( selected_tab == scores_ui_tab::conducts ) {
         draw_achievements_text( true );

@@ -1,8 +1,19 @@
 # CDDA Astral Client & Tileset
 
-**Separate downloads:** [Astral Client](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/client-v0.1.1) · [Astral Tileset](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/tileset-v0.1.5)
+**Separate downloads:** [Astral Client](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/client-v0.1.2) · [Astral Tileset](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/tileset-v0.1.25)
 
 A mouse-friendly CDDA client and an independently installable tileset. [Controls, updater and development notes](doc/hybrid/README.md).
+
+## Major features
+
+- Mouse-friendly menus and inventory controls, with the existing keyboard bindings retained.
+- A HUD with minimap, messages, Missions and workstation controls.
+- Drag-and-drop equipment, clothing layers, and separate scabbard, sheath and holster slots.
+- Workstation management with the actions each station supports, including fuel quantities.
+- An illustrated interface for the 211 vanilla achievements, with a reward bank for supported achievements.
+- Linux/SteamOS and Windows clients with updaters; Astral artwork remains a separate download.
+
+The additional Astral achievement goals are shelved; the achievement list uses the 211 vanilla goals.
 
 ---
 

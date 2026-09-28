@@ -5,8 +5,9 @@
     "name": "Martial Mastery",
     "authors": [ "John-Candlebury" ],
     "maintainers": [ "John-Candlebury" ],
-    "description": "Fight enemies to level up and build your own fighting style.",
+    "description": "Compatibility entry for existing worlds.  This progression system is built into the Astral client.",
     "category": "misc_additions",
-    "dependencies": [ "dda" ]
+    "dependencies": [ "dda" ],
+    "obsolete": true
   }
 ]

@@ -35,7 +35,7 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "extend": { "flags": [ "BOLT_ACTION" ] },
+    "extend": { "flags": [ "BOLT_ACTION", "OLD_GUN" ] },
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "enfield_303mag" ] } ]
   },
   {
@@ -56,6 +56,7 @@
     ],
     "weight": "4110 g",
     "longest_side": "1129 mm",
-    "dispersion": 150
+    "dispersion": 150,
+    "extend": { "flags": [ "OLD_GUN" ] }
   }
 ]

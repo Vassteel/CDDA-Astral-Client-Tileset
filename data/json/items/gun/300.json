@@ -86,7 +86,7 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "extend": { "flags": [ "BOLT_ACTION" ] },
+    "extend": { "flags": [ "BOLT_ACTION", "OLD_GUN" ] },
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "300": 3 } } ]
   },
   {

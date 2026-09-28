@@ -1,3 +1,4 @@
+#include "achievement_rewards_ui.h"
 #include "cursesdef.h" // IWYU pragma: associated
 #include "sdltiles.h" // IWYU pragma: associated
 
@@ -1714,6 +1715,7 @@ recipe_result renderer_resource_coordinator::recipe_device_reset()
     }
 #endif
     loading_ui::release_gpu_resources();
+    achievement_rewards_ui::release_gpu_resources();
     display_buffer.reset();
     if( check_pause_abort() ) {
         return { recipe_outcome::failure };
@@ -1904,6 +1906,7 @@ recipe_result renderer_resource_coordinator::recipe_device_lost()
     }
 #endif
     loading_ui::release_gpu_resources();
+    achievement_rewards_ui::release_gpu_resources();
     display_buffer.reset();
     if( check_pause_abort() ) {
         return { recipe_outcome::failure };

@@ -1,3 +1,4 @@
+#include "achievement_rewards.h"
 #include "character.h"
 
 #include <algorithm>
@@ -1194,7 +1195,10 @@ void Character::regen( int rate_multiplier )
                                              get_part_hp_max( healed_part ) - get_part_hp_cur( healed_part ) );
                 if( part_healing > 0 ) {
                     mod_part_healed_total( healed_part, part_healing );
+                    const int hp_before = get_part_hp_cur( healed_part );
                     heal( healed_part, part_healing );
+                    achievement_rewards::on_natural_healing( *this,
+                            get_part_hp_cur( healed_part ) - hp_before );
                     // Consume 1 "health" for every Hit Point healed via non-medicine healing.
                     // Using medicine reduces the ratio of health consumed to damage healed.
                     mod_daily_health( -part_healing, -200 );
@@ -2455,6 +2459,7 @@ void Character::wake_up()
     if( has_effect( effect_sleep ) ) {
         get_effect( effect_sleep ).set_duration( 0_turns );
         get_event_bus().send<event_type::character_wakes_up>( getID() );
+        achievement_rewards::on_wake( *this );
     }
     remove_effect( effect_slept_through_alarm );
     remove_effect( effect_lying_down );

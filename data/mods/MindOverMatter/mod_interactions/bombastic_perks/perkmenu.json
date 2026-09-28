@@ -5,10 +5,27 @@
     "dynamic_line": "Psionic Perks:\nLevel <u_val:current_level>.\n<u_val:num_perks> perk points to spend.\nCurrent EXP: <u_val:available_exp>.\nEXP to next level: <u_val:exp_to_perk>.",
     "responses": [
       {
-        "condition": { "not": { "u_has_trait": "perk_clear_minded_channeling" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_clear_minded_channeling" } },
+            {
+              "or": [
+                { "math": [ "u_no_prerecs > 0" ] },
+                {
+                  "and": [ { "u_has_proficiency": "prof_concentration_basic" }, { "not": { "u_has_trait": "CONCENTRATION_BAD" } } ]
+                }
+              ]
+            },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_clear_minded_channeling>]",
         "effect": [
-          { "set_string_var": "<trait_name:perk_clear_minded_channeling>", "target_var": { "context_val": "trait_name" } },
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
+          {
+            "set_string_var": "<trait_name:perk_clear_minded_channeling>",
+            "target_var": { "context_val": "trait_name" }
+          },
           {
             "set_string_var": "<trait_description:perk_clear_minded_channeling>",
             "target_var": { "context_val": "trait_description" }
@@ -27,9 +44,26 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_concussive_blasts" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_concussive_blasts" } },
+            {
+              "or": [
+                { "math": [ "u_no_prerecs > 0" ] },
+                {
+                  "or": [
+                    { "math": [ "u_spell_level('telekinetic_hammer') >= 1" ] },
+                    { "math": [ "u_spell_level('telekinetic_explosion') >= 1" ] }
+                  ]
+                }
+              ]
+            },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_concussive_blasts>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_concussive_blasts>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_concussive_blasts>",
@@ -54,9 +88,26 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_efficient_slumber" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_efficient_slumber" } },
+            {
+              "or": [
+                { "math": [ "u_no_prerecs > 0" ] },
+                {
+                  "or": [
+                    { "math": [ "u_spell_level('biokin_metabolism_enhance') >= 6" ] },
+                    { "math": [ "u_spell_level('vita_sleeping_trance') >= 5" ] }
+                  ]
+                }
+              ]
+            },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_efficient_slumber>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_efficient_slumber>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_efficient_slumber>",
@@ -81,9 +132,27 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_grace_under_pain" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_grace_under_pain" } },
+            {
+              "or": [
+                { "math": [ "u_no_prerecs > 0" ] },
+                {
+                  "or": [
+                    { "math": [ "u_spell_level('biokin_overcome_pain') >= 5" ] },
+                    { "math": [ "u_spell_level('electrokinetic_reduce_pain') >= 6" ] },
+                    { "math": [ "u_spell_level('telepathic_morale') >= 8" ] }
+                  ]
+                }
+              ]
+            },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_grace_under_pain>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_grace_under_pain>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_grace_under_pain>",
@@ -109,9 +178,33 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_in_the_zone" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_in_the_zone" } },
+            {
+              "or": [
+                { "math": [ "u_no_prerecs > 0" ] },
+                {
+                  "or": [
+                    { "math": [ "u_spell_level_sum('school': 'BIOKINETIC') >= 40" ] },
+                    { "math": [ "u_spell_level_sum('school': 'CLAIRSENTIENT') >= 40" ] },
+                    { "math": [ "u_spell_level_sum('school': 'ELECTROKINETIC') >= 40" ] },
+                    { "math": [ "u_spell_level_sum('school': 'PHOTOKINETIC') >= 40" ] },
+                    { "math": [ "u_spell_level_sum('school': 'PYROKINETIC') >= 40" ] },
+                    { "math": [ "u_spell_level_sum('school': 'TELEPATH') >= 40" ] },
+                    { "math": [ "u_spell_level_sum('school': 'TELEKINETIC') >= 40" ] },
+                    { "math": [ "u_spell_level_sum('school': 'TELEPORTER') >= 40" ] },
+                    { "math": [ "u_spell_level_sum('school': 'VITAKINETIC') >= 40" ] }
+                  ]
+                }
+              ]
+            },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_in_the_zone>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_in_the_zone>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_in_the_zone>",
@@ -143,9 +236,28 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_mind_cry" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_mind_cry" } },
+            {
+              "or": [
+                { "math": [ "u_no_prerecs > 0" ] },
+                {
+                  "or": [
+                    { "math": [ "u_spell_level('telepathic_blast') >= 5" ] },
+                    { "math": [ "u_spell_level('telepathic_blast_radius') >= 5" ] },
+                    { "math": [ "u_spell_level('telepathic_blast_knack') >= 5" ] },
+                    { "math": [ "u_spell_level('telepathic_blast_radius_knack') >= 5" ] }
+                  ]
+                }
+              ]
+            },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_mind_cry>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_mind_cry>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_mind_cry>",
@@ -172,9 +284,23 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_mastery_of_form" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_mastery_of_form" } },
+            {
+              "or": [
+                { "math": [ "u_no_prerecs > 0" ] },
+                {
+                  "math": [ "u_spell_level_sum('school': 'BIOKINETIC') + u_spell_level_sum('school': 'VITAKINETIC') >= 100" ]
+                }
+              ]
+            },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_mastery_of_form>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_mastery_of_form>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_mastery_of_form>",
@@ -194,9 +320,18 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "MOM_PSYCHIC_VAMPIRE" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "MOM_PSYCHIC_VAMPIRE" } },
+            {
+              "or": [ { "math": [ "u_no_prerecs > 0" ] }, { "or": [ { "u_has_trait": "TELEPATH" }, { "u_has_trait": "VITAKINETIC" } ] } ]
+            },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:MOM_PSYCHIC_VAMPIRE>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:MOM_PSYCHIC_VAMPIRE>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:MOM_PSYCHIC_VAMPIRE>",
@@ -216,9 +351,18 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "PYROMANIA" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "PYROMANIA" } },
+            {
+              "or": [ { "math": [ "u_no_prerecs > 0" ] }, { "math": [ "u_spell_level_sum('school': 'PYROKINETIC') >= 30" ] } ]
+            },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:PYROMANIA>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:PYROMANIA>", "target_var": { "context_val": "trait_name" } },
           { "set_string_var": "<trait_description:PYROMANIA>", "target_var": { "context_val": "trait_description" } },
           { "set_string_var": "PYROMANIA", "target_var": { "context_val": "trait_id" } },
@@ -235,9 +379,18 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_wary_sleeper" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_wary_sleeper" } },
+            {
+              "or": [ { "math": [ "u_no_prerecs > 0" ] }, { "math": [ "u_spell_level('clair_danger_sense') >= 5" ] } ]
+            },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_wary_sleeper>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_wary_sleeper>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_wary_sleeper>",
@@ -261,9 +414,16 @@
         "topic": "TALK_PERK_MENU_PSIONICS"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_burning_bright" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_burning_bright" } },
+            { "or": [ { "math": [ "u_no_prerecs > 0" ] }, { "u_has_trait": "PSI_TORRENTIAL_CHANNELING" } ] },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_burning_bright>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_burning_bright>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_burning_bright>",
@@ -280,9 +440,33 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_phoenix_rising" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_phoenix_rising" } },
+            {
+              "or": [
+                { "math": [ "u_no_prerecs > 0" ] },
+                {
+                  "u_has_any_trait": [
+                    "BIOKINETIC",
+                    "CLAIRSENTIENT",
+                    "ELECTROKINETIC",
+                    "PHOTOKINETIC",
+                    "PYROKINETIC",
+                    "TELEKINETIC",
+                    "TELEPATH",
+                    "TELEPORTER",
+                    "VITAKINETIC"
+                  ]
+                }
+              ]
+            },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_phoenix_rising>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_phoenix_rising>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_phoenix_rising>",

@@ -1,3 +1,5 @@
+#include "achievement_rewards_ui.h"
+#include "achievement_rewards.h"
 #include "game.h"
 #include "map_memory.h"
 
@@ -431,13 +433,7 @@ static void achievement_attained( const achievement *a, bool achievements_enable
         }
 
         if( show_popup ) {
-            std::string message = colorize( _( "Achievement completed!" ), c_light_green );
-            message += "\n\n";
-            message += get_achievements().ui_text_for( a );
-            message += "\n";
-            message += colorize( _( "Achievement completion popups can be\nconfigured via the "
-                                    "Interface options" ), c_dark_gray );
-            popup( message );
+            achievement_rewards_ui::popup( *a );
         }
     }
     get_event_bus().send<event_type::player_gets_achievement>( a->id, achievements_enabled );
@@ -7888,7 +7884,8 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
         }
         const double base_moves = u.run_cost( mcost, diag ) * 100.0 / crit_speed;
         const double encumb_moves = u.get_weight() / 4800.0_gram;
-        u.mod_moves( -static_cast<int>( std::ceil( base_moves + encumb_moves ) ) );
+        u.mod_moves( -static_cast<int>( std::ceil( ( base_moves + encumb_moves ) *
+                     achievement_rewards::mounted_move_multiplier( u, *crit ) ) ) );
         crit->use_mech_power( u.current_movement_mode()->mech_power_use() );
     } else {
         u.mod_moves( -u.run_cost( mcost, diag ) );

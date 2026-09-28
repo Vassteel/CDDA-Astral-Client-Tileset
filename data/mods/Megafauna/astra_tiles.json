@@ -1,0 +1,263 @@
+[
+  {
+    "type": "mod_tileset",
+    "compatibility": [
+      "UltimateCataclysm",
+      "Chibi_Ultica",
+      "MshockXottoplus"
+    ],
+    "tiles-new": [
+      {
+        "file": "sprites/astra_megafauna.png",
+        "sprite_width": 64,
+        "sprite_height": 64,
+        "sprite_offset_x": -16,
+        "sprite_offset_y": -32,
+        "tiles": [
+          {
+            "id": "mon_giant_beaver",
+            "fg": 0,
+            "rotates": false
+          },
+          {
+            "id": "mon_giant_beaver_cub",
+            "fg": 1,
+            "rotates": false
+          },
+          {
+            "id": "mon_large_claw_sloth",
+            "fg": 2,
+            "rotates": false
+          },
+          {
+            "id": "mon_large_claw_sloth_cub",
+            "fg": 3,
+            "rotates": false
+          },
+          {
+            "id": "mon_stagmoose",
+            "fg": 4,
+            "rotates": false
+          },
+          {
+            "id": "mon_stagmoose_cub",
+            "fg": 5,
+            "rotates": false
+          },
+          {
+            "id": "mon_mammoth",
+            "fg": 6,
+            "rotates": false
+          },
+          {
+            "id": "mon_mammoth_cub",
+            "fg": 7,
+            "rotates": false
+          },
+          {
+            "id": "mon_mastodon",
+            "fg": 8,
+            "rotates": false
+          },
+          {
+            "id": "mon_mastodon_cub",
+            "fg": 9,
+            "rotates": false
+          },
+          {
+            "id": "mon_shortface",
+            "fg": 10,
+            "rotates": false
+          },
+          {
+            "id": "mon_shortface_cub",
+            "fg": 11,
+            "rotates": false
+          },
+          {
+            "id": "mon_auk",
+            "fg": 12,
+            "rotates": false
+          },
+          {
+            "id": "mon_auk_chick",
+            "fg": 13,
+            "rotates": false
+          },
+          {
+            "id": "mon_glyptotherium",
+            "fg": 14,
+            "rotates": false
+          },
+          {
+            "id": "mon_glyptotherium_young",
+            "fg": 15,
+            "rotates": false
+          },
+          {
+            "id": "mon_american_zebra",
+            "fg": 16,
+            "rotates": false
+          },
+          {
+            "id": "mon_zebra_foal",
+            "fg": 17,
+            "rotates": false
+          },
+          {
+            "id": [
+              "mon_direwolf",
+              "mon_direwolf_dm"
+            ],
+            "fg": 18,
+            "rotates": false
+          },
+          {
+            "id": "mon_direwolf_cub",
+            "fg": 19,
+            "rotates": false
+          },
+          {
+            "id": [
+              "mon_sabcat",
+              "mon_sabcat_dm"
+            ],
+            "fg": 20,
+            "rotates": false
+          },
+          {
+            "id": "mon_sabcat_cub",
+            "fg": 21,
+            "rotates": false
+          },
+          {
+            "id": [
+              "mon_cave_lion",
+              "mon_cave_lion_dm"
+            ],
+            "fg": 22,
+            "rotates": false
+          },
+          {
+            "id": "mon_cave_lion_cub",
+            "fg": 23,
+            "rotates": false
+          },
+          {
+            "id": "mon_bobcat",
+            "fg": 24,
+            "rotates": false
+          },
+          {
+            "id": "mon_bobcat_cub",
+            "fg": 25,
+            "rotates": false
+          },
+          {
+            "id": [
+              "mon_titanis_walleri",
+              "mon_titanis_walleri_dm"
+            ],
+            "fg": 26,
+            "rotates": false
+          },
+          {
+            "id": "mon_titanis_walleri_chick",
+            "fg": 27,
+            "rotates": false
+          },
+          {
+            "id": "mon_shrubox",
+            "fg": 28,
+            "rotates": false
+          },
+          {
+            "id": "mon_shrubox_calf",
+            "fg": 29,
+            "rotates": false
+          },
+          {
+            "id": "mon_woodox",
+            "fg": 30,
+            "rotates": false
+          },
+          {
+            "id": "mon_woodox_calf",
+            "fg": 31,
+            "rotates": false
+          },
+          {
+            "id": "mon_soergoat",
+            "fg": 32,
+            "rotates": false
+          },
+          {
+            "id": "mon_soergoat_kid",
+            "fg": 33,
+            "rotates": false
+          },
+          {
+            "id": "mon_bison",
+            "fg": 34,
+            "rotates": false
+          },
+          {
+            "id": "mon_bison_calf",
+            "fg": 35,
+            "rotates": false
+          },
+          {
+            "id": "mon_scotts_horse",
+            "fg": 36,
+            "rotates": false
+          },
+          {
+            "id": "mon_scotts_foal",
+            "fg": 37,
+            "rotates": false
+          },
+          {
+            "id": "mon_giant_horse",
+            "fg": 38,
+            "rotates": false
+          },
+          {
+            "id": "mon_giant_foal",
+            "fg": 39,
+            "rotates": false
+          },
+          {
+            "id": "mon_camelops",
+            "fg": 40,
+            "rotates": false
+          },
+          {
+            "id": "mon_camelops_foal",
+            "fg": 41,
+            "rotates": false
+          },
+          {
+            "id": "mon_peccary_flathead",
+            "fg": 42,
+            "rotates": false
+          },
+          {
+            "id": "mon_flathead_piglet",
+            "fg": 43,
+            "rotates": false
+          },
+          {
+            "id": "mon_peccary_longnose",
+            "fg": 44,
+            "rotates": false
+          },
+          {
+            "id": "mon_longnose_piglet",
+            "fg": 45,
+            "rotates": false
+          }
+        ]
+      }
+    ]
+  }
+]
