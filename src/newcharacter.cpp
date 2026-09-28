@@ -180,19 +180,24 @@ static void set_detail_scroll()
     }
 }
 
-static void setup_list_detail_ui( const std::string &header = std::string(),
-                                  float uilist_width = 0.33f )
+void character_creator_ui_impl::setup_list_detail_ui( const std::string &header,
+        float uilist_width ) const
 {
-    ImGui::TableSetupScrollFreeze( 0, 1 ); // Make top row always visible
-    // reserve space for uilist
-    ImGui::TableSetupColumn( "", ImGuiTableColumnFlags_WidthStretch, uilist_width );
-    ImGui::TableSetupColumn( header.empty() ? _( "No entries found!" ) : header.c_str(),
-                             ImGuiTableColumnFlags_WidthStretch, 1.0f - uilist_width );
-    ImGui::TableHeadersRow();
+    ImGui::TableSetupColumn( "##choices", ImGuiTableColumnFlags_WidthStretch, uilist_width );
+    ImGui::TableSetupColumn( "##details", ImGuiTableColumnFlags_WidthStretch, 1.0f - uilist_width );
     ImGui::TableNextRow();
     ImGui::TableNextColumn();
+    if( ImGui::BeginChild( "character_choices", ImVec2( 0.f, 0.f ), ImGuiChildFlags_None,
+                           ImGuiWindowFlags_NoScrollWithMouse ) ) {
+        if( const std::shared_ptr<uilist> menu = ui_parent->get_current_tab_uilist() ) {
+            menu->draw_embedded();
+        }
+    }
+    ImGui::EndChild();
     ImGui::TableNextColumn();
-
+    ImGui::BeginChild( "character_details" );
+    draw_colored_text_wrap( header.empty() ? _( "No entries found!" ) : header, COL_HEADER );
+    ImGui::Separator();
     set_detail_scroll();
 }
 
@@ -2545,7 +2550,7 @@ void draw_equipment_details( const avatar &u )
             }
             ImGui::PushID( static_cast<int>( i ) );
             const bool selected = static_cast<int>( i ) == idx;
-            if( ImGui::Selectable( choices[i].it.display_name().c_str(), selected ) ) {
+            if( ImGui::Selectable( remove_color_tags( choices[i].it.display_name() ).c_str(), selected ) ) {
                 cc_uistate.selected_equipment_index = static_cast<int>( i );
             }
             ImGui::SameLine();
@@ -3348,11 +3353,6 @@ void character_creator_ui::setup_input_context( input_context &cc_ictxt, bool qu
     }
 }
 
-static cataimgui::bounds uilist_reset_desired_bounds()
-{
-    return { 0, -1.0f, 0.33f * ImGui::GetMainViewport()->WorkSize.x, -1.0f };
-}
-
 void character_creator_ui::setup_new_uilist()
 {
     std::shared_ptr<uilist> new_uilist = get_current_tab_uilist();
@@ -3374,9 +3374,6 @@ void character_creator_ui::setup_new_uilist()
             new_uilist->hilight_disabled = true;
             new_uilist->size_to_all_categories = true;
             new_uilist->callback = &cc_callback;
-            //snap to left edge of screen, position and height updated later
-            new_uilist->desired_bounds = uilist_reset_desired_bounds();
-            new_uilist->force_desired_bounds = true;
         }
 
         switch( cc_uistate.selected_tab ) {
@@ -3626,7 +3623,6 @@ void character_creator_ui::update_uilist_entries()
             break;
     }
     if( menu ) {
-        menu->desired_bounds = uilist_reset_desired_bounds();
         menu->filterlist();
         menu->setup();
     }
@@ -3651,18 +3647,6 @@ void character_creator_ui::setup_avatar()
     }
 }
 
-void character_creator_ui::update_uilist_position( ImVec2 new_position )
-{
-    std::shared_ptr<uilist> current_uilist = get_current_tab_uilist();
-    current_uilist->desired_bounds = uilist_reset_desired_bounds();
-    current_uilist->desired_bounds->y = new_position.y;
-    current_uilist->desired_bounds->h = ImGui::GetContentRegionAvail().y;
-    current_uilist->reposition();
-    if( cc_uilist_current ) {
-        cc_uilist_current->mark_resized();
-    }
-}
-
 void character_creator_ui_impl::draw_controls()
 {
     avatar &pc = get_avatar();
@@ -3683,14 +3667,6 @@ void character_creator_ui_impl::draw_controls()
             cc_uistate.selected_tab = new_tab;
             ui_parent->upon_switching_tab();
         }
-        std::shared_ptr<uilist> current_uilist = ui_parent->get_current_tab_uilist();
-        if( current_uilist ) {
-            const ImVec2 cursor_pos = ImGui::GetCursorScreenPos();
-            if( current_uilist->desired_bounds->y != cursor_pos.y ||
-                current_uilist->desired_bounds->w != uilist_reset_desired_bounds().w ) {
-                ui_parent->update_uilist_position( cursor_pos );
-            }
-        }
     };
 
     bool &top_bar_is_open = cc_uistate.top_bar_is_open;
@@ -3702,6 +3678,9 @@ void character_creator_ui_impl::draw_controls()
         draw_top_bar( pc );
     }
 
+    ImGui::BeginChild( "character_tabs", ImVec2( 0.f,
+                       -ImGui::GetFrameHeightWithSpacing() ), ImGuiChildFlags_None,
+                       ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse );
     if( ImGui::BeginTabBar( "CHARACTER_CREATOR_TABS" ) ) {
         if( ImGui::BeginTabItem( _( "SCENARIO" ), nullptr,
                                  tab_selected[static_cast<int>( CHARCREATOR_SCENARIO )] ) ) {
@@ -3753,6 +3732,15 @@ void character_creator_ui_impl::draw_controls()
         }
         ImGui::EndTabBar();
     }
+    ImGui::EndChild();
+    char_creation::draw_action_button( _( "Cancel" ), "QUIT" );
+    ImGui::SameLine();
+    ImGui::BeginDisabled( cc_uistate.selected_tab == CHARCREATOR_SCENARIO );
+    char_creation::draw_action_button( _( "Previous" ), "PREV_TAB" );
+    ImGui::EndDisabled();
+    ImGui::SameLine();
+    char_creation::draw_action_button( cc_uistate.selected_tab == CHARCREATOR_SUMMARY ?
+                                      _( "Finish" ) : _( "Next" ), "NEXT_TAB" );
     cc_uistate.previous_tab = cc_uistate.selected_tab;
 }
 
@@ -3868,12 +3856,10 @@ bool character_creator_ui::display()
         ui_manager::redraw();
         std::shared_ptr<uilist> current_tab_uilist = get_current_tab_uilist();
         if( current_tab_uilist ) {
-            cc_uilist_current = current_tab_uilist->create_or_get_ui();
             if( current_tab_uilist->query_setup() ) {
                 current_tab_uilist->query_once( current_tab_input, 33 );
             }
         } else {
-            cc_uilist_current.reset();
             handle_action( current_tab_input.handle_input( 33 ) );
         }
         if( !cc_uistate.top_bar_button_action.empty() ) {
@@ -3893,7 +3879,7 @@ void character_creator_ui_impl::draw_scenarios() const
     cc_uistate.recalc_scenario_list( u );
     const scenario *current_scenario = cc_uistate.get_selected_scenario();
 
-    if( ImGui::BeginTable( "SCENARIO_MAIN", 2, CHARACTER_CREATOR_TABLE_FLAGS ) ) {
+    if( ImGui::BeginTable( "SCENARIO_MAIN", 2, ImGuiTableFlags_BordersInnerV ) ) {
         if( current_scenario ) {
             std::string scenario_name = current_scenario->gender_appropriate_name( !u.male );
             if( current_scenario == get_scenario() ) {
@@ -3904,6 +3890,7 @@ void character_creator_ui_impl::draw_scenarios() const
         } else {
             setup_list_detail_ui();
         }
+        ImGui::EndChild();
         ImGui::EndTable();
     }
 }
@@ -3913,7 +3900,7 @@ void character_creator_ui_impl::draw_professions() const
     const avatar &u = get_avatar();
     cc_uistate.recalc_profession_list( u );
 
-    if( ImGui::BeginTable( "PROFESSION_MAIN", 2, CHARACTER_CREATOR_TABLE_FLAGS ) ) {
+    if( ImGui::BeginTable( "PROFESSION_MAIN", 2, ImGuiTableFlags_BordersInnerV ) ) {
         const profession_id &selected_profession = cc_uistate.get_selected_profession();
 
         if( !selected_profession.is_null() ) {
@@ -3935,6 +3922,7 @@ void character_creator_ui_impl::draw_professions() const
         } else {
             setup_list_detail_ui();
         }
+        ImGui::EndChild();
         ImGui::EndTable();
     }
 }
@@ -3945,7 +3933,7 @@ void character_creator_ui_impl::draw_backgrounds()
     cc_uistate.recalc_hobby_list( u );
     cc_uistate.recalc_hobbies_taken_list( u );
 
-    if( ImGui::BeginTable( "BACKGROUNDS_MAIN", 2, CHARACTER_CREATOR_TABLE_FLAGS ) ) {
+    if( ImGui::BeginTable( "BACKGROUNDS_MAIN", 2, ImGuiTableFlags_BordersInnerV ) ) {
 
         const profession_id selected_hobby = cc_uistate.get_selected_hobby();
         if( !selected_hobby.is_null() ) {
@@ -3969,16 +3957,18 @@ void character_creator_ui_impl::draw_backgrounds()
         } else {
             setup_list_detail_ui();
         }
+        ImGui::EndChild();
         ImGui::EndTable();
     }
 }
 
 void character_creator_ui_impl::draw_stats()
 {
-    if( ImGui::BeginTable( "STATS_MAIN", 2, CHARACTER_CREATOR_TABLE_FLAGS ) ) {
+    if( ImGui::BeginTable( "STATS_MAIN", 2, ImGuiTableFlags_BordersInnerV ) ) {
         setup_list_detail_ui( char_creation::get_character_stat_header( cc_uistate.selected_stat_index ) );
         ImGui::NewLine();
         char_creation::draw_stat_details( get_avatar() );
+        ImGui::EndChild();
         ImGui::EndTable();
     }
 }
@@ -3988,7 +3978,7 @@ void character_creator_ui_impl::draw_traits()
     const avatar &u = get_avatar();
     cc_uistate.recalc_trait_list( u );
     const trait_id selected_trait = cc_uistate.get_selected_trait();
-    if( ImGui::BeginTable( "TRAITS_MAIN", 2, CHARACTER_CREATOR_TABLE_FLAGS ) ) {
+    if( ImGui::BeginTable( "TRAITS_MAIN", 2, ImGuiTableFlags_BordersInnerV ) ) {
         if( !selected_trait.is_null() ) {
             std::string trait_name = selected_trait->name();
             if( u.has_trait( selected_trait ) ) {
@@ -4000,6 +3990,7 @@ void character_creator_ui_impl::draw_traits()
         } else {
             setup_list_detail_ui();
         }
+        ImGui::EndChild();
         ImGui::EndTable();
     }
 }
@@ -4007,7 +3998,7 @@ void character_creator_ui_impl::draw_traits()
 void character_creator_ui_impl::draw_skills()
 {
     cc_uistate.recalc_skill_list();
-    if( ImGui::BeginTable( "SKILLS_MAIN", 2, CHARACTER_CREATOR_TABLE_FLAGS ) ) {
+    if( ImGui::BeginTable( "SKILLS_MAIN", 2, ImGuiTableFlags_BordersInnerV ) ) {
         const skill_id selected_skill = cc_uistate.get_selected_skill();
         if( !selected_skill.is_null() ) {
             const avatar &u = get_avatar();
@@ -4025,6 +4016,7 @@ void character_creator_ui_impl::draw_skills()
         } else {
             setup_list_detail_ui();
         }
+        ImGui::EndChild();
         ImGui::EndTable();
     }
 }
@@ -4033,7 +4025,7 @@ void character_creator_ui_impl::draw_equipment()
 {
     const avatar &u = get_avatar();
     cc_uistate.ensure_equipment_pool( u );
-    if( ImGui::BeginTable( "EQUIPMENT_MAIN", 2, CHARACTER_CREATOR_TABLE_FLAGS ) ) {
+    if( ImGui::BeginTable( "EQUIPMENT_MAIN", 2, ImGuiTableFlags_BordersInnerV ) ) {
         if( !cc_uistate.equipment_choices.empty() ) {
             const int idx = std::clamp( cc_uistate.selected_equipment_index, 0,
                                         static_cast<int>( cc_uistate.equipment_choices.size() ) - 1 );
@@ -4044,6 +4036,7 @@ void character_creator_ui_impl::draw_equipment()
             setup_list_detail_ui( _( "Starting equipment" ) );
             char_creation::draw_equipment_details( u );
         }
+        ImGui::EndChild();
         ImGui::EndTable();
     }
 }

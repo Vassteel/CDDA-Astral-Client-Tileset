@@ -146,13 +146,10 @@ struct character_creator_uistate {
     void reset();
 };
 
-// implemented as two separate windows:
-// 1. a `uilist` that handles all list selections and inputs, displayed on left
-// 2. standard ImGui display details for the `uilist` selection, displayed on right
+// One window with an embedded selection list and independently scrolling details.
 class character_creator_ui
 {
         character_creator_callback cc_callback;
-        shared_ptr_fast<uilist_impl> cc_uilist_current;
         std::array<std::shared_ptr<uilist>, CHARACTER_CREATOR_TAB_COUNT> cc_uilist;
         std::array<input_context, CHARACTER_CREATOR_TAB_COUNT> cc_inputs;
 
@@ -167,7 +164,6 @@ class character_creator_ui
         // update uilist_entries for current tab, but do not modify uilist_entry count
         void update_uilist_entries();
         void upon_switching_tab();
-        void update_uilist_position( ImVec2 new_position );
         // @param quick_value_change - if true, add inputs for changing a value (stat or skill)
         void setup_input_context( input_context &cc_ictxt, bool quick_value_change );
         // @return action was handled
@@ -196,6 +192,8 @@ class character_creator_ui_impl : public cataimgui::window
         void draw_skills();
         void draw_equipment();
         void draw_summary();
+        void setup_list_detail_ui( const std::string &header = std::string(),
+                                   float uilist_width = 0.33f ) const;
 
     protected:
         void draw_controls() override;

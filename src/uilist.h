@@ -440,10 +440,13 @@ class uilist // NOLINT(cata-xy)
 #endif
 
         shared_ptr_fast<uilist_impl> create_or_get_ui();
+        // Render in the caller's child region, retaining the normal list input model.
+        void draw_embedded();
         // NOLINTNEXTLINE(google-explicit-constructor)
         operator int() const;
 
     private:
+        void draw_contents( bool embedded );
         scroll_amount scroll_amount_from_action( const std::string &action );
         // This function assumes it's being called from `query` and should
         // not be made public.

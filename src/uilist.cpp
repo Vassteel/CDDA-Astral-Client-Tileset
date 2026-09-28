@@ -41,14 +41,29 @@ void uilist_impl::draw_controls()
 {
 #if defined(TILES)
     hide_if_hidden();
+#endif
+    parent.draw_contents( false );
+}
+
+void uilist::draw_embedded()
+{
+    if( !started ) {
+        setup();
+    }
+    draw_contents( true );
+}
+
+void uilist::draw_contents( bool embedded )
+{
+#if defined(TILES)
     using cata::options::mouse;
-    bool cursor_shown = IsCursorVisible();
-    if( mouse.hidekb && !cursor_shown ) {
+    if( mouse.hidekb && !IsCursorVisible() ) {
         ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_NoMouse;
     } else {
         ImGui::GetIO().ConfigFlags &= ~ImGuiConfigFlags_NoMouse;
     }
 #endif
+    uilist &parent = *this;
     if( !parent.text.empty() ) {
         cataimgui::draw_colored_text( parent.text );
         ImGui::Separator();
@@ -75,6 +90,18 @@ void uilist_impl::draw_controls()
             }
             ImGui::EndTabBar();
         }
+    }
+
+    if( embedded ) {
+        const ImVec2 available = ImGui::GetContentRegionAvail();
+        const ImGuiStyle &style = ImGui::GetStyle();
+        parent.extra_space_left = parent.extra_space_right = 0.f;
+        const float footer = parent.desc_enabled ? ImGui::GetTextLineHeightWithSpacing() * 2.f : 0.f;
+        parent.calculated_menu_size = ImVec2( available.x,
+                                              std::max( ImGui::GetTextLineHeightWithSpacing(), available.y - footer ) );
+        parent.calculated_label_width = std::max( 1.f, available.x - style.ScrollbarSize -
+                                        parent.calculated_hotkey_width - parent.calculated_secondary_width -
+                                        8.f * style.CellPadding.x );
     }
 
     // An invisible table with three columns. Used to create a sidebar effect.
@@ -204,7 +231,8 @@ void uilist_impl::draw_controls()
         std::string description;
         if( !parent.footer_text.empty() ) {
             description = parent.footer_text;
-        } else {
+        } else if( parent.previewing >= 0 &&
+                   parent.previewing < static_cast<int>( parent.entries.size() ) ) {
             description = parent.entries[parent.previewing].desc;
         }
         cataimgui::draw_colored_text( description );
