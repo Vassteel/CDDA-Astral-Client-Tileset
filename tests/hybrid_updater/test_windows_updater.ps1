@@ -85,6 +85,8 @@ try {
           @{tag_name='client-v0.2';draft=$false;prerelease=$false;assets=@(@{name='Astral-linux-update.zip'})},
           @{tag_name='client-v0.1.1';draft=$false;prerelease=$false;assets=@(@{name='Astral-windows-update.zip'})})
     }
-    Assert ((Get-Release 'Vassteel/CDDA-Astral-Client-Tileset').version -eq 'client-v0.1.1') 'select Windows client release only'
+    $platformRelease = Get-Release 'Vassteel/CDDA-Astral-Client-Tileset'
+    Assert ($platformRelease.version -eq 'client-v0.2') 'skip tileset without downgrading to an older Windows patch'
+    Assert $platformRelease.full_download_required 'missing Windows patch requires full client'
     Write-Host "$script:passed assertions passed"
 } finally { Remove-Item -LiteralPath $root -Recurse -Force }
