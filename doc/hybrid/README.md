@@ -28,6 +28,8 @@ Pass `--client /path/to/client` and optionally `--state /path/outside/client` fo
 
 ## Controls and diagnostics
 
+The HUD includes Missions and wraps within the map area on narrow screens. Add fuel prompts for a quantity when selecting a stack; review the selected amounts and Confirm to transfer them. Quantity 0 clears a selection, and Cancel leaves items untouched. Drag gear onto the survivor image or a matching equipment slot, then choose Apply equipment change; Cancel change keeps the current equipment.
+
 Existing keyboard assignments are retained. Inventory selectors offer selection boxes, confirmation/cancellation, inspection, filtering, quantity, contents and keybinding controls. Pickup adds Wear/Wield. Trade offers switching sides and balancing; ammo offers quantity increments. Legacy armor, safemode, mutation, bionic, diary and vehicle screens have mouse controls routed through their existing actions. Some character- or mod-specific paths still need gameplay acceptance.
 
 Diagnostics stay local in `config/ui-telemetry.jsonl`, with three rotated files of up to 8 MiB each. Events cover actions, menus, window geometry, activity boundaries and errors. No automatic upload, raw keystrokes or free-text capture. Set `CDDA_UI_TELEMETRY=0` before launching to disable them. An action's return event records control flow; it does not claim the gameplay action succeeded.

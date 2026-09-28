@@ -233,9 +233,10 @@ static drop_locations inv_internal_multi( Character &u, const inventory_selector
         const std::string &title, int radius,
         const std::string &none_message,
         const std::string &hint = std::string(),
-        item_location container = item_location() )
+        item_location container = item_location(), bool quantity_prompt = false )
 {
     inventory_multiselector inv_s( u, preset );
+    inv_s.set_quantity_prompt( quantity_prompt );
 
     inv_s.set_title( title );
     inv_s.set_hint( hint );
@@ -352,9 +353,14 @@ item_location game_menus::inv::titled_filter_menu( const item_location_filter &f
 }
 
 drop_locations game_menus::inv::titled_multi_filter_menu( const item_location_filter &filter,
-        Character &you, const std::string &title, int radius, const std::string &none_message )
+        Character &you, const std::string &title, int radius, const std::string &none_message,
+        bool quantity_prompt )
 {
-    return inv_internal_multi( you, inventory_filter_preset( filter ), title, radius, none_message );
+    const std::string hint = quantity_prompt ?
+                            _( "Select an item to choose an amount. Quantity edits it; 0 clears it.\n"
+                               "Review the selection, then Confirm to add fuel. Cancel leaves your items untouched." ) : "";
+    return inv_internal_multi( you, inventory_filter_preset( filter ), title, radius, none_message,
+                               hint, item_location(), quantity_prompt );
 }
 
 item_location game_menus::inv::titled_menu( Character &you, const std::string &title,

@@ -1,6 +1,6 @@
 # CDDA Astral Client & Tileset
 
-**Separate downloads:** [Astral Client](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/client-v0.1.0) · [Astral Tileset](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/tileset-v0.1.5)
+**Separate downloads:** [Astral Client](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/client-v0.1.1) · [Astral Tileset](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/tileset-v0.1.5)
 
 A mouse-friendly CDDA client and an independently installable tileset. [Controls, updater and development notes](doc/hybrid/README.md).
 

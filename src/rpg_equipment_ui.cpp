@@ -548,6 +548,7 @@ class rpg_equipment_window : public cataimgui::window
         }
 
         void draw_paper_doll();
+        void accept_equipment_drop( int slot );
         void draw_survivor( const ImVec2 &min, const ImVec2 &max );
         void draw_equipment_inspection();
         bool equip_preview = false;
@@ -1045,7 +1046,7 @@ void rpg_equipment_window::draw_equipment_inspection()
     refresh_selection_validity();
     item_location loc = selected_inv ? selected_inv : selected_worn;
     if( !loc ) {
-        ImGui::TextDisabled( "%s", _( "Select gear to inspect it. Drag an item to a matching slot to preview equipping." ) );
+        ImGui::TextWrapped( "%s", _( "Drag an item onto the survivor or an equipment slot, then Apply equipment change." ) );
         return;
     }
     const item_context_menu::action action = item_context_menu::draw_inspector( *you, loc,
@@ -1077,6 +1078,31 @@ void rpg_equipment_window::draw_equipment_inspection()
     }
 }
 
+void rpg_equipment_window::accept_equipment_drop( int slot )
+{
+    if( !ImGui::BeginDragDropTarget() ) {
+        return;
+    }
+    if( const ImGuiPayload *payload = ImGui::AcceptDragDropPayload(
+                "RPG_EQ_ITEM", ImGuiDragDropFlags_AcceptBeforeDelivery ) ) {
+        if( payload->IsDelivery() && drag_payload && drag_payload.get_item() ) {
+            selected_inv = drag_payload;
+            selected_slot = slot;
+            selected_worn = slot >= 0 ? item_on_slot( *you, slots[slot] ) : item_location::nowhere;
+            equip_preview = true;
+            preview_item = selected_inv;
+            preview_slot = slot;
+            status_line = string_format( _( "%s is ready. Choose Apply equipment change." ),
+                                         selected_inv->type_name() );
+            ui_telemetry::record( "equipment.drop", {
+                { "type", selected_inv->typeId().str() },
+                { "target", slot >= 0 ? slots[slot].label : "survivor" }
+            } );
+        }
+    }
+    ImGui::EndDragDropTarget();
+}
+
 void rpg_equipment_window::draw_paper_doll()
 {
     ImGui::BeginChild( "paper_doll", ImVec2( ImGui::GetContentRegionAvail().x * 0.44f, 0 ),
@@ -1089,6 +1115,12 @@ void rpg_equipment_window::draw_paper_doll()
     const ImVec2 origin = ImGui::GetCursorPos();
     const ImVec2 screen = ImGui::GetCursorScreenPos();
     const float doll_height = 7.f * ( slot_h + gap );
+    // The visible survivor is a drop target too, not just the small slot buttons.
+    ImGui::SetCursorPos( ImVec2( origin.x + slot_w + gap, origin.y + slot_h + gap ) );
+    ImGui::InvisibleButton( "survivor_drop", ImVec2(
+                               std::max( 1.f, available - 2.f * ( slot_w + gap ) ),
+                               doll_height - 2.f * ( slot_h + gap ) ) );
+    accept_equipment_drop( -1 );
     draw_survivor( ImVec2( screen.x + slot_w + gap, screen.y + slot_h + gap ),
                    ImVec2( screen.x + available - slot_w - gap, screen.y + doll_height - slot_h - gap ) );
     const int item_name_chars = 12;
@@ -1186,21 +1218,7 @@ void rpg_equipment_window::draw_paper_doll()
         }
 
         // Drag-drop target: inventory grid → this doll slot (needs Button LastItem).
-        if( ImGui::BeginDragDropTarget() ) {
-            if( const ImGuiPayload *payload =
-                    ImGui::AcceptDragDropPayload( "RPG_EQ_ITEM" ) ) {
-                ( void )payload;
-                if( drag_payload && drag_payload.get_item() ) {
-                    selected_inv = drag_payload;
-                    selected_slot = i;
-                    selected_worn = item_on_slot( *you, slots[i] );
-                    equip_preview = true;
-                    preview_item = selected_inv;
-                    preview_slot = selected_slot;
-                }
-            }
-            ImGui::EndDragDropTarget();
-        }
+        accept_equipment_drop( i );
 
         // Defer shared doll popup until after PopID + EndChild (parent id stack).
         // Require same slot for RMB_DOWN and RMB_UP so adjacent rows cannot steal
@@ -1950,8 +1968,8 @@ void rpg_equipment_window::draw_action_bar()
     if( !status_line.empty() ) {
         ImGui::TextWrapped( "%s", status_line.c_str() );
     } else {
-        ImGui::TextDisabled( "%s",
-                             _( "Drag to a slot to preview. Select clothing layers below the doll. Right-click any item for actions." ) );
+        ImGui::TextWrapped( "%s",
+                             _( "Drag onto the survivor or a slot, then Apply. Right-click any item for actions." ) );
     }
     if( RPG_EQ_CTX_TELEM && !rmb_telem_line.empty() ) {
         ImGui::TextColored( ImVec4( 0.95f, 0.75f, 0.25f, 1.f ),
@@ -1973,7 +1991,6 @@ void rpg_equipment_window::draw_controls()
     draw_inventory_grid();
     ImGui::EndChild();
     ImGui::Separator();
-    draw_equipment_inspection();
     if( equip_preview && ( !preview_item || selected_inv != preview_item || selected_slot != preview_slot ) ) {
         equip_preview = false;
     }
@@ -1987,8 +2004,16 @@ void rpg_equipment_window::draw_controls()
         ImGui::SameLine();
         if( ImGui::Button( _( "Cancel change" ) ) ) {
             equip_preview = false;
+            status_line = _( "Equipment change cancelled." );
         }
     }
+    // Keep Apply/Cancel above details, which may wrap over several lines.
+    ImGui::BeginChild( "equipment_inspector", ImVec2( 0.f,
+                       std::max( ImGui::GetTextLineHeightWithSpacing(),
+                                 ImGui::GetContentRegionAvail().y -
+                                 ImGui::GetFrameHeightWithSpacing() * 3.f ) ) );
+    draw_equipment_inspection();
+    ImGui::EndChild();
     draw_action_bar();
 
     // Parent cataimgui::window::draw() BringWindowToDisplayFront(Equipment)

@@ -3566,7 +3566,7 @@ void iexamine::fireplace_add_fuel( Character &you, const tripoint_bub_ms &examp 
 
     drop_locations selected = game_menus::inv::titled_multi_filter_menu(
                                   fuel_filter, you, _( "Add fuel" ), 1,
-                                  _( "You have no suitable fuel." ) );
+                                  _( "You have no suitable fuel." ), true );
     if( selected.empty() ) {
         return;
     }

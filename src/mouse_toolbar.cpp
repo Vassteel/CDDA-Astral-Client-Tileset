@@ -1,5 +1,6 @@
 #include "mouse_toolbar.h"
 
+#include <algorithm>
 #include <memory>
 #include <optional>
 #include <string>
@@ -12,6 +13,8 @@
 #include "game.h"
 #include "imgui/imgui.h"
 #include "options.h"
+#include "panels.h"
+#include "output.h"
 #include "translations.h"
 #include "ui_manager.h"
 
@@ -22,12 +25,29 @@ namespace
 
 bool in_default_mode_wait = false;
 
+const std::vector<std::pair<action_id, translation>> &toolbar_buttons()
+{
+    static const std::vector<std::pair<action_id, translation>> buttons = {
+        { ACTION_INVENTORY, to_translation( "Inv" ) },
+        { ACTION_EAT, to_translation( "Consume" ) },
+        { ACTION_CRAFT, to_translation( "Craft" ) },
+        { ACTION_CONSTRUCT, to_translation( "Build" ) },
+        { ACTION_MAP, to_translation( "Map" ) },
+        { ACTION_MISSIONS, to_translation( "Missions" ) },
+        { ACTION_PL_INFO, to_translation( "Char" ) },
+        { ACTION_WAIT, to_translation( "Wait" ) },
+        { ACTION_MESSAGES, to_translation( "Log" ) },
+        { ACTION_ZONES, to_translation( "Zones" ) },
+    };
+    return buttons;
+}
+
 class mouse_toolbar_window : public cataimgui::window
 {
     public:
         mouse_toolbar_window() : cataimgui::window( "MOUSE_TOOLBAR",
                     ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar |
-                    ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoFocusOnAppearing |
+                    ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoFocusOnAppearing |
                     ImGuiWindowFlags_NoNav ) {
             force_to_back = true;
         }
@@ -44,12 +64,40 @@ class mouse_toolbar_window : public cataimgui::window
 
     protected:
         cataimgui::bounds get_bounds() override {
-            // Bottom-center strip: keep the map center clear on Deck/720p.
             const ImVec2 display = ImGui::GetMainViewport()->Size;
-            const float approx_w = 800.f;
-            const float x = ( display.x - approx_w ) * 0.5f;
-            const float y = display.y - 52.f;
-            return { x < 8.f ? 8.f : x, y < 8.f ? 8.f : y, -1.f, -1.f };
+            const panel_manager &mgr = panel_manager::get_manager();
+            const float left = str_width_to_pixels( mgr.get_width_left() );
+            const float right = str_width_to_pixels( mgr.get_width_right() );
+            const float map_width = std::max( 100.f, display.x - left - right );
+            const float padding = ImGui::GetStyle().WindowPadding.x * 2.f;
+            const float max_content = std::max( 80.f, map_width - 16.f - padding );
+            float row_width = 0.f;
+            float widest = 0.f;
+            int rows = 1;
+            auto measure = [&]( const std::string &label ) {
+                const float width = ImGui::CalcTextSize( label.c_str() ).x + 20.f;
+                if( row_width > 0.f && row_width + 6.f + width > max_content ) {
+                    widest = std::max( widest, row_width );
+                    row_width = 0.f;
+                    ++rows;
+                }
+                row_width += ( row_width > 0.f ? 6.f : 0.f ) + width;
+            };
+            for( const auto &button : toolbar_buttons() ) {
+                measure( button.second.translated() );
+            }
+            if( get_option<bool>( "MOUSE_TOOLBAR_AUTO_TOGGLES" ) ) {
+                // Reserve enough room for the active state labels.
+                measure( _( "Pick●" ) );
+                measure( std::string( _( "Forage●" ) ) + ":x" );
+                measure( _( "Combat●" ) );
+                measure( _( "Eat●" ) );
+            }
+            const float width = std::max( widest, row_width ) + padding;
+            const float height = rows * ( ImGui::GetFontSize() + 12.f ) +
+                                 ( rows - 1 ) * 4.f + ImGui::GetStyle().WindowPadding.y * 2.f;
+            return { left + ( map_width - width ) * 0.5f, display.y - height - 8.f,
+                     width, height };
         }
 
         void draw() override {
@@ -60,6 +108,12 @@ class mouse_toolbar_window : public cataimgui::window
             }
             // Hybrid chrome before Begin so the strip WindowBg matches.
             ui_hybrid_chrome::push();
+            const cataimgui::bounds next = get_bounds();
+            if( next.x != last_bounds.x || next.y != last_bounds.y ||
+                next.w != last_bounds.w || next.h != last_bounds.h ) {
+                last_bounds = next;
+                mark_resized();
+            }
             cataimgui::window::draw();
             ui_hybrid_chrome::pop();
         }
@@ -67,28 +121,21 @@ class mouse_toolbar_window : public cataimgui::window
         void draw_controls() override {
             hide_ui = false;
 
-            static const std::vector<std::pair<action_id, translation>> buttons = {
-                { ACTION_INVENTORY, to_translation( "Inv" ) },
-                { ACTION_EAT, to_translation( "Consume" ) },
-                { ACTION_CRAFT, to_translation( "Craft" ) },
-                { ACTION_CONSTRUCT, to_translation( "Build" ) },
-                { ACTION_MAP, to_translation( "Map" ) },
-                { ACTION_PL_INFO, to_translation( "Char" ) },
-                { ACTION_WAIT, to_translation( "Wait" ) },
-                { ACTION_MESSAGES, to_translation( "Log" ) },
-                { ACTION_ZONES, to_translation( "Zones" ) },
-            };
-
             ImGui::PushStyleVar( ImGuiStyleVar_FramePadding, ImVec2( 10.f, 6.f ) );
             ImGui::PushStyleVar( ImGuiStyleVar_ItemSpacing, ImVec2( 6.f, 4.f ) );
             bool first = true;
-            for( const auto &btn : buttons ) {
-                if( !first ) {
+            auto place_button = [&]( const std::string &label ) {
+                const float width = ImGui::CalcTextSize( label.c_str() ).x + 20.f;
+                if( !first && ImGui::GetItemRectMax().x + 6.f + width <=
+                    ImGui::GetWindowPos().x + ImGui::GetWindowContentRegionMax().x ) {
                     ImGui::SameLine();
                 }
                 first = false;
+            };
+            for( const auto &btn : toolbar_buttons() ) {
                 // Own the label string — ImGui may keep the pointer until end of frame.
                 const std::string label = btn.second.translated();
+                place_button( label );
                 const int tb_cols = ui_hybrid_chrome::push_toolbar_button( false );
                 if( ImGui::Button( label.c_str() ) ) {
                     pending = btn.first;
@@ -109,10 +156,7 @@ class mouse_toolbar_window : public cataimgui::window
 
                 auto draw_styled_button = [&]( const char *id, const std::string & label,
                 bool active ) {
-                    if( !first ) {
-                        ImGui::SameLine();
-                    }
-                    first = false;
+                    place_button( label );
                     const int n = ui_hybrid_chrome::push_toolbar_button( active );
                     ImGui::PushID( id );
                     ImGui::Button( label.c_str() );
@@ -245,6 +289,7 @@ class mouse_toolbar_window : public cataimgui::window
 
     private:
         std::optional<action_id> pending;
+        cataimgui::bounds last_bounds = { 0.f, 0.f, 0.f, 0.f };
 
         static bool should_draw() {
             if( !get_option<bool>( "MOUSE_TOOLBAR" ) ) {

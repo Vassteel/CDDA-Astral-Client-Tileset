@@ -2341,7 +2341,7 @@ void options_manager::add_options_interface()
 
         add( "MOUSE_TOOLBAR", page_id, to_translation( "On-screen mouse toolbar" ),
              to_translation( "If true, show a compact clickable toolbar during normal play "
-                             "(Inventory, Craft, Build, Map, Character, Wait, Log, Zones). "
+                             "(Inventory, Consume, Craft, Build, Map, Missions, Character, Wait, Log, Zones). "
                              "Keyboard bindings are unchanged." ),
              true, COPT_CURSES_HIDE );
         get_option( "MOUSE_TOOLBAR" ).setPrerequisite( "ENABLE_MOUSE" );

@@ -27,3 +27,11 @@ The menu source inventory covers 112 files and 457 original entry-point matches.
 Astral Tileset 0.1.5 has independent atlas/configuration/package checks. Newly detailed autumn olive sprites remain pending in-game visual acceptance. The client and art packages are versioned independently.
 
 The clean Linux distribution launched from a separate test profile without Astral installed. Its packaged core data passed `--check-mods dda` with exit 0. The actual release update ZIP passed checksum validation, installation into a disposable client, save preservation and rollback. Client archive checks exclude player data, generated caches and Astral artwork.
+
+## Client 0.1.1 follow-up
+
+- Add fuel: clicking 19 logs prompted for a quantity; selecting 2 showed “2 of 19”. Cancelling a subsequent edit retained 2; setting 0 cleared the selection. Cancelling the entire menu left all 19 logs and 100 charcoal in inventory. Confirming 2 logs plus 10 charcoal moved exactly those amounts to the adjacent brazier, leaving 17 logs and 90 charcoal. A saved-game assertion verified the remainder.
+- Equipment: dragging a T-shirt onto the survivor image exposed Apply/Cancel and Apply put it on. Dragging a combat knife onto Weapon and cancelling left it carried; a subsequent drop and Apply wielded it. Saved-game assertions verified both equipped items. Apply/Cancel now appear above a scrollable inspector.
+- Missions: the HUD button opened the existing active/completed/failed mission and point-of-interest interface.
+- HUD wrapping: all buttons remained inside the map area at 1280×800, 800×600 and 640×384. Equipment controls remained reachable at those sizes; the doll and inventory scroll on small windows.
+- Quantity and equipment-drop events add local diagnostics. Twelve updater tests passed again. Runtime installation remained unchanged while the user played.

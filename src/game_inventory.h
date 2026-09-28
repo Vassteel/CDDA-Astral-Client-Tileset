@@ -60,7 +60,8 @@ item_location titled_filter_menu( const item_filter &filter, Character &you,
 item_location titled_filter_menu( const item_location_filter &filter, Character &you,
                                   const std::string &title, int radius = -1, const std::string &none_message = "" );
 drop_locations titled_multi_filter_menu( const item_location_filter &filter, Character &you,
-        const std::string &title, int radius = -1, const std::string &none_message = "" );
+        const std::string &title, int radius = -1, const std::string &none_message = "",
+        bool quantity_prompt = false );
 
 /**
 * @name Customized inventory menus

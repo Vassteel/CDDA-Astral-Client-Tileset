@@ -1119,6 +1119,9 @@ class inventory_multiselector : public inventory_selector
                                           bool allow_select_contained = false );
         drop_locations execute( bool allow_empty = false );
         void toggle_entry( inventory_entry &entry, size_t count );
+        void set_quantity_prompt( bool enabled ) {
+            quantity_prompt = enabled;
+        }
     protected:
         void rearrange_columns( size_t client_width ) override;
         size_t max_chosen_count;
@@ -1136,6 +1139,9 @@ class inventory_multiselector : public inventory_selector
     private:
         std::unique_ptr<inventory_column> selection_col;
         GetStats get_stats;
+        bool quantity_prompt = false;
+        void select_quantity();
+        void set_selected_quantity( int quantity );
 };
 
 class inventory_haul_selector : public inventory_multiselector

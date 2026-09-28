@@ -3321,6 +3321,10 @@ int inventory_selector::query_count( char init, bool end_with_toggle )
         const int initial = selected.is_item() && selected.chosen_count > 0 ?
                             static_cast<int>( selected.chosen_count ) : 1;
         number_input_popup<int> popup( 38, initial, _( "Quantity" ) );
+        if( selected.is_item() ) {
+            popup.set_description( string_format( _( "%s — available: %d.  0 clears the selection." ),
+                                   selected.any_item()->type_name(), selected.get_available_count() ) );
+        }
         const int value = popup.query();
         return popup.cancelled() ? -1 : std::max( 0, value );
     }
@@ -4913,6 +4917,35 @@ void inventory_multiselector::toggle_categorize_contained()
     }
 }
 
+void inventory_multiselector::select_quantity()
+{
+    if( !get_active_column().get_highlighted().is_selectable() ) {
+        return;
+    }
+    set_selected_quantity( query_count() );
+}
+
+void inventory_multiselector::set_selected_quantity( int quantity )
+{
+    ui_telemetry::record( "inventory.quantity", {
+        { "prompt_on_select", quantity_prompt ? "true" : "false" },
+        { "quantity", std::to_string( quantity ) },
+        { "cancelled", quantity < 0 ? "true" : "false" }
+    } );
+    if( quantity < 0 ) {
+        return;
+    }
+    for( inventory_entry *entry : get_active_column().get_all_selected() ) {
+        set_chosen_count( *entry, quantity );
+    }
+    if( !allow_select_contained ) {
+        deselect_contained_items();
+    }
+    selection_col->prepare_paging();
+    count = 0;
+    on_toggle();
+}
+
 void inventory_multiselector::on_input( const inventory_input &input )
 {
     if( input.action == "HYBRID_MARK_ALL" || input.action == "HYBRID_CLEAR_ALL" ) {
@@ -4937,23 +4970,26 @@ void inventory_multiselector::on_input( const inventory_input &input )
     if( input.entry != nullptr ) { // Single Item from mouse
         highlight( input.entry->any_item() );
         if( input.action == "SELECT" || input.action == "ANY_INPUT" ) {
-            toggle_entries( count );
+            if( quantity_prompt ) {
+                select_quantity();
+            } else {
+                toggle_entries( count );
+            }
+            return;
         }
     }
     if( input.action == "TOGGLE_NON_FAVORITE" ) {
         toggle_entries( count, toggle_mode::NON_FAVORITE_NON_WORN );
     } else if( input.action == "MARK_WITH_COUNT" ) { // Set count and mark selected with specific key
-        int query_result = query_count();
-        if( query_result >= 0 ) {
-            toggle_entries( query_result, toggle_mode::SELECTED );
-        }
+        select_quantity();
     } else if( !uistate.numpad_navigation && input.ch >= '0' && input.ch <= '9' ) {
-        int query_result = query_count( input.ch, true );
-        if( query_result >= 0 ) {
-            toggle_entries( query_result, toggle_mode::SELECTED );
-        }
+        set_selected_quantity( query_count( input.ch, true ) );
     } else if( input.action == "TOGGLE_ENTRY" ) { // Mark selected
-        toggle_entries( count, toggle_mode::SELECTED );
+        if( quantity_prompt ) {
+            select_quantity();
+        } else {
+            toggle_entries( count, toggle_mode::SELECTED );
+        }
     } else if( input.action == "INCREASE_COUNT" || input.action == "DECREASE_COUNT" ) {
         inventory_entry &entry = get_active_column().get_highlighted();
         if( entry.is_selectable() ) {
