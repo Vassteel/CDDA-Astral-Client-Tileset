@@ -9,6 +9,7 @@
 set -euo pipefail
 project_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 client_dir="$project_dir/artifacts/client"
+python3 "$project_dir/tools/hybrid-updater/sync_loading_art.py"
 cd -- "$client_dir"
 export LD_LIBRARY_PATH="$client_dir/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 

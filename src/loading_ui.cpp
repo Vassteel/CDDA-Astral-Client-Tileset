@@ -30,6 +30,7 @@ struct ui_state {
 #ifdef TILES
     ImVec2 window_size;
     ImVec2 splash_size;
+    SDL_Surface_Ptr splash_surface;
     SDL_Texture_Ptr splash;
     cata_path chosen_load_img;
 #else
@@ -55,6 +56,11 @@ static ui_state *gLUI = nullptr;
 static void redraw()
 {
 #ifdef TILES
+    // Keep the decoded artwork across renderer recovery. GPU textures may be
+    // released while a world loads and must be recreated on a healthy frame.
+    if( !gLUI->splash && gLUI->splash_surface && !renderer_should_abort_frame() ) {
+        gLUI->splash = CreateTextureFromSurface( get_sdl_renderer(), gLUI->splash_surface );
+    }
     ImGui::SetNextWindowSize( ImGui::GetMainViewport()->Size );
     ImGui::SetNextWindowPos( {0, 0}, ImGuiCond_Always );
     ImGui::PushStyleVar( ImGuiStyleVar_WindowBorderSize, 0.0f );
@@ -69,7 +75,23 @@ static void redraw()
         const float image_start_pos_x = center_x - ( gLUI->splash_size.x / 2 );
         ImGui::SetCursorPosX( image_start_pos_x );
         if( gLUI->splash ) {
-            ImGui::Image( reinterpret_cast<ImTextureID>( gLUI->splash.get() ), gLUI->splash_size );
+            // SDL's software renderer overflows its textured-triangle math on
+            // large fullscreen quads. Small quads share the same texture and
+            // draw command, preserving the complete image without resampling it.
+            const ImVec2 origin = ImGui::GetCursorScreenPos();
+            ImDrawList *draw = ImGui::GetWindowDrawList();
+            constexpr float section = 256.0f;
+            for( float y = 0.0f; y < gLUI->splash_size.y; y += section ) {
+                for( float x = 0.0f; x < gLUI->splash_size.x; x += section ) {
+                    const ImVec2 start{ x, y };
+                    const ImVec2 end{ std::min( x + section, gLUI->splash_size.x ),
+                                      std::min( y + section, gLUI->splash_size.y ) };
+                    draw->AddImage( reinterpret_cast<ImTextureID>( gLUI->splash.get() ),
+                                    origin + start, origin + end,
+                                    start / gLUI->splash_size, end / gLUI->splash_size );
+                }
+            }
+            ImGui::Dummy( gLUI->splash_size );
         }
 
         // hint
@@ -199,7 +221,9 @@ static void update_state( const std::string &context, const std::string &step )
             }
             gLUI->chosen_load_img = random_entry( imgs );
         }
-        SDL_Surface_Ptr surf = load_image( gLUI->chosen_load_img.get_unrelative_path().u8string().c_str() );
+        gLUI->splash_surface = load_image(
+                                  gLUI->chosen_load_img.get_unrelative_path().u8string().c_str() );
+        const SDL_Surface_Ptr &surf = gLUI->splash_surface;
         // calculate max size of image, decreasing it by the size of text below
         const ImVec2 max_img_size = { screen_size.x, screen_size.y - gLUI->text_height };
         // preserve aspect ratio by finding the longest **relative** side and scaling both sides by its ratio to max_img_size
@@ -210,12 +234,6 @@ static void update_state( const std::string &context, const std::string &step )
         gLUI->splash_size = { static_cast<float>( surf->w ) / longest_side_ratio,
                               static_cast<float>( surf->h ) / longest_side_ratio
                             };
-        if( !renderer_should_abort_frame() ) {
-            // Skip the upload when recovery is queued: it would invalidate the
-            // texture. The splash stays absent for this load rather than uploading
-            // against a renderer about to be rebuilt.
-            gLUI->splash = CreateTextureFromSurface( get_sdl_renderer(), surf );
-        }
         gLUI->window_size = gLUI->splash_size + ImVec2{ 0.0f, 2.0f * ImGui::GetTextLineHeightWithSpacing() };
 #else
         std::string splash = PATH_INFO::title( get_holiday_from_time() );
