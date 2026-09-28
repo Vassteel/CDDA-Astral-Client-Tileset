@@ -30,6 +30,9 @@
 #include <imgui/imgui_internal.h>
 #include "input_context.h"
 #include "item.h"
+#include "item_pocket.h"
+#include "iuse_actor.h"
+#include "iuse.h"
 #include "item_context_menu.h"
 #include "item_location.h"
 #include "itype.h"
@@ -53,16 +56,59 @@
 #  include "sdltiles.h"
 #endif
 
+rpg_equipment_ui::storage_slot rpg_equipment_ui::storage_slot_for( const item &it )
+{
+    if( !it.is_armor() ) {
+        return storage_slot::none;
+    }
+    // Use pocket capabilities, not translated names or a list of item IDs.
+    // A backpack with a bottle holster remains a backpack.
+    if( it.type->get_use( "holster" ) ) {
+        bool sheath = false;
+        for( const item_pocket *pocket : it.get_container_pockets() ) {
+            for( const flag_id &flag : pocket->get_pocket_data()->get_flag_restrictions() ) {
+                if( flag.str() == "SHEATH_SWORD" ) {
+                    return storage_slot::scabbard;
+                }
+                sheath = sheath || flag.str() == "SHEATH_KNIFE" ||
+                         flag.str() == "SHEATH_AXE" || flag.str() == "SHEATH_SPEAR";
+            }
+        }
+        return sheath ? storage_slot::sheath : storage_slot::holster;
+    }
+    if( it.has_layer( { layer_level::BELTED }, body_part_torso ) ) {
+        for( const sub_bodypart_id &bp : it.get_covered_sub_body_parts() ) {
+            if( bp.id().str() == "torso_hanging_back" ) {
+                return storage_slot::back;
+            }
+        }
+    }
+    return storage_slot::none;
+}
+
 namespace
 {
 
-static const sub_bodypart_str_id sub_body_part_torso_hanging_back( "torso_hanging_back" );
-
 struct doll_slot {
-    enum class kind { body, body_outer, back, weapon, offhand } type;
+    enum class kind { body, body_layer, body_outer, back, scabbard, sheath, holster, weapon, offhand } type;
     bodypart_id bp;
     std::string label;
+    layer_level layer = layer_level::NORMAL;
 };
+
+static const char *layer_name( layer_level layer )
+{
+    switch( layer ) {
+        case layer_level::PERSONAL: return _( "Personal" );
+        case layer_level::SKINTIGHT: return _( "Close to skin" );
+        case layer_level::NORMAL: return _( "Normal" );
+        case layer_level::WAIST: return _( "Waist" );
+        case layer_level::OUTER: return _( "Outer" );
+        case layer_level::BELTED: return _( "Strapped" );
+        case layer_level::AURA: return _( "Aura" );
+        default: return "";
+    }
+}
 
 /** Prefer word-boundary cut, then utf8-safe ellipsis. */
 static std::string ellipsize_label( const std::string &raw, int max_cells )
@@ -157,19 +203,22 @@ static std::vector<doll_slot> make_doll_slots( Character &you )
     offhand.label = _( "Offhand" );
     slots.push_back( offhand );
 
-    return slots;
-}
-
-static bool covers_hanging_back( const item &it )
-{
-    for( const sub_bodypart_id &sbp : it.get_covered_sub_body_parts() ) {
-        if( sbp.id() == sub_body_part_torso_hanging_back ) {
-            return true;
+    for( const auto &entry : { std::make_pair( doll_slot::kind::scabbard, _( "Scabbards" ) ),
+                              std::make_pair( doll_slot::kind::sheath, _( "Sheaths" ) ),
+                              std::make_pair( doll_slot::kind::holster, _( "Holsters" ) ) } ) {
+        slots.push_back( { entry.first, bodypart_str_id::NULL_ID().id(), entry.second } );
+    }
+    const size_t overview_count = slots.size();
+    for( size_t i = 0; i < overview_count; ++i ) {
+        if( slots[i].type != doll_slot::kind::body ) {
+            continue;
+        }
+        for( int layer = 0; layer < static_cast<int>( layer_level::NUM_LAYER_LEVELS ); ++layer ) {
+            const layer_level level = static_cast<layer_level>( layer );
+            slots.push_back( { doll_slot::kind::body_layer, slots[i].bp, layer_name( level ), level } );
         }
     }
-    // Fallback: belted torso gear without detailed sub-coverage (backpacks).
-    return it.has_flag( flag_BELTED ) && it.covers( body_part_torso ) &&
-           it.has_layer( { layer_level::BELTED } );
+    return slots;
 }
 
 static bool is_outer_on_torso( const item &it )
@@ -177,75 +226,51 @@ static bool is_outer_on_torso( const item &it )
     return it.covers( body_part_torso ) && it.has_layer( { layer_level::OUTER }, body_part_torso );
 }
 
-/** Outermost worn item covering bp that belongs on a plain body slot. */
-static item_location worn_on_body_slot( Character &you, const bodypart_id &bp )
+static bool slot_matches( const item &it, const doll_slot &slot )
 {
-    const std::vector<item_location> worn = you.top_items_loc();
-    for( auto it = worn.rbegin(); it != worn.rend(); ++it ) {
-        if( !*it || !you.is_worn( **it ) || !( *it )->covers( bp ) ) {
-            continue;
+    using storage = rpg_equipment_ui::storage_slot;
+    const storage place = rpg_equipment_ui::storage_slot_for( it );
+    switch( slot.type ) {
+        case doll_slot::kind::scabbard: return place == storage::scabbard;
+        case doll_slot::kind::sheath: return place == storage::sheath;
+        case doll_slot::kind::holster: return place == storage::holster;
+        case doll_slot::kind::back: return place == storage::back;
+        case doll_slot::kind::body_outer:
+            return is_outer_on_torso( it ) && place == storage::none;
+        case doll_slot::kind::body_layer:
+            return it.covers( slot.bp ) && it.has_layer( { slot.layer }, slot.bp );
+        case doll_slot::kind::body:
+            return it.covers( slot.bp ) && place == storage::none &&
+                   !( it.has_flag( flag_BLOCK_WHILE_WORN ) && it.has_flag( flag_RESTRICT_HANDS ) ) &&
+                   ( slot.bp != body_part_torso || !is_outer_on_torso( it ) );
+        case doll_slot::kind::offhand:
+            return it.has_flag( flag_BLOCK_WHILE_WORN ) && it.has_flag( flag_RESTRICT_HANDS );
+        case doll_slot::kind::weapon: return true;
+    }
+    return false;
+}
+
+static std::vector<item_location> items_on_slot( Character &you, const doll_slot &slot )
+{
+    std::vector<item_location> result;
+    if( slot.type == doll_slot::kind::weapon ) {
+        if( you.get_wielded_item() ) {
+            result.push_back( you.get_wielded_item() );
         }
-        // Keep torso under-layer free of outer coats / backpacks (those have dedicated slots).
-        if( bp == body_part_torso ) {
-            if( covers_hanging_back( **it ) || is_outer_on_torso( **it ) ) {
-                continue;
+    } else {
+        for( const item_location &loc : you.top_items_loc() ) {
+            if( loc && you.is_worn( *loc ) && slot_matches( *loc, slot ) ) {
+                result.push_back( loc );
             }
         }
-        return *it;
     }
-    return item_location::nowhere;
-}
-
-static item_location worn_outer_torso( Character &you )
-{
-    const std::vector<item_location> worn = you.top_items_loc();
-    for( auto it = worn.rbegin(); it != worn.rend(); ++it ) {
-        if( *it && you.is_worn( **it ) && is_outer_on_torso( **it ) && !covers_hanging_back( **it ) ) {
-            return *it;
-        }
-    }
-    return item_location::nowhere;
-}
-
-static item_location worn_on_back( Character &you )
-{
-    const std::vector<item_location> worn = you.top_items_loc();
-    for( auto it = worn.rbegin(); it != worn.rend(); ++it ) {
-        if( *it && you.is_worn( **it ) && covers_hanging_back( **it ) ) {
-            return *it;
-        }
-    }
-    return item_location::nowhere;
-}
-
-static item_location worn_offhand_shield( Character &you )
-{
-    // Prefer CDDA's worn BLOCK_WHILE_WORN shield; never show the wielded weapon here.
-    item *shield = you.worn.best_shield();
-    if( shield == nullptr ) {
-        return item_location::nowhere;
-    }
-    if( you.is_wielding( *shield ) ) {
-        return item_location::nowhere;
-    }
-    return item_location( you, shield );
+    return result;
 }
 
 static item_location item_on_slot( Character &you, const doll_slot &slot )
 {
-    switch( slot.type ) {
-        case doll_slot::kind::weapon:
-            return you.get_wielded_item();
-        case doll_slot::kind::offhand:
-            return worn_offhand_shield( you );
-        case doll_slot::kind::back:
-            return worn_on_back( you );
-        case doll_slot::kind::body_outer:
-            return worn_outer_torso( you );
-        case doll_slot::kind::body:
-        default:
-            return worn_on_body_slot( you, slot.bp );
-    }
+    const std::vector<item_location> items = items_on_slot( you, slot );
+    return items.empty() ? item_location::nowhere : items.back();
 }
 
 
@@ -477,6 +502,12 @@ class rpg_equipment_window : public cataimgui::window
                                  ImGuiWindowFlags_NoNav ) {
             you = guy;
             slots = make_doll_slots( *you );
+            for( int i = 0; i < static_cast<int>( slots.size() ); ++i ) {
+                if( slots[i].type == doll_slot::kind::body && slots[i].bp == body_part_torso ) {
+                    selected_slot = i;
+                    break;
+                }
+            }
         }
 
         bool execute();
@@ -561,7 +592,7 @@ class rpg_equipment_window : public cataimgui::window
         }
 
         void draw_paper_doll();
-        void accept_equipment_drop( int slot );
+        void accept_equipment_drop( int slot, const item_location &target = item_location::nowhere );
         void draw_survivor( const ImVec2 &min, const ImVec2 &max );
         void draw_equipment_inspection();
         bool equip_preview = false;
@@ -838,7 +869,26 @@ void rpg_equipment_window::try_drag_equip()
     // Dropping a compatible magazine/ammo onto an occupied doll slot (e.g.
     // notched stick → bow fire drill) should Reload, not try to replace the
     // wielded item (which only offers Store/Drop/Wear via dispose_item).
-    item_location on_slot = item_on_slot( *you, slot );
+    item_location on_slot = selected_worn && slot_matches( *selected_worn, slot ) ?
+                            selected_worn : item_on_slot( *you, slot );
+    if( slot.type == doll_slot::kind::scabbard || slot.type == doll_slot::kind::sheath ||
+        slot.type == doll_slot::kind::holster ) {
+        if( !slot_matches( *selected_inv, slot ) ) {
+            if( on_slot && on_slot != selected_inv ) {
+                const use_function *use = on_slot->type->get_use( "holster" );
+                const auto *actor = use ? dynamic_cast<const holster_actor *>( use->get_actor_ptr() ) : nullptr;
+                if( actor && actor->can_holster( *on_slot, *selected_inv ) ) {
+                    item_location source = selected_inv;
+                    clear_selections();
+                    status_line = actor->store( *you, *on_slot, *source ) ?
+                                  _( "Stored." ) : _( "Could not store that item." );
+                    return;
+                }
+            }
+            status_line = _( "Drop matching wearable storage here, or a compatible weapon onto an equipped holder." );
+            return;
+        }
+    }
     if( on_slot && on_slot.get_item() && selected_inv.get_item() &&
         on_slot.get_item() != selected_inv.get_item() ) {
         const bool accepts = on_slot->can_reload_with( *selected_inv, /*now=*/true );
@@ -871,8 +921,8 @@ void rpg_equipment_window::try_drag_equip()
         try_wield_selected();
         return;
     }
-    if( slot.bp != bodypart_str_id::NULL_ID().id() && !selected_inv->covers( slot.bp ) ) {
-        status_line = _( "That item does not fit the selected body part." );
+    if( !slot_matches( *selected_inv, slot ) ) {
+        status_line = _( "That item does not belong in this slot or clothing layer." );
         return;
     }
     // Offhand / body / outer / back → wear covering that part when possible.
@@ -893,8 +943,7 @@ void rpg_equipment_window::try_drag_equip()
         }
         return;
     }
-    // Non-armor dropped on a wear slot: fall back to wield.
-    try_wield_selected();
+    status_line = _( "This slot takes wearable equipment." );
 }
 
 void rpg_equipment_window::try_wield_selected()
@@ -1118,7 +1167,7 @@ void rpg_equipment_window::draw_equipment_inspection()
     }
 }
 
-void rpg_equipment_window::accept_equipment_drop( int slot )
+void rpg_equipment_window::accept_equipment_drop( int slot, const item_location &target )
 {
     if( !ImGui::BeginDragDropTarget() ) {
         return;
@@ -1128,7 +1177,8 @@ void rpg_equipment_window::accept_equipment_drop( int slot )
         if( payload->IsDelivery() && drag_payload && drag_payload.get_item() ) {
             selected_inv = drag_payload;
             selected_slot = slot;
-            selected_worn = slot >= 0 ? item_on_slot( *you, slots[slot] ) : item_location::nowhere;
+            selected_worn = target ? target :
+                            slot >= 0 ? item_on_slot( *you, slots[slot] ) : item_location::nowhere;
             equip_preview = true;
             preview_item = selected_inv;
             preview_slot = slot;
@@ -1150,19 +1200,20 @@ void rpg_equipment_window::draw_paper_doll()
     ui_hybrid_chrome::section_header( _( "Worn and wielded" ) );
     const float available = ImGui::GetContentRegionAvail().x;
     const float slot_w = std::max( 54.f, std::min( 110.f, available * 0.27f ) );
-    const float slot_h = std::max( 48.f, ImGui::GetTextLineHeight() * 2.9f );
+    const float slot_h = std::max( ImGui::GetTextLineHeight() * 2.1f,
+                                  std::min( 48.f, ( ImGui::GetContentRegionAvail().y - 160.f ) / 8.f - 6.f ) );
     const float gap = 6.f;
     const ImVec2 origin = ImGui::GetCursorPos();
     const ImVec2 screen = ImGui::GetCursorScreenPos();
-    const float doll_height = 7.f * ( slot_h + gap );
+    const float doll_height = 8.f * ( slot_h + gap );
     // The visible survivor is a drop target too, not just the small slot buttons.
     ImGui::SetCursorPos( ImVec2( origin.x + slot_w + gap, origin.y + slot_h + gap ) );
     ImGui::InvisibleButton( "survivor_drop", ImVec2(
                                 std::max( 1.f, available - 2.f * ( slot_w + gap ) ),
-                                doll_height - 2.f * ( slot_h + gap ) ) );
+                                doll_height - 3.f * ( slot_h + gap ) ) );
     accept_equipment_drop( -1 );
     draw_survivor( ImVec2( screen.x + slot_w + gap, screen.y + slot_h + gap ),
-                   ImVec2( screen.x + available - slot_w - gap, screen.y + doll_height - slot_h - gap ) );
+                   ImVec2( screen.x + available - slot_w - gap, screen.y + doll_height - 2.f * ( slot_h + gap ) ) );
     const int item_name_chars = 12;
     auto slot_position = [&]( const doll_slot & slot ) -> ImVec2 {
         int column = 0, row = 0;
@@ -1177,6 +1228,12 @@ void rpg_equipment_window::draw_paper_doll()
         {
             column = 1;
             row = 6;
+        } else if( slot.type == doll_slot::kind::scabbard ||
+                   slot.type == doll_slot::kind::sheath || slot.type == doll_slot::kind::holster )
+        {
+            row = 7;
+            column = slot.type == doll_slot::kind::scabbard ? 0 :
+                     slot.type == doll_slot::kind::sheath ? 1 : 2;
         } else if( slot.type == doll_slot::kind::body_outer )
         {
             column = 2;
@@ -1221,9 +1278,13 @@ void rpg_equipment_window::draw_paper_doll()
     item_location doll_ctx_loc;
     for( int i = 0; i < static_cast<int>( slots.size() ); i++ ) {
         const doll_slot &slot = slots[i];
-        item_location worn_loc = item_on_slot( *you, slot );
+        if( slot.type == doll_slot::kind::body_layer ) {
+            continue;
+        }
+        const std::vector<item_location> worn_items = items_on_slot( *you, slot );
+        item_location worn_loc = worn_items.empty() ? item_location::nowhere : worn_items.back();
         if( selected_slot == i && selected_worn && you->is_worn( *selected_worn ) &&
-            slot.bp != bodypart_str_id::NULL_ID().id() && selected_worn->covers( slot.bp ) ) {
+            slot_matches( *selected_worn, slot ) ) {
             worn_loc = selected_worn;
         }
         ImGui::SetCursorPos( slot_position( slot ) );
@@ -1234,7 +1295,12 @@ void rpg_equipment_window::draw_paper_doll()
         ImVec4 tint = ImVec4( 0.7f, 0.7f, 0.7f, 1.f );
         if( worn_loc && worn_loc.get_item() ) {
             right = cell_label( *worn_loc, 1, item_name_chars );
-            tip = worn_loc->display_name();
+            for( const item_location &loc : worn_items ) {
+                if( !tip.empty() ) {
+                    tip += "\n";
+                }
+                tip += loc->display_name();
+            }
             tint = cataimgui::imvec4_from_color( worn_loc->color_in_inventory( you ) );
         } else {
             right = _( "— empty —" );
@@ -1332,6 +1398,12 @@ void rpg_equipment_window::draw_paper_doll()
             }
 #endif
         }
+        if( worn_items.size() > 1 ) {
+            const std::string count = string_format( "%d", worn_items.size() );
+            const ImVec2 rmin = ImGui::GetItemRectMin();
+            ImGui::GetWindowDrawList()->AddText( ImVec2( rmin.x + 4.f, rmin.y + slot_h - 18.f ),
+                                                ImGui::GetColorU32( ImGuiCol_Text ), count.c_str() );
+        }
         if( hovered && !tip.empty() ) {
             imgui_cdda_tooltip( tip );
         }
@@ -1352,23 +1424,67 @@ void rpg_equipment_window::draw_paper_doll()
 
     ImGui::SetCursorPos( ImVec2( origin.x, origin.y + doll_height ) );
     ImGui::Dummy( ImVec2( 1.f, 1.f ) );
-    if( selected_slot >= 0 && selected_slot < static_cast<int>( slots.size() ) &&
-        slots[selected_slot].bp != bodypart_str_id::NULL_ID().id() ) {
-        ui_hybrid_chrome::section_header( _( "Clothing layers" ) );
-        int layer_index = 0;
-        for( const item_location &loc : you->top_items_loc() ) {
-            if( !loc || !you->is_worn( *loc ) || !loc->covers( slots[selected_slot].bp ) ) {
-                continue;
+    if( selected_slot >= 0 && selected_slot < static_cast<int>( slots.size() ) ) {
+        const doll_slot selected = slots[selected_slot];
+        if( selected.bp != bodypart_str_id::NULL_ID().id() ) {
+            ui_hybrid_chrome::section_header( string_format( _( "Layers — %s" ),
+                                              body_part_name_as_heading( selected.bp, 1 ) ).c_str() );
+            // Every native clothing layer has a target, including empty layers.
+            const float width = ImGui::GetContentRegionAvail().x;
+            const int columns = std::clamp( static_cast<int>( width /
+                                           ( ImGui::CalcTextSize( _( "Close to skin" ) ).x + 12.f ) ), 1, 4 );
+            const float layer_width = ( width - ( columns - 1 ) * gap ) / columns;
+            int column = 0;
+            for( int i = 0; i < static_cast<int>( slots.size() ); ++i ) {
+                if( slots[i].type != doll_slot::kind::body_layer || slots[i].bp != selected.bp ) {
+                    continue;
+                }
+                if( column++ % columns != 0 ) {
+                    ImGui::SameLine( 0.f, gap );
+                }
+                const std::vector<item_location> items = items_on_slot( *you, slots[i] );
+                ImGui::PushID( 10000 + i );
+                const int colors = ui_hybrid_chrome::push_slot_button( selected_slot == i, items.empty() );
+                const std::string label = string_format( "%s\n%s", slots[i].label,
+                                          items.empty() ? _( "Empty" ) : string_format( _( "%d worn" ), items.size() ) );
+                if( ImGui::Button( label.c_str(), ImVec2( layer_width, ImGui::GetTextLineHeight() * 2.5f ) ) ) {
+                    selected_slot = i;
+                    selected_inv = item_location::nowhere;
+                    selected_worn = items.empty() ? item_location::nowhere : items.back();
+                }
+                accept_equipment_drop( i );
+                ui_hybrid_chrome::draw_item_bezel( selected_slot == i, ImGui::IsItemHovered(), items.empty() );
+                if( ImGui::IsItemHovered() ) {
+                    std::string tip = slots[i].label;
+                    for( const item_location &loc : items ) {
+                        tip += "\n" + loc->display_name();
+                    }
+                    imgui_cdda_tooltip( tip );
+                }
+                ImGui::PopStyleColor( colors );
+                ImGui::PopID();
             }
-            ImGui::PushID( 5000 + layer_index++ );
+        }
+        const doll_slot &active = slots[selected_slot];
+        const std::vector<item_location> items = items_on_slot( *you, active );
+        ui_hybrid_chrome::section_header( active.label.c_str() );
+        if( items.empty() ) {
+            ImGui::TextDisabled( "%s", _( "Empty — drag matching equipment here." ) );
+        }
+        for( size_t i = 0; i < items.size(); ++i ) {
+            const item_location &loc = items[i];
+            ImGui::PushID( 20000 + static_cast<int>( i ) );
             if( ImGui::Selectable( remove_color_tags( loc->display_name() ).c_str(), selected_worn == loc ) ) {
                 selected_worn = loc;
                 selected_inv = item_location::nowhere;
             }
+            accept_equipment_drop( selected_slot, loc );
+            if( ImGui::IsItemHovered() && ImGui::IsMouseReleased( ImGuiMouseButton_Right ) ) {
+                doll_ctx_request = true;
+                doll_ctx_index = selected_slot;
+                doll_ctx_loc = loc;
+            }
             ImGui::PopID();
-        }
-        if( layer_index == 0 ) {
-            ImGui::TextDisabled( "%s", _( "Nothing worn here." ) );
         }
     }
 
@@ -2068,7 +2184,7 @@ void rpg_equipment_window::draw_controls()
         hide_if_hidden();
         return;
     }
-    const float footer = ImGui::GetTextLineHeightWithSpacing() * 8.f + 30.f;
+    const float footer = ImGui::GetTextLineHeightWithSpacing() * 6.f + 24.f;
     ImGui::BeginChild( "equipment_body", ImVec2( 0.f,
                        std::max( 180.f, ImGui::GetContentRegionAvail().y - footer ) ) );
     draw_paper_doll();
