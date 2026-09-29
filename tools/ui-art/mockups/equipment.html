@@ -1,0 +1,90 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Astral equipment — MOCKUP</title>
+<link rel="stylesheet" href="astral.css"><link rel="stylesheet" href="icons.css">
+<style>
+:root { --u: var(--scale, 1px); }
+.win { left:50%; top:50%; transform:translate(-50%,-50%); width:min(96vw, calc(2400*var(--u))); height:min(94vh, calc(1500*var(--u))); }
+.col-left { width:calc(300*var(--u)); display:flex; flex-direction:column; gap:var(--md); }
+.portrait { flex:1; min-height:0; display:grid; place-items:center; background:var(--deep-bg); position:relative; }
+.portrait img { height:80%; image-rendering:pixelated; margin-bottom:calc(20*var(--u)); }
+.portrait .cap { position:absolute; left:var(--sm); bottom:var(--xs); font-size:calc(var(--body)*.75); color:var(--text-muted); }
+.hand { display:flex; flex-direction:column; gap:var(--xs); padding:var(--sm) var(--md); min-height:calc(88*var(--u)); }
+.hand .h { color:var(--text-muted); font-size:calc(var(--body)*.9); }
+.hand .it { display:flex; align-items:center; gap:var(--md); font-size:var(--section); }
+.hand .it .sprite { width:var(--icon-featured); height:var(--icon-featured); background:#0006; border:1px dashed var(--edge-quiet); display:grid; place-items:center; color:var(--text-muted); font-size:12px; }
+.hand.selected { outline:2px solid var(--accent); }
+.col-tree { flex:1.05; display:flex; flex-direction:column; min-width:0; position:relative; }
+.col-inv { flex:1; display:flex; flex-direction:column; min-width:0; }
+.tree { flex:1; overflow:hidden; padding-right:calc(20*var(--u)); position:relative; }
+.inv-rows { flex:1; overflow:hidden; position:relative; padding-right:calc(20*var(--u)); }
+.inv .row { height:calc(36*var(--u)); }
+.inv .row .sprite { width:var(--icon); height:var(--icon); background:#0006; border:1px dashed var(--edge-quiet); }
+.inv .row .qty { color:var(--text-muted); width:calc(60*var(--u)); text-align:right; }
+.inv-head { display:flex; gap:var(--sm); margin-bottom:var(--sm); align-items:center; }
+.inv-head .field { flex:1; white-space:nowrap; overflow:hidden; }
+.dest { display:flex; white-space:nowrap; overflow:hidden; align-items:center; gap:var(--sm); color:var(--text-muted); margin-bottom:var(--sm); }
+.dest b { color:var(--accent); font-weight:normal; }
+</style></head>
+<body><div class="viewport">
+<div class="map-bg"></div><div class="scrim"></div>
+<div class="mock-tag">MOCKUP — generated HTML, not a runtime capture</div>
+<div class="win frame-large">
+  <div class="titlebar"><h1>Character Equipment</h1><div class="close"><span class="ic muted i-close"></span></div></div>
+  <div class="title-rule"></div>
+  <div class="body">
+    <div class="col-left">
+      <div class="portrait portrait-frame"><img src="../../../artifacts/ui-art-overhaul/m1/mockups/assets/survivor-live-crop.png" alt="live survivor sprite (from the active tileset)"></div>
+      <div class="hand card selected"><div class="h">Main hand</div><div class="it"><span class="sprite">spr</span><span>longsword</span></div></div>
+      <div class="hand card"><div class="h">Off hand</div><div class="it"><span class="sprite muted"></span><span class="hint">Uses both hands</span></div></div>
+      <div class="btn secondary" style="justify-content:space-between"><span>Other equipment</span><span class="ic i-chevron_right" style="width:16px;height:16px"></span></div>
+    </div>
+    <div class="col-tree">
+      <div class="section-label"><span class="ic i-tab_equipment" style="width:20px;height:20px"></span>Equipment</div>
+      <div class="tree"><div class="rows">
+        <div class="row featured"><span class="ic big i-cat_head"></span><span class="label">Head</span><span class="count">No items</span><span class="ic muted chev i-chevron_right"></span></div>
+        <div class="row featured"><span class="ic big i-cat_body"></span><span class="label">Body</span><span class="count">8 items</span><span class="ic chev i-chevron_down"></span></div>
+        <div class="row indent1"><span class="tree-line"></span><span class="ic i-cat_neck"></span><span class="label">Neck</span><span class="count">No items</span><span class="ic muted chev i-chevron_right"></span></div>
+        <div class="row indent1"><span class="tree-line"></span><span class="ic i-cat_body"></span><span class="label">Torso</span><span class="count">8 items</span><span class="ic chev i-chevron_down"></span></div>
+        <div class="row indent2"><span class="tree-line"></span><span class="ic muted i-cat_body"></span><span class="label">Skin</span><span class="count">3 items</span><span class="ic muted chev i-chevron_right"></span></div>
+        <div class="row indent2 selected"><span class="tree-line"></span><span class="ic i-cat_body"></span><span class="label">Middle</span><span class="count">2 items</span><span class="ic chev i-chevron_down"></span></div>
+        <div class="row indent3 focus"><span class="tree-line"></span><span class="sprite ic muted i-empty_slot"></span><span class="label">cyan t-shirt <span class="link"><span class="ic i-link"></span>Torso, Arms</span></span></div>
+        <div class="row indent3"><span class="tree-line"></span><span class="sprite ic muted i-empty_slot"></span><span class="label">brown t-shirt <span class="link"><span class="ic i-link"></span>Torso, Arms</span></span></div>
+        <div class="row indent2"><span class="tree-line"></span><span class="ic muted i-cat_body"></span><span class="label">Outer</span><span class="count">2 items</span><span class="ic muted chev i-chevron_right"></span></div>
+        <div class="row indent2"><span class="tree-line"></span><span class="ic muted i-cat_other"></span><span class="label">Other layers</span><span class="count">1 item</span><span class="ic muted chev i-chevron_right"></span></div>
+        <div class="row featured"><span class="ic big i-cat_arms"></span><span class="label">Arms</span><span class="count">5 items</span><span class="ic muted chev i-chevron_right"></span></div>
+        <div class="row featured"><span class="ic big i-cat_hands"></span><span class="label">Hands</span><span class="count">No items</span><span class="ic muted chev i-chevron_right"></span></div>
+        <div class="row featured"><span class="ic big i-cat_waist"></span><span class="label">Waist</span><span class="count">1 item</span><span class="ic muted chev i-chevron_right"></span></div>
+        <div class="row featured"><span class="ic big i-cat_legs"></span><span class="label">Legs</span><span class="count">4 items</span><span class="ic muted chev i-chevron_right"></span></div>
+        <div class="row featured"><span class="ic big i-cat_feet"></span><span class="label">Feet</span><span class="count">1 item</span><span class="ic muted chev i-chevron_right"></span></div>
+        <div class="row featured"><span class="ic big i-cat_back"></span><span class="label">Back</span><span class="count">4 items</span><span class="ic muted chev i-chevron_right"></span></div>
+      </div><div class="scroll"><div class="thumb"></div></div></div>
+    </div>
+    <div class="col-inv inv">
+      <div class="section-label"><span class="ic i-tab_inventory" style="width:20px;height:20px"></span>Inventory</div>
+      <div class="inv-head"><div class="field focus"><span class="ic muted i-search" style="width:18px;height:18px"></span><span>Find carried items…</span></div><div class="field" style="width:calc(160*var(--u))">All <span class="ic muted i-chevron_down" style="width:14px;height:14px;margin-left:auto"></span></div><span class="btn tertiary"><span class="ic muted i-nearby" style="width:20px;height:20px"></span>Nearby</span><span class="btn tertiary"><span class="ic muted i-grid" style="width:20px;height:20px"></span></span></div>
+      <div class="dest"><span class="ic i-chevron_right" style="width:14px;height:14px"></span>Equip destination: <b>Torso › Middle</b> <span class="btn tertiary" style="height:auto;padding:0 var(--sm)">clear</span></div>
+      <div class="inv-rows"><div class="rows">
+        <div class="row selected"><span class="sprite"></span><span class="label">brown t-shirt</span><span class="qty">×1</span></div>
+        <div class="row"><span class="sprite"></span><span class="label">jeans</span><span class="qty">×1</span></div>
+        <div class="row"><span class="sprite"></span><span class="label">longsword</span><span class="qty">×1</span></div>
+        <div class="row"><span class="sprite"></span><span class="label">plastic bottle of clean water</span><span class="qty">×2</span></div>
+        <div class="row"><span class="sprite"></span><span class="label">rag</span><span class="qty">×157</span></div>
+        <div class="row"><span class="sprite"></span><span class="label">copper knife</span><span class="qty">×1</span></div>
+        <div class="row"><span class="sprite"></span><span class="label">wooden shield</span><span class="qty">×1</span></div>
+        <div class="row hover"><span class="sprite"></span><span class="label">an extraordinarily long item name that must ellipsize instead of pushing the count off the row</span><span class="qty">×3.4k</span></div>
+        <div class="row"><span class="sprite"></span><span class="label">leather belt</span><span class="qty">×1</span></div>
+        <div class="row"><span class="sprite"></span><span class="label">backpack</span><span class="qty">×1</span></div>
+        <div class="row"><span class="sprite"></span><span class="label">pine bough</span><span class="qty">×24</span></div>
+        <div class="row"><span class="sprite"></span><span class="label">clean water</span><span class="qty">×12</span></div>
+      </div><div class="scroll"><div class="thumb" style="top:2%;height:60%"></div></div></div>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="hint" style="white-space:nowrap"><b>Enter</b> select · <b>→</b> expand · <b>Esc</b> back</span>
+    <span class="status">brown t-shirt → Torso › Middle. Ready to equip.</span>
+    <span class="btn tertiary">Details</span><span class="btn tertiary">More <span class="ic muted i-chevron_down" style="width:12px;height:12px"></span></span>
+    <span class="btn secondary disabled">Take off</span><span class="btn primary">Equip</span>
+  </div>
+</div>
+<div class="legend">Mockup. Sprites shown as dashed placeholders; the runtime draws the actual item and survivor tiles.</div>
+</div></body></html>

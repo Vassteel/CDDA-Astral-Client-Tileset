@@ -82,6 +82,7 @@ void on_block( Character &, const Creature &, float damage_blocked );
 void on_craft( Character &, const recipe &, const std::vector<item> &results );
 void on_natural_healing( Character &, int recovered_hp );
 double mounted_move_multiplier( const Character &, const monster & );
+double chopping_time_multiplier( const item & );
 bool applying_reward();
 } // namespace achievement_rewards
 #endif

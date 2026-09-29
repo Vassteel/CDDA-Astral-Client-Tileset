@@ -4293,7 +4293,7 @@ static int chop_moves( Character *p, item *it )
     int moves = to_moves<int>( time_duration::from_minutes( 60 - attr ) / std::pow( 2, quality - 1 ) );
     const int helpersize = p->get_num_crafting_helpers( 3 );
     moves *= ( 1.0f - ( helpersize / 10.0f ) );
-    return moves;
+    return static_cast<int>( std::ceil( moves * achievement_rewards::chopping_time_multiplier( *it ) ) );
 }
 
 std::optional<int> iuse::chop_tree( Character *p, item *it, const tripoint_bub_ms &target )

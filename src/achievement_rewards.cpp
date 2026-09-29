@@ -14,6 +14,10 @@
 #include "item_location.h"
 #include "itype.h"
 #include "recipe.h"
+#include "dialogue.h"
+#include "effect_on_condition.h"
+#include "talker.h"
+#include "math_parser_diag_value.h"
 #include "json.h"
 #include "map.h"
 #include "mapdata.h"
@@ -40,6 +44,10 @@ struct reward_guard {
     }
 };
 const std::map<std::string, std::pair<std::string, std::string>> recovery_types = {
+    { "perk_point", { "Perk point", "Add one spendable general perk point. Normal choice requirements still apply." } },
+    { "martial_point", { "Martial point", "Add one spendable Martial Mastery point. Normal choice requirements still apply." } },
+    { "playstyle_point", { "Playstyle point", "Add one playstyle point. Learning a playstyle still requires its normal general perk point and prerequisites." } },
+    { "reading_desk_plans", { "Archivist's desk plans", "Permanently learn to craft a folding Archivist's desk with an improved work surface." } },
     { "fresh_start", { "Fresh Start", "Clear temporary negative morale; preserve positive and permanent morale. Gain +30 morale for six hours. Ongoing causes can return." } },
     { "field_recovery", { "Field Recovery", "Heal one selected nonbroken body part by 40% of its maximum HP and stop bleeding there." } },
     { "boneknit", { "Boneknit", "Mend one selected broken limb and restore it to 50% HP." } },
@@ -62,9 +70,25 @@ bool prepare_item( const item_award &award, item &result )
             result.charges = award.charges;
         } else {
             if( result.ammo_default().is_null() ) {
-                return false;
+                // Battery tools can have no ammo type until a compatible cell
+                // is inserted. Use their real default magazine, not a guessed
+                // battery size or a synthetic charge counter.
+                const itype_id magazine_id = result.magazine_default();
+                if( magazine_id.is_null() || !magazine_id.is_valid() ) {
+                    return false;
+                }
+                item magazine( magazine_id, calendar::turn );
+                if( magazine.ammo_default().is_null() ) {
+                    return false;
+                }
+                magazine.ammo_set( magazine.ammo_default(), award.charges );
+                if( magazine.ammo_remaining() != award.charges ||
+                    !result.put_in( magazine, pocket_type::MAGAZINE_WELL, false, nullptr, true ).success() ) {
+                    return false;
+                }
+            } else {
+                result.ammo_set( result.ammo_default(), award.charges );
             }
-            result.ammo_set( result.ammo_default(), award.charges );
             if( result.ammo_remaining() != award.charges ) {
                 return false;
             }
@@ -253,6 +277,9 @@ std::string describe( const option &o )
             result += string_format( _( " in %s" ), item::nname( i.container ) );
         }
         result += "\n";
+        if( i.item.is_valid() && i.item.str().rfind( "astral_", 0 ) == 0 ) {
+            result += i.item->description.translated() + "\n";
+        }
     }
     for( const auto &c : o.credits ) {
         result += string_format( "%d × %s\n%s\n", c.second, credit_name( c.first ),
@@ -290,7 +317,29 @@ bool bank::redeem( Character &who, const std::string &credit, const bodypart_id 
     const std::vector<bodypart_id> parts = who.get_all_body_parts( get_body_part_flags::only_main );
     const bool valid_part = std::find( parts.begin(), parts.end(), part ) != parts.end();
     reward_guard guard;
-    if( credit == "field_recovery" ) {
+    if( credit == "perk_point" || credit == "martial_point" || credit == "playstyle_point" ) {
+        if( !who.is_avatar() ) {
+            return false;
+        }
+        const bool martial = credit == "martial_point";
+        const effect_on_condition_id init( martial ? "EOC_give_ma_perk_menu" : "EOC_give_perk_menu" );
+        if( !init.is_valid() ) {
+            return false;
+        }
+        dialogue d( get_talker_for( who ), nullptr );
+        init->activate( d );
+        const std::string key = martial ? "num_ma_perks" : credit == "perk_point" ?
+                                "num_perks" : "playstyle_perks_available";
+        const diag_value &old = who.get_value( key );
+        const double points = old.is_empty() ? 0 : old.dbl();
+        who.set_value( key, points + 1 );
+    } else if( credit == "reading_desk_plans" ) {
+        const recipe_id plans( "astral_archivist_desk" );
+        if( !plans.is_valid() || who.knows_recipe( &plans.obj() ) ) {
+            return false;
+        }
+        who.learn_recipe( &plans.obj() );
+    } else if( credit == "field_recovery" ) {
         if( !valid_part || who.is_limb_broken( part ) ||
             ( who.get_part_hp_cur( part ) >= who.get_part_hp_max( part ) &&
               !who.has_effect( efftype_id( "bleed" ), part ) ) ) {
@@ -597,6 +646,16 @@ void on_natural_healing( Character &who, int recovered_hp )
     if( healed == 100 ) {
         complete( "astral_199" );
     }
+}
+double chopping_time_multiplier( const item &tool )
+{
+    if( tool.typeId() == itype_id( "astral_lumberjack_axe" ) ) {
+        return 1.0 / 1.25;
+    }
+    if( tool.typeId() == itype_id( "astral_forester_axe" ) ) {
+        return 1.0 / 1.4;
+    }
+    return 1.0;
 }
 double mounted_move_multiplier( const Character &who, const monster &mount )
 {

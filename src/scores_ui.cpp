@@ -63,7 +63,9 @@ class scores_ui_impl : public cataimgui::window
     public:
         std::string last_action;
         explicit scores_ui_impl() : cataimgui::window( _( "Your scores" ),
-                    ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoNav ) {}
+                    ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoNav ) {
+            set_shell( 0, "star" );
+        }
         void init_data();
 
     private:

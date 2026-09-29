@@ -21,6 +21,7 @@
 #include "sdltiles.h"
 #include "sdl_wrappers.h"
 #include "string_formatter.h"
+#include "ui_hybrid_widgets.h"
 #include "ui_hybrid_window.h"
 #include "ui_manager.h"
 
@@ -78,7 +79,7 @@ void draw_bank()
 {
     auto &bank = get_achievements().reward_bank;
     ImGui::TextWrapped( "%s",
-                        _( "Recovery stays here until you use it. Item deliveries are collected one at a time; failed deliveries remain available." ) );
+                        _( "Unspent rewards stay here until you use them. Item deliveries are collected one at a time; failed deliveries remain available." ) );
     for( const auto &benefit : bank.benefits ) {
         ImGui::TextWrapped( "%s", achievement_rewards::credit_description( benefit ).c_str() );
     }
@@ -114,7 +115,7 @@ void draw_bank()
                 }
                 ImGui::EndDisabled();
             }
-        } else if( ImGui::Button( _( "Use recovery" ) ) ) {
+        } else if( ImGui::Button( _( "Use reward" ) ) ) {
             use( bodypart_id() );
         }
         ImGui::PopID();
@@ -181,7 +182,12 @@ void draw()
         ImGui::EndTabBar();
     }
     if( view == 3 ) {
-        draw_bank();
+        const float height = std::max( 120.f, ImGui::GetContentRegionAvail().y -
+                                       2 * ImGui::GetTextLineHeightWithSpacing() );
+        if( ImGui::BeginChild( "##reward_bank_scroll", ImVec2( 0, height ), ImGuiChildFlags_Borders ) ) {
+            draw_bank();
+        }
+        ImGui::EndChild();
     } else {
         ImGui::SetNextItemWidth( ImGui::GetContentRegionAvail().x * 0.6f );
         ImGui::InputTextWithHint( "##achievement_search", _( "Search achievements…" ), search,
@@ -314,16 +320,17 @@ void draw()
                         ImGui::TextWrapped( "%s", achievement_rewards::describe( reward_choices[choice] ).c_str() );
                         const bool claimed = tracker.reward_bank.claims.count( selected );
                         if( claimed ) {
-                            ImGui::TextWrapped( "%s", _( "Claimed. Unused items and recovery are in Reward bank." ) );
+                            ImGui::TextWrapped( "%s", _( "Claimed. Unused rewards are in Reward bank." ) );
                         } else {
                             ImGui::BeginDisabled( tracker.is_completed( id ) != achievement_completion::completed );
-                            if( ImGui::Button( _( "Claim selected reward" ) ) ) {
+                            if( ui_hybrid_widgets::action_button( _( "Claim selected reward" ),
+                                    ui_hybrid_widgets::button_kind::primary ) ) {
                                 const std::string claim_id = selected;
                                 const int claim_choice = choice;
                                 pending = [claim_id, claim_choice]() {
                                     auto &t = get_achievements();
                                     status = t.reward_bank.claim( t, claim_id, claim_choice ) ?
-                                             _( "Claimed. Open Reward bank to collect items or use recovery." ) :
+                                             _( "Claimed. Open Reward bank to collect items or use rewards." ) :
                                              _( "Reward could not be claimed." );
                                 };
                             }
@@ -357,7 +364,8 @@ void popup( const achievement &a )
                 ImGui::TextWrapped( "%s", achievement_rewards::describe( o ).c_str() );
             }
         }
-        if( ImGui::Button( _( "Continue" ) ) ) {
+        ImGui::Spacing();
+        if( ui_hybrid_widgets::action_button( _( "Continue" ), ui_hybrid_widgets::button_kind::primary ) ) {
             done = true;
         }
     } );

@@ -1,3 +1,4 @@
+#include "tactical_combat.h"
 #include "ui_hybrid_sidebar.h"
 
 #if defined(TILES)
@@ -37,6 +38,7 @@
 #include "string_formatter.h"
 #include "translations.h"
 #include "ui_hybrid_chrome.h"
+#include "ui_hybrid_widgets.h"
 #include "units.h"
 #include "weather.h"
 
@@ -71,29 +73,17 @@ void hp_meter_row( Character &u, const bodypart_id &bp, const char *label )
     std::snprintf( value_buf, sizeof( value_buf ), "%d/%d", cur, mx );
 
     ImGui::BeginGroup();
+    ImGui::AlignTextToFramePadding();
     ImGui::TextColored( sidebar_label_col(), "%-6s", label );
     ImGui::SameLine();
 
     const float value_w = ImGui::CalcTextSize( value_buf ).x +
                           ImGui::GetStyle().ItemSpacing.x;
     const float bar_w = std::max( 24.f, ImGui::GetContentRegionAvail().x - value_w );
-
-    // Color the bar by health band
-    ImVec4 fill = ui_hybrid_chrome::palette::accent();
-    if( frac < 0.25f ) {
-        fill = ImVec4( 0.75f, 0.18f, 0.14f, 1.f );
-    } else if( frac < 0.50f ) {
-        fill = ImVec4( 0.85f, 0.45f, 0.15f, 1.f );
-    } else if( frac < 0.75f ) {
-        fill = ImVec4( 0.80f, 0.70f, 0.20f, 1.f );
-    } else {
-        fill = ImVec4( 0.30f, 0.65f, 0.28f, 1.f );
-    }
-    ImGui::PushStyleColor( ImGuiCol_PlotHistogram, fill );
-    ImGui::PushStyleColor( ImGuiCol_FrameBg, ui_hybrid_chrome::palette::button() );
-    // Empty overlay: value is drawn beside the bar on charcoal for contrast.
-    ImGui::ProgressBar( frac, ImVec2( bar_w, 0.f ), "" );
-    ImGui::PopStyleColor( 2 );
+    // Shared meter: semantic health bands, value drawn beside the bar on
+    // charcoal for contrast (text overlay stays empty on short bars).
+    ui_hybrid_widgets::meter( label, frac, ui_hybrid_widgets::meter_kind::health, std::string(),
+                              bar_w / ui_hybrid_chrome::theme::scale(), 14.f );
     ImGui::SameLine( 0.f, ImGui::GetStyle().ItemSpacing.x );
     ImGui::TextColored( ui_hybrid_chrome::palette::text(), "%s", value_buf );
     ImGui::EndGroup();
@@ -152,47 +142,104 @@ class hybrid_sidebar_window : public cataimgui::window
             []( const window_panel & panel ) {
                 return panel.get_id() == "Log" && panel.toggle && panel.render();
             } );
+            namespace w = ui_hybrid_widgets;
+            namespace theme = ui_hybrid_chrome::theme;
+            const ui_hybrid_chrome::theme::tokens &tk = theme::get();
+            const float s = theme::scale();
+            // Quiet edge on the map side: persistent HUD panels stay thinner
+            // and quieter than modal windows.
+            {
+                ImDrawList *bg = ImGui::GetWindowDrawList();
+                const ImVec2 wmin = ImGui::GetWindowPos();
+                const ImVec2 wmax( wmin.x + ImGui::GetWindowSize().x, wmin.y + ImGui::GetWindowSize().y );
+                const bool right = get_option<std::string>( "SIDEBAR_POSITION" ) == "right";
+                const float x = right ? wmin.x : wmax.x - 2.f;
+                bg->AddRectFilled( ImVec2( x, wmin.y ), ImVec2( x + 2.f, wmax.y ), tk.edge_quiet );
+            }
             // Keep the section sizes independent of the previous frame's
             // content. Scrollbar changes must not resize the status/log split.
             // Keep a stopped safe mode visible even when status rows are scrolled.
             if( g->safe_mode == SAFE_MODE_STOP ) {
-                ImGui::TextColored( cataimgui::imvec4_from_color( c_light_red ), "%s",
-                                    _( "Safe mode: danger detected" ) );
-                if( ImGui::SmallButton( _( "Ignore threat" ) ) ) {
+                // Critical warning band: danger edge, icon and text, never only color.
+                const ImVec2 p = ImGui::GetCursorScreenPos();
+                const float band_h = tk.button * s;
+                ImDrawList *dl = ImGui::GetWindowDrawList();
+                const float wdt = ImGui::GetContentRegionAvail().x;
+                dl->AddRectFilled( p, ImVec2( p.x + wdt, p.y + band_h ), IM_COL32( 0x2A, 0x1A, 0x17, 255 ),
+                                   tk.radius_control * s );
+                dl->AddRect( p, ImVec2( p.x + wdt, p.y + band_h ), tk.danger, tk.radius_control * s );
+                const float isz = tk.icon * 0.7f * s;
+                w::draw_icon_at( dl, "warning", ImVec2( p.x + tk.sm * s, p.y + ( band_h - isz ) * 0.5f ), isz,
+                                 tk.danger );
+                ImGui::SetCursorScreenPos( ImVec2( p.x + tk.sm * s * 2.f + isz, p.y + ( band_h - ImGui::GetFontSize() ) * 0.5f ) );
+                ImGui::TextColored( ui_hybrid_chrome::palette::danger(), "%s", _( "Safe mode: danger detected" ) );
+                ImGui::SameLine();
+                const float btn_w = 84.f;
+                ImGui::SetCursorScreenPos( ImVec2( p.x + wdt - btn_w * s - tk.xs * s, p.y + ( band_h - 32.f * s ) * 0.5f ) );
+                if( w::action_button( _( "Ignore" ), w::button_kind::tertiary, ImVec2( btn_w, 32.f ) ) ) {
                     mouse_toolbar::queue_action( ACTION_IGNORE_ENEMY );
                 }
+                ImGui::SetCursorScreenPos( ImVec2( p.x, p.y + band_h + tk.xs * s ) );
             }
             if( mission *objective = u.get_active_mission() ) {
-                ImGui::TextWrapped( "%s", objective->name().c_str() );
-                if( ImGui::IsItemClicked() ) {
+                w::row_state st;
+                const w::row_result r = w::selectable_row( "objective", objective->name(), std::string(), "star",
+                                        nullptr, st, tk.row_compact );
+                if( r.hovered ) {
+                    w::tooltip( objective->name() + "\n" + _( "Click to open Missions." ) );
+                }
+                if( r.clicked ) {
                     mouse_toolbar::queue_action( ACTION_MISSIONS );
                 }
             }
+            // Automation state, one compact line each, icon marks automatic behaviour.
+            const auto auto_line = [&]( const std::string & text ) {
+                w::icon( "auto", 14.f, tk.text_muted );
+                ImGui::SameLine( 0.f, tk.xs * s );
+                ImGui::PushTextWrapPos( ImGui::GetCursorPosX() + ImGui::GetContentRegionAvail().x );
+                ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", text.c_str() );
+                ImGui::PopTextWrapPos();
+            };
             if( get_option<bool>( "AUTO_PICKUP" ) ) {
                 const char *state = u.is_mounted() ? _( "Paused while mounted" ) :
                                     u.is_hauling() ? _( "Paused while hauling" ) :
                                     get_option<bool>( "AUTO_PICKUP_SAFEMODE" ) &&
                                     u.get_mon_visible().has_dangerous_creature_in_proximity ?
                                     _( "Paused near danger" ) : _( "On movement; pickup rules apply" );
-                ImGui::TextWrapped( "%s", string_format( _( "Pick: %s" ), state ).c_str() );
+                auto_line( string_format( _( "Pick: %s" ), state ) );
             }
             if( get_option<std::string>( "AUTO_FORAGING" ) != "off" ) {
                 const char *state = !get_option<bool>( "AUTO_FEATURES" ) ? _( "Auto features disabled" ) :
                                     u.is_mounted() ? _( "Paused while mounted" ) :
                                     g->mostseen > 0 ? _( "Paused while creatures are visible" ) :
                                     _( "On movement; selected plants only" );
-                ImGui::TextWrapped( "%s", string_format( _( "Forage: %s" ), state ).c_str() );
+                auto_line( string_format( _( "Forage: %s" ), state ) );
+            }
+            if( get_option<bool>( "TACTICAL_COMBAT" ) ) {
+                // Combat group: real dispatcher actions only; stance from the native state.
+                w::section_label( _( "Combat" ), "attack" );
+                ImGui::PushTextWrapPos( ImGui::GetCursorPosX() + ImGui::GetContentRegionAvail().x );
+                ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", tactical_combat::stance( u ).c_str() );
+                ImGui::PopTextWrapPos();
             }
             if( get_option<bool>( "AUTO_COMBAT" ) ) {
-                ImGui::TextWrapped( "%s", string_format( _( "Combat: %s" ),
-                                    avatar_action::auto_combat_status() ).c_str() );
+                auto_line( string_format( _( "Combat: %s" ), avatar_action::auto_combat_status() ) );
             }
             if( get_option<bool>( "AUTO_EAT" ) ) {
-                ImGui::TextWrapped( "%s", string_format( _( "Eat: %s" ),
-                                    avatar_action::auto_eat_status() ).c_str() );
+                auto_line( string_format( _( "Eat: %s" ), avatar_action::auto_eat_status() ) );
             }
-            if( ImGui::SmallButton( _( "HUD settings" ) ) ) {
-                ImGui::OpenPopup( "hud_settings" );
+            // Character section label with the HUD settings gear at the right.
+            {
+                const float gear = 30.f;
+                const ImVec2 p = ImGui::GetCursorScreenPos();
+                const float wdt = ImGui::GetContentRegionAvail().x;
+                w::section_label( _( "Character" ), "hp" );
+                const ImVec2 after = ImGui::GetCursorScreenPos();
+                ImGui::SetCursorScreenPos( ImVec2( p.x + wdt - gear * s, p.y ) );
+                if( w::icon_button( "##hud_settings", "gear", gear, false, _( "HUD settings" ) ) ) {
+                    ImGui::OpenPopup( "hud_settings" );
+                }
+                ImGui::SetCursorScreenPos( after );
             }
             if( ImGui::BeginPopup( "hud_settings" ) ) {
                 bool overview = get_option<bool>( "HYBRID_HP_OVERVIEW" );
@@ -219,7 +266,6 @@ class hybrid_sidebar_window : public cataimgui::window
             ImGui::BeginChild( "hybrid_status", ImVec2( 0.f, stats_height ),
                                ImGuiChildFlags_None, ImGuiWindowFlags_AlwaysVerticalScrollbar |
                                ImGuiWindowFlags_AlwaysHorizontalScrollbar );
-            ui_hybrid_chrome::section_header( _( "Character" ) );
             if( get_option<bool>( "HYBRID_HP_OVERVIEW" ) ) {
                 for( const bodypart_id &bp :
                      u.get_all_body_parts( get_body_part_flags::only_main |
@@ -228,18 +274,19 @@ class hybrid_sidebar_window : public cataimgui::window
                     hp_meter_row( u, bp, label.c_str() );
                 }
             }
-            if( ImGui::SmallButton( _( "Health" ) ) ) {
+            if( w::action_button( _( "Health" ), w::button_kind::tertiary, ImVec2( 0, 30.f ), true, nullptr, "hp" ) ) {
                 mouse_toolbar::queue_action( ACTION_MEDICAL );
             }
             ImGui::SameLine();
-            if( ImGui::SmallButton( _( "Mood" ) ) ) {
+            if( w::action_button( _( "Mood" ), w::button_kind::tertiary, ImVec2( 0, 30.f ), true, nullptr, "info" ) ) {
                 mouse_toolbar::queue_action( ACTION_MORALE );
             }
             ImGui::SameLine();
-            if( ImGui::SmallButton( _( "Gear" ) ) ) {
+            if( w::action_button( _( "Gear" ), w::button_kind::tertiary, ImVec2( 0, 30.f ), true, nullptr,
+                                  "tab_equipment" ) ) {
                 mouse_toolbar::queue_action( ACTION_INVENTORY );
             }
-            ui_hybrid_chrome::section_header( _( "Status" ) );
+            w::section_label( _( "Status" ) );
             const float text_width = ImGui::GetContentRegionAvail().x;
             const int columns = std::max( 1, static_cast<int>( text_width /
                                           ImGui::CalcTextSize( "X" ).x ) );
@@ -276,11 +323,11 @@ class hybrid_sidebar_window : public cataimgui::window
 
     private:
         void draw_message_log() {
-            ui_hybrid_chrome::section_header( _( "Messages" ) );
+            ui_hybrid_widgets::section_label( _( "Messages" ), "list" );
             // Remaining vertical space for the scrollable log
             const float remain = std::max( 1.f, ImGui::GetContentRegionAvail().y );
-            ImGui::BeginChild( "hybrid_msg_log", ImVec2( 0.f, remain ),
-                               ImGuiChildFlags_Borders, ImGuiWindowFlags_AlwaysVerticalScrollbar );
+            ui_hybrid_widgets::panel_begin( "hybrid_msg_log", ImVec2( 0.f, remain ), true,
+                                            ImGuiWindowFlags_AlwaysVerticalScrollbar );
             const bool follow = log_from_top ? ImGui::GetScrollY() <= 4.f :
                                 ImGui::GetScrollY() >= ImGui::GetScrollMaxY() - 4.f;
             const auto msgs = Messages::sidebar_messages( 200 );
@@ -298,7 +345,7 @@ class hybrid_sidebar_window : public cataimgui::window
                     ImGui::SetScrollHereY( 1.f );
                 }
             }
-            ImGui::EndChild();
+            ui_hybrid_widgets::panel_end();
         }
 };
 

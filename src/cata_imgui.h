@@ -196,8 +196,20 @@ class window
         void clear_filter();
         void defocus_filter();
         void mark_resized();
+        /**
+         * Use the Astral window shell (custom frame, title bar and close control
+         * drawn by ui_hybrid_widgets::window_shell) instead of ImGui's title bar.
+         * kind: 0 large, 1 dialog, 2 popup. Optional atlas icon next to the title.
+         */
+        void set_shell( int kind, const char *icon = nullptr, bool show_title = true );
+        int shell_kind() const {
+            return astral_shell;
+        }
 
     protected:
+        int astral_shell = -1;
+        const char *astral_shell_icon = nullptr;
+        bool astral_shell_title = true;
         bool force_to_back = false;
         bool hide_ui = false;
         bool is_open;
@@ -223,6 +235,9 @@ void PushGuiFont();
 void PushMonoFont();
 void PushGuiFont1_5x();
 void PopGuiFont1_5x();
+// Section-label face (1.25x gui font); falls back to scaled body text.
+void PushGuiFont1_25x();
+void PopGuiFont1_25x();
 
 bool BeginRightAlign( const char *str_id );
 void EndRightAlign();
@@ -232,9 +247,8 @@ void EndRightAlign();
 bool BeginTabItem( const char *label, bool is_selected, bool *p_open = nullptr,
                    ImGuiTabItemFlags flags = 0 );
 
-// Set ImGui theme colors to those chosen by the player.
-// This loads the settings from `config/imgui_style.json` and - optionally - falls back to base colors
-// for elements not explicitly specified.
+// Set ImGui theme colors: Astral tokens as the base, then the player's
+// `config/imgui_style.json` colors on top (see doc/astral/ui-art-theme.md §7).
 void init_colors();
 
 /**

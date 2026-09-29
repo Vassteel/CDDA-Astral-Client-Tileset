@@ -1,3 +1,4 @@
+#include "tactical_combat.h"
 #include "achievement_rewards.h"
 #include "melee.h"
 
@@ -578,6 +579,8 @@ bool Character::melee_attack( Creature &t, bool allow_special, const matec_id &f
         !get_map().on_matching_stairs( pos_bub(), t.pos_bub() ) ) {
         return false;
     }
+
+    tactical_combat::clear_defense( *this );
 
     // Max out recoil & reset aim point
     recoil = MAX_RECOIL;
@@ -1220,6 +1223,12 @@ float Character::get_dodge() const
     }
 
     float ret = Creature::get_dodge();
+    if( has_effect( efftype_id( "astral_evade" ) ) ) {
+        ret += 2.0f;
+    }
+    if( has_effect( efftype_id( "astral_recover" ) ) ) {
+        ret *= 0.5f;
+    }
     add_msg_debug( debugmode::DF_MELEE, "Base dodge %.1f", ret );
 
     // Chop in half if we are unable to move
@@ -1995,6 +2004,10 @@ item_location Character::best_shield()
 bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instance &dam )
 {
 
+    if( has_effect( efftype_id( "astral_recover" ) ) ) {
+        return false;
+    }
+
     // Shouldn't block if player is asleep or winded
     if( in_sleep_state() || has_effect( effect_narcosis ) ||
         has_effect( effect_winded ) || has_effect( effect_fearparalyze ) || is_driving() ) {
@@ -2035,7 +2048,8 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
     // Melee skill and reaction score governs if you can react in time
     // Skill of 5 without relevant encumbrance guarantees a block attempt
     float melee_skill = has_active_bionic( bio_cqb ) ? 5 : get_skill_level( skill_melee );
-    const float reaction = held_shield ? std::min( 100.0f, 20.0f + melee_skill * 16.0f ) :
+    const bool guarding = held_shield && has_effect( efftype_id( "astral_guard" ) );
+    const float reaction = guarding ? std::min( 100.0f, 60.0f + melee_skill * 8.0f ) : held_shield ? std::min( 100.0f, 20.0f + melee_skill * 16.0f ) :
                            melee_skill * 20.0f;
     if( !x_in_y( reaction * get_limb_score( limb_score_reaction ), 100 ) ) {
         add_msg_debug( debugmode::DF_MELEE, "Block roll failed" );
@@ -2046,7 +2060,7 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
 
     // This bonus absorbs damage from incoming attacks before they land,
     // but it still counts as a block even if it absorbs all the damage.
-    float total_phys_block = mabuff_block_bonus();
+    float total_phys_block = mabuff_block_bonus() + ( guarding ? 5.0f : 0.0f );
 
 
     // Check if we are going to block with an item. This could

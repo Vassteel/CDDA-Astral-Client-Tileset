@@ -17,6 +17,8 @@
 #include "sdl_wrappers.h"
 #include "cata_imgui.h"
 #include "text_snippets.h"
+#include "ui_hybrid_chrome.h"
+#include "ui_hybrid_widgets.h"
 #include "worldfactory.h"
 #else
 #include "cursesdef.h"
@@ -67,6 +69,10 @@ static void redraw()
     if( ImGui::Begin( "Loading…", nullptr,
                       ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
                       ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings ) ) {
+        if( ui_hybrid_widgets::probe::enabled() ) {
+            ui_hybrid_widgets::probe::record( "window", "Loading", ImGui::GetWindowPos(),
+                                              ImGui::GetWindowPos() + ImGui::GetWindowSize() );
+        }
 
         const float width = ImGui::GetContentRegionAvail().x;
 
@@ -94,6 +100,17 @@ static void redraw()
             ImGui::Dummy( gLUI->splash_size );
         }
 
+        // Quiet strip behind the tip and progress text so they read over any art.
+        {
+            const ImVec2 wpos = ImGui::GetWindowPos();
+            const ImVec2 wsize = ImGui::GetWindowSize();
+            const float top = wpos.y + wsize.y - gLUI->text_height - ImGui::GetStyle().WindowPadding.y;
+            ImDrawList *draw = ImGui::GetWindowDrawList();
+            const ui_hybrid_chrome::theme::tokens &tk = ui_hybrid_chrome::theme::get();
+            draw->AddRectFilled( ImVec2( wpos.x, top ), ImVec2( wpos.x + wsize.x, wpos.y + wsize.y ),
+                                 ( tk.surface & 0x00FFFFFFu ) | 0xD8000000u );
+            draw->AddRectFilled( ImVec2( wpos.x, top ), ImVec2( wpos.x + wsize.x, top + 1.f ), tk.edge_quiet );
+        }
         // hint
         ImGui::SetCursorPosY( ImGui::GetWindowHeight() - gLUI->text_height );
         if( gLUI->large_hint_size ) {

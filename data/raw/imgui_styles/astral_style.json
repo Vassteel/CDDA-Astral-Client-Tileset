@@ -1,0 +1,325 @@
+{
+  "//": "Astral client theme. Generated from data/ui/astral/theme.json by tools/ui-art (see doc/astral/ui-art-theme.md). astral_base keeps the Astral tokens underneath; colors listed here override them.",
+  "astral_base": true,
+  "inherit_base_colors": false,
+  "colors": {
+    "ImGuiCol_Text": [
+      0.933,
+      0.89,
+      0.796,
+      1.0
+    ],
+    "ImGuiCol_TextDisabled": [
+      0.718,
+      0.682,
+      0.616,
+      1.0
+    ],
+    "ImGuiCol_WindowBg": [
+      0.106,
+      0.114,
+      0.114,
+      1.0
+    ],
+    "ImGuiCol_ChildBg": [
+      0.106,
+      0.114,
+      0.114,
+      0.0
+    ],
+    "ImGuiCol_PopupBg": [
+      0.106,
+      0.114,
+      0.114,
+      0.97
+    ],
+    "ImGuiCol_Border": [
+      0.345,
+      0.275,
+      0.18,
+      1.0
+    ],
+    "ImGuiCol_BorderShadow": [
+      0.043,
+      0.051,
+      0.055,
+      0.0
+    ],
+    "ImGuiCol_FrameBg": [
+      0.067,
+      0.082,
+      0.086,
+      1.0
+    ],
+    "ImGuiCol_FrameBgHovered": [
+      0.145,
+      0.153,
+      0.145,
+      1.0
+    ],
+    "ImGuiCol_FrameBgActive": [
+      0.18,
+      0.188,
+      0.176,
+      1.0
+    ],
+    "ImGuiCol_TitleBg": [
+      0.067,
+      0.082,
+      0.086,
+      1.0
+    ],
+    "ImGuiCol_TitleBgActive": [
+      0.067,
+      0.082,
+      0.086,
+      1.0
+    ],
+    "ImGuiCol_TitleBgCollapsed": [
+      0.067,
+      0.082,
+      0.086,
+      1.0
+    ],
+    "ImGuiCol_MenuBarBg": [
+      0.145,
+      0.153,
+      0.145,
+      1.0
+    ],
+    "ImGuiCol_ScrollbarBg": [
+      0.067,
+      0.082,
+      0.086,
+      1.0
+    ],
+    "ImGuiCol_ScrollbarGrab": [
+      0.557,
+      0.427,
+      0.227,
+      1.0
+    ],
+    "ImGuiCol_ScrollbarGrabHovered": [
+      0.608,
+      0.459,
+      0.267,
+      1.0
+    ],
+    "ImGuiCol_ScrollbarGrabActive": [
+      0.839,
+      0.643,
+      0.341,
+      1.0
+    ],
+    "ImGuiCol_CheckMark": [
+      0.839,
+      0.643,
+      0.341,
+      1.0
+    ],
+    "ImGuiCol_SliderGrab": [
+      0.557,
+      0.427,
+      0.227,
+      1.0
+    ],
+    "ImGuiCol_SliderGrabActive": [
+      0.839,
+      0.643,
+      0.341,
+      1.0
+    ],
+    "ImGuiCol_Button": [
+      0.145,
+      0.153,
+      0.145,
+      1.0
+    ],
+    "ImGuiCol_ButtonHovered": [
+      0.18,
+      0.188,
+      0.176,
+      1.0
+    ],
+    "ImGuiCol_ButtonActive": [
+      0.227,
+      0.176,
+      0.102,
+      1.0
+    ],
+    "ImGuiCol_Header": [
+      0.145,
+      0.153,
+      0.145,
+      1.0
+    ],
+    "ImGuiCol_HeaderHovered": [
+      0.18,
+      0.188,
+      0.176,
+      1.0
+    ],
+    "ImGuiCol_HeaderActive": [
+      0.227,
+      0.176,
+      0.102,
+      1.0
+    ],
+    "ImGuiCol_Separator": [
+      0.345,
+      0.275,
+      0.18,
+      1.0
+    ],
+    "ImGuiCol_SeparatorHovered": [
+      0.608,
+      0.459,
+      0.267,
+      1.0
+    ],
+    "ImGuiCol_SeparatorActive": [
+      0.839,
+      0.643,
+      0.341,
+      1.0
+    ],
+    "ImGuiCol_ResizeGrip": [
+      0.345,
+      0.275,
+      0.18,
+      0.5
+    ],
+    "ImGuiCol_ResizeGripHovered": [
+      0.608,
+      0.459,
+      0.267,
+      1.0
+    ],
+    "ImGuiCol_ResizeGripActive": [
+      0.839,
+      0.643,
+      0.341,
+      1.0
+    ],
+    "ImGuiCol_Tab": [
+      0.145,
+      0.153,
+      0.145,
+      0.0
+    ],
+    "ImGuiCol_TabHovered": [
+      0.18,
+      0.188,
+      0.176,
+      1.0
+    ],
+    "ImGuiCol_TabSelected": [
+      0.145,
+      0.153,
+      0.145,
+      1.0
+    ],
+    "ImGuiCol_TabDimmed": [
+      0.145,
+      0.153,
+      0.145,
+      0.0
+    ],
+    "ImGuiCol_TabDimmedSelected": [
+      0.145,
+      0.153,
+      0.145,
+      1.0
+    ],
+    "ImGuiCol_PlotLines": [
+      0.561,
+      0.682,
+      0.733,
+      1.0
+    ],
+    "ImGuiCol_PlotLinesHovered": [
+      0.839,
+      0.643,
+      0.341,
+      1.0
+    ],
+    "ImGuiCol_PlotHistogram": [
+      0.839,
+      0.643,
+      0.341,
+      1.0
+    ],
+    "ImGuiCol_PlotHistogramHovered": [
+      0.776,
+      0.604,
+      0.365,
+      1.0
+    ],
+    "ImGuiCol_TableHeaderBg": [
+      0.145,
+      0.153,
+      0.145,
+      1.0
+    ],
+    "ImGuiCol_TableBorderStrong": [
+      0.345,
+      0.275,
+      0.18,
+      1.0
+    ],
+    "ImGuiCol_TableBorderLight": [
+      0.345,
+      0.275,
+      0.18,
+      0.5
+    ],
+    "ImGuiCol_TableRowBg": [
+      0.106,
+      0.114,
+      0.114,
+      0.0
+    ],
+    "ImGuiCol_TableRowBgAlt": [
+      0.145,
+      0.153,
+      0.145,
+      0.35
+    ],
+    "ImGuiCol_TextSelectedBg": [
+      0.557,
+      0.427,
+      0.227,
+      0.45
+    ],
+    "ImGuiCol_DragDropTarget": [
+      0.839,
+      0.643,
+      0.341,
+      1.0
+    ],
+    "ImGuiCol_NavCursor": [
+      0.839,
+      0.643,
+      0.341,
+      1.0
+    ],
+    "ImGuiCol_NavWindowingHighlight": [
+      0.839,
+      0.643,
+      0.341,
+      0.7
+    ],
+    "ImGuiCol_NavWindowingDimBg": [
+      0.043,
+      0.051,
+      0.055,
+      0.4
+    ],
+    "ImGuiCol_ModalWindowDimBg": [
+      0.043,
+      0.051,
+      0.055,
+      0.55
+    ]
+  }
+}

@@ -1,14 +1,15 @@
 # Astral native achievement rewards
 
+Current scope: all 211 vanilla achievements have reward mappings and matching artwork. The proposed expansion is shelved; its gameplay hooks remain dormant without expansion registrations.
+
 Register an `achievement_reward` object alongside core game data:
 
 ```json
 {
   "type": "achievement_reward",
-  "achievement": "astral_001",
+  "achievement": "achievement_survive_one_day",
   "category": "Survival",
-  "art": "proposed_001",
-  "enroll": true,
+  "art": "achievement_survive_one_day",
   "choices": [
     {
       "name": "Second Wind",
@@ -21,9 +22,9 @@ Register an `achievement_reward` object alongside core game data:
 
 `achievement` must reference a real achievement. `enroll` explicitly migrates a new Astral definition into existing characters; leave it false for existing core IDs. `requires_monster` optionally gates availability on a loaded monster type. `art` names an optional PNG under `data/achievement_art` without an extension or path separators.
 
-Each choice has a name, item list and credit map. Item entries have `item` (real item ID), `count` (individual deliveries, default 1), and optional `charges` (actual charges per delivered item, default stock initialization). Charge amounts must be valid for the item; clothing and individual food servings use count, not pretend charges. Stock item containers are applied at delivery, including liquid bottles. An optional `container` item ID overrides the stock container (for example, eight coffee charges in `astral_midnight_thermos`). The complete payload must fit before a claim or delivery succeeds; over-capacity liquid is never discarded. The container choice persists in claimed payloads and pending parcels. A claim saves the selected payload and cannot be repeated. Pending deliveries and credits are in the same character save as achievement state.
+Each choice has a name, item list and credit map. Item entries have `item` (real item ID), `count` (individual deliveries, default 1), and optional `charges` (actual charges per delivered item, default stock initialization). Charge amounts must be valid for the item; clothing and individual food servings use count, not pretend charges. For tools with detachable batteries, a charged reward inserts the actual compatible default cell and validates its capacity. Stock item containers are applied at delivery, including liquid bottles. An optional `container` item ID overrides the stock container (for example, eight coffee charges in `astral_midnight_thermos`). The complete payload must fit before a claim or delivery succeeds; over-capacity liquid is never discarded. The container choice persists in claimed payloads and pending parcels. A claim saves the selected payload and cannot be repeated. Pending deliveries and credits are in the same character save as achievement state.
 
-Supported credits: `fresh_start`, `field_recovery`, `boneknit`, `second_wind`, `nourished`, `complete_recovery`, `warm_up`, and permanent `giant_horse_rider`. Other IDs fail consistency checks. Recovery is intentionally redeemed; no credit is consumed if the operation would do nothing. Field Recovery/Boneknit enumerate actual main body parts. Vitamin recovery filters to `vitamin_type::VITAMIN`.
+Supported recovery credits: `fresh_start`, `field_recovery`, `boneknit`, `second_wind`, `nourished`, `complete_recovery`, and `warm_up`. `perk_point`, `martial_point`, and `playstyle_point` initialize the appropriate native progression system and grant a real spendable point while preserving its normal eligibility requirements. `reading_desk_plans` permanently teaches the Archivist desk recipe; already knowing it does not consume a credit. Permanent `giant_horse_rider` remains supported only for the shelved expansion. Other IDs fail consistency checks. Recovery is intentionally redeemed; no credit is consumed if the operation would do nothing. Field Recovery/Boneknit enumerate actual main body parts. Vitamin recovery filters to `vitamin_type::VITAMIN`.
 
 New gameplay hooks must ignore `achievement_rewards::applying_reward()` and reward-provenance items when a goal excludes reward-origin progress. Counters/unique-instance sets belong to `achievements_tracker::reward_bank`, never process-global state. Long-running actions must record real successful completion and their relevant identity; requested duration or an arbitrary nearby object is insufficient.
 
@@ -31,10 +32,14 @@ Renderer recovery releases the achievement texture cache before invalidating the
 
 The bank provides normal save/reload persistence, not cross-file crash atomicity or anti-backup-rollback guarantees. Future multi-target/timed rewards require their own validated implementation and tests before adding registry payloads.
 
-## Completion hooks
+## Shelved expansion completion hooks
 
 `Character::complete_craft` calls `on_craft` after creating actual recipe results, before moving them into the world. Night Owl counts one completed activity per call regardless of batch size. Practice recipes and empty outputs do not count. Night means below the sunrise/sunset solar altitude (including twilight); underground daytime crafting does not count.
 
 `Character::block_hit` reports damage actually prevented before any counterattack. Hold the Line requires positive prevention against a real hostile source. Failed reactions, friendly sparring, hallucinations and zero-damage attacks do not count.
 
 The non-medicine branch of `Character::regen` reports the actual HP delta after limb-specific healing rules. Rest and Recuperation requires sleep in a recognized bed. Direct healing, reward healing, medicine ticks and full-HP ticks do not contribute. Counters cap at their completion thresholds and save with the character.
+
+## Vanilla equipment bonuses
+
+All custom variants are real item definitions. Weapon damage, weight, dispersion and recoil use normal item properties. Reading glasses use a worn reading-speed enchantment. The two reward axes apply their chopping modifier to both manual and automated chopping. Lantern and research-light variants preserve capacity across lit/unlit conversion. The Archivist desk uses a normal deployable furniture item and a learned crafting recipe with real components. No reward relies on unimplemented XP, temporary-buff or companion systems.

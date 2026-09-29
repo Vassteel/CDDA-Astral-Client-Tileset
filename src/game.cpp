@@ -1,6 +1,7 @@
 #include "achievement_rewards_ui.h"
 #include "achievement_rewards.h"
 #include "game.h"
+#include "tactical_combat.h"
 #include "map_memory.h"
 
 #include <algorithm>
@@ -2461,6 +2462,14 @@ bool game::handle_mouseview( input_context &ctxt, std::string &action )
                                        ImGuiPopupFlags_AnyPopupLevel );
 #endif
         action = ctxt.handle_input();
+        if( action == "CLICK_AND_DRAG" ) {
+            // Mouse-down has no world action. Keep the HUD alive through release so
+            // a first click entering a button is not lost when ImGui capture lags a frame.
+            tactical_combat::stop_auto_combat();
+            action = "TIMEOUT";
+            ui_manager::redraw();
+            return true;
+        }
 #if defined(TILES)
         if( hud_popup ) {
             action = "TIMEOUT";
@@ -2673,6 +2682,13 @@ input_context get_default_mode_input_context()
         ctxt.register_action( "safemode" );
         ctxt.register_action( "autosafe" );
         ctxt.register_action( "autoattack" );
+        ctxt.register_action( "combat_menu" );
+        ctxt.register_action( "combat_attack" );
+        ctxt.register_action( "combat_guard" );
+        ctxt.register_action( "combat_evade" );
+        ctxt.register_action( "combat_bash" );
+        ctxt.register_action( "combat_recover" );
+
         ctxt.register_action( "ignore_enemy" );
         ctxt.register_action( "whitelist_enemy" );
         ctxt.register_action( "workout" );
@@ -2792,6 +2808,15 @@ bool game::try_get_left_click_action( action_id &act, const tripoint_bub_ms &mou
     const int dist = square_dist( mouse_target.xy(), player_pos.xy() );
     const bool is_self = dist <= 0;
     const bool is_adjacent = dist <= 1;
+
+    // Select a visible creature for the combat hotbar without spending a turn.
+    // Friendly NPCs and pets keep their ordinary talk/interact shortcut.
+    if( tactical_combat::can_target_from_map( u, get_creature_tracker().creature_at( mouse_target ) ) ) {
+        destination_preview.clear();
+        u.clear_destination();
+        act = ACTION_COMBAT_MENU;
+        return true;
+    }
 
     // RPG UI shell: left-click primary world interact when in range (Stardew/Elin).
     // Priority: talk → open → close → pickup → examine(+pickup) → examine.

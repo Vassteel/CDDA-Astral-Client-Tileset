@@ -94,6 +94,7 @@ class player_display_hybrid_ui : public cataimgui::window
         player_display_hybrid_ui( Character &you_in, bool customize_in )
             : cataimgui::window( _( "Character" ), ImGuiWindowFlags_None ),
               you( you_in ), customize( customize_in ) {
+            set_shell( 0, "person" );
             rebuild();
         }
 

@@ -1,3 +1,4 @@
+#include "tactical_combat.h"
 #include "workstation_ui.h"
 #include "ui_telemetry.h"
 #include "game.h" // IWYU pragma: associated
@@ -470,7 +471,7 @@ input_context game::get_player_input( std::string &action )
                 break;
             }
         } while( handle_mouseview( ctxt, action ) && uquit != QUIT_WATCH
-                 && ( action != "TIMEOUT" || !current_turn.has_timeout_elapsed() ) );
+                 && ( action != "TIMEOUT" || ( !get_option<bool>( "AUTO_COMBAT" ) && !current_turn.has_timeout_elapsed() ) ) );
         ctxt.reset_timeout();
     } else {
         ctxt.set_timeout( 125 );
@@ -479,7 +480,7 @@ input_context game::get_player_input( std::string &action )
                 action = "TIMEOUT";
                 break;
             }
-            if( action == "TIMEOUT" && current_turn.has_timeout_elapsed() ) {
+            if( action == "TIMEOUT" && ( get_option<bool>( "AUTO_COMBAT" ) || current_turn.has_timeout_elapsed() ) ) {
                 break;
             }
         }
@@ -2365,6 +2366,14 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
                 // so no rotation needed
                 pldrive( get_delta_from_movement_action( act, iso_rotate::no ) );
             } else {
+                // Track a deliberate bump target for the hotbar; movement and attacks stay native.
+                const tripoint_bub_ms combat_tile = player_character.pos_bub() +
+                        get_delta_from_movement_action( act, iso_rotate::yes );
+                Creature *combat_target = get_creature_tracker().creature_at( combat_tile );
+                if( !player_character.is_auto_moving() && !auto_travel_mode &&
+                    tactical_combat::can_target_from_map( player_character, combat_target ) ) {
+                    tactical_combat::select_target( player_character, combat_target );
+                }
                 const int pre_walk_moves = player_character.get_moves();
                 point_rel_ms dest_delta = get_delta_from_movement_action( act, iso_rotate::yes );
                 if( auto_travel_mode && !player_character.is_auto_moving() ) {
@@ -3174,10 +3183,9 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
         case ACTION_TOGGLE_AUTO_COMBAT: {
             set_next_option( "AUTO_COMBAT" );
             if( get_option<bool>( "AUTO_COMBAT" ) ) {
-                add_msg( _( "Auto combat on.  Each turn fights hostiles in melee/reach "
-                            "or fires your wielded gun when in range.  Toggle off "
-                            "(Combat●) or clear safe mode to stop.  Right-click Combat "
-                            "for details." ) );
+                add_msg( _( "Auto combat on. Manual input stops it. It pauses for low health, "
+                            "exhaustion, unsafe actions, or no target. Ammunition use and "
+                            "combat behavior can be changed in options." ) );
             }
             break;
         }
@@ -3222,6 +3230,25 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             item_action_menu();
             break;
 
+        case ACTION_COMBAT_MENU:
+            tactical_combat::menu( player_character, mouse_target ?
+                                   get_creature_tracker().creature_at( *mouse_target ) : nullptr );
+            break;
+        case ACTION_COMBAT_ATTACK:
+            tactical_combat::manual_action( player_character, tactical_combat::action::attack );
+            break;
+        case ACTION_COMBAT_GUARD:
+            tactical_combat::manual_action( player_character, tactical_combat::action::guard );
+            break;
+        case ACTION_COMBAT_EVADE:
+            tactical_combat::manual_action( player_character, tactical_combat::action::evade );
+            break;
+        case ACTION_COMBAT_BASH:
+            tactical_combat::manual_action( player_character, tactical_combat::action::bash );
+            break;
+        case ACTION_COMBAT_RECOVER:
+            tactical_combat::manual_action( player_character, tactical_combat::action::recover );
+            break;
         case ACTION_AUTOATTACK:
             avatar_action::autoattack( player_character, here );
             break;
@@ -3263,15 +3290,8 @@ bool game::handle_action()
         open_menu_tmp.value()();
         return false;
     } else {
-        // Soft-fork sticky AUTO_COMBAT: inject a combat action when a hostile is
-        // fightable; otherwise fall through to normal input (no pause spam).
-        if( get_option<bool>( "AUTO_COMBAT" ) && uquit != QUIT_WATCH &&
-            !player_character.is_dead_state() &&
-            avatar_action::auto_combat( player_character, here ) ) {
-            return true;
-        }
         // Soft-fork sticky AUTO_EAT: consume a safe inventory item when hungry/thirsty.
-        if( get_option<bool>( "AUTO_EAT" ) && uquit != QUIT_WATCH &&
+        if( get_option<bool>( "AUTO_EAT" ) && !get_option<bool>( "AUTO_COMBAT" ) && uquit != QUIT_WATCH &&
             !player_character.is_dead_state() &&
             avatar_action::auto_eat( player_character ) ) {
             return true;
@@ -3291,6 +3311,18 @@ bool game::handle_action()
             // action/main menus and the world-state action counter.
             action = action_ident( *toolbar_act );
             act = ACTION_NULL;
+        }
+        if( get_option<bool>( "AUTO_COMBAT" ) && uquit != QUIT_WATCH &&
+            !player_character.is_dead_state() ) {
+            if( action == "TIMEOUT" ) {
+                if( avatar_action::auto_combat( player_character, here ) ) {
+                    return true;
+                }
+                tactical_combat::stop_auto_combat();
+                add_msg( m_info, _( "Auto combat stopped: %s." ), avatar_action::auto_combat_status() );
+            } else if( action != "toggle_auto_combat" ) {
+                tactical_combat::stop_auto_combat();
+            }
         }
     }
 
@@ -3499,6 +3531,11 @@ bool game::handle_action()
         if( !do_regular_action( act, player_character, mouse_target ) ) {
             return false;
         }
+    }
+    if( player_character.get_moves() < before_action_moves &&
+        act != ACTION_COMBAT_MENU && act != ACTION_COMBAT_GUARD &&
+        act != ACTION_COMBAT_EVADE && act != ACTION_COMBAT_RECOVER ) {
+        tactical_combat::clear_defense( player_character );
     }
     if( act != ACTION_TIMEOUT ) {
         player_character.mod_moves( -current_turn.moves_elapsed() );

@@ -1,5 +1,6 @@
 #include "ui_telemetry.h"
 #include "item_context_menu.h"
+#include "equipment_actions.h"
 
 #include <string>
 #include <vector>
@@ -412,10 +413,11 @@ std::string perform( Character &you, item_location loc, action act,
         }
         case action::takeoff: {
             if( you.is_wielding( *loc ) ) {
-                if( you.can_unwield( *loc ).success() && you.unwield() ) {
+                const auto result = equipment_actions::unwield_to_inventory( you );
+                if( result.success() ) {
                     return _( "Unwielded." );
                 }
-                return you.can_unwield( *loc ).str();
+                return result.str();
             }
             const ret_val<void> can = you.can_takeoff( *loc );
             if( !can.success() ) {

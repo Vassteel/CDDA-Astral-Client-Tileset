@@ -3,6 +3,15 @@
 #include "damage.h"
 #include "recipe.h"
 #include "string_formatter.h"
+#include "math_parser_diag_value.h"
+#include "dialogue.h"
+#include "effect_on_condition.h"
+#include "talker.h"
+#include "iuse.h"
+#include "itype.h"
+#include "item_location.h"
+#include "mapdata.h"
+#include "player_activity.h"
 #include "achievement.h"
 #include "achievement_rewards.h"
 #include "avatar.h"
@@ -30,7 +39,7 @@ void reset_rewards()
     clear_map_without_vision();
     get_achievements().clear();
     get_achievements().deserialize( json_loader::from_string(
-        "{\"enabled\":true,\"initial_achievements\":[\"achievement_survive_one_day\"],\"achievements_status\":{}}" ).get_object() );
+                                        "{\"enabled\":true,\"initial_achievements\":[\"achievement_survive_one_day\"],\"achievements_status\":{}}" ).get_object() );
 }
 std::string save_tracker()
 {
@@ -66,11 +75,13 @@ TEST_CASE( "Astral_reward_claims_persist_and_cannot_repeat", "[astral_rewards]" 
     CHECK( b.claims.empty() );
     load_tracker( "{\"enabled\":true,\"initial_achievements\":[],\"achievements_status\":{}}" );
     CHECK( b.credits.empty() );
-    CHECK( t.is_completed( achievement_id( "achievement_survive_one_day" ) ) == achievement_completion::pending );
+    CHECK( t.is_completed( achievement_id( "achievement_survive_one_day" ) ) ==
+           achievement_completion::pending );
     CHECK( t.valid_achievements().empty() );
     t.set_enabled( false );
     achievement_rewards::complete( "achievement_survive_one_day" );
-    CHECK( t.is_completed( achievement_id( "achievement_survive_one_day" ) ) == achievement_completion::pending );
+    CHECK( t.is_completed( achievement_id( "achievement_survive_one_day" ) ) ==
+           achievement_completion::pending );
 }
 TEST_CASE( "Astral_recovery_is_selective_and_preserves_unused_credits", "[astral_rewards]" )
 {
@@ -192,7 +203,7 @@ TEST_CASE( "Astral_oversized_or_missing_containers_leave_rewards_pending", "[ast
 TEST_CASE( "Astral_expansion_is_shelved_while_vanilla_rewards_remain", "[astral_rewards]" )
 {
     reset_rewards();
-    CHECK( achievement_rewards::all().size() == 6 );
+    CHECK( achievement_rewards::all().size() == 211 );
     for( const auto &entry : achievement_rewards::all() ) {
         CHECK_FALSE( entry.second.enroll );
         CHECK( entry.first.find( "astral_" ) != 0 );
@@ -211,4 +222,130 @@ TEST_CASE( "Astral_expansion_is_shelved_while_vanilla_rewards_remain", "[astral_
     CHECK( get_achievements().reward_bank.seen.empty() );
     achievement_rewards::complete( "astral_014" );
     CHECK_FALSE( get_achievements().reward_bank.claim( get_achievements(), "astral_014", 0 ) );
+}
+
+TEST_CASE( "Every_vanilla_reward_choice_can_be_claimed_and_delivered", "[astral_rewards]" )
+{
+    reset_rewards();
+    auto &t = get_achievements();
+    avatar &u = get_avatar();
+    for( const auto &entry : achievement_rewards::all() ) {
+        for( size_t choice = 0; choice < entry.second.choices.size(); ++choice ) {
+            INFO( entry.first );
+            INFO( choice );
+            const std::string fixture = string_format(
+                                            "{\"enabled\":true,\"initial_achievements\":[\"%s\"],\"achievements_status\":{\"%s\":{\"completion\":\"completed\",\"last_state_change\":1,\"final_values\":[]}}}",
+                                            entry.first, entry.first );
+            load_tracker( fixture );
+            auto &b = t.reward_bank;
+            REQUIRE( b.claim( t, entry.first, choice ) );
+            load_tracker( save_tracker() );
+            CHECK_FALSE( b.claim( t, entry.first, choice ) );
+            get_map().i_clear( u.pos_bub() );
+            while( !b.parcels.empty() ) {
+                REQUIRE( b.deliver( u, 0, true ) );
+            }
+            for( const item &it : get_map().i_at( u.pos_bub() ) ) {
+                CHECK( it.get_var( "astral_reward" ) == "yes" );
+            }
+            load_tracker( save_tracker() );
+            CHECK( b.parcels.empty() );
+            CHECK_FALSE( b.claim( t, entry.first, choice ) );
+        }
+    }
+}
+TEST_CASE( "Reward_points_survive_progression_initialization_and_only_spend_once",
+           "[astral_rewards]" )
+{
+    reset_rewards();
+    avatar &u = get_avatar();
+    auto &b = get_achievements().reward_bank;
+    for( const auto &p : std::map<std::string, std::string> {
+    {"perk_point", "num_perks"}, {"martial_point", "num_ma_perks"},
+    {"playstyle_point", "playstyle_perks_available"}
+} ) {
+        b.credits[p.first] = 1;
+        REQUIRE( b.redeem( u, p.first, bodypart_id() ) );
+        CHECK( u.get_value( p.second ).dbl() == 1 );
+        load_tracker( save_tracker() );
+        CHECK_FALSE( b.redeem( u, p.first, bodypart_id() ) );
+        CHECK( u.get_value( p.second ).dbl() == 1 );
+    }
+    dialogue d( get_talker_for( u ), nullptr );
+    effect_on_condition_id( "EOC_give_perk_menu" )->activate( d );
+    effect_on_condition_id( "EOC_give_ma_perk_menu" )->activate( d );
+    CHECK( u.get_value( "num_perks" ).dbl() == 1 );
+    CHECK( u.get_value( "num_ma_perks" ).dbl() == 1 );
+    CHECK( u.get_value( "playstyle_perks_available" ).dbl() == 1 );
+    b.credits["reading_desk_plans"] = 1;
+    const recipe &plans = recipe_id( "astral_archivist_desk" ).obj();
+    REQUIRE_FALSE( u.knows_recipe( &plans ) );
+    REQUIRE( b.redeem( u, "reading_desk_plans", bodypart_id() ) );
+    CHECK( u.knows_recipe( &plans ) );
+    load_tracker( save_tracker() );
+    CHECK_FALSE( b.redeem( u, "reading_desk_plans", bodypart_id() ) );
+    CHECK( furn_id( "f_astral_archivist_desk" ).obj().workbench->multiplier == Approx( 1.3 ) );
+}
+TEST_CASE( "Named_reward_gear_has_real_improvements", "[astral_rewards]" )
+{
+    reset_rewards();
+    item normal( itype_id( "machete" ) );
+    item legendary( itype_id( "astral_last_word" ) );
+    CHECK( legendary.damage_melee( damage_type_id( "cut" ) ) >= normal.damage_melee(
+               damage_type_id( "cut" ) ) * 1.5 );
+    item pistol( itype_id( "glock_19" ) );
+    item final( itype_id( "astral_legend_pistol" ) );
+    CHECK( final.weight() == pistol.weight() / 2 );
+    CHECK( final.type->gun->dispersion == Approx( pistol.type->gun->dispersion * 0.75 ) );
+    CHECK( final.type->gun->recoil == Approx( pistol.type->gun->recoil * 0.85 ).margin( 1 ) );
+    avatar &u = get_avatar();
+    const int read_before = u.read_speed();
+    REQUIRE( u.wear_item( item( itype_id( "astral_archivist_plain" ) ), false ).has_value() );
+    u.recalculate_enchantment_cache();
+    CHECK( u.read_speed() == Approx( read_before * 0.85 ).margin( 1 ) );
+    const tripoint_bub_ms tree = u.pos_bub() + tripoint::east;
+    get_map().ter_set( tree, ter_id( "t_tree" ) );
+    item axe( itype_id( "ax" ) );
+    iuse::chop_tree( &u, &axe, tree );
+    const int ordinary_moves = u.activity.moves_total;
+    REQUIRE( ordinary_moves > 0 );
+    u.cancel_activity();
+    item better( itype_id( "astral_forester_axe" ) );
+    iuse::chop_tree( &u, &better, tree );
+    CHECK( u.activity.moves_total == Approx( ordinary_moves / 1.4 ).margin( 1 ) );
+    u.cancel_activity();
+}
+
+TEST_CASE( "Reward_battery_tools_receive_their_real_charged_cell", "[astral_rewards]" )
+{
+    reset_rewards();
+    auto &b = get_achievements().reward_bank;
+    achievement_rewards::item_award flashlight;
+    flashlight.item = itype_id( "flashlight" );
+    flashlight.charges = 56;
+    b.parcels.push_back( flashlight );
+    REQUIRE( b.deliver( get_avatar(), 0, true ) );
+    const item &light = get_map().i_at( get_avatar().pos_bub() ).only_item();
+    CHECK( light.ammo_remaining() == 56 );
+    REQUIRE( light.magazine_current() != nullptr );
+    CHECK( light.magazine_current()->typeId() == itype_id( "medium_battery_cell" ) );
+}
+
+TEST_CASE( "Research_light_retains_its_real_cell_across_switch_states", "[astral_rewards]" )
+{
+    reset_rewards();
+    auto &b = get_achievements().reward_bank;
+    achievement_rewards::item_award parcel;
+    parcel.item = itype_id( "astral_research_light" );
+    parcel.charges = 168;
+    b.parcels.push_back( parcel );
+    REQUIRE( b.deliver( get_avatar(), 0, true ) );
+    item &light = get_map().i_at( get_avatar().pos_bub() ).only_item();
+    REQUIRE( light.magazine_current() != nullptr );
+    CHECK( light.magazine_current()->typeId() == itype_id( "astral_research_cell" ) );
+    CHECK( light.ammo_remaining() == 168 );
+    light.convert( itype_id( "astral_research_light_on" ) );
+    CHECK( light.ammo_remaining() == 168 );
+    light.convert( itype_id( "astral_research_light" ) );
+    CHECK( light.ammo_remaining() == 168 );
 }

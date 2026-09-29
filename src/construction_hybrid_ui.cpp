@@ -134,6 +134,7 @@ class construction_hybrid_ui : public cataimgui::window
                                  ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize |
                                  ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoNav ),
               blueprint( blueprint_mode ) {
+            set_shell( 0, "build" );
             load_available( available, cat_available, g_filter_mode );
             cats = construction_categories::get_all();
             if( uistate.construction_tab.is_valid() ) {

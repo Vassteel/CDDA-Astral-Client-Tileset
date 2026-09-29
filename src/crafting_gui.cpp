@@ -595,6 +595,7 @@ crafting_ui_impl::crafting_ui_impl( Character *crafter, const recipe_id &goto_re
       highlight_unread( get_option<bool>( "HIGHLIGHT_UNREAD_RECIPES" ) ),
       recalc_unread( highlight_unread )
 {
+    set_shell( 0, "craft" );
     crafting_group = crafter->get_crafting_group();
     crafter_i = std::find( crafting_group.begin(), crafting_group.end(),
                            crafter ) - crafting_group.begin();

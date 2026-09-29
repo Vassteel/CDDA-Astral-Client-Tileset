@@ -17,7 +17,9 @@ class hybrid_window : public cataimgui::window
     public:
         hybrid_window( const std::string &title, std::function<void()> controls ) :
             cataimgui::window( title, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize |
-                              ImGuiWindowFlags_NoMove ), controls( std::move( controls ) ) {}
+                              ImGuiWindowFlags_NoMove ), controls( std::move( controls ) ) {
+            set_shell( 0 );
+        }
         void close() { is_open = false; }
         void set_hidden( bool hidden ) { hide_ui = hidden; }
     protected:

@@ -42,11 +42,75 @@
   },
   {
     "type": "achievement_reward",
-    "achievement": "achievement_kill_10_monsters",
-    "category": "Combat",
+    "achievement": "achievement_kill_cyborg",
+    "category": "Milestones",
+    "art": "achievement_kill_cyborg",
     "choices": [
       {
-        "name": "Medical parcel",
+        "name": "Salvager",
+        "items": [
+          {
+            "item": "soldering_iron"
+          },
+          {
+            "item": "pliers"
+          }
+        ],
+        "credits": {
+          "field_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_kill_nether",
+    "category": "Milestones",
+    "art": "achievement_kill_nether",
+    "choices": [
+      {
+        "name": "Quiet again",
+        "items": [
+          {
+            "item": "oil_lamp",
+            "charges": 750
+          }
+        ],
+        "credits": {
+          "fresh_start": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_kill_fungus",
+    "category": "Milestones",
+    "art": "achievement_kill_fungus",
+    "choices": [
+      {
+        "name": "Sporeguard",
+        "items": [
+          {
+            "item": "mask_gas"
+          },
+          {
+            "item": "gasfilter_m",
+            "charges": 100
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_kill_insect",
+    "category": "Milestones",
+    "art": "achievement_kill_insect",
+    "choices": [
+      {
+        "name": "Bite care",
         "items": [
           {
             "item": "bandages",
@@ -63,52 +127,62 @@
   },
   {
     "type": "achievement_reward",
-    "achievement": "achievement_survive_one_day",
-    "category": "Survival",
+    "achievement": "achievement_kill_robot",
+    "category": "Milestones",
+    "art": "achievement_kill_robot",
     "choices": [
       {
-        "name": "Tomorrow is yours (plant food)",
+        "name": "Circuit repair",
         "items": [
           {
-            "item": "protein_bar_zero",
-            "count": 2
+            "item": "electrohack"
+          },
+          {
+            "item": "screwdriver"
           }
         ],
-        "credits": {
-          "second_wind": 1
-        }
-      },
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_kill_in_first_minute",
+    "category": "Milestones",
+    "art": "achievement_kill_in_first_minute",
+    "choices": [
       {
-        "name": "Tomorrow is yours (meat food)",
+        "name": "A fighting chance",
         "items": [
           {
-            "item": "jerky",
-            "count": 2
+            "item": "bandages",
+            "count": 3
           }
         ],
         "credits": {
-          "second_wind": 1
+          "warm_up": 1
         }
       }
     ]
   },
   {
     "type": "achievement_reward",
-    "achievement": "achievement_survive_7_days",
-    "category": "Survival",
+    "achievement": "achievement_kill_10_monsters",
+    "category": "Combat",
     "choices": [
       {
-        "name": "A week of hope",
+        "name": "Medical parcel",
         "items": [
           {
-            "item": "oil_lamp",
-            "charges": 750
+            "item": "bandages",
+            "count": 6
+          },
+          {
+            "item": "disinfectant",
+            "charges": 10
           }
         ],
-        "credits": {
-          "fresh_start": 1,
-          "field_recovery": 1
-        }
+        "credits": {}
       }
     ]
   },
@@ -177,6 +251,4279 @@
           }
         ],
         "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_kill_10000_monsters",
+    "category": "Combat",
+    "art": "achievement_kill_10000_monsters",
+    "choices": [
+      {
+        "name": "Dawncleaver",
+        "items": [
+          {
+            "item": "astral_master_machete"
+          }
+        ],
+        "credits": {
+          "martial_point": 2
+        }
+      },
+      {
+        "name": "Citadel",
+        "items": [
+          {
+            "item": "astral_master_mace"
+          }
+        ],
+        "credits": {
+          "martial_point": 2
+        }
+      },
+      {
+        "name": "Starwarden",
+        "items": [
+          {
+            "item": "astral_master_spear"
+          }
+        ],
+        "credits": {
+          "martial_point": 2
+        }
+      },
+      {
+        "name": "Dead Reckoning",
+        "items": [
+          {
+            "item": "astral_master_pistol",
+            "charges": 1
+          }
+        ],
+        "credits": {
+          "martial_point": 2
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_kill_100000_monsters",
+    "category": "Combat",
+    "art": "achievement_kill_100000_monsters",
+    "choices": [
+      {
+        "name": "Last Word",
+        "items": [
+          {
+            "item": "astral_last_word"
+          },
+          {
+            "item": "astral_keepsake_last_word"
+          }
+        ],
+        "credits": {}
+      },
+      {
+        "name": "Last Stand",
+        "items": [
+          {
+            "item": "astral_last_stand"
+          },
+          {
+            "item": "astral_keepsake_last_word"
+          }
+        ],
+        "credits": {}
+      },
+      {
+        "name": "Last Light",
+        "items": [
+          {
+            "item": "astral_last_light"
+          },
+          {
+            "item": "astral_keepsake_last_word"
+          }
+        ],
+        "credits": {}
+      },
+      {
+        "name": "Final Answer",
+        "items": [
+          {
+            "item": "astral_legend_pistol",
+            "charges": 1
+          },
+          {
+            "item": "astral_keepsake_last_word"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_survive_one_day",
+    "category": "Survival",
+    "choices": [
+      {
+        "name": "Tomorrow is yours (plant food)",
+        "items": [
+          {
+            "item": "protein_bar_zero",
+            "count": 2
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      },
+      {
+        "name": "Tomorrow is yours (meat food)",
+        "items": [
+          {
+            "item": "jerky",
+            "count": 2
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_survive_7_days",
+    "category": "Survival",
+    "choices": [
+      {
+        "name": "A week of hope",
+        "items": [
+          {
+            "item": "oil_lamp",
+            "charges": 750
+          }
+        ],
+        "credits": {
+          "fresh_start": 1,
+          "field_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_survive_28_days",
+    "category": "Survival",
+    "art": "achievement_survive_28_days",
+    "choices": [
+      {
+        "name": "Homesteader pack",
+        "items": [
+          {
+            "item": "astral_homesteader"
+          }
+        ],
+        "credits": {
+          "nourished": 1
+        }
+      },
+      {
+        "name": "Trailwalker boots",
+        "items": [
+          {
+            "item": "astral_trailwalker"
+          }
+        ],
+        "credits": {
+          "nourished": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_survive_91_days",
+    "category": "Survival",
+    "art": "achievement_survive_91_days",
+    "choices": [
+      {
+        "name": "Seasoned Survivor",
+        "items": [],
+        "credits": {
+          "complete_recovery": 1,
+          "perk_point": 2
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_survive_365_days",
+    "category": "Survival",
+    "art": "achievement_survive_365_days",
+    "choices": [
+      {
+        "name": "Last Word",
+        "items": [
+          {
+            "item": "astral_last_word"
+          },
+          {
+            "item": "astral_everlight",
+            "charges": 6000
+          }
+        ],
+        "credits": {
+          "complete_recovery": 1
+        }
+      },
+      {
+        "name": "Last Stand",
+        "items": [
+          {
+            "item": "astral_last_stand"
+          },
+          {
+            "item": "astral_everlight",
+            "charges": 6000
+          }
+        ],
+        "credits": {
+          "complete_recovery": 1
+        }
+      },
+      {
+        "name": "Last Light",
+        "items": [
+          {
+            "item": "astral_last_light"
+          },
+          {
+            "item": "astral_everlight",
+            "charges": 6000
+          }
+        ],
+        "credits": {
+          "complete_recovery": 1
+        }
+      },
+      {
+        "name": "Final Answer",
+        "items": [
+          {
+            "item": "astral_legend_pistol",
+            "charges": 1
+          },
+          {
+            "item": "astral_everlight",
+            "charges": 6000
+          }
+        ],
+        "credits": {
+          "complete_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_marathon",
+    "category": "Travel",
+    "art": "achievement_marathon",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "astral_trailwalker"
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_walk_1000_miles",
+    "category": "Travel",
+    "art": "achievement_walk_1000_miles",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "astral_trailwalker"
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_traverse_sharp_terrain",
+    "category": "Travel",
+    "art": "achievement_traverse_sharp_terrain",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "astral_trailwalker"
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_swim_merit_badge",
+    "category": "Travel",
+    "art": "achievement_swim_merit_badge",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "flotation_vest"
+          },
+          {
+            "item": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_max_z_level",
+    "category": "Travel",
+    "art": "achievement_reach_max_z_level",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "rope_30"
+          },
+          {
+            "item": "flashlight",
+            "charges": 56
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_min_z_level",
+    "category": "Travel",
+    "art": "achievement_reach_min_z_level",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "rope_30"
+          },
+          {
+            "item": "flashlight",
+            "charges": 56
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_distance_gndv_berthabenz",
+    "category": "Travel",
+    "art": "achievement_vehicle_distance_gndv_berthabenz",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "wrench"
+          },
+          {
+            "item": "duct_tape",
+            "charges": 100
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_distance_gndv_daytona",
+    "category": "Travel",
+    "art": "achievement_vehicle_distance_gndv_daytona",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "wrench"
+          },
+          {
+            "item": "duct_tape",
+            "charges": 100
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_distance_gndv_arcticsounds",
+    "category": "Travel",
+    "art": "achievement_vehicle_distance_gndv_arcticsounds",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "wrench"
+          },
+          {
+            "item": "duct_tape",
+            "charges": 100
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_distance_gndv_route66",
+    "category": "Travel",
+    "art": "achievement_vehicle_distance_gndv_route66",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "wrench"
+          },
+          {
+            "item": "duct_tape",
+            "charges": 100
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_distance_boat_hocr",
+    "category": "Travel",
+    "art": "achievement_vehicle_distance_boat_hocr",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "flotation_vest"
+          },
+          {
+            "item": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_distance_boat_mayflower",
+    "category": "Travel",
+    "art": "achievement_vehicle_distance_boat_mayflower",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "flotation_vest"
+          },
+          {
+            "item": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_distance_boat_circumnavigate",
+    "category": "Travel",
+    "art": "achievement_vehicle_distance_boat_circumnavigate",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "flotation_vest"
+          },
+          {
+            "item": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_distance_acft_wright",
+    "category": "Travel",
+    "art": "achievement_vehicle_distance_acft_wright",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "binoculars"
+          },
+          {
+            "item": "astral_homesteader"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_distance_acft_bleriot",
+    "category": "Travel",
+    "art": "achievement_vehicle_distance_acft_bleriot",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "binoculars"
+          },
+          {
+            "item": "astral_homesteader"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_distance_acft_lindbergh",
+    "category": "Travel",
+    "art": "achievement_vehicle_distance_acft_lindbergh",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "binoculars"
+          },
+          {
+            "item": "astral_homesteader"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_distance_acft_fosset",
+    "category": "Travel",
+    "art": "achievement_vehicle_distance_acft_fosset",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "binoculars"
+          },
+          {
+            "item": "astral_homesteader"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_distance_acft_flyergold",
+    "category": "Travel",
+    "art": "achievement_vehicle_distance_acft_flyergold",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "binoculars"
+          },
+          {
+            "item": "astral_homesteader"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_onboard_rc",
+    "category": "Travel",
+    "art": "achievement_vehicle_onboard_rc",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "wrench"
+          },
+          {
+            "item": "duct_tape",
+            "charges": 100
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_distance_passenger",
+    "category": "Travel",
+    "art": "achievement_vehicle_distance_passenger",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "wrench"
+          },
+          {
+            "item": "duct_tape",
+            "charges": 100
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_distance_skidding",
+    "category": "Travel",
+    "art": "achievement_vehicle_distance_skidding",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "wrench"
+          },
+          {
+            "item": "duct_tape",
+            "charges": 100
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_velocity_gndv_42mph",
+    "category": "Travel",
+    "art": "achievement_vehicle_velocity_gndv_42mph",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "wrench"
+          },
+          {
+            "item": "duct_tape",
+            "charges": 100
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_velocity_gndv_135mph",
+    "category": "Travel",
+    "art": "achievement_vehicle_velocity_gndv_135mph",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "wrench"
+          },
+          {
+            "item": "duct_tape",
+            "charges": 100
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_velocity_rail_150mph",
+    "category": "Travel",
+    "art": "achievement_vehicle_velocity_rail_150mph",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "wrench"
+          },
+          {
+            "item": "duct_tape",
+            "charges": 100
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_velocity_boat_71mph",
+    "category": "Travel",
+    "art": "achievement_vehicle_velocity_boat_71mph",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "flotation_vest"
+          },
+          {
+            "item": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_velocity_boat_125mph",
+    "category": "Travel",
+    "art": "achievement_vehicle_velocity_boat_125mph",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "flotation_vest"
+          },
+          {
+            "item": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_velocity_acft_mach1",
+    "category": "Travel",
+    "art": "achievement_vehicle_velocity_acft_mach1",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "binoculars"
+          },
+          {
+            "item": "astral_homesteader"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_acft_max_z_level",
+    "category": "Travel",
+    "art": "achievement_vehicle_acft_max_z_level",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "binoculars"
+          },
+          {
+            "item": "astral_homesteader"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_velocity_drift_50mph",
+    "category": "Travel",
+    "art": "achievement_vehicle_velocity_drift_50mph",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "wrench"
+          },
+          {
+            "item": "duct_tape",
+            "charges": 100
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_vehicle_velocity_rail_human50mph",
+    "category": "Travel",
+    "art": "achievement_vehicle_velocity_rail_human50mph",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "wrench"
+          },
+          {
+            "item": "duct_tape",
+            "charges": 100
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_wield_crowbar",
+    "category": "Milestones",
+    "art": "achievement_wield_crowbar",
+    "choices": [
+      {
+        "name": "Freeman's kit",
+        "items": [
+          {
+            "item": "hat_hard"
+          },
+          {
+            "item": "gloves_light"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_wear_power_armor",
+    "category": "Milestones",
+    "art": "achievement_wear_power_armor",
+    "choices": [
+      {
+        "name": "Armor maintenance",
+        "items": [
+          {
+            "item": "wrench"
+          },
+          {
+            "item": "soldering_iron"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_lab_finale",
+    "category": "Discovery",
+    "art": "achievement_reach_lab_finale",
+    "choices": [
+      {
+        "name": "Researcher's cache",
+        "items": [
+          {
+            "item": "goggles_chem"
+          },
+          {
+            "item": "bandages",
+            "count": 8
+          },
+          {
+            "item": "astral_research_light",
+            "charges": 168
+          }
+        ],
+        "credits": {
+          "field_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_refugee_center",
+    "category": "Discovery",
+    "art": "achievement_reach_refugee_center",
+    "choices": [
+      {
+        "name": "Relief parcel (plant food)",
+        "items": [
+          {
+            "item": "bandages",
+            "count": 6
+          },
+          {
+            "item": "protein_bar_zero",
+            "count": 6
+          }
+        ],
+        "credits": {}
+      },
+      {
+        "name": "Relief parcel (meat food)",
+        "items": [
+          {
+            "item": "bandages",
+            "count": 6
+          },
+          {
+            "item": "jerky",
+            "count": 6
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_return_to_first_omt",
+    "category": "Travel",
+    "art": "achievement_return_to_first_omt",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "astral_trailwalker"
+          },
+          {
+            "item": "water_clean",
+            "charges": 8,
+            "container": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_cut_1_tree",
+    "category": "Craft and work",
+    "art": "achievement_cut_1_tree",
+    "choices": [
+      {
+        "name": "Sharpening supplies",
+        "items": [
+          {
+            "item": "sharpener"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_cut_100_trees",
+    "category": "Craft and work",
+    "art": "achievement_cut_100_trees",
+    "choices": [
+      {
+        "name": "Lumberjack",
+        "items": [
+          {
+            "item": "astral_lumberjack_axe"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_cut_1000_trees",
+    "category": "Craft and work",
+    "art": "achievement_cut_1000_trees",
+    "choices": [
+      {
+        "name": "Forester",
+        "items": [
+          {
+            "item": "astral_forester_axe"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_exhume_1_grave",
+    "category": "Milestones",
+    "art": "achievement_exhume_1_grave",
+    "choices": [
+      {
+        "name": "Digging kit",
+        "items": [
+          {
+            "item": "shovel"
+          },
+          {
+            "item": "gloves_light"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_exhume_10_graves",
+    "category": "Milestones",
+    "art": "achievement_exhume_10_graves",
+    "choices": [
+      {
+        "name": "Earthworker",
+        "items": [
+          {
+            "item": "shovel"
+          },
+          {
+            "item": "astral_work_apron"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_bury_1_corpse",
+    "category": "Milestones",
+    "art": "achievement_bury_1_corpse",
+    "choices": [
+      {
+        "name": "A moment of peace",
+        "items": [],
+        "credits": {
+          "fresh_start": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_bury_10_corpses",
+    "category": "Milestones",
+    "art": "achievement_bury_10_corpses",
+    "choices": [
+      {
+        "name": "Remembrance",
+        "items": [],
+        "credits": {
+          "fresh_start": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_bury_100_corpses",
+    "category": "Milestones",
+    "art": "achievement_bury_100_corpses",
+    "choices": [
+      {
+        "name": "Names remembered",
+        "items": [
+          {
+            "item": "astral_remembrance_shovel"
+          },
+          {
+            "item": "astral_keepsake_remembrance"
+          }
+        ],
+        "credits": {
+          "fresh_start": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_install_1_cbm",
+    "category": "Milestones",
+    "art": "achievement_install_1_cbm",
+    "choices": [
+      {
+        "name": "Postoperative supplies",
+        "items": [
+          {
+            "item": "bandages",
+            "count": 8
+          },
+          {
+            "item": "disinfectant",
+            "charges": 10
+          }
+        ],
+        "credits": {
+          "field_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_install_10_cbms",
+    "category": "Milestones",
+    "art": "achievement_install_10_cbms",
+    "choices": [
+      {
+        "name": "Clockwork recovery",
+        "items": [
+          {
+            "item": "soldering_iron"
+          },
+          {
+            "item": "screwdriver"
+          },
+          {
+            "item": "pliers"
+          }
+        ],
+        "credits": {
+          "complete_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_crosses_mutation_threshold",
+    "category": "Transformation",
+    "art": "achievement_crosses_mutation_threshold",
+    "choices": [
+      {
+        "name": "Changed, Not Broken",
+        "items": [],
+        "credits": {
+          "complete_recovery": 1,
+          "perk_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_plant",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_plant",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_plant"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_rabbit",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_rabbit",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_rabbit"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_insect",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_insect",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_insect"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_spider",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_spider",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_spider"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_slime",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_slime",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_slime"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_fish",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_fish",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_fish"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_rat",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_rat",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_rat"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_beast",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_beast",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_beast"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_ursine",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_ursine",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_ursine"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_feline",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_feline",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_feline"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_lupine",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_lupine",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_lupine"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_cattle",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_cattle",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_cattle"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_cephalapod",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_cephalapod",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_cephalapod"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_bird",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_bird",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_bird"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_lizard",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_lizard",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_lizard"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_troglobite",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_troglobite",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_troglobite"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_gastropod",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_gastropod",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_gastropod"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_batrachian",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_batrachian",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_batrachian"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_alpha",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_alpha",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_alpha"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_medical",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_medical",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_medical"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_chimera",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_chimera",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_chimera"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_elfa",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_elfa",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_elfa"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_raptor",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_raptor",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_raptor"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_mutation_threshold_mouse",
+    "category": "Transformation",
+    "art": "achievement_mutation_threshold_mouse",
+    "choices": [
+      {
+        "name": "A new chapter",
+        "items": [
+          {
+            "item": "astral_keepsake_threshold_mouse"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_break_major_limbs",
+    "category": "Milestones",
+    "art": "achievement_break_major_limbs",
+    "choices": [
+      {
+        "name": "Mending reserve",
+        "items": [],
+        "credits": {
+          "boneknit": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_speech",
+    "category": "Skills",
+    "art": "achievement_lvl_4_speech",
+    "choices": [
+      {
+        "name": "Silver Tongue book strap starter parcel",
+        "items": [
+          {
+            "item": "bookstrap"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_speech",
+    "category": "Skills",
+    "art": "achievement_lvl_7_speech",
+    "choices": [
+      {
+        "name": "Silver Tongue book strap",
+        "items": [
+          {
+            "item": "astral_skill_speech_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_speech",
+    "category": "Skills",
+    "art": "achievement_lvl_10_speech",
+    "choices": [
+      {
+        "name": "Masterwork Silver Tongue book strap",
+        "items": [
+          {
+            "item": "astral_skill_speech_10"
+          }
+        ],
+        "credits": {
+          "perk_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_computer",
+    "category": "Skills",
+    "art": "achievement_lvl_4_computer",
+    "choices": [
+      {
+        "name": "Cipher electronic toolkit starter parcel",
+        "items": [
+          {
+            "item": "electrohack"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_computer",
+    "category": "Skills",
+    "art": "achievement_lvl_7_computer",
+    "choices": [
+      {
+        "name": "Cipher electronic toolkit",
+        "items": [
+          {
+            "item": "astral_skill_computer_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_computer",
+    "category": "Skills",
+    "art": "achievement_lvl_10_computer",
+    "choices": [
+      {
+        "name": "Masterwork Cipher electronic toolkit",
+        "items": [
+          {
+            "item": "astral_skill_computer_10"
+          }
+        ],
+        "credits": {
+          "perk_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_firstaid",
+    "category": "Skills",
+    "art": "achievement_lvl_4_firstaid",
+    "choices": [
+      {
+        "name": "Steadyhand scalpel starter parcel",
+        "items": [
+          {
+            "item": "scalpel"
+          },
+          {
+            "item": "bandages",
+            "count": 6
+          },
+          {
+            "item": "disinfectant",
+            "charges": 10
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_firstaid",
+    "category": "Skills",
+    "art": "achievement_lvl_7_firstaid",
+    "choices": [
+      {
+        "name": "Steadyhand scalpel",
+        "items": [
+          {
+            "item": "astral_skill_firstaid_7"
+          }
+        ],
+        "credits": {
+          "field_recovery": 2
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_firstaid",
+    "category": "Skills",
+    "art": "achievement_lvl_10_firstaid",
+    "choices": [
+      {
+        "name": "Masterwork Steadyhand scalpel",
+        "items": [
+          {
+            "item": "astral_skill_firstaid_10"
+          }
+        ],
+        "credits": {
+          "perk_point": 1,
+          "field_recovery": 3
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_mechanics",
+    "category": "Skills",
+    "art": "achievement_lvl_4_mechanics",
+    "choices": [
+      {
+        "name": "Roadsmith welder starter parcel",
+        "items": [
+          {
+            "item": "welder"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_mechanics",
+    "category": "Skills",
+    "art": "achievement_lvl_7_mechanics",
+    "choices": [
+      {
+        "name": "Roadsmith welder",
+        "items": [
+          {
+            "item": "astral_skill_mechanics_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_mechanics",
+    "category": "Skills",
+    "art": "achievement_lvl_10_mechanics",
+    "choices": [
+      {
+        "name": "Masterwork Roadsmith welder",
+        "items": [
+          {
+            "item": "astral_skill_mechanics_10"
+          }
+        ],
+        "credits": {
+          "perk_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_traps",
+    "category": "Skills",
+    "art": "achievement_lvl_4_traps",
+    "choices": [
+      {
+        "name": "Trailkeeper trap starter parcel",
+        "items": [
+          {
+            "item": "beartrap"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_traps",
+    "category": "Skills",
+    "art": "achievement_lvl_7_traps",
+    "choices": [
+      {
+        "name": "Trailkeeper trap",
+        "items": [
+          {
+            "item": "astral_skill_traps_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_traps",
+    "category": "Skills",
+    "art": "achievement_lvl_10_traps",
+    "choices": [
+      {
+        "name": "Masterwork Trailkeeper trap",
+        "items": [
+          {
+            "item": "astral_skill_traps_10"
+          }
+        ],
+        "credits": {
+          "perk_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_driving",
+    "category": "Skills",
+    "art": "achievement_lvl_4_driving",
+    "choices": [
+      {
+        "name": "Touring gloves starter parcel",
+        "items": [
+          {
+            "item": "gloves_light"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_driving",
+    "category": "Skills",
+    "art": "achievement_lvl_7_driving",
+    "choices": [
+      {
+        "name": "Touring gloves",
+        "items": [
+          {
+            "item": "astral_skill_driving_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_driving",
+    "category": "Skills",
+    "art": "achievement_lvl_10_driving",
+    "choices": [
+      {
+        "name": "Masterwork Touring gloves",
+        "items": [
+          {
+            "item": "astral_skill_driving_10"
+          }
+        ],
+        "credits": {
+          "perk_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_swimming",
+    "category": "Skills",
+    "art": "achievement_lvl_4_swimming",
+    "choices": [
+      {
+        "name": "Riverguard vest starter parcel",
+        "items": [
+          {
+            "item": "flotation_vest"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_swimming",
+    "category": "Skills",
+    "art": "achievement_lvl_7_swimming",
+    "choices": [
+      {
+        "name": "Riverguard vest",
+        "items": [
+          {
+            "item": "astral_skill_swimming_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_swimming",
+    "category": "Skills",
+    "art": "achievement_lvl_10_swimming",
+    "choices": [
+      {
+        "name": "Masterwork Riverguard vest",
+        "items": [
+          {
+            "item": "astral_skill_swimming_10"
+          }
+        ],
+        "credits": {
+          "perk_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_fabrication",
+    "category": "Skills",
+    "art": "achievement_lvl_4_fabrication",
+    "choices": [
+      {
+        "name": "Cornerstone hammer starter parcel",
+        "items": [
+          {
+            "item": "hammer"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_fabrication",
+    "category": "Skills",
+    "art": "achievement_lvl_7_fabrication",
+    "choices": [
+      {
+        "name": "Cornerstone hammer",
+        "items": [
+          {
+            "item": "astral_skill_fabrication_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_fabrication",
+    "category": "Skills",
+    "art": "achievement_lvl_10_fabrication",
+    "choices": [
+      {
+        "name": "Masterwork Cornerstone hammer",
+        "items": [
+          {
+            "item": "astral_skill_fabrication_10"
+          }
+        ],
+        "credits": {
+          "perk_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_cooking",
+    "category": "Skills",
+    "art": "achievement_lvl_4_cooking",
+    "choices": [
+      {
+        "name": "Hearthkeeper pot starter parcel",
+        "items": [
+          {
+            "item": "pot"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_cooking",
+    "category": "Skills",
+    "art": "achievement_lvl_7_cooking",
+    "choices": [
+      {
+        "name": "Hearthkeeper pot",
+        "items": [
+          {
+            "item": "astral_skill_cooking_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_cooking",
+    "category": "Skills",
+    "art": "achievement_lvl_10_cooking",
+    "choices": [
+      {
+        "name": "Masterwork Hearthkeeper pot",
+        "items": [
+          {
+            "item": "astral_skill_cooking_10"
+          }
+        ],
+        "credits": {
+          "perk_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_tailor",
+    "category": "Skills",
+    "art": "achievement_lvl_4_tailor",
+    "choices": [
+      {
+        "name": "Mender sewing kit starter parcel",
+        "items": [
+          {
+            "item": "sewing_kit"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_tailor",
+    "category": "Skills",
+    "art": "achievement_lvl_7_tailor",
+    "choices": [
+      {
+        "name": "Mender sewing kit",
+        "items": [
+          {
+            "item": "astral_skill_tailor_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_tailor",
+    "category": "Skills",
+    "art": "achievement_lvl_10_tailor",
+    "choices": [
+      {
+        "name": "Masterwork Mender sewing kit",
+        "items": [
+          {
+            "item": "astral_skill_tailor_10"
+          }
+        ],
+        "credits": {
+          "perk_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_survival",
+    "category": "Skills",
+    "art": "achievement_lvl_4_survival",
+    "choices": [
+      {
+        "name": "Redleaf hunting knife starter parcel",
+        "items": [
+          {
+            "item": "knife_hunting"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_survival",
+    "category": "Skills",
+    "art": "achievement_lvl_7_survival",
+    "choices": [
+      {
+        "name": "Redleaf hunting knife",
+        "items": [
+          {
+            "item": "astral_skill_survival_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_survival",
+    "category": "Skills",
+    "art": "achievement_lvl_10_survival",
+    "choices": [
+      {
+        "name": "Masterwork Redleaf hunting knife",
+        "items": [
+          {
+            "item": "astral_skill_survival_10"
+          }
+        ],
+        "credits": {
+          "perk_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_electronics",
+    "category": "Skills",
+    "art": "achievement_lvl_4_electronics",
+    "choices": [
+      {
+        "name": "Sparkkeeper soldering iron starter parcel",
+        "items": [
+          {
+            "item": "soldering_iron"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_electronics",
+    "category": "Skills",
+    "art": "achievement_lvl_7_electronics",
+    "choices": [
+      {
+        "name": "Sparkkeeper soldering iron",
+        "items": [
+          {
+            "item": "astral_skill_electronics_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_electronics",
+    "category": "Skills",
+    "art": "achievement_lvl_10_electronics",
+    "choices": [
+      {
+        "name": "Masterwork Sparkkeeper soldering iron",
+        "items": [
+          {
+            "item": "astral_skill_electronics_10"
+          }
+        ],
+        "credits": {
+          "perk_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_archery",
+    "category": "Skills",
+    "art": "achievement_lvl_4_archery",
+    "choices": [
+      {
+        "name": "Whisperstring bow starter parcel",
+        "items": [
+          {
+            "item": "longbow",
+            "charges": 1
+          },
+          {
+            "item": "arrow_wood",
+            "count": 20
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_archery",
+    "category": "Skills",
+    "art": "achievement_lvl_7_archery",
+    "choices": [
+      {
+        "name": "Whisperstring bow",
+        "items": [
+          {
+            "item": "astral_skill_archery_7",
+            "charges": 1
+          },
+          {
+            "item": "arrow_wood",
+            "count": 20
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_archery",
+    "category": "Skills",
+    "art": "achievement_lvl_10_archery",
+    "choices": [
+      {
+        "name": "Masterwork Whisperstring bow",
+        "items": [
+          {
+            "item": "astral_skill_archery_10",
+            "charges": 1
+          },
+          {
+            "item": "arrow_wood",
+            "count": 20
+          }
+        ],
+        "credits": {
+          "martial_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_gun",
+    "category": "Skills",
+    "art": "achievement_lvl_4_gun",
+    "choices": [
+      {
+        "name": "Steadyglass binoculars starter parcel",
+        "items": [
+          {
+            "item": "binoculars"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_gun",
+    "category": "Skills",
+    "art": "achievement_lvl_7_gun",
+    "choices": [
+      {
+        "name": "Steadyglass binoculars",
+        "items": [
+          {
+            "item": "astral_skill_gun_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_gun",
+    "category": "Skills",
+    "art": "achievement_lvl_10_gun",
+    "choices": [
+      {
+        "name": "Masterwork Steadyglass binoculars",
+        "items": [
+          {
+            "item": "astral_skill_gun_10"
+          }
+        ],
+        "credits": {
+          "martial_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_launcher",
+    "category": "Skills",
+    "art": "achievement_lvl_4_launcher",
+    "choices": [
+      {
+        "name": "Thunderhead launcher starter parcel",
+        "items": [
+          {
+            "item": "m79",
+            "charges": 1
+          },
+          {
+            "item": "40x46mm_m433",
+            "charges": 4
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_launcher",
+    "category": "Skills",
+    "art": "achievement_lvl_7_launcher",
+    "choices": [
+      {
+        "name": "Thunderhead launcher",
+        "items": [
+          {
+            "item": "astral_skill_launcher_7",
+            "charges": 1
+          },
+          {
+            "item": "40x46mm_m433",
+            "charges": 4
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_launcher",
+    "category": "Skills",
+    "art": "achievement_lvl_10_launcher",
+    "choices": [
+      {
+        "name": "Masterwork Thunderhead launcher",
+        "items": [
+          {
+            "item": "astral_skill_launcher_10",
+            "charges": 1
+          },
+          {
+            "item": "40x46mm_m433",
+            "charges": 4
+          }
+        ],
+        "credits": {
+          "martial_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_pistol",
+    "category": "Skills",
+    "art": "achievement_lvl_4_pistol",
+    "choices": [
+      {
+        "name": "Last Chance pistol starter parcel",
+        "items": [
+          {
+            "item": "glock_19",
+            "charges": 1
+          },
+          {
+            "item": "9mm",
+            "charges": 50
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_pistol",
+    "category": "Skills",
+    "art": "achievement_lvl_7_pistol",
+    "choices": [
+      {
+        "name": "Last Chance pistol",
+        "items": [
+          {
+            "item": "astral_skill_pistol_7",
+            "charges": 1
+          },
+          {
+            "item": "9mm",
+            "charges": 50
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_pistol",
+    "category": "Skills",
+    "art": "achievement_lvl_10_pistol",
+    "choices": [
+      {
+        "name": "Masterwork Last Chance pistol",
+        "items": [
+          {
+            "item": "astral_skill_pistol_10",
+            "charges": 1
+          },
+          {
+            "item": "9mm",
+            "charges": 50
+          }
+        ],
+        "credits": {
+          "martial_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_rifle",
+    "category": "Skills",
+    "art": "achievement_lvl_4_rifle",
+    "choices": [
+      {
+        "name": "Farwatch rifle starter parcel",
+        "items": [
+          {
+            "item": "sks",
+            "charges": 1
+          },
+          {
+            "item": "762_m87",
+            "charges": 40
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_rifle",
+    "category": "Skills",
+    "art": "achievement_lvl_7_rifle",
+    "choices": [
+      {
+        "name": "Farwatch rifle",
+        "items": [
+          {
+            "item": "astral_skill_rifle_7",
+            "charges": 1
+          },
+          {
+            "item": "762_m87",
+            "charges": 40
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_rifle",
+    "category": "Skills",
+    "art": "achievement_lvl_10_rifle",
+    "choices": [
+      {
+        "name": "Masterwork Farwatch rifle",
+        "items": [
+          {
+            "item": "astral_skill_rifle_10",
+            "charges": 1
+          },
+          {
+            "item": "762_m87",
+            "charges": 40
+          }
+        ],
+        "credits": {
+          "martial_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_shotgun",
+    "category": "Skills",
+    "art": "achievement_lvl_4_shotgun",
+    "choices": [
+      {
+        "name": "Doorwarden shotgun starter parcel",
+        "items": [
+          {
+            "item": "remington_870",
+            "charges": 1
+          },
+          {
+            "item": "shot_00",
+            "charges": 25
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_shotgun",
+    "category": "Skills",
+    "art": "achievement_lvl_7_shotgun",
+    "choices": [
+      {
+        "name": "Doorwarden shotgun",
+        "items": [
+          {
+            "item": "astral_skill_shotgun_7",
+            "charges": 1
+          },
+          {
+            "item": "shot_00",
+            "charges": 25
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_shotgun",
+    "category": "Skills",
+    "art": "achievement_lvl_10_shotgun",
+    "choices": [
+      {
+        "name": "Masterwork Doorwarden shotgun",
+        "items": [
+          {
+            "item": "astral_skill_shotgun_10",
+            "charges": 1
+          },
+          {
+            "item": "shot_00",
+            "charges": 25
+          }
+        ],
+        "credits": {
+          "martial_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_smg",
+    "category": "Skills",
+    "art": "achievement_lvl_4_smg",
+    "choices": [
+      {
+        "name": "Nightfall SMG starter parcel",
+        "items": [
+          {
+            "item": "hk_mp5",
+            "charges": 1
+          },
+          {
+            "item": "9mm",
+            "charges": 90
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_smg",
+    "category": "Skills",
+    "art": "achievement_lvl_7_smg",
+    "choices": [
+      {
+        "name": "Nightfall SMG",
+        "items": [
+          {
+            "item": "astral_skill_smg_7",
+            "charges": 1
+          },
+          {
+            "item": "9mm",
+            "charges": 90
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_smg",
+    "category": "Skills",
+    "art": "achievement_lvl_10_smg",
+    "choices": [
+      {
+        "name": "Masterwork Nightfall SMG",
+        "items": [
+          {
+            "item": "astral_skill_smg_10",
+            "charges": 1
+          },
+          {
+            "item": "9mm",
+            "charges": 90
+          }
+        ],
+        "credits": {
+          "martial_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_throw",
+    "category": "Skills",
+    "art": "achievement_lvl_4_throw",
+    "choices": [
+      {
+        "name": "Comet throwing knife starter parcel",
+        "items": [
+          {
+            "item": "throwing_knife"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_throw",
+    "category": "Skills",
+    "art": "achievement_lvl_7_throw",
+    "choices": [
+      {
+        "name": "Comet throwing knife",
+        "items": [
+          {
+            "item": "astral_skill_throw_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_throw",
+    "category": "Skills",
+    "art": "achievement_lvl_10_throw",
+    "choices": [
+      {
+        "name": "Masterwork Comet throwing knife",
+        "items": [
+          {
+            "item": "astral_skill_throw_10"
+          }
+        ],
+        "credits": {
+          "martial_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_melee",
+    "category": "Skills",
+    "art": "achievement_lvl_4_melee",
+    "choices": [
+      {
+        "name": "Hearthguard machete starter parcel",
+        "items": [
+          {
+            "item": "machete"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_melee",
+    "category": "Skills",
+    "art": "achievement_lvl_7_melee",
+    "choices": [
+      {
+        "name": "Hearthguard machete",
+        "items": [
+          {
+            "item": "astral_skill_melee_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_melee",
+    "category": "Skills",
+    "art": "achievement_lvl_10_melee",
+    "choices": [
+      {
+        "name": "Masterwork Hearthguard machete",
+        "items": [
+          {
+            "item": "astral_skill_melee_10"
+          }
+        ],
+        "credits": {
+          "martial_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_bashing",
+    "category": "Skills",
+    "art": "achievement_lvl_4_bashing",
+    "choices": [
+      {
+        "name": "Crowdkeeper mace starter parcel",
+        "items": [
+          {
+            "item": "mace"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_bashing",
+    "category": "Skills",
+    "art": "achievement_lvl_7_bashing",
+    "choices": [
+      {
+        "name": "Crowdkeeper mace",
+        "items": [
+          {
+            "item": "astral_skill_bashing_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_bashing",
+    "category": "Skills",
+    "art": "achievement_lvl_10_bashing",
+    "choices": [
+      {
+        "name": "Masterwork Crowdkeeper mace",
+        "items": [
+          {
+            "item": "astral_skill_bashing_10"
+          }
+        ],
+        "credits": {
+          "martial_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_cutting",
+    "category": "Skills",
+    "art": "achievement_lvl_4_cutting",
+    "choices": [
+      {
+        "name": "Duskcleaver machete starter parcel",
+        "items": [
+          {
+            "item": "machete"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_cutting",
+    "category": "Skills",
+    "art": "achievement_lvl_7_cutting",
+    "choices": [
+      {
+        "name": "Duskcleaver machete",
+        "items": [
+          {
+            "item": "astral_skill_cutting_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_cutting",
+    "category": "Skills",
+    "art": "achievement_lvl_10_cutting",
+    "choices": [
+      {
+        "name": "Masterwork Duskcleaver machete",
+        "items": [
+          {
+            "item": "astral_skill_cutting_10"
+          }
+        ],
+        "credits": {
+          "martial_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_dodge",
+    "category": "Skills",
+    "art": "achievement_lvl_4_dodge",
+    "choices": [
+      {
+        "name": "Featherstep shoes starter parcel",
+        "items": [
+          {
+            "item": "sneakers"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_dodge",
+    "category": "Skills",
+    "art": "achievement_lvl_7_dodge",
+    "choices": [
+      {
+        "name": "Featherstep shoes",
+        "items": [
+          {
+            "item": "astral_skill_dodge_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_dodge",
+    "category": "Skills",
+    "art": "achievement_lvl_10_dodge",
+    "choices": [
+      {
+        "name": "Masterwork Featherstep shoes",
+        "items": [
+          {
+            "item": "astral_skill_dodge_10"
+          }
+        ],
+        "credits": {
+          "martial_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_stabbing",
+    "category": "Skills",
+    "art": "achievement_lvl_4_stabbing",
+    "choices": [
+      {
+        "name": "Longreach spear starter parcel",
+        "items": [
+          {
+            "item": "spear_steel"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_stabbing",
+    "category": "Skills",
+    "art": "achievement_lvl_7_stabbing",
+    "choices": [
+      {
+        "name": "Longreach spear",
+        "items": [
+          {
+            "item": "astral_skill_stabbing_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_stabbing",
+    "category": "Skills",
+    "art": "achievement_lvl_10_stabbing",
+    "choices": [
+      {
+        "name": "Masterwork Longreach spear",
+        "items": [
+          {
+            "item": "astral_skill_stabbing_10"
+          }
+        ],
+        "credits": {
+          "martial_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_unarmed",
+    "category": "Skills",
+    "art": "achievement_lvl_4_unarmed",
+    "choices": [
+      {
+        "name": "Knucklestar knuckles starter parcel",
+        "items": [
+          {
+            "item": "knuckle_brass"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_unarmed",
+    "category": "Skills",
+    "art": "achievement_lvl_7_unarmed",
+    "choices": [
+      {
+        "name": "Knucklestar knuckles",
+        "items": [
+          {
+            "item": "astral_skill_unarmed_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_unarmed",
+    "category": "Skills",
+    "art": "achievement_lvl_10_unarmed",
+    "choices": [
+      {
+        "name": "Masterwork Knucklestar knuckles",
+        "items": [
+          {
+            "item": "astral_skill_unarmed_10"
+          }
+        ],
+        "credits": {
+          "martial_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_4_chemistry",
+    "category": "Skills",
+    "art": "achievement_lvl_4_chemistry",
+    "choices": [
+      {
+        "name": "Alchemist chemistry kit starter parcel",
+        "items": [
+          {
+            "item": "chemistry_set"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_7_chemistry",
+    "category": "Skills",
+    "art": "achievement_lvl_7_chemistry",
+    "choices": [
+      {
+        "name": "Alchemist chemistry kit",
+        "items": [
+          {
+            "item": "astral_skill_chemistry_7"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_lvl_10_chemistry",
+    "category": "Skills",
+    "art": "achievement_lvl_10_chemistry",
+    "choices": [
+      {
+        "name": "Masterwork Alchemist chemistry kit",
+        "items": [
+          {
+            "item": "astral_skill_chemistry_10"
+          }
+        ],
+        "credits": {
+          "perk_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_witnessed_portal_storm",
+    "category": "Milestones",
+    "art": "achievement_witnessed_portal_storm",
+    "choices": [
+      {
+        "name": "After the storm",
+        "items": [
+          {
+            "item": "astral_keepsake_stormglass"
+          }
+        ],
+        "credits": {
+          "fresh_start": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "escaped_the_cataclysm",
+    "category": "Milestones",
+    "art": "escaped_the_cataclysm",
+    "choices": [
+      {
+        "name": "Last Word",
+        "items": [
+          {
+            "item": "astral_last_word"
+          },
+          {
+            "item": "astral_keepsake_survivor"
+          }
+        ],
+        "credits": {
+          "complete_recovery": 1,
+          "playstyle_point": 1
+        }
+      },
+      {
+        "name": "Last Stand",
+        "items": [
+          {
+            "item": "astral_last_stand"
+          },
+          {
+            "item": "astral_keepsake_survivor"
+          }
+        ],
+        "credits": {
+          "complete_recovery": 1,
+          "playstyle_point": 1
+        }
+      },
+      {
+        "name": "Last Light",
+        "items": [
+          {
+            "item": "astral_last_light"
+          },
+          {
+            "item": "astral_keepsake_survivor"
+          }
+        ],
+        "credits": {
+          "complete_recovery": 1,
+          "playstyle_point": 1
+        }
+      },
+      {
+        "name": "Final Answer",
+        "items": [
+          {
+            "item": "astral_legend_pistol",
+            "charges": 1
+          },
+          {
+            "item": "astral_keepsake_survivor"
+          }
+        ],
+        "credits": {
+          "complete_recovery": 1,
+          "playstyle_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_officer_kill",
+    "category": "Milestones",
+    "art": "achievement_officer_kill",
+    "choices": [
+      {
+        "name": "Officer equipment",
+        "items": [
+          {
+            "item": "glock_19",
+            "charges": 1
+          },
+          {
+            "item": "9mm",
+            "charges": 50
+          }
+        ],
+        "credits": {
+          "field_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_arcade_mode",
+    "category": "Milestones",
+    "art": "achievement_arcade_mode",
+    "choices": [
+      {
+        "name": "One more game",
+        "items": [
+          {
+            "item": "mp3",
+            "charges": 50
+          }
+        ],
+        "credits": {
+          "fresh_start": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_exodii_base",
+    "category": "Discovery",
+    "art": "achievement_reach_exodii_base",
+    "choices": [
+      {
+        "name": "Exodii maintenance kit",
+        "items": [
+          {
+            "item": "soldering_iron"
+          },
+          {
+            "item": "screwdriver"
+          },
+          {
+            "item": "pliers"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_balthazar",
+    "category": "Discovery",
+    "art": "achievement_reach_balthazar",
+    "choices": [
+      {
+        "name": "Bunker repair kit",
+        "items": [
+          {
+            "item": "electrohack"
+          },
+          {
+            "item": "copper_wire",
+            "count": 10
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_hub01",
+    "category": "Discovery",
+    "art": "achievement_reach_hub01",
+    "choices": [
+      {
+        "name": "Hub electronics kit",
+        "items": [
+          {
+            "item": "soldering_iron"
+          },
+          {
+            "item": "medium_battery_cell",
+            "count": 3,
+            "charges": 56
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_new_england_church_retreat",
+    "category": "Discovery",
+    "art": "achievement_reach_new_england_church_retreat",
+    "choices": [
+      {
+        "name": "Quiet refuge",
+        "items": [
+          {
+            "item": "blanket"
+          }
+        ],
+        "credits": {
+          "fresh_start": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_isherwood_farms",
+    "category": "Discovery",
+    "art": "achievement_reach_isherwood_farms",
+    "choices": [
+      {
+        "name": "Farming parcel",
+        "items": [
+          {
+            "item": "seed_beans",
+            "count": 10
+          },
+          {
+            "item": "seed_corn",
+            "count": 10
+          },
+          {
+            "item": "seed_carrot",
+            "count": 10
+          },
+          {
+            "item": "fertilizer_commercial",
+            "count": 10
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_aircraft_carrier",
+    "category": "Discovery",
+    "art": "achievement_reach_aircraft_carrier",
+    "choices": [
+      {
+        "name": "Flight deck kit",
+        "items": [
+          {
+            "item": "binoculars"
+          },
+          {
+            "item": "hat_hard"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_nuclear_plant",
+    "category": "Discovery",
+    "art": "achievement_reach_nuclear_plant",
+    "choices": [
+      {
+        "name": "Radiation survey kit",
+        "items": [
+          {
+            "item": "geiger_off"
+          },
+          {
+            "item": "gloves_medical",
+            "count": 2
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_island_prison",
+    "category": "Discovery",
+    "art": "achievement_reach_island_prison",
+    "choices": [
+      {
+        "name": "Breakout supplies",
+        "items": [
+          {
+            "item": "boltcutters"
+          },
+          {
+            "item": "rope_30"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_mi-Go_encampment",
+    "category": "Discovery",
+    "art": "achievement_reach_mi-Go_encampment",
+    "choices": [
+      {
+        "name": "Rescue reserve",
+        "items": [
+          {
+            "item": "bandages",
+            "count": 10
+          }
+        ],
+        "credits": {
+          "field_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_trans_coast_lab",
+    "category": "Discovery",
+    "art": "achievement_reach_trans_coast_lab",
+    "choices": [
+      {
+        "name": "Laboratory cache",
+        "items": [
+          {
+            "item": "goggles_chem"
+          },
+          {
+            "item": "astral_research_light",
+            "charges": 168
+          },
+          {
+            "item": "disinfectant",
+            "charges": 10
+          }
+        ],
+        "credits": {
+          "nourished": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_bastion_fort",
+    "category": "Discovery",
+    "art": "achievement_reach_bastion_fort",
+    "choices": [
+      {
+        "name": "Bastion armory",
+        "items": [
+          {
+            "item": "astral_shield_kite"
+          },
+          {
+            "item": "spear_steel"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_military_base",
+    "category": "Discovery",
+    "art": "achievement_reach_military_base",
+    "choices": [
+      {
+        "name": "Field equipment",
+        "items": [
+          {
+            "item": "binoculars"
+          },
+          {
+            "item": "bandages",
+            "count": 10
+          }
+        ],
+        "credits": {
+          "field_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_military_bunker",
+    "category": "Discovery",
+    "art": "achievement_reach_military_bunker",
+    "choices": [
+      {
+        "name": "Bunker equipment",
+        "items": [
+          {
+            "item": "flashlight",
+            "charges": 56
+          },
+          {
+            "item": "medium_battery_cell",
+            "count": 2,
+            "charges": 56
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_triffid_grove",
+    "category": "Discovery",
+    "art": "achievement_reach_triffid_grove",
+    "choices": [
+      {
+        "name": "Grove-clearing supplies",
+        "items": [
+          {
+            "item": "machete"
+          },
+          {
+            "item": "gloves_light"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_megastore",
+    "category": "Discovery",
+    "art": "achievement_reach_megastore",
+    "choices": [
+      {
+        "name": "Stockroom cache (plant food)",
+        "items": [
+          {
+            "item": "astral_homesteader"
+          },
+          {
+            "item": "protein_bar_zero",
+            "count": 6
+          }
+        ],
+        "credits": {}
+      },
+      {
+        "name": "Stockroom cache (meat food)",
+        "items": [
+          {
+            "item": "astral_homesteader"
+          },
+          {
+            "item": "jerky",
+            "count": 6
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_hospital",
+    "category": "Discovery",
+    "art": "achievement_reach_hospital",
+    "choices": [
+      {
+        "name": "Triage cache",
+        "items": [
+          {
+            "item": "bandages",
+            "count": 12
+          },
+          {
+            "item": "disinfectant",
+            "charges": 10
+          }
+        ],
+        "credits": {
+          "field_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_mid_z_level",
+    "category": "Travel",
+    "art": "achievement_reach_mid_z_level",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "rope_30"
+          },
+          {
+            "item": "flashlight",
+            "charges": 56
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_negative_z_level",
+    "category": "Travel",
+    "art": "achievement_reach_negative_z_level",
+    "choices": [
+      {
+        "name": "Road and trail supplies",
+        "items": [
+          {
+            "item": "rope_30"
+          },
+          {
+            "item": "flashlight",
+            "charges": 56
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_fungal_tower",
+    "category": "Discovery",
+    "art": "achievement_reach_fungal_tower",
+    "choices": [
+      {
+        "name": "Decontamination supplies",
+        "items": [
+          {
+            "item": "mask_gas"
+          },
+          {
+            "item": "gasfilter_m",
+            "charges": 100
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_mansion",
+    "category": "Discovery",
+    "art": "achievement_reach_mansion",
+    "choices": [
+      {
+        "name": "Housewarming parcel",
+        "items": [
+          {
+            "item": "oil_lamp",
+            "charges": 750
+          },
+          {
+            "item": "blanket"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_mine",
+    "category": "Discovery",
+    "art": "achievement_reach_mine",
+    "choices": [
+      {
+        "name": "Delver's kit",
+        "items": [
+          {
+            "item": "hat_hard"
+          },
+          {
+            "item": "flashlight",
+            "charges": 56
+          },
+          {
+            "item": "rope_30"
+          },
+          {
+            "item": "medium_battery_cell",
+            "count": 2,
+            "charges": 56
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_police_station",
+    "category": "Discovery",
+    "art": "achievement_reach_police_station",
+    "choices": [
+      {
+        "name": "Patrol equipment",
+        "items": [
+          {
+            "item": "astral_shield_riot"
+          },
+          {
+            "item": "glock_19",
+            "charges": 1
+          },
+          {
+            "item": "9mm",
+            "charges": 30
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_read_books_250",
+    "category": "Knowledge",
+    "art": "achievement_read_books_250",
+    "choices": [
+      {
+        "name": "Reading light",
+        "items": [
+          {
+            "item": "flashlight",
+            "charges": 56
+          },
+          {
+            "item": "medium_battery_cell",
+            "count": 2,
+            "charges": 56
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_read_books_500",
+    "category": "Knowledge",
+    "art": "achievement_read_books_500",
+    "choices": [
+      {
+        "name": "Clear lenses",
+        "items": [
+          {
+            "item": "astral_archivist_plain"
+          }
+        ],
+        "credits": {}
+      },
+      {
+        "name": "Nearsight correction",
+        "items": [
+          {
+            "item": "astral_archivist_near"
+          }
+        ],
+        "credits": {}
+      },
+      {
+        "name": "Farsight correction",
+        "items": [
+          {
+            "item": "astral_archivist_far"
+          }
+        ],
+        "credits": {}
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_read_books_1000",
+    "category": "Knowledge",
+    "art": "achievement_read_books_1000",
+    "choices": [
+      {
+        "name": "Archivist's legacy",
+        "items": [],
+        "credits": {
+          "reading_desk_plans": 1,
+          "perk_point": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_break_3_bones",
+    "category": "Milestones",
+    "art": "achievement_break_3_bones",
+    "choices": [
+      {
+        "name": "Boneknit reserve",
+        "items": [],
+        "credits": {
+          "boneknit": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_break_6_bones",
+    "category": "Milestones",
+    "art": "achievement_break_6_bones",
+    "choices": [
+      {
+        "name": "Recovery reserve",
+        "items": [
+          {
+            "item": "astral_recovery_quilt"
+          }
+        ],
+        "credits": {
+          "boneknit": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_break_10_bones",
+    "category": "Milestones",
+    "art": "achievement_break_10_bones",
+    "choices": [
+      {
+        "name": "Back together",
+        "items": [],
+        "credits": {
+          "complete_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_heal_250_damage",
+    "category": "Milestones",
+    "art": "achievement_heal_250_damage",
+    "choices": [
+      {
+        "name": "Recovery kit",
+        "items": [
+          {
+            "item": "bandages",
+            "count": 6
+          }
+        ],
+        "credits": {
+          "field_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_heal_1000_damage",
+    "category": "Milestones",
+    "art": "achievement_heal_1000_damage",
+    "choices": [
+      {
+        "name": "Seasoned recovery",
+        "items": [],
+        "credits": {
+          "field_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_heal_2500_damage",
+    "category": "Milestones",
+    "art": "achievement_heal_2500_damage",
+    "choices": [
+      {
+        "name": "Veteran recovery",
+        "items": [
+          {
+            "item": "astral_recovery_quilt"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_heal_5000_damage",
+    "category": "Milestones",
+    "art": "achievement_heal_5000_damage",
+    "choices": [
+      {
+        "name": "Hardened reserve",
+        "items": [],
+        "credits": {
+          "complete_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_LIXA",
+    "category": "Discovery",
+    "art": "achievement_reach_LIXA",
+    "choices": [
+      {
+        "name": "Science expedition cache",
+        "items": [
+          {
+            "item": "chemistry_set"
+          },
+          {
+            "item": "goggles_chem"
+          }
+        ],
+        "credits": {
+          "nourished": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_highlands",
+    "category": "Discovery",
+    "art": "achievement_reach_highlands",
+    "choices": [
+      {
+        "name": "Highland expedition",
+        "items": [
+          {
+            "item": "astral_trailwalker"
+          },
+          {
+            "item": "astral_restkeeper_roll"
+          }
+        ],
+        "credits": {
+          "second_wind": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_string_dimension",
+    "category": "Discovery",
+    "art": "achievement_reach_string_dimension",
+    "choices": [
+      {
+        "name": "Threads of home",
+        "items": [
+          {
+            "item": "astral_homesteader"
+          }
+        ],
+        "credits": {
+          "complete_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_LIXA_finale",
+    "category": "Milestones",
+    "art": "achievement_LIXA_finale",
+    "choices": [
+      {
+        "name": "Research triumph",
+        "items": [
+          {
+            "item": "chemistry_set"
+          },
+          {
+            "item": "goggles_chem"
+          }
+        ],
+        "credits": {
+          "complete_recovery": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_exodii_hub_autodoc_death",
+    "category": "Milestones",
+    "art": "achievement_exodii_hub_autodoc_death",
+    "choices": [
+      {
+        "name": "The hidden cost",
+        "items": [
+          {
+            "item": "astral_keepsake_autodoc"
+          }
+        ],
+        "credits": {
+          "fresh_start": 1
+        }
+      }
+    ]
+  },
+  {
+    "type": "achievement_reward",
+    "achievement": "achievement_reach_labyrinth",
+    "category": "Discovery",
+    "art": "achievement_reach_labyrinth",
+    "choices": [
+      {
+        "name": "Way out",
+        "items": [
+          {
+            "item": "binoculars"
+          },
+          {
+            "item": "astral_wayfarer_flask"
+          }
+        ],
+        "credits": {
+          "fresh_start": 1
+        }
       }
     ]
   }

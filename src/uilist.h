@@ -564,12 +564,20 @@ class uilist_impl : public cataimgui::window
                     ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse |
                     ImGuiWindowFlags_NoNavInputs ),
             parent( parent ) {
+#if defined(TILES)
+            // Untitled menus: light popup frame, no title bar.
+            set_shell( 2, nullptr, false );
+#endif
         }
 
         uilist_impl( uilist &parent, const std::string &title ) : cataimgui::window( title,
                     ImGuiWindowFlags_None | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse |
                     ImGuiWindowFlags_NoNavInputs ),
             parent( parent ) {
+#if defined(TILES)
+            // Titled menus use the shared Astral dialog shell (frame, title, close).
+            set_shell( 1 );
+#endif
         }
 
         cataimgui::bounds get_bounds() override {

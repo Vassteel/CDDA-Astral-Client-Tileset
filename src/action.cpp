@@ -417,6 +417,18 @@ std::string action_ident( action_id act )
             return "SEC_SELECT";
         case ACTION_CLICK_AND_DRAG:
             return "CLICK_AND_DRAG";
+        case ACTION_COMBAT_MENU:
+            return "combat_menu";
+        case ACTION_COMBAT_ATTACK:
+            return "combat_attack";
+        case ACTION_COMBAT_GUARD:
+            return "combat_guard";
+        case ACTION_COMBAT_EVADE:
+            return "combat_evade";
+        case ACTION_COMBAT_BASH:
+            return "combat_bash";
+        case ACTION_COMBAT_RECOVER:
+            return "combat_recover";
         case ACTION_AUTOATTACK:
             return "autoattack";
         case ACTION_MAIN_MENU:
@@ -1068,7 +1080,12 @@ action_id handle_tile_context_menu( map &here, const tripoint_bub_ms &p )
                 }
                 const int dist_xy = square_dist( p.xy(), player_pos.xy() );
                 if( dist_xy <= reach ) {
-                    entries.emplace_back( ATTACK_CREATURE, true, 0, _( "Attack" ) );
+                    if( get_option<bool>( "TACTICAL_COMBAT" ) &&
+                        player_character.is_adjacent( critter, false ) ) {
+                        add_action( ACTION_COMBAT_MENU, _( "Select combat target" ) );
+                    } else {
+                        entries.emplace_back( ATTACK_CREATURE, true, 0, _( "Attack" ) );
+                    }
                 }
             }
         }
@@ -1553,6 +1570,13 @@ action_id handle_action_menu( map &here )
             REGISTER_ACTION( ACTION_THROW_WIELDED );
             REGISTER_ACTION( ACTION_FIRE_BURST );
             REGISTER_ACTION( ACTION_PICK_STYLE );
+            REGISTER_ACTION( ACTION_COMBAT_MENU );
+            REGISTER_ACTION( ACTION_COMBAT_ATTACK );
+            REGISTER_ACTION( ACTION_COMBAT_GUARD );
+            REGISTER_ACTION( ACTION_COMBAT_EVADE );
+            REGISTER_ACTION( ACTION_COMBAT_BASH );
+            REGISTER_ACTION( ACTION_COMBAT_RECOVER );
+
             REGISTER_ACTION( ACTION_TOGGLE_AUTO_TRAVEL_MODE );
             REGISTER_ACTION( ACTION_TOGGLE_SAFEMODE );
             REGISTER_ACTION( ACTION_TOGGLE_AUTOSAFE );

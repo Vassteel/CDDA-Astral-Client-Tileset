@@ -1,0 +1,51 @@
+[
+  {
+    "type": "furniture",
+    "id": "f_astral_archivist_desk",
+    "copy-from": "f_workbench",
+    "name": "Archivist's desk",
+    "description": "A folding study desk with a carefully fitted work surface.",
+    "item": "astral_archivist_desk",
+    "deployed_item": "astral_archivist_desk",
+    "mass": "12 kg",
+    "workbench": {
+      "multiplier": 1.3,
+      "mass": "500 kg",
+      "volume": "200 L"
+    }
+  },
+  {
+    "type": "recipe",
+    "result": "astral_archivist_desk",
+    "copy-from": "workbench",
+    "autolearn": false,
+    "book_learn": [],
+    "decomp_learn": [],
+    "components": [
+      [
+        [
+          "pipe",
+          8
+        ]
+      ],
+      [
+        [
+          "sheet_metal",
+          2
+        ]
+      ],
+      [
+        [
+          "sheet_metal_small",
+          4
+        ]
+      ],
+      [
+        [
+          "pipe_fittings",
+          4
+        ]
+      ]
+    ]
+  }
+]

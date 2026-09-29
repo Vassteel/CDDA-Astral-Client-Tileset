@@ -1,3 +1,4 @@
+#include "tactical_combat.h"
 #include "monster.h"
 
 #include <algorithm>
@@ -2245,7 +2246,11 @@ bool monster::melee_attack( Creature &target, float accuracy )
         return false;
     }
 
-    const int monster_hit_roll = melee::melee_hit_range( accuracy );
+    bool heavy_strike = false;
+    if( tactical_combat::prepare_monster_strike( *this, target, heavy_strike ) ) {
+        return true;
+    }
+    const int monster_hit_roll = melee::melee_hit_range( accuracy * ( heavy_strike ? 0.85f : 1.0f ) );
     int hitspread = target.deal_melee_attack( this, monster_hit_roll );
     if( type->melee_dice == 0 ) {
         // We don't hit, so just return
@@ -2272,6 +2277,10 @@ bool monster::melee_attack( Creature &target, float accuracy )
         damage.add_damage( damage_bash, dice( type->melee_dice, type->melee_sides ), type->melee_dice_ap );
     }
 
+    if( heavy_strike ) {
+        damage.mult_damage( 1.5f );
+        mod_moves( -type->attack_cost / 2 );
+    }
     modify_damage_dealt_with_enchantments( damage );
 
     dealt_damage_instance dealt_dam;

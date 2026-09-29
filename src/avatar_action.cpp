@@ -1,3 +1,4 @@
+#include "tactical_combat.h"
 #include "avatar_action.h"
 
 #include <algorithm>
@@ -823,10 +824,7 @@ static bool auto_combat_is_hostile( const avatar &you, const Creature &c )
     if( c.is_npc() ) {
         return dynamic_cast<const npc &>( c ).is_enemy();
     }
-    // Monsters already exclude FRIENDLY in get_targetable_creatures; keep hostiles + neutrals
-    // that vanilla autoattack would still swing at (same filter as autoattack for non-NPC).
-    static_cast<void>( you );
-    return true;
+    return c.attitude_to( you ) == Creature::Attitude::HOSTILE;
 }
 
 namespace
@@ -859,6 +857,12 @@ bool avatar_action::auto_combat( avatar &you, map &m )
         return false;
     }
 
+    if( you.get_stamina() * 100 < you.get_stamina_max() * 15 ||
+        you.get_part_hp_cur( bodypart_id( "head" ) ) * 100 < you.get_part_hp_max( bodypart_id( "head" ) ) * 35 ||
+        you.get_part_hp_cur( bodypart_id( "torso" ) ) * 100 < you.get_part_hp_max( bodypart_id( "torso" ) ) * 35 ) {
+        combat_status = _( "Paused: low health or stamina" );
+        return false;
+    }
     const int moves_before = you.get_moves();
     const item_location weapon = you.get_wielded_item();
     const int melee_reach = weapon ? weapon->reach_range( you ).first : std::max( 1,
@@ -882,8 +886,21 @@ bool avatar_action::auto_combat( avatar &you, map &m )
     if( !melee.empty() ) {
         // Vanilla path: adjacent move-attack or reach_attack → melee_attack → pick_technique
         // (style + weapon + worn armor).  Defensive techniques stay on the normal hit path.
+        Creature *target = *std::min_element( melee.begin(), melee.end(), [&you]( Creature * a, Creature * b ) {
+            return rl_dist( you.pos_bub(), a->pos_bub() ) < rl_dist( you.pos_bub(), b->pos_bub() );
+        } );
+        if( get_option<bool>( "TACTICAL_COMBAT" ) && you.is_adjacent( target, false ) ) {
+            const tactical_combat::action choice = tactical_combat::choose_auto_action(
+                    you, *target, get_option<std::string>( "AUTO_COMBAT_PROFILE" ) );
+            combat_status = tactical_combat::name( choice );
+            return tactical_combat::execute( you, choice, target );
+        }
         combat_status = _( "Attacking" );
-        autoattack( you, m );
+        if( you.is_adjacent( target, false ) ) {
+            you.melee_attack( *target, true );
+        } else {
+            you.reach_attack( target->pos_bub() );
+        }
         return you.get_moves() < moves_before;
     }
 
@@ -892,6 +909,11 @@ bool avatar_action::auto_combat( avatar &you, map &m )
         return false;
     }
 
+    if( !get_option<bool>( "AUTO_COMBAT_RANGED" ) ) {
+        combat_status = _( "Paused: automatic ammunition use is disabled" );
+        return false;
+    }
+    tactical_combat::clear_defense( you );
     const gun_mode mode = weapon->gun_current_mode();
     if( !mode || mode.melee() ) {
         return false;

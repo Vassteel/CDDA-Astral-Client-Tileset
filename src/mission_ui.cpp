@@ -78,6 +78,7 @@ class mission_ui_impl : public cataimgui::window
         std::string last_action;
         explicit mission_ui_impl() : cataimgui::window( _( "Your missions" ),
                     ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoNav ) {
+            set_shell( 0, "star" );
         }
 
     private:

@@ -45,6 +45,10 @@ class query_popup_impl : public cataimgui::window
             default_text_color( c_white ) {
             msg_width = 400;
             this->parent = parent;
+#if defined(TILES)
+            // Frame-only Astral shell (no title bar): prompts keep their text as the heading.
+            set_shell( 2, nullptr, false );
+#endif
             keyboard_selected_option = 0;
             last_keyboard_selected_option = -1;
             mouse_selected_option = -1;
