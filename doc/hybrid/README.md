@@ -9,24 +9,29 @@ Two independent downloads, maintained in one public Cataclysm: Dark Days Ahead f
 
 ## Client updates
 
-Run `Update Astral Client.sh` from an extracted client distribution. Python 3 and Zenity provide the updater; command-line use does not require Zenity. Public downloads work without signing in. An existing authenticated `gh` installation is used when available.
+On Linux and SteamOS, run `Update Astral Client.sh` from an extracted client distribution; `Rollback Astral Client.sh` restores the version you had before the last update. They need Python 3 and Zenity or kdialog (SteamOS desktop mode includes both); without either, run them from a terminal for text prompts. Public downloads work without signing in. An authenticated `gh` installation is used only as a fallback, for example when GitHub's anonymous rate limit is reached.
 
-On Windows, extract the entire ZIP and run `Launch Astral Client.cmd`. Use `Update Astral Client.cmd` for updates and `Rollback Astral Client.cmd` to restore the previous updater-managed version. These use Windows PowerShell 5.1, included with Windows 10/11; Python is not needed. Windows backups are stored beside the installation in `.<folder-name>-updates`.
+On Windows, extract the entire ZIP and run `Launch Astral Client.cmd`. Use `Update Astral Client.cmd` for updates and `Rollback Astral Client.cmd` to restore the previous updater-managed version. These use Windows PowerShell 5.1, included with Windows 10/11; Python is not needed.
 
-The updater only follows `client-v…` releases. Tileset releases use `tileset-v…` and never trigger a client update. Downloading while playing is supported; installation and rollback require the game to be closed. It never stops the game.
+Both updaters show the installed and new versions, a download progress bar with Cancel, and retry brief network failures. They never offer an older release than the one installed. Downloading while playing is supported: the verified download is kept and installed the next time you run the updater after quitting, without downloading again. Installation and rollback require the game to be closed; the updater never stops the game.
 
-Current update archives replace the executable and optional title image only. They verify every file's SHA-256 before installation, retain an external backup, and preserve saves, settings, mods and tilesets. Runtime/data changes require a new full client distribution. The updater identifies those releases and directs you to the full download instead of selecting an older executable-only patch. Keep the updater state directory and backups if you want rollback.
+The updater only follows `client-v…` releases. Tileset releases use `tileset-v…` and never trigger a client update.
+
+Current update archives replace the executable and optional title image only. They verify every file's SHA-256 before installation, retain an external backup, and preserve saves, settings, mods and tilesets. Runtime/data changes require a new full client distribution. The updater identifies those releases and offers to open the download page instead of selecting an older executable-only patch.
+
+Backups and downloads are stored beside the installation in `.<folder-name>-updates`, so several extracted clients in one folder no longer share state. A Linux client that already has history in the older shared `hybrid-updates` folder keeps using it. Finished downloads, and backups that rollback can no longer reach, are removed automatically; backups from an interrupted installation are kept for recovery. Keep the updates folder if you want rollback.
 
 From this source checkout:
 
 ```sh
+python3 tools/hybrid-updater/updater.py status
 python3 tools/hybrid-updater/updater.py check
 python3 tools/hybrid-updater/updater.py download
 python3 tools/hybrid-updater/updater.py apply --package /path/to/Astral-Client-linux-update.zip
 python3 tools/hybrid-updater/updater.py rollback
 ```
 
-Pass `--client /path/to/client` and optionally `--state /path/outside/client` for another installation. Backups default to `hybrid-updates` beside the client. Do not launch CDDA during installation. File replacements are atomic; a normal I/O error restores already-replaced files. An OS crash/power loss during a multi-file operation can require recovery from the retained backup.
+Pass `--client /path/to/client` and optionally `--state /path/outside/client` for another installation. The Windows script accepts `-Action Status|Check|Download|Apply|Rollback` with `-ClientDirectory`, `-StateDirectory` and `-Package`. Do not launch CDDA during installation. File replacements are atomic; a normal I/O error restores already-replaced files. An OS crash/power loss during a multi-file operation can require recovery from the retained backup.
 
 ## Controls and diagnostics
 

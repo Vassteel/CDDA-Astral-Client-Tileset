@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verified, reversible Linux updates for the Hybrid client (standard library only)."""
+"""Verified, reversible Linux/SteamOS updates for the Astral Client (standard library only)."""
 import argparse
 import contextlib
 import fcntl
@@ -14,11 +14,15 @@ import subprocess
 import sys
 import tempfile
 import time
+import urllib.error
 import urllib.request
 import zipfile
 
 LIMIT = 512 * 1024 * 1024
 REPOSITORY = "Vassteel/CDDA-Astral-Client-Tileset"
+USER_AGENT = "Astral-Client-Updater"
+TITLE = "Astral Client Update"
+RETRIES = 3
 
 class UpdateError(Exception):
     pass
@@ -148,8 +152,84 @@ def atomic_copy(source, target, mode):
 def write_json(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(".tmp")
-    temporary.write_text(json.dumps(value, indent=2) + "\n")
+    with open(temporary, "w") as out:
+        out.write(json.dumps(value, indent=2) + "\n")
+        out.flush()
+        os.fsync(out.fileno())
     os.replace(temporary, path)
+
+def parse_version(tag):
+    """client-v0.1.2 -> (0, 1, 2); None when the tag is not a client version."""
+    match = re.fullmatch(r"client-v(\d+(?:\.\d+)*)", tag or "")
+    return tuple(int(x) for x in match.group(1).split(".")) if match else None
+
+def is_current(installed, latest):
+    """Never offer a downgrade: a newer local build counts as up to date."""
+    have, want = parse_version(installed), parse_version(latest)
+    if have is None or want is None:
+        return installed == latest
+    return have >= want
+
+def default_state(client):
+    """Per-installation state beside the client, like the Windows updater.
+
+    Older releases shared "hybrid-updates" between every client in a folder,
+    which blocked a newly extracted full download. Keep using it only when it
+    already belongs to this installation so rollback history is not lost."""
+    legacy = client.parent / "hybrid-updates"
+    with contextlib.suppress(OSError, ValueError, KeyError, TypeError):
+        if json.loads((legacy / "installed.json").read_text())["client"] == str(client):
+            return legacy
+    return client.parent / f".{client.name}-updates"
+
+def installed_version(client, state):
+    """The verified version of the current files, or None when unknown/modified."""
+    marker = state / "installed.json"
+    if marker.is_file():
+        info = json.loads(marker.read_text())
+        if info.get("client") == str(client):
+            try:
+                if all(digest(destination(client, f["path"])) == f["sha256"] for f in info.get("files", [])):
+                    return info.get("version")
+            except (OSError, UpdateError):
+                pass
+            return None
+    version_file = client / "VERSION.json"
+    if version_file.is_file():
+        info = json.loads(version_file.read_text())
+        if info.get("version") and (client / "cataclysm-tiles").is_file() and info.get("executable_sha256") == digest(client / "cataclysm-tiles"):
+            return "client-v" + info["version"]
+    return None
+
+def rollback_chain(state):
+    """Backups still reachable from installed.json through previous installs."""
+    chain = set()
+    marker = state / "installed.json"
+    current = json.loads(marker.read_text()) if marker.exists() else None
+    while current and current.get("backup") and current["backup"] not in chain:
+        chain.add(current["backup"])
+        try:
+            current = json.loads((Path(current["backup"]) / "backup.json").read_text()).get("previous_install")
+        except (OSError, ValueError):
+            break
+    return chain
+
+def prune(state, keep=None):
+    """Remove finished downloads and backups rollback can no longer reach.
+
+    Backups of an interrupted install ("prepared") are always kept for manual
+    recovery, as is every backup in the rollback chain."""
+    for staged in [*state.glob("release-*.zip"), *state.glob("release-*.download")]:
+        if keep is None or staged.resolve() != Path(keep).resolve():
+            staged.unlink(missing_ok=True)
+    chain = rollback_chain(state)
+    for backup in (state / "backups").glob("*") if (state / "backups").is_dir() else []:
+        try:
+            status = json.loads((backup / "backup.json").read_text()).get("status")
+        except (OSError, ValueError):
+            continue
+        if status in ("rolled-back", "failed-restored") and str(backup) not in chain:
+            shutil.rmtree(backup, ignore_errors=True)
 
 @contextlib.contextmanager
 def locked(state):
@@ -272,16 +352,37 @@ def gh_binary():
     candidates = sorted((Path.home() / ".local/share/cdda-tools").glob("gh_*/bin/gh"))
     return str(candidates[-1]) if candidates else None
 
+def http_open(url, accept="application/vnd.github+json"):
+    """Open a GitHub URL, retrying transient network and server errors."""
+    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": accept})
+    for attempt in range(RETRIES):
+        try:
+            return urllib.request.urlopen(request, timeout=60)
+        except urllib.error.HTTPError as error:
+            if error.code == 403 and error.headers.get("X-RateLimit-Remaining") == "0":
+                raise UpdateError("GitHub's hourly download-check limit was reached. Try again later.") from error
+            if error.code < 500 or attempt == RETRIES - 1:
+                raise UpdateError(f"GitHub returned HTTP {error.code} for {url}") from error
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as error:
+            if attempt == RETRIES - 1:
+                raise UpdateError("Could not reach GitHub. Check your internet connection and try again.") from error
+        time.sleep(2 ** attempt)
+
 def github_json(repo, suffix):
-    gh = gh_binary()
+    # Public releases need no sign-in. An authenticated gh is only a fallback
+    # (rate limits, private forks) so a logged-out gh never blocks updates.
     endpoint = f"repos/{repo}/{suffix}"
-    if gh:
+    try:
+        with http_open("https://api.github.com/" + endpoint) as response:
+            return json.load(response)
+    except UpdateError:
+        gh = gh_binary()
+        if not gh:
+            raise
         result = subprocess.run([gh, "api", endpoint], capture_output=True, text=True, timeout=60)
         if result.returncode:
-            raise UpdateError("GitHub request failed. Check your gh login and repository access.")
+            raise
         return json.loads(result.stdout)
-    with urllib.request.urlopen("https://api.github.com/" + endpoint, timeout=60) as response:
-        return json.load(response)
 
 def check(repo):
     # Tilesets have independent releases. Never mistake a newer art package for
@@ -296,7 +397,20 @@ def check(repo):
         return {"version": release["tag_name"], "url": release["html_url"], "asset": assets[0]}
     raise UpdateError("No supported Astral Client release is available yet")
 
-def download(repo, release, state):
+def verify_download(path, release):
+    asset = release["asset"]
+    if path.stat().st_size != asset["size"]:
+        raise UpdateError("Incomplete release download")
+    expected = asset.get("digest")
+    if expected and expected.startswith("sha256:") and digest(path) != expected[7:]:
+        raise UpdateError("Release archive checksum mismatch")
+    if inspect_package(path)["version"] != release["version"]:
+        raise UpdateError("Release/package version mismatch")
+
+def download(repo, release, state, progress=None):
+    """Download and verify the update, reusing an already staged copy.
+
+    progress(done, total) is called while downloading; it may raise to cancel."""
     if release.get("full_download_required"):
         raise UpdateError(f"{release['version']} requires the full client download: {release['url']}")
     state.mkdir(parents=True, exist_ok=True)
@@ -305,91 +419,213 @@ def download(repo, release, state):
     if not isinstance(asset["id"], int):
         raise UpdateError("Invalid release asset")
     target = state / f"release-{asset['id']}.zip"
+    if target.is_file():
+        # Staged earlier (e.g. while the game was running): no second download.
+        try:
+            verify_download(target, release)
+            return target
+        except (UpdateError, OSError, ValueError, KeyError, zipfile.BadZipFile):
+            target.unlink(missing_ok=True)
     temporary = target.with_suffix(".download")
-    gh = gh_binary()
+    url = asset["browser_download_url"]
+    if not url.startswith(f"https://github.com/{repo}/releases/download/"):
+        raise UpdateError("Unexpected release download URL")
     try:
-        with open(temporary, "wb") as out:
-            if gh:
+        try:
+            with open(temporary, "wb") as out, http_open(url, "application/octet-stream") as source:
+                total = 0
+                while chunk := source.read(1024 * 1024):
+                    total += len(chunk)
+                    if total > LIMIT:
+                        raise UpdateError("Download exceeds size limit")
+                    out.write(chunk)
+                    if progress:
+                        progress(total, asset["size"])
+        except (UpdateError, OSError) as error:
+            gh = gh_binary()
+            if not gh or (isinstance(error, UpdateError) and str(error) == "Download exceeds size limit"):
+                raise
+            with open(temporary, "wb") as out:
                 result = subprocess.run([gh, "api", "-H", "Accept: application/octet-stream", f"repos/{repo}/releases/assets/{asset['id']}"], stdout=out, stderr=subprocess.PIPE, timeout=600)
-                if result.returncode:
-                    raise UpdateError("Release download failed")
-            else:
-                url = asset["browser_download_url"]
-                if not url.startswith(f"https://github.com/{repo}/releases/download/"):
-                    raise UpdateError("Unexpected release download URL")
-                with urllib.request.urlopen(url, timeout=60) as source:
-                    total = 0
-                    while chunk := source.read(1024 * 1024):
-                        total += len(chunk)
-                        if total > LIMIT:
-                            raise UpdateError("Download exceeds size limit")
-                        out.write(chunk)
-        if temporary.stat().st_size != asset["size"]:
-            raise UpdateError("Incomplete release download")
-        expected = asset.get("digest")
-        if expected and expected.startswith("sha256:") and digest(temporary) != expected[7:]:
-            raise UpdateError("Release archive checksum mismatch")
-        manifest = inspect_package(temporary)
-        if manifest["version"] != release["version"]:
-            raise UpdateError("Release/package version mismatch")
+            if result.returncode:
+                raise
+        verify_download(temporary, release)
         os.replace(temporary, target)
         return target
     finally:
         temporary.unlink(missing_ok=True)
 
+class Cancelled(Exception):
+    pass
+
+class Dialogs:
+    """Zenity (SteamOS, GNOME), kdialog (KDE) or a terminal, in that order."""
+
+    def __init__(self):
+        self.kind = "zenity" if shutil.which("zenity") else "kdialog" if shutil.which("kdialog") else "terminal" if sys.stdin.isatty() else None
+        if self.kind is None:
+            raise UpdateError("The graphical updater needs zenity or kdialog. Run it from a terminal or use the check/download/apply commands.")
+
+    def _run(self, zenity, kdialog):
+        return subprocess.run(["zenity", f"--title={TITLE}", "--width=420", *zenity] if self.kind == "zenity" else ["kdialog", "--title", TITLE, *kdialog]).returncode
+
+    def info(self, text):
+        if self.kind == "terminal":
+            print(text)
+        else:
+            self._run(["--info", "--text", text], ["--msgbox", text])
+
+    def error(self, text):
+        if self.kind == "terminal":
+            print(text, file=sys.stderr)
+        else:
+            self._run(["--error", "--text", text], ["--error", text])
+
+    def question(self, text, yes="Yes", no="No"):
+        if self.kind == "terminal":
+            try:
+                return input(f"{text}\n[y/N] ").strip().lower() in ("y", "yes")
+            except EOFError:
+                return False
+        return self._run(["--question", "--text", text, f"--ok-label={yes}", f"--cancel-label={no}"],
+                         ["--yesno", text, "--yes-label", yes, "--no-label", no]) == 0
+
+    @contextlib.contextmanager
+    def progress(self, text):
+        """Yield progress(done, total); raises Cancelled if the user cancels."""
+        if self.kind != "zenity":
+            def report(done, total):
+                if self.kind == "terminal" and sys.stdout.isatty():
+                    print(f"\r{text} {done * 100 // max(total, 1)}% ({done >> 20} / {total >> 20} MiB)", end="", flush=True)
+            yield report
+            if self.kind == "terminal" and sys.stdout.isatty():
+                print()
+            return
+        window = subprocess.Popen(["zenity", "--progress", f"--title={TITLE}", "--width=420", "--auto-close", "--text", text],
+                                  stdin=subprocess.PIPE, text=True)
+        shown = [-1]
+        def report(done, total):
+            percent = min(99, done * 100 // max(total, 1))
+            if window.poll() is not None:
+                raise Cancelled()
+            if percent != shown[0]:
+                shown[0] = percent
+                try:
+                    window.stdin.write(f"{percent}\n# {text} {done >> 20} / {total >> 20} MiB\n")
+                    window.stdin.flush()
+                except BrokenPipeError as error:
+                    raise Cancelled() from error
+        try:
+            yield report
+        finally:
+            with contextlib.suppress(BrokenPipeError, OSError):
+                window.stdin.write("100\n")
+                window.stdin.close()
+            with contextlib.suppress(subprocess.TimeoutExpired):
+                window.wait(timeout=5)
+            if window.poll() is None:
+                window.terminate()
+
+def open_page(url):
+    if url.startswith("https://github.com/") and shutil.which("xdg-open"):
+        subprocess.Popen(["xdg-open", url], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        return True
+    return False
+
+def gui_update(repo, client, state, dialogs):
+    release = check(repo)
+    current = installed_version(client, state)
+    label = current.removeprefix("client-v") if current else "an unrecognized version"
+    if current and is_current(current, release["version"]):
+        dialogs.info(f"Your Astral Client ({label}) is up to date.")
+        return
+    new = release["version"].removeprefix("client-v")
+    if release.get("full_download_required"):
+        text = (f"Astral Client {new} includes new game data or libraries and must be downloaded in full.\n\n"
+                f"Extract it to a new folder, then copy your save and config folders across.\n\n{release['url']}")
+        if dialogs.question(text + "\n\nOpen the download page?", "Open page", "Close") and not open_page(release["url"]):
+            dialogs.info(release["url"])
+        return
+    staged = state / f"release-{release['asset']['id']}.zip"
+    action = "Install" if staged.is_file() else "Download and install"
+    if not dialogs.question(f"{action} Astral Client {new}? You have {label}.\n\n"
+                            "Saves, settings, mods and tilesets are preserved, and the current version is backed up for rollback.",
+                            "Update", "Not now"):
+        return
+    try:
+        with dialogs.progress(f"Downloading Astral Client {new}…") as report:
+            package = download(repo, release, state, report)
+    except Cancelled:
+        return
+    if running(client):
+        dialogs.info(f"Astral Client {new} is downloaded and verified.\n\n"
+                     "CDDA is still running. Save and quit, then run the updater again to install it — it will not download again.")
+        return
+    result = apply(package, client, state)
+    prune(state)
+    dialogs.info(f"Installed Astral Client {result['version'].removeprefix('client-v')}.\n\n"
+                 "Your previous version is backed up; use Rollback Astral Client if something is wrong.")
+
+def gui_rollback(client, state, dialogs):
+    marker = state / "installed.json"
+    if not marker.exists():
+        raise UpdateError("There is no updater backup to roll back to.")
+    info = json.loads(marker.read_text())
+    record = json.loads((Path(info["backup"]) / "backup.json").read_text())
+    previous = (record.get("previous_install") or {}).get("version") or "the version you had before updating"
+    if not dialogs.question(f"Replace Astral Client {info['version'].removeprefix('client-v')} with {previous.removeprefix('client-v')}?\n\n"
+                            "Saves, settings, mods and tilesets are not changed.", "Roll back", "Cancel"):
+        return
+    rollback(client, state)
+    prune(state)
+    dialogs.info("The previous Astral Client was restored.")
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["check", "download", "apply", "rollback", "gui"])
+    parser.add_argument("command", choices=["check", "status", "download", "apply", "rollback", "gui", "gui-rollback"])
     parser.add_argument("--client", type=Path, default=Path(__file__).resolve().parents[2] / "artifacts/client")
     parser.add_argument("--state", type=Path)
     parser.add_argument("--package", type=Path)
     parser.add_argument("--repo", default=REPOSITORY)
     args = parser.parse_args()
     client = args.client.resolve()
-    state = (args.state or client.parent / "hybrid-updates").resolve()
+    state = (args.state or default_state(client)).resolve()
     if state == client or client in state.parents:
         parser.error("Updater state must be outside the client installation")
+    dialogs = None
     try:
         if args.command == "check":
             print(json.dumps(check(args.repo), indent=2))
+        elif args.command == "status":
+            release = check(args.repo)
+            current = installed_version(client, state)
+            print(json.dumps({"installed": current, "latest": release["version"], "state": str(state),
+                              "up_to_date": bool(current and is_current(current, release["version"])),
+                              "full_download_required": bool(release.get("full_download_required"))}, indent=2))
         elif args.command == "download":
             print(download(args.repo, check(args.repo), state))
         elif args.command == "apply":
             if not args.package:
                 parser.error("apply requires --package")
-            print(json.dumps(apply(args.package, client, state), indent=2))
+            result = apply(args.package, client, state)
+            prune(state, keep=args.package)
+            print(json.dumps(result, indent=2))
         elif args.command == "rollback":
             rollback(client, state)
+            prune(state)
             print("Previous client restored.")
         else:
-            if not shutil.which("zenity"):
-                raise UpdateError("Graphical updater requires zenity; CLI commands remain available")
-            release = check(args.repo)
-            version_file = client / "VERSION.json"
-            if version_file.is_file():
-                info = json.loads(version_file.read_text())
-                if ("client-v" + info.get("version", "") == release["version"] and
-                        info.get("executable_sha256") == digest(client / "cataclysm-tiles")):
-                    subprocess.run(["zenity", "--info", "--title=Astral Client Update", "--text", "Your Astral Client is up to date."])
-                    return 0
-            if release.get("full_download_required"):
-                raise UpdateError(f"{release['version']} includes new game data. Download the full client from {release['url']}")
-            marker = state / "installed.json"
-            if marker.exists():
-                installed = json.loads(marker.read_text())
-                if installed.get("version") == release["version"] and installed.get("client") == str(client) and all(destination(client, f["path"]).is_file() and digest(destination(client, f["path"])) == f["sha256"] for f in installed.get("files", [])):
-                    subprocess.run(["zenity", "--info", "--title=Astral Client Update", "--text", "Your Astral Client is up to date."])
-                    return 0
-            answer = subprocess.run(["zenity", "--question", "--title=Astral Client Update", "--text", f"Download and install {release['version']}?\n\nSaves and settings are preserved. If CDDA is running, the download will be staged until you exit."])
-            if answer.returncode:
-                return 0
-            package = download(args.repo, release, state)
-            result = apply(package, client, state)
-            subprocess.run(["zenity", "--info", "--title=Astral Client Update", "--text", f"Installed {result['version']}. Your previous client is backed up.\nLaunch CDDA when ready."])
+            dialogs = Dialogs()
+            if args.command == "gui":
+                gui_update(args.repo, client, state, dialogs)
+            else:
+                gui_rollback(client, state, dialogs)
+    except KeyboardInterrupt:
+        return 130
     except (UpdateError, OSError, ValueError, KeyError, zipfile.BadZipFile, TypeError, subprocess.SubprocessError) as error:
         message = str(error)
-        if args.command == "gui" and shutil.which("zenity"):
-            subprocess.run(["zenity", "--error", "--title=Astral Client Update", "--text", message])
+        if dialogs and dialogs.kind != "terminal":
+            dialogs.error(message)
         print(message, file=sys.stderr)
         return 1
     return 0

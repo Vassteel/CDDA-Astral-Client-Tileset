@@ -49,7 +49,7 @@ def stage(binary, data_bundle, runtime, source, output, version, source_commit, 
     scripts = {
         'Launch Astral Client.cmd': '@echo off\ncd /d "%~dp0"\nstart "" "%~dp0cataclysm-tiles.exe" --basepath "" --userdir "./"\n',
         'Update Astral Client.cmd': '@echo off\npowershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\\hybrid-updater\\windows-updater.ps1" -ClientDirectory "%~dp0."\n',
-        'Rollback Astral Client.cmd': '@echo off\npowershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\\hybrid-updater\\windows-updater.ps1" -Action Rollback -ClientDirectory "%~dp0."\npause\n',
+        'Rollback Astral Client.cmd': '@echo off\npowershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\\hybrid-updater\\windows-updater.ps1" -Action GuiRollback -ClientDirectory "%~dp0."\n',
     }
     for name, text in scripts.items():
         (root / name).write_bytes(text.replace('\n', '\r\n').encode('ascii'))
@@ -60,7 +60,8 @@ Launch Astral Client.cmd (or cataclysm-tiles.exe).
 
 Update Astral Client.cmd checks for Windows updates. Windows PowerShell 5.1
 is included with Windows; no Python or GitHub sign-in is required.
-Close the game before installing. Saves, settings, mods and tilesets stay intact.
+Updates can download while the game is running and install the next time you
+run the updater after quitting. Saves, settings, mods and tilesets stay intact.
 Rollback Astral Client.cmd restores the previous updater-managed executable.
 Backups and downloads are kept beside this folder in a hidden updates directory.
 Do not launch the game during installation. Keep that directory for rollback.

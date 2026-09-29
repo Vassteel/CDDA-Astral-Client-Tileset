@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('Gui','Check','Download','Apply','Rollback')][string]$Action = 'Gui',
+    [ValidateSet('Gui','GuiRollback','Check','Status','Download','Apply','Rollback')][string]$Action = 'Gui',
     [string]$ClientDirectory = (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent),
     [string]$StateDirectory = '',
     [string]$Package = '',
@@ -9,7 +9,48 @@ param(
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+# Windows PowerShell 5.1 redraws its progress bar per packet, which makes
+# Invoke-WebRequest/RestMethod many times slower. The GUI shows its own.
+$ProgressPreference = 'SilentlyContinue'
+$script:UserAgent = 'Astral-Client-Updater'
+$script:Retries = 3
 
+function ConvertTo-ClientVersion([string]$Tag) {
+    if ($Tag -match '^client-v(\d+(\.\d+){0,3})$') {
+        $parts = @($Matches[1].Split('.') | ForEach-Object { [int]$_ })
+        while ($parts.Count -lt 4) { $parts += 0 }
+        return New-Object Version($parts[0], $parts[1], $parts[2], $parts[3])
+    }
+    return $null
+}
+function Test-UpToDate([string]$Installed, [string]$Latest) {
+    # Never offer a downgrade: a newer local build counts as up to date.
+    if (!$Installed) { return $false }
+    $have = ConvertTo-ClientVersion $Installed
+    $want = ConvertTo-ClientVersion $Latest
+    if ($have -and $want) { return $have -ge $want }
+    return $Installed -eq $Latest
+}
+function Invoke-WithRetry([scriptblock]$Run) {
+    for ($attempt = 1; ; $attempt++) {
+        try { return & $Run }
+        catch {
+            # Only network failures are retried; validation errors and cancellation are final.
+            $e = $_.Exception
+            # .NET calls such as GetResponse() arrive wrapped by PowerShell.
+            while ($e -is [Management.Automation.MethodInvocationException] -and $e.InnerException) { $e = $e.InnerException }
+            if (!($e -is [Net.WebException] -or $e -is [IO.IOException] -or $e.GetType().Name -match '^Http')) { throw }
+            $status = $null
+            if ($e.Response) { try { $status = [int]$e.Response.StatusCode } catch { } }
+            if ($status -eq 403) { throw "GitHub refused the request (HTTP 403). The hourly update-check limit may have been reached; try again later." }
+            if (($status -and $status -lt 500) -or $attempt -ge $script:Retries) {
+                if ($status) { throw "GitHub returned HTTP $status. Try again later." }
+                throw "Could not reach GitHub. Check your internet connection and try again. ($($_.Exception.Message))"
+            }
+            Start-Sleep -Seconds ([Math]::Pow(2, $attempt - 1))
+        }
+    }
+}
 function Get-FileDigest([string]$Path) { (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant() }
 function Write-Record($Value, [string]$Path) {
     $temporary = "$Path.new"
@@ -120,6 +161,8 @@ function Invoke-Install([string]$ZipPath, [string]$Client, [string]$State) {
             Write-Record @{client=$Client; version=$manifest.version; backup=$backup; files=$manifest.files} $installed
         } catch {
             Restore-Files $record $backup $Client
+            $record.status = 'failed-restored'
+            Write-Record $record (Join-Path $backup 'backup.json')
             throw
         }
         $record.status = 'installed'
@@ -156,34 +199,100 @@ function Invoke-Rollback([string]$Client, [string]$State) {
             foreach ($file in $record.files) { Copy-Atomic (Join-Path $rescue $file.path) (Get-Target $Client $file.path) }
             throw
         }
+        $record.status = 'rolled-back'
+        Write-Record $record (Join-Path $current.backup 'backup.json')
     } finally { Remove-Item -LiteralPath $rescue -Recurse -Force }
     return 'Previous client restored. Saves and settings were preserved.'
 }
 function Get-Release([string]$Repo) {
     if ($Repo -notmatch '^[\w.-]+/[\w.-]+$') { throw 'Invalid repository' }
-    $releases = Invoke-RestMethod -Uri "https://api.github.com/repos/$Repo/releases?per_page=100" -Headers @{'User-Agent'='Astral-Client-Updater'}
+    $releases = Invoke-WithRetry { Invoke-RestMethod -UseBasicParsing -Uri "https://api.github.com/repos/$Repo/releases?per_page=100" -Headers @{'User-Agent'=$script:UserAgent} }
     foreach ($release in $releases) {
         if ($release.draft -or $release.prerelease -or $release.tag_name -notmatch '^client-v') { continue }
         $assets = @($release.assets | Where-Object { $_.name.EndsWith('-windows-update.zip') })
-        if ($assets.Count -eq 1) { return @{version=$release.tag_name; asset=$assets[0]} }
+        if ($assets.Count -eq 1) { return @{version=$release.tag_name; url=$release.html_url; asset=$assets[0]} }
         return @{version=$release.tag_name; full_download_required=$true; url=$release.html_url}
     }
     throw 'No Windows client update is available'
 }
-function Save-Download($Release, [string]$State) {
+function Receive-File([string]$Uri, [string]$Path, [long]$Size, [scriptblock]$OnProgress) {
+    # Stream on this thread so a progress window can stay responsive via its callback.
+    $request = [Net.WebRequest]::Create($Uri)
+    $request.UserAgent = $script:UserAgent
+    $request.Timeout = 60000
+    $request.ReadWriteTimeout = 60000
+    $response = $request.GetResponse()
+    try {
+        $source = $response.GetResponseStream()
+        $out = [IO.File]::Create($Path)
+        try {
+            $buffer = New-Object byte[] 1048576
+            $done = 0L
+            while (($read = $source.Read($buffer, 0, $buffer.Length)) -gt 0) {
+                $done += $read
+                if ($done -gt 536870912) { throw 'Download exceeds size limit' }
+                $out.Write($buffer, 0, $read)
+                if ($OnProgress) { & $OnProgress $done $Size }
+            }
+        } finally { $out.Dispose(); $source.Dispose() }
+    } finally { $response.Dispose() }
+}
+function Test-Download([string]$Path, $Release) {
+    $asset = $Release.asset
+    if ((Get-Item -LiteralPath $Path).Length -ne $asset.size) { throw 'Incomplete download' }
+    if ($asset.digest -and $asset.digest -cne ('sha256:' + (Get-FileDigest $Path))) { throw 'Download checksum mismatch' }
+    $verify = Join-Path (Split-Path $Path -Parent) ('verify-' + [guid]::NewGuid().ToString('N'))
+    [IO.Directory]::CreateDirectory($verify) | Out-Null
+    try {
+        if ((Read-Package $Path $verify).version -cne $Release.version) { throw 'Release/package version mismatch' }
+    } finally { Remove-Item -LiteralPath $verify -Recurse -Force }
+}
+function Save-Download($Release, [string]$State, [string]$Repo = $Repository, [scriptblock]$OnProgress = $null) {
     if ($Release.full_download_required) { throw "$($Release.version) requires the full client download: $($Release.url)" }
     $asset = $Release.asset
     if ($asset.size -lt 1 -or $asset.size -gt 536870912 -or $asset.id -notmatch '^\d+$') { throw 'Invalid download metadata' }
-    if ($asset.browser_download_url -notmatch '^https://github\.com/') { throw 'Invalid download URL' }
+    if (!$asset.browser_download_url.StartsWith("https://github.com/$Repo/releases/download/", [StringComparison]::OrdinalIgnoreCase)) { throw 'Invalid download URL' }
     $path = Join-Path $State ("release-$($asset.id).zip")
+    if (Test-Path -LiteralPath $path) {
+        # Staged earlier (e.g. while the game was running): no second download.
+        try { Test-Download $path $Release; return $path }
+        catch { Remove-Item -LiteralPath $path -Force }
+    }
     $temp = "$path.part"
     try {
-        Invoke-WebRequest -UseBasicParsing -Uri $asset.browser_download_url -OutFile $temp -Headers @{'User-Agent'='Astral-Client-Updater'}
-        if ((Get-Item -LiteralPath $temp).Length -ne $asset.size) { throw 'Incomplete download' }
-        if ($asset.digest -and $asset.digest -cne ('sha256:' + (Get-FileDigest $temp))) { throw 'Download checksum mismatch' }
+        Invoke-WithRetry { Receive-File $asset.browser_download_url $temp $asset.size $OnProgress } | Out-Null
+        Test-Download $temp $Release
         Move-Item -LiteralPath $temp -Destination $path -Force
         return $path
     } finally { if (Test-Path -LiteralPath $temp) { Remove-Item -LiteralPath $temp -Force } }
+}
+function Get-RollbackChain([string]$State) {
+    $chain = New-Object 'Collections.Generic.HashSet[string]' ([StringComparer]::OrdinalIgnoreCase)
+    $marker = Join-Path $State 'installed.json'
+    $current = $null
+    if (Test-Path -LiteralPath $marker) { $current = Get-Content -Raw -LiteralPath $marker | ConvertFrom-Json }
+    while ($current -and $current.backup -and $chain.Add([IO.Path]::GetFullPath([string]$current.backup))) {
+        try { $current = (Get-Content -Raw -LiteralPath (Join-Path $current.backup 'backup.json') | ConvertFrom-Json).previous }
+        catch { break }
+    }
+    return ,$chain
+}
+function Remove-StaleUpdates([string]$State, [string]$Keep = '') {
+    # Finished downloads and backups rollback can no longer reach. Interrupted
+    # ('prepared') backups stay for manual recovery.
+    foreach ($staged in @(Get-ChildItem -LiteralPath $State -Filter 'release-*' -File -ErrorAction SilentlyContinue)) {
+        if (!$Keep -or $staged.FullName -ine [IO.Path]::GetFullPath($Keep)) { Remove-Item -LiteralPath $staged.FullName -Force }
+    }
+    $chain = Get-RollbackChain $State
+    foreach ($backup in @(Get-ChildItem -LiteralPath (Join-Path $State 'backups') -Directory -ErrorAction SilentlyContinue)) {
+        try { $status = (Get-Content -Raw -LiteralPath (Join-Path $backup.FullName 'backup.json') | ConvertFrom-Json).status } catch { continue }
+        if (($status -eq 'rolled-back' -or $status -eq 'failed-restored') -and !$chain.Contains($backup.FullName)) {
+            Remove-Item -LiteralPath $backup.FullName -Recurse -Force
+        }
+    }
+}
+function Test-GameRunning([string]$Client) {
+    try { Assert-GameClosed $Client; return $false } catch { return $true }
 }
 function Get-InstalledVersion([string]$Client, [string]$State) {
     $record = Join-Path $State 'installed.json'
@@ -191,18 +300,95 @@ function Get-InstalledVersion([string]$Client, [string]$State) {
         $info = Get-Content -Raw -LiteralPath $record | ConvertFrom-Json
         if ($info.client -ine $Client) { throw 'Updater state belongs to another installation' }
         foreach ($file in $info.files) {
-            if ((Get-FileDigest (Get-Target $Client $file.path)) -ine $file.sha256) { return '' }
+            $target = Get-Target $Client $file.path
+            if (![IO.File]::Exists($target) -or (Get-FileDigest $target) -ine $file.sha256) { return '' }
         }
         return $info.version
     }
     $record = Join-Path $Client 'VERSION.json'
     if (Test-Path -LiteralPath $record) {
         $info = Get-Content -Raw -LiteralPath $record | ConvertFrom-Json
-        if ($info.executable_sha256 -and (Get-FileDigest (Get-Target $Client 'cataclysm-tiles.exe')) -ieq $info.executable_sha256) {
+        if ($info.executable_sha256 -and [IO.File]::Exists((Join-Path $Client 'cataclysm-tiles.exe')) -and (Get-FileDigest (Get-Target $Client 'cataclysm-tiles.exe')) -ieq $info.executable_sha256) {
             return ('client-v' + $info.version)
         }
     }
     return ''
+}
+function Show-Message([string]$Text, [string]$Buttons = 'OK', [string]$Icon = 'Information') {
+    return [string][Windows.Forms.MessageBox]::Show($Text, 'Astral Client', $Buttons, $Icon)
+}
+function Save-DownloadWithProgress($Release, [string]$State, [string]$Repo) {
+    $form = New-Object Windows.Forms.Form
+    $form.Text = 'Astral Client'
+    $form.FormBorderStyle = 'FixedDialog'
+    $form.MaximizeBox = $false; $form.MinimizeBox = $false
+    $form.StartPosition = 'CenterScreen'
+    $form.ClientSize = New-Object Drawing.Size(420, 110)
+    $label = New-Object Windows.Forms.Label
+    $label.SetBounds(12, 12, 396, 20)
+    $label.Text = "Downloading Astral Client $($Release.version.Substring(8))..."
+    $bar = New-Object Windows.Forms.ProgressBar
+    $bar.SetBounds(12, 38, 396, 22)
+    $cancel = New-Object Windows.Forms.Button
+    $cancel.SetBounds(318, 72, 90, 26)
+    $cancel.Text = 'Cancel'
+    # Not $state: PowerShell names are case-insensitive and $State is a parameter.
+    $ui = @{ cancelled = $false }
+    $cancel.Add_Click({ $ui.cancelled = $true }.GetNewClosure())
+    $form.Add_FormClosing({ $ui.cancelled = $true }.GetNewClosure())
+    $form.Controls.AddRange(@($label, $bar, $cancel))
+    $form.Show()
+    try {
+        $progress = {
+            param($Done, $Total)
+            $bar.Value = [int][Math]::Min(100, $Done * 100 / [Math]::Max($Total, 1))
+            $label.Text = 'Downloading Astral Client {0}... {1:N0} / {2:N0} MB' -f $Release.version.Substring(8), ($Done / 1MB), ($Total / 1MB)
+            [Windows.Forms.Application]::DoEvents()
+            if ($ui.cancelled) { throw 'Download cancelled' }
+        }.GetNewClosure()
+        [Windows.Forms.Application]::DoEvents()
+        try { return Save-Download $Release $State $Repo $progress }
+        catch { if ($ui.cancelled) { return $null }; throw }
+    } finally { $form.Dispose() }
+}
+function Invoke-GuiUpdate([string]$Client, [string]$State) {
+    $release = Get-Release $Repository
+    $installedVersion = Get-InstalledVersion $Client $State
+    $label = if ($installedVersion) { $installedVersion.Substring(8) } else { 'an unrecognized version' }
+    $new = $release.version.Substring(8)
+    if (Test-UpToDate $installedVersion $release.version) {
+        Show-Message "Your Astral Client ($label) is up to date." | Out-Null
+        return
+    }
+    if ($release.full_download_required) {
+        $answer = Show-Message "Astral Client $new includes new game data or libraries and must be downloaded in full.`n`nExtract it to a new folder, then copy your save and config folders across.`n`nOpen the download page?" 'YesNo'
+        if ($answer -eq 'Yes' -and $release.url -match '^https://github\.com/') { Start-Process $release.url }
+        return
+    }
+    $action = if (Test-Path -LiteralPath (Join-Path $State "release-$($release.asset.id).zip")) { 'Install' } else { 'Download and install' }
+    $answer = Show-Message "$action Astral Client $($new)? You have $label.`n`nSaves, settings, mods and tilesets are preserved, and the current version is backed up for rollback." 'YesNo'
+    if ($answer -ne 'Yes') { return }
+    $zip = Save-DownloadWithProgress $release $State $Repository
+    if (!$zip) { return }
+    if (Test-GameRunning $Client) {
+        Show-Message "Astral Client $new is downloaded and verified.`n`nThe game is still running. Save and quit, then run Update Astral Client again to install it. It will not download again." | Out-Null
+        return
+    }
+    Invoke-Install $zip $Client $State | Out-Null
+    Remove-StaleUpdates $State
+    Show-Message "Installed Astral Client $new.`n`nYour previous version is backed up; use Rollback Astral Client if something is wrong." | Out-Null
+}
+function Invoke-GuiRollback([string]$Client, [string]$State) {
+    $installed = Join-Path $State 'installed.json'
+    if (!(Test-Path -LiteralPath $installed)) { throw 'There is no updater backup to roll back to.' }
+    $current = Get-Content -Raw -LiteralPath $installed | ConvertFrom-Json
+    $record = Get-Content -Raw -LiteralPath (Join-Path $current.backup 'backup.json') | ConvertFrom-Json
+    $previous = if ($record.previous -and $record.previous.version) { $record.previous.version.Substring(8) } else { 'the version you had before updating' }
+    $answer = Show-Message "Replace Astral Client $($current.version.Substring(8)) with $($previous)?`n`nSaves, settings, mods and tilesets are not changed." 'YesNo' 'Question'
+    if ($answer -ne 'Yes') { return }
+    Invoke-Rollback $Client $State | Out-Null
+    Remove-StaleUpdates $State
+    Show-Message 'The previous Astral Client was restored.' | Out-Null
 }
 function Invoke-Updater {
     $client = [IO.Path]::GetFullPath($ClientDirectory).TrimEnd([IO.Path]::DirectorySeparatorChar)
@@ -211,33 +397,32 @@ function Invoke-Updater {
     $state = [IO.Path]::GetFullPath($state)
     if ($state -ieq $client -or $state.StartsWith($client + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) { throw 'Updater state must be outside the client folder' }
     [IO.Directory]::CreateDirectory($state) | Out-Null
-    $lock = [IO.File]::Open((Join-Path $state 'updater.lock'), [IO.FileMode]::OpenOrCreate, [IO.FileAccess]::ReadWrite, [IO.FileShare]::None)
+    try { $lock = [IO.File]::Open((Join-Path $state 'updater.lock'), [IO.FileMode]::OpenOrCreate, [IO.FileAccess]::ReadWrite, [IO.FileShare]::None) }
+    catch [IO.IOException] { throw 'Another Astral Client updater is already running.' }
     try {
         switch ($Action) {
             'Check' { Get-Release $Repository | ConvertTo-Json -Depth 12; return }
-            'Download' { Save-Download (Get-Release $Repository) $state; return }
-            'Apply' { Invoke-Install ([IO.Path]::GetFullPath($Package)) $client $state; return }
-            'Rollback' { Invoke-Rollback $client $state; return }
+            'Status' {
+                $release = Get-Release $Repository
+                $installedVersion = Get-InstalledVersion $client $state
+                @{installed=$installedVersion; latest=$release.version; state=$state; up_to_date=(Test-UpToDate $installedVersion $release.version); full_download_required=[bool]$release.full_download_required} | ConvertTo-Json
+                return
+            }
+            'Download' { Save-Download (Get-Release $Repository) $state $Repository; return }
+            'Apply' { Invoke-Install ([IO.Path]::GetFullPath($Package)) $client $state; Remove-StaleUpdates $state $Package; return }
+            'Rollback' { Invoke-Rollback $client $state; Remove-StaleUpdates $state; return }
         }
         Add-Type -AssemblyName System.Windows.Forms
-        $release = Get-Release $Repository
-        $installedVersion = Get-InstalledVersion $client $state
-        if ($installedVersion -eq $release.version) {
-            [Windows.Forms.MessageBox]::Show('Astral Client is up to date.', 'Astral Client', 'OK', 'Information') | Out-Null
-            return
-        }
-        if ($release.full_download_required) { throw "$($release.version) includes new game data. Download the full client from $($release.url)" }
-        $answer = [Windows.Forms.MessageBox]::Show("Download and install $($release.version)?`n`nClose the game before installation. Your saves and settings are preserved.", 'Astral Client', 'YesNo', 'Information')
-        if ($answer -ne 'Yes') { return }
-        $zip = Save-Download $release $state
-        $message = Invoke-Install $zip $client $state
-        [Windows.Forms.MessageBox]::Show($message, 'Astral Client', 'OK', 'Information') | Out-Null
+        Add-Type -AssemblyName System.Drawing
+        [Windows.Forms.Application]::EnableVisualStyles()
+        if ($Action -eq 'GuiRollback') { Invoke-GuiRollback $client $state }
+        else { Invoke-GuiUpdate $client $state }
     } finally { $lock.Dispose() }
 }
 if ($MyInvocation.InvocationName -ne '.') {
     try { Invoke-Updater }
     catch {
-        if ($Action -eq 'Gui') {
+        if ($Action -like 'Gui*') {
             Add-Type -AssemblyName System.Windows.Forms
             [Windows.Forms.MessageBox]::Show($_.Exception.Message, 'Astral Client', 'OK', 'Error') | Out-Null
         } else { Write-Error $_ }
