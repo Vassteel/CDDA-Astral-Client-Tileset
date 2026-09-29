@@ -1,18 +1,13 @@
 [
   {
-    "type": "dimension",
-    "id": "astral_test_world",
-    "region_layout": "astral_test_world"
-  },
-  {
     "type": "dimension_region_layout",
-    "id": "astral_test_world",
+    "id": "astral_pocket",
     "generation_mode": "UNIFORM",
-    "uniform_region": "astral_test_world"
+    "uniform_region": "astral_pocket"
   },
   {
     "type": "weather_generator",
-    "id": "astral_test_world",
+    "id": "astral_pocket",
     "copy-from": "default",
     "base_temperature": 14.0,
     "base_humidity": 65.0,
@@ -29,9 +24,9 @@
   },
   {
     "type": "region_settings",
-    "id": "astral_test_world",
+    "id": "astral_pocket",
     "copy-from": "default",
-    "//": "Pocket world used by the prototype portal.  Everything outside the placed microworld special is t_astral_veil (solid, opaque, indestructible) so exploration cannot generate endless terrain.  default_oter runs top (z+10) to bottom (z-10).",
+    "//": "Template for every pocket dimension (astral_pocket_01..NN, see pockets_generated.json).  Everything outside the placed microworld special is t_astral_veil (solid, opaque, indestructible).  default_oter runs top (z+10) to bottom (z-10).",
     "rivers": null,
     "lakes": null,
     "ocean": null,
@@ -43,7 +38,7 @@
     "cities": "no_cities",
     "map_extras": "astral_none",
     "terrain_furniture": "default",
-    "weather": "astral_test_world",
+    "weather": "astral_pocket",
     "npc_spawntime": 0,
     "neighbor_connections": false,
     "place_roads": false,

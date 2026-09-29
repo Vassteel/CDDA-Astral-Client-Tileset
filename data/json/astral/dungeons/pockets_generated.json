@@ -1,0 +1,2478 @@
+[
+  {
+    "type": "dimension",
+    "id": "astral_pocket_01",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_02",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_03",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_04",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_05",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_06",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_07",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_08",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_09",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_10",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_11",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_12",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_13",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_14",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_15",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_16",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_17",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_18",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_19",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_20",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_21",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_22",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_23",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "dimension",
+    "id": "astral_pocket_24",
+    "region_layout": "astral_pocket"
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P01",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_01.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P01_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P01_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p01" } },
+      { "math": [ "astral_entries_p01++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_01",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_01" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p01)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p01" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p01" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p01 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P01_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p01)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p01" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P01",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p01" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P01_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P02",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_02.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P02_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P02_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p02" } },
+      { "math": [ "astral_entries_p02++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_02",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_02" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p02)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p02" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p02" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p02 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P02_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p02)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p02" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P02",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p02" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P02_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P03",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_03.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P03_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P03_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p03" } },
+      { "math": [ "astral_entries_p03++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_03",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_03" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p03)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p03" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p03" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p03 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P03_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p03)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p03" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P03",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p03" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P03_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P04",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_04.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P04_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P04_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p04" } },
+      { "math": [ "astral_entries_p04++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_04",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_04" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p04)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p04" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p04" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p04 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P04_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p04)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p04" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P04",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p04" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P04_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P05",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_05.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P05_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P05_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p05" } },
+      { "math": [ "astral_entries_p05++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_05",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_05" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p05)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p05" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p05" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p05 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P05_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p05)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p05" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P05",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p05" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P05_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P06",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_06.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P06_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P06_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p06" } },
+      { "math": [ "astral_entries_p06++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_06",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_06" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p06)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p06" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p06" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p06 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P06_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p06)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p06" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P06",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p06" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P06_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P07",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_07.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P07_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P07_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p07" } },
+      { "math": [ "astral_entries_p07++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_07",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_07" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p07)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p07" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p07" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p07 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P07_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p07)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p07" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P07",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p07" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P07_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P08",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_08.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P08_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P08_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p08" } },
+      { "math": [ "astral_entries_p08++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_08",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_08" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p08)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p08" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p08" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p08 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P08_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p08)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p08" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P08",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p08" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P08_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P09",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_09.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P09_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P09_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p09" } },
+      { "math": [ "astral_entries_p09++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_09",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_09" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p09)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p09" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p09" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p09 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P09_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p09)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p09" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P09",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p09" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P09_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P10",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_10.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P10_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P10_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p10" } },
+      { "math": [ "astral_entries_p10++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_10",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_10" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p10)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p10" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p10" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p10 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P10_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p10)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p10" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P10",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p10" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P10_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P11",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_11.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P11_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P11_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p11" } },
+      { "math": [ "astral_entries_p11++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_11",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_11" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p11)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p11" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p11" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p11 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P11_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p11)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p11" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P11",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p11" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P11_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P12",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_12.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P12_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P12_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p12" } },
+      { "math": [ "astral_entries_p12++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_12",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_12" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p12)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p12" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p12" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p12 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P12_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p12)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p12" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P12",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p12" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P12_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P13",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_13.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P13_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P13_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p13" } },
+      { "math": [ "astral_entries_p13++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_13",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_13" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p13)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p13" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p13" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p13 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P13_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p13)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p13" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P13",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p13" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P13_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P14",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_14.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P14_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P14_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p14" } },
+      { "math": [ "astral_entries_p14++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_14",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_14" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p14)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p14" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p14" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p14 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P14_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p14)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p14" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P14",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p14" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P14_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P15",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_15.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P15_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P15_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p15" } },
+      { "math": [ "astral_entries_p15++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_15",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_15" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p15)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p15" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p15" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p15 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P15_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p15)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p15" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P15",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p15" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P15_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P16",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_16.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P16_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P16_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p16" } },
+      { "math": [ "astral_entries_p16++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_16",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_16" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p16)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p16" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p16" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p16 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P16_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p16)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p16" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P16",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p16" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P16_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P17",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_17.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P17_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P17_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p17" } },
+      { "math": [ "astral_entries_p17++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_17",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_17" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p17)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p17" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p17" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p17 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P17_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p17)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p17" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P17",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p17" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P17_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P18",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_18.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P18_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P18_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p18" } },
+      { "math": [ "astral_entries_p18++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_18",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_18" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p18)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p18" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p18" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p18 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P18_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p18)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p18" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P18",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p18" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P18_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P19",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_19.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P19_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P19_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p19" } },
+      { "math": [ "astral_entries_p19++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_19",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_19" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p19)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p19" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p19" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p19 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P19_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p19)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p19" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P19",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p19" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P19_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P20",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_20.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P20_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P20_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p20" } },
+      { "math": [ "astral_entries_p20++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_20",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_20" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p20)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p20" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p20" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p20 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P20_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p20)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p20" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P20",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p20" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P20_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P21",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_21.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P21_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P21_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p21" } },
+      { "math": [ "astral_entries_p21++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_21",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_21" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p21)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p21" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p21" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p21 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P21_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p21)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p21" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P21",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p21" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P21_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P22",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_22.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P22_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P22_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p22" } },
+      { "math": [ "astral_entries_p22++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_22",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_22" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p22)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p22" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p22" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p22 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P22_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p22)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p22" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P22",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p22" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P22_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P23",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_23.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P23_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P23_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p23" } },
+      { "math": [ "astral_entries_p23++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_23",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_23" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p23)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p23" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p23" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p23 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P23_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p23)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p23" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P23",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p23" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P23_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_THRESHOLD_P24",
+    "//": "Examine action of the overworld threshold bound to astral_pocket_24.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_ENTER_P24_DO" } ]
+          }
+        ],
+        "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_ENTER_P24_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "u_location_variable": { "global_val": "astral_return_p24" } },
+      { "math": [ "astral_entries_p24++" ] },
+      {
+        "u_travel_to_dimension": "astral_pocket_24",
+        "npc_travel_radius": 0,
+        "npc_travel_filter": "none",
+        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
+        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+      },
+      {
+        "if": { "current_dimension": "astral_pocket_24" },
+        "then": [
+          {
+            "if": { "not": { "math": [ "has_var(astral_arrival_p24)" ] } },
+            "then": [
+              {
+                "u_location_variable": { "global_val": "astral_arrival_p24" },
+                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
+                "terrain": "t_astral_portal_active_r2c2",
+                "target_max_radius": 40
+              }
+            ]
+          },
+          { "u_teleport": { "global_val": "astral_arrival_p24" }, "force_safe": true },
+          {
+            "if": { "math": [ "astral_entries_p24 == 1" ] },
+            "then": [
+              {
+                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
+                "popup": true
+              }
+            ],
+            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RETURN_P24_DO",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      {
+        "if": { "not": { "math": [ "has_var(astral_return_p24)" ] } },
+        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        "else": [
+          {
+            "u_travel_to_dimension": "default",
+            "npc_travel_radius": 0,
+            "npc_travel_filter": "none",
+            "fail_message": "The membrane resists you.",
+            "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+          },
+          {
+            "if": { "current_dimension": "default" },
+            "then": [ { "u_teleport": { "global_val": "astral_return_p24" }, "force_safe": true } ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BIND_P24",
+    "effect": [
+      { "u_transform_radius": 1, "ter_furn_transform": "astral_bind_p24" },
+      { "math": [ "astral_pocket_next++" ] },
+      { "run_eocs": "EOC_ASTRAL_ENTER_P24_DO" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PORTAL_ENTER_DO",
+    "//": "Unbound overworld threshold: bind it to the next free pocket and enter.  Tests call this directly.",
+    "condition": { "not": "u_driving" },
+    "effect": [
+      { "math": [ "astral_pocket_next = max(astral_pocket_next, 1)" ] },
+      {
+        "if": { "math": [ "astral_pocket_next > 24" ] },
+        "then": [ { "u_message": "The runes flare and fade.  Whatever lies beyond has no room left for another door.", "type": "bad" } ],
+        "else": [
+          {
+            "switch": { "math": [ "astral_pocket_next" ] },
+            "cases": [
+              { "case": 1, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P01" } ] },
+              { "case": 2, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P02" } ] },
+              { "case": 3, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P03" } ] },
+              { "case": 4, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P04" } ] },
+              { "case": 5, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P05" } ] },
+              { "case": 6, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P06" } ] },
+              { "case": 7, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P07" } ] },
+              { "case": 8, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P08" } ] },
+              { "case": 9, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P09" } ] },
+              { "case": 10, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P10" } ] },
+              { "case": 11, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P11" } ] },
+              { "case": 12, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P12" } ] },
+              { "case": 13, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P13" } ] },
+              { "case": 14, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P14" } ] },
+              { "case": 15, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P15" } ] },
+              { "case": 16, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P16" } ] },
+              { "case": 17, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P17" } ] },
+              { "case": 18, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P18" } ] },
+              { "case": 19, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P19" } ] },
+              { "case": 20, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P20" } ] },
+              { "case": 21, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P21" } ] },
+              { "case": 22, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P22" } ] },
+              { "case": 23, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P23" } ] },
+              { "case": 24, "effect": [ { "run_eocs": "EOC_ASTRAL_BIND_P24" } ] }
+            ]
+          }
+        ]
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PORTAL_RETURN_DO",
+    "//": "Pocket-side threshold (unbound tile from the shared microworld mapgen): return to the anchor of whichever pocket we are in.",
+    "effect": [
+      { "if": { "current_dimension": "astral_pocket_01" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P01_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_02" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P02_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_03" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P03_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_04" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P04_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_05" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P05_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_06" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P06_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_07" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P07_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_08" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P08_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_09" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P09_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_10" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P10_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_11" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P11_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_12" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P12_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_13" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P13_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_14" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P14_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_15" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P15_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_16" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P16_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_17" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P17_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_18" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P18_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_19" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P19_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_20" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P20_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_21" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P21_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_22" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P22_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_23" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P23_DO" } ] },
+      { "if": { "current_dimension": "astral_pocket_24" }, "then": [ { "run_eocs": "EOC_ASTRAL_RETURN_P24_DO" } ] }
+    ]
+  }
+]
