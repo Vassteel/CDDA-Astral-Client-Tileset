@@ -1,7 +1,6 @@
 [
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "astral_microworld_center",
     "//": "Arrival courtyard of the test microworld.  Return portal at rows 3-7, cols 9-13; the player arrives on its platform tile r2c2 (row 5, col 11).  Stone shelter with an empty crate for the persistence test.",
     "object": {
@@ -49,7 +48,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "astral_microworld_grounds",
     "//": "Wooded meadow ring around the courtyard.  Everything beyond the 3x3 special is t_astral_veil.",
     "object": {
@@ -94,7 +92,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "astral_veil",
     "object": { "fill_ter": "t_astral_veil" }
   }

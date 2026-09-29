@@ -19,7 +19,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "om_terrain": "astral_portal_clearing",
     "//": "Overworld gateway site.  The 5x5 portal (A..Y) sits at rows 8-12, cols 9-13, entrance facing south; a worn track leads in from the south edge.",
     "object": {
@@ -55,7 +54,6 @@
   },
   {
     "type": "mapgen",
-    "method": "json",
     "update_mapgen_id": "astral_place_portal_active",
     "//": "Debug placement: draws an active portal centered in the target OMT (rows 8-12, cols 9-13).",
     "object": {
