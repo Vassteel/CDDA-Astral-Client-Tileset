@@ -25,6 +25,15 @@ jobs:
           python tests/hybrid_updater/windows_fixtures.py "$env:RUNNER_TEMP/fixtures"
           if ($LASTEXITCODE) { throw 'Fixture creation failed' }
           & tests/hybrid_updater/test_windows_updater.ps1 -Fixtures "$env:RUNNER_TEMP/fixtures" -Updater "$PWD/tools/hybrid-updater/windows-updater.ps1"
+      - name: Validate native updater progress window
+        shell: powershell
+        run: |
+          & tests/hybrid_updater/test_windows_progress.ps1 -Updater "$PWD/tools/hybrid-updater/windows-updater.ps1" -Output "$env:RUNNER_TEMP/astral-updater-ui"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: astral-updater-progress
+          path: ${{ runner.temp }}/astral-updater-ui/
       - name: Validate published Windows package
         if: inputs.release_tag != ''
         shell: powershell
