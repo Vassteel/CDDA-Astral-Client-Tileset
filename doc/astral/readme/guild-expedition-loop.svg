@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="610" viewBox="0 0 1080 610" role="img" aria-labelledby="title desc">
+  <title id="title">Project Astral: the proposed guild and expedition loop</title>
+  <desc id="desc">Concept only. Records and contracts lead to preparation, then portal exploration. Discoveries return to improve facilities and relations, creating new opportunities.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101e2b"/><stop offset="1" stop-color="#182725"/></linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 1 8 5 0 9" fill="none" stroke="#d5af72" stroke-width="1.4"/></marker>
+  </defs>
+  <rect width="1080" height="610" rx="16" fill="url(#bg)"/>
+  <rect x="16" y="16" width="1048" height="578" rx="9" fill="none" stroke="#526053"/>
+  <g fill="#d5af72"><path d="m58 49 4 12 12 4-12 4-4 12-4-12-12-4 12-4z"/><circle cx="1005" cy="66" r="2"/><circle cx="981" cy="91" r="1.5"/></g>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="89" y="73" font-size="27" font-weight="700" fill="#f0dfbd">BEYOND THE GUILDHALL</text>
+    <text x="45" y="112" font-size="19" fill="#b7c6c8">A proposed cycle of preparation, discovery, and lasting change.</text>
+    <g stroke="#d5af72" stroke-width="2" fill="none" marker-end="url(#arrow)">
+      <path d="M329 222H374"/><path d="M704 222H749"/>
+      <path d="M892 294V365"/>
+      <path d="M752 439H708"/><path d="M377 439H333"/>
+      <path d="M185 367V298"/>
+    </g>
+    <g fill="#172d36" stroke="#556c6c"><rect x="45" y="152" width="284" height="142" rx="10"/><rect x="377" y="152" width="327" height="142" rx="10"/><rect x="752" y="152" width="284" height="142" rx="10"/></g>
+    <g fill="#23332e" stroke="#657761"><rect x="45" y="367" width="284" height="142" rx="10"/><rect x="377" y="367" width="327" height="142" rx="10"/><rect x="752" y="367" width="284" height="142" rx="10"/></g>
+    <g fill="#d5af72" font-size="15" font-weight="700" letter-spacing="2">
+      <text x="66" y="182">01 / FIND A PURPOSE</text><text x="400" y="182">02 / GET READY</text><text x="775" y="182">03 / CROSS OVER</text>
+      <text x="66" y="397">06 / BUILD TRUST</text><text x="400" y="397">05 / INVEST AT HOME</text><text x="775" y="397">04 / BRING IT BACK</text>
+    </g>
+    <g fill="#f2eadc" font-size="24" font-weight="700">
+      <text x="66" y="220">Records &amp; contracts</text><text x="400" y="220">Expedition support</text><text x="775" y="220">Portal exploration</text>
+      <text x="66" y="435">Relations</text><text x="400" y="435">Guild facilities</text><text x="775" y="435">Discoveries</text>
+    </g>
+    <g fill="#bed0cc" font-size="18">
+      <text x="66" y="251">Reports, routes, requests</text><text x="400" y="251">Supplies, gear, companions</text><text x="775" y="251">Layers, inhabitants, cores</text>
+      <text x="66" y="466">Access, allies, agreements</text><text x="400" y="466">Workshops, healing, research</text><text x="775" y="466">Knowledge and materials</text>
+    </g>
+    <text x="540" y="335" text-anchor="middle" fill="#d5af72" font-size="18" letter-spacing="3">EVERY RETURN CAN CHANGE HOME</text>
+    <path d="M45 539H1036" stroke="#526053"/>
+    <text x="45" y="570" font-size="17" fill="#d5af72" font-weight="700">CONCEPT / NOT IMPLEMENTED</text>
+    <text x="1036" y="570" text-anchor="end" font-size="17" fill="#b7c6c8">PROJECT ASTRAL</text>
+  </g>
+</svg>

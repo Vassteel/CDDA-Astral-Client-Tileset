@@ -1,19 +1,170 @@
-# CDDA Astral Client & Tileset
+<p align="center">
+  <img src="doc/astral/readme/astral-banner.png" alt="Astral title artwork: a survivor overlooks a ruined city across a lake at dusk" width="1000">
+</p>
 
-**Separate downloads:** [Astral Client](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/client-v0.1.2) · [Astral Tileset](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/tileset-v0.1.25)
+# Project Astral — CDDA Astral Client & Tileset
 
-A mouse-friendly CDDA client and an independently installable tileset. [Controls, updater and development notes](doc/hybrid/README.md).
+**A mouse-friendly survival client today. A portal-fantasy adventure taking shape for tomorrow.**
 
-## Major features
+Project Astral is an independent fork of **Cataclysm: Dark Days Ahead**, bringing mouse-friendly controls, clearer equipment management, an illustrated achievement system, and a growing collection of original artwork to CDDA's survival sandbox.
 
-- Mouse-friendly menus and inventory controls, with the existing keyboard bindings retained.
-- A HUD with minimap, messages, Missions and workstation controls.
-- Drag-and-drop equipment, clothing layers, and separate scabbard, sheath and holster slots.
-- Workstation management with the actions each station supports, including fuel quantities.
-- An illustrated interface for the 211 vanilla achievements, with a reward bank for supported achievements.
-- Linux/SteamOS and Windows clients with updaters; Astral artwork remains a separate download.
+Its longer-term direction is **isekai and portal fantasy**: expeditions into persistent pocket worlds, layered dungeons with cores to confront, and overworld guild settlements shaped by what adventurers discover and bring home.
 
-The additional Astral achievement goals are shelved; the achievement list uses the 211 vanilla goals.
+**The client and tileset below are available now. The portal worlds and guild systems are still concepts, not features in the current downloads.**
+
+[Download](#astral-downloads) · [Current features](#current-astral-features) · [Development previews](#in-development) · [Future direction](#the-portal-fantasy-direction) · [Controls & updater guide](doc/hybrid/README.md)
+
+## Astral downloads
+
+The client and artwork are **separate downloads**. You can use the client with other compatible tilesets, or install Astral artwork into a compatible CDDA installation without replacing its executable.
+
+| Download | What you get |
+| --- | --- |
+| **[Astral Client 0.1.2](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/client-v0.1.2)** | Full clients for **Linux / SteamOS** and **Windows x64**, with launchers and updaters. |
+| **[Astral Tileset 0.1.25](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/tileset-v0.1.25)** | Standalone Astral artwork, seasonal trees and plants, shield sprites, and an included **UltiCa fallback**. |
+
+For Client 0.1.2, download the **full client** for your platform; this release includes game-data changes. Extract into a new folder and copy your saves and settings while the game is closed. To add the tileset, extract its `gfx/Astral` folder into your game installation and select **Astral** in Graphics.
+
+[All releases and checksums](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases) · [Installation, updates and rollback](doc/hybrid/README.md#client-updates)
+
+## Current Astral features
+
+### Mouse-friendly controls, with familiar keyboard bindings
+
+Menus and inventory selectors offer visible controls for selecting, confirming, cancelling, inspecting, filtering, and choosing quantities. Pickup includes Wear and Wield actions; trade and ammunition selectors expose their own relevant controls. Existing keyboard bindings remain available.
+
+The HUD brings together character information, messages, a minimap, Missions, and workstation controls. Common actions are accessible from the on-screen toolbar, keeping essential interactions close to the map.
+
+### Equipment, clothing layers and weapon holders
+
+Manage gear through a visual equipment interface with **drag-and-drop changes**, clothing layers, and separate scabbard, sheath, and holster destinations. Preview a change before applying it, or cancel it and keep your current equipment.
+
+Equipment still follows CDDA's wear and storage rules: a displayed holder represents actual equipment and capacity. A more detailed equipment interface is being developed below.
+
+### Workstations with relevant actions
+
+Use workstation controls to access the actions supported by the selected station. Fuel transfers let you choose quantities from stacks and review the amounts before confirming, making routine workshop management easier to handle with the mouse.
+
+### Illustrated achievements and a reward bank
+
+The achievement interface presents the **211 vanilla achievement goals**, with illustrations and views for progress, claimable rewards, completed goals, and the reward bank. Supported rewards can be claimed and kept in the bank for later use; reward state persists with the character.
+
+The additional Astral achievement expansion is **shelved**. The current achievement list uses the vanilla goals.
+
+<table>
+  <tr>
+    <td align="center"><img src="doc/astral/readme/achievement-survival.png" alt="Achievement illustration of a survivor beside a winter cabin and garden" width="220"></td>
+    <td align="center"><img src="doc/astral/readme/achievement-exploration.png" alt="Astral achievement illustration for reaching Hub 01" width="220"></td>
+    <td align="center"><img src="doc/astral/readme/achievement-crafting.png" alt="Astral achievement illustration for fabrication skill" width="220"></td>
+  </tr>
+  <tr>
+    <td align="center">Survival</td>
+    <td align="center">Exploration</td>
+    <td align="center">Craft and skill</td>
+  </tr>
+</table>
+
+*Examples from Astral's achievement artwork.*
+
+### Separate artwork, shared survival foundation
+
+Astral's art direction combines seasonal landscapes, detailed flora, creatures, and equipment with a consistent pixel-art style. The published tileset includes seasonal trees and plants, shield artwork, and UltiCa fallback for content without an Astral replacement.
+
+Artwork and client releases have independent version numbers. Newer art previews and local development packages may go beyond the public tileset linked above.
+
+### Linux / SteamOS and Windows distribution
+
+Both client downloads include an updater. Client updates and tileset releases are tracked separately, and updater-managed installations support backups and rollback. Update installation requires the game to be closed. See the [updater guide](doc/hybrid/README.md#client-updates) for package support and platform details.
+
+## In development
+
+**These are development builds and ongoing work, not a promise that every feature below is included in Client 0.1.2.** Layouts, balance, and artwork may change before release.
+
+### Equipment and inventory, side by side
+
+The newer equipment layout keeps the survivor preview, equipment groups, and carried inventory visible together. Expand Head, Body, Arms, Hands, Waist, Legs, Feet, or Back to inspect the relevant items and layers; use search, filters, and list or grid views to find equipment.
+
+Drag items between inventory and compatible equipment destinations, then review and apply the change. Main-hand equipment and the shield-based off-hand position are visible alongside the character. **General dual wielding and selected-hand firearm support remain future work.**
+
+### Tactical combat controls
+
+A developing combat hotbar exposes **Attack, Guard, Evade, Shield bash, and Recover**, with move and stamina information. Select a target from the map and make combat decisions without opening a separate battle screen. Combat continues to use CDDA's existing time and action system.
+
+The first creature-behavior experiment gives zombie brutes a readable heavy-strike windup. Automatic combat also has developing Aggressive, Balanced, and Defensive policies with interruption conditions. Costs, timing, and behavior still need broader playtesting; current Evade prepares a defensive reaction in place.
+
+### Character creation and progression interfaces
+
+Recent interface work brings character-creation selections and details into one window and improves appearance-picker cancellation. Progression work is also bringing perk selection into a searchable interface with visible costs, requirements, and confirmation before learning a choice.
+
+### More Astral artwork
+
+Ongoing art work expands plants, wildlife, terrain, and item coverage. The aim is to finish related families together: seasonal variants, relevant growth or life stages, harvested or dead states, and connected terrain where appropriate. Reused fallback tiles are not counted as new original artwork.
+
+## Planned interface work
+
+These items are **design plans**, separate from the development features above:
+
+- **Construction planning:** place building previews with single, line, rectangle, and outline tools; review materials; deliver supplies; and pause or resume construction through normal game activities. Initial scope is floors, walls, doors, and simple furniture.
+- **Broader hand and equipment support:** develop consistent handling for a second held item, off-hand attacks, and selected-hand firearms, while respecting item ownership, grip requirements, and action costs.
+- **Interface polish:** continue improving equipment readability, artwork, screen-size behavior, and mouse/keyboard access, with further controller and platform validation.
+
+## The portal-fantasy direction
+
+**Concept stage — not implemented, with no release date announced.** This is the direction being explored for Project Astral, rather than a fixed feature list or development order.
+
+The ambition is to build on survival, crafting, and exploration with places worth learning about, returning to, and changing. Modern equipment, magical knowledge, unfamiliar materials, and relationships could all become ways to progress.
+
+### Persistent pocket worlds and layered dungeons
+
+Enter a portal from the overworld and discover a smaller, persistent world. A dungeon's layers could include forests, flooded settlements, caverns, ruins, or other environments, each with its own resources, hazards, inhabitants, and routes deeper inside.
+
+Expeditions would build on earlier visits: knowledge of a safe passage, supplies left at a camp, a negotiated agreement, or a newly understood threat. World sizes and the underlying travel system are still undecided.
+
+### A core worth making a decision about
+
+Reaching the core would create several possible outcomes:
+
+| Choice | Intended consequence |
+| --- | --- |
+| **Destroy** | End a threat, with possible consequences for the world and people sustained by the core. |
+| **Claim** | Gain control or a foothold, along with responsibilities for what happens there. |
+| **Bargain** | Establish access, trade, or an alliance with a core that retains its own interests. |
+
+The aim is for each choice to depend on what the player discovers about that particular dungeon.
+
+### Guildhalls as a home between expeditions
+
+Overworld guild settlements could connect exploration to five ongoing activities:
+
+| Guild system | What players could do |
+| --- | --- |
+| **Portal records** | Bring back reports, map routes, identify hazards, and improve incomplete knowledge of other worlds. |
+| **Contracts** | Scout, retrieve materials, escort specialists, rescue missing parties, or investigate a core. |
+| **Expedition support** | Arrange supplies, recruit help, store equipment, and prepare for longer journeys. |
+| **Facilities** | Develop workshops, an infirmary, libraries, and research spaces using discoveries brought home. |
+| **Relations** | Build trust, negotiate dungeon access, manage disputes, and maintain agreements with inhabitants and cores. |
+
+<p align="center">
+  <img src="doc/astral/readme/guild-expedition-loop.svg" alt="Proposed gameplay loop: guild records and contracts lead to expedition preparation, portal exploration and discoveries, which return to improve guild facilities and relations" width="1000">
+</p>
+
+*A proposed gameplay loop. Guilds and portal expeditions are not in the current release.*
+
+A scout, crafter, healer, or negotiator could make a meaningful contribution without conquering every dungeon. A recovered plant might support the infirmary; a rediscovered technique might expand the workshop; an agreement with a core might open a lasting trade route.
+
+### Settlements, inhabitants and discoveries
+
+The goal is to give settlements recognizable layouts, useful facilities, and a reason to exist. Dungeon history could emerge through architecture, objects, written accounts, and inhabitants with different perspectives.
+
+Believable NPC behavior, dependable companions, settlement generation, coherent lore, and new artwork are substantial development challenges. These systems will need to be proven in playable examples before the setting can expand broadly.
+
+## Follow the project
+
+- **[Releases](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases):** published clients and standalone tilesets.
+- **[Astral issues](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/issues):** report Astral-specific bugs or suggest improvements. For bugs, include your client/tileset versions, platform, mods, and steps to reproduce.
+- **[Controls and development notes](doc/hybrid/README.md):** installation, updater behavior, input controls, and validation details.
+
+Project Astral is an independent fork of [Cataclysm: Dark Days Ahead](https://github.com/CleverRaven/Cataclysm-DDA), not an official CDDA release. Original licensing and credits remain in [LICENSE.txt](LICENSE.txt) and the upstream README below; artwork attribution accompanies the tileset.
 
 ---
 
