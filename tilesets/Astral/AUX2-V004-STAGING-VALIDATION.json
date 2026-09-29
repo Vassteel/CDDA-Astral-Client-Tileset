@@ -1,0 +1,20 @@
+{
+  "base": "/home/deck/Astra & Grok/CDDA/artifacts/astral-tileset/release-0.1.39/gfx/Astral",
+  "output": "/home/deck/Astra & Grok/CDDA/artifacts/astral-tileset/integration-staging/aux2-v007-on-0.1.39/gfx/Astral",
+  "new_ids": [
+    "draw_plate",
+    "drift",
+    "nail_header",
+    "nail_header_bronze",
+    "temper_block"
+  ],
+  "all_unrelated_mappings_preserved": true,
+  "prior_files_bytes_verified": 327,
+  "source_hashes_verified": 5,
+  "new_sprite_slots": 5,
+  "base_slots": 19636,
+  "final_slots": 19641,
+  "live_validation": "not performed",
+  "release_archive_modified": false,
+  "client_modified": false
+}

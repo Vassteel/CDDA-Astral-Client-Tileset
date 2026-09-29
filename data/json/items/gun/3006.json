@@ -75,7 +75,8 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "garandclip" ] } ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "garandclip" ] } ],
+    "extend": { "flags": [ "OLD_GUN" ] }
   },
   {
     "id": "m1903",
@@ -114,7 +115,7 @@
       [ "stock accessory", 1 ],
       [ "stock mount", 1 ]
     ],
-    "extend": { "flags": [ "BOLT_ACTION" ] },
+    "extend": { "flags": [ "BOLT_ACTION", "OLD_GUN" ] },
     "pocket_data": [
       { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "3006": 5 }, "allowed_speedloaders": [ "3006_clip" ] }
     ]
@@ -155,7 +156,8 @@
       [ "sling", 1 ],
       [ "stock accessory", 1 ]
     ],
-    "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "m1918mag", "m1918bigmag" ] } ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "m1918mag", "m1918bigmag" ] } ],
+    "extend": { "flags": [ "OLD_GUN" ] }
   },
   {
     "id": "remington_700",

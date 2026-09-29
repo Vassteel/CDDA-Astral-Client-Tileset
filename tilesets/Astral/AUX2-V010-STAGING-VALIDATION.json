@@ -1,0 +1,19 @@
+{
+  "base": "/home/deck/Astra & Grok/CDDA/artifacts/astral-tileset/release-0.1.42/gfx/Astral",
+  "output": "/home/deck/Astra & Grok/CDDA/artifacts/astral-tileset/integration-staging/aux2-v010-on-0.1.42/gfx/Astral",
+  "new_ids": [
+    "emf_detector",
+    "emf_detector_on",
+    "geiger_off",
+    "geiger_on"
+  ],
+  "all_unrelated_mappings_preserved": true,
+  "prior_files_bytes_verified": 355,
+  "source_hashes_verified": 4,
+  "new_sprite_slots": 4,
+  "base_slots": 19658,
+  "final_slots": 19662,
+  "live_validation": "not performed",
+  "release_archive_modified": false,
+  "client_modified": false
+}

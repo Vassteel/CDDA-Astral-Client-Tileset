@@ -1,0 +1,42 @@
+[
+  {
+    "type": "ITEM",
+    "id": "astral_debug_portal_placer",
+    "name": { "str_sp": "gateway placer (debug)" },
+    "description": "Development tool.  Activating it raises an active Astral gateway in the centre of the overmap tile you are standing in.  Spawn it from the debug menu.",
+    "color": "light_blue",
+    "symbol": ";",
+    "weight": "10 g",
+    "volume": "1 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "steel" ],
+    "flags": [ "TRADER_AVOID", "ZERO_WEIGHT" ],
+    "use_action": {
+      "type": "effect_on_conditions",
+      "description": "Raise an Astral gateway here",
+      "menu_text": "Raise gateway",
+      "effect_on_conditions": [ "EOC_ASTRAL_DEBUG_PLACE_PORTAL" ]
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_debug_portal_tuner",
+    "name": { "str_sp": "gateway tuner (debug)" },
+    "description": "Development tool.  Switches any Astral gateway stonework within four squares between its active, dormant and ruined states, for reviewing the artwork in place.",
+    "color": "yellow",
+    "symbol": ";",
+    "weight": "10 g",
+    "volume": "1 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "steel" ],
+    "flags": [ "TRADER_AVOID", "ZERO_WEIGHT" ],
+    "use_action": {
+      "type": "effect_on_conditions",
+      "description": "Tune a nearby gateway",
+      "menu_text": "Tune gateway",
+      "effect_on_conditions": [ "EOC_ASTRAL_DEBUG_TUNE_PORTAL" ]
+    }
+  }
+]

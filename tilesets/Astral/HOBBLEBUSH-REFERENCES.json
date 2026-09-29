@@ -1,0 +1,19 @@
+{
+  "species": "Viburnum lantanoides",
+  "source_page": "https://gobotany.nativeplanttrust.org/species/viburnum/lantanoides/",
+  "photos": {
+    "flowers": "https://newfs.s3.amazonaws.com/taxon-images-1000s1000/Adoxaceae/viburnum-lantanoides-fl-dcameron-c.jpg",
+    "fruit": "https://newfs.s3.amazonaws.com/taxon-images-1000s1000/Adoxaceae/viburnum-lantanoides-fr-fbramley-b.jpg",
+    "habit": "https://newfs.s3.amazonaws.com/taxon-images-1000s1000/Adoxaceae/viburnum-lantanoides-ha-dcameron-b.jpg"
+  },
+  "use": "Botanical references only; original Astral art generated using built-in imagegen.",
+  "observations": [
+    "Broad rounded to heart-shaped opposite leaves with toothed margins and strong sunken veins",
+    "Low spreading arching woody branches",
+    "Flat flower clusters with large white outer sterile flowers and tiny inner fertile flowers",
+    "Fruit clusters mature red to dark purple-black",
+    "Autumn burgundy/russet foliage and bare winter twigs; light snow is a game seasonal treatment"
+  ],
+  "additional_source": "https://plants.ces.ncsu.edu/plants/viburnum-lantanoides/",
+  "season_policy": "Spring flowering and autumn harvest follow the planned game-season treatment; real bloom and fruit timing varies. Ripe drupes mature purple, per NC State."
+}

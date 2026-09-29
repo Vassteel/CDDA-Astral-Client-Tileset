@@ -351,7 +351,8 @@
     "material": [ "steel" ],
     "dispersion": 420,
     "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail mount", 1 ], [ "stock mount", 1 ] ],
-    "pocket_data": [ { "magazine_well": "55 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "p08mag_8rd", "p08mag_32rd" ] } ]
+    "pocket_data": [ { "magazine_well": "55 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "p08mag_8rd", "p08mag_32rd" ] } ],
+    "extend": { "flags": [ "OLD_GUN" ] }
   },
   {
     "id": "mauser_c96",
@@ -378,7 +379,7 @@
     "material": [ "steel" ],
     "dispersion": 450,
     "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail mount", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
-    "flags": [ "RELOAD_ONE" ],
+    "flags": [ "RELOAD_ONE", "OLD_GUN" ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE",
@@ -427,7 +428,8 @@
       [ "stock", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "pocket_data": [ { "magazine_well": "40 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "mp40mag_32rd" ] } ]
+    "pocket_data": [ { "magazine_well": "40 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "mp40mag_32rd" ] } ],
+    "extend": { "flags": [ "OLD_GUN" ] }
   },
   {
     "id": "mp40semi",
@@ -627,7 +629,8 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "stenmag", "survivor9mm_mag" ] } ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "stenmag", "survivor9mm_mag" ] } ],
+    "extend": { "flags": [ "OLD_GUN" ] }
   },
   {
     "id": "usp_9mm",
@@ -880,7 +883,8 @@
     "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail mount", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
     "pocket_data": [
       { "magazine_well": "191 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "bhp9mag_13rd", "bhp9mag_15rd" ] }
-    ]
+    ],
+    "extend": { "flags": [ "OLD_GUN" ] }
   },
   {
     "id": "walther_p38",
@@ -898,7 +902,8 @@
     "material": [ "plastic", "steel" ],
     "dispersion": 480,
     "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail mount", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
-    "pocket_data": [ { "magazine_well": "228 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "p38mag" ] } ]
+    "pocket_data": [ { "magazine_well": "228 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "p38mag" ] } ],
+    "extend": { "flags": [ "OLD_GUN" ] }
   },
   {
     "id": "walther_ppq_9mm",
@@ -956,7 +961,7 @@
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "CZ 75 B pistol" },
-    "description": "The CZ 75 B is a semi-automatic pistol developed in Czechoslovakia, and is one of the original wonder nines.  Though designed for export to western countries, it was declared a state secret; lack of international patent protection meant that many clones and variants were produced and distributed around the world, with Česká zbrojovka only joining in the 90's.  This pistol remains wildly popular among competition shooters.",
+    "description": "The CZ 75 B is a semi-automatic pistol developed in Czechoslovakia, and is one of the original wonder nines.  Though designed for export to western countries, it was declared a state secret; lack of international patent protection meant that many clones and variants were produced and distributed around the world, with \u010cesk\u00e1 zbrojovka only joining in the 90's.  This pistol remains wildly popular among competition shooters.",
     "weight": "998 g",
     "volume": "476 ml",
     "longest_side": "238 mm",
@@ -1045,7 +1050,7 @@
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "B&T APC9 PRO K submachine gun" },
-    "description": "The Brügger & Thomet APC9 PRO K is a closed bolt blowback submachine gun in 9x19mm Parabellum.  It has a collapsible shoulder stock and a red dot sight.",
+    "description": "The Br\u00fcgger & Thomet APC9 PRO K is a closed bolt blowback submachine gun in 9x19mm Parabellum.  It has a collapsible shoulder stock and a red dot sight.",
     "weight": "2400 g",
     "volume": "1890 ml",
     "longest_side": "525 mm",

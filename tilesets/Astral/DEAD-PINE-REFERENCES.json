@@ -1,0 +1,14 @@
+{
+  "family": "dead-pine",
+  "real_photo_url": "https://www.internationaloaksociety.org/sites/default/files/pictures/User3553/Pinus%20ponderosa.JPG",
+  "source_page": "https://www.internationaloaksociety.org/content/oak-creek-canyon-arizona",
+  "local_photo": "references/dead-pine-photo.jpg",
+  "anatomy": "Real pine snag illustrates straight central leader, bare lateral branch whorls and weathered wood; species photo used as structural guide rather than changing game species.",
+  "game_species": "Pinus strobus, resinosa or rigida; bare dead conifer",
+  "style_reference": "Original Astral pine spring source and new dead deciduous tree bark treatment",
+  "states": {
+    "normal": "bare dead conifer",
+    "warped": "branches twisted into shapes reminiscent of Sierpinski triangles per game description"
+  },
+  "client_modified": false
+}

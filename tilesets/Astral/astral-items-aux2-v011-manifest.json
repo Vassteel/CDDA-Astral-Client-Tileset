@@ -1,0 +1,366 @@
+{
+  "version": "aux-2-v011",
+  "status": "packaged in Astral 0.1.44; user/live acceptance pending",
+  "preserve": "All prior Astral art including nine shields; see preserved-art.json",
+  "entries": [
+    {
+      "id": "glass_thermometer",
+      "aliases": [],
+      "state": "neutral",
+      "source_path": "sources/glass_thermometer.png",
+      "source_sha256": "72b60885780c6b07567243d4f01ce0525062b2b28897d08fb5e29512f35ceefb",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/glass_thermometer.png",
+      "png_sha256": "8c51c3454980339720dfb7864e078d6cc09d13eb05b09c6ce6da469033c62f53",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 148,
+      "content_bounds": [
+        72,
+        65,
+        200,
+        195
+      ],
+      "prompt_path": "prompts/glass_thermometer.txt",
+      "prompt_sha256": "2d825cf65c8dacf79336c0093edebf06a8fb6e149a32789a92e3dd36cf2a6310",
+      "native_preview": "previews/glass_thermometer-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving nearest-neighbor resize to256 and transparent pad to256; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_glass_thermometer.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "glass_thermometer",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/science.json",
+          "array_index": 73,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed at128/64/32: narrow pale glass stem, dark silver capillary and rounded bulb; sparse etched ticks, no backing or red fluid.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "glass_thermometer",
+          "page_url": "https://commons.wikimedia.org/wiki/File:Mercury_Thermometer.jpg",
+          "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Mercury_Thermometer.jpg",
+          "local_path": "references/glass_thermometer.image",
+          "sha256": "c4e92da793d422700ecf96ba9483b272151526e3d15ad98447eae645db2e5a41",
+          "purpose": "Real object construction reference only; no photo pixels copied",
+          "inspection": "Inspected room thermometer photo: glass bulb, silver mercury capillary and graduation scale. Omit mount/backing to follow all-glass game definition and glass/mercury recipe."
+        }
+      ]
+    },
+    {
+      "id": "hygrometer",
+      "aliases": [],
+      "state": "neutral",
+      "source_path": "sources/hygrometer.png",
+      "source_sha256": "c939269ab7f26e056de960ca8c7082249aed0d0ed84db8312c56b11345afc473",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/hygrometer.png",
+      "png_sha256": "be50eb0da5b7e1b686905bda45b59d6e7dd202866d3d6107dbaf2a5e47a19649",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 108,
+      "content_bounds": [
+        69,
+        47,
+        201,
+        185
+      ],
+      "prompt_path": "prompts/hygrometer.txt",
+      "prompt_sha256": "faff36689055595fcbc3c62eb9d49f61d79f5437bcf1b68ecbd0178c7f7b0f10",
+      "native_preview": "previews/hygrometer-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving nearest-neighbor resize to256 and transparent pad to256; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_hygrometer.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "hygrometer",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/science.json",
+          "array_index": 29,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed at128/64/32: compact charcoal plastic dial, muted humidity arc and single red pointer; clearly distinct from boxed hygroscope.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "hygrometer",
+          "page_url": "https://exo-terra.com/products/heating/thermo-hygrometers/analog-hygrometer/",
+          "image_url": "https://exo-terra.com/wp-content/uploads/PT2466_01.jpg",
+          "local_path": "references/hygrometer.image",
+          "sha256": "398194d8bf619dcc0ac038aa8b86515b1c4894b2cfd2d68e113fff70b16908f8",
+          "purpose": "Real object construction reference only; no photo pixels copied",
+          "inspection": "Inspected Exo Terra compact round plastic dial, color arc and single pointer. Ignore all packaging/text/animal photo; use muted palette."
+        }
+      ]
+    },
+    {
+      "id": "hygroscope",
+      "aliases": [],
+      "state": "neutral",
+      "source_path": "sources/hygroscope.png",
+      "source_sha256": "77aecc72d1318d93daa1f0d3add333a58bd822204cd6507c1fafef53e2d930be",
+      "source_size": [
+        1242,
+        1266
+      ],
+      "png_path": "png/hygroscope.png",
+      "png_sha256": "573fc68e8f491e0a35ce81c729522102a681a61392a4e904563e54c58913cae0",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 84,
+      "content_bounds": [
+        95,
+        38,
+        161,
+        216
+      ],
+      "prompt_path": "prompts/hygroscope.txt",
+      "prompt_sha256": "efc0cb42e687c1e18fd8075abd6ab32f97c6a91ee1f7eee884ecb76b247e6b37",
+      "native_preview": "previews/hygroscope-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving nearest-neighbor resize to224 and transparent pad to256; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_hygroscope.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "hygroscope",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/science.json",
+          "array_index": 72,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed at128/64/32: long wooden open-front case with steel anchors and pale lower dial; fine hair and mechanism simplify at native size, main box/dial remains distinct.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "hygroscope",
+          "page_url": "https://collections.whipplemuseum.cam.ac.uk/objects/13509/",
+          "image_url": "https://collections.whipplemuseum.cam.ac.uk/media/library_images/thumbnail/32805_3999.jpg",
+          "local_path": "references/hygroscope.image",
+          "sha256": "7c68f8fff7952a61f822e1f0dfb4daa6482d49bc7f8550b800c27f7546117bf4",
+          "purpose": "Real object construction reference only; no photo pixels copied",
+          "inspection": "Inspected Whipple hair hygrometer mechanism and wooden case. Adapt brass historical mechanism to game steel, put inside a simple rectangular wood frame; no brass or added recording drum."
+        },
+        {
+          "subject": "hygroscope",
+          "page_url": "https://collections.whipplemuseum.cam.ac.uk/objects/13509/",
+          "image_url": "https://collections.whipplemuseum.cam.ac.uk/media/library_images/web/32807_3999b.jpg",
+          "local_path": "references/hygroscope-case.image",
+          "sha256": "67edfdd47be4d3ac40efd19828b7231987215b6686883e3ac3bba090a22d60a3",
+          "purpose": "Wood case and mechanism construction reference only; no copied pixels",
+          "inspection": "Inspected Whipple hair hygrometer mechanism and wooden case. Adapt brass historical mechanism to game steel, put inside a simple rectangular wood frame; no brass or added recording drum."
+        }
+      ]
+    },
+    {
+      "id": "sextant",
+      "aliases": [],
+      "state": "neutral",
+      "source_path": "sources/sextant.png",
+      "source_sha256": "f1e8a12d02684efe1b4f458abe2f4d6b07cd65d3b02b095fdb2d7c660812013a",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/sextant.png",
+      "png_sha256": "bb56d4a691c4211c1718cb6072876a8958d49a4ba41ef9ed95790f1a441df962",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 216,
+      "content_bounds": [
+        33,
+        48,
+        223,
+        227
+      ],
+      "prompt_path": "prompts/sextant.txt",
+      "prompt_sha256": "350c809bd32a30522c3808f4ff4daee86c381146b5273886d7267b1f93cdc82a",
+      "native_preview": "previews/sextant-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving nearest-neighbor resize to224 and transparent pad to256; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_sextant.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "sextant",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/science.json",
+          "array_index": 68,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed at128/64/32: pale plastic sector frame, curved arc, index arm, dark mirrors and side sight; open webbing is a stylized adaptation of plastic sector construction.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "sextant",
+          "page_url": "https://www.davisinstruments.com/products/mark-3-sextant",
+          "image_url": "https://cdn.shopify.com/s/files/1/0515/5992/3873/products/00011_03.jpg?v=1618465406",
+          "local_path": "references/sextant.image",
+          "sha256": "17ad851d5f15b94356fec99cff5642a676a67194380edc6b1e27f07479e33dd2",
+          "purpose": "Real object construction reference only; no photo pixels copied",
+          "inspection": "Inspected Davis Mark3 pale molded plastic sector, arc/index arm, mirrors, sight and small filter tabs; simplify native32 without text."
+        }
+      ]
+    },
+    {
+      "id": "tape_measure",
+      "aliases": [],
+      "state": "neutral",
+      "source_path": "sources/tape_measure.png",
+      "source_sha256": "7582762138383d9cced0239dfb7a90fac3b81f4e13d9f9628c2f1ecb7397afae",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/tape_measure.png",
+      "png_sha256": "ebb8031d482ab235fa974df3d630bf65a934cd677f03c6c75de69b5dfba41b0c",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 109,
+      "content_bounds": [
+        58,
+        55,
+        196,
+        229
+      ],
+      "prompt_path": "prompts/tape_measure.txt",
+      "prompt_sha256": "c3bc6d5fd1a2a4439576e6103e49f9c3de699259c52bcd9ee67687e4980f879f",
+      "native_preview": "previews/tape_measure-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving nearest-neighbor resize to256 and transparent pad to256; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_tape_measure.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "tape_measure",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/misc.json",
+          "array_index": 59,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed at128/64/32: yellow rounded plastic body, dark lock and small steel hook; blade retracted and unbranded.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "tape_measure",
+          "page_url": "https://www.merga.ca/en/tape-measures/stanley-30-454-25-ft-fractional-read-tape-measure-sta30-454",
+          "image_url": "https://mergaca-2.azureedge.net/img/product/STA30-454_1-B.jpg?fv=F34FB1A018EC9E530F5CB59B287A3458",
+          "local_path": "references/tape_measure.image",
+          "sha256": "e7d064b25963aa127791792461818c0edb8ea3b222cd20d4f9d4b8e51a57733e",
+          "purpose": "Real object construction reference only; no photo pixels copied",
+          "inspection": "Inspected yellow Stanley25ft plastic body, rounded top/flat base, lock and hook. Adapted unbranded ochre-yellow body and retracted hook."
+        }
+      ]
+    }
+  ],
+  "generated_count": 5,
+  "creative_method": "built-in imagegen only",
+  "static_checks": "dimensions, transparent alpha, non-clipped bounds, exact prompt/source/export hashes",
+  "live_acceptance": "not tested",
+  "release": "0.1.44"
+}

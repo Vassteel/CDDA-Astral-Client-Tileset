@@ -1,0 +1,852 @@
+{
+  "version": "aux-2-v006",
+  "status": "packaged in Astral 0.1.38; user/live acceptance pending",
+  "preserve": "All prior Astral art including nine shields; see preserved-art.json",
+  "entries": [
+    {
+      "id": "clinch_block",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/clinch_block.png",
+      "source_sha256": "7d274da0c5980b9d84029dafc5aacaef2259fb06e36d06bc34cdfd98802b5330",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/clinch_block.png",
+      "png_sha256": "4e67839afeef33cd82d29f992ee80445f1d84f87738e6b13c76d9b7277bde57e",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 100,
+      "content_bounds": [
+        34,
+        72,
+        237,
+        197
+      ],
+      "prompt_path": "prompts/clinch_block.txt",
+      "prompt_sha256": "9839cd2aca5dde591edd30c7b05fe988de0581b3fb31b02abd1851507db1b57b",
+      "native_preview": "previews/clinch_block-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; selected large sources inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_clinch_block.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "clinch_block",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/farrier.json",
+          "array_index": 7,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: low stepped block with raised angled lip; transparent interior and safe margins retained. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "clinch_block",
+          "page_url": "https://kbchorsesupplies.com/tough-1-professional-clinch-block/",
+          "image_url": "https://cdn11.bigcommerce.com/s-anpopbmhid/images/stencil/850x600/products/2212/14158/19-3503__78726.1721073444.jpg?c=1",
+          "local_path": "references/clinch_block.image",
+          "sha256": "d8f8aee164c76ff8aec6e0e0b9675c315fa6bd4e5114e97de9dcc536fe77907a",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photos inspected before generation in reference contact sheet; hoof pick separately inspected.",
+          "adaptation": "Game description controls neutral geometry and material. Preserve functional silhouette; omit brands, text, backgrounds and measurement marks. No photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "clinch_cutter",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/clinch_cutter.png",
+      "source_sha256": "c3b3d9dce7630f09f98774a08ddb9efe8c522c1fd2a5f702f660a2f4dfff323b",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/clinch_cutter.png",
+      "png_sha256": "8a1ae6ac75231d178adf57a789763a3b5598df70f565f18bfcd58c56feaeae37",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 182,
+      "content_bounds": [
+        36,
+        29,
+        213,
+        239
+      ],
+      "prompt_path": "prompts/clinch_cutter.txt",
+      "prompt_sha256": "d1748614459134565999d36440dd0454a26861dc5761c3b73adfae08d8cc478d",
+      "native_preview": "previews/clinch_cutter-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; selected large sources inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_clinch_cutter.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "clinch_cutter",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/farrier.json",
+          "array_index": 9,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: transverse cutter and pointed counter-end on steel shaft; transparent interior and safe margins retained. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "clinch_cutter",
+          "page_url": "https://www.farriertools.co.uk/products/farriers-tools-hoof-buffer-right-left-clinch-cutter-chrome-vanadium-blacksmith-1",
+          "image_url": "https://www.farriertools.co.uk/cdn/shop/files/57_1c74fda6-e3bd-44fa-8cf6-65ab8f34aa9a_1024x1024%402x.jpg?v=1770826748",
+          "local_path": "references/clinch_cutter.image",
+          "sha256": "a675a6add5a8e0d01783a00ed92b92f45c2ebc8431137b4a4c72d5e0b33277d5",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photos inspected before generation in reference contact sheet; hoof pick separately inspected.",
+          "adaptation": "Reference transverse cutter/pick construction; game description specifies small hatchet-like steel tool. No markings or wood handle."
+        }
+      ]
+    },
+    {
+      "id": "clinch_pliers",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/clinch_pliers.png",
+      "source_sha256": "1eba9db4e10f3b0721a1a0e6f64d695ba5788fdd88e7193eda97c39f7b2ff449",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/clinch_pliers.png",
+      "png_sha256": "e47611a90d5f4f84664f9a78c18832e08cacbdee7608dfd9d2d04cb5b83f2a52",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 201,
+      "content_bounds": [
+        36,
+        45,
+        229,
+        225
+      ],
+      "prompt_path": "prompts/clinch_pliers.txt",
+      "prompt_sha256": "afd6d8afe64033f54b931c8910afabc71328416cee52b8235f5c300346434e68",
+      "native_preview": "previews/clinch_pliers-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; selected large sources inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_clinch_pliers.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "clinch_pliers",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/farrier.json",
+          "array_index": 8,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: open asymmetric hooked jaws and separate handles; transparent interior and safe margins retained. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "clinch_pliers",
+          "page_url": "https://northeastfarrier.com/products/kahn-curved-jaw-clincher",
+          "image_url": "https://northeastfarrier.com/cdn/shop/products/Clincher-LowNail_2_436x436.jpg?v=1681311236",
+          "local_path": "references/clinch_pliers.image",
+          "sha256": "7fe7e3c9c9e8c9b217e991ca5705c64c1294553cb30db4a84c82a873a2240083",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photos inspected before generation in reference contact sheet; hoof pick separately inspected.",
+          "adaptation": "Game description controls neutral geometry and material. Preserve functional silhouette; omit brands, text, backgrounds and measurement marks. No photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "hoof_nippers",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/hoof_nippers.png",
+      "source_sha256": "6b4c5889d0e78d9dde33abf0c1c379f1abd2f49bbd1a08dc2a419eb67b4d8e9f",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/hoof_nippers.png",
+      "png_sha256": "c7cfee7f7b83140ece99b8042463d6879dc15ec1342081c94c672051d444a992",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 226,
+      "content_bounds": [
+        10,
+        22,
+        246,
+        243
+      ],
+      "prompt_path": "prompts/hoof_nippers.txt",
+      "prompt_sha256": "621fc8d20e161020b7eca51f1833f6be4902f40bea51fe15e911246e215ae929",
+      "native_preview": "previews/hoof_nippers-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; selected large sources inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_hoof_nippers.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "hoof_nippers",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/farrier.json",
+          "array_index": 4,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: compact broad rounded end-cutting head with central gap; transparent interior and safe margins retained. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "hoof_nippers",
+          "page_url": "https://www.diamondfarrierusa.com/products/?category=41",
+          "image_url": "https://www.diamondfarrierusa.com/media/images/DFN12-DIA_Hoof-Nipper%281%29%281%29.jpg",
+          "local_path": "references/hoof_nippers.image",
+          "sha256": "400191ebf90fdaab60557dc0850da4375d7211ca792beb3bf0a31f895c4c6c2d",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photos inspected before generation in reference contact sheet; hoof pick separately inspected.",
+          "adaptation": "Game description controls neutral geometry and material. Preserve functional silhouette; omit brands, text, backgrounds and measurement marks. No photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "hoof_pick",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/hoof_pick.png",
+      "source_sha256": "04afda21db3cf15cdc243e64f7c0eb93e38189fb1b1de916f8059a2136aec431",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/hoof_pick.png",
+      "png_sha256": "2a8daff68f275f5d91a4e2e8224b3dde19f3cfc5341c52b98ba0b2b5c3166ef8",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 176,
+      "content_bounds": [
+        32,
+        32,
+        227,
+        229
+      ],
+      "prompt_path": "prompts/hoof_pick.txt",
+      "prompt_sha256": "fa9c898307e0abd6c5b8bc50353d3784ad7680c57c4c566cfb83fd65f6af1b00",
+      "native_preview": "previews/hoof_pick-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; selected large sources inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_hoof_pick.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "hoof_pick",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/farrier.json",
+          "array_index": 0,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: plastic grip, brush tufts and hooked pick; transparent interior and safe margins retained. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "hoof_pick",
+          "page_url": "https://www.weaverequine.com/products/hoof-pick-brush",
+          "image_url": "https://www.weaverequine.com/cdn/shop/products/8542-1_3f2e8558-729f-4dc6-b334-29c93a80e1bc_grande.jpg?v=1669747770",
+          "local_path": "references/hoof_pick.image",
+          "sha256": "0b1f11d747f890b10a0518c1944ce0481faa765859a6c30ffdb069cf23e9f19e",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photos inspected before generation in reference contact sheet; hoof pick separately inspected.",
+          "adaptation": "Game description controls neutral geometry and material. Preserve functional silhouette; omit brands, text, backgrounds and measurement marks. No photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "hoof_rasp",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/hoof_rasp.png",
+      "source_sha256": "c344539423faae7ac7f4c02886aa6c075560621654ead120c91303c271eeeb7b",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/hoof_rasp.png",
+      "png_sha256": "3a64bad570c57c750187d29cb35dd1c4ee61deba0d0a89e8c7a38a32c40f7855",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 175,
+      "content_bounds": [
+        31,
+        37,
+        223,
+        228
+      ],
+      "prompt_path": "prompts/hoof_rasp.txt",
+      "prompt_sha256": "76513eb5a8384f69dc17bf9ec892f72ac3f291037ea7c5562b62c3499ffc49cd",
+      "native_preview": "previews/hoof_rasp-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; selected large sources inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_hoof_rasp.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "hoof_rasp",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/farrier.json",
+          "array_index": 5,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: flat rasp teeth, long rectangular blade and bare tang; transparent interior and safe margins retained. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "hoof_rasp",
+          "page_url": "https://www.equestra.fr/rape-sabot-cheval-/94841-rape-bellota-prime-level-eurofers-7500372015112.html",
+          "image_url": "https://www.equestra.fr/61885-full_default/rape-bellota-prime-level-eurofers.jpg",
+          "local_path": "references/hoof_rasp.image",
+          "sha256": "6c041f927b12414fa22bff5db0855da0903bfad7cba28d09235044804b8cb3a2",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photos inspected before generation in reference contact sheet; hoof pick separately inspected.",
+          "adaptation": "Game description controls neutral geometry and material. Preserve functional silhouette; omit brands, text, backgrounds and measurement marks. No photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "hoof_stand",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/hoof_stand.png",
+      "source_sha256": "da228f9e8797a720a02bcc415ce67d140d686c8d288ccff4c67c70ef4db2634e",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/hoof_stand.png",
+      "png_sha256": "7be3533f5080aec53650fe29e466b184973274448095fab6767a5a4b6d572a8b",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 194,
+      "content_bounds": [
+        10,
+        34,
+        216,
+        235
+      ],
+      "prompt_path": "prompts/hoof_stand.txt",
+      "prompt_sha256": "168114198a079f880f5d69acc6185891112c6eb7cd0963a9b461dd91dfeeeb36",
+      "native_preview": "previews/hoof_stand-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; selected large sources inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_hoof_stand.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "hoof_stand",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/farrier.json",
+          "array_index": 10,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: three steel feet, upright post and curved cradle; transparent interior and safe margins retained. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "hoof_stand",
+          "page_url": "https://ufa.com/myUFA/Animals/Animal-Equipment/Equine/Hoof-Stand/p/mp-00008043",
+          "image_url": "https://ufa-cdn.b-cdn.net/posimages/mp-00008043_000_001.jpg",
+          "local_path": "references/hoof_stand.image",
+          "sha256": "0019a6e30ad43a0b4e18f08f7154ee43be2fbd0c797013dc3d671d9f223f28ae",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photos inspected before generation in reference contact sheet; hoof pick separately inspected.",
+          "adaptation": "Use compact post/cradle/base construction only; all-steel short tripod per game material/size instead of branded composite base."
+        }
+      ]
+    },
+    {
+      "id": "hoof_tester",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/hoof_tester.png",
+      "source_sha256": "b8868a2226bb83b78efbd661e426365f2b54e92774971d875ca475d11289805a",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/hoof_tester.png",
+      "png_sha256": "f17126226f26e58d22f8227173fe2852c73c8e1429a93b44462c783dd2c36f44",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 210,
+      "content_bounds": [
+        35,
+        32,
+        221,
+        231
+      ],
+      "prompt_path": "prompts/hoof_tester.txt",
+      "prompt_sha256": "f96b26c6158df09882f057ae642de8cf282b2a578f33d32dd68513e5a6ec86ab",
+      "native_preview": "previews/hoof_tester-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; selected large sources inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_hoof_tester.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "hoof_tester",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/farrier.json",
+          "array_index": 3,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: large open oval pressure arms and separate handles; transparent interior and safe margins retained. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "hoof_tester",
+          "page_url": "https://ynrinstruments.co.uk/fr/products/ynr-england-13-hoof-testers-stainless-steel-farriers-tools-equine-equipments-ce",
+          "image_url": "https://ynrinstruments.co.uk/cdn/shop/products/151859297_1080x.jpg?v=1642687991",
+          "local_path": "references/hoof_tester.image",
+          "sha256": "c263567317db934568c50e7ca973e9d5990a3e23dd4b1a186a1b8bbd421391e9",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photos inspected before generation in reference contact sheet; hoof pick separately inspected.",
+          "adaptation": "Game description controls neutral geometry and material. Preserve functional silhouette; omit brands, text, backgrounds and measurement marks. No photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "horseshoe",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/horseshoe.png",
+      "source_sha256": "2e41a31727208e35e9e2b987c4fd545a06e138dd18d04009ca0931c61af1c4c1",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/horseshoe.png",
+      "png_sha256": "6242c025c9c0f2d094ba58561d68ced4e2d4e1b58dd7340b2d79444033534b84",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 180,
+      "content_bounds": [
+        39,
+        42,
+        217,
+        238
+      ],
+      "prompt_path": "prompts/horseshoe.txt",
+      "prompt_sha256": "4debe1769b4b055fba0f25bb5377d810cb9323ab7d11ddcf48c82d4d72637418",
+      "native_preview": "previews/horseshoe-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; selected large sources inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_horseshoe.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "horseshoe",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/farrier.json",
+          "array_index": 11,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: U-shaped iron shoe, nail holes and open center; transparent interior and safe margins retained. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "horseshoe",
+          "page_url": "https://www.anvilbrand.com/products/st-croix-1-lite-plain-horseshoe",
+          "image_url": "https://www.anvilbrand.com/cdn/shop/files/36-007_f2841dc9-26b6-48cd-beca-aab203c11ed5_1000x.png?v=1704826300",
+          "local_path": "references/horseshoe.image",
+          "sha256": "f0bfcf28e46e82aa845ba8e8a3f391b7ea397a307287422a733277d99d0b35a5",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photos inspected before generation in reference contact sheet; hoof pick separately inspected.",
+          "adaptation": "Game description controls neutral geometry and material. Preserve functional silhouette; omit brands, text, backgrounds and measurement marks. No photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "horseshoe_pliers",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/horseshoe_pliers.png",
+      "source_sha256": "b4230a2068155cf2a39bc7404f74d3b16b74ac9430e0715aa06052f33578d438",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/horseshoe_pliers.png",
+      "png_sha256": "1a41dc51566eed011057f491f2583b6aafb12e7e29d45dfe0164129a01b34860",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 228,
+      "content_bounds": [
+        12,
+        17,
+        248,
+        245
+      ],
+      "prompt_path": "prompts/horseshoe_pliers.txt",
+      "prompt_sha256": "4e4e336c88ebb965e55d236e9d43cbc0de169d4c97cd4f2f2ebff6e2d8361e9d",
+      "native_preview": "previews/horseshoe_pliers-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; selected large sources inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_horseshoe_pliers.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "horseshoe_pliers",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/farrier.json",
+          "array_index": 1,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: large blunt opposed pull-off jaws with wide curved opening; transparent interior and safe margins retained. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "horseshoe_pliers",
+          "page_url": "https://northeastfarrier.com/products/diamond-pull-off",
+          "image_url": "https://northeastfarrier.com/cdn/shop/products/Spreader-Pull-off_1_-white_2048x.jpg?v=1632240123",
+          "local_path": "references/horseshoe_pliers.image",
+          "sha256": "76fe02c1c7c282a71337fec56f580187e8e0e9e88b0bc129e995ed97db503d97",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photos inspected before generation in reference contact sheet; hoof pick separately inspected.",
+          "adaptation": "Game description controls neutral geometry and material. Preserve functional silhouette; omit brands, text, backgrounds and measurement marks. No photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "nail_puller",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/nail_puller.png",
+      "source_sha256": "20524891be0e1ab2d83e45aba45b779e6d4d391387ac21e25330e81cbe8d3d11",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/nail_puller.png",
+      "png_sha256": "c8ed73315d9d1fb5752ce4381a9c53dd1a80959ab886f26f02b172647013cb76",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 201,
+      "content_bounds": [
+        12,
+        50,
+        230,
+        238
+      ],
+      "prompt_path": "prompts/nail_puller.txt",
+      "prompt_sha256": "baa121592371300966769abef07cdf46335a90fe80d3765503b1d7888e61747b",
+      "native_preview": "previews/nail_puller-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; selected large sources inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_nail_puller.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "nail_puller",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/farrier.json",
+          "array_index": 2,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: narrow short jaws distinct from wider shoe puller; transparent interior and safe margins retained. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "nail_puller",
+          "page_url": "https://cowboyhq.com/products/diamond-farrier-12-crease-nail-puller",
+          "image_url": "https://cowboyhq.com/cdn/shop/files/BA_farrier_diamond_nail_puller_12in_23804.webp?v=1749496418",
+          "local_path": "references/nail_puller.image",
+          "sha256": "234046576414d5998e8e1b245b3d71deaf3e55fffab2b919216a4de356a75ce4",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photos inspected before generation in reference contact sheet; hoof pick separately inspected.",
+          "adaptation": "Game description controls neutral geometry and material. Preserve functional silhouette; omit brands, text, backgrounds and measurement marks. No photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "pritchel",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/pritchel.png",
+      "source_sha256": "0e3efd3f655f31b960d6a6b084a05ab3fdfd5d860be54b58bc51f35649659412",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/pritchel.png",
+      "png_sha256": "140c08b4fedb6e39f2bd310190d7228bf3877a373681b2e2608a58d79391f367",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 138,
+      "content_bounds": [
+        28,
+        39,
+        226,
+        226
+      ],
+      "prompt_path": "prompts/pritchel.txt",
+      "prompt_sha256": "6eea77e70b2d3f2ef43e3df3e15fd1f345f1e4c54ee00e9ad72bbfcbe3fa0cdd",
+      "native_preview": "previews/pritchel-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; selected large sources inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_pritchel.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "pritchel",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/farrier.json",
+          "array_index": 6,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: blunt striking head and long tapered punch point; transparent interior and safe margins retained. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "pritchel",
+          "page_url": "https://www.hawkesburytoolworx.com.au/shop/index.php?cPath=8_10_28&main_page=index",
+          "image_url": "https://www.hawkesburytoolworx.com.au/shop/images/Flatland%20Forge%20Pritchel.jpg",
+          "local_path": "references/pritchel.image",
+          "sha256": "ed6d0a83bdeb08d6f8fef04c1d83e7cd64f16202210c9d94efa7049bdf432277",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photos inspected before generation in reference contact sheet; hoof pick separately inspected.",
+          "adaptation": "Game description controls neutral geometry and material. Preserve functional silhouette; omit brands, text, backgrounds and measurement marks. No photo pixels copied."
+        }
+      ]
+    }
+  ],
+  "generated_count": 12,
+  "creative_method": "built-in imagegen only",
+  "static_checks": "dimensions, transparent alpha, non-clipped bounds, exact prompt/source/export hashes",
+  "live_acceptance": "not tested",
+  "release": "0.1.38"
+}

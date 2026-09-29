@@ -5619,5 +5619,11 @@
     "category": "STRING_EDITOR",
     "//": "'?' is treated as text input, so a different key is used.",
     "bindings": [ { "input_method": "keyboard_any", "key": "F1" } ]
-  }
+  },
+  {"type": "keybinding", "name": "Combat actions", "category": "DEFAULTMODE", "id": "combat_menu"},
+  {"type": "keybinding", "name": "Combat: attack", "category": "DEFAULTMODE", "id": "combat_attack"},
+  {"type": "keybinding", "name": "Combat: guard", "category": "DEFAULTMODE", "id": "combat_guard"},
+  {"type": "keybinding", "name": "Combat: evade", "category": "DEFAULTMODE", "id": "combat_evade"},
+  {"type": "keybinding", "name": "Combat: shield bash", "category": "DEFAULTMODE", "id": "combat_bash"},
+  {"type": "keybinding", "name": "Combat: recover", "category": "DEFAULTMODE", "id": "combat_recover"}
 ]

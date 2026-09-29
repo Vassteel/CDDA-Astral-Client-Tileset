@@ -1,0 +1,10 @@
+{
+  "family": "sea-sponge",
+  "image_url": "https://www.habitas.org.uk/marinelife/porifera/SC0275.jpg",
+  "page_url": "https://www.habitas.org.uk/marinelife/photo.asp?item=SC0275",
+  "purpose": "Real brown encrusting sponge morphology: irregular lobes and raised oscula. Generic furniture does not declare an exact species.",
+  "game_id": "f_sea_sponge",
+  "style": "Original Astral tree sprites",
+  "seasons": "All four, restrained palette shifts, living underwater form retained",
+  "states": "No harvest or transform defined; normal only"
+}

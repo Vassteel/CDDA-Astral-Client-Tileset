@@ -1,0 +1,334 @@
+{
+  "name": "Domestic and cottontail rabbits",
+  "revision": "rabbits-v1",
+  "seasonal_policy": "Natural brown coats shared across all four seasons; no white seasonal morph defined. Domestic and cottontail adults and kits are distinct art.",
+  "assets": [
+    {
+      "key": "rabbit-domestic",
+      "id": "mon_rabbit",
+      "label": "Domestic adult / living",
+      "max": [
+        192,
+        192
+      ],
+      "state": "Domestic adult living",
+      "source": "sources/rabbit-domestic.png",
+      "native": "native/rabbit-domestic.png",
+      "source_sha256": "70c277931c6f09e994344a1762a62de3b70b03893325025d8aca31abbd2274c7",
+      "native_sha256": "b28b9851c164d15b029284b5be14b305fbd56d5036d239beac905023b9847464",
+      "prompt_sha256": "16873cb046a058aa5c9f8b06c7109c162d2314be96614d3a646f0cee7956e8c1",
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "crop": [
+        284,
+        154,
+        1078,
+        1100
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        5.875,
+        5.0,
+        26.0,
+        29.0
+      ]
+    },
+    {
+      "key": "rabbit-domestic-corpse",
+      "id": "corpse_mon_rabbit",
+      "label": "Domestic adult / corpse",
+      "max": [
+        192,
+        104
+      ],
+      "state": "Domestic adult corpse",
+      "source": "sources/rabbit-domestic-corpse.png",
+      "native": "native/rabbit-domestic-corpse.png",
+      "source_sha256": "82e1dba5410defba343699a9b8cf8d1ada7c43bb8cf2724a2df6f0132e1457ca",
+      "native_sha256": "e37f06dda3a61521eb603244da5e2d207c795c27348681402e09c484367c0f21",
+      "prompt_sha256": "a92e0756cc87fc33664f69749ee98cce0852dce680ce357e036b3dce19376678",
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "crop": [
+        148,
+        448,
+        1169,
+        944
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        4.0,
+        17.375,
+        28.0,
+        29.0
+      ]
+    },
+    {
+      "key": "rabbit-domestic-kit",
+      "id": "mon_rabbit_baby",
+      "label": "Domestic kit / living",
+      "max": [
+        112,
+        104
+      ],
+      "state": "Domestic kit living",
+      "source": "sources/rabbit-domestic-kit.png",
+      "native": "native/rabbit-domestic-kit.png",
+      "source_sha256": "605a96b0b5c8658d577e844766f8996ac1d82a6324d1c3969ba380185c6c935e",
+      "native_sha256": "d72bb141eb80f2b8ae8110f9584b8ca014bf1d3fbdc0338f524ac0d46551f733",
+      "prompt_sha256": "859ff22ad438b7b442b2a087745a0cd896fb5c2271c4f3a84d4e2a471c7499b8",
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "crop": [
+        380,
+        432,
+        944,
+        1024
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        9.75,
+        16.0,
+        22.125,
+        29.0
+      ]
+    },
+    {
+      "key": "rabbit-domestic-kit-corpse",
+      "id": "corpse_mon_rabbit_baby",
+      "label": "Domestic kit / corpse",
+      "max": [
+        112,
+        64
+      ],
+      "state": "Domestic kit corpse",
+      "source": "sources/rabbit-domestic-kit-corpse.png",
+      "native": "native/rabbit-domestic-kit-corpse.png",
+      "source_sha256": "3589df80a964bdec7e5b419d7aab1291ee6deaa321907a1fab51fc4188a3fec4",
+      "native_sha256": "3a2378dbb81f8c9579067c2c5ea61ac5df595e9311eaf61902dcd4564dc18cd1",
+      "prompt_sha256": "8a8ae8e916f1b47d2458e27f9ab1ff465ec8b727876df2d7befebf4a48f026c9",
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "crop": [
+        266,
+        600,
+        1014,
+        994
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        9.0,
+        21.625,
+        23.0,
+        29.0
+      ]
+    },
+    {
+      "key": "rabbit-cottontail",
+      "id": "mon_wild_rabbit",
+      "label": "Cottontail adult / living",
+      "max": [
+        184,
+        184
+      ],
+      "state": "Cottontail adult living",
+      "source": "sources/rabbit-cottontail.png",
+      "native": "native/rabbit-cottontail.png",
+      "source_sha256": "3c084da438fffb41b65585d088a3ecd766390d6b4bcda2c8bc0c469496805b0c",
+      "native_sha256": "ed1a6f8a8a5ffdb569750b83e2c88908436b587bb8a335498c451fe570a28e7a",
+      "prompt_sha256": "4e6d4246964333c88322279b34bd235540a764dd43c729af3e89de22a7cbbd61",
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "crop": [
+        255,
+        162,
+        1048,
+        1098
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        6.25,
+        6.0,
+        25.75,
+        29.0
+      ]
+    },
+    {
+      "key": "rabbit-cottontail-corpse",
+      "id": "corpse_mon_wild_rabbit",
+      "label": "Cottontail adult / corpse",
+      "max": [
+        184,
+        96
+      ],
+      "state": "Cottontail adult corpse",
+      "source": "sources/rabbit-cottontail-corpse.png",
+      "native": "native/rabbit-cottontail-corpse.png",
+      "source_sha256": "e54f46d2176b1ba1ef8d393726f0d059aee404f3af92f9364009cbb1485b7829",
+      "native_sha256": "6fe26da03cfce46e45ca5102c84818077446fc6efa75b1b969d933f74739c217",
+      "prompt_sha256": "99bfd285870cd3c403edad54e934a918a3ecf1ae05d95950f7c2766bc423b92b",
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "crop": [
+        91,
+        521,
+        1205,
+        1032
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        4.5,
+        18.5,
+        27.5,
+        29.0
+      ]
+    },
+    {
+      "key": "rabbit-cottontail-kit",
+      "id": "mon_wild_rabbit_baby",
+      "label": "Cottontail kit / living",
+      "max": [
+        104,
+        96
+      ],
+      "state": "Cottontail kit living",
+      "source": "sources/rabbit-cottontail-kit.png",
+      "native": "native/rabbit-cottontail-kit.png",
+      "source_sha256": "f56c7b310ed47539f5438730151db03f8182a0b26bc9355aacc72d75596aee65",
+      "native_sha256": "4cd40e6666ef1f863dd5711bf1e823f94162b16a87732e449ee44ed323f7b6d0",
+      "prompt_sha256": "151796750bc3b1dc0f34c2c3fe49ff437af6550792f0d5b1e9a135d48ef2a26c",
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "crop": [
+        344,
+        422,
+        983,
+        1082
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        10.125,
+        17.0,
+        21.75,
+        29.0
+      ]
+    },
+    {
+      "key": "rabbit-cottontail-kit-corpse",
+      "id": "corpse_mon_wild_rabbit_baby",
+      "label": "Cottontail kit / corpse",
+      "max": [
+        104,
+        64
+      ],
+      "state": "Cottontail kit corpse",
+      "source": "sources/rabbit-cottontail-kit-corpse.png",
+      "native": "native/rabbit-cottontail-kit-corpse.png",
+      "source_sha256": "eb0d674de45d015a58aeee154a7b41a02eb8cb4ddf4eb7f9a4803351afa290bc",
+      "native_sha256": "d0a4bdeee93a13ba402537df3a3476270f43361ca17139f015f3788fa1a77824",
+      "prompt_sha256": "2d8a0dc3a8246121a0c276d964d85d5be8f122649a9444507ec86169d05a6274",
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "crop": [
+        190,
+        571,
+        1083,
+        1018
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        9.5,
+        22.5,
+        22.5,
+        29.0
+      ]
+    }
+  ],
+  "status": "packaged in Astral 0.1.40; user/live review pending",
+  "generator": "built-in imagegen",
+  "client_modified": false,
+  "visual_review": "source and native preview inspected; user/live review pending",
+  "release": "0.1.40",
+  "validation": {
+    "version": "0.1.40",
+    "unique_sprites": 8,
+    "creature_ids": [
+      "mon_rabbit",
+      "mon_rabbit_baby",
+      "mon_wild_rabbit",
+      "mon_wild_rabbit_baby"
+    ],
+    "corpse_ids": [
+      "corpse_mon_rabbit",
+      "corpse_mon_rabbit_baby",
+      "corpse_mon_wild_rabbit",
+      "corpse_mon_wild_rabbit_baby"
+    ],
+    "seasonal_policy": "Natural brown coats shared across all four seasons; no white seasonal morph defined. Domestic and cottontail adults and kits are distinct art.",
+    "seasonal_mapping_ids": 40,
+    "source_prompt_export_hashes": "passed",
+    "binary_alpha_and_bounds": "passed",
+    "unrelated_mappings_and_previous_art_bytes": "preserved",
+    "atlas_bytes": "passed",
+    "all_sprite_references_in_range": true,
+    "total_sprite_slots": 19649,
+    "client_modified": false,
+    "user_live_acceptance": "pending"
+  }
+}

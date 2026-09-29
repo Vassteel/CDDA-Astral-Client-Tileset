@@ -1,0 +1,9 @@
+{
+  "species": "Prunus domestica",
+  "page": "https://laji.fi/taxon/MX.38935/identification",
+  "photo": "https://image.laji.fi/MM.134705/Prun_dome_Kumpulan_ktp_12_JK_large.jpg",
+  "local_photo": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/flora/references/plum-photo.jpg",
+  "use": "Real photograph for branching and crown anatomy; approved Astral deciduous tree sprite controls all style.",
+  "game": "Several Prunus species; summer fruit, winter barren; terrain-flora.json 686-699",
+  "failed_reference": "Lucidcentral photo inaccessible; used Finnish Biodiversity Information Facility photograph instead"
+}

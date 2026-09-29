@@ -1,0 +1,106 @@
+{
+  "name": "Striped skunk",
+  "revision": "skunk-v1",
+  "seasonal_policy": "Natural black-and-white coat shared across all four seasons; no seasonal morph or separate young ID defined.",
+  "assets": [
+    {
+      "key": "skunk-adult",
+      "id": "mon_skunk",
+      "label": "Adult / living",
+      "max": [
+        240,
+        208
+      ],
+      "state": "adult living",
+      "source": "sources/skunk-adult.png",
+      "native": "native/skunk-adult.png",
+      "source_sha256": "12920ac7a956be659dc5f4ca7824357ad74437a5ec4f1b706ce28ae0fb209ade",
+      "native_sha256": "bbd76bca6681c1effe3d3386ed9385d723bf60295a593d9f3d4e07889f5a6f75",
+      "prompt_sha256": "9d28ef4ce699cb62f7f0dd4015d92ebd3ae801fe288e08615536000ea3a165bf",
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "crop": [
+        80,
+        241,
+        1234,
+        1070
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        1.0,
+        7.5,
+        31.0,
+        29.0
+      ]
+    },
+    {
+      "key": "skunk-corpse",
+      "id": "corpse_mon_skunk",
+      "label": "Adult / corpse",
+      "max": [
+        240,
+        120
+      ],
+      "state": "adult corpse",
+      "source": "sources/skunk-corpse.png",
+      "native": "native/skunk-corpse.png",
+      "source_sha256": "39af82fee69e30242f9d5cda169307843398f640f803216266c705ef5cc0a685",
+      "native_sha256": "ca71ac2f6c221d71ae52e95ef9d4937e6074072f8fe3c70b904a9ab445e34803",
+      "prompt_sha256": "4b5b994635f51dd7da08a81945b6d02241f07ee7c6d1f86eddab13a6d1b86f8e",
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "crop": [
+        36,
+        567,
+        1234,
+        956
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        1.0,
+        19.25,
+        31.0,
+        29.0
+      ]
+    }
+  ],
+  "status": "packaged in Astral 0.1.39; user/live review pending",
+  "generator": "built-in imagegen",
+  "client_modified": false,
+  "visual_review": "source and native preview inspected; user/live review pending",
+  "release": "0.1.39",
+  "validation": {
+    "version": "0.1.39",
+    "unique_sprites": 2,
+    "creature_ids": [
+      "mon_skunk"
+    ],
+    "corpse_ids": [
+      "corpse_mon_skunk"
+    ],
+    "seasonal_policy": "Natural black-and-white coat shared across all four seasons; no seasonal morph or separate young ID defined.",
+    "seasonal_mapping_ids": 10,
+    "source_prompt_export_hashes": "passed",
+    "binary_alpha_and_bounds": "passed",
+    "unrelated_mappings_and_previous_art_bytes": "preserved",
+    "atlas_bytes": "passed",
+    "all_sprite_references_in_range": true,
+    "total_sprite_slots": 19636,
+    "client_modified": false,
+    "user_live_acceptance": "pending"
+  }
+}

@@ -1,7 +1,11 @@
 #include "ui_telemetry.h"
 #include "rpg_equipment_ui.h"
+#include "equipment_layout.h"
+#include "equipment_actions.h"
 
 #include <algorithm>
+#include <array>
+#include <set>
 #include <optional>
 #include <cmath>
 #include <cstdio>
@@ -18,6 +22,8 @@
 #include "cata_scope_helpers.h"
 #include "cata_utility.h"
 #include "ui_hybrid_chrome.h"
+#include "ui_hybrid_textures.h"
+#include "ui_hybrid_widgets.h"
 #include "catacharset.h"
 #include "character.h"
 #include "color.h"
@@ -56,166 +62,404 @@
 #  include "sdltiles.h"
 #endif
 
+static const flag_id flag_ASTRAL_SHIELD( "ASTRAL_SHIELD" );
+
 rpg_equipment_ui::storage_slot rpg_equipment_ui::storage_slot_for( const item &it )
 {
-    if( !it.is_armor() ) {
-        return storage_slot::none;
-    }
-    // Use pocket capabilities, not translated names or a list of item IDs.
-    // A backpack with a bottle holster remains a backpack.
-    if( it.type->get_use( "holster" ) ) {
-        bool sheath = false;
-        for( const item_pocket *pocket : it.get_container_pockets() ) {
-            for( const flag_id &flag : pocket->get_pocket_data()->get_flag_restrictions() ) {
-                if( flag.str() == "SHEATH_SWORD" ) {
-                    return storage_slot::scabbard;
-                }
-                sheath = sheath || flag.str() == "SHEATH_KNIFE" ||
-                         flag.str() == "SHEATH_AXE" || flag.str() == "SHEATH_SPEAR";
-            }
-        }
-        return sheath ? storage_slot::sheath : storage_slot::holster;
-    }
-    if( it.has_layer( { layer_level::BELTED }, body_part_torso ) ) {
-        for( const sub_bodypart_id &bp : it.get_covered_sub_body_parts() ) {
-            if( bp.id().str() == "torso_hanging_back" ) {
-                return storage_slot::back;
-            }
-        }
-    }
-    return storage_slot::none;
+    return equipment_layout::storage_slot_for( it );
 }
 
 namespace
 {
 
 struct doll_slot {
-    enum class kind { body, body_layer, body_outer, back, scabbard, sheath, holster, weapon, offhand } type;
+    enum class kind {
+        body, body_layer, body_outer, back, scabbard, sheath, holster, weapon, offhand,
+        region, region_layer
+    } type = kind::region;
     bodypart_id bp;
     std::string label;
     layer_level layer = layer_level::NORMAL;
+    equipment_layout::region_id region = equipment_layout::region_id::fallback;
+    equipment_layout::display_layer display = equipment_layout::display_layer::any;
+    equipment_layout::region_side side = equipment_layout::region_side::none;
+    /** Waist prominent positions 0/1; overflow uses >=2. */
+    int position_index = 0;
 };
 
 static const char *layer_name( layer_level layer )
 {
     switch( layer ) {
-        case layer_level::PERSONAL: return _( "Personal" );
-        case layer_level::SKINTIGHT: return _( "Close to skin" );
-        case layer_level::NORMAL: return _( "Normal" );
-        case layer_level::WAIST: return _( "Waist" );
-        case layer_level::OUTER: return _( "Outer" );
-        case layer_level::BELTED: return _( "Strapped" );
-        case layer_level::AURA: return _( "Aura" );
-        default: return "";
+        case layer_level::PERSONAL:
+            return _( "Personal" );
+        case layer_level::SKINTIGHT:
+            return _( "Close to skin" );
+        case layer_level::NORMAL:
+            return _( "Normal" );
+        case layer_level::WAIST:
+            return _( "Waist" );
+        case layer_level::OUTER:
+            return _( "Outer" );
+        case layer_level::BELTED:
+            return _( "Strapped" );
+        case layer_level::AURA:
+            return _( "Aura" );
+        default:
+            return "";
     }
 }
 
-/** Prefer word-boundary cut, then utf8-safe ellipsis. */
-static std::string ellipsize_label( const std::string &raw, int max_cells )
+static std::string labeled_region( const equipment_layout::region_info &info )
 {
-    if( max_cells <= 1 ) {
-        return "…";
+    return _( info.label );
+}
+
+enum class doll_group { overview, head, body, arms, hands, waist, legs, feet, back, weapons, other };
+
+static doll_group group_for( equipment_layout::region_id id )
+{
+    using equipment_layout::region_id;
+    switch( id ) {
+        case region_id::head:
+        case region_id::ear_l:
+        case region_id::ear_r:
+        case region_id::forehead:
+        case region_id::eyes:
+        case region_id::face:
+            return doll_group::head;
+        case region_id::neck:
+        case region_id::torso:
+            return doll_group::body;
+        case region_id::arm_l:
+        case region_id::arm_r:
+            return doll_group::arms;
+        case region_id::wrist_l:
+        case region_id::wrist_r:
+        case region_id::hand_l:
+        case region_id::hand_r:
+        case region_id::rings_l:
+        case region_id::rings_r:
+            return doll_group::hands;
+        case region_id::waist:
+            return doll_group::waist;
+        case region_id::pants:
+        case region_id::leg_lower_l:
+        case region_id::leg_lower_r:
+            return doll_group::legs;
+        case region_id::foot_l:
+        case region_id::foot_r:
+            return doll_group::feet;
+        case region_id::back_bag:
+        case region_id::back_weapon:
+            return doll_group::back;
+        case region_id::main_hand:
+        case region_id::off_hand:
+            return doll_group::weapons;
+        default:
+            return doll_group::other;
     }
-    if( utf8_width( raw ) <= max_cells ) {
-        return raw;
+}
+
+static const char *group_label( doll_group group )
+{
+    switch( group ) {
+        case doll_group::head:
+            return _( "Head" );
+        case doll_group::body:
+            return _( "Body" );
+        case doll_group::arms:
+            return _( "Arms" );
+        case doll_group::hands:
+            return _( "Hands" );
+        case doll_group::waist:
+            return _( "Waist" );
+        case doll_group::legs:
+            return _( "Legs" );
+        case doll_group::feet:
+            return _( "Feet" );
+        case doll_group::back:
+            return _( "Back" );
+        case doll_group::weapons:
+            return _( "Weapons" );
+        case doll_group::other:
+            return _( "Other equipment" );
+        default:
+            return _( "Equipment" );
     }
-    // Prefer breaking on space / hyphen / slash near the end.
-    const std::string truncated = utf8_truncate( raw, static_cast<size_t>( max_cells - 1 ) );
-    size_t break_at = std::string::npos;
-    const size_t min_keep = truncated.size() / 3;
-    for( size_t i = truncated.size(); i > min_keep; --i ) {
-        const char c = truncated[i - 1];
-        if( c == ' ' || c == '-' || c == '/' || c == '_' ) {
-            break_at = i - 1;
-            break;
+}
+
+/** Atlas icon for an equipment group (data/ui/astral/icons). */
+static const char *group_icon( doll_group group )
+{
+    switch( group ) {
+        case doll_group::head:
+            return "cat_head";
+        case doll_group::body:
+            return "cat_body";
+        case doll_group::arms:
+            return "cat_arms";
+        case doll_group::hands:
+            return "cat_hands";
+        case doll_group::waist:
+            return "cat_waist";
+        case doll_group::legs:
+            return "cat_legs";
+        case doll_group::feet:
+            return "cat_feet";
+        case doll_group::back:
+            return "cat_back";
+        case doll_group::weapons:
+            return "cat_weapons";
+        case doll_group::other:
+            return "cat_other";
+        default:
+            return "cat_all";
+    }
+}
+
+/** Atlas icon for an anatomical region row. */
+static const char *region_icon( equipment_layout::region_id id )
+{
+    using equipment_layout::region_id;
+    switch( id ) {
+        case region_id::head:
+        case region_id::forehead:
+            return "cat_head";
+        case region_id::ear_l:
+        case region_id::ear_r:
+            return "cat_ears";
+        case region_id::eyes:
+            return "cat_eyes";
+        case region_id::face:
+            return "cat_face";
+        case region_id::neck:
+            return "cat_neck";
+        case region_id::torso:
+            return "cat_body";
+        case region_id::arm_l:
+        case region_id::arm_r:
+            return "cat_arms";
+        case region_id::wrist_l:
+        case region_id::wrist_r:
+        case region_id::hand_l:
+        case region_id::hand_r:
+        case region_id::rings_l:
+        case region_id::rings_r:
+            return "cat_hands";
+        case region_id::waist:
+            return "cat_waist";
+        case region_id::pants:
+        case region_id::leg_lower_l:
+        case region_id::leg_lower_r:
+            return "cat_legs";
+        case region_id::foot_l:
+        case region_id::foot_r:
+            return "cat_feet";
+        case region_id::back_bag:
+        case region_id::back_weapon:
+            return "cat_back";
+        case region_id::main_hand:
+            return "cat_main_hand";
+        case region_id::off_hand:
+            return "cat_off_hand";
+        default:
+            return "cat_other";
+    }
+}
+
+static bool is_overview_slot( const doll_slot &slot )
+{
+    return slot.type == doll_slot::kind::region || slot.type == doll_slot::kind::weapon ||
+           slot.type == doll_slot::kind::offhand || slot.type == doll_slot::kind::back;
+}
+
+static const std::array<doll_group, 10> overview_groups = {{
+        doll_group::head, doll_group::body, doll_group::arms, doll_group::hands,
+        doll_group::waist, doll_group::legs, doll_group::feet, doll_group::back,
+        doll_group::weapons, doll_group::other
+    }
+};
+
+static void draw_equipment_icon( const item &it, ImVec2 min, ImVec2 max )
+{
+#if defined(TILES)
+    if( get_option<bool>( "USE_TILES" ) && tilecontext ) {
+        const auto data = tilecontext->get_texture_draw_data( it.typeId().str(),
+                          TILE_CATEGORY::ITEM, tripoint_bub_ms() );
+        if( data ) {
+            ImGui::GetWindowDrawList()->AddImage( reinterpret_cast<ImTextureID>( data->texture ),
+                                                  min, max, ImVec2( data->uv0.first, data->uv0.second ),
+                                                  ImVec2( data->uv1.first, data->uv1.second ) );
+            return;
         }
     }
-    std::string out = ( break_at != std::string::npos )
-                      ? truncated.substr( 0, break_at )
-                      : truncated;
-    // Trim trailing whitespace from the break
-    while( !out.empty() && out.back() == ' ' ) {
-        out.pop_back();
-    }
-    if( out.empty() ) {
-        out = utf8_truncate( raw, static_cast<size_t>( max_cells - 1 ) );
-    }
-    return out + "…";
+#endif
+    ImGui::GetWindowDrawList()->AddText( min, ImGui::GetColorU32( ImGuiCol_Text ),
+                                         it.symbol().c_str() );
 }
 
 static std::vector<doll_slot> make_doll_slots( Character &you )
 {
+    using equipment_layout::region_id;
+    using equipment_layout::display_layer;
+    using equipment_layout::region_side;
+
     std::vector<doll_slot> slots;
-    const auto add_bp = [&]( const bodypart_str_id & id, const char *fallback_label ) {
-        if( !you.has_part( id.id() ) ) {
+    const std::vector<region_id> visible = equipment_layout::visible_regions_for( you );
+    const auto is_visible = [&]( region_id id ) {
+        return std::find( visible.begin(), visible.end(), id ) != visible.end();
+    };
+
+    const auto add_region = [&]( region_id id, doll_slot::kind type = doll_slot::kind::region,
+                                 display_layer display = display_layer::any, int position_index = 0,
+    const char *label_override = nullptr ) {
+        if( !is_visible( id ) ) {
             return;
         }
+        const equipment_layout::region_info &info = equipment_layout::info_for( id );
         doll_slot s;
-        s.type = doll_slot::kind::body;
-        s.bp = id.id();
-        s.label = body_part_name_as_heading( s.bp, 1 );
-        if( s.label.empty() ) {
-            s.label = fallback_label;
+        s.type = type;
+        s.region = id;
+        s.display = display;
+        s.side = info.side;
+        s.position_index = position_index;
+        s.label = label_override ? _( label_override ) : labeled_region( info );
+        s.bp = bodypart_str_id::NULL_ID().id();
+        // Keep a body-part hint for encumbrance readout; layer controls no
+        // longer key off shared bp IDs (avoids Neck/Torso duplicate panels).
+        switch( id ) {
+            case region_id::head:
+            case region_id::ear_l:
+            case region_id::ear_r:
+            case region_id::forehead:
+                s.bp = body_part_head.id();
+                break;
+            case region_id::eyes:
+                s.bp = body_part_eyes.id();
+                break;
+            case region_id::face:
+                s.bp = body_part_mouth.id();
+                break;
+            case region_id::neck:
+            case region_id::torso:
+            case region_id::waist:
+            case region_id::back_bag:
+            case region_id::back_weapon:
+                s.bp = body_part_torso.id();
+                break;
+            case region_id::arm_l:
+                s.bp = body_part_arm_l.id();
+                break;
+            case region_id::arm_r:
+                s.bp = body_part_arm_r.id();
+                break;
+            case region_id::wrist_l:
+            case region_id::hand_l:
+            case region_id::rings_l:
+                s.bp = body_part_hand_l.id();
+                break;
+            case region_id::wrist_r:
+            case region_id::hand_r:
+            case region_id::rings_r:
+                s.bp = body_part_hand_r.id();
+                break;
+            case region_id::pants:
+            case region_id::leg_lower_l:
+                s.bp = body_part_leg_l.id();
+                break;
+            case region_id::leg_lower_r:
+                s.bp = body_part_leg_r.id();
+                break;
+            case region_id::foot_l:
+                s.bp = body_part_foot_l.id();
+                break;
+            case region_id::foot_r:
+                s.bp = body_part_foot_r.id();
+                break;
+            default:
+                break;
         }
         slots.push_back( s );
     };
 
-    add_bp( body_part_eyes, "Eyes" );
-    add_bp( body_part_head, "Head" );
-    add_bp( body_part_mouth, "Mouth" );
-    add_bp( body_part_torso, "Torso" );
+    // Anatomical overview (Package B layout).
+    add_region( region_id::head );
+    add_region( region_id::forehead );
+    add_region( region_id::eyes );
+    add_region( region_id::face );
+    add_region( region_id::ear_l );
+    add_region( region_id::ear_r );
+    add_region( region_id::neck );
+    add_region( region_id::torso );
+    add_region( region_id::arm_l );
+    add_region( region_id::arm_r );
+    add_region( region_id::wrist_l );
+    add_region( region_id::wrist_r );
+    add_region( region_id::hand_l );
+    add_region( region_id::hand_r );
+    add_region( region_id::rings_l );
+    add_region( region_id::rings_r );
+    // Two prominent waist equipment positions + overflow list elsewhere.
+    add_region( region_id::waist, doll_slot::kind::region, display_layer::any, 0, "Waist 1" );
+    add_region( region_id::waist, doll_slot::kind::region, display_layer::any, 1, "Waist 2" );
+    add_region( region_id::pants );
+    add_region( region_id::leg_lower_l );
+    add_region( region_id::leg_lower_r );
+    add_region( region_id::foot_l );
+    add_region( region_id::foot_r );
+    add_region( region_id::back_bag, doll_slot::kind::back );
+    add_region( region_id::back_weapon );
+    add_region( region_id::main_hand, doll_slot::kind::weapon );
+    add_region( region_id::off_hand, doll_slot::kind::offhand );
+    add_region( region_id::fallback );
 
-    // Dedicated outer-layer torso slot (coats / outer armor).
-    {
-        doll_slot outer;
-        outer.type = doll_slot::kind::body_outer;
-        outer.bp = body_part_torso.id();
-        outer.label = _( "Outer" );
-        slots.push_back( outer );
-    }
-    // Dedicated hanging-back / backpack slot (BELTED back storage).
-    {
-        doll_slot back;
-        back.type = doll_slot::kind::back;
-        back.bp = body_part_torso.id();
-        back.label = _( "Back" );
-        slots.push_back( back );
-    }
+    // Legacy holder overview labels remain reachable as waist/back filters.
+    slots.push_back( { doll_slot::kind::scabbard, bodypart_str_id::NULL_ID().id(),
+                       _( "Scabbards" ), layer_level::NORMAL, region_id::waist,
+                       display_layer::uncommon, region_side::none, 0 } );
+    slots.push_back( { doll_slot::kind::sheath, bodypart_str_id::NULL_ID().id(),
+                       _( "Sheaths" ), layer_level::NORMAL, region_id::waist,
+                       display_layer::uncommon, region_side::none, 0 } );
+    slots.push_back( { doll_slot::kind::holster, bodypart_str_id::NULL_ID().id(),
+                       _( "Holsters" ), layer_level::NORMAL, region_id::waist,
+                       display_layer::uncommon, region_side::none, 0 } );
 
-    add_bp( body_part_arm_l, "Arm L" );
-    add_bp( body_part_arm_r, "Arm R" );
-    add_bp( body_part_hand_l, "Hand L" );
-    add_bp( body_part_hand_r, "Hand R" );
-    add_bp( body_part_leg_l, "Leg L" );
-    add_bp( body_part_leg_r, "Leg R" );
-    add_bp( body_part_foot_l, "Foot L" );
-    add_bp( body_part_foot_r, "Foot R" );
-
-    doll_slot weapon;
-    weapon.type = doll_slot::kind::weapon;
-    weapon.bp = bodypart_str_id::NULL_ID().id();
-    weapon.label = _( "Weapon" );
-    slots.push_back( weapon );
-
-    doll_slot offhand;
-    offhand.type = doll_slot::kind::offhand;
-    offhand.bp = bodypart_str_id::NULL_ID().id();
-    offhand.label = _( "Offhand" );
-    slots.push_back( offhand );
-
-    for( const auto &entry : { std::make_pair( doll_slot::kind::scabbard, _( "Scabbards" ) ),
-                              std::make_pair( doll_slot::kind::sheath, _( "Sheaths" ) ),
-                              std::make_pair( doll_slot::kind::holster, _( "Holsters" ) ) } ) {
-        slots.push_back( { entry.first, bodypart_str_id::NULL_ID().id(), entry.second } );
-    }
+    // Compact skin/middle/outer (+ uncommon) layer targets per clothing region.
+    // Do NOT emit seven legacy body_layer slots per region — Neck/Torso shared
+    // the same bp and duplicated the layer panel. Uncommon expands native
+    // layers for the selected region only at draw time.
     const size_t overview_count = slots.size();
     for( size_t i = 0; i < overview_count; ++i ) {
-        if( slots[i].type != doll_slot::kind::body ) {
+        const equipment_layout::region_info &info = equipment_layout::info_for( slots[i].region );
+        if( !info.skin_middle_outer || slots[i].type == doll_slot::kind::scabbard ||
+            slots[i].type == doll_slot::kind::sheath || slots[i].type == doll_slot::kind::holster ||
+            slots[i].region == region_id::waist ) {
             continue;
         }
-        for( int layer = 0; layer < static_cast<int>( layer_level::NUM_LAYER_LEVELS ); ++layer ) {
-            const layer_level level = static_cast<layer_level>( layer );
-            slots.push_back( { doll_slot::kind::body_layer, slots[i].bp, layer_name( level ), level } );
+        // Only one compact set per region (skip duplicate waist positions).
+        bool already = false;
+        for( size_t j = overview_count; j < slots.size(); ++j ) {
+            if( slots[j].type == doll_slot::kind::region_layer &&
+                slots[j].region == slots[i].region ) {
+                already = true;
+                break;
+            }
+        }
+        if( already ) {
+            continue;
+        }
+        for( display_layer display : {
+                 display_layer::skin, display_layer::middle,
+                 display_layer::outer, display_layer::uncommon
+             } ) {
+            doll_slot layer_slot = slots[i];
+            layer_slot.type = doll_slot::kind::region_layer;
+            layer_slot.display = display;
+            layer_slot.layer = equipment_layout::to_native_layer( display );
+            layer_slot.position_index = 0;
+            layer_slot.label = string_format( "%s",
+                                              equipment_layout::display_layer_label( display ) );
+            slots.push_back( layer_slot );
         }
     }
     return slots;
@@ -229,12 +473,20 @@ static bool is_outer_on_torso( const item &it )
 static bool slot_matches( const item &it, const doll_slot &slot )
 {
     using storage = rpg_equipment_ui::storage_slot;
+    using equipment_layout::region_id;
+    using equipment_layout::display_layer;
     const storage place = rpg_equipment_ui::storage_slot_for( it );
+    const equipment_layout::item_profile profile = equipment_layout::classify_item( it );
+
     switch( slot.type ) {
-        case doll_slot::kind::scabbard: return place == storage::scabbard;
-        case doll_slot::kind::sheath: return place == storage::sheath;
-        case doll_slot::kind::holster: return place == storage::holster;
-        case doll_slot::kind::back: return place == storage::back;
+        case doll_slot::kind::scabbard:
+            return place == storage::scabbard;
+        case doll_slot::kind::sheath:
+            return place == storage::sheath;
+        case doll_slot::kind::holster:
+            return place == storage::holster;
+        case doll_slot::kind::back:
+            return place == storage::back;
         case doll_slot::kind::body_outer:
             return is_outer_on_torso( it ) && place == storage::none;
         case doll_slot::kind::body_layer:
@@ -245,23 +497,95 @@ static bool slot_matches( const item &it, const doll_slot &slot )
                    ( slot.bp != body_part_torso || !is_outer_on_torso( it ) );
         case doll_slot::kind::offhand:
             return it.has_flag( flag_BLOCK_WHILE_WORN ) && it.has_flag( flag_RESTRICT_HANDS );
-        case doll_slot::kind::weapon: return true;
+        case doll_slot::kind::weapon:
+            return true;
+        case doll_slot::kind::region:
+        case doll_slot::kind::region_layer:
+            if( slot.region == region_id::main_hand ) {
+                return true;
+            }
+            if( slot.region == region_id::off_hand ) {
+                return it.has_flag( flag_BLOCK_WHILE_WORN ) && it.has_flag( flag_RESTRICT_HANDS );
+            }
+            if( slot.type == doll_slot::kind::region_layer ) {
+                return equipment_layout::is_plausible_drop_destination( it, slot.region, slot.display );
+            }
+            return equipment_layout::is_plausible_drop_destination( it, slot.region, display_layer::any ) ||
+                   profile.equip_destination.id == slot.region;
     }
     return false;
 }
 
 static std::vector<item_location> items_on_slot( Character &you, const doll_slot &slot )
 {
+    using equipment_layout::region_id;
+    using equipment_layout::display_layer;
     std::vector<item_location> result;
-    if( slot.type == doll_slot::kind::weapon ) {
-        if( you.get_wielded_item() ) {
-            result.push_back( you.get_wielded_item() );
+
+    if( slot.type == doll_slot::kind::weapon || slot.region == region_id::main_hand ) {
+        const equipment_layout::hand_occupancy hands = equipment_layout::hands_for( you );
+        if( hands.main_hand ) {
+            result.push_back( hands.main_hand );
         }
-    } else {
-        for( const item_location &loc : you.top_items_loc() ) {
-            if( loc && you.is_worn( *loc ) && slot_matches( *loc, slot ) ) {
-                result.push_back( loc );
+        return result;
+    }
+    if( slot.type == doll_slot::kind::offhand || slot.region == region_id::off_hand ) {
+        const equipment_layout::hand_occupancy hands = equipment_layout::hands_for( you );
+        if( hands.off_hand ) {
+            result.push_back( hands.off_hand );
+        }
+        return result;
+    }
+
+    if( slot.type == doll_slot::kind::region || slot.type == doll_slot::kind::region_layer ) {
+        const equipment_layout::character_map mapped = equipment_layout::map_character( you );
+        const display_layer layer = ( slot.type == doll_slot::kind::region_layer )
+                                    ? slot.display : display_layer::any;
+        // Occupants ≠ incidental coverage highlight (helmet on empty ear).
+        result = equipment_layout::items_visible_on( mapped, slot.region, layer );
+        if( slot.region == region_id::waist ) {
+            // Two prominent waist positions; index >=2 is overflow (shown on
+            // both tiles as a count via the full list when selected).
+            std::vector<item_location> holders;
+            std::vector<item_location> overflow;
+            for( const item_location &loc : result ) {
+                if( !loc ) {
+                    continue;
+                }
+                const equipment_layout::item_profile profile =
+                    equipment_layout::classify_item( *loc );
+                if( profile.role == equipment_layout::equipment_role::holder ||
+                    profile.storage != equipment_layout::storage_slot::none ) {
+                    holders.push_back( loc );
+                } else {
+                    overflow.push_back( loc );
+                }
             }
+            std::vector<item_location> positioned;
+            if( slot.position_index >= 0 &&
+                slot.position_index < static_cast<int>( holders.size() ) ) {
+                positioned.push_back( holders[slot.position_index] );
+            }
+            // Overflow (3rd+ holders and non-holder waist clothing) appears on
+            // the selected waist tile's item list only when that tile is empty
+            // of a dedicated holder — always append for position 0 as overflow
+            // entry point when more than two holders exist.
+            if( slot.position_index == 0 && holders.size() > 2 ) {
+                for( size_t i = 2; i < holders.size(); ++i ) {
+                    positioned.push_back( holders[i] );
+                }
+            }
+            if( slot.position_index == 0 ) {
+                positioned.insert( positioned.end(), overflow.begin(), overflow.end() );
+            }
+            return positioned;
+        }
+        return result;
+    }
+
+    for( const item_location &loc : you.top_items_loc() ) {
+        if( loc && you.is_worn( *loc ) && slot_matches( *loc, slot ) ) {
+            result.push_back( loc );
         }
     }
     return result;
@@ -273,6 +597,36 @@ static item_location item_on_slot( Character &you, const doll_slot &slot )
     return items.empty() ? item_location::nowhere : items.back();
 }
 
+/** Prefer word-boundary cut, then utf8-safe ellipsis. */
+static std::string ellipsize_label( const std::string &raw, int max_cells )
+{
+    if( max_cells <= 1 ) {
+        return "…";
+    }
+    if( utf8_width( raw ) <= max_cells ) {
+        return raw;
+    }
+    const std::string truncated = utf8_truncate( raw, static_cast<size_t>( max_cells - 1 ) );
+    size_t break_at = std::string::npos;
+    const size_t min_keep = truncated.size() / 3;
+    for( size_t i = truncated.size(); i > min_keep; --i ) {
+        const char c = truncated[i - 1];
+        if( c == ' ' || c == '-' || c == '/' || c == '_' ) {
+            break_at = i - 1;
+            break;
+        }
+    }
+    std::string out = ( break_at != std::string::npos )
+                      ? truncated.substr( 0, break_at )
+                      : truncated;
+    while( !out.empty() && out.back() == ' ' ) {
+        out.pop_back();
+    }
+    if( out.empty() ) {
+        out = utf8_truncate( raw, static_cast<size_t>( max_cells - 1 ) );
+    }
+    return out + "…";
+}
 
 static void imgui_cdda_tooltip( const std::string &tip )
 {
@@ -502,12 +856,8 @@ class rpg_equipment_window : public cataimgui::window
                                  ImGuiWindowFlags_NoNav ) {
             you = guy;
             slots = make_doll_slots( *you );
-            for( int i = 0; i < static_cast<int>( slots.size() ); ++i ) {
-                if( slots[i].type == doll_slot::kind::body && slots[i].bp == body_part_torso ) {
-                    selected_slot = i;
-                    break;
-                }
-            }
+            // Astral shell: frame, title and close control drawn by the shared widgets.
+            set_shell( 0, "tab_equipment" );
         }
 
         bool execute();
@@ -540,13 +890,19 @@ class rpg_equipment_window : public cataimgui::window
         cataimgui::bounds get_bounds() override {
             const ImVec2 vp = ImGui::GetMainViewport()->Size;
             const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
-            return { -1.f, -1.f, std::min( vp.x * 0.94f, 1200.f * scale ),
-                     std::min( vp.y * 0.92f, 800.f * scale ) };
+            const float width = std::min( vp.x * 0.96f, 2800.f * scale );
+            const float height = std::min( vp.y * 0.92f, 1600.f * scale );
+            const ImVec2 origin = ImGui::GetMainViewport()->Pos;
+            // Center explicitly: this tree uses available height rather than the
+            // shared auto-centered dialog cap, while keeping viewport margins.
+            return { origin.x + ( vp.x - width ) * 0.5f, origin.y + ( vp.y - height ) * 0.5f,
+                     width, height };
         }
 
     private:
         Character *you = nullptr;
         std::vector<doll_slot> slots;
+        bool scroll_to_active_group = false;
         int selected_slot = -1;
         item_location selected_inv;
         item_location selected_worn;
@@ -603,6 +959,22 @@ class rpg_equipment_window : public cataimgui::window
         std::string inspector_method;
         char inventory_filter[128] = "";
         int inventory_category = 0;
+        bool inventory_list = true;
+        bool show_nearby = false;
+        bool focus_inventory_search = false;
+        std::set<int> expanded_slots;
+        struct tree_node {
+            doll_group group;
+            int slot = -1;
+            item_location location;
+        };
+        std::vector<tree_node> visible_nodes;
+        int tree_focus = 0;
+        void activate_tree_node( const tree_node &node, bool toggle );
+        doll_group active_group = doll_group::overview;
+        bool focus_changed = false;
+        bool overview_keyboard_focus = false;
+        void select_group( doll_group group );
         void draw_inventory_grid();
         void draw_action_bar();
         void try_equip_selected();
@@ -615,6 +987,9 @@ class rpg_equipment_window : public cataimgui::window
         void refresh_selection_validity();
         void clear_selections();
         void flush_pending_action();
+        /** Keyboard/controller-style directional nav across doll overview slots. */
+        void navigate_doll( int dcol, int drow );
+        int focus_list_index = 0; // item list within selected region
 };
 
 void rpg_equipment_window::clear_selections()
@@ -630,6 +1005,12 @@ bool rpg_equipment_window::execute()
     ctxt.register_action( "CONFIRM", to_translation( "Wear / wield selected" ) );
     ctxt.register_action( "HELP_KEYBINDINGS" );
     ctxt.register_action( "EXAMINE" );
+    ctxt.register_action( "UP", to_translation( "Move doll selection up" ) );
+    ctxt.register_action( "DOWN", to_translation( "Move doll selection down" ) );
+    ctxt.register_action( "LEFT", to_translation( "Move doll selection left" ) );
+    ctxt.register_action( "RIGHT", to_translation( "Move doll selection right" ) );
+    ctxt.register_action( "PAGE_UP", to_translation( "Previous item in region list" ) );
+    ctxt.register_action( "PAGE_DOWN", to_translation( "Next item in region list" ) );
     ctxt.register_action( "ANY_INPUT" );
     ctxt.set_timeout( 16 );
 
@@ -651,12 +1032,48 @@ bool rpg_equipment_window::execute()
         if( open_classic || open_storage || open_layers ) {
             break;
         }
+        if( last_action == "QUIT" && !cataimgui::client::want_text_input() ) {
+            if( equip_preview ) {
+                equip_preview = false;
+                status_line = _( "Equipment change cancelled." );
+                continue;
+            }
+            if( active_group != doll_group::overview ) {
+                active_group = doll_group::overview;
+                clear_selections();
+                continue;
+            }
+        }
         if( ( last_action == "QUIT" && !cataimgui::client::want_text_input() ) || !get_is_open() ) {
             break;
         }
         if( last_action == "EXAMINE" && !cataimgui::client::want_text_input() ) {
             inspector_item = selected_inv ? selected_inv : selected_worn;
             inspector_action = item_context_menu::action::more_actions;
+        }
+        if( !cataimgui::client::want_text_input() && !popup_open ) {
+            if( last_action == "UP" ) {
+                navigate_doll( 0, -1 );
+            } else if( last_action == "DOWN" ) {
+                navigate_doll( 0, 1 );
+            } else if( last_action == "LEFT" ) {
+                navigate_doll( -1, 0 );
+            } else if( last_action == "RIGHT" ) {
+                navigate_doll( 1, 0 );
+            } else if( last_action == "PAGE_UP" || last_action == "PAGE_DOWN" ) {
+                if( selected_slot >= 0 && selected_slot < static_cast<int>( slots.size() ) ) {
+                    const std::vector<item_location> items =
+                        items_on_slot( *you, slots[selected_slot] );
+                    if( !items.empty() ) {
+                        const int delta = ( last_action == "PAGE_DOWN" ) ? 1 : -1;
+                        focus_list_index = ( focus_list_index + delta +
+                                             static_cast<int>( items.size() ) ) %
+                                           static_cast<int>( items.size() );
+                        selected_worn = items[focus_list_index];
+                        selected_inv = item_location::nowhere;
+                    }
+                }
+            }
         }
         if( last_action == "ANY_INPUT" && !cataimgui::client::want_text_input() ) {
             const input_event &event = ctxt.get_raw_input();
@@ -672,12 +1089,94 @@ bool rpg_equipment_window::execute()
                 }
             }
         }
-        if( last_action == "CONFIRM" && !cataimgui::client::want_text_input() ) {
-            try_equip_selected();
+        if( last_action == "CONFIRM" && !popup_open && !cataimgui::client::want_text_input() ) {
+            if( equip_preview ) {
+                pending = pending_action::drag_equip;
+                equip_preview = false;
+            } else if( !selected_inv && !visible_nodes.empty() ) {
+                activate_tree_node( visible_nodes[std::clamp( tree_focus, 0,
+                                                              static_cast<int>( visible_nodes.size() ) - 1 )], true );
+            } else if( selected_worn && !selected_inv ) {
+                inspector_item = selected_worn;
+                inspector_action = item_context_menu::action::more_actions;
+            } else {
+                pending = selected_slot >= 0 ? pending_action::drag_equip : pending_action::equip;
+            }
         }
     }
 
     return false;
+}
+
+void rpg_equipment_window::select_group( doll_group group )
+{
+    active_group = group;
+    scroll_to_active_group = true;
+    clear_selections();
+    for( int i = 0; i < static_cast<int>( slots.size() ); ++i ) {
+        if( is_overview_slot( slots[i] ) && group_for( slots[i].region ) == group &&
+            ( group != doll_group::body || slots[i].region == equipment_layout::region_id::torso ) ) {
+            selected_slot = i;
+            const auto items = items_on_slot( *you, slots[i] );
+            selected_worn = items.empty() ? item_location::nowhere : items.front();
+            focus_list_index = 0;
+            break;
+        }
+    }
+    status_line.clear();
+}
+
+void rpg_equipment_window::activate_tree_node( const tree_node &node, bool toggle )
+{
+    if( node.slot < 0 ) {
+        active_group = toggle && active_group == node.group ? doll_group::overview : node.group;
+        clear_selections();
+        selected_slot = -1;
+        return;
+    }
+    selected_slot = node.slot;
+    selected_inv = item_location::nowhere;
+    const auto items = items_on_slot( *you, slots[node.slot] );
+    selected_worn = node.location ? node.location :
+                    items.empty() ? item_location::nowhere : items.front();
+    if( toggle && node.location ) {
+        inspector_item = node.location;
+        inspector_action = item_context_menu::action::more_actions;
+    } else if( toggle ) {
+        if( expanded_slots.count( node.slot ) ) {
+            expanded_slots.erase( node.slot );
+        } else {
+            expanded_slots.insert( node.slot );
+        }
+    }
+}
+
+void rpg_equipment_window::navigate_doll( int dcol, int drow )
+{
+    if( visible_nodes.empty() ) {
+        return;
+    }
+    const int count = static_cast<int>( visible_nodes.size() );
+    tree_focus = std::clamp( tree_focus, 0, count - 1 );
+    if( drow ) {
+        tree_focus = ( tree_focus + drow + count ) % count;
+    } else {
+        const tree_node &node = visible_nodes[tree_focus];
+        if( dcol > 0 ) {
+            activate_tree_node( node, false );
+            if( node.slot >= 0 ) {
+                expanded_slots.insert( node.slot );
+            }
+        } else if( node.slot >= 0 && expanded_slots.count( node.slot ) ) {
+            expanded_slots.erase( node.slot );
+        } else {
+            active_group = doll_group::overview;
+            tree_focus = 0;
+        }
+    }
+    selected_inv = item_location::nowhere;
+    overview_keyboard_focus = true;
+    focus_changed = true;
 }
 
 void rpg_equipment_window::flush_pending_action()
@@ -825,6 +1324,12 @@ void rpg_equipment_window::try_equip_selected()
     }
 
     item &it = *selected_inv;
+    if( selected_slot >= 0 && selected_slot < static_cast<int>( slots.size() ) &&
+        slots[selected_slot].type == doll_slot::kind::offhand &&
+        !( it.has_flag( flag_BLOCK_WHILE_WORN ) && it.has_flag( flag_RESTRICT_HANDS ) ) ) {
+        status_line = _( "The off-hand slot takes a shield." );
+        return;
+    }
 
     // Weapon slot selected → prefer wield
     if( selected_slot >= 0 && selected_slot < static_cast<int>( slots.size() ) &&
@@ -866,27 +1371,98 @@ void rpg_equipment_window::try_drag_equip()
         return;
     }
     const doll_slot &slot = slots[selected_slot];
+    if( slot.type == doll_slot::kind::offhand &&
+        !( selected_inv->has_flag( flag_BLOCK_WHILE_WORN ) &&
+           selected_inv->has_flag( flag_RESTRICT_HANDS ) ) ) {
+        status_line = _( "The off-hand slot takes a shield." );
+        return;
+    }
     // Dropping a compatible magazine/ammo onto an occupied doll slot (e.g.
     // notched stick → bow fire drill) should Reload, not try to replace the
     // wielded item (which only offers Store/Drop/Wear via dispose_item).
     item_location on_slot = selected_worn && slot_matches( *selected_worn, slot ) ?
                             selected_worn : item_on_slot( *you, slot );
-    if( slot.type == doll_slot::kind::scabbard || slot.type == doll_slot::kind::sheath ||
-        slot.type == doll_slot::kind::holster ) {
-        if( !slot_matches( *selected_inv, slot ) ) {
-            if( on_slot && on_slot != selected_inv ) {
-                const use_function *use = on_slot->type->get_use( "holster" );
-                const auto *actor = use ? dynamic_cast<const holster_actor *>( use->get_actor_ptr() ) : nullptr;
-                if( actor && actor->can_holster( *on_slot, *selected_inv ) ) {
-                    item_location source = selected_inv;
-                    clear_selections();
-                    status_line = actor->store( *you, *on_slot, *source ) ?
-                                  _( "Stored." ) : _( "Could not store that item." );
-                    return;
+    using equipment_layout::region_id;
+    const bool holder_region =
+        slot.type == doll_slot::kind::scabbard ||
+        slot.type == doll_slot::kind::sheath ||
+        slot.type == doll_slot::kind::holster ||
+        slot.region == region_id::waist ||
+        slot.region == region_id::back_weapon;
+
+    const auto try_store_in = [&]( const item_location & holder ) -> bool {
+        if( !holder || !holder.get_item() || holder == selected_inv )
+        {
+            return false;
+        }
+        // Must be an equipped holder (holster use), not an arbitrary container.
+        const use_function *use = holder->type->get_use( "holster" );
+        const auto *actor = use ? dynamic_cast<const holster_actor *>( use->get_actor_ptr() ) : nullptr;
+        if( actor == nullptr )
+        {
+            return false;
+        }
+        if( !actor->can_holster( *holder, *selected_inv ) )
+        {
+            status_line = _( "That holder cannot store this item (incompatible or full)." );
+            return true; // handled (rejected)
+        }
+        item_location source = selected_inv;
+        item_location dest_holder = holder;
+        clear_selections();
+        status_line = actor->store( *you, *dest_holder, *source ) ?
+        _( "Stored." ) : _( "Could not store that item." );
+        return true;
+    };
+
+    if( holder_region && selected_inv && selected_inv.get_item() ) {
+        const equipment_layout::item_profile inv_profile =
+            equipment_layout::classify_item( *selected_inv );
+        const bool equipping_holder =
+            inv_profile.role == equipment_layout::equipment_role::holder ||
+            ( selected_inv->is_armor() && slot_matches( *selected_inv, slot ) &&
+              inv_profile.storage != equipment_layout::storage_slot::none );
+        if( !equipping_holder ) {
+            // Resolve the exact selected equipped holder independently of
+            // presentation kind (anatomical Waist/Back are kind::region).
+            item_location holder = item_location::nowhere;
+            if( selected_worn && selected_worn.get_item() &&
+                selected_worn->type->get_use( "holster" ) &&
+                slot_matches( *selected_worn, slot ) ) {
+                holder = selected_worn;
+            } else if( on_slot && on_slot.get_item() &&
+                       on_slot->type->get_use( "holster" ) ) {
+                holder = on_slot;
+            } else {
+                // Prefer an exact holder on this region / waist position.
+                for( const item_location &cand : items_on_slot( *you, slot ) ) {
+                    if( cand && cand->type->get_use( "holster" ) ) {
+                        holder = cand;
+                        break;
+                    }
+                }
+                // Back (weapon) / waist: also search other holders on the region.
+                if( !holder && ( slot.region == region_id::waist ||
+                                 slot.region == region_id::back_weapon ) ) {
+                    const equipment_layout::character_map mapped =
+                        equipment_layout::map_character( *you );
+                    for( const item_location &cand :
+                         equipment_layout::items_equipping_to( mapped, slot.region ) ) {
+                        if( cand && cand->type->get_use( "holster" ) ) {
+                            holder = cand;
+                            break;
+                        }
+                    }
                 }
             }
-            status_line = _( "Drop matching wearable storage here, or a compatible weapon onto an equipped holder." );
-            return;
+            if( holder ) {
+                if( try_store_in( holder ) ) {
+                    return;
+                }
+            } else if( !selected_inv->is_armor() ) {
+                status_line = _( "No equipped holder in this slot to store that item." );
+                return;
+            }
         }
     }
     if( on_slot && on_slot.get_item() && selected_inv.get_item() &&
@@ -934,12 +1510,16 @@ void rpg_equipment_window::try_drag_equip()
             add_msg( m_info, can.str() );
             return;
         }
+        const std::optional<side> want_side = equipment_layout::side_intent_for( slot.region );
         item_location loc = selected_inv;
+        const bool sided = loc->is_sided();
         clear_selections();
-        if( you->wear( loc ) ) {
-            status_line = string_format( _( "Equipped to %s." ), slot.label );
+        if( want_side && sided ) {
+            const auto result = equipment_actions::wear_on_side( *you, loc, *want_side );
+            status_line = result.success() ? string_format( _( "Equipped to %s." ), slot.label ) : result.str();
         } else {
-            status_line = _( "Could not wear that." );
+            status_line = you->wear( loc ) ? string_format( _( "Equipped to %s." ), slot.label ) :
+                          _( "Could not wear that." );
         }
         return;
     }
@@ -981,11 +1561,12 @@ void rpg_equipment_window::try_takeoff_selected()
     }
 
     if( you->is_wielding( *loc ) ) {
-        if( you->can_unwield( *loc ).success() && you->unwield() ) {
+        const auto result = equipment_actions::unwield_to_inventory( *you );
+        if( result.success() ) {
             status_line = _( "Unwielded." );
             clear_selections();
         } else {
-            status_line = you->can_unwield( *loc ).str();
+            status_line = result.str();
         }
         return;
     }
@@ -1134,7 +1715,7 @@ void rpg_equipment_window::draw_equipment_inspection()
     item_location loc = selected_inv ? selected_inv : selected_worn;
     if( !loc ) {
         ImGui::TextWrapped( "%s",
-                            _( "Drag an item onto the survivor or an equipment slot, then Apply equipment change." ) );
+                            _( "Select an item to inspect it." ) );
         return;
     }
     const item_context_menu::action action = item_context_menu::draw_inspector( *you, loc,
@@ -1195,303 +1776,303 @@ void rpg_equipment_window::accept_equipment_drop( int slot, const item_location 
 
 void rpg_equipment_window::draw_paper_doll()
 {
-    ImGui::BeginChild( "paper_doll", ImVec2( ImGui::GetContentRegionAvail().x * 0.44f, 0 ),
-                       ImGuiChildFlags_Borders, ImGuiWindowFlags_NoNav );
-    ui_hybrid_chrome::section_header( _( "Worn and wielded" ) );
-    const float available = ImGui::GetContentRegionAvail().x;
-    const float slot_w = std::max( 54.f, std::min( 110.f, available * 0.27f ) );
-    const float slot_h = std::max( ImGui::GetTextLineHeight() * 2.1f,
-                                  std::min( 48.f, ( ImGui::GetContentRegionAvail().y - 160.f ) / 8.f - 6.f ) );
-    const float gap = 6.f;
-    const ImVec2 origin = ImGui::GetCursorPos();
-    const ImVec2 screen = ImGui::GetCursorScreenPos();
-    const float doll_height = 8.f * ( slot_h + gap );
-    // The visible survivor is a drop target too, not just the small slot buttons.
-    ImGui::SetCursorPos( ImVec2( origin.x + slot_w + gap, origin.y + slot_h + gap ) );
-    ImGui::InvisibleButton( "survivor_drop", ImVec2(
-                                std::max( 1.f, available - 2.f * ( slot_w + gap ) ),
-                                doll_height - 3.f * ( slot_h + gap ) ) );
-    accept_equipment_drop( -1 );
-    draw_survivor( ImVec2( screen.x + slot_w + gap, screen.y + slot_h + gap ),
-                   ImVec2( screen.x + available - slot_w - gap, screen.y + doll_height - 2.f * ( slot_h + gap ) ) );
-    const int item_name_chars = 12;
-    auto slot_position = [&]( const doll_slot & slot ) -> ImVec2 {
-        int column = 0, row = 0;
-        if( slot.type == doll_slot::kind::weapon )
-        {
-            row = 6;
-        } else if( slot.type == doll_slot::kind::offhand )
-        {
-            column = 2;
-            row = 6;
-        } else if( slot.type == doll_slot::kind::back )
-        {
-            column = 1;
-            row = 6;
-        } else if( slot.type == doll_slot::kind::scabbard ||
-                   slot.type == doll_slot::kind::sheath || slot.type == doll_slot::kind::holster )
-        {
-            row = 7;
-            column = slot.type == doll_slot::kind::scabbard ? 0 :
-                     slot.type == doll_slot::kind::sheath ? 1 : 2;
-        } else if( slot.type == doll_slot::kind::body_outer )
-        {
-            column = 2;
-            row = 1;
-        } else
-        {
-            const std::string id = slot.bp.id().str();
-            if( id == "head" ) {
-                column = 1;
-            } else if( id == "mouth" ) {
-                column = 2;
-            } else if( id == "torso" ) {
-                row = 1;
-            } else if( id == "arm_l" ) {
-                row = 2;
-            } else if( id == "arm_r" ) {
-                column = 2;
-                row = 2;
-            } else if( id == "hand_l" ) {
-                row = 3;
-            } else if( id == "hand_r" ) {
-                column = 2;
-                row = 3;
-            } else if( id == "leg_l" ) {
-                row = 4;
-            } else if( id == "leg_r" ) {
-                column = 2;
-                row = 4;
-            } else if( id == "foot_l" ) {
-                row = 5;
-            } else if( id == "foot_r" ) {
-                column = 2;
-                row = 5;
-            }
-        }
-        return ImVec2( origin.x + column * ( available - slot_w ) * 0.5f,
-                       origin.y + row * ( slot_h + gap ) );
-    };
-
+    namespace w = ui_hybrid_widgets;
+    namespace theme = ui_hybrid_chrome::theme;
+    const ui_hybrid_chrome::theme::tokens &tk = theme::get();
+    const float s = theme::scale();
+    const float gap = tk.lg * s;
+    const float available_width = ImGui::GetContentRegionAvail().x;
+    // Portrait column: wide enough for a readable survivor and hand cards, never
+    // a narrow strip stranded in a tall panel.
+    const float portrait_width = std::clamp( available_width * 0.2f, 220.f * s, 420.f * s );
+    const float tree_width = ( available_width - portrait_width - gap * 2.f ) * 0.5f;
     bool doll_ctx_request = false;
     int doll_ctx_index = -1;
     item_location doll_ctx_loc;
-    for( int i = 0; i < static_cast<int>( slots.size() ); i++ ) {
-        const doll_slot &slot = slots[i];
-        if( slot.type == doll_slot::kind::body_layer ) {
+    const auto mapped = equipment_layout::map_character( *you );
+    visible_nodes.clear();
+
+    const auto request_context = [&]( int slot, const item_location & loc ) {
+        if( loc ) {
+            doll_ctx_request = true;
+            doll_ctx_index = slot;
+            doll_ctx_loc = loc;
+        }
+    };
+    const auto sprite_painter = [this]( const item * it ) -> w::icon_painter {
+        if( it == nullptr ) {
+            return nullptr;
+        }
+        return [it]( ImDrawList *, const ImVec2 & min, const ImVec2 & max ) {
+            draw_equipment_icon( *it, min, max );
+        };
+    };
+
+    // ---- left column: live survivor, hand cards, other equipment -------------
+    // These controls remain visible while either the equipment tree or inventory scrolls.
+    ImGui::BeginChild( "survivor_column", ImVec2( portrait_width, 0.f ),
+                       ImGuiChildFlags_None, ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoScrollbar );
+    const float left_width = ImGui::GetContentRegionAvail().x;
+    const float card_h = 88.f * s;
+    const float other_h = tk.button * s;
+    const float reserved = card_h * 2.f + other_h + tk.md * s * 2.f + tk.xs * s * 2.f +
+                           ImGui::GetStyle().ItemSpacing.y * 6.f;
+    const float portrait_height = std::max( 160.f * s, ImGui::GetContentRegionAvail().y - reserved );
+    const ImVec2 portrait_min = ImGui::GetCursorScreenPos();
+    const ImVec2 portrait_max( portrait_min.x + left_width, portrait_min.y + portrait_height );
+    ImVec2 inner_min;
+    ImVec2 inner_max;
+    w::portrait_frame( ImGui::GetWindowDrawList(), portrait_min, portrait_max, inner_min, inner_max );
+    draw_survivor( inner_min, inner_max );
+    ImGui::InvisibleButton( "survivor_drop", ImVec2( left_width, portrait_height ) );
+    accept_equipment_drop( -1 );
+    if( ImGui::IsItemHovered() && drag_payload ) {
+        w::tooltip( _( "Drop here to equip on the best matching slot." ) );
+    }
+    ImGui::Dummy( ImVec2( 0.f, tk.md * s - ImGui::GetStyle().ItemSpacing.y ) );
+    for( int i = 0; i < static_cast<int>( slots.size() ); ++i ) {
+        if( slots[i].type != doll_slot::kind::weapon && slots[i].type != doll_slot::kind::offhand ) {
             continue;
         }
-        const std::vector<item_location> worn_items = items_on_slot( *you, slot );
-        item_location worn_loc = worn_items.empty() ? item_location::nowhere : worn_items.back();
-        if( selected_slot == i && selected_worn && you->is_worn( *selected_worn ) &&
-            slot_matches( *selected_worn, slot ) ) {
-            worn_loc = selected_worn;
-        }
-        ImGui::SetCursorPos( slot_position( slot ) );
-        // Resolve names into owned strings before any ImGui call that may hold
-        // a const char* past this expression (SetTooltip keeps until end of frame).
-        std::string right;
-        std::string tip;
-        ImVec4 tint = ImVec4( 0.7f, 0.7f, 0.7f, 1.f );
-        if( worn_loc && worn_loc.get_item() ) {
-            right = cell_label( *worn_loc, 1, item_name_chars );
-            for( const item_location &loc : worn_items ) {
-                if( !tip.empty() ) {
-                    tip += "\n";
-                }
-                tip += loc->display_name();
-            }
-            tint = cataimgui::imvec4_from_color( worn_loc->color_in_inventory( you ) );
-        } else {
-            right = _( "— empty —" );
-            worn_loc = item_location::nowhere;
-        }
-
-        const bool selected = ( selected_slot == i );
-        const bool empty = !worn_loc;
-
+        const auto items = items_on_slot( *you, slots[i] );
+        const item_location occupant = items.empty() ? item_location::nowhere : items.front();
         ImGui::PushID( i );
-        const int slot_cols = ui_hybrid_chrome::push_slot_button( selected, empty );
-
-        // Leading gutter so a left-side ITEM sprite does not cover the slot name.
-        const std::string row = slot.label + "\n ";
-        // Leave left padding in the label so a tileset sprite can sit in the
-        // slot without covering the body-part name when drawn as an overlay.
-        if( ImGui::Button( row.c_str(), ImVec2( slot_w, slot_h ) ) ) {
+        const bool selected = selected_slot == i;
+        // One hit target per card; the card art is drawn underneath.
+        ImGui::PushStyleColor( ImGuiCol_Button, 0 );
+        ImGui::PushStyleColor( ImGuiCol_ButtonHovered, 0 );
+        ImGui::PushStyleColor( ImGuiCol_ButtonActive, 0 );
+        ImGui::PushStyleVar( ImGuiStyleVar_FrameBorderSize, 0.f );
+        if( ImGui::Button( "##held_slot", ImVec2( left_width, card_h ) ) ) {
             selected_slot = i;
+            selected_worn = occupant;
             selected_inv = item_location::nowhere;
-            if( worn_loc ) {
-                selected_worn = worn_loc;
-                // Selection never removes gear. Use the explicit action or context menu.
-            } else {
-                selected_worn = item_location::nowhere;
-            }
         }
-        // Plain hover: do NOT use AllowWhenBlockedByPopup — while the RMB
-        // menu is open that flag keeps cells under the popup "hovered", which
-        // spawns tooltips that fight the menu and can scroll/jitter the grid.
+        ImGui::PopStyleVar();
+        ImGui::PopStyleColor( 3 );
         const bool hovered = ImGui::IsItemHovered();
-        const bool rmb_down = ImGui::IsMouseClicked( ImGuiMouseButton_Right );
-        const bool rmb_up = ImGui::IsMouseReleased( ImGuiMouseButton_Right );
-        const bool want_cap = ImGui::GetIO().WantCaptureMouse;
-        const ImGuiID slot_item_id = ImGui::GetItemID();
-        const ImGuiID per_slot_popup_id = ImGui::GetID( "rpg_doll_ctx" );
-
-        if( hovered && rmb_down ) {
-            doll_rmb_down_slot = i;
+        if( hovered && ImGui::IsMouseReleased( ImGuiMouseButton_Right ) ) {
+            request_context( i, occupant );
         }
-        if( hovered && ( rmb_down || rmb_up ) ) {
-            rpg_eq_ctx_telem( rmb_telem_line, string_format(
-                                  "DOLL %s slot=%d down=%d id=0x%08X popupId=0x%08X wantCap=%d t='%s'",
-                                  rmb_down ? "RMB_DOWN" : "RMB_UP",
-                                  i, doll_rmb_down_slot,
-                                  static_cast<unsigned>( slot_item_id ),
-                                  static_cast<unsigned>( per_slot_popup_id ),
-                                  want_cap ? 1 : 0,
-                                  rpg_eq_short_tname( worn_loc ) ) );
-        }
-
-        // Drag-drop target: inventory grid → this doll slot (needs Button LastItem).
         accept_equipment_drop( i );
-
-        // Defer shared doll popup until after PopID + EndChild (parent id stack).
-        // Require same slot for RMB_DOWN and RMB_UP so adjacent rows cannot steal
-        // the release (Deck drift: DOWN slot=14 UP slot=13 → wrong popup).
-        if( hovered && rmb_up && worn_loc && worn_loc.get_item() ) {
-            if( doll_rmb_down_slot == i ) {
-                doll_ctx_request = true;
-                doll_ctx_index = i;
-                doll_ctx_loc = worn_loc;
-            } else if( doll_rmb_down_slot >= 0 ) {
-                rpg_eq_ctx_telem( rmb_telem_line, string_format(
-                                      "DOLL RMB_UP MISMATCH down=%d up=%d t='%s'",
-                                      doll_rmb_down_slot, i,
-                                      rpg_eq_short_tname( worn_loc ) ) );
+        const ImVec2 min = ImGui::GetItemRectMin();
+        const ImVec2 max = ImGui::GetItemRectMax();
+        ImDrawList *draw = ImGui::GetWindowDrawList();
+        {
+            // card art
+            ui_hybrid_textures::texture card = theme::level() != ui_hybrid_chrome::decoration::none ?
+                                               ui_hybrid_textures::get( ui_hybrid_textures::asset::card ) : ui_hybrid_textures::texture{};
+            if( !ui_hybrid_textures::draw_nine_slice( draw, card, min, max, 16.f, 0.5f * s,
+                    hovered ? IM_COL32( 255, 255, 255, 255 ) : IM_COL32( 235, 235, 235, 255 ) ) ) {
+                draw->AddRectFilled( min, max, hovered ? tk.raised_hover : tk.raised, tk.radius_panel * s );
+                draw->AddRect( min, max, tk.edge_quiet, tk.radius_panel * s );
+            }
+            if( selected ) {
+                draw->AddRectFilled( min, ImVec2( max.x, min.y + 1.f * s ), tk.accent );
+                draw->AddRectFilled( ImVec2( min.x, max.y - 1.f * s ), max, tk.accent );
+                draw->AddRectFilled( min, ImVec2( min.x + 1.f * s, max.y ), tk.accent );
+                draw->AddRectFilled( ImVec2( max.x - 1.f * s, min.y ), max, tk.accent );
             }
         }
+        draw->PushClipRect( min, max, true );
+        const float pad = tk.md * s;
+        draw->AddText( ImVec2( min.x + pad, min.y + tk.sm * s ), tk.text_muted, slots[i].label.c_str() );
+        const float isz = tk.icon_featured * s;
+        const float icon_y = min.y + card_h - pad - isz;
+        if( occupant ) {
+            draw_equipment_icon( *occupant, ImVec2( min.x + pad, icon_y ), ImVec2( min.x + pad + isz, icon_y + isz ) );
+        } else {
+            ui_hybrid_textures::draw_icon( draw, slots[i].type == doll_slot::kind::weapon ? "cat_main_hand" :
+                                           "cat_off_hand", ImVec2( min.x + pad, icon_y ), isz, tk.edge_quiet );
+        }
+        const bool reserved_hand = slots[i].type == doll_slot::kind::offhand && occupant &&
+                                   you->is_wielding( *occupant );
+        const std::string label = reserved_hand ? _( "Uses both hands" ) :
+                                  occupant ? remove_color_tags( occupant->type_name() ) : _( "Empty" );
+        w::push_font_section();
+        const float fs = ImGui::GetFontSize();
+        const float text_x = min.x + pad + isz + tk.md * s;
+        const std::string fitted = w::fit_text( label, max.x - pad - text_x );
+        draw->AddText( ImGui::GetFont(), fs, ImVec2( text_x, icon_y + ( isz - fs ) * 0.5f ),
+                       occupant && !reserved_hand ? tk.text : tk.text_muted, fitted.c_str() );
+        w::pop_font();
+        draw->PopClipRect();
+        if( hovered && occupant ) {
+            w::tooltip( occupant->display_name() );
+        }
+        ImGui::PopID();
+        ImGui::Dummy( ImVec2( 0.f, tk.xs * s ) );
+    }
+    if( w::action_button( _( "Other equipment" ), w::button_kind::secondary, ImVec2( left_width / s, 0.f ),
+                          true, nullptr, "cat_other" ) ) {
+        select_group( doll_group::other );
+    }
+    ImGui::EndChild();
+    ImGui::SameLine( 0.f, gap );
 
-        ui_hybrid_chrome::draw_item_bezel( selected, hovered, empty );
-        if( worn_loc && worn_loc.get_item() ) {
-            // Draw-list sprite only — ImGui::Image would steal last-item from the
-            // slot Button and break drag-drop target + right-click context.
-            const ImVec2 rmin = ImGui::GetItemRectMin();
-            const ImVec2 rmax = ImGui::GetItemRectMax();
-            const float row_h = rmax.y - rmin.y;
-            const float icon_sz = std::clamp( row_h - ImGui::GetTextLineHeight() - 6.f, 14.f, 36.f );
-#if defined(TILES)
-            if( get_option<bool>( "USE_TILES" ) && tilecontext ) {
-                const itype_id &iid = worn_loc->typeId();
-                if( iid.is_valid() ) {
-                    const std::optional<texture_draw_data> data =
-                        tilecontext->get_texture_draw_data( iid.str(), TILE_CATEGORY::ITEM,
-                                                            tripoint_bub_ms() );
-                    if( data ) {
-                        const ImVec2 p0( ( rmin.x + rmax.x - icon_sz ) * 0.5f,
-                                         rmax.y - icon_sz - 3.f );
-                        const ImVec2 p1( p0.x + icon_sz, p0.y + icon_sz );
-                        ImGui::GetWindowDrawList()->AddImage(
-                            reinterpret_cast<ImTextureID>( data->texture ), p0, p1,
-                            ImVec2( data->uv0.first, data->uv0.second ),
-                            ImVec2( data->uv1.first, data->uv1.second ) );
+    // ---- middle column: equipment tree -------------------------------------
+    ImGui::BeginChild( "equipment_panel", ImVec2( tree_width, 0.f ), ImGuiChildFlags_None,
+                       ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoScrollbar );
+    w::section_label( _( "Equipment" ), "tab_equipment" );
+    {
+        ImGui::BeginChild( "equipment_tree", ImVec2( 0.f, 0.f ), ImGuiChildFlags_None,
+                           ImGuiWindowFlags_NoNav );
+        ImGui::PushStyleVar( ImGuiStyleVar_ItemSpacing, ImVec2( tk.sm * s, tk.xs * s + 2.f * s ) );
+        // One shared row primitive; sprite/text drawing never steals the drag/drop hit target.
+        const auto row = [&]( const std::string & label, const std::string & detail,
+                              const char *icon_name, const item * sprite, int depth, bool branch,
+                              bool open, bool selected, const tree_node & node ) {
+            const int index = static_cast<int>( visible_nodes.size() );
+            visible_nodes.push_back( node );
+            w::row_state st;
+            st.selected = selected;
+            st.focused = overview_keyboard_focus && tree_focus == index;
+            const std::string id = "n" + std::to_string( index );
+            const w::row_result r = w::tree_row( id.c_str(), label, detail, icon_name,
+                                                 sprite_painter( sprite ), depth, branch, open, st );
+            if( node.slot >= 0 ) {
+                accept_equipment_drop( node.slot, node.location );
+                if( r.right_clicked ) {
+                    const auto occupants = items_on_slot( *you, slots[node.slot] );
+                    request_context( node.slot, node.location ? node.location : occupants.empty() ?
+                                     item_location::nowhere : occupants.front() );
+                }
+            } else if( drag_payload ) {
+                // Collapsed group headers remain useful drop targets.  Choose
+                // a compatible region; explicit rows still provide side/layer intent.
+                for( int i = 0; i < static_cast<int>( slots.size() ); ++i ) {
+                    if( is_overview_slot( slots[i] ) && group_for( slots[i].region ) == node.group &&
+                        slot_matches( *drag_payload, slots[i] ) ) {
+                        accept_equipment_drop( i );
+                        break;
                     }
                 }
             }
-#endif
+            if( r.hovered ) {
+                const std::string tip = node.location ? node.location->display_name() : label;
+                if( node.location || r.truncated || !detail.empty() ) {
+                    w::tooltip( detail.empty() ? tip : tip + "\n" + detail );
+                }
+            }
+            if( st.focused && focus_changed ) {
+                ImGui::SetScrollHereY();
+            }
+            if( r.clicked ) {
+                tree_focus = index;
+                overview_keyboard_focus = false;
+            }
+            return r.clicked;
+        };
+        const auto count_label = []( size_t count ) {
+            return count == 0 ? std::string( _( "No items" ) ) :
+                   string_format( n_gettext( "%d item", "%d items", count ), count );
+        };
+        const auto draw_items = [&]( int slot_index, int depth ) {
+            const auto items = items_on_slot( *you, slots[slot_index] );
+            for( const item_location &loc : items ) {
+                std::set<doll_group> covers;
+                for( const auto &ref : equipment_layout::coverage_for( mapped, loc ) ) {
+                    covers.insert( group_for( ref.id ) );
+                }
+                std::string linked;
+                if( covers.size() > 1 ) {
+                    for( doll_group group : covers ) {
+                        if( !linked.empty() ) {
+                            linked += ", ";
+                        }
+                        linked += group == doll_group::body ? _( "Torso" ) : group_label( group );
+                    }
+                }
+                if( slots[slot_index].display == equipment_layout::display_layer::uncommon && loc->is_armor() ) {
+                    const auto layers = loc->get_layer();
+                    if( !layers.empty() ) {
+                        linked = layer_name( layers.front() );
+                    }
+                }
+                tree_node node{ group_for( slots[slot_index].region ), slot_index, loc };
+                if( row( remove_color_tags( loc->type_name() ), linked, "link", loc.get_item(), depth,
+                         false, false, selected_worn == loc, node ) ) {
+                    activate_tree_node( node, false );
+                }
+            }
+        };
+        if( active_group == doll_group::other || active_group == doll_group::weapons ) {
+            if( w::action_button( _( "All equipment" ), w::button_kind::tertiary, ImVec2( 0, 0 ), true,
+                                  nullptr, "back" ) ) {
+                active_group = doll_group::overview;
+            }
         }
-        if( worn_items.size() > 1 ) {
-            const std::string count = string_format( "%d", worn_items.size() );
-            const ImVec2 rmin = ImGui::GetItemRectMin();
-            ImGui::GetWindowDrawList()->AddText( ImVec2( rmin.x + 4.f, rmin.y + slot_h - 18.f ),
-                                                ImGui::GetColorU32( ImGuiCol_Text ), count.c_str() );
-        }
-        if( hovered && !tip.empty() ) {
-            imgui_cdda_tooltip( tip );
-        }
-
-        // Tint hint via draw-list (avoid TextUnformatted stealing LastItem).
-        {
-            const ImVec2 rmin = ImGui::GetItemRectMin();
-            const ImVec2 rmax = ImGui::GetItemRectMax();
-            ImGui::GetWindowDrawList()->AddRectFilled(
-                ImVec2( rmax.x - 5.f, rmin.y + 3.f ),
-                ImVec2( rmax.x - 2.f, rmax.y - 3.f ),
-                ImGui::ColorConvertFloat4ToU32( tint ) );
-        }
-
-        ImGui::PopStyleColor( slot_cols );
-        ImGui::PopID();
-    }
-
-    ImGui::SetCursorPos( ImVec2( origin.x, origin.y + doll_height ) );
-    ImGui::Dummy( ImVec2( 1.f, 1.f ) );
-    if( selected_slot >= 0 && selected_slot < static_cast<int>( slots.size() ) ) {
-        const doll_slot selected = slots[selected_slot];
-        if( selected.bp != bodypart_str_id::NULL_ID().id() ) {
-            ui_hybrid_chrome::section_header( string_format( _( "Layers — %s" ),
-                                              body_part_name_as_heading( selected.bp, 1 ) ).c_str() );
-            // Every native clothing layer has a target, including empty layers.
-            const float width = ImGui::GetContentRegionAvail().x;
-            const int columns = std::clamp( static_cast<int>( width /
-                                           ( ImGui::CalcTextSize( _( "Close to skin" ) ).x + 12.f ) ), 1, 4 );
-            const float layer_width = ( width - ( columns - 1 ) * gap ) / columns;
-            int column = 0;
+        for( const doll_group group : overview_groups ) {
+            if( group == doll_group::weapons || ( group == doll_group::other && active_group != group ) ) {
+                continue;
+            }
+            std::set<const item *> occupants;
+            for( const auto &region : equipment_layout::region_catalog() ) {
+                if( group_for( region.id ) == group ) {
+                    for( const auto &loc : equipment_layout::items_visible_on( mapped, region.id ) ) {
+                        occupants.insert( loc.get_item() );
+                    }
+                }
+            }
+            tree_node group_node{ group, -1, item_location::nowhere };
+            if( row( group_label( group ), count_label( occupants.size() ), group_icon( group ), nullptr,
+                     0, true, active_group == group, false, group_node ) ) {
+                activate_tree_node( group_node, true );
+            }
+            if( active_group != group ) {
+                continue;
+            }
+            if( scroll_to_active_group ) {
+                ImGui::SetScrollHereY( 0.f );
+                scroll_to_active_group = false;
+            }
             for( int i = 0; i < static_cast<int>( slots.size() ); ++i ) {
-                if( slots[i].type != doll_slot::kind::body_layer || slots[i].bp != selected.bp ) {
+                if( !is_overview_slot( slots[i] ) || group_for( slots[i].region ) != group ) {
                     continue;
                 }
-                if( column++ % columns != 0 ) {
-                    ImGui::SameLine( 0.f, gap );
+                const auto items = items_on_slot( *you, slots[i] );
+                tree_node node{ group, i, item_location::nowhere };
+                if( row( slots[i].label, count_label( items.size() ), region_icon( slots[i].region ),
+                         items.empty() ? nullptr : items.front().get_item(),
+                         1, true, expanded_slots.count( i ), selected_slot == i, node ) ) {
+                    activate_tree_node( node, true );
                 }
-                const std::vector<item_location> items = items_on_slot( *you, slots[i] );
-                ImGui::PushID( 10000 + i );
-                const int colors = ui_hybrid_chrome::push_slot_button( selected_slot == i, items.empty() );
-                const std::string label = string_format( "%s\n%s", slots[i].label,
-                                          items.empty() ? _( "Empty" ) : string_format( _( "%d worn" ), items.size() ) );
-                if( ImGui::Button( label.c_str(), ImVec2( layer_width, ImGui::GetTextLineHeight() * 2.5f ) ) ) {
-                    selected_slot = i;
-                    selected_inv = item_location::nowhere;
-                    selected_worn = items.empty() ? item_location::nowhere : items.back();
+                if( !expanded_slots.count( i ) ) {
+                    continue;
                 }
-                accept_equipment_drop( i );
-                ui_hybrid_chrome::draw_item_bezel( selected_slot == i, ImGui::IsItemHovered(), items.empty() );
-                if( ImGui::IsItemHovered() ) {
-                    std::string tip = slots[i].label;
-                    for( const item_location &loc : items ) {
-                        tip += "\n" + loc->display_name();
+                if( !equipment_layout::info_for( slots[i].region ).skin_middle_outer ) {
+                    draw_items( i, 2 );
+                    continue;
+                }
+                for( int j = 0; j < static_cast<int>( slots.size() ); ++j ) {
+                    if( slots[j].type != doll_slot::kind::region_layer || slots[j].region != slots[i].region ) {
+                        continue;
                     }
-                    imgui_cdda_tooltip( tip );
+                    const auto layer_items = items_on_slot( *you, slots[j] );
+                    tree_node layer_node{ group, j, item_location::nowhere };
+                    if( row( slots[j].label, count_label( layer_items.size() ), region_icon( slots[j].region ),
+                             layer_items.empty() ? nullptr : layer_items.front().get_item(), 2, true,
+                             expanded_slots.count( j ), selected_slot == j, layer_node ) ) {
+                        activate_tree_node( layer_node, true );
+                    }
+                    if( expanded_slots.count( j ) ) {
+                        draw_items( j, 3 );
+                    }
                 }
-                ImGui::PopStyleColor( colors );
-                ImGui::PopID();
             }
         }
-        const doll_slot &active = slots[selected_slot];
-        const std::vector<item_location> items = items_on_slot( *you, active );
-        ui_hybrid_chrome::section_header( active.label.c_str() );
-        if( items.empty() ) {
-            ImGui::TextDisabled( "%s", _( "Empty — drag matching equipment here." ) );
-        }
-        for( size_t i = 0; i < items.size(); ++i ) {
-            const item_location &loc = items[i];
-            ImGui::PushID( 20000 + static_cast<int>( i ) );
-            if( ImGui::Selectable( remove_color_tags( loc->display_name() ).c_str(), selected_worn == loc ) ) {
-                selected_worn = loc;
-                selected_inv = item_location::nowhere;
-            }
-            accept_equipment_drop( selected_slot, loc );
-            if( ImGui::IsItemHovered() && ImGui::IsMouseReleased( ImGuiMouseButton_Right ) ) {
-                doll_ctx_request = true;
-                doll_ctx_index = selected_slot;
-                doll_ctx_loc = loc;
-            }
-            ImGui::PopID();
-        }
+        ImGui::PopStyleVar();
+        ImGui::EndChild();
     }
-
-    // OpenPopup/BeginPopup must run OUTSIDE paper_doll child so the popup is
-    // hashed at the parent Character Equipment window (not clipped/stacked
-    // under the child) and can draw above the panel.
     ImGui::EndChild();
+    ImGui::SameLine( 0.f, gap );
+
+    // ---- right column: inventory ---------------------------------------------
+    ImGui::BeginChild( "inventory_panel", ImVec2( 0.f, 0.f ), ImGuiChildFlags_None,
+                       ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoScrollbar );
+    draw_inventory_grid();
+    ImGui::EndChild();
+    focus_changed = false;
 
     if( ImGui::IsMouseReleased( ImGuiMouseButton_Right ) ) {
         doll_rmb_down_slot = -1;
@@ -1602,31 +2183,76 @@ static const char *nearby_dir_label( int dx, int dy )
 
 void rpg_equipment_window::draw_inventory_grid()
 {
+    namespace w = ui_hybrid_widgets;
+    namespace theme = ui_hybrid_chrome::theme;
+    const ui_hybrid_chrome::theme::tokens &tk = theme::get();
+    const float s = theme::scale();
+    w::section_label( _( "Inventory" ), "tab_inventory" );
+    // Header: search, category, nearby storage, view toggle.
+    {
+        const float btn = tk.button * s;
+        const float right_controls = btn * 2.f + ImGui::GetStyle().ItemSpacing.x * 2.f;
+        const float combo_w = std::clamp( ImGui::GetContentRegionAvail().x * 0.28f, 110.f * s, 220.f * s );
+        ImGui::SetNextItemWidth( std::max( 80.f * s,
+                                           ImGui::GetContentRegionAvail().x - combo_w - right_controls - ImGui::GetStyle().ItemSpacing.x ) );
+        if( focus_inventory_search ) {
+            ImGui::SetKeyboardFocusHere();
+            focus_inventory_search = false;
+        }
+        ImGui::PushStyleVar( ImGuiStyleVar_FramePadding, ImVec2( tk.md * s, ( btn - ImGui::GetFontSize() ) * 0.5f ) );
+        ImGui::InputTextWithHint( "##inventory_filter", _( "Find carried items…" ),
+                                  inventory_filter, sizeof( inventory_filter ) );
+        if( w::probe::enabled() ) {
+            w::probe::record( "input", "inventory_filter", ImGui::GetItemRectMin(), ImGui::GetItemRectMax() );
+        }
+        ImGui::SameLine();
+        const char *categories[] = { _( "All" ), _( "Gear" ), _( "Food / drink" ),
+                                     _( "Tools" ), _( "Weapons" )
+                                   };
+        ImGui::SetNextItemWidth( combo_w );
+        ImGui::Combo( "##category", &inventory_category, categories, 5 );
+        ImGui::PopStyleVar();
+        ImGui::SameLine();
+        if( w::icon_button( "##nearby_storage", "nearby", tk.button, false,
+                            _( "Nearby storage: store or take items from nearby furniture, buildings, containers and vehicle cargo." ) ) ) {
+            open_storage = true;
+        }
+        ImGui::SameLine();
+        if( w::icon_button( "##inventory_view", inventory_list ? "grid" : "list", tk.button, false,
+                            inventory_list ? _( "Switch to icon grid" ) : _( "Switch to list view" ) ) ) {
+            inventory_list = !inventory_list;
+        }
+    }
+    // Destination hint: where Equip will put the selected inventory item.
+    const bool has_target = selected_slot >= 0 && selected_slot < static_cast<int>( slots.size() );
+    {
+        std::string target_name = _( "Automatic" );
+        if( has_target ) {
+            const doll_slot &target = slots[selected_slot];
+            target_name = target.type == doll_slot::kind::region_layer ?
+                          equipment_layout::region_label( target.region ) + " › " + target.label : target.label;
+        }
+        ImGui::AlignTextToFramePadding();
+        ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", _( "Equip destination:" ) );
+        ImGui::SameLine();
+        const float avail = ImGui::GetContentRegionAvail().x - 90.f * s;
+        const std::string fitted = w::fit_text( target_name, std::max( 40.f * s, avail ) );
+        ImGui::TextColored( ui_hybrid_chrome::palette::from_u32( has_target ? tk.accent : tk.text_muted ), "%s",
+                            fitted.c_str() );
+        if( ImGui::IsItemHovered() && fitted != target_name ) {
+            w::tooltip( target_name );
+        }
+        if( has_target ) {
+            ImGui::SameLine();
+            if( w::action_button( _( "clear" ), w::button_kind::tertiary, ImVec2( 0.f, 28.f ) ) ) {
+                selected_slot = -1;
+                selected_worn = item_location::nowhere;
+            }
+        }
+    }
     // NoNav: prevent gamepad L-stick from scrolling the inventory grid while
     // a context popup is open (NavWindow would otherwise be this child).
-    ImGui::BeginChild( "inv_grid", ImVec2( 0, 0 ), ImGuiChildFlags_Borders,
-                       ImGuiWindowFlags_NoNav );
-    ImGui::TextColored( ui_hybrid_chrome::palette::accent(), "%s",
-                        _( "Inventory" ) );
-    ImGui::SameLine();
-    if( ImGui::Button( _( "Nearby storage" ) ) ) {
-        open_storage = true;
-    }
-    if( ImGui::IsItemHovered() ) {
-        ImGui::SetTooltip( "%s",
-                           _( "Store or take items from nearby furniture, buildings, containers and vehicle cargo." ) );
-    }
-    ImGui::Separator();
-
-    ImGui::SetNextItemWidth( ImGui::GetContentRegionAvail().x * 0.62f );
-    ImGui::InputTextWithHint( "##inventory_filter", _( "Find carried items…" ),
-                              inventory_filter, sizeof( inventory_filter ) );
-    ImGui::SameLine();
-    const char *categories[] = { _( "All" ), _( "Clothing" ), _( "Food / drink" ),
-                                 _( "Tools" ), _( "Weapons" )
-                               };
-    ImGui::SetNextItemWidth( -1 );
-    ImGui::Combo( "##category", &inventory_category, categories, 5 );
+    w::panel_begin( "inv_grid", ImVec2( 0, 0 ), true, ImGuiWindowFlags_NoNav );
 
     // Snapshot labels up front so ImGui never sees a temporary .c_str(), and so
     // a later deferred wear/takeoff cannot leave dangling item* mid-draw.
@@ -1657,7 +2283,7 @@ void rpg_equipment_window::draw_inventory_grid()
             !lcmatch( remove_color_tags( loc->display_name() ), inventory_filter ) ) {
             continue;
         }
-        if( ( inventory_category == 1 && !loc->is_armor() ) ||
+        if( ( inventory_category == 1 && !loc->is_armor() && !loc->is_gun() && !loc->is_melee() ) ||
             ( inventory_category == 2 && !loc->is_comestible() ) ||
             ( inventory_category == 3 && !loc->is_tool() ) ||
             ( inventory_category == 4 && !loc->is_gun() && !loc->is_melee() ) ) {
@@ -1689,9 +2315,9 @@ void rpg_equipment_window::draw_inventory_grid()
     // Equipped gear on doll/slots only — no duplicate equipped-item list.
     // Soft-fork: denser inventory cells (Hybrid charcoal/amber grid).
     const float avail = ImGui::GetContentRegionAvail().x;
-    const float min_cell = 40.f;
-    const float max_cell = 52.f;
-    const float cell_gap = 2.f;
+    const float min_cell = 56.f;
+    const float max_cell = 72.f;
+    const float cell_gap = 6.f;
     int columns = std::max( 1, static_cast<int>( ( avail + cell_gap ) /
                             ( min_cell + cell_gap ) ) );
     columns = std::min( columns, 16 );
@@ -1706,7 +2332,11 @@ void rpg_equipment_window::draw_inventory_grid()
         columns = std::min( columns, 16 );
         cell_w = max_cell;
     }
-    const float cell_h = cell_w; // square-ish inventory cells
+    if( inventory_list ) {
+        columns = 1;
+        cell_w = avail;
+    }
+    const float cell_h = inventory_list ? 36.f * ui_hybrid_chrome::theme::scale() : cell_w;
     const int label_chars = std::max( 4,
                                       static_cast<int>( ( cell_w - 6.f ) /
                                               std::max( 1.f, ImGui::CalcTextSize( "W" ).x ) ) );
@@ -1728,7 +2358,9 @@ void rpg_equipment_window::draw_inventory_grid()
     }
 
     if( grid_items.empty() ) {
-        ImGui::TextDisabled( "%s", _( "No carried items in containers." ) );
+        ImGui::Dummy( ImVec2( 0.f, 8.f * ui_hybrid_chrome::theme::scale() ) );
+        ui_hybrid_widgets::empty_state( _( "No items match this view." ),
+                                        inventory_filter[0] != '\0' ? _( "Clear the search to see everything you carry." ) : std::string() );
     }
 
     // Match SameLine spacing to the gap baked into column math so rows stay
@@ -1746,7 +2378,18 @@ void rpg_equipment_window::draw_inventory_grid()
         [&]( const item_location & l ) {
             return selected_inv == l;
         } );
-        const int grid_cols = ui_hybrid_chrome::push_grid_button( is_sel );
+        int grid_cols = 0;
+        if( inventory_list ) {
+            // Row look is drawn by the shared row background; the button stays
+            // transparent so it remains the drag source / hit target.
+            ImGui::PushStyleColor( ImGuiCol_Button, 0 );
+            ImGui::PushStyleColor( ImGuiCol_ButtonHovered, 0 );
+            ImGui::PushStyleColor( ImGuiCol_ButtonActive, 0 );
+            grid_cols = 3;
+        } else {
+            grid_cols = ui_hybrid_chrome::push_grid_button( is_sel );
+        }
+        ImGui::PushStyleVar( ImGuiStyleVar_FrameBorderSize, is_sel && !inventory_list ? 1.f : 0.f );
 
         // Invisible label (PushID scopes uniqueness); sprite / glyph drawn as overlay.
         if( ImGui::Button( "##inv_cell", ImVec2( cell_w, cell_h ) ) ) {
@@ -1756,7 +2399,7 @@ void rpg_equipment_window::draw_inventory_grid()
                     pending = pending_action::use_item;
                     pending_use_method.clear();
                 } else {
-                    pending = pending_action::equip;
+                    pending = selected_slot >= 0 ? pending_action::drag_equip : pending_action::equip;
                 }
             } else {
                 // Operate on the first / representative item of the display stack.
@@ -1821,7 +2464,9 @@ void rpg_equipment_window::draw_inventory_grid()
             }
         }
 
-        ui_hybrid_chrome::draw_item_bezel( is_sel, hovered, false );
+        if( !inventory_list ) {
+            ui_hybrid_chrome::draw_item_bezel( is_sel, hovered, false );
+        }
         // Default tileset ITEM sprite (looks_like / variants via get_texture_draw_data).
         // Fallback: truncated label / first glyph. Stack ×N badge when stacked.
         {
@@ -1833,13 +2478,46 @@ void rpg_equipment_window::draw_inventory_grid()
             } else {
                 fb = ellipsize_label( fb, label_chars );
             }
-            overlay_item_sprite_on_last_item( *cell.loc,
-                                              static_cast<int>( cell.locs.size() ), fb );
+            if( inventory_list ) {
+                const ImVec2 min = ImGui::GetItemRectMin();
+                const ImVec2 max = ImGui::GetItemRectMax();
+                ImDrawList *draw = ImGui::GetWindowDrawList();
+                ui_hybrid_widgets::row_state rs;
+                rs.selected = is_sel;
+                ui_hybrid_widgets::draw_row_background( draw, min, max, rs, hovered );
+                if( ui_hybrid_widgets::probe::enabled() ) {
+                    ui_hybrid_widgets::probe::record( is_sel ? "inv_row_selected" : "inv_row",
+                                                      remove_color_tags( cell.loc->type_name() ), min, max );
+                }
+                const float isz = ui_hybrid_chrome::theme::get().icon * ui_hybrid_chrome::theme::scale();
+                const float pad = ui_hybrid_chrome::theme::get().md * ui_hybrid_chrome::theme::scale();
+                draw_equipment_icon( *cell.loc, ImVec2( min.x + pad, min.y + ( cell_h - isz ) * 0.5f ),
+                                     ImVec2( min.x + pad + isz, min.y + ( cell_h + isz ) * 0.5f ) );
+                const int amount = cell.loc->count_by_charges() ? cell.loc->charges :
+                                   static_cast<int>( cell.locs.size() );
+                float right = max.x - pad;
+                if( amount > 1 ) {
+                    const std::string qty = format_stack_badge( amount );
+                    const float qw = ImGui::CalcTextSize( qty.c_str() ).x;
+                    draw->AddText( ImVec2( right - qw, min.y + ( cell_h - ImGui::GetFontSize() ) * 0.5f ),
+                                   ImGui::GetColorU32( ImGuiCol_TextDisabled ), qty.c_str() );
+                    right -= qw + pad;
+                }
+                const float text_x = min.x + pad + isz + pad;
+                const std::string name = ui_hybrid_widgets::fit_text( remove_color_tags( cell.loc->type_name() ),
+                                         std::max( 20.f, right - text_x ) );
+                draw->AddText( ImVec2( text_x, min.y + ( cell_h - ImGui::GetFontSize() ) * 0.5f ),
+                               ImGui::GetColorU32( ImGuiCol_Text ), name.c_str() );
+            } else {
+                overlay_item_sprite_on_last_item( *cell.loc,
+                                                  static_cast<int>( cell.locs.size() ), fb );
+            }
         }
         if( hovered ) {
             imgui_cdda_tooltip( cell.tip );
         }
 
+        ImGui::PopStyleVar();
         ImGui::PopStyleColor( grid_cols );
         ImGui::PopID();
 
@@ -1852,16 +2530,9 @@ void rpg_equipment_window::draw_inventory_grid()
     }
     ImGui::PopStyleVar(); // ItemSpacing
 
-    // Soft-fork: Nearby — ground items in the 3x3 around the avatar (underfoot
-    // + 8 adjacent). Lets the player grab a corpse under tall grass without
-    // leaving the Hybrid inventory UI.
     ImGui::Spacing();
     ImGui::Separator();
-    ImGui::TextColored( ui_hybrid_chrome::palette::accent(), "%s",
-                        _( "Nearby" ) );
-    ImGui::SameLine();
-    ImGui::TextDisabled( "%s", _( "(3×3 around you)" ) );
-    ImGui::Separator();
+    ImGui::Checkbox( _( "Show nearby ground items" ), &show_nearby );
 
     struct nearby_cell {
         item_location loc;
@@ -1873,7 +2544,7 @@ void rpg_equipment_window::draw_inventory_grid()
         int dy = 0;
     };
     std::vector<nearby_cell> nearby_items;
-    {
+    if( show_nearby ) {
         map &here = get_map();
         const tripoint_bub_ms origin = you->pos_bub();
         for( int dy = -1; dy <= 1; dy++ ) {
@@ -1925,9 +2596,9 @@ void rpg_equipment_window::draw_inventory_grid()
         }
     }
 
-    if( nearby_items.empty() ) {
+    if( show_nearby && nearby_items.empty() ) {
         ImGui::TextDisabled( "%s", _( "Nothing nearby on the ground." ) );
-    } else {
+    } else if( show_nearby ) {
         // Slightly denser than inventory for the ground strip.
         const float navail = ImGui::GetContentRegionAvail().x;
         const float nmin = 36.f;
@@ -1972,6 +2643,7 @@ void rpg_equipment_window::draw_inventory_grid()
                 return selected_inv == l;
             } );
             const int grid_cols = ui_hybrid_chrome::push_grid_button( is_sel );
+            ImGui::PushStyleVar( ImGuiStyleVar_FrameBorderSize, is_sel ? 1.f : 0.f );
 
             if( ImGui::Button( "##nearby_cell", ImVec2( ncell_w, ncell_h ) ) ) {
                 if( is_sel ) {
@@ -1996,7 +2668,9 @@ void rpg_equipment_window::draw_inventory_grid()
                 }
             }
 
-            ui_hybrid_chrome::draw_item_bezel( is_sel, hovered, false );
+            if( !inventory_list ) {
+                ui_hybrid_chrome::draw_item_bezel( is_sel, hovered, false );
+            }
             {
                 std::string fb = remove_color_tags(
                                      cell.loc->type_name( 1, /*use_variant=*/true ) );
@@ -2019,6 +2693,7 @@ void rpg_equipment_window::draw_inventory_grid()
                 imgui_cdda_tooltip( cell.tip );
             }
 
+            ImGui::PopStyleVar();
             ImGui::PopStyleColor( grid_cols );
             ImGui::PopID();
 
@@ -2034,7 +2709,7 @@ void rpg_equipment_window::draw_inventory_grid()
 
     // OpenPopup/BeginPopup OUTSIDE inv_grid child — parent Equipment id stack
     // so the menu draws above the panel instead of under/inside the child.
-    ImGui::EndChild();
+    ui_hybrid_widgets::panel_end();
 
     if( ImGui::IsMouseReleased( ImGuiMouseButton_Right ) ) {
         inv_rmb_down_cell = -1;
@@ -2130,47 +2805,105 @@ void rpg_equipment_window::draw_inventory_grid()
 
 void rpg_equipment_window::draw_action_bar()
 {
-    auto action_btn = []( const char *label ) {
-        const int n = ui_hybrid_chrome::push_toolbar_button( false );
-        const bool clicked = ImGui::Button( label );
-        ui_hybrid_chrome::draw_item_bezel( false, ImGui::IsItemHovered(), false );
-        ImGui::PopStyleColor( n );
-        return clicked;
-    };
+    namespace w = ui_hybrid_widgets;
+    namespace theme = ui_hybrid_chrome::theme;
+    const ui_hybrid_chrome::theme::tokens &tk = theme::get();
+    const float s = theme::scale();
+    refresh_selection_validity();
+    const item_location inspected = selected_inv ? selected_inv : selected_worn;
+    const bool can_takeoff = selected_worn && you->is_worn( *selected_worn );
 
-    if( action_btn( _( "Wear / Wield" ) ) ) {
-        pending = pending_action::equip;
+    // Right-aligned action group. Widths are fixed so the layout is stable.
+    const float primary_w = 150.f;
+    const float secondary_w = 130.f;
+    const float tertiary_w = 96.f;
+    float group_w = ( primary_w + secondary_w + tertiary_w * 2.f ) * s + ImGui::GetStyle().ItemSpacing.x * 3.f;
+    if( equip_preview ) {
+        group_w += ( secondary_w + 20.f ) * s + ImGui::GetStyle().ItemSpacing.x;
+    }
+    // Left: binding hints and the current status / selected target. On narrow footers
+    // (small window at a large font) the hints give way to the status text.
+    const bool show_hints = ImGui::GetContentRegionAvail().x > group_w + 460.f * s;
+    if( show_hints ) {
+        w::hint( ctxt, "CONFIRM", _( "select" ) );
+        ImGui::SameLine();
+        w::hint( ctxt, "RIGHT", _( "expand" ) );
+        ImGui::SameLine();
+        w::hint( ctxt, "QUIT", _( "back" ) );
+        ImGui::SameLine( 0.f, tk.lg * s );
+    }
+    const float status_w = ImGui::GetContentRegionAvail().x - group_w - tk.md * s;
+    {
+        std::string status = status_line;
+        if( status.empty() && inspected ) {
+            status = remove_color_tags( inspected->display_name() );
+        } else if( status.empty() ) {
+            status = _( "Select an item to inspect it." );
+        }
+        const std::string fitted = w::fit_text( status, std::max( 40.f * s, status_w ) );
+        ImGui::AlignTextToFramePadding();
+        ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", fitted.c_str() );
+        if( w::probe::enabled() ) {
+            w::probe::record( "status", status, ImGui::GetItemRectMin(), ImGui::GetItemRectMax() );
+        }
+        if( ImGui::IsItemHovered() && fitted != status ) {
+            w::tooltip( status );
+        }
+        ImGui::SameLine();
+    }
+    w::footer_align_right( group_w );
+    if( w::action_button( _( "Details" ), w::button_kind::tertiary, ImVec2( tertiary_w, 0.f ),
+                          static_cast<bool>( inspected ), _( "Select an item first." ) ) ) {
+        ImGui::OpenPopup( "equipment_details" );
     }
     ImGui::SameLine();
-    if( action_btn( _( "Take Off" ) ) ) {
+    if( w::action_button( _( "More" ), w::button_kind::tertiary, ImVec2( tertiary_w, 0.f ), true, nullptr,
+                          "chevron_down" ) ) {
+        ImGui::OpenPopup( "equipment_more" );
+    }
+    if( ImGui::BeginPopup( "equipment_more" ) ) {
+        if( ImGui::MenuItem( _( "Wield" ), nullptr, false, static_cast<bool>( inspected ) ) ) {
+            pending = pending_action::wield;
+        }
+        if( ImGui::MenuItem( _( "Use" ), nullptr, false, static_cast<bool>( inspected ) ) ) {
+            pending = pending_action::use_item;
+        }
+        ImGui::Separator();
+        if( ImGui::MenuItem( _( "Clothing layers…" ) ) ) {
+            open_layers = true;
+        }
+        if( ImGui::MenuItem( _( "Classic inventory…" ) ) ) {
+            open_classic = true;
+        }
+        ImGui::EndPopup();
+    }
+    ImGui::SameLine();
+    if( equip_preview ) {
+        if( w::action_button( _( "Cancel change" ), w::button_kind::secondary, ImVec2( secondary_w + 20.f, 0.f ) ) ) {
+            equip_preview = false;
+            status_line = _( "Equipment change cancelled." );
+        }
+        ImGui::SameLine();
+    }
+    if( w::action_button( _( "Take off" ), w::button_kind::secondary, ImVec2( secondary_w, 0.f ), can_takeoff,
+                          _( "Select a worn item to take it off." ) ) ) {
         pending = pending_action::takeoff;
     }
     ImGui::SameLine();
-    if( action_btn( _( "Wield" ) ) ) {
-        pending = pending_action::wield;
-    }
-    ImGui::SameLine();
-    if( action_btn( _( "Use" ) ) ) {
-        pending = pending_action::use_item;
-    }
-    ImGui::SameLine();
-    if( action_btn( _( "Clothing layers…" ) ) ) {
-        open_layers = true;
-    }
-    ImGui::SameLine();
-    if( action_btn( _( "Classic Inv…" ) ) ) {
-        open_classic = true;
-    }
-    ImGui::SameLine();
-    if( action_btn( _( "Close" ) ) ) {
-        want_close = true;
-    }
-
-    if( !status_line.empty() ) {
-        ImGui::TextWrapped( "%s", status_line.c_str() );
-    } else {
-        ImGui::TextWrapped( "%s",
-                            _( "Drag onto the survivor or a slot, then Apply. Right-click any item for actions." ) );
+    if( equip_preview ) {
+        if( w::action_button( _( "Apply change" ), w::button_kind::primary, ImVec2( primary_w, 0.f ) ) ) {
+            selected_inv = preview_item;
+            selected_slot = preview_slot;
+            pending = pending_action::drag_equip;
+            equip_preview = false;
+        }
+    } else if( w::action_button( _( "Equip" ), w::button_kind::primary, ImVec2( primary_w, 0.f ) ) ) {
+        if( selected_inv ) {
+            pending = selected_slot >= 0 ? pending_action::drag_equip : pending_action::equip;
+        } else {
+            focus_inventory_search = true;
+            status_line = _( "Choose an inventory item, then Equip." );
+        }
     }
     if( RPG_EQ_CTX_TELEM && !rmb_telem_line.empty() ) {
         ImGui::TextColored( ImVec4( 0.95f, 0.75f, 0.25f, 1.f ),
@@ -2180,49 +2913,41 @@ void rpg_equipment_window::draw_action_bar()
 
 void rpg_equipment_window::draw_controls()
 {
+    namespace w = ui_hybrid_widgets;
     if( hide_ui ) {
         hide_if_hidden();
         return;
     }
-    const float footer = ImGui::GetTextLineHeightWithSpacing() * 6.f + 24.f;
-    ImGui::BeginChild( "equipment_body", ImVec2( 0.f,
-                       std::max( 180.f, ImGui::GetContentRegionAvail().y - footer ) ) );
-    draw_paper_doll();
-    ImGui::SameLine();
-    draw_inventory_grid();
-    ImGui::EndChild();
-    ImGui::Separator();
     if( equip_preview && ( !preview_item || selected_inv != preview_item ||
                            selected_slot != preview_slot ) ) {
         equip_preview = false;
     }
-    if( equip_preview ) {
-        if( ImGui::Button( _( "Apply equipment change" ) ) ) {
-            selected_inv = preview_item;
-            selected_slot = preview_slot;
-            pending = pending_action::drag_equip;
-            equip_preview = false;
-        }
-        ImGui::SameLine();
-        if( ImGui::Button( _( "Cancel change" ) ) ) {
-            equip_preview = false;
-            status_line = _( "Equipment change cancelled." );
-        }
+    // Content scrolls per column; the footer with the actions stays fixed.
+    if( w::body_begin( "equipment_body", ui_hybrid_chrome::theme::get().footer, ImGuiWindowFlags_NoScrollbar ) ) {
+        draw_paper_doll();
     }
-    // Keep Apply/Cancel above details, which may wrap over several lines.
-    ImGui::BeginChild( "equipment_inspector", ImVec2( 0.f,
-                       std::max( ImGui::GetTextLineHeightWithSpacing(),
-                                 ImGui::GetContentRegionAvail().y -
-                                 ImGui::GetFrameHeightWithSpacing() * 3.f ) ) );
-    draw_equipment_inspection();
-    ImGui::EndChild();
-    draw_action_bar();
+    w::body_end();
+    if( w::footer_begin( "equipment_footer" ) ) {
+        draw_action_bar();
+    }
+    w::footer_end();
+
+    ImGui::SetNextWindowSize( ImVec2( std::min( 650.f, ImGui::GetMainViewport()->Size.x * 0.85f ),
+                                      std::min( 400.f, ImGui::GetMainViewport()->Size.y * 0.6f ) ), ImGuiCond_Appearing );
+    if( ImGui::BeginPopup( "equipment_details", ImGuiWindowFlags_NoNav ) ) {
+        draw_equipment_inspection();
+        if( inspector_action != item_context_menu::action::none ) {
+            ImGui::CloseCurrentPopup();
+        }
+        ImGui::EndPopup();
+    }
 
     // Parent cataimgui::window::draw() BringWindowToDisplayFront(Equipment)
     // after this returns — that would bury our context popups under the panel.
     // Skip that front-bring while a ctx popup is open (IDs hashed at parent).
     force_to_back = ImGui::IsPopupOpen( "rpg_inv_ctx" ) ||
-                    ImGui::IsPopupOpen( "rpg_doll_ctx" );
+                    ImGui::IsPopupOpen( "rpg_doll_ctx" ) || ImGui::IsPopupOpen( "equipment_more" ) ||
+                    ImGui::IsPopupOpen( "equipment_details" );
 
     if( !get_is_open() ) {
         want_close = true;

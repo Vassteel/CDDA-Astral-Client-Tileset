@@ -1,0 +1,20 @@
+{
+  "base": "/home/deck/Astra & Grok/CDDA/artifacts/astral-tileset/release-0.1.41/gfx/Astral",
+  "output": "/home/deck/Astra & Grok/CDDA/artifacts/astral-tileset/integration-staging/aux2-v009-on-0.1.41/gfx/Astral",
+  "new_ids": [
+    "knife_sharpener_handheld",
+    "metal_honing_rod",
+    "sieve_primitive",
+    "sieve_steel",
+    "sieve_steel_makeshift"
+  ],
+  "all_unrelated_mappings_preserved": true,
+  "prior_files_bytes_verified": 346,
+  "source_hashes_verified": 5,
+  "new_sprite_slots": 5,
+  "base_slots": 19653,
+  "final_slots": 19658,
+  "live_validation": "not performed",
+  "release_archive_modified": false,
+  "client_modified": false
+}

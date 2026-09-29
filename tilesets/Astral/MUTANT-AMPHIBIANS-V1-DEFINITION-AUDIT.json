@@ -1,0 +1,1898 @@
+{
+  "active_mods": [
+    "bombastic_perks",
+    "dda",
+    "innawood",
+    "limitless_backpack",
+    "megafauna",
+    "no_npc_food",
+    "perk_melee_system",
+    "personal_portal_storms"
+  ],
+  "records": [
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "abstract": "mon_proxy_bigtad",
+        "type": "MONSTER",
+        "description": "A tadpole the size of a bass.  It could win awards if it hadn't been debugged.",
+        "name": {
+          "str": "giant tadpole"
+        },
+        "default_faction": "fish_small",
+        "bodytype": "fish",
+        "species": [
+          "AMPHIBIAN"
+        ],
+        "volume": "2 L",
+        "weight": "1500 g",
+        "hp": 10,
+        "speed": 120,
+        "move_skills": {
+          "swim": 8
+        },
+        "material": [
+          "flesh"
+        ],
+        "symbol": "J",
+        "color": "brown",
+        "aggression": -40,
+        "morale": 5,
+        "melee_dice": 1,
+        "melee_dice_sides": 2,
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 2
+          }
+        ],
+        "melee_training_cap": 1,
+        "dodge": 6,
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology"
+        ],
+        "dissect": "dissect_batrachian_sample_single",
+        "harvest": "mutant_animal_noskin",
+        "vision_night": 30,
+        "fear_triggers": [
+          "PLAYER_CLOSE",
+          "FIRE",
+          "HURT",
+          "FRIEND_ATTACKED",
+          "SOUND"
+        ],
+        "flags": [
+          "FISHABLE",
+          "SEES",
+          "SMELLS",
+          "HEARS",
+          "AQUATIC",
+          "WATER_CAMOUFLAGE"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_pattern_bigtad",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_bigtad",
+        "description": "A giant, gray-brown tadpole.  Its body is covered in irregular, chaotic speckles of pitch black and chalk white.",
+        "name": {
+          "str": "giant tadpole"
+        },
+        "color": "dark_gray",
+        "upgrades": {
+          "age_grow": 22,
+          "into": "mon_pattern_bigfrog"
+        },
+        "//": "When possible, add effect for rare flicker of very low luminance."
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_strange_bigtad",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_bigtad",
+        "description": "This giant, green tadpole would have been an oddity before the collapse.  Now it's simply part of the scenery.",
+        "name": {
+          "str": "giant tadpole"
+        },
+        "color": "green",
+        "upgrades": {
+          "age_grow": 91,
+          "into": "mon_strange_bigfrog"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_foul_bigtad",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_bigtad",
+        "description": "This big tadpole has already grown some warty bumps on its softball-sized body.  Its nearly whip-thin tail appears to have no trouble propelling its much larger core.",
+        "name": {
+          "str": "giant tadpole"
+        },
+        "upgrades": {
+          "age_grow": 8,
+          "into": "mon_foul_bigfrog"
+        },
+        "extend": {
+          "flags": [
+            "POISON"
+          ]
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_odd_bigtad",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_bigtad",
+        "description": "Some kind of giant tadpole.  This speckled one has a body the size of a grapefruit and a thin, tapered tail.  It flits about the water in quick bursts.",
+        "name": {
+          "str": "giant tadpole"
+        },
+        "upgrades": {
+          "age_grow": 10,
+          "into": "mon_odd_bigfrog"
+        },
+        "extend": {
+          "flags": [
+            "POISON"
+          ]
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_vocal_bigtad",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_bigtad",
+        "description": "A much larger than average tadpole.  Despite its unusual size, it is hard to make out any features from its dark, almost black, tint.",
+        "name": {
+          "str": "giant tadpole"
+        },
+        "upgrades": {
+          "age_grow": 10,
+          "into_group": "GROUP_BIGTAD_VOCAL"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_shift_bigtad",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_bigtad",
+        "color": "red",
+        "description": "This tadpole's expanded size only accentuates its other unique feature.  Its tail fin is a vibrant gradient of crimson to yellow.",
+        "name": {
+          "str": "giant tadpole"
+        },
+        "upgrades": {
+          "age_grow": 10,
+          "into": "mon_shift_bigfrog"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "abstract": "mon_proxy_frog",
+        "type": "MONSTER",
+        "description": "A hypothetical frog, if you're seeing this there's a problem.",
+        "name": {
+          "str": "proxy frog"
+        },
+        "default_faction": "amphibian_tiny",
+        "bodytype": "frog",
+        "looks_like": "mon_frog",
+        "categories": [
+          "WILDLIFE"
+        ],
+        "species": [
+          "AMPHIBIAN"
+        ],
+        "volume": "300 ml",
+        "weight": "30 g",
+        "hp": 3,
+        "speed": 80,
+        "move_skills": {
+          "swim": 8
+        },
+        "material": [
+          "flesh"
+        ],
+        "symbol": "b",
+        "color": "brown",
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 0
+          }
+        ],
+        "dodge": 6,
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology",
+          "prof_wp_basic_amphibian"
+        ],
+        "weakpoint_sets": [
+          "wps_amphibian_body",
+          "wps_amphibian_frog"
+        ],
+        "dissect": "dissect_batrachian_sample_single",
+        "harvest": "mammal_tiny",
+        "vision_night": 30,
+        "special_attacks": [
+          {
+            "type": "leap",
+            "cooldown": 32,
+            "max_range": 4,
+            "allow_no_target": true
+          }
+        ],
+        "fear_triggers": [
+          "PLAYER_CLOSE",
+          "FIRE",
+          "HURT",
+          "FRIEND_ATTACKED",
+          "SOUND"
+        ],
+        "baby_flags": [
+          "SPRING",
+          "SUMMER"
+        ],
+        "flags": [
+          "FISHABLE",
+          "SEES",
+          "SMELLS",
+          "HEARS",
+          "WATER_CAMOUFLAGE",
+          "SMALL_HIDER",
+          "SWARMS"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_leo_frog",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_frog",
+        "description": "Leopard frogs are named for the brown spots on their backs and legs.  Although limited by size, they too are voracious predators.",
+        "name": {
+          "str": "leopard frog"
+        },
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_leo_frog"
+          },
+          "baby_count": 6,
+          "baby_timer": 20
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_pattern_frog",
+        "type": "MONSTER",
+        "copy-from": "mon_leo_frog",
+        "description": "This large frog is covered in chaotic markings like a fractal river map over a background of TV static.  While most lose their gills during metamorphosis, this frog seems to have retained them, or something like them.",
+        "name": {
+          "str": "strangely-patterned frog"
+        },
+        "categories": [
+          "NULL"
+        ],
+        "harvest": "mutant_tiny",
+        "upgrades": {
+          "age_grow": 15,
+          "into": "mon_pattern_bigfrog"
+        },
+        "//": "When possible, add effect for rare flicker of very low luminance."
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_fowler_toad",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_frog",
+        "description": "Fowler's toads secrete a harmful and distasteful compound from their backs.  This helps safeguard them from predators and also gives them a distinctive odor like boiled peanuts.",
+        "name": {
+          "str": "Fowler's toad"
+        },
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_fowler_toad"
+          },
+          "baby_count": 8,
+          "baby_timer": 36
+        },
+        "extend": {
+          "flags": [
+            "POISON"
+          ]
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_foul_toad",
+        "type": "MONSTER",
+        "copy-from": "mon_fowler_toad",
+        "description": "You could almost smell it before you saw it.  This toad reeks.  You're not quite sure what like, but it's hot and musky and it sticks in your nose until you're tasting it.",
+        "name": {
+          "str": "foul toad"
+        },
+        "categories": [
+          "NULL"
+        ],
+        "harvest": "mutant_tiny",
+        "upgrades": {
+          "age_grow": 15,
+          "into": "mon_foul_bigfrog"
+        },
+        "extend": {
+          "flags": [
+            "POISON",
+            "NO_BREATHE"
+          ]
+        },
+        "//": "NO_BREATHE flag is to prevent gassing by other 'foul' toads.  When possible, add effect for aoe morale debuff around toad. Possibly stack up until triggering nausea/vomiting."
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_freedom_toad",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_frog",
+        "description": "American toads can vary greatly in appearance.  Individual toads will shift their coloration and patterning throughout the seasons to better camouflage.",
+        "name": {
+          "str": "American toad"
+        },
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_freedom_toad"
+          },
+          "baby_count": 8,
+          "baby_timer": 36
+        },
+        "extend": {
+          "flags": [
+            "POISON"
+          ]
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_odd_toad",
+        "type": "MONSTER",
+        "copy-from": "mon_freedom_toad",
+        "description": "Wide as a watermelon and halfway up to your knee, this toad's size is alarming.  So too are its odd proportions.  It's as if it hasn't fully grown.",
+        "name": {
+          "str": "odd toad"
+        },
+        "categories": [
+          "NULL"
+        ],
+        "volume": "4 L",
+        "weight": "3 kg",
+        "hp": 12,
+        "harvest": "mutant_tiny",
+        "upgrades": {
+          "age_grow": 15,
+          "into": "mon_odd_bigfrog"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_gray_frog",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_frog",
+        "description": "This treefrog can change its coloration much like a chameleon, shifting from a near-white gray, through greens and browns, to a dark, almost charcoal color.",
+        "name": {
+          "str": "gray treefrog"
+        },
+        "volume": "150 ml",
+        "weight": "10 g",
+        "hp": 2,
+        "color": "light_gray",
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_gray_frog"
+          },
+          "baby_count": 8,
+          "baby_timer": 26
+        },
+        "extend": {
+          "flags": [
+            "CAMOUFLAGE"
+          ]
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_shift_frog",
+        "type": "MONSTER",
+        "copy-from": "mon_gray_frog",
+        "description": "You've seen it wrinkle its skin into bark and disappear on a tree; settle on a toadstool and take its spots.  It's no trick of the light, this frog's skin shifts not just color but texture.",
+        "name": {
+          "str": "shifting treefrog"
+        },
+        "categories": [
+          "NULL"
+        ],
+        "harvest": "mutant_tiny",
+        "upgrades": {
+          "age_grow": 15,
+          "into": "mon_shift_bigfrog"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_pickerel_frog",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_frog",
+        "description": "The pickerel frog is identifiable by two rows of roughly square-shaped spots that run along its back, shaded a darker brown than the rest of their skin.  Though not more than an irritant to humans, their skin secretions are known for being fatal to most things their size.",
+        "name": {
+          "str": "pickerel frog"
+        },
+        "volume": "150 ml",
+        "weight": "10 g",
+        "hp": 2,
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_pickerel_frog"
+          },
+          "baby_count": 8,
+          "baby_timer": 26
+        },
+        "extend": {
+          "flags": [
+            "POISON"
+          ]
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_palette_frog",
+        "type": "MONSTER",
+        "copy-from": "mon_pickerel_frog",
+        "description": "You're quite sure that no frog this bright and garish could be native to New England.  Most of its skin is a light brown, but the large, squarish patches on its back and legs are of every different hue, all of them bright.",
+        "name": {
+          "str": "palette frog"
+        },
+        "categories": [
+          "NULL"
+        ],
+        "color": "magenta",
+        "harvest": "mutant_tiny",
+        "extend": {
+          "flags": [
+            "POISON"
+          ]
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_wood_frog",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_frog",
+        "description": "This frog wears a pattern of tans and browns, with a darker eye mask and a light cream underbelly.  Its coverings make for great camouflage among the dry leaves and tree bark.",
+        "name": {
+          "str": "wood frog"
+        },
+        "volume": "150 ml",
+        "weight": "10 g",
+        "hp": 2,
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_wood_frog"
+          },
+          "baby_count": 8,
+          "baby_timer": 36
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_leo_worm",
+        "type": "MONSTER",
+        "copy-from": "mon_leo_frog",
+        "description": "You see a whole leopard frog and then some.  This poor thing must have almost a dozen extra legs sticking off of it.  It is difficult to determine an exact number as most of them are underdeveloped or otherwise malformed.",
+        "name": {
+          "str": "many-legged frog"
+        },
+        "categories": [
+          "NULL"
+        ],
+        "dissect": "dissect_worm_frog_single",
+        "harvest": "mutant_tiny",
+        "special_attacks": [
+          {
+            "type": "leap",
+            "cooldown": 32,
+            "max_range": 4,
+            "allow_no_target": true,
+            "random_leap": true
+          }
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_wood_worm",
+        "type": "MONSTER",
+        "copy-from": "mon_wood_frog",
+        "description": "This cream and brown frog looks more like a great insect in profile.  It has evidently mutated, growing many additional, spindly legs that rise high before attempting to bend back downwards.",
+        "name": {
+          "str": "many-legged frog"
+        },
+        "categories": [
+          "NULL"
+        ],
+        "dissect": "dissect_worm_frog_single",
+        "harvest": "mutant_tiny",
+        "special_attacks": [
+          {
+            "type": "leap",
+            "cooldown": 32,
+            "max_range": 4,
+            "allow_no_target": true,
+            "random_leap": true
+          }
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "abstract": "mon_proxy_bigfrog",
+        "type": "MONSTER",
+        "name": {
+          "str": "oversized proxy frog"
+        },
+        "description": "An unreal frog of unusually large size.  This one is here by mistake; likely drawn by some kind of (de)bug.",
+        "default_faction": "frog",
+        "bodytype": "frog",
+        "species": [
+          "AMPHIBIAN"
+        ],
+        "volume": "60 L",
+        "weight": "50 kg",
+        "hp": 50,
+        "speed": 100,
+        "move_skills": {
+          "climb": 4,
+          "swim": 8
+        },
+        "material": [
+          "flesh"
+        ],
+        "symbol": "m",
+        "color": "brown",
+        "aggression": -10,
+        "morale": 20,
+        "aggro_character": false,
+        "melee_skill": 5,
+        "melee_dice": 1,
+        "melee_dice_sides": 8,
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 1
+          }
+        ],
+        "dodge": 2,
+        "armor": {
+          "bash": 4
+        },
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology",
+          "prof_wp_basic_amphibian"
+        ],
+        "weakpoint_sets": [
+          "wps_amphibian_body",
+          "wps_amphibian_frog"
+        ],
+        "dissect": "dissect_batrachian_sample_single",
+        "harvest": "mutant_animal_large_noskin",
+        "vision_night": 30,
+        "path_settings": {
+          "max_dist": 5
+        },
+        "grab_strength": 2,
+        "special_attacks": [
+          {
+            "id": "ranged_pull",
+            "cooldown": 10,
+            "range": 3,
+            "condition": {
+              "and": [
+                {
+                  "not": {
+                    "u_has_flag": "GRAB_FILTER"
+                  }
+                },
+                {
+                  "not": {
+                    "u_has_effect": "maimed_tongue"
+                  }
+                }
+              ]
+            },
+            "hit_dmg_u": "%s catches you with its tongue and pulls you in!",
+            "hit_dmg_npc": "%s catches <npcname> with its tongue and pulls them in!",
+            "miss_msg_u": "%s's tongue lashes out at you, but you dodge!",
+            "miss_msg_npc": "%s's tongue lashes out at <npcname>, but they dodge!",
+            "no_dmg_msg_u": "%s catches you with its tongue and pulls you in!",
+            "no_dmg_msg_npc": "%s catches <npcname> with its tongue and pulls them in!"
+          },
+          {
+            "type": "leap",
+            "cooldown": 10,
+            "move_cost": 0,
+            "max_range": 10,
+            "min_consider_range": 2,
+            "condition": {
+              "not": {
+                "u_has_effect": "maimed_leg"
+              }
+            }
+          }
+        ],
+        "fear_triggers": [
+          "FRIEND_DIED",
+          "FIRE",
+          "SOUND"
+        ],
+        "anger_triggers": [
+          "STALK",
+          "PLAYER_WEAK",
+          "PLAYER_CLOSE",
+          "MATING_SEASON"
+        ],
+        "burn_into": "mon_frog_husk",
+        "baby_flags": [
+          "SPRING",
+          "SUMMER"
+        ],
+        "flags": [
+          "FISHABLE",
+          "SEES",
+          "SMELLS",
+          "HEARS",
+          "SWARMS",
+          "WATER_CAMOUFLAGE"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_pattern_bigfrog",
+        "type": "MONSTER",
+        "name": {
+          "str": "staticskin frog"
+        },
+        "description": "Bioluminescent trails trace through the dark speckled patterns on this oversized frog's skin.  What would be cleanly defined spots on another frog, are instead fragmented collages of gray and black pigment over pale skin.  Its vestigial gills have grown into something else.  You can see them bulging the flesh under its mouth.",
+        "copy-from": "mon_proxy_bigfrog",
+        "volume": "30 L",
+        "weight": "20 kg",
+        "hp": 40,
+        "speed": 80,
+        "symbol": "x",
+        "color": "light_blue",
+        "melee_dice_sides": 4,
+        "melee_damage": [
+          {
+            "damage_type": "electric",
+            "amount": 3
+          },
+          {
+            "damage_type": "cut",
+            "amount": 1
+          }
+        ],
+        "armor": {
+          "bash": 2,
+          "acid": 2,
+          "heat": 1,
+          "electric": 4
+        },
+        "weakpoint_sets": [
+          "wps_amphibian_body",
+          "wps_amphibian_frog",
+          "wps_amphibian_electric"
+        ],
+        "luminance": 3,
+        "special_when_hit": [
+          "ZAPBACK",
+          100
+        ],
+        "upgrades": {
+          "age_grow": 30,
+          "into_group": "GROUP_FROGS_UPGRADE_PATTERN"
+        },
+        "zombify_into": "mon_frog_shocker",
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_pattern_bigfrog"
+          },
+          "baby_count": 12,
+          "baby_timer": 20
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_foul_bigfrog",
+        "type": "MONSTER",
+        "name": {
+          "str": "greasy stinktoad"
+        },
+        "description": "This lumpy oversized toad is a real stinker!  A miasma like rotted onions coated in rancid peanut butter surrounds it.  Even approaching it makes your eyes water and your throat tighten until you're coughing to catch breath.  It doesn't help that its leathery skin looks to be coated in a thick greasy substance, no doubt related to the creature's horrid odor.",
+        "copy-from": "mon_proxy_bigfrog",
+        "volume": "30 L",
+        "weight": "20 kg",
+        "hp": 40,
+        "speed": 70,
+        "symbol": "g",
+        "melee_dice_sides": 4,
+        "armor": {
+          "bash": 2,
+          "acid": 4,
+          "heat": 1
+        },
+        "emit_fields": [
+          {
+            "emit_id": "emit_tear_gas_toad",
+            "delay": "1 s"
+          }
+        ],
+        "special_attacks": [
+          {
+            "id": "ranged_pull",
+            "cooldown": 10,
+            "range": 3,
+            "condition": {
+              "and": [
+                {
+                  "not": {
+                    "u_has_flag": "GRAB_FILTER"
+                  }
+                },
+                {
+                  "not": {
+                    "u_has_effect": "maimed_tongue"
+                  }
+                }
+              ]
+            },
+            "hit_dmg_u": "%s catches you with its tongue and pulls you in!",
+            "hit_dmg_npc": "%s catches <npcname> with its tongue and pulls them in!",
+            "miss_msg_u": "%s's tongue lashes out at you, but you dodge!",
+            "miss_msg_npc": "%s's tongue lashes out at <npcname>, but they dodge!",
+            "no_dmg_msg_u": "%s catches you with its tongue and pulls you in!",
+            "no_dmg_msg_npc": "%s catches <npcname> with its tongue and pulls them in!"
+          },
+          {
+            "type": "leap",
+            "cooldown": 5,
+            "move_cost": 0,
+            "max_range": 6,
+            "min_consider_range": 2,
+            "condition": {
+              "not": {
+                "u_has_effect": "maimed_leg"
+              }
+            }
+          }
+        ],
+        "upgrades": {
+          "age_grow": 30,
+          "into_group": "GROUP_FROGS_UPGRADE_FOUL"
+        },
+        "zombify_into": "mon_toad_zombie",
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_foul_bigfrog"
+          },
+          "baby_count": 12,
+          "baby_timer": 20
+        },
+        "extend": {
+          "flags": [
+            "POISON",
+            "NO_BREATHE"
+          ]
+        },
+        "//": "When possible, add an AOE burst & temporary trail of slippery, toxic grease on several hour cooldown.  The toad can expel grease like a squid with ink.  The grease offgasses into something between tear gas and a blister agent, hence the smell.  NO_BREATHE flag is to prevent self-gassing."
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_jumbo_bigfrog",
+        "type": "MONSTER",
+        "name": {
+          "str": "jumbo treefrog"
+        },
+        "description": "On thick, over-proportioned legs, this large treefrog slings its weight with notable force.  It doesn't seem dangerous, but its size is still cause for concern.  Even scrunched up, it is as large as a Thanksgiving turkey.",
+        "copy-from": "mon_proxy_bigfrog",
+        "volume": "20 L",
+        "weight": "14 kg",
+        "hp": 20,
+        "speed": 110,
+        "symbol": "k",
+        "morale": 10,
+        "melee_dice_sides": 2,
+        "dodge": 3,
+        "grab_strength": 1,
+        "special_attacks": [
+          {
+            "id": "ranged_pull",
+            "cooldown": 10,
+            "range": 3,
+            "condition": {
+              "and": [
+                {
+                  "not": {
+                    "u_has_flag": "GRAB_FILTER"
+                  }
+                },
+                {
+                  "not": {
+                    "u_has_effect": "maimed_tongue"
+                  }
+                }
+              ]
+            },
+            "hit_dmg_u": "%s catches you with its tongue and pulls you in!",
+            "hit_dmg_npc": "%s catches <npcname> with its tongue and pulls them in!",
+            "miss_msg_u": "%s's tongue lashes out at you, but you dodge!",
+            "miss_msg_npc": "%s's tongue lashes out at <npcname>, but they dodge!",
+            "no_dmg_msg_u": "%s catches you with its tongue and pulls you in!",
+            "no_dmg_msg_npc": "%s catches <npcname> with its tongue and pulls them in!"
+          },
+          {
+            "type": "leap",
+            "cooldown": 8,
+            "move_cost": 0,
+            "max_range": 12,
+            "min_consider_range": 2,
+            "condition": {
+              "not": {
+                "u_has_effect": "maimed_leg"
+              }
+            }
+          }
+        ],
+        "fear_triggers": [
+          "HURT",
+          "FRIEND_DIED",
+          "FIRE",
+          "SOUND"
+        ],
+        "anger_triggers": [
+          "PLAYER_CLOSE",
+          "MATING_SEASON"
+        ],
+        "zombify_into": "mon_zombtreefrog",
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_vocal_bigfrog"
+          },
+          "baby_count": 12,
+          "baby_timer": 20
+        },
+        "delete": {
+          "flags": [
+            "SWARMS"
+          ]
+        },
+        "harvest": "bullfrog",
+        "//": "Give climbing (Z axis) ability when available."
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_vocal_bigfrog",
+        "type": "MONSTER",
+        "name": {
+          "str": "wailing treefrog"
+        },
+        "description": "Now the size of a dog, this tan, speckled tree frog will not stop making noise.  Its increased size has only boosted its volume.  It belts out sound in a relentless series of piercing, grinding chirps.",
+        "copy-from": "mon_jumbo_bigfrog",
+        "special_attacks": [
+          [
+            "PARROT",
+            30
+          ],
+          {
+            "id": "ranged_pull",
+            "cooldown": 10,
+            "range": 3,
+            "condition": {
+              "and": [
+                {
+                  "not": {
+                    "u_has_flag": "GRAB_FILTER"
+                  }
+                },
+                {
+                  "not": {
+                    "u_has_effect": "maimed_tongue"
+                  }
+                }
+              ]
+            },
+            "hit_dmg_u": "%s catches you with its tongue and pulls you in!",
+            "hit_dmg_npc": "%s catches <npcname> with its tongue and pulls them in!",
+            "miss_msg_u": "%s's tongue lashes out at you, but you dodge!",
+            "miss_msg_npc": "%s's tongue lashes out at <npcname>, but they dodge!",
+            "no_dmg_msg_u": "%s catches you with its tongue and pulls you in!",
+            "no_dmg_msg_npc": "%s catches <npcname> with its tongue and pulls them in!"
+          },
+          {
+            "type": "leap",
+            "cooldown": 8,
+            "move_cost": 0,
+            "max_range": 12,
+            "min_consider_range": 2,
+            "condition": {
+              "not": {
+                "u_has_effect": "maimed_leg"
+              }
+            }
+          }
+        ],
+        "//": "Give climbing (Z axis) ability when available."
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_shift_bigfrog",
+        "type": "MONSTER",
+        "name": {
+          "str": "mimic treefrog"
+        },
+        "description": "You've seen enough to gather that this is a frog with some very specialized camouflage.  Its skin appears able to reactively change texture and color to match its surroundings.  Like a morphing ghillie suit it can extend filaments to mimic individual leaves and blades of grass.  It is keen enough to match the swaying of brush in the wind.",
+        "copy-from": "mon_jumbo_bigfrog",
+        "speed": 130,
+        "color": "light_gray",
+        "dodge": 6,
+        "armor": {
+          "bash": 5,
+          "acid": 2,
+          "heat": 5,
+          "electric": 4
+        },
+        "vision_night": 35,
+        "zombify_into": "mon_frog_shadow",
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_shift_bigfrog"
+          },
+          "baby_count": 12,
+          "baby_timer": 20
+        },
+        "extend": {
+          "flags": [
+            "CAMOUFLAGE"
+          ]
+        },
+        "//": "Give climbing (Z axis) ability when available."
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "abstract": "mon_proxy_giganfrog",
+        "type": "MONSTER",
+        "name": {
+          "str": "giant proxy frog",
+          "//~": "NO_I18N"
+        },
+        "description": {
+          "str": "This frog is much too big to be real, must be a bug",
+          "//~": "NO_I18N"
+        },
+        "default_faction": "frog",
+        "bodytype": "frog",
+        "species": [
+          "AMPHIBIAN"
+        ],
+        "volume": "240 L",
+        "weight": "200 kg",
+        "hp": 120,
+        "speed": 90,
+        "move_skills": {
+          "climb": 4,
+          "swim": 8
+        },
+        "material": [
+          "flesh"
+        ],
+        "symbol": "M",
+        "color": "brown",
+        "aggression": 10,
+        "morale": 100,
+        "aggro_character": false,
+        "melee_skill": 5,
+        "melee_dice": 1,
+        "melee_dice_sides": 12,
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 1
+          }
+        ],
+        "dodge": 2,
+        "armor": {
+          "bash": 4,
+          "electric": 1
+        },
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology",
+          "prof_wp_basic_amphibian"
+        ],
+        "weakpoint_sets": [
+          "wps_amphibian_body",
+          "wps_amphibian_frog"
+        ],
+        "dissect": "dissect_batrachian_sample_small",
+        "harvest": "mutant_animal_large_noskin",
+        "vision_night": 30,
+        "path_settings": {
+          "max_dist": 5
+        },
+        "grab_strength": 20,
+        "special_attacks": [
+          {
+            "id": "ranged_pull",
+            "cooldown": 10,
+            "range": 4,
+            "condition": {
+              "and": [
+                {
+                  "not": {
+                    "u_has_flag": "GRAB_FILTER"
+                  }
+                },
+                {
+                  "not": {
+                    "u_has_effect": "maimed_tongue"
+                  }
+                }
+              ]
+            },
+            "hit_dmg_u": "%s catches you with its tongue and pulls you in!",
+            "hit_dmg_npc": "%s catches <npcname> with its tongue and pulls them in!",
+            "miss_msg_u": "%s's tongue lashes out at you, but you dodge!",
+            "miss_msg_npc": "%s's tongue lashes out at <npcname>, but they dodge!",
+            "no_dmg_msg_u": "%s catches you with its tongue and pulls you in!",
+            "no_dmg_msg_npc": "%s catches <npcname> with its tongue and pulls them in!"
+          },
+          {
+            "type": "leap",
+            "cooldown": 10,
+            "move_cost": 0,
+            "max_range": 10,
+            "min_consider_range": 2,
+            "condition": {
+              "not": {
+                "u_has_effect": "maimed_leg"
+              }
+            }
+          }
+        ],
+        "fear_triggers": [
+          "FIRE"
+        ],
+        "anger_triggers": [
+          "STALK",
+          "PLAYER_WEAK",
+          "PLAYER_CLOSE",
+          "MATING_SEASON"
+        ],
+        "burn_into": "mon_frog_mummy",
+        "baby_flags": [
+          "SPRING",
+          "SUMMER"
+        ],
+        "flags": [
+          "FISHABLE",
+          "SEES",
+          "SMELLS",
+          "HEARS",
+          "GRABS",
+          "WATER_CAMOUFLAGE",
+          "BASHES"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_strange_giganfrog",
+        "type": "MONSTER",
+        "name": {
+          "str": "giant bullfrog"
+        },
+        "description": "A mutated bullfrog taller than you are.  It stares with amber eyes as it considers the easiest way to swallow you whole.",
+        "copy-from": "mon_proxy_giganfrog",
+        "color": "light_green",
+        "upgrades": {
+          "age_grow": 45,
+          "into_group": "GROUP_FROGS_UPGRADE_STRANGE_MEGA"
+        },
+        "zombify_into": "mon_zombullfrog",
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_strange_bigfrog"
+          },
+          "baby_count": 18,
+          "baby_timer": 20
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_odd_giganfrog",
+        "type": "MONSTER",
+        "name": {
+          "str": "giant toad"
+        },
+        "description": "This toad has grown bigger than a human.  It looks uninterested in eating you but you better not give it a chance.",
+        "copy-from": "mon_proxy_giganfrog",
+        "upgrades": {
+          "age_grow": 45,
+          "into_group": "GROUP_FROGS_UPGRADE_ODD_MEGA"
+        },
+        "zombify_into": "mon_toad_zombie",
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_odd_bigfrog"
+          },
+          "baby_count": 18,
+          "baby_timer": 20
+        },
+        "extend": {
+          "flags": [
+            "POISON"
+          ]
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_pattern_giganfrog",
+        "type": "MONSTER",
+        "name": {
+          "str": "taser tongue"
+        },
+        "description": "This pale, trash can-sized frog sports a series of faintly glowing spots among its chaotic skin patterns.  The glow seems most concentrated around its unusually bulky neck and mouth.  Its dark eyes scan for an appetizing target.",
+        "copy-from": "mon_proxy_giganfrog",
+        "volume": "200 L",
+        "weight": "180 kg",
+        "hp": 100,
+        "symbol": "P",
+        "color": "light_blue",
+        "aggression": -1,
+        "morale": 50,
+        "melee_skill": 4,
+        "melee_damage": [
+          {
+            "damage_type": "electric",
+            "amount": 6
+          },
+          {
+            "damage_type": "cut",
+            "amount": 1
+          }
+        ],
+        "armor": {
+          "bash": 6,
+          "cut": 2,
+          "acid": 3,
+          "heat": 3,
+          "electric": 6
+        },
+        "weakpoint_sets": [
+          "wps_amphibian_body",
+          "wps_amphibian_frog",
+          "wps_amphibian_electric"
+        ],
+        "luminance": 2,
+        "special_attacks": [
+          {
+            "id": "ranged_pull",
+            "cooldown": 10,
+            "range": 4,
+            "condition": {
+              "and": [
+                {
+                  "not": {
+                    "u_has_flag": "GRAB_FILTER"
+                  }
+                },
+                {
+                  "not": {
+                    "u_has_effect": "maimed_tongue"
+                  }
+                }
+              ]
+            },
+            "damage_max_instance": [
+              {
+                "damage_type": "electric",
+                "amount": 4
+              }
+            ],
+            "effects": [
+              {
+                "id": "zapped",
+                "duration": [
+                  2,
+                  10
+                ]
+              }
+            ],
+            "hit_dmg_u": "%s catches you with its tongue and pulls you in!",
+            "hit_dmg_npc": "%s catches <npcname> with its tongue and pulls them in!",
+            "miss_msg_u": "%s's tongue lashes out at you, but you dodge!",
+            "miss_msg_npc": "%s's tongue lashes out at <npcname>, but they dodge!",
+            "no_dmg_msg_u": "%s catches you with its tongue and pulls you in!",
+            "no_dmg_msg_npc": "%s catches <npcname> with its tongue and pulls them in!"
+          },
+          {
+            "type": "leap",
+            "cooldown": 10,
+            "move_cost": 0,
+            "max_range": 8,
+            "min_consider_range": 2,
+            "condition": {
+              "not": {
+                "u_has_effect": "maimed_leg"
+              }
+            }
+          }
+        ],
+        "special_when_hit": [
+          "ZAPBACK",
+          100
+        ],
+        "anger_triggers": [
+          "PLAYER_WEAK",
+          "PLAYER_CLOSE",
+          "MATING_SEASON",
+          "FRIEND_ATTACKED"
+        ],
+        "zombify_into": "mon_frog_shocker",
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_pattern_bigfrog"
+          },
+          "baby_count": 18,
+          "baby_timer": 20
+        },
+        "extend": {
+          "flags": [
+            "SWARMS"
+          ]
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_foul_giganfrog",
+        "type": "MONSTER",
+        "name": {
+          "str": "giant hogtoad"
+        },
+        "description": "This large, odious, boar-sized toad shares some features with its namesake.  It grunts, roots and wallows, but more striking are the dense tusk-like growths sprouting from its face and jaw.  Though they seem to be most effective for burrowing and protection, in places they come to curved points that look quite sharp.",
+        "copy-from": "mon_proxy_giganfrog",
+        "speed": 100,
+        "symbol": "G",
+        "melee_dice_sides": 20,
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 2
+          }
+        ],
+        "armor": {
+          "bash": 6,
+          "cut": 3,
+          "acid": 5,
+          "heat": 2,
+          "electric": 2
+        },
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology",
+          "prof_wp_basic_amphibian",
+          "prof_wp_skeleton"
+        ],
+        "weakpoint_sets": [
+          "wps_amphibian_body",
+          "wps_amphibian_frog",
+          "wps_amphibian_bone",
+          "wps_bone_armor"
+        ],
+        "emit_fields": [
+          {
+            "emit_id": "emit_tear_gas_leak",
+            "delay": "1 s"
+          }
+        ],
+        "special_attacks": [
+          {
+            "id": "ranged_pull",
+            "cooldown": 10,
+            "range": 3,
+            "condition": {
+              "and": [
+                {
+                  "not": {
+                    "u_has_flag": "GRAB_FILTER"
+                  }
+                },
+                {
+                  "not": {
+                    "u_has_effect": "maimed_tongue"
+                  }
+                }
+              ]
+            },
+            "hit_dmg_u": "%s catches you with its tongue and pulls you in!",
+            "hit_dmg_npc": "%s catches <npcname> with its tongue and pulls them in!",
+            "miss_msg_u": "%s's tongue lashes out at you, but you dodge!",
+            "miss_msg_npc": "%s's tongue lashes out at <npcname>, but they dodge!",
+            "no_dmg_msg_u": "%s catches you with its tongue and pulls you in!",
+            "no_dmg_msg_npc": "%s catches <npcname> with its tongue and pulls them in!"
+          },
+          {
+            "type": "leap",
+            "cooldown": 8,
+            "move_cost": 0,
+            "max_range": 8,
+            "min_consider_range": 2,
+            "condition": {
+              "not": {
+                "u_has_effect": "maimed_leg"
+              }
+            }
+          }
+        ],
+        "anger_triggers": [
+          "PLAYER_WEAK",
+          "PLAYER_CLOSE",
+          "MATING_SEASON",
+          "FRIEND_ATTACKED"
+        ],
+        "upgrades": {
+          "age_grow": 45,
+          "into_group": "GROUP_FROGS_UPGRADE_FOUL_MEGA"
+        },
+        "zombify_into": "mon_toad_zombie",
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_foul_bigfrog"
+          },
+          "baby_count": 18,
+          "baby_timer": 20
+        },
+        "extend": {
+          "flags": [
+            "POISON",
+            "NO_BREATHE",
+            "SWARMS"
+          ]
+        },
+        "//": "When possible, add ability to dig furrows (lines of shallow pits) and wallow.  NO_BREATHE flag is to prevent gassing by younger of its kind."
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "abstract": "mon_proxy_megafrog",
+        "type": "MONSTER",
+        "name": {
+          "str": "mega proxy frog",
+          "//~": "NO_I18N"
+        },
+        "description": {
+          "str": "You can only imagine the size of the (de)bugs that drew out this enormous frog",
+          "//~": "NO_I18N"
+        },
+        "default_faction": "frog",
+        "bodytype": "frog",
+        "species": [
+          "AMPHIBIAN"
+        ],
+        "volume": "650 L",
+        "weight": "800 kg",
+        "hp": 1200,
+        "regenerates": 4,
+        "speed": 80,
+        "move_skills": {
+          "swim": 8
+        },
+        "material": [
+          "flesh"
+        ],
+        "symbol": "F",
+        "color": "brown",
+        "aggression": 5,
+        "morale": 100,
+        "aggro_character": false,
+        "melee_skill": 4,
+        "melee_dice": 6,
+        "melee_dice_sides": 10,
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 1
+          }
+        ],
+        "armor": {
+          "bash": 8,
+          "cut": 3,
+          "bullet": 2,
+          "electric": 2
+        },
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology",
+          "prof_wp_basic_amphibian"
+        ],
+        "weakpoint_sets": [
+          "wps_amphibian_body",
+          "wps_amphibian_frog"
+        ],
+        "dissect": "dissect_batrachian_sample_huge",
+        "harvest": "mutant_animal_large_noskin",
+        "vision_night": 10,
+        "path_settings": {
+          "max_dist": 5
+        },
+        "grab_strength": 50,
+        "special_attacks": [
+          {
+            "id": "ranged_pull",
+            "cooldown": 10,
+            "range": 5,
+            "condition": {
+              "and": [
+                {
+                  "not": {
+                    "u_has_flag": "GRAB_FILTER"
+                  }
+                },
+                {
+                  "not": {
+                    "u_has_effect": "maimed_tongue"
+                  }
+                }
+              ]
+            },
+            "hit_dmg_u": "%s catches you with its tongue and pulls you in!",
+            "hit_dmg_npc": "%s catches <npcname> with its tongue and pulls them in!",
+            "miss_msg_u": "%s's tongue lashes out at you, but you dodge!",
+            "miss_msg_npc": "%s's tongue lashes out at <npcname>, but they dodge!",
+            "no_dmg_msg_u": "%s catches you with its tongue and pulls you in!",
+            "no_dmg_msg_npc": "%s catches <npcname> with its tongue and pulls them in!"
+          },
+          {
+            "type": "leap",
+            "cooldown": 10,
+            "move_cost": 0,
+            "max_range": 12,
+            "min_consider_range": 2,
+            "condition": {
+              "not": {
+                "u_has_effect": "maimed_leg"
+              }
+            }
+          }
+        ],
+        "fear_triggers": [
+          "FIRE"
+        ],
+        "anger_triggers": [
+          "STALK",
+          "PLAYER_WEAK",
+          "PLAYER_CLOSE",
+          "MATING_SEASON"
+        ],
+        "burn_into": "mon_frog_smoker_hulk",
+        "baby_flags": [
+          "SPRING",
+          "SUMMER"
+        ],
+        "flags": [
+          "SEES",
+          "SMELLS",
+          "GRABS",
+          "HEARS",
+          "DESTROYS"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_strange_megafrog",
+        "type": "MONSTER",
+        "name": {
+          "str": "colossal croaker"
+        },
+        "description": "Bloated to titanic size, rivaling a moose, this mutated bullfrog takes several seconds just to blink each vacant eye.  In place of the cognition it has lost, the beast has gained an even more voracious appetite and the might to sustain it.",
+        "copy-from": "mon_proxy_megafrog",
+        "color": "green",
+        "special_attacks": [
+          {
+            "id": "ranged_pull",
+            "cooldown": 10,
+            "range": 5,
+            "condition": {
+              "and": [
+                {
+                  "not": {
+                    "u_has_flag": "GRAB_FILTER"
+                  }
+                },
+                {
+                  "not": {
+                    "u_has_effect": "maimed_tongue"
+                  }
+                }
+              ]
+            },
+            "hit_dmg_u": "%s catches you with its tongue and pulls you in!",
+            "hit_dmg_npc": "%s catches <npcname> with its tongue and pulls them in!",
+            "miss_msg_u": "%s's tongue lashes out at you, but you dodge!",
+            "miss_msg_npc": "%s's tongue lashes out at <npcname>, but they dodge!",
+            "no_dmg_msg_u": "%s catches you with its tongue and pulls you in!",
+            "no_dmg_msg_npc": "%s catches <npcname> with its tongue and pulls them in!"
+          },
+          {
+            "type": "leap",
+            "cooldown": 10,
+            "move_cost": 0,
+            "max_range": 12,
+            "min_consider_range": 2,
+            "condition": {
+              "not": {
+                "u_has_effect": "maimed_leg"
+              }
+            }
+          },
+          [
+            "SHRIEK_ALERT",
+            20
+          ],
+          [
+            "SHRIEK_STUN",
+            5
+          ]
+        ],
+        "zombify_into": "mon_frog_dad",
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_strange_bigfrog"
+          },
+          "baby_count": 32,
+          "baby_timer": 20
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_odd_megafrog",
+        "type": "MONSTER",
+        "name": {
+          "str": "gargantuan toad"
+        },
+        "description": "This toad is of truly enormous stature, larger than many cars.  You can't help but wonder if it could fit as many people inside.",
+        "copy-from": "mon_proxy_megafrog",
+        "armor": {
+          "bash": 18,
+          "cut": 18,
+          "bullet": 12,
+          "electric": 4
+        },
+        "zombify_into": "mon_toad_wart",
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_odd_bigfrog"
+          },
+          "baby_count": 32,
+          "baby_timer": 20
+        },
+        "extend": {
+          "flags": [
+            "POISON"
+          ]
+        },
+        "//": "Simple wallowing, likes to create deep pits and lay in them."
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_foul_megafrog",
+        "type": "MONSTER",
+        "name": {
+          "str": "great beaked toad"
+        },
+        "description": "This massive toad's jaw bones have grown out from its lips into a powerful beak, large enough to snap a bicycle in two.  The bony growths extend to its face, ringing its eyes and shielding its parotoid glands, swollen with poison.  Though intimidating, it appears more interested in a soothing mud bath than anything violent.",
+        "copy-from": "mon_proxy_megafrog",
+        "volume": "325 L",
+        "weight": "400 kg",
+        "hp": 400,
+        "regenerates": 2,
+        "speed": 90,
+        "symbol": "B",
+        "aggression": 0,
+        "melee_skill": 5,
+        "melee_dice": 2,
+        "melee_dice_sides": 8,
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 4
+          }
+        ],
+        "dodge": 1,
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology",
+          "prof_wp_basic_amphibian",
+          "prof_wp_skeleton"
+        ],
+        "weakpoint_sets": [
+          "wps_amphibian_body",
+          "wps_amphibian_frog",
+          "wps_amphibian_bone",
+          "wps_bone_armor"
+        ],
+        "grab_strength": 35,
+        "special_attacks": [
+          {
+            "id": "bite_grab",
+            "cooldown": 5,
+            "accuracy": 5,
+            "damage_max_instance": [
+              {
+                "damage_type": "cut",
+                "amount": 26,
+                "armor_multiplier": 0.2
+              },
+              {
+                "damage_type": "bash",
+                "amount": 14,
+                "armor_multiplier": 0.2
+              }
+            ],
+            "effects": [
+              {
+                "id": "venom_pain",
+                "duration": 20,
+                "affect_hit_bp": true
+              }
+            ],
+            "condition": {
+              "not": {
+                "u_has_effect": "maimed_mandible"
+              }
+            }
+          },
+          {
+            "id": "ranged_pull",
+            "cooldown": 10,
+            "range": 4,
+            "condition": {
+              "and": [
+                {
+                  "not": {
+                    "u_has_flag": "GRAB_FILTER"
+                  }
+                },
+                {
+                  "not": {
+                    "u_has_effect": "maimed_tongue"
+                  }
+                }
+              ]
+            },
+            "hit_dmg_u": "%s catches you with its tongue and pulls you in!",
+            "hit_dmg_npc": "%s catches <npcname> with its tongue and pulls them in!",
+            "miss_msg_u": "%s's tongue lashes out at you, but you dodge!",
+            "miss_msg_npc": "%s's tongue lashes out at <npcname>, but they dodge!",
+            "no_dmg_msg_u": "%s catches you with its tongue and pulls you in!",
+            "no_dmg_msg_npc": "%s catches <npcname> with its tongue and pulls them in!"
+          },
+          {
+            "type": "leap",
+            "cooldown": 8,
+            "move_cost": 0,
+            "max_range": 8,
+            "min_consider_range": 2,
+            "condition": {
+              "not": {
+                "u_has_effect": "maimed_leg"
+              }
+            }
+          }
+        ],
+        "anger_triggers": [
+          "PLAYER_WEAK",
+          "PLAYER_CLOSE",
+          "MATING_SEASON",
+          "FRIEND_ATTACKED"
+        ],
+        "zombify_into": "mon_toad_bone",
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_foul_bigfrog"
+          },
+          "baby_count": 32,
+          "baby_timer": 20
+        },
+        "extend": {
+          "flags": [
+            "POISON",
+            "NO_BREATHE"
+          ]
+        },
+        "//": "When possible, add ability to dig furrows (lines of shallow pits) and wallow.  NO_BREATHE flag is to prevent gassing by younger of its kind."
+      }
+    }
+  ],
+  "creature_ids": [
+    "mon_pattern_bigtad",
+    "mon_strange_bigtad",
+    "mon_foul_bigtad",
+    "mon_odd_bigtad",
+    "mon_vocal_bigtad",
+    "mon_shift_bigtad",
+    "mon_pattern_frog",
+    "mon_odd_toad",
+    "mon_shift_frog",
+    "mon_palette_frog",
+    "mon_leo_worm",
+    "mon_wood_worm",
+    "mon_pattern_bigfrog",
+    "mon_foul_bigfrog",
+    "mon_jumbo_bigfrog",
+    "mon_vocal_bigfrog",
+    "mon_shift_bigfrog",
+    "mon_pattern_giganfrog",
+    "mon_strange_giganfrog",
+    "mon_odd_giganfrog",
+    "mon_foul_giganfrog",
+    "mon_foul_megafrog",
+    "mon_strange_megafrog",
+    "mon_odd_megafrog",
+    "mon_foul_toad"
+  ],
+  "renderer_states": [
+    "corpse_mon_pattern_bigtad",
+    "corpse_mon_strange_bigtad",
+    "corpse_mon_foul_bigtad",
+    "corpse_mon_odd_bigtad",
+    "corpse_mon_vocal_bigtad",
+    "corpse_mon_shift_bigtad",
+    "corpse_mon_pattern_frog",
+    "corpse_mon_odd_toad",
+    "corpse_mon_shift_frog",
+    "corpse_mon_palette_frog",
+    "corpse_mon_leo_worm",
+    "corpse_mon_wood_worm",
+    "corpse_mon_pattern_bigfrog",
+    "corpse_mon_foul_bigfrog",
+    "corpse_mon_jumbo_bigfrog",
+    "corpse_mon_vocal_bigfrog",
+    "corpse_mon_shift_bigfrog",
+    "corpse_mon_pattern_giganfrog",
+    "corpse_mon_strange_giganfrog",
+    "corpse_mon_odd_giganfrog",
+    "corpse_mon_foul_giganfrog",
+    "corpse_mon_foul_megafrog",
+    "corpse_mon_strange_megafrog",
+    "corpse_mon_odd_megafrog",
+    "corpse_mon_foul_toad"
+  ],
+  "evidence": "src/cata_tiles.cpp:3680 prefixes corpse_ to monster id",
+  "seasons": "Every remaining core mutated amphibian growth form in this family has living and corpse states; unlike tiny natural tadpoles the giant tadpole parent does not specify NO_CORPSE. Neutral calendar aliases; breeding flags do not create separate appearance states. Previously drawn growth forms remain unchanged. Foul toad has the same inherited Fowler toad appearance and size, with odor and behavior only, so uses the reviewed Fowler pair.",
+  "runtime_review": "pending; conditional mod interactions outside this static audit",
+  "conditional_files_skipped": [
+    "data/mods/innawood/mod_interactions/bombastic_perks/experience_eocs.json",
+    "data/mods/innawood/mod_interactions/sorcerer/experience_eocs.json",
+    "data/mods/innawood/mod_interactions/skyisland/region_overlay.json",
+    "data/mods/innawood/mod_interactions/perk_melee_system/experience_eocs.json",
+    "data/mods/Megafauna/mod_interactions/defense_mode/monsters.json",
+    "data/mods/Megafauna/mod_interactions/defense_mode/monstergroups.json"
+  ]
+}

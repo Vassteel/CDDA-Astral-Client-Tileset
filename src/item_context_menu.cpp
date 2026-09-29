@@ -1,5 +1,6 @@
 #include "ui_telemetry.h"
 #include "item_context_menu.h"
+#include "equipment_actions.h"
 
 #include <string>
 #include <vector>
@@ -28,6 +29,8 @@
 
 namespace item_context_menu
 {
+static const flag_id flag_ASTRAL_SHIELD( "ASTRAL_SHIELD" );
+
 namespace
 {
 
@@ -212,7 +215,8 @@ action draw_imgui_menu( Character &you, const item_location &loc, bool from_worn
 
     if( !from_worn ) {
         if( rate_wear( you, it ) != hint_rating::cant ) {
-            if( menu_entry( _( "Wear" ), you.can_wear( it ).success() ) ) {
+            if( menu_entry( it.has_flag( flag_ASTRAL_SHIELD ) ? _( "Equip off-hand" ) : _( "Wear" ),
+                            you.can_wear( it ).success() ) ) {
                 chosen = action::wear;
             }
         }
@@ -409,10 +413,11 @@ std::string perform( Character &you, item_location loc, action act,
         }
         case action::takeoff: {
             if( you.is_wielding( *loc ) ) {
-                if( you.can_unwield( *loc ).success() && you.unwield() ) {
+                const auto result = equipment_actions::unwield_to_inventory( you );
+                if( result.success() ) {
                     return _( "Unwielded." );
                 }
-                return you.can_unwield( *loc ).str();
+                return result.str();
             }
             const ret_val<void> can = you.can_takeoff( *loc );
             if( !can.success() ) {

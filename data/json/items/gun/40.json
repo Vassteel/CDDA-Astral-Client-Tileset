@@ -153,7 +153,8 @@
     "material": [ "plastic", "steel" ],
     "dispersion": 480,
     "valid_mod_locations": [ [ "barrel", 1 ], [ "mechanism", 2 ], [ "rail mount", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ] ],
-    "pocket_data": [ { "magazine_well": "185 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "bhp40mag" ] } ]
+    "pocket_data": [ { "magazine_well": "185 ml", "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "bhp40mag" ] } ],
+    "extend": { "flags": [ "OLD_GUN" ] }
   },
   {
     "id": "hptjcp",

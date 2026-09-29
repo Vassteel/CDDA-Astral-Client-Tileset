@@ -53,6 +53,7 @@
 #include "dialogue_helpers.h"
 #include "dialogue_imgui.h"
 #include "effect_on_condition.h"
+#include "progression_ui.h"
 #include "enum_conversions.h"
 #include "enum_traits.h"
 #include "enums.h"
@@ -5685,6 +5686,10 @@ talk_effect_fun_t::func f_open_dialogue( const JsonObject &jo, std::string_view 
             run_eoc_vector( false_eocs, d );
             return;
         } else if( !actual_topic.empty() ) {
+            if( progression_ui::show( actual_topic ) ) {
+                run_eoc_vector( true_eocs, d );
+                return;
+            }
             get_avatar().talk_to( get_talker_for( std::vector<std::string> { actual_topic } ), false, false,
                                   true );
         } else {

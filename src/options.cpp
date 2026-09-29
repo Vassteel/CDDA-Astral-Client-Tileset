@@ -2353,6 +2353,15 @@ void options_manager::add_options_interface()
              to_translation( "Share of sidebar space used for status rather than messages." ),
              20, 80, 55, COPT_CURSES_HIDE );
 
+        add( "ASTRAL_UI_DECORATION", page_id, to_translation( "Astral UI decoration" ),
+             to_translation( "Strength of the decorative window art in the Astral interface.  "
+                             "Full: textured surfaces and bronze frames.  Reduced: flat surfaces "
+                             "with a single edge.  None: quiet edges only.  Layout and content "
+                             "are identical in every setting." ),
+        { { "full", to_translation( "Full" ) }, { "reduced", to_translation( "Reduced" ) },
+            { "none", to_translation( "None" ) } }, "full", COPT_CURSES_HIDE
+           );
+
         add( "RPG_EQUIPMENT_UI", page_id, to_translation( "RPG equipment UI (paper doll)" ),
              to_translation( "If true, Inventory (i / toolbar Inv) opens the paper-doll + "
                              "grid equipment window. Classic inventory remains available from "
@@ -2372,14 +2381,16 @@ void options_manager::add_options_interface()
              true, COPT_CURSES_HIDE );
         get_option( "MOUSE_TOOLBAR_AUTO_TOGGLES" ).setPrerequisite( "MOUSE_TOOLBAR" );
 
+        add( "TACTICAL_COMBAT", page_id, to_translation( "Tactical combat actions" ),
+             to_translation( "Enable Attack, Guard, Evade, Shield Bash and Recover, and telegraphed heavy strikes for designated creatures." ), true );
+        add( "AUTO_COMBAT_PROFILE", page_id, to_translation( "Auto combat behavior" ),
+             to_translation( "Aggressive favors shield interruption and attacks; balanced manages stamina; defensive recovers earlier and braces against heavy strikes." ),
+             { { "aggressive", to_translation( "Aggressive" ) }, { "balanced", to_translation( "Balanced" ) },
+               { "defensive", to_translation( "Defensive" ) } }, "balanced" );
+        add( "AUTO_COMBAT_RANGED", page_id, to_translation( "Auto combat may use ammunition" ),
+             to_translation( "Allow auto combat to aim and fire the wielded ranged weapon. It never reloads or chases targets automatically." ), false );
         add( "AUTO_COMBAT", page_id, to_translation( "Auto combat" ),
-             to_translation( "If true, each player turn automatically takes a combat action when "
-                             "a hostile is fightable: melee/reach uses the normal attack path "
-                             "(martial style + weapon + worn armor techniques); ranged fires the "
-                             "wielded gun/bow without the aiming UI.  If nothing is in range, "
-                             "control returns to you so you can move.  Safe mode still blocks "
-                             "actions.  Toggle from the toolbar Combat button when toolbar auto "
-                             "toggles are enabled." ),
+             to_translation( "Automatically choose an action against reachable hostiles using the selected behavior. Manual input stops combat; low health, exhaustion, safe mode, or no target pause it. Ranged ammunition use requires its separate option. No automatic chasing or reloading." ),
              false, COPT_CURSES_HIDE );
 
         add( "AUTO_EAT", page_id, to_translation( "Auto eat / drink" ),

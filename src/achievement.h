@@ -2,6 +2,7 @@
 #ifndef CATA_SRC_ACHIEVEMENT_H
 #define CATA_SRC_ACHIEVEMENT_H
 
+#include "achievement_rewards.h"
 #include <array>
 #include <functional>
 #include <iosfwd>
@@ -220,6 +221,8 @@ class achievements_tracker : public event_subscriber
             enabled_ = enabled;
         }
 
+        achievement_rewards::bank reward_bank;
+        void enroll_astral();
         void clear();
         using event_subscriber::notify;
         void notify( const cata::event & ) override;

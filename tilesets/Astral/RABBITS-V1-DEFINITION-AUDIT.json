@@ -1,0 +1,222 @@
+{
+  "active_mods": [
+    "bombastic_perks",
+    "dda",
+    "innawood",
+    "limitless_backpack",
+    "megafauna",
+    "no_npc_food",
+    "perk_melee_system",
+    "personal_portal_storms"
+  ],
+  "records": [
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/mammal.json",
+      "definition": {
+        "abstract": "mon_rabbit_base",
+        "type": "MONSTER",
+        "name": {
+          "str": "rabbit"
+        },
+        "description": {
+          "str": "rabbit abstract",
+          "//~": "NO_I18N"
+        },
+        "default_faction": "mammal_small",
+        "bodytype": "pig",
+        "categories": [
+          "WILDLIFE"
+        ],
+        "species": [
+          "MAMMAL"
+        ],
+        "volume": "5 L",
+        "weight": "2 kg",
+        "hp": 8,
+        "speed": 300,
+        "attack_cost": 300,
+        "material": [
+          "flesh"
+        ],
+        "symbol": "r",
+        "color": "brown",
+        "aggression": -99,
+        "morale": -7,
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 0
+          }
+        ],
+        "dodge": 6,
+        "special_attacks": [
+          [
+            "EAT_CROP",
+            60
+          ],
+          [
+            "GRAZE",
+            50
+          ]
+        ],
+        "harvest": "rabbit_with_skull",
+        "dissect": "dissect_rabbit_sample_single",
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology"
+        ],
+        "fear_triggers": [
+          "SOUND",
+          "PLAYER_CLOSE"
+        ],
+        "flags": [
+          "SEES",
+          "HEARS",
+          "SMELLS",
+          "ANIMAL",
+          "PATH_AVOID_DANGER",
+          "PET_WONT_FOLLOW",
+          "WARM",
+          "CAN_BE_CULLED",
+          "GOODHEARING",
+          "EATS",
+          "SMALL_HIDER"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/mammal.json",
+      "definition": {
+        "abstract": "mon_rabbit_baby_base",
+        "type": "MONSTER",
+        "name": {
+          "str": "rabbit kit abstract",
+          "//~": "NO_I18N"
+        },
+        "copy-from": "mon_rabbit_base",
+        "volume": "150 ml",
+        "weight": "30 g",
+        "hp": 1,
+        "speed": 125,
+        "attack_cost": 125,
+        "dodge": 8,
+        "harvest": "mammal_tiny"
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/mammal.json",
+      "definition": {
+        "id": "mon_rabbit",
+        "type": "MONSTER",
+        "name": {
+          "str": "domestic rabbit"
+        },
+        "description": "A small mammal with a cute wiggling nose, a cotton ball tail, and a body made of delicious flesh.",
+        "copy-from": "mon_rabbit_base",
+        "reproduction": {
+          "baby_type": {
+            "baby_monster": "mon_rabbit_baby"
+          },
+          "baby_count": 6,
+          "baby_timer": 33
+        },
+        "petfood": {
+          "food": [
+            "CATTLEFOOD"
+          ],
+          "feed": "The %s seems to like you!  It lets you pat its head and seems friendly."
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/mammal.json",
+      "definition": {
+        "id": "mon_rabbit_baby",
+        "type": "MONSTER",
+        "name": {
+          "str": "domestic rabbit kit"
+        },
+        "description": "A tiny bunny with a cute wiggling nose, a cotton ball tail, and a body made of delicious flesh.",
+        "copy-from": "mon_rabbit_baby_base",
+        "upgrades": {
+          "age_grow": 45,
+          "into": "mon_rabbit"
+        },
+        "petfood": {
+          "food": [
+            "CATTLEFOOD"
+          ],
+          "feed": "The %s seems to like you!  It lets you pat its head and seems friendly."
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/mammal.json",
+      "definition": {
+        "id": "mon_wild_rabbit",
+        "type": "MONSTER",
+        "name": {
+          "str": "cottontail rabbit"
+        },
+        "description": "A brown-coated cottontail rabbit, with a fluffy white tail.  Its small size and docile nature makes it easy prey for predators, at least the ones that can catch it.  You can't tell which one of the two cottontail species from the region this is.",
+        "copy-from": "mon_rabbit_base",
+        "looks_like": "mon_rabbit",
+        "weight": "1200 g",
+        "reproduction": {
+          "baby_type": {
+            "baby_monster": "mon_wild_rabbit_baby"
+          },
+          "baby_count": 5,
+          "baby_timer": 28
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/mammal.json",
+      "definition": {
+        "id": "mon_wild_rabbit_baby",
+        "type": "MONSTER",
+        "name": {
+          "str": "cottontail rabbit kit"
+        },
+        "description": "A tiny and very cute cottontail rabbit kit.",
+        "copy-from": "mon_rabbit_baby_base",
+        "looks_like": "mon_rabbit_baby",
+        "upgrades": {
+          "age_grow": 23,
+          "into": "mon_wild_rabbit"
+        }
+      }
+    }
+  ],
+  "creature_ids": [
+    "mon_rabbit",
+    "mon_rabbit_baby",
+    "mon_wild_rabbit",
+    "mon_wild_rabbit_baby"
+  ],
+  "renderer_states": [
+    "corpse_mon_rabbit",
+    "corpse_mon_rabbit_baby",
+    "corpse_mon_wild_rabbit",
+    "corpse_mon_wild_rabbit_baby"
+  ],
+  "evidence": "src/cata_tiles.cpp:3680 prefixes corpse_ to monster id",
+  "seasons": "Natural brown coats shared across all four seasons; no white seasonal morph defined. Domestic and cottontail adults and kits are distinct art.",
+  "runtime_review": "pending; conditional mod interactions outside this static audit",
+  "conditional_files_skipped": [
+    "data/mods/innawood/mod_interactions/bombastic_perks/experience_eocs.json",
+    "data/mods/innawood/mod_interactions/sorcerer/experience_eocs.json",
+    "data/mods/innawood/mod_interactions/skyisland/region_overlay.json",
+    "data/mods/innawood/mod_interactions/perk_melee_system/experience_eocs.json",
+    "data/mods/Megafauna/mod_interactions/defense_mode/monsters.json",
+    "data/mods/Megafauna/mod_interactions/defense_mode/monstergroups.json"
+  ]
+}

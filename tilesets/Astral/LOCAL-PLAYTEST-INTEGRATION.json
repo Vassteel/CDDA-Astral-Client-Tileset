@@ -1,0 +1,3252 @@
+{
+  "status": "local playtest integration; full visual/gameplay acceptance pending",
+  "base": "Astral 0.1.44",
+  "creature_families": [
+    {
+      "name": "Butterfly lifecycle",
+      "unique_sprites": 10
+    },
+    {
+      "name": "Moth lifecycle",
+      "unique_sprites": 8
+    },
+    {
+      "name": "Fish fry and crustacean larva",
+      "unique_sprites": 4
+    },
+    {
+      "name": "Natural tadpoles",
+      "unique_sprites": 10
+    },
+    {
+      "name": "Frogs and toads",
+      "unique_sprites": 16
+    },
+    {
+      "name": "Mutated amphibian growth families",
+      "unique_sprites": 48
+    },
+    {
+      "name": "Undead amphibians",
+      "unique_sprites": 22
+    },
+    {
+      "name": "Fungal mounds and constructs",
+      "unique_sprites": 12
+    }
+  ],
+  "recent_entries": 178,
+  "new_unique_texture_slots": 159,
+  "sprite_slots": 19956,
+  "unknown_definition_ids": [],
+  "unrelated_mappings_preserved": true,
+  "sprite_indices_valid": true,
+  "source_hashes_verified": true,
+  "additions": [
+    {
+      "id": "arbor_press",
+      "aliases": [],
+      "sha256": "ef53bb846c77ddb7f0572fe4b42ce2bb35d56ee19e7ddcefa9a519822f10199b",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "aux2-v012",
+      "source": "artifacts/astral-item-art/aux-2/v012/png/arbor_press.png",
+      "installed_file": "playtest_ef53bb846c77ddb7f057.png",
+      "sprite": 19797
+    },
+    {
+      "id": "bench_vise",
+      "aliases": [],
+      "sha256": "737d79ca2e2d9e4f38d8caab4d3f84f032971bb74cf785fb4f351f6e45a91028",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "aux2-v012",
+      "source": "artifacts/astral-item-art/aux-2/v012/png/bench_vise.png",
+      "installed_file": "playtest_737d79ca2e2d9e4f38d8.png",
+      "sprite": 19798
+    },
+    {
+      "id": "claw_bar",
+      "aliases": [],
+      "sha256": "aca8afde7a123535b06efb8aff8b54e58b4b2554436ec95d78e3b21c3fba81f1",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "aux2-v012",
+      "source": "artifacts/astral-item-art/aux-2/v012/png/claw_bar.png",
+      "installed_file": "playtest_aca8afde7a123535b06e.png",
+      "sprite": 19799
+    },
+    {
+      "id": "glass_cutter",
+      "aliases": [],
+      "sha256": "62d743c9c091c7880d1860e6bcd871a79964a2a676107716c85384bc7c0d57d2",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "aux2-v012",
+      "source": "artifacts/astral-item-art/aux-2/v012/png/glass_cutter.png",
+      "installed_file": "playtest_62d743c9c091c7880d18.png",
+      "sprite": 19800
+    },
+    {
+      "id": "thread_cutting_set",
+      "aliases": [],
+      "sha256": "18444326fff44bc23457968aefbc1203314904f56d712c6da9877570b898c864",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "aux2-v012",
+      "source": "artifacts/astral-item-art/aux-2/v012/png/thread_cutting_set.png",
+      "installed_file": "playtest_18444326fff44bc23457.png",
+      "sprite": 19801
+    },
+    {
+      "id": "UPS_off",
+      "aliases": [],
+      "sha256": "e05baeed57b09b4cf65e493e66999dcf8b44abbcf906d58ef8fa1243326a3043",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/UPS_off_256.png",
+      "installed_file": "playtest_e05baeed57b09b4cf65e.png",
+      "sprite": 19802
+    },
+    {
+      "id": "UPS_ON",
+      "aliases": [],
+      "sha256": "751c5eb3ac2917fa76ba766bc33a90abe73547f88b2f506e25c4afaea0a024b3",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/UPS_ON_256.png",
+      "installed_file": "playtest_751c5eb3ac2917fa76ba.png",
+      "sprite": 19803
+    },
+    {
+      "id": "chainsaw_off",
+      "aliases": [],
+      "sha256": "24da0b3da7ff27fef1d9154a2210e1206515f82320d55563c08da0b9fa4e0669",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/chainsaw_off_256.png",
+      "installed_file": "playtest_24da0b3da7ff27fef1d9.png",
+      "sprite": 19804
+    },
+    {
+      "id": "chainsaw_on",
+      "aliases": [],
+      "sha256": "d7c5dd32696d62b2b03a7b1e2c8d1f27e572e9e57c99fe1ede8cb0e124a893e4",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/chainsaw_on_256.png",
+      "installed_file": "playtest_d7c5dd32696d62b2b03a.png",
+      "sprite": 19805
+    },
+    {
+      "id": "circsaw_off",
+      "aliases": [],
+      "sha256": "8729a92ced205c544d26d1e54c6fc66902c6f0cb133d9f22eebc19dbede89a82",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/circsaw_off_256.png",
+      "installed_file": "playtest_8729a92ced205c544d26.png",
+      "sprite": 19806
+    },
+    {
+      "id": "circsaw_on",
+      "aliases": [],
+      "sha256": "12d70bfbc754312fd203c797a61bb3a3d95dd4f4852c22679bc954d27b9175ea",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/circsaw_on_256.png",
+      "installed_file": "playtest_12d70bfbc754312fd203.png",
+      "sprite": 19807
+    },
+    {
+      "id": "electric_lantern",
+      "aliases": [],
+      "sha256": "49b2e1735ea259183a624b80897c7fe14b1c2fd9fbd2ae2ec07db042f480e636",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/electric_lantern_256.png",
+      "installed_file": "playtest_49b2e1735ea259183a62.png",
+      "sprite": 19808
+    },
+    {
+      "id": "electric_lantern_on",
+      "aliases": [],
+      "sha256": "fe8fc0d79033c89fd4fd5a2e356c0a79ee52404be1e6e6288ee153a2e16b48ad",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/electric_lantern_on_256.png",
+      "installed_file": "playtest_fe8fc0d79033c89fd4fd.png",
+      "sprite": 19809
+    },
+    {
+      "id": "gasoline_lantern",
+      "aliases": [],
+      "sha256": "5cacb066910e3d18b557ba5a7632a405e21791e829985c167491d6b42a033e2e",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/gasoline_lantern_256.png",
+      "installed_file": "playtest_5cacb066910e3d18b557.png",
+      "sprite": 19810
+    },
+    {
+      "id": "gasoline_lantern_on",
+      "aliases": [],
+      "sha256": "8ae1623d88c00387b6f196e480044ee4ff2f23fa71295aae4546a0960ceee25c",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/gasoline_lantern_on_256.png",
+      "installed_file": "playtest_8ae1623d88c00387b6f1.png",
+      "sprite": 19811
+    },
+    {
+      "id": "airhorn",
+      "aliases": [],
+      "sha256": "dde0cfcfbf63353f46aef08c88af64b10fefd6bf9fd2f85d5d86234b1151fa9d",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/airhorn_256.png",
+      "installed_file": "playtest_dde0cfcfbf63353f46ae.png",
+      "sprite": 19812
+    },
+    {
+      "id": "carver_off",
+      "aliases": [],
+      "sha256": "5e59552a0b63d6a62d5c86eeaeb3414d0217d6670eecb2ef592a4d1b34a0e23b",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/carver_off_256.png",
+      "installed_file": "playtest_5e59552a0b63d6a62d5c.png",
+      "sprite": 19813
+    },
+    {
+      "id": "carver_on",
+      "aliases": [],
+      "sha256": "ba85c4cf4088c27f8c116d65a4594621009223cba03239f53a7c12267990ab85",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/carver_on_256.png",
+      "installed_file": "playtest_ba85c4cf4088c27f8c11.png",
+      "sprite": 19814
+    },
+    {
+      "id": "eink_tablet_pc",
+      "aliases": [],
+      "sha256": "892c5f63f055bc4fdebcba60a7ec15b4a10ed4fbc1fde9b5f6adf612ac67f7e6",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/eink_tablet_pc_256.png",
+      "installed_file": "playtest_892c5f63f055bc4fdebc.png",
+      "sprite": 19815
+    },
+    {
+      "id": "eink_tablet_pc_on",
+      "aliases": [],
+      "sha256": "d11ea72dd6ebb6bb080999066e8a7998d48b44dd73f0be093a5050d6abeda68a",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/eink_tablet_pc_on_256.png",
+      "installed_file": "playtest_d11ea72dd6ebb6bb0809.png",
+      "sprite": 19816
+    },
+    {
+      "id": "UPS_OFF",
+      "aliases": [],
+      "sha256": "e05baeed57b09b4cf65e493e66999dcf8b44abbcf906d58ef8fa1243326a3043",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch1-v1/tools-batch1/native/UPS_OFF_256.png",
+      "installed_file": "playtest_e05baeed57b09b4cf65e.png",
+      "sprite": 19802
+    },
+    {
+      "id": "EMPbomb",
+      "aliases": [],
+      "sha256": "dd704bbfe36e6bf94b3082cc93c72aa750fcd9040e32c9ee39647f5b5ae03f97",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/EMPbomb_256.png",
+      "installed_file": "playtest_dd704bbfe36e6bf94b30.png",
+      "sprite": 19817
+    },
+    {
+      "id": "EMPbomb_act",
+      "aliases": [],
+      "sha256": "ca683735d2293926884246bb563e4745284ac9b3d4bf2385af598ef6b9a3ec1e",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/EMPbomb_act_256.png",
+      "installed_file": "playtest_ca683735d22939268842.png",
+      "sprite": 19818
+    },
+    {
+      "id": "dynamite",
+      "aliases": [],
+      "sha256": "a14eb1c0d0a2d789208cb3c9701a960ee593126adf7ae5c8dd40b49b1cc22a2b",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/dynamite_256.png",
+      "installed_file": "playtest_a14eb1c0d0a2d789208c.png",
+      "sprite": 19819
+    },
+    {
+      "id": "dynamite_act",
+      "aliases": [],
+      "sha256": "548871b46b3a598d6b8ba7289340e0d09d65deca7ad803f8f253b715d8f14980",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/dynamite_act_256.png",
+      "installed_file": "playtest_548871b46b3a598d6b8b.png",
+      "sprite": 19820
+    },
+    {
+      "id": "elec_chainsaw_off",
+      "aliases": [],
+      "sha256": "0cfa9abf0913f26b7a55514351cc01ce9626bde5c7c80c02ec6e1ba04fb94cb2",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/elec_chainsaw_off_256.png",
+      "installed_file": "playtest_0cfa9abf0913f26b7a55.png",
+      "sprite": 19821
+    },
+    {
+      "id": "elec_chainsaw_on",
+      "aliases": [],
+      "sha256": "bcfe4141e05dfa0b41e8c22963e9e632b100f8f60c23a8ad8359deb7f48a3f2b",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/elec_chainsaw_on_256.png",
+      "installed_file": "playtest_bcfe4141e05dfa0b41e8.png",
+      "sprite": 19822
+    },
+    {
+      "id": "electric_masonrysaw_off",
+      "aliases": [],
+      "sha256": "386b91317b0f0418dd5de665aeb327dc9a0fbfd940926cb2837244f19c7f2e11",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/electric_masonrysaw_off_256.png",
+      "installed_file": "playtest_386b91317b0f0418dd5d.png",
+      "sprite": 19823
+    },
+    {
+      "id": "electric_masonrysaw_on",
+      "aliases": [],
+      "sha256": "5a81b37c20e94e0950f141e0ef9aaecf633aeb25c3fc99e9e5cb8e28c5a466f2",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/electric_masonrysaw_on_256.png",
+      "installed_file": "playtest_5a81b37c20e94e0950f1.png",
+      "sprite": 19824
+    },
+    {
+      "id": "firecracker",
+      "aliases": [],
+      "sha256": "ea6b7f3fa812f1d652c42fe4d5a7a088bb07caf811f31fe8e09357df717c8210",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/firecracker_256.png",
+      "installed_file": "playtest_ea6b7f3fa812f1d652c4.png",
+      "sprite": 19825
+    },
+    {
+      "id": "firecracker_act",
+      "aliases": [],
+      "sha256": "36f002d4a1531fd35941a5ba56e465af8b879ff28a71557d2bf2f32599e2de27",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/firecracker_act_256.png",
+      "installed_file": "playtest_36f002d4a1531fd35941.png",
+      "sprite": 19826
+    },
+    {
+      "id": "firecracker_pack",
+      "aliases": [],
+      "sha256": "4f373ea9372e5464ddeb4eb05938a3da0b6c493813f200b2f9c1771bdaae4198",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/firecracker_pack_256.png",
+      "installed_file": "playtest_4f373ea9372e5464ddeb.png",
+      "sprite": 19827
+    },
+    {
+      "id": "firecracker_pack_act",
+      "aliases": [],
+      "sha256": "c6abbe235bfbd88f7454b6fc00b128d35beddc63354ab3bf0856193fca2a6fd7",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/firecracker_pack_act_256.png",
+      "installed_file": "playtest_c6abbe235bfbd88f7454.png",
+      "sprite": 19828
+    },
+    {
+      "id": "flashbang",
+      "aliases": [],
+      "sha256": "3950482c28ffab490c1a437b0cf6c9f913a9e190f192334c54aeb5a190fc0b8e",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/flashbang_256.png",
+      "installed_file": "playtest_3950482c28ffab490c1a.png",
+      "sprite": 19829
+    },
+    {
+      "id": "flashbang_act",
+      "aliases": [],
+      "sha256": "caeb852482019d30de9dfc814bb4e641d82e9480873d90f748b39cbb66c2f3a1",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/flashbang_act_256.png",
+      "installed_file": "playtest_caeb852482019d30de9d.png",
+      "sprite": 19830
+    },
+    {
+      "id": "full_barrel_bomb",
+      "aliases": [],
+      "sha256": "31da372041a5f0c853fa95a374b6934d758a2c2c00a3b5cc937597cb4ce8a682",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/full_barrel_bomb_256.png",
+      "installed_file": "playtest_31da372041a5f0c853fa.png",
+      "sprite": 19831
+    },
+    {
+      "id": "full_barrel_bomb_act",
+      "aliases": [],
+      "sha256": "6ec738350f693d4379368ac3da7bc062ab1fcf9ed9cd44e862ed33de41fd81df",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/full_barrel_bomb_act_256.png",
+      "installed_file": "playtest_6ec738350f693d437936.png",
+      "sprite": 19832
+    },
+    {
+      "id": "gas_charger",
+      "aliases": [],
+      "sha256": "91a6a039b53160807095a6a86f9f38e991d7d8eecc53a45256e9f6c595d5a004",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/gas_charger_256.png",
+      "installed_file": "playtest_91a6a039b53160807095.png",
+      "sprite": 19833
+    },
+    {
+      "id": "gas_charger_on",
+      "aliases": [],
+      "sha256": "50b33183b39511964246b3862809882f47933c2b7351bc479723e2aa4c4ee7be",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/gas_charger_on_256.png",
+      "installed_file": "playtest_50b33183b39511964246.png",
+      "sprite": 19834
+    },
+    {
+      "id": "grenade",
+      "aliases": [],
+      "sha256": "1369d7522e4ad5a33f96cba83f7a37774ff74955625bf8f32747292e6504e3f9",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/grenade_256.png",
+      "installed_file": "playtest_1369d7522e4ad5a33f96.png",
+      "sprite": 19835
+    },
+    {
+      "id": "grenade_act",
+      "aliases": [],
+      "sha256": "2f8824a8b37fc910503842212d4514a7533bd4f2cf592c3c8e2c835d05c72050",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/grenade_act_256.png",
+      "installed_file": "playtest_2f8824a8b37fc9105038.png",
+      "sprite": 19836
+    },
+    {
+      "id": "half_barrel_bomb",
+      "aliases": [],
+      "sha256": "dd81035d6fd487a1a7fadbbfb014bf1d917060f8a7c107288909cc68872c709b",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/half_barrel_bomb_256.png",
+      "installed_file": "playtest_dd81035d6fd487a1a7fa.png",
+      "sprite": 19837
+    },
+    {
+      "id": "half_barrel_bomb_act",
+      "aliases": [],
+      "sha256": "1adaadec9ab23206cc58bb39af26901700e65ad4ddf86e89ac33fac354092fde",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/half_barrel_bomb_act_256.png",
+      "installed_file": "playtest_1adaadec9ab23206cc58.png",
+      "sprite": 19838
+    },
+    {
+      "id": "elec_chainsaw_cord_off",
+      "aliases": [],
+      "sha256": "0cfa9abf0913f26b7a55514351cc01ce9626bde5c7c80c02ec6e1ba04fb94cb2",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/elec_chainsaw_cord_off_256.png",
+      "installed_file": "playtest_0cfa9abf0913f26b7a55.png",
+      "sprite": 19821
+    },
+    {
+      "id": "elec_chainsaw_cord_on",
+      "aliases": [],
+      "sha256": "bcfe4141e05dfa0b41e8c22963e9e632b100f8f60c23a8ad8359deb7f48a3f2b",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch2-v1/tools-batch2/native/elec_chainsaw_cord_on_256.png",
+      "installed_file": "playtest_bcfe4141e05dfa0b41e8.png",
+      "sprite": 19822
+    },
+    {
+      "id": "30gal_firebarrel",
+      "aliases": [],
+      "sha256": "015cba459b42f422c55f41c6722c33b1cb9804697ed50ad2b694a72fccd1698e",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch3-v1/tools-batch3/native/30gal_firebarrel_256.png",
+      "installed_file": "playtest_015cba459b42f422c55f.png",
+      "sprite": 19839
+    },
+    {
+      "id": "55gal_firebarrel",
+      "aliases": [],
+      "sha256": "3094b8a9b1829052302810fc0b2676b6d7c9ff6be94de904a7d620ef6a1dcecc",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch3-v1/tools-batch3/native/55gal_firebarrel_256.png",
+      "installed_file": "playtest_3094b8a9b18290523028.png",
+      "sprite": 19840
+    },
+    {
+      "id": "RTG_coffee",
+      "aliases": [],
+      "sha256": "6d330acfd95adea5b5159c315a95b3431260adb2c33234ac167907ce4573b0ca",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch3-v1/tools-batch3/native/RTG_coffee_256.png",
+      "installed_file": "playtest_6d330acfd95adea5b515.png",
+      "sprite": 19841
+    },
+    {
+      "id": "acetylene_cooker",
+      "aliases": [],
+      "sha256": "62b841a32334666296fe891f0f63eda03e9e72349d61aee02ba23bb1d0d567d8",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch3-v1/tools-batch3/native/acetylene_cooker_256.png",
+      "installed_file": "playtest_62b841a32334666296fe.png",
+      "sprite": 19842
+    },
+    {
+      "id": "acetylene_machine",
+      "aliases": [],
+      "sha256": "d76aa168258b2a317de2ac4b8ee7821a6f7a40bd1a9f536e59a9c14eab5a3d88",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch3-v1/tools-batch3/native/acetylene_machine_256.png",
+      "installed_file": "playtest_d76aa168258b2a317de2.png",
+      "sprite": 19843
+    },
+    {
+      "id": "adobe_pallet_done",
+      "aliases": [],
+      "sha256": "602925f1a95845048e8bf484a90c7fef674e9a91140cf30118d6089782de1791",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch3-v1/tools-batch3/native/adobe_pallet_done_256.png",
+      "installed_file": "playtest_602925f1a95845048e8b.png",
+      "sprite": 19844
+    },
+    {
+      "id": "adobe_pallet_full_active",
+      "aliases": [],
+      "sha256": "188e5540f3560ec129db479b1719bc66026e4c8a330e626dda0cb75960151463",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch3-v1/tools-batch3/native/adobe_pallet_full_active_256.png",
+      "installed_file": "playtest_188e5540f3560ec129db.png",
+      "sprite": 19845
+    },
+    {
+      "id": "astral_everlight",
+      "aliases": [],
+      "sha256": "0496d41d35a5a5c630436ca273d382eb6ce5c8e88fdbbf4008a1098c69d02dab",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch3-v1/tools-batch3/native/astral_everlight_256.png",
+      "installed_file": "playtest_0496d41d35a5a5c63043.png",
+      "sprite": 19846
+    },
+    {
+      "id": "astral_everlight_on",
+      "aliases": [],
+      "sha256": "5f5ba723b0e2a7a37aa757800f96e8c35e03c739fb08899256299fbb7bccdb23",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch3-v1/tools-batch3/native/astral_everlight_on_256.png",
+      "installed_file": "playtest_5f5ba723b0e2a7a37aa7.png",
+      "sprite": 19847
+    },
+    {
+      "id": "c4",
+      "aliases": [],
+      "sha256": "e4eef75af8481e8f7c1a2b885c2ca9ac367cf048d923e5cf38c4e292de111787",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch3-v1/tools-batch3/native/c4_256.png",
+      "installed_file": "playtest_e4eef75af8481e8f7c1a.png",
+      "sprite": 19848
+    },
+    {
+      "id": "c4_payload",
+      "aliases": [],
+      "sha256": "23a76fd0081196409a11483b3f153faba9a2ae199979ac6560b3332f6cc12cd1",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch3-v1/tools-batch3/native/c4_payload_256.png",
+      "installed_file": "playtest_23a76fd0081196409a11.png",
+      "sprite": 19849
+    },
+    {
+      "id": "c4armed",
+      "aliases": [],
+      "sha256": "35adbffec007306756fc93f0d579ae8562159927f4c3f8fa84f452c6cb2d041a",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch3-v1/tools-batch3/native/c4armed_256.png",
+      "installed_file": "playtest_35adbffec007306756fc.png",
+      "sprite": 19850
+    },
+    {
+      "id": "firefighter_scba_tank",
+      "aliases": [],
+      "sha256": "9c91755b0de72097cff1ef3dcc3c2ec6cc50f3b29f36845beb6a958bb0356762",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/firefighter_scba_tank_256.png",
+      "installed_file": "playtest_9c91755b0de72097cff1.png",
+      "sprite": 19851
+    },
+    {
+      "id": "firefighter_scba_tank_on",
+      "aliases": [],
+      "sha256": "f6b42f2f1650fb0781715fcd58d3924075dd08ae33024bfb315af7a957479f1e",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/firefighter_scba_tank_on_256.png",
+      "installed_file": "playtest_f6b42f2f1650fb078171.png",
+      "sprite": 19852
+    },
+    {
+      "id": "jackolantern",
+      "aliases": [],
+      "sha256": "5e95d5a874e0565fe6f744312371e01ef501c46ea521f917badbc38438c2c829",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/jackolantern_256.png",
+      "installed_file": "playtest_5e95d5a874e0565fe6f7.png",
+      "sprite": 19853
+    },
+    {
+      "id": "jackolantern_lit",
+      "aliases": [],
+      "sha256": "727a1692a47548807c8e9bbeb340f4ec7b4e9903455b5cc11ae4b5463e1fedf9",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/jackolantern_lit_256.png",
+      "installed_file": "playtest_727a1692a47548807c8e.png",
+      "sprite": 19854
+    },
+    {
+      "id": "lightstrip",
+      "aliases": [],
+      "sha256": "4f5556c5bf089568cf481c76f901afb5edb4cdaf7d2676ab1dbcdb884773a28a",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/lightstrip_256.png",
+      "installed_file": "playtest_4f5556c5bf089568cf48.png",
+      "sprite": 19855
+    },
+    {
+      "id": "lightstrip_inactive",
+      "aliases": [],
+      "sha256": "b8be78131beaa37305b70abc55b67401d6284d37bd11384fa6f7001e6060c218",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/lightstrip_inactive_256.png",
+      "installed_file": "playtest_b8be78131beaa37305b7.png",
+      "sprite": 19856
+    },
+    {
+      "id": "mipim",
+      "aliases": [],
+      "sha256": "f5408e0627b1ca76e345551c8f36cf043663d1b0bca511af27ed3b600ad983f6",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/mipim_256.png",
+      "installed_file": "playtest_f5408e0627b1ca76e345.png",
+      "sprite": 19857
+    },
+    {
+      "id": "mipim_on",
+      "aliases": [],
+      "sha256": "582e1e8bd117500393f7f38b9e44f154fd8ef95fe21da98015397c541008d06e",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/mipim_on_256.png",
+      "installed_file": "playtest_582e1e8bd117500393f7.png",
+      "sprite": 19858
+    },
+    {
+      "id": "mounted_flashlight",
+      "aliases": [],
+      "sha256": "10ae3f197c5315d8a612d059af721a507d5c350fb618e90dd90af19c0932bf70",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/mounted_flashlight_256.png",
+      "installed_file": "playtest_10ae3f197c5315d8a612.png",
+      "sprite": 19859
+    },
+    {
+      "id": "mounted_flashlight_on",
+      "aliases": [],
+      "sha256": "942e4deccb26992ca8b44f90061a11ca97e44e108cc8df3a2c4c8a2a868db1ac",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/mounted_flashlight_on_256.png",
+      "installed_file": "playtest_942e4deccb26992ca8b4.png",
+      "sprite": 19860
+    },
+    {
+      "id": "noise_emitter",
+      "aliases": [],
+      "sha256": "75ebf5bde0c99b99995bb68d9e5c24486ae28e39287b39ee25fe3f029c6a9854",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/noise_emitter_256.png",
+      "installed_file": "playtest_75ebf5bde0c99b99995b.png",
+      "sprite": 19861
+    },
+    {
+      "id": "noise_emitter_on",
+      "aliases": [],
+      "sha256": "dc0f6c4910105b361b68ee40ce13f418847870f2d654e2dfc23c75b0068cc26a",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/noise_emitter_on_256.png",
+      "installed_file": "playtest_dc0f6c4910105b361b68.png",
+      "sprite": 19862
+    },
+    {
+      "id": "noise_emitter_super",
+      "aliases": [],
+      "sha256": "7dfff1f37912732bc85e19bfb774a95b11712610837f0730c5b52e8a51af2599",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/noise_emitter_super_256.png",
+      "installed_file": "playtest_7dfff1f37912732bc85e.png",
+      "sprite": 19863
+    },
+    {
+      "id": "noise_emitter_super_on",
+      "aliases": [],
+      "sha256": "e06bee8a827dd14e38adadba4d6bd7eb90c92b9471a7c39840fccf17327efff9",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/noise_emitter_super_on_256.png",
+      "installed_file": "playtest_e06bee8a827dd14e38ad.png",
+      "sprite": 19864
+    },
+    {
+      "id": "ref_lighter",
+      "aliases": [],
+      "sha256": "df14538e64e1b940e2c9979c90367643af4addf1faa9e796f5199702a8a09633",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/ref_lighter_256.png",
+      "installed_file": "playtest_df14538e64e1b940e2c9.png",
+      "sprite": 19865
+    },
+    {
+      "id": "ref_lighter_on",
+      "aliases": [],
+      "sha256": "c08c82b5aa43e8a8737caa578da011eee8dc1d83c99931741f1b50a4dcbcab3f",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/ref_lighter_on_256.png",
+      "installed_file": "playtest_c08c82b5aa43e8a8737c.png",
+      "sprite": 19866
+    },
+    {
+      "id": "small_scuba_tank",
+      "aliases": [],
+      "sha256": "9eeabf131e954f33f23d24d8a3b570f95f03980c9b2be7bb9a46f8fde7f2d563",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/small_scuba_tank_256.png",
+      "installed_file": "playtest_9eeabf131e954f33f23d.png",
+      "sprite": 19867
+    },
+    {
+      "id": "small_scuba_tank_on",
+      "aliases": [],
+      "sha256": "6165213a5b95183cf264b79452d6e068a4051fe7a93d73226082d7f723731c09",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/small_scuba_tank_on_256.png",
+      "installed_file": "playtest_6165213a5b95183cf264.png",
+      "sprite": 19868
+    },
+    {
+      "id": "throw_extinguisher",
+      "aliases": [],
+      "sha256": "f6d7cb206639f5f9a97cf8d3a43a8de2bb302ac6d4c01ede2fb81c186321eeca",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/throw_extinguisher_256.png",
+      "installed_file": "playtest_f6d7cb206639f5f9a97c.png",
+      "sprite": 19869
+    },
+    {
+      "id": "throw_extinguisher_act",
+      "aliases": [],
+      "sha256": "0ac1ac69bd853be7eaa39c277a6e846399b227566423fb9bf0a54923e1c4f3f8",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/throw_extinguisher_act_256.png",
+      "installed_file": "playtest_0ac1ac69bd853be7eaa3.png",
+      "sprite": 19870
+    },
+    {
+      "id": "tool_rocket_candy",
+      "aliases": [],
+      "sha256": "75b811b615dcc3b79b841bfbc78b5f3b126a65522e6eb9e4f6fdc39b0f2f1284",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/tool_rocket_candy_256.png",
+      "installed_file": "playtest_75b811b615dcc3b79b84.png",
+      "sprite": 19871
+    },
+    {
+      "id": "tool_rocket_candy_act",
+      "aliases": [],
+      "sha256": "db5d699de4ec30ee484ee984dd6d9c250baf3f68bc66f6f3c24eab62482271f0",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/tool_rocket_candy_act_256.png",
+      "installed_file": "playtest_db5d699de4ec30ee484e.png",
+      "sprite": 19872
+    },
+    {
+      "id": "tool_rocket_candy_primed",
+      "aliases": [],
+      "sha256": "5464b28d288ccbcc9d3d52c6da3c84f7079d9badec27669dc3f1e41baac429be",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-items-tools-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-items-tools-batch4-v1/native/tool_rocket_candy_primed_256.png",
+      "installed_file": "playtest_5464b28d288ccbcc9d3d.png",
+      "sprite": 19873
+    },
+    {
+      "id": "mon_mole",
+      "aliases": [],
+      "sha256": "9e918dc1847a961fcd2f54c5c1042dc7048f7b68dceb70e26634c6d1e8178134",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-small-mammals-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-small-mammals-v1/astral-small-mammals/native/mon_mole_256.png",
+      "installed_file": "playtest_9e918dc1847a961fcd2f.png",
+      "sprite": 19874
+    },
+    {
+      "id": "corpse_mon_mole",
+      "aliases": [],
+      "sha256": "b1ae1511e586fd11c6407316dc0e8ac03dca8de1b676f83d3d3f3adb29d91f49",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-small-mammals-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-small-mammals-v1/astral-small-mammals/native/corpse_mon_mole_256.png",
+      "installed_file": "playtest_b1ae1511e586fd11c640.png",
+      "sprite": 19875
+    },
+    {
+      "id": "mon_shrew",
+      "aliases": [],
+      "sha256": "2711020fff577254f0939cfb06562a990c2a61d0ee1c65915ba4c08c6a5575d3",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-small-mammals-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-small-mammals-v1/astral-small-mammals/native/mon_shrew_256.png",
+      "installed_file": "playtest_2711020fff577254f093.png",
+      "sprite": 19876
+    },
+    {
+      "id": "corpse_mon_shrew",
+      "aliases": [],
+      "sha256": "2102d5f90278a5df3bc42c6b9216e67d52444d4665472b9104a8ceba41c8bd34",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-small-mammals-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-small-mammals-v1/astral-small-mammals/native/corpse_mon_shrew_256.png",
+      "installed_file": "playtest_2102d5f90278a5df3bc4.png",
+      "sprite": 19877
+    },
+    {
+      "id": "mon_porcupine",
+      "aliases": [],
+      "sha256": "2c643ebf389bc66af1882b4dec85499026970d87470a454c87560ee806219cd2",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-small-mammals-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-small-mammals-v1/astral-small-mammals/native/mon_porcupine_256.png",
+      "installed_file": "playtest_2c643ebf389bc66af188.png",
+      "sprite": 19878
+    },
+    {
+      "id": "corpse_mon_porcupine",
+      "aliases": [],
+      "sha256": "40a5374e97f88090076f01c8a3405de5c5babc440623f8e9d42004a4db45a855",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-small-mammals-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-small-mammals-v1/astral-small-mammals/native/corpse_mon_porcupine_256.png",
+      "installed_file": "playtest_40a5374e97f88090076f.png",
+      "sprite": 19879
+    },
+    {
+      "id": "mon_gartersnake",
+      "aliases": [],
+      "sha256": "4346622aa74d8fa3c5147ce751851306b09c436b73d7c9ef97e8cbbbae84c8da",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/mon_gartersnake_256.png",
+      "installed_file": "playtest_4346622aa74d8fa3c514.png",
+      "sprite": 19880
+    },
+    {
+      "id": "corpse_mon_gartersnake",
+      "aliases": [],
+      "sha256": "2d2ebd75fd0f3e404f2d76e6fe40b9eba22a825d92b037af26662a320782684c",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/corpse_mon_gartersnake_256.png",
+      "installed_file": "playtest_2d2ebd75fd0f3e404f2d.png",
+      "sprite": 19881
+    },
+    {
+      "id": "mon_gartersnake_baby",
+      "aliases": [],
+      "sha256": "a61fe6f5458ea06653530a19d0f268853230d666f681efe57a186bbc46d2c61f",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/mon_gartersnake_baby_256.png",
+      "installed_file": "playtest_a61fe6f5458ea0665353.png",
+      "sprite": 19882
+    },
+    {
+      "id": "corpse_mon_gartersnake_baby",
+      "aliases": [],
+      "sha256": "e9778ae78f984cf3e8624176ea179d7a231d03b838e8c1238e7d2451e34bb07a",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/corpse_mon_gartersnake_baby_256.png",
+      "installed_file": "playtest_e9778ae78f984cf3e862.png",
+      "sprite": 19883
+    },
+    {
+      "id": "mon_wormsnake",
+      "aliases": [],
+      "sha256": "953b47d47e2117040e31c6febaea481ff75a63dff466563f32f055fd05b2613e",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/mon_wormsnake_256.png",
+      "installed_file": "playtest_953b47d47e2117040e31.png",
+      "sprite": 19884
+    },
+    {
+      "id": "corpse_mon_wormsnake",
+      "aliases": [],
+      "sha256": "3d6e646024a00e27685fa3c32dca1a6a49a821dcb6e4725f4b8f11fc90877b91",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/corpse_mon_wormsnake_256.png",
+      "installed_file": "playtest_3d6e646024a00e27685f.png",
+      "sprite": 19885
+    },
+    {
+      "id": "mon_wormsnake_baby",
+      "aliases": [],
+      "sha256": "36ab06bfc862d781b82ee96f94b2b59a7de73ecab65ba370919b217ae2f14ed4",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/mon_wormsnake_baby_256.png",
+      "installed_file": "playtest_36ab06bfc862d781b82e.png",
+      "sprite": 19886
+    },
+    {
+      "id": "corpse_mon_wormsnake_baby",
+      "aliases": [],
+      "sha256": "eb8cfa26cf1a070094495f168860d1a8c6df7f11a8bf4af9331eacfe9e18bca5",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/corpse_mon_wormsnake_baby_256.png",
+      "installed_file": "playtest_eb8cfa26cf1a07009449.png",
+      "sprite": 19887
+    },
+    {
+      "id": "mon_skink_fivelined",
+      "aliases": [],
+      "sha256": "5d857b3c5f99553516aaec50a1cec547dfb8de5dfe25db7a6fcc29c2e928a7e0",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/mon_skink_fivelined_256.png",
+      "installed_file": "playtest_5d857b3c5f99553516aa.png",
+      "sprite": 19888
+    },
+    {
+      "id": "corpse_mon_skink_fivelined",
+      "aliases": [],
+      "sha256": "743eee44f6b95ce16bf5feb9dfad0ba5bb96758d485abb33240db8ac8b337fa8",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/corpse_mon_skink_fivelined_256.png",
+      "installed_file": "playtest_743eee44f6b95ce16bf5.png",
+      "sprite": 19889
+    },
+    {
+      "id": "mon_skink_fivelined_baby",
+      "aliases": [],
+      "sha256": "050567443530a2f013a8c383cc2a9269e19b9a446b51e085f0163ae0f8cc008a",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/mon_skink_fivelined_baby_256.png",
+      "installed_file": "playtest_050567443530a2f013a8.png",
+      "sprite": 19890
+    },
+    {
+      "id": "corpse_mon_skink_fivelined_baby",
+      "aliases": [],
+      "sha256": "2011222dac6c45134cd03183d082dd86e2db3ce0644554331f930b21a0eb7898",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/corpse_mon_skink_fivelined_baby_256.png",
+      "installed_file": "playtest_2011222dac6c45134cd0.png",
+      "sprite": 19891
+    },
+    {
+      "id": "mon_turtle_painted_baby",
+      "aliases": [],
+      "sha256": "7d9ac2fd64c606f49c26c18d570b539a522b27f1f1e66fa8442b170f37ff8dee",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/mon_turtle_painted_baby_256.png",
+      "installed_file": "playtest_7d9ac2fd64c606f49c26.png",
+      "sprite": 19892
+    },
+    {
+      "id": "corpse_mon_turtle_painted_baby",
+      "aliases": [],
+      "sha256": "433b1b281d24d0e18b8f8ee2d58f770bde8b41d29c7ef61e2e9d6df1e4d1461a",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/corpse_mon_turtle_painted_baby_256.png",
+      "installed_file": "playtest_433b1b281d24d0e18b8f.png",
+      "sprite": 19893
+    },
+    {
+      "id": "mon_turtle_snapping_common_baby",
+      "aliases": [],
+      "sha256": "2ec3b2f74f77585baf78f6ffc91f5df6af424dc646b6423ebd98af34f2cf5171",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/mon_turtle_snapping_common_baby_256.png",
+      "installed_file": "playtest_2ec3b2f74f77585baf78.png",
+      "sprite": 19894
+    },
+    {
+      "id": "corpse_mon_turtle_snapping_common_baby",
+      "aliases": [],
+      "sha256": "4fa5427193b3c264f952d6ac6433e5e7d64847a91671347b72e3f2986fe1e995",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch1-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch1-v1/astral-wildlife-expansion/batch1-small-reptiles/native/corpse_mon_turtle_snapping_common_baby_256.png",
+      "installed_file": "playtest_4fa5427193b3c264f952.png",
+      "sprite": 19895
+    },
+    {
+      "id": "mon_rattlesnake_s",
+      "aliases": [],
+      "sha256": "7a6a002ffad43e6aa194a2d2d6735adbdd45727467a9954455264f23534416c6",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch2-v1/batch2-rattlesnakes/native/mon_rattlesnake_s_256.png",
+      "installed_file": "playtest_7a6a002ffad43e6aa194.png",
+      "sprite": 19896
+    },
+    {
+      "id": "corpse_mon_rattlesnake_s",
+      "aliases": [],
+      "sha256": "5f214f1927318aa63aa72595eb0b11386e2d04d209678d8c32c77782af37fbdb",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch2-v1/batch2-rattlesnakes/native/corpse_mon_rattlesnake_s_256.png",
+      "installed_file": "playtest_5f214f1927318aa63aa7.png",
+      "sprite": 19897
+    },
+    {
+      "id": "mon_rattlesnake_big_s",
+      "aliases": [],
+      "sha256": "32d21517cb977f78eef1dc3888214ad1a828fbcf7f045ca8e77b9040f02e9241",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch2-v1/batch2-rattlesnakes/native/mon_rattlesnake_big_s_256.png",
+      "installed_file": "playtest_32d21517cb977f78eef1.png",
+      "sprite": 19898
+    },
+    {
+      "id": "corpse_mon_rattlesnake_big_s",
+      "aliases": [],
+      "sha256": "7f36f4d713a37b3d3363695288b00ed1ea4e8c5cb7f19cc75e1a0ce9bf2aa4a2",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch2-v1/batch2-rattlesnakes/native/corpse_mon_rattlesnake_big_s_256.png",
+      "installed_file": "playtest_7f36f4d713a37b3d3363.png",
+      "sprite": 19899
+    },
+    {
+      "id": "mon_rattlesnake_mega",
+      "aliases": [],
+      "sha256": "adc15af37884b9cc559ac7d7d5eaabc314435ea6a6171a1453b48b76de4d637c",
+      "size": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        -16,
+        -32
+      ],
+      "batch": "astral-wildlife-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch2-v1/batch2-rattlesnakes/native/mon_rattlesnake_mega_512.png",
+      "installed_file": "playtest_adc15af37884b9cc559a.png",
+      "sprite": 19900
+    },
+    {
+      "id": "corpse_mon_rattlesnake_mega",
+      "aliases": [],
+      "sha256": "659c89aa313a97546d874554f57bd3828a7564ebe1d72bb2a6b5784dec14d40d",
+      "size": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        -16,
+        -32
+      ],
+      "batch": "astral-wildlife-batch2-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch2-v1/batch2-rattlesnakes/native/corpse_mon_rattlesnake_mega_512.png",
+      "installed_file": "playtest_659c89aa313a97546d87.png",
+      "sprite": 19901
+    },
+    {
+      "id": "mon_guinea_fowl",
+      "aliases": [],
+      "sha256": "18a6a8938c7fdd071cf47802c42cb9e5771d148631a9f95af4baed316e7619fb",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/mon_guinea_fowl_256.png",
+      "installed_file": "playtest_18a6a8938c7fdd071cf4.png",
+      "sprite": 19902
+    },
+    {
+      "id": "corpse_mon_guinea_fowl",
+      "aliases": [],
+      "sha256": "3551f540df97e593cf0a7d3e314bd8409f59c72d8cf6096710999e356a288541",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/corpse_mon_guinea_fowl_256.png",
+      "installed_file": "playtest_3551f540df97e593cf0a.png",
+      "sprite": 19903
+    },
+    {
+      "id": "mon_waxwing",
+      "aliases": [],
+      "sha256": "515292d3f8708ffb452b71a1ec086a3342055e13d9a251ce2a4f8ad1273b26c7",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/mon_waxwing_256.png",
+      "installed_file": "playtest_515292d3f8708ffb452b.png",
+      "sprite": 19904
+    },
+    {
+      "id": "corpse_mon_waxwing",
+      "aliases": [],
+      "sha256": "bbba2ceaf681e1db0bc7c0bd0ffe39d9dc8842d3ad3648a8a73685c79356cb3b",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/corpse_mon_waxwing_256.png",
+      "installed_file": "playtest_bbba2ceaf681e1db0bc7.png",
+      "sprite": 19905
+    },
+    {
+      "id": "mon_guinea_fowl_chick",
+      "aliases": [],
+      "sha256": "646123850d43049553e1f2df0aa807a89226bf9ce26b97de96fff6fb36b1559a",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/mon_guinea_fowl_chick_256.png",
+      "installed_file": "playtest_646123850d43049553e1.png",
+      "sprite": 19906
+    },
+    {
+      "id": "corpse_mon_guinea_fowl_chick",
+      "aliases": [],
+      "sha256": "0ed82cd32dfc1756a8b3d084b4ae265e5bc9576e26bc77d44f915e90a324b3e5",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/corpse_mon_guinea_fowl_chick_256.png",
+      "installed_file": "playtest_0ed82cd32dfc1756a8b3.png",
+      "sprite": 19907
+    },
+    {
+      "id": "mon_coot_chick",
+      "aliases": [],
+      "sha256": "78148ae5779fba84b4456108d6c3e638eaef7ba3470dac13685775da0004d3e5",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/mon_coot_chick_256.png",
+      "installed_file": "playtest_78148ae5779fba84b445.png",
+      "sprite": 19908
+    },
+    {
+      "id": "corpse_mon_coot_chick",
+      "aliases": [],
+      "sha256": "ddf0b8c8a1f24d99de96c567cad6821801ac969e731af4a540bf381b40b38810",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/corpse_mon_coot_chick_256.png",
+      "installed_file": "playtest_ddf0b8c8a1f24d99de96.png",
+      "sprite": 19909
+    },
+    {
+      "id": "mon_cormorant_chick",
+      "aliases": [],
+      "sha256": "78148ae5779fba84b4456108d6c3e638eaef7ba3470dac13685775da0004d3e5",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/mon_cormorant_chick_256.png",
+      "installed_file": "playtest_78148ae5779fba84b445.png",
+      "sprite": 19908
+    },
+    {
+      "id": "corpse_mon_cormorant_chick",
+      "aliases": [],
+      "sha256": "ddf0b8c8a1f24d99de96c567cad6821801ac969e731af4a540bf381b40b38810",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/corpse_mon_cormorant_chick_256.png",
+      "installed_file": "playtest_ddf0b8c8a1f24d99de96.png",
+      "sprite": 19909
+    },
+    {
+      "id": "mon_duck_domestic_chick",
+      "aliases": [],
+      "sha256": "78148ae5779fba84b4456108d6c3e638eaef7ba3470dac13685775da0004d3e5",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/mon_duck_domestic_chick_256.png",
+      "installed_file": "playtest_78148ae5779fba84b445.png",
+      "sprite": 19908
+    },
+    {
+      "id": "corpse_mon_duck_domestic_chick",
+      "aliases": [],
+      "sha256": "ddf0b8c8a1f24d99de96c567cad6821801ac969e731af4a540bf381b40b38810",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/corpse_mon_duck_domestic_chick_256.png",
+      "installed_file": "playtest_ddf0b8c8a1f24d99de96.png",
+      "sprite": 19909
+    },
+    {
+      "id": "mon_goose_chick",
+      "aliases": [],
+      "sha256": "78148ae5779fba84b4456108d6c3e638eaef7ba3470dac13685775da0004d3e5",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/mon_goose_chick_256.png",
+      "installed_file": "playtest_78148ae5779fba84b445.png",
+      "sprite": 19908
+    },
+    {
+      "id": "corpse_mon_goose_chick",
+      "aliases": [],
+      "sha256": "ddf0b8c8a1f24d99de96c567cad6821801ac969e731af4a540bf381b40b38810",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/corpse_mon_goose_chick_256.png",
+      "installed_file": "playtest_ddf0b8c8a1f24d99de96.png",
+      "sprite": 19909
+    },
+    {
+      "id": "mon_grebe_chick",
+      "aliases": [],
+      "sha256": "78148ae5779fba84b4456108d6c3e638eaef7ba3470dac13685775da0004d3e5",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/mon_grebe_chick_256.png",
+      "installed_file": "playtest_78148ae5779fba84b445.png",
+      "sprite": 19908
+    },
+    {
+      "id": "corpse_mon_grebe_chick",
+      "aliases": [],
+      "sha256": "ddf0b8c8a1f24d99de96c567cad6821801ac969e731af4a540bf381b40b38810",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/corpse_mon_grebe_chick_256.png",
+      "installed_file": "playtest_ddf0b8c8a1f24d99de96.png",
+      "sprite": 19909
+    },
+    {
+      "id": "mon_moorhen_chick",
+      "aliases": [],
+      "sha256": "78148ae5779fba84b4456108d6c3e638eaef7ba3470dac13685775da0004d3e5",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/mon_moorhen_chick_256.png",
+      "installed_file": "playtest_78148ae5779fba84b445.png",
+      "sprite": 19908
+    },
+    {
+      "id": "corpse_mon_moorhen_chick",
+      "aliases": [],
+      "sha256": "ddf0b8c8a1f24d99de96c567cad6821801ac969e731af4a540bf381b40b38810",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/corpse_mon_moorhen_chick_256.png",
+      "installed_file": "playtest_ddf0b8c8a1f24d99de96.png",
+      "sprite": 19909
+    },
+    {
+      "id": "mon_waxwing_chick",
+      "aliases": [],
+      "sha256": "7a799bffe1dfdc30d7a270bd3a9ecbd2cd0bd2204beb6cfb02077327363cdbc9",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/mon_waxwing_chick_256.png",
+      "installed_file": "playtest_7a799bffe1dfdc30d7a2.png",
+      "sprite": 19910
+    },
+    {
+      "id": "corpse_mon_waxwing_chick",
+      "aliases": [],
+      "sha256": "b8c67bb86b39fd1cf8ef1b8d949a294e8a0ae1b9614a2bd29ee888fcd2fcc557",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/corpse_mon_waxwing_chick_256.png",
+      "installed_file": "playtest_b8c67bb86b39fd1cf8ef.png",
+      "sprite": 19911
+    },
+    {
+      "id": "mon_hummingbird_chick",
+      "aliases": [],
+      "sha256": "7a799bffe1dfdc30d7a270bd3a9ecbd2cd0bd2204beb6cfb02077327363cdbc9",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/mon_hummingbird_chick_256.png",
+      "installed_file": "playtest_7a799bffe1dfdc30d7a2.png",
+      "sprite": 19910
+    },
+    {
+      "id": "corpse_mon_hummingbird_chick",
+      "aliases": [],
+      "sha256": "b8c67bb86b39fd1cf8ef1b8d949a294e8a0ae1b9614a2bd29ee888fcd2fcc557",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/corpse_mon_hummingbird_chick_256.png",
+      "installed_file": "playtest_b8c67bb86b39fd1cf8ef.png",
+      "sprite": 19911
+    },
+    {
+      "id": "mon_woodpecker_chick",
+      "aliases": [],
+      "sha256": "7a799bffe1dfdc30d7a270bd3a9ecbd2cd0bd2204beb6cfb02077327363cdbc9",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/mon_woodpecker_chick_256.png",
+      "installed_file": "playtest_7a799bffe1dfdc30d7a2.png",
+      "sprite": 19910
+    },
+    {
+      "id": "corpse_mon_woodpecker_chick",
+      "aliases": [],
+      "sha256": "b8c67bb86b39fd1cf8ef1b8d949a294e8a0ae1b9614a2bd29ee888fcd2fcc557",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/corpse_mon_woodpecker_chick_256.png",
+      "installed_file": "playtest_b8c67bb86b39fd1cf8ef.png",
+      "sprite": 19911
+    },
+    {
+      "id": "mon_pigeon_chick",
+      "aliases": [],
+      "sha256": "fbc785367c0d2ec9d8bb0126786ddc2c9af05ddf2162ed64e3fa4221c78f66ae",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/mon_pigeon_chick_256.png",
+      "installed_file": "playtest_fbc785367c0d2ec9d8bb.png",
+      "sprite": 19912
+    },
+    {
+      "id": "corpse_mon_pigeon_chick",
+      "aliases": [],
+      "sha256": "c9e35128fd98c1ba14e02bf509d980ae60564fd4c6fc7cd1bbe4eda70e7add1f",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/corpse_mon_pigeon_chick_256.png",
+      "installed_file": "playtest_c9e35128fd98c1ba14e0.png",
+      "sprite": 19913
+    },
+    {
+      "id": "mon_turkey_domestic_chick",
+      "aliases": [],
+      "sha256": "fbc785367c0d2ec9d8bb0126786ddc2c9af05ddf2162ed64e3fa4221c78f66ae",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/mon_turkey_domestic_chick_256.png",
+      "installed_file": "playtest_fbc785367c0d2ec9d8bb.png",
+      "sprite": 19912
+    },
+    {
+      "id": "corpse_mon_turkey_domestic_chick",
+      "aliases": [],
+      "sha256": "c9e35128fd98c1ba14e02bf509d980ae60564fd4c6fc7cd1bbe4eda70e7add1f",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch3-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch3-v1/batch3-birds/native/corpse_mon_turkey_domestic_chick_256.png",
+      "installed_file": "playtest_c9e35128fd98c1ba14e0.png",
+      "sprite": 19913
+    },
+    {
+      "id": "mon_cicada",
+      "aliases": [],
+      "sha256": "4a7f9119b5390d921f63f94c12b33066d561c4f22f8d9a8c2b1ef55a0b5b0c65",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/mon_cicada_256.png",
+      "installed_file": "playtest_4a7f9119b5390d921f63.png",
+      "sprite": 19914
+    },
+    {
+      "id": "corpse_mon_cicada",
+      "aliases": [],
+      "sha256": "54b2950a43fd46c6a83251c4f64ee463f9170bc9be06a7b55b6089b616d12058",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/corpse_mon_cicada_256.png",
+      "installed_file": "playtest_54b2950a43fd46c6a832.png",
+      "sprite": 19915
+    },
+    {
+      "id": "mon_cicada_nymph",
+      "aliases": [],
+      "sha256": "6df3f770eeec00c33362d1da7c5daab890c605ef07a1cc2332cdfed9c1c1c86c",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/mon_cicada_nymph_256.png",
+      "installed_file": "playtest_6df3f770eeec00c33362.png",
+      "sprite": 19916
+    },
+    {
+      "id": "corpse_mon_cicada_nymph",
+      "aliases": [],
+      "sha256": "729f55350fb54761a63c206bb16c99c248e72468b2b94ae002a59657a9f31fe6",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/corpse_mon_cicada_nymph_256.png",
+      "installed_file": "playtest_729f55350fb54761a63c.png",
+      "sprite": 19917
+    },
+    {
+      "id": "mon_grasshopper_giant",
+      "aliases": [],
+      "sha256": "c41141106db030449b0a488a7b5981b2457f31c247ee1f9210113366fb53b922",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/mon_grasshopper_giant_256.png",
+      "installed_file": "playtest_c41141106db030449b0a.png",
+      "sprite": 19918
+    },
+    {
+      "id": "corpse_mon_grasshopper_giant",
+      "aliases": [],
+      "sha256": "c0c69c4f28dfd4646546405daee6fc7751e0bab6007e1b892d7e7a02f148e89f",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/corpse_mon_grasshopper_giant_256.png",
+      "installed_file": "playtest_c0c69c4f28dfd4646546.png",
+      "sprite": 19919
+    },
+    {
+      "id": "mon_grasshopper_nymph",
+      "aliases": [],
+      "sha256": "f50adff3742878e011a6175fde44a18367bfedfaecc85f5a4dffd629ae52fe33",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/mon_grasshopper_nymph_256.png",
+      "installed_file": "playtest_f50adff3742878e011a6.png",
+      "sprite": 19920
+    },
+    {
+      "id": "corpse_mon_grasshopper_nymph",
+      "aliases": [],
+      "sha256": "c40f4fa359a901d28b4e3c263bdda1828f8c1f659b6852d6b822e4d31cf1309a",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/corpse_mon_grasshopper_nymph_256.png",
+      "installed_file": "playtest_c40f4fa359a901d28b4e.png",
+      "sprite": 19921
+    },
+    {
+      "id": "mon_mantis_giant",
+      "aliases": [],
+      "sha256": "d5e5f77c4a76079fbbfff5bdeba2d11a214b11d56c8e233e7a734b54ccfed37b",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/mon_mantis_giant_256.png",
+      "installed_file": "playtest_d5e5f77c4a76079fbbff.png",
+      "sprite": 19922
+    },
+    {
+      "id": "corpse_mon_mantis_giant",
+      "aliases": [],
+      "sha256": "65eb4e832582da850d6e08ef0cab88bbf2ef406d7d0b96ce7bb0455c528772f5",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/corpse_mon_mantis_giant_256.png",
+      "installed_file": "playtest_65eb4e832582da850d6e.png",
+      "sprite": 19923
+    },
+    {
+      "id": "mon_mantis_nymph",
+      "aliases": [],
+      "sha256": "3406fb2fa27e7049b5307b5c1fe2f29427bb8c6aae1c8a9ee0c01fb7ffbf757e",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/mon_mantis_nymph_256.png",
+      "installed_file": "playtest_3406fb2fa27e7049b530.png",
+      "sprite": 19924
+    },
+    {
+      "id": "corpse_mon_mantis_nymph",
+      "aliases": [],
+      "sha256": "a97456424a2119151411bcd5229580391a2e521a30fde8b75c37721516f405d3",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/corpse_mon_mantis_nymph_256.png",
+      "installed_file": "playtest_a97456424a2119151411.png",
+      "sprite": 19925
+    },
+    {
+      "id": "mon_moth_fly",
+      "aliases": [],
+      "sha256": "eeb068be56dbfb4ac0baa4f866bf26f341e479e6968b0b38294dc40cfb96b57b",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/mon_moth_fly_256.png",
+      "installed_file": "playtest_eeb068be56dbfb4ac0ba.png",
+      "sprite": 19926
+    },
+    {
+      "id": "corpse_mon_moth_fly",
+      "aliases": [],
+      "sha256": "0fdbda5544a4ad39606f93b64a35150a549ed2a53dff9da1ef533aa024116e01",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/corpse_mon_moth_fly_256.png",
+      "installed_file": "playtest_0fdbda5544a4ad39606f.png",
+      "sprite": 19927
+    },
+    {
+      "id": "mon_moth_fly_larva",
+      "aliases": [],
+      "sha256": "36c4e0c371f81d88b1df45af51547423fc0d176ad00bfd5c6a17ee22c2bd227f",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/mon_moth_fly_larva_256.png",
+      "installed_file": "playtest_36c4e0c371f81d88b1df.png",
+      "sprite": 19928
+    },
+    {
+      "id": "corpse_mon_moth_fly_larva",
+      "aliases": [],
+      "sha256": "bddcf3dd5a19d111125f380a15105ebff98f2b9bffb067d5f8e2924eaf5c4b91",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch4-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch4-v1/batch4-insects/native/corpse_mon_moth_fly_larva_256.png",
+      "installed_file": "playtest_bddcf3dd5a19d111125f.png",
+      "sprite": 19929
+    },
+    {
+      "id": "mon_fly_larva",
+      "aliases": [],
+      "sha256": "2c2f5bb60cf858335d339cd1a8b65aa3af6116708d4d5bcbb453f3cfa3ff581b",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/mon_fly_larva_256.png",
+      "installed_file": "playtest_2c2f5bb60cf858335d33.png",
+      "sprite": 19930
+    },
+    {
+      "id": "corpse_mon_fly_larva",
+      "aliases": [],
+      "sha256": "90d747bed8d2fb1a70ca3b01a21dd04db75a5c79c37d977704ad724517319ef1",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/corpse_mon_fly_larva_256.png",
+      "installed_file": "playtest_90d747bed8d2fb1a70ca.png",
+      "sprite": 19931
+    },
+    {
+      "id": "mon_firefly_larva",
+      "aliases": [],
+      "sha256": "26ebc84b2304b6cbc148df47926a816cb5fae8723cd4a706a19023b52d5c90b5",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/mon_firefly_larva_256.png",
+      "installed_file": "playtest_26ebc84b2304b6cbc148.png",
+      "sprite": 19932
+    },
+    {
+      "id": "corpse_mon_firefly_larva",
+      "aliases": [],
+      "sha256": "35d0b6e530b16b9dd8ef96733cfe874df7498fbbe0265f93b7845af0ad74805a",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/corpse_mon_firefly_larva_256.png",
+      "installed_file": "playtest_35d0b6e530b16b9dd8ef.png",
+      "sprite": 19933
+    },
+    {
+      "id": "mon_mosquito_larva",
+      "aliases": [],
+      "sha256": "34d6c0075b9c8f7c747703dcd97548d07b86b37bb6b596250c1000f25116a098",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/mon_mosquito_larva_256.png",
+      "installed_file": "playtest_34d6c0075b9c8f7c7477.png",
+      "sprite": 19934
+    },
+    {
+      "id": "corpse_mon_mosquito_larva",
+      "aliases": [],
+      "sha256": "15edda3d15cdd85ef8980d44d2ef0ae2fef92bcdc147503e722e39c7f5d16710",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/corpse_mon_mosquito_larva_256.png",
+      "installed_file": "playtest_15edda3d15cdd85ef898.png",
+      "sprite": 19935
+    },
+    {
+      "id": "mon_worm_larva",
+      "aliases": [],
+      "sha256": "b266708a6e38a8915a69609251fe6c627939f09d596e73c50b0c7e63cc5c361e",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/mon_worm_larva_256.png",
+      "installed_file": "playtest_b266708a6e38a8915a69.png",
+      "sprite": 19936
+    },
+    {
+      "id": "corpse_mon_worm_larva",
+      "aliases": [],
+      "sha256": "e51d28db8f7c25ed423d54f0f6ed92cc27181be863388ca9ae23e0816a98b686",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/corpse_mon_worm_larva_256.png",
+      "installed_file": "playtest_e51d28db8f7c25ed423d.png",
+      "sprite": 19937
+    },
+    {
+      "id": "mon_crayfish_giant_larva",
+      "aliases": [],
+      "sha256": "7489218e60122698aa39cb403e5a919ebb303d3229a6d6c6f0fa6448e5ca8267",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/mon_crayfish_giant_larva_256.png",
+      "installed_file": "playtest_7489218e60122698aa39.png",
+      "sprite": 19938
+    },
+    {
+      "id": "corpse_mon_crayfish_giant_larva",
+      "aliases": [],
+      "sha256": "d4fa392afc2fe5a5a58e0c24ef73daa5467772b1f982e6bcee62ad014ea35c71",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/corpse_mon_crayfish_giant_larva_256.png",
+      "installed_file": "playtest_d4fa392afc2fe5a5a58e.png",
+      "sprite": 19939
+    },
+    {
+      "id": "mon_spider_jumping_giant_s",
+      "aliases": [],
+      "sha256": "85aa8601826123f05c33839242241c964a306f85a300e1dfc46585cd9f0ac7a5",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/mon_spider_jumping_giant_s_256.png",
+      "installed_file": "playtest_85aa8601826123f05c33.png",
+      "sprite": 19940
+    },
+    {
+      "id": "corpse_mon_spider_jumping_giant_s",
+      "aliases": [],
+      "sha256": "4661cb9b6a193f3846586485a9d369c058ae2c9081c6ab1008185ec9d3c68277",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/corpse_mon_spider_jumping_giant_s_256.png",
+      "installed_file": "playtest_4661cb9b6a193f384658.png",
+      "sprite": 19941
+    },
+    {
+      "id": "mon_spider_trapdoor_s",
+      "aliases": [],
+      "sha256": "68679a820eb9e8d8a017df328b360114828b5bb7634c52aec5d0230bf51d23a6",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/mon_spider_trapdoor_s_256.png",
+      "installed_file": "playtest_68679a820eb9e8d8a017.png",
+      "sprite": 19942
+    },
+    {
+      "id": "corpse_mon_spider_trapdoor_s",
+      "aliases": [],
+      "sha256": "eda1e4c7bcbca2d7cbfa23e0039dc9ae768341d3effdb8b6ab20e1c408bdd3c2",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/corpse_mon_spider_trapdoor_s_256.png",
+      "installed_file": "playtest_eda1e4c7bcbca2d7cbfa.png",
+      "sprite": 19943
+    },
+    {
+      "id": "mon_spider_wolf_giant_s",
+      "aliases": [],
+      "sha256": "be3f7e821e17e07d6b3c8cec2907f8899ab95e4e32761054933e22f3c4240c7a",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/mon_spider_wolf_giant_s_256.png",
+      "installed_file": "playtest_be3f7e821e17e07d6b3c.png",
+      "sprite": 19944
+    },
+    {
+      "id": "corpse_mon_spider_wolf_giant_s",
+      "aliases": [],
+      "sha256": "9e939b5f17c0643f669afe8d87994dffe775df36df8b6509a1b5155071b919cf",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch5-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch5-v1/batch5-larvae-spiderlings/native/corpse_mon_spider_wolf_giant_s_256.png",
+      "installed_file": "playtest_9e939b5f17c0643f669a.png",
+      "sprite": 19945
+    },
+    {
+      "id": "mon_snail_small",
+      "aliases": [],
+      "sha256": "6c97f1607da5bca695dcfeecb17a3e3ceeadd2f92f437ffc152d43af07d237c5",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch6-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch6-v1/batch6-snails-salmon/native/mon_snail_small_256.png",
+      "installed_file": "playtest_6c97f1607da5bca695dc.png",
+      "sprite": 19946
+    },
+    {
+      "id": "corpse_mon_snail_small",
+      "aliases": [],
+      "sha256": "6fb547f6ac9f6298d80acb250c36d1c932198c3f6c28cfc53edf2b1f40ab4bbb",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch6-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch6-v1/batch6-snails-salmon/native/corpse_mon_snail_small_256.png",
+      "installed_file": "playtest_6fb547f6ac9f6298d80a.png",
+      "sprite": 19947
+    },
+    {
+      "id": "mon_snail_river",
+      "aliases": [],
+      "sha256": "2128bb50ed8570cd75749fa4f545c64d79d608997b96c87425503e388fa99adc",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch6-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch6-v1/batch6-snails-salmon/native/mon_snail_river_256.png",
+      "installed_file": "playtest_2128bb50ed8570cd7574.png",
+      "sprite": 19948
+    },
+    {
+      "id": "corpse_mon_snail_river",
+      "aliases": [],
+      "sha256": "3b1f2031a4bfb49ece3fe83c576b4996ceca950a56c5bff4803c1f44f47742e6",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch6-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch6-v1/batch6-snails-salmon/native/corpse_mon_snail_river_256.png",
+      "installed_file": "playtest_3b1f2031a4bfb49ece3f.png",
+      "sprite": 19949
+    },
+    {
+      "id": "mon_snail_giant",
+      "aliases": [],
+      "sha256": "6c49c71406641357e29e527c616525c3a1d948212514ab833cfd9faa0d685bc0",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch6-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch6-v1/batch6-snails-salmon/native/mon_snail_giant_256.png",
+      "installed_file": "playtest_6c49c71406641357e29e.png",
+      "sprite": 19950
+    },
+    {
+      "id": "corpse_mon_snail_giant",
+      "aliases": [],
+      "sha256": "e5cfb385e11af406882d8c1a1faa28b2400e68d35dcdb18d8182befead2edf10",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch6-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch6-v1/batch6-snails-salmon/native/corpse_mon_snail_giant_256.png",
+      "installed_file": "playtest_e5cfb385e11af406882d.png",
+      "sprite": 19951
+    },
+    {
+      "id": "mon_mutant_salmon_huge",
+      "aliases": [],
+      "sha256": "bc169fe110d357f34664624f88ed17d9e10ef132713a3c989dacdfffacb9de89",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch6-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch6-v1/batch6-snails-salmon/native/mon_mutant_salmon_huge_256.png",
+      "installed_file": "playtest_bc169fe110d357f34664.png",
+      "sprite": 19952
+    },
+    {
+      "id": "corpse_mon_mutant_salmon_huge",
+      "aliases": [],
+      "sha256": "381220a89aed1e531edf3ac5ca3215192c6e09994a26d10495568e6bc9b8975a",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch6-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch6-v1/batch6-snails-salmon/native/corpse_mon_mutant_salmon_huge_256.png",
+      "installed_file": "playtest_381220a89aed1e531edf.png",
+      "sprite": 19953
+    },
+    {
+      "id": "mon_mutant_salmon_mega",
+      "aliases": [],
+      "sha256": "bc12df7c2f531651c9bd3f67803122091870260c41655de7bb26fafcc6e3a43d",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch6-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch6-v1/batch6-snails-salmon/native/mon_mutant_salmon_mega_256.png",
+      "installed_file": "playtest_bc12df7c2f531651c9bd.png",
+      "sprite": 19954
+    },
+    {
+      "id": "corpse_mon_mutant_salmon_mega",
+      "aliases": [],
+      "sha256": "e29b9dcc5a5a7b8809052d367b86dda46887462fc53bcba3ce000258c8d951c6",
+      "size": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "offset": [
+        0,
+        0
+      ],
+      "batch": "astral-wildlife-batch6-v1",
+      "source": "artifacts/local-playtest-update-20260928/returns/astral-wildlife-batch6-v1/batch6-snails-salmon/native/corpse_mon_mutant_salmon_mega_256.png",
+      "installed_file": "playtest_e29b9dcc5a5a7b880905.png",
+      "sprite": 19955
+    }
+  ],
+  "not_included": "Unfinished natural terrain candidates and returns without completed artwork."
+}

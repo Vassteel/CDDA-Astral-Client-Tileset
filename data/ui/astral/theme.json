@@ -1,0 +1,69 @@
+{
+  "//": "Astral client UI theme tokens. Single source of truth for colors, spacing, type roles and control sizes. Regenerate derived files with tools/ui-art/gen_theme.py. Values are logical px at UI scale 1.0 (GUI font height 16).",
+  "version": 1,
+  "colors": {
+    "deep_bg":        { "hex": "#111516", "use": "Recessed portrait / backdrop, deepest surface" },
+    "surface":        { "hex": "#1B1D1D", "use": "Main opaque reading surface (window body)" },
+    "raised":         { "hex": "#252725", "use": "Cards, active controls, list rows" },
+    "raised_hover":   { "hex": "#2E302D", "use": "Hovered row / secondary control hover" },
+    "edge_dark":      { "hex": "#0B0D0E", "use": "Outer shadow line under frames" },
+    "edge_quiet":     { "hex": "#58462E", "use": "Subtle structural separation, panel inset edge, tree connectors" },
+    "edge_bronze":    { "hex": "#9B7544", "use": "Main frame edge and emphasis outline" },
+    "bronze_light":   { "hex": "#C69A5D", "use": "Bronze edge highlight (top/left bevel)" },
+    "bronze_dark":    { "hex": "#6A4F2C", "use": "Bronze edge shade (bottom/right bevel)" },
+    "accent":         { "hex": "#D6A457", "use": "Selection, keyboard focus ring, primary action" },
+    "accent_dim":     { "hex": "#8E6D3A", "use": "Accent at rest (primary button fill, scrollbar grab)" },
+    "selected_bg":    { "hex": "#3A2D1A", "use": "Selected row fill" },
+    "focus_bg":       { "hex": "#2F2A20", "use": "Keyboard-focused (not selected) row fill" },
+    "text":           { "hex": "#EEE3CB", "use": "Body and headings" },
+    "text_muted":     { "hex": "#B7AE9D", "use": "Counts, units, hints, disabled labels" },
+    "text_on_accent": { "hex": "#1A1408", "use": "Text on amber primary buttons" },
+    "danger":         { "hex": "#CF7064", "use": "Destructive actions, critical conditions" },
+    "success":        { "hex": "#91B17C", "use": "Positive state, completion" },
+    "info":           { "hex": "#8FAEBB", "use": "Neutral informational state" },
+    "warning":        { "hex": "#D9B054", "use": "Caution state (same hue family as accent, paired with icon/text)" },
+    "meter_track":    { "hex": "#151817", "use": "Meter background" },
+    "scrim":          { "hex": "#000000", "alpha": 0.55, "use": "Dim behind modal dialogs" }
+  },
+  "spacing": { "xs": 4, "sm": 8, "md": 12, "lg": 16, "xl": 24 },
+  "radius":  { "window": 6, "panel": 4, "control": 3, "row": 3 },
+  "border":  { "frame": 2, "quiet": 1, "focus": 2 },
+  "type": {
+    "//": "Roles map onto the already-loaded ImGui faces: body = gui font at the user's FONT_HEIGHT; section = gui 1.25x; title = gui 1.5x. No fractional bitmap scaling.",
+    "body":    { "scale": 1.0,  "target_px": "16-18" },
+    "section": { "scale": 1.25, "target_px": "20-22" },
+    "title":   { "scale": 1.5,  "target_px": "24-28" }
+  },
+  "controls": {
+    "row":            40,
+    "row_featured":   48,
+    "row_compact":    32,
+    "button":         42,
+    "button_min_w":   120,
+    "footer":         64,
+    "title_bar":      44,
+    "close_hit":      36,
+    "icon":           28,
+    "icon_featured":  36,
+    "tree_indent":    20,
+    "scrollbar":      12
+  },
+  "frames": {
+    "//": "Nine-slice PNGs under data/ui/astral/frames. 'margin' is the slice inset in source px at 2x authoring scale; runtime divides by 2 for logical px.",
+    "window_large":   { "file": "frames/window_large.png",   "size": 192, "margin": 48, "scale": 2, "content_inset": 16 },
+    "dialog_compact": { "file": "frames/dialog_compact.png", "size": 128, "margin": 32, "scale": 2, "content_inset": 12 },
+    "popup_light":    { "file": "frames/popup_light.png",    "size": 96,  "margin": 24, "scale": 2, "content_inset": 8 },
+    "panel_inset":    { "file": "frames/panel_inset.png",    "size": 64,  "margin": 16, "scale": 2, "content_inset": 8 },
+    "card":           { "file": "frames/card.png",           "size": 64,  "margin": 16, "scale": 2, "content_inset": 8 },
+    "portrait":       { "file": "frames/portrait.png",       "size": 128, "margin": 32, "scale": 2, "content_inset": 12 }
+  },
+  "materials": {
+    "charcoal_grain": { "file": "materials/charcoal_grain.png", "size": 256, "tile": true, "strength_full": 0.35, "strength_reduced": 0.12 },
+    "bronze_grain":   { "file": "materials/bronze_grain.png",   "size": 128, "tile": true }
+  },
+  "decoration_levels": {
+    "full":    "Textured window surface, bevelled bronze frame, corner detail.",
+    "reduced": "Flat surfaces, single bronze line, no corner detail, no grain.",
+    "none":    "Flat surfaces, quiet edge only; identical layout and content."
+  }
+}

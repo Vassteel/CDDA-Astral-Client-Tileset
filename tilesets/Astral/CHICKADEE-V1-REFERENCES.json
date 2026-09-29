@@ -1,0 +1,14 @@
+[
+  {
+    "role": "adult anatomy",
+    "page": "https://ebird.org/species/bkcchi",
+    "image": "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/302473191/1800",
+    "file": "references/adult.jpg"
+  },
+  {
+    "role": "young anatomy",
+    "page": "https://ebird.org/atlasny/news/new-guide-to-recognizing-fledglings",
+    "image": "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/66587571/1200",
+    "file": "references/chick.jpg"
+  }
+]

@@ -1,0 +1,9932 @@
+{
+  "status": "offline validated; ready for user-authorized local installation",
+  "assets": {
+    "cave-dirt": {
+      "first_sprite": 19968,
+      "file": "astral_terrain_complete_cave_dirt.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/natural-terrain-v2/atlases/cave-dirt-spring.png",
+      "sha256": "9a2931db5086ea9d7f2c3f77541aa7d1debff10bcec1aa0f8b8198600699e3df",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "cave-rock": {
+      "first_sprite": 19988,
+      "file": "astral_terrain_complete_cave_rock.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/natural-terrain-v2/atlases/cave-rock-spring.png",
+      "sha256": "beb1a3dad84ccf4e6daf72bc145180f47abde5c617de3ed1cf7250ec6772a153",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "cave-sand": {
+      "first_sprite": 20008,
+      "file": "astral_terrain_complete_cave_sand.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/natural-terrain-v2/atlases/cave-sand-spring.png",
+      "sha256": "28af32465e32386fc87a6f39a921601ccdd996f09459592e27ce09572cac4c85",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "clay": {
+      "first_sprite": 20028,
+      "file": "astral_terrain_complete_clay.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/natural-terrain-v2/atlases/clay-spring.png",
+      "sha256": "9c991a312bb749d52ba2358cd0d7c4071b70a2c20571a36d6d5a07bf0c5c603a",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "claymound": {
+      "first_sprite": 20048,
+      "file": "astral_terrain_complete_claymound.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/natural-terrain-v2/atlases/claymound-spring.png",
+      "sha256": "6df627292df53f21800e75dfe0d1252c0bdd9e0f47553ed052ce986ff26a4013",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "fresh-deep": {
+      "first_sprite": 20068,
+      "file": "astral_terrain_complete_fresh_deep.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/fresh-deep/atlas.png",
+      "sha256": "0e7689aef37c02e5a26cc8cf0a7a16176f94b40590d842c13a6637496e5113d0",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "fresh-murky": {
+      "first_sprite": 20088,
+      "file": "astral_terrain_complete_fresh_murky.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/fresh-murky/atlas.png",
+      "sha256": "dbd939e58196efe23ddb95dc6df7fbabd5dffc2d7ca42823bdb713a47ca10304",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "fresh-shallow": {
+      "first_sprite": 20108,
+      "file": "astral_terrain_complete_fresh_shallow.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/fresh-shallow/atlas.png",
+      "sha256": "cdb04c3894c6e8b6cebdf7d1cd2be16a426c3a1340a2227d6362a295e3b52984",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "fresh-submerged": {
+      "first_sprite": 20128,
+      "file": "astral_terrain_complete_fresh_submerged.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/fresh-submerged/atlas.png",
+      "sha256": "c53342e5518a37429687cb335108637944a7853ff35ccb63767f8dea348cf87f",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "gravel": {
+      "first_sprite": 20148,
+      "file": "astral_terrain_complete_gravel.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/natural-terrain-v2/atlases/gravel-spring.png",
+      "sha256": "8259b3bdfa8c104d65f0bbb94c03be302e25bbd47eafc631eb04c443793d3e83",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "ice-dp-thick": {
+      "first_sprite": 20168,
+      "file": "astral_terrain_complete_ice_dp_thick.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/ice-dp-thick/atlas.png",
+      "sha256": "8211d7e7705ec9b2b4ffd4394e6999053fa4c4a4bbfcc3a6cc5da7ded17202b3",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "ice-dp-thin": {
+      "first_sprite": 20188,
+      "file": "astral_terrain_complete_ice_dp_thin.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/ice-dp-thin/atlas.png",
+      "sha256": "091b3618591b28d796128a036cf63b1fb009c95e53660f570f7df79d3012a2c1",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "ice-sh-thick": {
+      "first_sprite": 20208,
+      "file": "astral_terrain_complete_ice_sh_thick.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/ice-sh-thick/atlas.png",
+      "sha256": "de76e1e43f191a59966c1d2ba9ee2310f0903ddc011ccf55404a5a50674a8820",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "ice-sh-thin": {
+      "first_sprite": 20228,
+      "file": "astral_terrain_complete_ice_sh_thin.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/ice-sh-thin/atlas.png",
+      "sha256": "d760d7bdecf3375e418576ef7fe1ec77416ebf1a032cb7c4ba091ab5ba6ee1db",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "lake-bed": {
+      "first_sprite": 20248,
+      "file": "astral_terrain_complete_lake_bed.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/lake-bed/atlas.png",
+      "sha256": "f4f0388ead28ec38e2e0872f0acac405e6e12b2151b5295bb56912678ee7069e",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "moss": {
+      "first_sprite": 20268,
+      "file": "astral_terrain_complete_moss.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/natural-terrain-v2/atlases/moss-spring.png",
+      "sha256": "253fc955eba23d7aa0a29aa124a271c50573a5c34d1db8cd8c2fc59668748526",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "moving-deep": {
+      "first_sprite": 20288,
+      "file": "astral_terrain_complete_moving_deep.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/natural-terrain-v2/atlases/moving-deep-spring.png",
+      "sha256": "066cca405d984f01a70502ecc419456da06ff1366f45656e8c2c08c5f22beeb9",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "moving-shallow": {
+      "first_sprite": 20308,
+      "file": "astral_terrain_complete_moving_shallow.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/natural-terrain-v2/atlases/moving-shallow-spring.png",
+      "sha256": "10605281f17e229335bc9705df6fdde9ced83ea12ed74b3a9dfb08146e2cac3c",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "mud": {
+      "first_sprite": 20328,
+      "file": "astral_terrain_complete_mud.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/natural-terrain-v2/atlases/mud-spring.png",
+      "sha256": "85fb2f6e69cd7a29ebe989f6d844e0984b8da0bdc4b686834eeddc7a27a88f37",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "ocean-bed": {
+      "first_sprite": 20348,
+      "file": "astral_terrain_complete_ocean_bed.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/ocean-bed/atlas.png",
+      "sha256": "c4d15276cf3ebd40678e32a12a8339f7783a0f03cc8c8ae0cbb66a3e17a57080",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "salt-deep": {
+      "first_sprite": 20368,
+      "file": "astral_terrain_complete_salt_deep.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/salt-deep/atlas.png",
+      "sha256": "2fe0e2c1a63f69ee2bdd4082307cccdc60e8d8758ff32ecb55668586caf4b680",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "salt-shallow": {
+      "first_sprite": 20388,
+      "file": "astral_terrain_complete_salt_shallow.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/salt-shallow/atlas.png",
+      "sha256": "ca52f03d68fcd5ae754a89e0618d72a267dde92cc712271e00e6f06cbc71d5b4",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "salt-submerged": {
+      "first_sprite": 20408,
+      "file": "astral_terrain_complete_salt_submerged.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/salt-submerged/atlas.png",
+      "sha256": "926cee1899f72801010a6b2820585db7f17df59798d81498dd812ec3b66ade64",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "tidepool": {
+      "first_sprite": 20428,
+      "file": "astral_terrain_complete_tidepool.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/tidepool/atlas.png",
+      "sha256": "26002fe6558f8a99c579a80f02a7fa903ba476978dd52de4acb84054d7f3142d",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    },
+    "wet-sand-surf": {
+      "first_sprite": 20448,
+      "file": "astral_terrain_complete_wet_sand_surf.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/wet-sand-surf/atlas.png",
+      "sha256": "fb55751809e5d4bcc9def350430cce51c1a60d48583f7b7b4d18aa24a678d1f6",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      }
+    }
+  },
+  "bindings": [
+    {
+      "id": "t_mud",
+      "season": "spring",
+      "material": "mud",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20328
+          },
+          {
+            "weight": 1,
+            "sprite": 20344
+          },
+          {
+            "weight": 1,
+            "sprite": 20345
+          }
+        ],
+        "corner": [
+          20329,
+          20332,
+          20331,
+          20330
+        ],
+        "t_connection": [
+          20333,
+          20336,
+          20335,
+          20334
+        ],
+        "edge": [
+          20337,
+          20338
+        ],
+        "end_piece": [
+          20339,
+          20342,
+          20341,
+          20340
+        ],
+        "unconnected": [
+          20343
+        ]
+      },
+      "background": 18581
+    },
+    {
+      "id": "t_mud",
+      "season": "summer",
+      "material": "mud",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20328
+          },
+          {
+            "weight": 1,
+            "sprite": 20344
+          },
+          {
+            "weight": 1,
+            "sprite": 20345
+          }
+        ],
+        "corner": [
+          20329,
+          20332,
+          20331,
+          20330
+        ],
+        "t_connection": [
+          20333,
+          20336,
+          20335,
+          20334
+        ],
+        "edge": [
+          20337,
+          20338
+        ],
+        "end_piece": [
+          20339,
+          20342,
+          20341,
+          20340
+        ],
+        "unconnected": [
+          20343
+        ]
+      },
+      "background": 18581
+    },
+    {
+      "id": "t_mud",
+      "season": "autumn",
+      "material": "mud",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20328
+          },
+          {
+            "weight": 1,
+            "sprite": 20344
+          },
+          {
+            "weight": 1,
+            "sprite": 20345
+          }
+        ],
+        "corner": [
+          20329,
+          20332,
+          20331,
+          20330
+        ],
+        "t_connection": [
+          20333,
+          20336,
+          20335,
+          20334
+        ],
+        "edge": [
+          20337,
+          20338
+        ],
+        "end_piece": [
+          20339,
+          20342,
+          20341,
+          20340
+        ],
+        "unconnected": [
+          20343
+        ]
+      },
+      "background": 18581
+    },
+    {
+      "id": "t_mud",
+      "season": "winter",
+      "material": "mud",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20328
+          },
+          {
+            "weight": 1,
+            "sprite": 20344
+          },
+          {
+            "weight": 1,
+            "sprite": 20345
+          }
+        ],
+        "corner": [
+          20329,
+          20332,
+          20331,
+          20330
+        ],
+        "t_connection": [
+          20333,
+          20336,
+          20335,
+          20334
+        ],
+        "edge": [
+          20337,
+          20338
+        ],
+        "end_piece": [
+          20339,
+          20342,
+          20341,
+          20340
+        ],
+        "unconnected": [
+          20343
+        ]
+      },
+      "background": 18581
+    },
+    {
+      "id": "t_mud_underground",
+      "season": "spring",
+      "material": "mud",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20328
+          },
+          {
+            "weight": 1,
+            "sprite": 20344
+          },
+          {
+            "weight": 1,
+            "sprite": 20345
+          }
+        ],
+        "corner": [
+          20329,
+          20332,
+          20331,
+          20330
+        ],
+        "t_connection": [
+          20333,
+          20336,
+          20335,
+          20334
+        ],
+        "edge": [
+          20337,
+          20338
+        ],
+        "end_piece": [
+          20339,
+          20342,
+          20341,
+          20340
+        ],
+        "unconnected": [
+          20343
+        ]
+      },
+      "background": 19968
+    },
+    {
+      "id": "t_mud_underground",
+      "season": "summer",
+      "material": "mud",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20328
+          },
+          {
+            "weight": 1,
+            "sprite": 20344
+          },
+          {
+            "weight": 1,
+            "sprite": 20345
+          }
+        ],
+        "corner": [
+          20329,
+          20332,
+          20331,
+          20330
+        ],
+        "t_connection": [
+          20333,
+          20336,
+          20335,
+          20334
+        ],
+        "edge": [
+          20337,
+          20338
+        ],
+        "end_piece": [
+          20339,
+          20342,
+          20341,
+          20340
+        ],
+        "unconnected": [
+          20343
+        ]
+      },
+      "background": 19968
+    },
+    {
+      "id": "t_mud_underground",
+      "season": "autumn",
+      "material": "mud",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20328
+          },
+          {
+            "weight": 1,
+            "sprite": 20344
+          },
+          {
+            "weight": 1,
+            "sprite": 20345
+          }
+        ],
+        "corner": [
+          20329,
+          20332,
+          20331,
+          20330
+        ],
+        "t_connection": [
+          20333,
+          20336,
+          20335,
+          20334
+        ],
+        "edge": [
+          20337,
+          20338
+        ],
+        "end_piece": [
+          20339,
+          20342,
+          20341,
+          20340
+        ],
+        "unconnected": [
+          20343
+        ]
+      },
+      "background": 19968
+    },
+    {
+      "id": "t_mud_underground",
+      "season": "winter",
+      "material": "mud",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20328
+          },
+          {
+            "weight": 1,
+            "sprite": 20344
+          },
+          {
+            "weight": 1,
+            "sprite": 20345
+          }
+        ],
+        "corner": [
+          20329,
+          20332,
+          20331,
+          20330
+        ],
+        "t_connection": [
+          20333,
+          20336,
+          20335,
+          20334
+        ],
+        "edge": [
+          20337,
+          20338
+        ],
+        "end_piece": [
+          20339,
+          20342,
+          20341,
+          20340
+        ],
+        "unconnected": [
+          20343
+        ]
+      },
+      "background": 19968
+    },
+    {
+      "id": "t_clay",
+      "season": "spring",
+      "material": "clay",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20028
+          },
+          {
+            "weight": 1,
+            "sprite": 20044
+          },
+          {
+            "weight": 1,
+            "sprite": 20045
+          }
+        ],
+        "corner": [
+          20029,
+          20032,
+          20031,
+          20030
+        ],
+        "t_connection": [
+          20033,
+          20036,
+          20035,
+          20034
+        ],
+        "edge": [
+          20037,
+          20038
+        ],
+        "end_piece": [
+          20039,
+          20042,
+          20041,
+          20040
+        ],
+        "unconnected": [
+          20043
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_clay",
+      "season": "summer",
+      "material": "clay",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20028
+          },
+          {
+            "weight": 1,
+            "sprite": 20044
+          },
+          {
+            "weight": 1,
+            "sprite": 20045
+          }
+        ],
+        "corner": [
+          20029,
+          20032,
+          20031,
+          20030
+        ],
+        "t_connection": [
+          20033,
+          20036,
+          20035,
+          20034
+        ],
+        "edge": [
+          20037,
+          20038
+        ],
+        "end_piece": [
+          20039,
+          20042,
+          20041,
+          20040
+        ],
+        "unconnected": [
+          20043
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_clay",
+      "season": "autumn",
+      "material": "clay",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20028
+          },
+          {
+            "weight": 1,
+            "sprite": 20044
+          },
+          {
+            "weight": 1,
+            "sprite": 20045
+          }
+        ],
+        "corner": [
+          20029,
+          20032,
+          20031,
+          20030
+        ],
+        "t_connection": [
+          20033,
+          20036,
+          20035,
+          20034
+        ],
+        "edge": [
+          20037,
+          20038
+        ],
+        "end_piece": [
+          20039,
+          20042,
+          20041,
+          20040
+        ],
+        "unconnected": [
+          20043
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_clay",
+      "season": "winter",
+      "material": "clay",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20028
+          },
+          {
+            "weight": 1,
+            "sprite": 20044
+          },
+          {
+            "weight": 1,
+            "sprite": 20045
+          }
+        ],
+        "corner": [
+          20029,
+          20032,
+          20031,
+          20030
+        ],
+        "t_connection": [
+          20033,
+          20036,
+          20035,
+          20034
+        ],
+        "edge": [
+          20037,
+          20038
+        ],
+        "end_piece": [
+          20039,
+          20042,
+          20041,
+          20040
+        ],
+        "unconnected": [
+          20043
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_clay_underground",
+      "season": "spring",
+      "material": "clay",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20028
+          },
+          {
+            "weight": 1,
+            "sprite": 20044
+          },
+          {
+            "weight": 1,
+            "sprite": 20045
+          }
+        ],
+        "corner": [
+          20029,
+          20032,
+          20031,
+          20030
+        ],
+        "t_connection": [
+          20033,
+          20036,
+          20035,
+          20034
+        ],
+        "edge": [
+          20037,
+          20038
+        ],
+        "end_piece": [
+          20039,
+          20042,
+          20041,
+          20040
+        ],
+        "unconnected": [
+          20043
+        ]
+      },
+      "background": 19968
+    },
+    {
+      "id": "t_clay_underground",
+      "season": "summer",
+      "material": "clay",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20028
+          },
+          {
+            "weight": 1,
+            "sprite": 20044
+          },
+          {
+            "weight": 1,
+            "sprite": 20045
+          }
+        ],
+        "corner": [
+          20029,
+          20032,
+          20031,
+          20030
+        ],
+        "t_connection": [
+          20033,
+          20036,
+          20035,
+          20034
+        ],
+        "edge": [
+          20037,
+          20038
+        ],
+        "end_piece": [
+          20039,
+          20042,
+          20041,
+          20040
+        ],
+        "unconnected": [
+          20043
+        ]
+      },
+      "background": 19968
+    },
+    {
+      "id": "t_clay_underground",
+      "season": "autumn",
+      "material": "clay",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20028
+          },
+          {
+            "weight": 1,
+            "sprite": 20044
+          },
+          {
+            "weight": 1,
+            "sprite": 20045
+          }
+        ],
+        "corner": [
+          20029,
+          20032,
+          20031,
+          20030
+        ],
+        "t_connection": [
+          20033,
+          20036,
+          20035,
+          20034
+        ],
+        "edge": [
+          20037,
+          20038
+        ],
+        "end_piece": [
+          20039,
+          20042,
+          20041,
+          20040
+        ],
+        "unconnected": [
+          20043
+        ]
+      },
+      "background": 19968
+    },
+    {
+      "id": "t_clay_underground",
+      "season": "winter",
+      "material": "clay",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20028
+          },
+          {
+            "weight": 1,
+            "sprite": 20044
+          },
+          {
+            "weight": 1,
+            "sprite": 20045
+          }
+        ],
+        "corner": [
+          20029,
+          20032,
+          20031,
+          20030
+        ],
+        "t_connection": [
+          20033,
+          20036,
+          20035,
+          20034
+        ],
+        "edge": [
+          20037,
+          20038
+        ],
+        "end_piece": [
+          20039,
+          20042,
+          20041,
+          20040
+        ],
+        "unconnected": [
+          20043
+        ]
+      },
+      "background": 19968
+    },
+    {
+      "id": "t_claymound",
+      "season": "spring",
+      "material": "claymound",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20048
+          },
+          {
+            "weight": 1,
+            "sprite": 20064
+          },
+          {
+            "weight": 1,
+            "sprite": 20065
+          }
+        ],
+        "corner": [
+          20049,
+          20052,
+          20051,
+          20050
+        ],
+        "t_connection": [
+          20053,
+          20056,
+          20055,
+          20054
+        ],
+        "edge": [
+          20057,
+          20058
+        ],
+        "end_piece": [
+          20059,
+          20062,
+          20061,
+          20060
+        ],
+        "unconnected": [
+          20063
+        ]
+      },
+      "background": 20028
+    },
+    {
+      "id": "t_claymound",
+      "season": "summer",
+      "material": "claymound",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20048
+          },
+          {
+            "weight": 1,
+            "sprite": 20064
+          },
+          {
+            "weight": 1,
+            "sprite": 20065
+          }
+        ],
+        "corner": [
+          20049,
+          20052,
+          20051,
+          20050
+        ],
+        "t_connection": [
+          20053,
+          20056,
+          20055,
+          20054
+        ],
+        "edge": [
+          20057,
+          20058
+        ],
+        "end_piece": [
+          20059,
+          20062,
+          20061,
+          20060
+        ],
+        "unconnected": [
+          20063
+        ]
+      },
+      "background": 20028
+    },
+    {
+      "id": "t_claymound",
+      "season": "autumn",
+      "material": "claymound",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20048
+          },
+          {
+            "weight": 1,
+            "sprite": 20064
+          },
+          {
+            "weight": 1,
+            "sprite": 20065
+          }
+        ],
+        "corner": [
+          20049,
+          20052,
+          20051,
+          20050
+        ],
+        "t_connection": [
+          20053,
+          20056,
+          20055,
+          20054
+        ],
+        "edge": [
+          20057,
+          20058
+        ],
+        "end_piece": [
+          20059,
+          20062,
+          20061,
+          20060
+        ],
+        "unconnected": [
+          20063
+        ]
+      },
+      "background": 20028
+    },
+    {
+      "id": "t_claymound",
+      "season": "winter",
+      "material": "claymound",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20048
+          },
+          {
+            "weight": 1,
+            "sprite": 20064
+          },
+          {
+            "weight": 1,
+            "sprite": 20065
+          }
+        ],
+        "corner": [
+          20049,
+          20052,
+          20051,
+          20050
+        ],
+        "t_connection": [
+          20053,
+          20056,
+          20055,
+          20054
+        ],
+        "edge": [
+          20057,
+          20058
+        ],
+        "end_piece": [
+          20059,
+          20062,
+          20061,
+          20060
+        ],
+        "unconnected": [
+          20063
+        ]
+      },
+      "background": 20028
+    },
+    {
+      "id": "t_claymound_underground",
+      "season": "spring",
+      "material": "claymound",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20048
+          },
+          {
+            "weight": 1,
+            "sprite": 20064
+          },
+          {
+            "weight": 1,
+            "sprite": 20065
+          }
+        ],
+        "corner": [
+          20049,
+          20052,
+          20051,
+          20050
+        ],
+        "t_connection": [
+          20053,
+          20056,
+          20055,
+          20054
+        ],
+        "edge": [
+          20057,
+          20058
+        ],
+        "end_piece": [
+          20059,
+          20062,
+          20061,
+          20060
+        ],
+        "unconnected": [
+          20063
+        ]
+      },
+      "background": 20068
+    },
+    {
+      "id": "t_claymound_underground",
+      "season": "summer",
+      "material": "claymound",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20048
+          },
+          {
+            "weight": 1,
+            "sprite": 20064
+          },
+          {
+            "weight": 1,
+            "sprite": 20065
+          }
+        ],
+        "corner": [
+          20049,
+          20052,
+          20051,
+          20050
+        ],
+        "t_connection": [
+          20053,
+          20056,
+          20055,
+          20054
+        ],
+        "edge": [
+          20057,
+          20058
+        ],
+        "end_piece": [
+          20059,
+          20062,
+          20061,
+          20060
+        ],
+        "unconnected": [
+          20063
+        ]
+      },
+      "background": 20068
+    },
+    {
+      "id": "t_claymound_underground",
+      "season": "autumn",
+      "material": "claymound",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20048
+          },
+          {
+            "weight": 1,
+            "sprite": 20064
+          },
+          {
+            "weight": 1,
+            "sprite": 20065
+          }
+        ],
+        "corner": [
+          20049,
+          20052,
+          20051,
+          20050
+        ],
+        "t_connection": [
+          20053,
+          20056,
+          20055,
+          20054
+        ],
+        "edge": [
+          20057,
+          20058
+        ],
+        "end_piece": [
+          20059,
+          20062,
+          20061,
+          20060
+        ],
+        "unconnected": [
+          20063
+        ]
+      },
+      "background": 20068
+    },
+    {
+      "id": "t_claymound_underground",
+      "season": "winter",
+      "material": "claymound",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20048
+          },
+          {
+            "weight": 1,
+            "sprite": 20064
+          },
+          {
+            "weight": 1,
+            "sprite": 20065
+          }
+        ],
+        "corner": [
+          20049,
+          20052,
+          20051,
+          20050
+        ],
+        "t_connection": [
+          20053,
+          20056,
+          20055,
+          20054
+        ],
+        "edge": [
+          20057,
+          20058
+        ],
+        "end_piece": [
+          20059,
+          20062,
+          20061,
+          20060
+        ],
+        "unconnected": [
+          20063
+        ]
+      },
+      "background": 20068
+    },
+    {
+      "id": "t_railroad_rubble",
+      "season": "spring",
+      "material": "gravel",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20148
+          },
+          {
+            "weight": 1,
+            "sprite": 20164
+          },
+          {
+            "weight": 1,
+            "sprite": 20165
+          }
+        ],
+        "corner": [
+          20149,
+          20152,
+          20151,
+          20150
+        ],
+        "t_connection": [
+          20153,
+          20156,
+          20155,
+          20154
+        ],
+        "edge": [
+          20157,
+          20158
+        ],
+        "end_piece": [
+          20159,
+          20162,
+          20161,
+          20160
+        ],
+        "unconnected": [
+          20163
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_railroad_rubble",
+      "season": "summer",
+      "material": "gravel",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20148
+          },
+          {
+            "weight": 1,
+            "sprite": 20164
+          },
+          {
+            "weight": 1,
+            "sprite": 20165
+          }
+        ],
+        "corner": [
+          20149,
+          20152,
+          20151,
+          20150
+        ],
+        "t_connection": [
+          20153,
+          20156,
+          20155,
+          20154
+        ],
+        "edge": [
+          20157,
+          20158
+        ],
+        "end_piece": [
+          20159,
+          20162,
+          20161,
+          20160
+        ],
+        "unconnected": [
+          20163
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_railroad_rubble",
+      "season": "autumn",
+      "material": "gravel",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20148
+          },
+          {
+            "weight": 1,
+            "sprite": 20164
+          },
+          {
+            "weight": 1,
+            "sprite": 20165
+          }
+        ],
+        "corner": [
+          20149,
+          20152,
+          20151,
+          20150
+        ],
+        "t_connection": [
+          20153,
+          20156,
+          20155,
+          20154
+        ],
+        "edge": [
+          20157,
+          20158
+        ],
+        "end_piece": [
+          20159,
+          20162,
+          20161,
+          20160
+        ],
+        "unconnected": [
+          20163
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_railroad_rubble",
+      "season": "winter",
+      "material": "gravel",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20148
+          },
+          {
+            "weight": 1,
+            "sprite": 20164
+          },
+          {
+            "weight": 1,
+            "sprite": 20165
+          }
+        ],
+        "corner": [
+          20149,
+          20152,
+          20151,
+          20150
+        ],
+        "t_connection": [
+          20153,
+          20156,
+          20155,
+          20154
+        ],
+        "edge": [
+          20157,
+          20158
+        ],
+        "end_piece": [
+          20159,
+          20162,
+          20161,
+          20160
+        ],
+        "unconnected": [
+          20163
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_moss",
+      "season": "spring",
+      "material": "moss",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20268
+          },
+          {
+            "weight": 1,
+            "sprite": 20284
+          },
+          {
+            "weight": 1,
+            "sprite": 20285
+          }
+        ],
+        "corner": [
+          20269,
+          20272,
+          20271,
+          20270
+        ],
+        "t_connection": [
+          20273,
+          20276,
+          20275,
+          20274
+        ],
+        "edge": [
+          20277,
+          20278
+        ],
+        "end_piece": [
+          20279,
+          20282,
+          20281,
+          20280
+        ],
+        "unconnected": [
+          20283
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_moss",
+      "season": "summer",
+      "material": "moss",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20268
+          },
+          {
+            "weight": 1,
+            "sprite": 20284
+          },
+          {
+            "weight": 1,
+            "sprite": 20285
+          }
+        ],
+        "corner": [
+          20269,
+          20272,
+          20271,
+          20270
+        ],
+        "t_connection": [
+          20273,
+          20276,
+          20275,
+          20274
+        ],
+        "edge": [
+          20277,
+          20278
+        ],
+        "end_piece": [
+          20279,
+          20282,
+          20281,
+          20280
+        ],
+        "unconnected": [
+          20283
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_moss",
+      "season": "autumn",
+      "material": "moss",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20268
+          },
+          {
+            "weight": 1,
+            "sprite": 20284
+          },
+          {
+            "weight": 1,
+            "sprite": 20285
+          }
+        ],
+        "corner": [
+          20269,
+          20272,
+          20271,
+          20270
+        ],
+        "t_connection": [
+          20273,
+          20276,
+          20275,
+          20274
+        ],
+        "edge": [
+          20277,
+          20278
+        ],
+        "end_piece": [
+          20279,
+          20282,
+          20281,
+          20280
+        ],
+        "unconnected": [
+          20283
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_moss",
+      "season": "winter",
+      "material": "moss",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20268
+          },
+          {
+            "weight": 1,
+            "sprite": 20284
+          },
+          {
+            "weight": 1,
+            "sprite": 20285
+          }
+        ],
+        "corner": [
+          20269,
+          20272,
+          20271,
+          20270
+        ],
+        "t_connection": [
+          20273,
+          20276,
+          20275,
+          20274
+        ],
+        "edge": [
+          20277,
+          20278
+        ],
+        "end_piece": [
+          20279,
+          20282,
+          20281,
+          20280
+        ],
+        "unconnected": [
+          20283
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_moss_underground",
+      "season": "spring",
+      "material": "moss",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20268
+          },
+          {
+            "weight": 1,
+            "sprite": 20284
+          },
+          {
+            "weight": 1,
+            "sprite": 20285
+          }
+        ],
+        "corner": [
+          20269,
+          20272,
+          20271,
+          20270
+        ],
+        "t_connection": [
+          20273,
+          20276,
+          20275,
+          20274
+        ],
+        "edge": [
+          20277,
+          20278
+        ],
+        "end_piece": [
+          20279,
+          20282,
+          20281,
+          20280
+        ],
+        "unconnected": [
+          20283
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_moss_underground",
+      "season": "summer",
+      "material": "moss",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20268
+          },
+          {
+            "weight": 1,
+            "sprite": 20284
+          },
+          {
+            "weight": 1,
+            "sprite": 20285
+          }
+        ],
+        "corner": [
+          20269,
+          20272,
+          20271,
+          20270
+        ],
+        "t_connection": [
+          20273,
+          20276,
+          20275,
+          20274
+        ],
+        "edge": [
+          20277,
+          20278
+        ],
+        "end_piece": [
+          20279,
+          20282,
+          20281,
+          20280
+        ],
+        "unconnected": [
+          20283
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_moss_underground",
+      "season": "autumn",
+      "material": "moss",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20268
+          },
+          {
+            "weight": 1,
+            "sprite": 20284
+          },
+          {
+            "weight": 1,
+            "sprite": 20285
+          }
+        ],
+        "corner": [
+          20269,
+          20272,
+          20271,
+          20270
+        ],
+        "t_connection": [
+          20273,
+          20276,
+          20275,
+          20274
+        ],
+        "edge": [
+          20277,
+          20278
+        ],
+        "end_piece": [
+          20279,
+          20282,
+          20281,
+          20280
+        ],
+        "unconnected": [
+          20283
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_moss_underground",
+      "season": "winter",
+      "material": "moss",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20268
+          },
+          {
+            "weight": 1,
+            "sprite": 20284
+          },
+          {
+            "weight": 1,
+            "sprite": 20285
+          }
+        ],
+        "corner": [
+          20269,
+          20272,
+          20271,
+          20270
+        ],
+        "t_connection": [
+          20273,
+          20276,
+          20275,
+          20274
+        ],
+        "edge": [
+          20277,
+          20278
+        ],
+        "end_piece": [
+          20279,
+          20282,
+          20281,
+          20280
+        ],
+        "unconnected": [
+          20283
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_rock_floor",
+      "season": "spring",
+      "material": "cave-rock",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 19988
+          },
+          {
+            "weight": 1,
+            "sprite": 20004
+          },
+          {
+            "weight": 1,
+            "sprite": 20005
+          }
+        ],
+        "corner": [
+          19989,
+          19992,
+          19991,
+          19990
+        ],
+        "t_connection": [
+          19993,
+          19996,
+          19995,
+          19994
+        ],
+        "edge": [
+          19997,
+          19998
+        ],
+        "end_piece": [
+          19999,
+          20002,
+          20001,
+          20000
+        ],
+        "unconnected": [
+          20003
+        ]
+      },
+      "background": 7336
+    },
+    {
+      "id": "t_rock_floor",
+      "season": "summer",
+      "material": "cave-rock",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 19988
+          },
+          {
+            "weight": 1,
+            "sprite": 20004
+          },
+          {
+            "weight": 1,
+            "sprite": 20005
+          }
+        ],
+        "corner": [
+          19989,
+          19992,
+          19991,
+          19990
+        ],
+        "t_connection": [
+          19993,
+          19996,
+          19995,
+          19994
+        ],
+        "edge": [
+          19997,
+          19998
+        ],
+        "end_piece": [
+          19999,
+          20002,
+          20001,
+          20000
+        ],
+        "unconnected": [
+          20003
+        ]
+      },
+      "background": 7336
+    },
+    {
+      "id": "t_rock_floor",
+      "season": "autumn",
+      "material": "cave-rock",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 19988
+          },
+          {
+            "weight": 1,
+            "sprite": 20004
+          },
+          {
+            "weight": 1,
+            "sprite": 20005
+          }
+        ],
+        "corner": [
+          19989,
+          19992,
+          19991,
+          19990
+        ],
+        "t_connection": [
+          19993,
+          19996,
+          19995,
+          19994
+        ],
+        "edge": [
+          19997,
+          19998
+        ],
+        "end_piece": [
+          19999,
+          20002,
+          20001,
+          20000
+        ],
+        "unconnected": [
+          20003
+        ]
+      },
+      "background": 7336
+    },
+    {
+      "id": "t_rock_floor",
+      "season": "winter",
+      "material": "cave-rock",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 19988
+          },
+          {
+            "weight": 1,
+            "sprite": 20004
+          },
+          {
+            "weight": 1,
+            "sprite": 20005
+          }
+        ],
+        "corner": [
+          19989,
+          19992,
+          19991,
+          19990
+        ],
+        "t_connection": [
+          19993,
+          19996,
+          19995,
+          19994
+        ],
+        "edge": [
+          19997,
+          19998
+        ],
+        "end_piece": [
+          19999,
+          20002,
+          20001,
+          20000
+        ],
+        "unconnected": [
+          20003
+        ]
+      },
+      "background": 7336
+    },
+    {
+      "id": "t_rock_floor_no_roof",
+      "season": "spring",
+      "material": "cave-rock",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 19988
+          },
+          {
+            "weight": 1,
+            "sprite": 20004
+          },
+          {
+            "weight": 1,
+            "sprite": 20005
+          }
+        ],
+        "corner": [
+          19989,
+          19992,
+          19991,
+          19990
+        ],
+        "t_connection": [
+          19993,
+          19996,
+          19995,
+          19994
+        ],
+        "edge": [
+          19997,
+          19998
+        ],
+        "end_piece": [
+          19999,
+          20002,
+          20001,
+          20000
+        ],
+        "unconnected": [
+          20003
+        ]
+      },
+      "background": 7336
+    },
+    {
+      "id": "t_rock_floor_no_roof",
+      "season": "summer",
+      "material": "cave-rock",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 19988
+          },
+          {
+            "weight": 1,
+            "sprite": 20004
+          },
+          {
+            "weight": 1,
+            "sprite": 20005
+          }
+        ],
+        "corner": [
+          19989,
+          19992,
+          19991,
+          19990
+        ],
+        "t_connection": [
+          19993,
+          19996,
+          19995,
+          19994
+        ],
+        "edge": [
+          19997,
+          19998
+        ],
+        "end_piece": [
+          19999,
+          20002,
+          20001,
+          20000
+        ],
+        "unconnected": [
+          20003
+        ]
+      },
+      "background": 7336
+    },
+    {
+      "id": "t_rock_floor_no_roof",
+      "season": "autumn",
+      "material": "cave-rock",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 19988
+          },
+          {
+            "weight": 1,
+            "sprite": 20004
+          },
+          {
+            "weight": 1,
+            "sprite": 20005
+          }
+        ],
+        "corner": [
+          19989,
+          19992,
+          19991,
+          19990
+        ],
+        "t_connection": [
+          19993,
+          19996,
+          19995,
+          19994
+        ],
+        "edge": [
+          19997,
+          19998
+        ],
+        "end_piece": [
+          19999,
+          20002,
+          20001,
+          20000
+        ],
+        "unconnected": [
+          20003
+        ]
+      },
+      "background": 7336
+    },
+    {
+      "id": "t_rock_floor_no_roof",
+      "season": "winter",
+      "material": "cave-rock",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 19988
+          },
+          {
+            "weight": 1,
+            "sprite": 20004
+          },
+          {
+            "weight": 1,
+            "sprite": 20005
+          }
+        ],
+        "corner": [
+          19989,
+          19992,
+          19991,
+          19990
+        ],
+        "t_connection": [
+          19993,
+          19996,
+          19995,
+          19994
+        ],
+        "edge": [
+          19997,
+          19998
+        ],
+        "end_piece": [
+          19999,
+          20002,
+          20001,
+          20000
+        ],
+        "unconnected": [
+          20003
+        ]
+      },
+      "background": 7336
+    },
+    {
+      "id": "t_dirt_underground",
+      "season": "spring",
+      "material": "cave-dirt",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 19968
+          },
+          {
+            "weight": 1,
+            "sprite": 19984
+          },
+          {
+            "weight": 1,
+            "sprite": 19985
+          }
+        ],
+        "corner": [
+          19969,
+          19972,
+          19971,
+          19970
+        ],
+        "t_connection": [
+          19973,
+          19976,
+          19975,
+          19974
+        ],
+        "edge": [
+          19977,
+          19978
+        ],
+        "end_piece": [
+          19979,
+          19982,
+          19981,
+          19980
+        ],
+        "unconnected": [
+          19983
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_dirt_underground",
+      "season": "summer",
+      "material": "cave-dirt",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 19968
+          },
+          {
+            "weight": 1,
+            "sprite": 19984
+          },
+          {
+            "weight": 1,
+            "sprite": 19985
+          }
+        ],
+        "corner": [
+          19969,
+          19972,
+          19971,
+          19970
+        ],
+        "t_connection": [
+          19973,
+          19976,
+          19975,
+          19974
+        ],
+        "edge": [
+          19977,
+          19978
+        ],
+        "end_piece": [
+          19979,
+          19982,
+          19981,
+          19980
+        ],
+        "unconnected": [
+          19983
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_dirt_underground",
+      "season": "autumn",
+      "material": "cave-dirt",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 19968
+          },
+          {
+            "weight": 1,
+            "sprite": 19984
+          },
+          {
+            "weight": 1,
+            "sprite": 19985
+          }
+        ],
+        "corner": [
+          19969,
+          19972,
+          19971,
+          19970
+        ],
+        "t_connection": [
+          19973,
+          19976,
+          19975,
+          19974
+        ],
+        "edge": [
+          19977,
+          19978
+        ],
+        "end_piece": [
+          19979,
+          19982,
+          19981,
+          19980
+        ],
+        "unconnected": [
+          19983
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_dirt_underground",
+      "season": "winter",
+      "material": "cave-dirt",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 19968
+          },
+          {
+            "weight": 1,
+            "sprite": 19984
+          },
+          {
+            "weight": 1,
+            "sprite": 19985
+          }
+        ],
+        "corner": [
+          19969,
+          19972,
+          19971,
+          19970
+        ],
+        "t_connection": [
+          19973,
+          19976,
+          19975,
+          19974
+        ],
+        "edge": [
+          19977,
+          19978
+        ],
+        "end_piece": [
+          19979,
+          19982,
+          19981,
+          19980
+        ],
+        "unconnected": [
+          19983
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_sand_underground",
+      "season": "spring",
+      "material": "cave-sand",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20008
+          },
+          {
+            "weight": 1,
+            "sprite": 20024
+          },
+          {
+            "weight": 1,
+            "sprite": 20025
+          }
+        ],
+        "corner": [
+          20009,
+          20012,
+          20011,
+          20010
+        ],
+        "t_connection": [
+          20013,
+          20016,
+          20015,
+          20014
+        ],
+        "edge": [
+          20017,
+          20018
+        ],
+        "end_piece": [
+          20019,
+          20022,
+          20021,
+          20020
+        ],
+        "unconnected": [
+          20023
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_sand_underground",
+      "season": "summer",
+      "material": "cave-sand",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20008
+          },
+          {
+            "weight": 1,
+            "sprite": 20024
+          },
+          {
+            "weight": 1,
+            "sprite": 20025
+          }
+        ],
+        "corner": [
+          20009,
+          20012,
+          20011,
+          20010
+        ],
+        "t_connection": [
+          20013,
+          20016,
+          20015,
+          20014
+        ],
+        "edge": [
+          20017,
+          20018
+        ],
+        "end_piece": [
+          20019,
+          20022,
+          20021,
+          20020
+        ],
+        "unconnected": [
+          20023
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_sand_underground",
+      "season": "autumn",
+      "material": "cave-sand",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20008
+          },
+          {
+            "weight": 1,
+            "sprite": 20024
+          },
+          {
+            "weight": 1,
+            "sprite": 20025
+          }
+        ],
+        "corner": [
+          20009,
+          20012,
+          20011,
+          20010
+        ],
+        "t_connection": [
+          20013,
+          20016,
+          20015,
+          20014
+        ],
+        "edge": [
+          20017,
+          20018
+        ],
+        "end_piece": [
+          20019,
+          20022,
+          20021,
+          20020
+        ],
+        "unconnected": [
+          20023
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_sand_underground",
+      "season": "winter",
+      "material": "cave-sand",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20008
+          },
+          {
+            "weight": 1,
+            "sprite": 20024
+          },
+          {
+            "weight": 1,
+            "sprite": 20025
+          }
+        ],
+        "corner": [
+          20009,
+          20012,
+          20011,
+          20010
+        ],
+        "t_connection": [
+          20013,
+          20016,
+          20015,
+          20014
+        ],
+        "edge": [
+          20017,
+          20018
+        ],
+        "end_piece": [
+          20019,
+          20022,
+          20021,
+          20020
+        ],
+        "unconnected": [
+          20023
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_moving_sh",
+      "season": "spring",
+      "material": "moving-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20308
+          },
+          {
+            "weight": 1,
+            "sprite": 20324
+          },
+          {
+            "weight": 1,
+            "sprite": 20325
+          }
+        ],
+        "corner": [
+          20309,
+          20312,
+          20311,
+          20310
+        ],
+        "t_connection": [
+          20313,
+          20316,
+          20315,
+          20314
+        ],
+        "edge": [
+          20317,
+          20318
+        ],
+        "end_piece": [
+          20319,
+          20322,
+          20321,
+          20320
+        ],
+        "unconnected": [
+          20323
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_water_moving_sh",
+      "season": "summer",
+      "material": "moving-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20308
+          },
+          {
+            "weight": 1,
+            "sprite": 20324
+          },
+          {
+            "weight": 1,
+            "sprite": 20325
+          }
+        ],
+        "corner": [
+          20309,
+          20312,
+          20311,
+          20310
+        ],
+        "t_connection": [
+          20313,
+          20316,
+          20315,
+          20314
+        ],
+        "edge": [
+          20317,
+          20318
+        ],
+        "end_piece": [
+          20319,
+          20322,
+          20321,
+          20320
+        ],
+        "unconnected": [
+          20323
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_water_moving_sh",
+      "season": "autumn",
+      "material": "moving-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20308
+          },
+          {
+            "weight": 1,
+            "sprite": 20324
+          },
+          {
+            "weight": 1,
+            "sprite": 20325
+          }
+        ],
+        "corner": [
+          20309,
+          20312,
+          20311,
+          20310
+        ],
+        "t_connection": [
+          20313,
+          20316,
+          20315,
+          20314
+        ],
+        "edge": [
+          20317,
+          20318
+        ],
+        "end_piece": [
+          20319,
+          20322,
+          20321,
+          20320
+        ],
+        "unconnected": [
+          20323
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_water_moving_sh",
+      "season": "winter",
+      "material": "moving-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20308
+          },
+          {
+            "weight": 1,
+            "sprite": 20324
+          },
+          {
+            "weight": 1,
+            "sprite": 20325
+          }
+        ],
+        "corner": [
+          20309,
+          20312,
+          20311,
+          20310
+        ],
+        "t_connection": [
+          20313,
+          20316,
+          20315,
+          20314
+        ],
+        "edge": [
+          20317,
+          20318
+        ],
+        "end_piece": [
+          20319,
+          20322,
+          20321,
+          20320
+        ],
+        "unconnected": [
+          20323
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_water_moving_sh_underground",
+      "season": "spring",
+      "material": "moving-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20308
+          },
+          {
+            "weight": 1,
+            "sprite": 20324
+          },
+          {
+            "weight": 1,
+            "sprite": 20325
+          }
+        ],
+        "corner": [
+          20309,
+          20312,
+          20311,
+          20310
+        ],
+        "t_connection": [
+          20313,
+          20316,
+          20315,
+          20314
+        ],
+        "edge": [
+          20317,
+          20318
+        ],
+        "end_piece": [
+          20319,
+          20322,
+          20321,
+          20320
+        ],
+        "unconnected": [
+          20323
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_moving_sh_underground",
+      "season": "summer",
+      "material": "moving-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20308
+          },
+          {
+            "weight": 1,
+            "sprite": 20324
+          },
+          {
+            "weight": 1,
+            "sprite": 20325
+          }
+        ],
+        "corner": [
+          20309,
+          20312,
+          20311,
+          20310
+        ],
+        "t_connection": [
+          20313,
+          20316,
+          20315,
+          20314
+        ],
+        "edge": [
+          20317,
+          20318
+        ],
+        "end_piece": [
+          20319,
+          20322,
+          20321,
+          20320
+        ],
+        "unconnected": [
+          20323
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_moving_sh_underground",
+      "season": "autumn",
+      "material": "moving-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20308
+          },
+          {
+            "weight": 1,
+            "sprite": 20324
+          },
+          {
+            "weight": 1,
+            "sprite": 20325
+          }
+        ],
+        "corner": [
+          20309,
+          20312,
+          20311,
+          20310
+        ],
+        "t_connection": [
+          20313,
+          20316,
+          20315,
+          20314
+        ],
+        "edge": [
+          20317,
+          20318
+        ],
+        "end_piece": [
+          20319,
+          20322,
+          20321,
+          20320
+        ],
+        "unconnected": [
+          20323
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_moving_sh_underground",
+      "season": "winter",
+      "material": "moving-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20308
+          },
+          {
+            "weight": 1,
+            "sprite": 20324
+          },
+          {
+            "weight": 1,
+            "sprite": 20325
+          }
+        ],
+        "corner": [
+          20309,
+          20312,
+          20311,
+          20310
+        ],
+        "t_connection": [
+          20313,
+          20316,
+          20315,
+          20314
+        ],
+        "edge": [
+          20317,
+          20318
+        ],
+        "end_piece": [
+          20319,
+          20322,
+          20321,
+          20320
+        ],
+        "unconnected": [
+          20323
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_moving_dp",
+      "season": "spring",
+      "material": "moving-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20288
+          },
+          {
+            "weight": 1,
+            "sprite": 20304
+          },
+          {
+            "weight": 1,
+            "sprite": 20305
+          }
+        ],
+        "corner": [
+          20289,
+          20292,
+          20291,
+          20290
+        ],
+        "t_connection": [
+          20293,
+          20296,
+          20295,
+          20294
+        ],
+        "edge": [
+          20297,
+          20298
+        ],
+        "end_piece": [
+          20299,
+          20302,
+          20301,
+          20300
+        ],
+        "unconnected": [
+          20303
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_water_moving_dp",
+      "season": "summer",
+      "material": "moving-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20288
+          },
+          {
+            "weight": 1,
+            "sprite": 20304
+          },
+          {
+            "weight": 1,
+            "sprite": 20305
+          }
+        ],
+        "corner": [
+          20289,
+          20292,
+          20291,
+          20290
+        ],
+        "t_connection": [
+          20293,
+          20296,
+          20295,
+          20294
+        ],
+        "edge": [
+          20297,
+          20298
+        ],
+        "end_piece": [
+          20299,
+          20302,
+          20301,
+          20300
+        ],
+        "unconnected": [
+          20303
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_water_moving_dp",
+      "season": "autumn",
+      "material": "moving-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20288
+          },
+          {
+            "weight": 1,
+            "sprite": 20304
+          },
+          {
+            "weight": 1,
+            "sprite": 20305
+          }
+        ],
+        "corner": [
+          20289,
+          20292,
+          20291,
+          20290
+        ],
+        "t_connection": [
+          20293,
+          20296,
+          20295,
+          20294
+        ],
+        "edge": [
+          20297,
+          20298
+        ],
+        "end_piece": [
+          20299,
+          20302,
+          20301,
+          20300
+        ],
+        "unconnected": [
+          20303
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_water_moving_dp",
+      "season": "winter",
+      "material": "moving-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20288
+          },
+          {
+            "weight": 1,
+            "sprite": 20304
+          },
+          {
+            "weight": 1,
+            "sprite": 20305
+          }
+        ],
+        "corner": [
+          20289,
+          20292,
+          20291,
+          20290
+        ],
+        "t_connection": [
+          20293,
+          20296,
+          20295,
+          20294
+        ],
+        "edge": [
+          20297,
+          20298
+        ],
+        "end_piece": [
+          20299,
+          20302,
+          20301,
+          20300
+        ],
+        "unconnected": [
+          20303
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_water_moving_dp_underground",
+      "season": "spring",
+      "material": "moving-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20288
+          },
+          {
+            "weight": 1,
+            "sprite": 20304
+          },
+          {
+            "weight": 1,
+            "sprite": 20305
+          }
+        ],
+        "corner": [
+          20289,
+          20292,
+          20291,
+          20290
+        ],
+        "t_connection": [
+          20293,
+          20296,
+          20295,
+          20294
+        ],
+        "edge": [
+          20297,
+          20298
+        ],
+        "end_piece": [
+          20299,
+          20302,
+          20301,
+          20300
+        ],
+        "unconnected": [
+          20303
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_moving_dp_underground",
+      "season": "summer",
+      "material": "moving-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20288
+          },
+          {
+            "weight": 1,
+            "sprite": 20304
+          },
+          {
+            "weight": 1,
+            "sprite": 20305
+          }
+        ],
+        "corner": [
+          20289,
+          20292,
+          20291,
+          20290
+        ],
+        "t_connection": [
+          20293,
+          20296,
+          20295,
+          20294
+        ],
+        "edge": [
+          20297,
+          20298
+        ],
+        "end_piece": [
+          20299,
+          20302,
+          20301,
+          20300
+        ],
+        "unconnected": [
+          20303
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_moving_dp_underground",
+      "season": "autumn",
+      "material": "moving-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20288
+          },
+          {
+            "weight": 1,
+            "sprite": 20304
+          },
+          {
+            "weight": 1,
+            "sprite": 20305
+          }
+        ],
+        "corner": [
+          20289,
+          20292,
+          20291,
+          20290
+        ],
+        "t_connection": [
+          20293,
+          20296,
+          20295,
+          20294
+        ],
+        "edge": [
+          20297,
+          20298
+        ],
+        "end_piece": [
+          20299,
+          20302,
+          20301,
+          20300
+        ],
+        "unconnected": [
+          20303
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_moving_dp_underground",
+      "season": "winter",
+      "material": "moving-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20288
+          },
+          {
+            "weight": 1,
+            "sprite": 20304
+          },
+          {
+            "weight": 1,
+            "sprite": 20305
+          }
+        ],
+        "corner": [
+          20289,
+          20292,
+          20291,
+          20290
+        ],
+        "t_connection": [
+          20293,
+          20296,
+          20295,
+          20294
+        ],
+        "edge": [
+          20297,
+          20298
+        ],
+        "end_piece": [
+          20299,
+          20302,
+          20301,
+          20300
+        ],
+        "unconnected": [
+          20303
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_swater_sh",
+      "season": "spring",
+      "material": "salt-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20388
+          },
+          {
+            "weight": 1,
+            "sprite": 20404
+          },
+          {
+            "weight": 1,
+            "sprite": 20405
+          }
+        ],
+        "corner": [
+          20389,
+          20392,
+          20391,
+          20390
+        ],
+        "t_connection": [
+          20393,
+          20396,
+          20395,
+          20394
+        ],
+        "edge": [
+          20397,
+          20398
+        ],
+        "end_piece": [
+          20399,
+          20402,
+          20401,
+          20400
+        ],
+        "unconnected": [
+          20403
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_swater_sh",
+      "season": "summer",
+      "material": "salt-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20388
+          },
+          {
+            "weight": 1,
+            "sprite": 20404
+          },
+          {
+            "weight": 1,
+            "sprite": 20405
+          }
+        ],
+        "corner": [
+          20389,
+          20392,
+          20391,
+          20390
+        ],
+        "t_connection": [
+          20393,
+          20396,
+          20395,
+          20394
+        ],
+        "edge": [
+          20397,
+          20398
+        ],
+        "end_piece": [
+          20399,
+          20402,
+          20401,
+          20400
+        ],
+        "unconnected": [
+          20403
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_swater_sh",
+      "season": "autumn",
+      "material": "salt-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20388
+          },
+          {
+            "weight": 1,
+            "sprite": 20404
+          },
+          {
+            "weight": 1,
+            "sprite": 20405
+          }
+        ],
+        "corner": [
+          20389,
+          20392,
+          20391,
+          20390
+        ],
+        "t_connection": [
+          20393,
+          20396,
+          20395,
+          20394
+        ],
+        "edge": [
+          20397,
+          20398
+        ],
+        "end_piece": [
+          20399,
+          20402,
+          20401,
+          20400
+        ],
+        "unconnected": [
+          20403
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_swater_sh",
+      "season": "winter",
+      "material": "salt-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20388
+          },
+          {
+            "weight": 1,
+            "sprite": 20404
+          },
+          {
+            "weight": 1,
+            "sprite": 20405
+          }
+        ],
+        "corner": [
+          20389,
+          20392,
+          20391,
+          20390
+        ],
+        "t_connection": [
+          20393,
+          20396,
+          20395,
+          20394
+        ],
+        "edge": [
+          20397,
+          20398
+        ],
+        "end_piece": [
+          20399,
+          20402,
+          20401,
+          20400
+        ],
+        "unconnected": [
+          20403
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_swater_sh_underground",
+      "season": "spring",
+      "material": "salt-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20388
+          },
+          {
+            "weight": 1,
+            "sprite": 20404
+          },
+          {
+            "weight": 1,
+            "sprite": 20405
+          }
+        ],
+        "corner": [
+          20389,
+          20392,
+          20391,
+          20390
+        ],
+        "t_connection": [
+          20393,
+          20396,
+          20395,
+          20394
+        ],
+        "edge": [
+          20397,
+          20398
+        ],
+        "end_piece": [
+          20399,
+          20402,
+          20401,
+          20400
+        ],
+        "unconnected": [
+          20403
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_swater_sh_underground",
+      "season": "summer",
+      "material": "salt-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20388
+          },
+          {
+            "weight": 1,
+            "sprite": 20404
+          },
+          {
+            "weight": 1,
+            "sprite": 20405
+          }
+        ],
+        "corner": [
+          20389,
+          20392,
+          20391,
+          20390
+        ],
+        "t_connection": [
+          20393,
+          20396,
+          20395,
+          20394
+        ],
+        "edge": [
+          20397,
+          20398
+        ],
+        "end_piece": [
+          20399,
+          20402,
+          20401,
+          20400
+        ],
+        "unconnected": [
+          20403
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_swater_sh_underground",
+      "season": "autumn",
+      "material": "salt-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20388
+          },
+          {
+            "weight": 1,
+            "sprite": 20404
+          },
+          {
+            "weight": 1,
+            "sprite": 20405
+          }
+        ],
+        "corner": [
+          20389,
+          20392,
+          20391,
+          20390
+        ],
+        "t_connection": [
+          20393,
+          20396,
+          20395,
+          20394
+        ],
+        "edge": [
+          20397,
+          20398
+        ],
+        "end_piece": [
+          20399,
+          20402,
+          20401,
+          20400
+        ],
+        "unconnected": [
+          20403
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_swater_sh_underground",
+      "season": "winter",
+      "material": "salt-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20388
+          },
+          {
+            "weight": 1,
+            "sprite": 20404
+          },
+          {
+            "weight": 1,
+            "sprite": 20405
+          }
+        ],
+        "corner": [
+          20389,
+          20392,
+          20391,
+          20390
+        ],
+        "t_connection": [
+          20393,
+          20396,
+          20395,
+          20394
+        ],
+        "edge": [
+          20397,
+          20398
+        ],
+        "end_piece": [
+          20399,
+          20402,
+          20401,
+          20400
+        ],
+        "unconnected": [
+          20403
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_swater_dp",
+      "season": "spring",
+      "material": "salt-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20368
+          },
+          {
+            "weight": 1,
+            "sprite": 20384
+          },
+          {
+            "weight": 1,
+            "sprite": 20385
+          }
+        ],
+        "corner": [
+          20369,
+          20372,
+          20371,
+          20370
+        ],
+        "t_connection": [
+          20373,
+          20376,
+          20375,
+          20374
+        ],
+        "edge": [
+          20377,
+          20378
+        ],
+        "end_piece": [
+          20379,
+          20382,
+          20381,
+          20380
+        ],
+        "unconnected": [
+          20383
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_swater_dp",
+      "season": "summer",
+      "material": "salt-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20368
+          },
+          {
+            "weight": 1,
+            "sprite": 20384
+          },
+          {
+            "weight": 1,
+            "sprite": 20385
+          }
+        ],
+        "corner": [
+          20369,
+          20372,
+          20371,
+          20370
+        ],
+        "t_connection": [
+          20373,
+          20376,
+          20375,
+          20374
+        ],
+        "edge": [
+          20377,
+          20378
+        ],
+        "end_piece": [
+          20379,
+          20382,
+          20381,
+          20380
+        ],
+        "unconnected": [
+          20383
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_swater_dp",
+      "season": "autumn",
+      "material": "salt-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20368
+          },
+          {
+            "weight": 1,
+            "sprite": 20384
+          },
+          {
+            "weight": 1,
+            "sprite": 20385
+          }
+        ],
+        "corner": [
+          20369,
+          20372,
+          20371,
+          20370
+        ],
+        "t_connection": [
+          20373,
+          20376,
+          20375,
+          20374
+        ],
+        "edge": [
+          20377,
+          20378
+        ],
+        "end_piece": [
+          20379,
+          20382,
+          20381,
+          20380
+        ],
+        "unconnected": [
+          20383
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_swater_dp",
+      "season": "winter",
+      "material": "salt-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20368
+          },
+          {
+            "weight": 1,
+            "sprite": 20384
+          },
+          {
+            "weight": 1,
+            "sprite": 20385
+          }
+        ],
+        "corner": [
+          20369,
+          20372,
+          20371,
+          20370
+        ],
+        "t_connection": [
+          20373,
+          20376,
+          20375,
+          20374
+        ],
+        "edge": [
+          20377,
+          20378
+        ],
+        "end_piece": [
+          20379,
+          20382,
+          20381,
+          20380
+        ],
+        "unconnected": [
+          20383
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_swater_dp_underground",
+      "season": "spring",
+      "material": "salt-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20368
+          },
+          {
+            "weight": 1,
+            "sprite": 20384
+          },
+          {
+            "weight": 1,
+            "sprite": 20385
+          }
+        ],
+        "corner": [
+          20369,
+          20372,
+          20371,
+          20370
+        ],
+        "t_connection": [
+          20373,
+          20376,
+          20375,
+          20374
+        ],
+        "edge": [
+          20377,
+          20378
+        ],
+        "end_piece": [
+          20379,
+          20382,
+          20381,
+          20380
+        ],
+        "unconnected": [
+          20383
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_swater_dp_underground",
+      "season": "summer",
+      "material": "salt-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20368
+          },
+          {
+            "weight": 1,
+            "sprite": 20384
+          },
+          {
+            "weight": 1,
+            "sprite": 20385
+          }
+        ],
+        "corner": [
+          20369,
+          20372,
+          20371,
+          20370
+        ],
+        "t_connection": [
+          20373,
+          20376,
+          20375,
+          20374
+        ],
+        "edge": [
+          20377,
+          20378
+        ],
+        "end_piece": [
+          20379,
+          20382,
+          20381,
+          20380
+        ],
+        "unconnected": [
+          20383
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_swater_dp_underground",
+      "season": "autumn",
+      "material": "salt-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20368
+          },
+          {
+            "weight": 1,
+            "sprite": 20384
+          },
+          {
+            "weight": 1,
+            "sprite": 20385
+          }
+        ],
+        "corner": [
+          20369,
+          20372,
+          20371,
+          20370
+        ],
+        "t_connection": [
+          20373,
+          20376,
+          20375,
+          20374
+        ],
+        "edge": [
+          20377,
+          20378
+        ],
+        "end_piece": [
+          20379,
+          20382,
+          20381,
+          20380
+        ],
+        "unconnected": [
+          20383
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_swater_dp_underground",
+      "season": "winter",
+      "material": "salt-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20368
+          },
+          {
+            "weight": 1,
+            "sprite": 20384
+          },
+          {
+            "weight": 1,
+            "sprite": 20385
+          }
+        ],
+        "corner": [
+          20369,
+          20372,
+          20371,
+          20370
+        ],
+        "t_connection": [
+          20373,
+          20376,
+          20375,
+          20374
+        ],
+        "edge": [
+          20377,
+          20378
+        ],
+        "end_piece": [
+          20379,
+          20382,
+          20381,
+          20380
+        ],
+        "unconnected": [
+          20383
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_swater_surf",
+      "season": "spring",
+      "material": "wet-sand-surf",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20448
+          },
+          {
+            "weight": 1,
+            "sprite": 20464
+          },
+          {
+            "weight": 1,
+            "sprite": 20465
+          }
+        ],
+        "corner": [
+          20449,
+          20452,
+          20451,
+          20450
+        ],
+        "t_connection": [
+          20453,
+          20456,
+          20455,
+          20454
+        ],
+        "edge": [
+          20457,
+          20458
+        ],
+        "end_piece": [
+          20459,
+          20462,
+          20461,
+          20460
+        ],
+        "unconnected": [
+          20463
+        ]
+      },
+      "background": 18724
+    },
+    {
+      "id": "t_swater_surf",
+      "season": "summer",
+      "material": "wet-sand-surf",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20448
+          },
+          {
+            "weight": 1,
+            "sprite": 20464
+          },
+          {
+            "weight": 1,
+            "sprite": 20465
+          }
+        ],
+        "corner": [
+          20449,
+          20452,
+          20451,
+          20450
+        ],
+        "t_connection": [
+          20453,
+          20456,
+          20455,
+          20454
+        ],
+        "edge": [
+          20457,
+          20458
+        ],
+        "end_piece": [
+          20459,
+          20462,
+          20461,
+          20460
+        ],
+        "unconnected": [
+          20463
+        ]
+      },
+      "background": 18740
+    },
+    {
+      "id": "t_swater_surf",
+      "season": "autumn",
+      "material": "wet-sand-surf",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20448
+          },
+          {
+            "weight": 1,
+            "sprite": 20464
+          },
+          {
+            "weight": 1,
+            "sprite": 20465
+          }
+        ],
+        "corner": [
+          20449,
+          20452,
+          20451,
+          20450
+        ],
+        "t_connection": [
+          20453,
+          20456,
+          20455,
+          20454
+        ],
+        "edge": [
+          20457,
+          20458
+        ],
+        "end_piece": [
+          20459,
+          20462,
+          20461,
+          20460
+        ],
+        "unconnected": [
+          20463
+        ]
+      },
+      "background": 18756
+    },
+    {
+      "id": "t_swater_surf",
+      "season": "winter",
+      "material": "wet-sand-surf",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20448
+          },
+          {
+            "weight": 1,
+            "sprite": 20464
+          },
+          {
+            "weight": 1,
+            "sprite": 20465
+          }
+        ],
+        "corner": [
+          20449,
+          20452,
+          20451,
+          20450
+        ],
+        "t_connection": [
+          20453,
+          20456,
+          20455,
+          20454
+        ],
+        "edge": [
+          20457,
+          20458
+        ],
+        "end_piece": [
+          20459,
+          20462,
+          20461,
+          20460
+        ],
+        "unconnected": [
+          20463
+        ]
+      },
+      "background": 18772
+    },
+    {
+      "id": "t_saltwater_cube",
+      "season": "spring",
+      "material": "salt-submerged",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20408
+          },
+          {
+            "weight": 1,
+            "sprite": 20424
+          },
+          {
+            "weight": 1,
+            "sprite": 20425
+          }
+        ],
+        "corner": [
+          20409,
+          20412,
+          20411,
+          20410
+        ],
+        "t_connection": [
+          20413,
+          20416,
+          20415,
+          20414
+        ],
+        "edge": [
+          20417,
+          20418
+        ],
+        "end_piece": [
+          20419,
+          20422,
+          20421,
+          20420
+        ],
+        "unconnected": [
+          20423
+        ]
+      },
+      "background": 20408
+    },
+    {
+      "id": "t_saltwater_cube",
+      "season": "summer",
+      "material": "salt-submerged",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20408
+          },
+          {
+            "weight": 1,
+            "sprite": 20424
+          },
+          {
+            "weight": 1,
+            "sprite": 20425
+          }
+        ],
+        "corner": [
+          20409,
+          20412,
+          20411,
+          20410
+        ],
+        "t_connection": [
+          20413,
+          20416,
+          20415,
+          20414
+        ],
+        "edge": [
+          20417,
+          20418
+        ],
+        "end_piece": [
+          20419,
+          20422,
+          20421,
+          20420
+        ],
+        "unconnected": [
+          20423
+        ]
+      },
+      "background": 20408
+    },
+    {
+      "id": "t_saltwater_cube",
+      "season": "autumn",
+      "material": "salt-submerged",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20408
+          },
+          {
+            "weight": 1,
+            "sprite": 20424
+          },
+          {
+            "weight": 1,
+            "sprite": 20425
+          }
+        ],
+        "corner": [
+          20409,
+          20412,
+          20411,
+          20410
+        ],
+        "t_connection": [
+          20413,
+          20416,
+          20415,
+          20414
+        ],
+        "edge": [
+          20417,
+          20418
+        ],
+        "end_piece": [
+          20419,
+          20422,
+          20421,
+          20420
+        ],
+        "unconnected": [
+          20423
+        ]
+      },
+      "background": 20408
+    },
+    {
+      "id": "t_saltwater_cube",
+      "season": "winter",
+      "material": "salt-submerged",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20408
+          },
+          {
+            "weight": 1,
+            "sprite": 20424
+          },
+          {
+            "weight": 1,
+            "sprite": 20425
+          }
+        ],
+        "corner": [
+          20409,
+          20412,
+          20411,
+          20410
+        ],
+        "t_connection": [
+          20413,
+          20416,
+          20415,
+          20414
+        ],
+        "edge": [
+          20417,
+          20418
+        ],
+        "end_piece": [
+          20419,
+          20422,
+          20421,
+          20420
+        ],
+        "unconnected": [
+          20423
+        ]
+      },
+      "background": 20408
+    },
+    {
+      "id": "t_ocean_bed",
+      "season": "spring",
+      "material": "ocean-bed",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20348
+          },
+          {
+            "weight": 1,
+            "sprite": 20364
+          },
+          {
+            "weight": 1,
+            "sprite": 20365
+          }
+        ],
+        "corner": [
+          20349,
+          20352,
+          20351,
+          20350
+        ],
+        "t_connection": [
+          20353,
+          20356,
+          20355,
+          20354
+        ],
+        "edge": [
+          20357,
+          20358
+        ],
+        "end_piece": [
+          20359,
+          20362,
+          20361,
+          20360
+        ],
+        "unconnected": [
+          20363
+        ]
+      },
+      "background": 20348
+    },
+    {
+      "id": "t_ocean_bed",
+      "season": "summer",
+      "material": "ocean-bed",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20348
+          },
+          {
+            "weight": 1,
+            "sprite": 20364
+          },
+          {
+            "weight": 1,
+            "sprite": 20365
+          }
+        ],
+        "corner": [
+          20349,
+          20352,
+          20351,
+          20350
+        ],
+        "t_connection": [
+          20353,
+          20356,
+          20355,
+          20354
+        ],
+        "edge": [
+          20357,
+          20358
+        ],
+        "end_piece": [
+          20359,
+          20362,
+          20361,
+          20360
+        ],
+        "unconnected": [
+          20363
+        ]
+      },
+      "background": 20348
+    },
+    {
+      "id": "t_ocean_bed",
+      "season": "autumn",
+      "material": "ocean-bed",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20348
+          },
+          {
+            "weight": 1,
+            "sprite": 20364
+          },
+          {
+            "weight": 1,
+            "sprite": 20365
+          }
+        ],
+        "corner": [
+          20349,
+          20352,
+          20351,
+          20350
+        ],
+        "t_connection": [
+          20353,
+          20356,
+          20355,
+          20354
+        ],
+        "edge": [
+          20357,
+          20358
+        ],
+        "end_piece": [
+          20359,
+          20362,
+          20361,
+          20360
+        ],
+        "unconnected": [
+          20363
+        ]
+      },
+      "background": 20348
+    },
+    {
+      "id": "t_ocean_bed",
+      "season": "winter",
+      "material": "ocean-bed",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20348
+          },
+          {
+            "weight": 1,
+            "sprite": 20364
+          },
+          {
+            "weight": 1,
+            "sprite": 20365
+          }
+        ],
+        "corner": [
+          20349,
+          20352,
+          20351,
+          20350
+        ],
+        "t_connection": [
+          20353,
+          20356,
+          20355,
+          20354
+        ],
+        "edge": [
+          20357,
+          20358
+        ],
+        "end_piece": [
+          20359,
+          20362,
+          20361,
+          20360
+        ],
+        "unconnected": [
+          20363
+        ]
+      },
+      "background": 20348
+    },
+    {
+      "id": "t_tidepool",
+      "season": "spring",
+      "material": "tidepool",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20428
+          },
+          {
+            "weight": 1,
+            "sprite": 20444
+          },
+          {
+            "weight": 1,
+            "sprite": 20445
+          }
+        ],
+        "corner": [
+          20429,
+          20432,
+          20431,
+          20430
+        ],
+        "t_connection": [
+          20433,
+          20436,
+          20435,
+          20434
+        ],
+        "edge": [
+          20437,
+          20438
+        ],
+        "end_piece": [
+          20439,
+          20442,
+          20441,
+          20440
+        ],
+        "unconnected": [
+          20443
+        ]
+      },
+      "background": 18724
+    },
+    {
+      "id": "t_tidepool",
+      "season": "summer",
+      "material": "tidepool",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20428
+          },
+          {
+            "weight": 1,
+            "sprite": 20444
+          },
+          {
+            "weight": 1,
+            "sprite": 20445
+          }
+        ],
+        "corner": [
+          20429,
+          20432,
+          20431,
+          20430
+        ],
+        "t_connection": [
+          20433,
+          20436,
+          20435,
+          20434
+        ],
+        "edge": [
+          20437,
+          20438
+        ],
+        "end_piece": [
+          20439,
+          20442,
+          20441,
+          20440
+        ],
+        "unconnected": [
+          20443
+        ]
+      },
+      "background": 18740
+    },
+    {
+      "id": "t_tidepool",
+      "season": "autumn",
+      "material": "tidepool",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20428
+          },
+          {
+            "weight": 1,
+            "sprite": 20444
+          },
+          {
+            "weight": 1,
+            "sprite": 20445
+          }
+        ],
+        "corner": [
+          20429,
+          20432,
+          20431,
+          20430
+        ],
+        "t_connection": [
+          20433,
+          20436,
+          20435,
+          20434
+        ],
+        "edge": [
+          20437,
+          20438
+        ],
+        "end_piece": [
+          20439,
+          20442,
+          20441,
+          20440
+        ],
+        "unconnected": [
+          20443
+        ]
+      },
+      "background": 18756
+    },
+    {
+      "id": "t_tidepool",
+      "season": "winter",
+      "material": "tidepool",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20428
+          },
+          {
+            "weight": 1,
+            "sprite": 20444
+          },
+          {
+            "weight": 1,
+            "sprite": 20445
+          }
+        ],
+        "corner": [
+          20429,
+          20432,
+          20431,
+          20430
+        ],
+        "t_connection": [
+          20433,
+          20436,
+          20435,
+          20434
+        ],
+        "edge": [
+          20437,
+          20438
+        ],
+        "end_piece": [
+          20439,
+          20442,
+          20441,
+          20440
+        ],
+        "unconnected": [
+          20443
+        ]
+      },
+      "background": 18772
+    },
+    {
+      "id": "t_water_sh",
+      "season": "spring",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_water_sh",
+      "season": "summer",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_water_sh",
+      "season": "autumn",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_water_sh",
+      "season": "winter",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_water_sh_underground",
+      "season": "spring",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_sh_underground",
+      "season": "summer",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_sh_underground",
+      "season": "autumn",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_sh_underground",
+      "season": "winter",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_dp",
+      "season": "spring",
+      "material": "fresh-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20068
+          },
+          {
+            "weight": 1,
+            "sprite": 20084
+          },
+          {
+            "weight": 1,
+            "sprite": 20085
+          }
+        ],
+        "corner": [
+          20069,
+          20072,
+          20071,
+          20070
+        ],
+        "t_connection": [
+          20073,
+          20076,
+          20075,
+          20074
+        ],
+        "edge": [
+          20077,
+          20078
+        ],
+        "end_piece": [
+          20079,
+          20082,
+          20081,
+          20080
+        ],
+        "unconnected": [
+          20083
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_water_dp",
+      "season": "summer",
+      "material": "fresh-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20068
+          },
+          {
+            "weight": 1,
+            "sprite": 20084
+          },
+          {
+            "weight": 1,
+            "sprite": 20085
+          }
+        ],
+        "corner": [
+          20069,
+          20072,
+          20071,
+          20070
+        ],
+        "t_connection": [
+          20073,
+          20076,
+          20075,
+          20074
+        ],
+        "edge": [
+          20077,
+          20078
+        ],
+        "end_piece": [
+          20079,
+          20082,
+          20081,
+          20080
+        ],
+        "unconnected": [
+          20083
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_water_dp",
+      "season": "autumn",
+      "material": "fresh-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20068
+          },
+          {
+            "weight": 1,
+            "sprite": 20084
+          },
+          {
+            "weight": 1,
+            "sprite": 20085
+          }
+        ],
+        "corner": [
+          20069,
+          20072,
+          20071,
+          20070
+        ],
+        "t_connection": [
+          20073,
+          20076,
+          20075,
+          20074
+        ],
+        "edge": [
+          20077,
+          20078
+        ],
+        "end_piece": [
+          20079,
+          20082,
+          20081,
+          20080
+        ],
+        "unconnected": [
+          20083
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_water_dp",
+      "season": "winter",
+      "material": "fresh-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20068
+          },
+          {
+            "weight": 1,
+            "sprite": 20084
+          },
+          {
+            "weight": 1,
+            "sprite": 20085
+          }
+        ],
+        "corner": [
+          20069,
+          20072,
+          20071,
+          20070
+        ],
+        "t_connection": [
+          20073,
+          20076,
+          20075,
+          20074
+        ],
+        "edge": [
+          20077,
+          20078
+        ],
+        "end_piece": [
+          20079,
+          20082,
+          20081,
+          20080
+        ],
+        "unconnected": [
+          20083
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_water_dp_underground",
+      "season": "spring",
+      "material": "fresh-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20068
+          },
+          {
+            "weight": 1,
+            "sprite": 20084
+          },
+          {
+            "weight": 1,
+            "sprite": 20085
+          }
+        ],
+        "corner": [
+          20069,
+          20072,
+          20071,
+          20070
+        ],
+        "t_connection": [
+          20073,
+          20076,
+          20075,
+          20074
+        ],
+        "edge": [
+          20077,
+          20078
+        ],
+        "end_piece": [
+          20079,
+          20082,
+          20081,
+          20080
+        ],
+        "unconnected": [
+          20083
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_dp_underground",
+      "season": "summer",
+      "material": "fresh-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20068
+          },
+          {
+            "weight": 1,
+            "sprite": 20084
+          },
+          {
+            "weight": 1,
+            "sprite": 20085
+          }
+        ],
+        "corner": [
+          20069,
+          20072,
+          20071,
+          20070
+        ],
+        "t_connection": [
+          20073,
+          20076,
+          20075,
+          20074
+        ],
+        "edge": [
+          20077,
+          20078
+        ],
+        "end_piece": [
+          20079,
+          20082,
+          20081,
+          20080
+        ],
+        "unconnected": [
+          20083
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_dp_underground",
+      "season": "autumn",
+      "material": "fresh-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20068
+          },
+          {
+            "weight": 1,
+            "sprite": 20084
+          },
+          {
+            "weight": 1,
+            "sprite": 20085
+          }
+        ],
+        "corner": [
+          20069,
+          20072,
+          20071,
+          20070
+        ],
+        "t_connection": [
+          20073,
+          20076,
+          20075,
+          20074
+        ],
+        "edge": [
+          20077,
+          20078
+        ],
+        "end_piece": [
+          20079,
+          20082,
+          20081,
+          20080
+        ],
+        "unconnected": [
+          20083
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_dp_underground",
+      "season": "winter",
+      "material": "fresh-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20068
+          },
+          {
+            "weight": 1,
+            "sprite": 20084
+          },
+          {
+            "weight": 1,
+            "sprite": 20085
+          }
+        ],
+        "corner": [
+          20069,
+          20072,
+          20071,
+          20070
+        ],
+        "t_connection": [
+          20073,
+          20076,
+          20075,
+          20074
+        ],
+        "edge": [
+          20077,
+          20078
+        ],
+        "end_piece": [
+          20079,
+          20082,
+          20081,
+          20080
+        ],
+        "unconnected": [
+          20083
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_murky",
+      "season": "spring",
+      "material": "fresh-murky",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20088
+          },
+          {
+            "weight": 1,
+            "sprite": 20104
+          },
+          {
+            "weight": 1,
+            "sprite": 20105
+          }
+        ],
+        "corner": [
+          20089,
+          20092,
+          20091,
+          20090
+        ],
+        "t_connection": [
+          20093,
+          20096,
+          20095,
+          20094
+        ],
+        "edge": [
+          20097,
+          20098
+        ],
+        "end_piece": [
+          20099,
+          20102,
+          20101,
+          20100
+        ],
+        "unconnected": [
+          20103
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_water_murky",
+      "season": "summer",
+      "material": "fresh-murky",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20088
+          },
+          {
+            "weight": 1,
+            "sprite": 20104
+          },
+          {
+            "weight": 1,
+            "sprite": 20105
+          }
+        ],
+        "corner": [
+          20089,
+          20092,
+          20091,
+          20090
+        ],
+        "t_connection": [
+          20093,
+          20096,
+          20095,
+          20094
+        ],
+        "edge": [
+          20097,
+          20098
+        ],
+        "end_piece": [
+          20099,
+          20102,
+          20101,
+          20100
+        ],
+        "unconnected": [
+          20103
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_water_murky",
+      "season": "autumn",
+      "material": "fresh-murky",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20088
+          },
+          {
+            "weight": 1,
+            "sprite": 20104
+          },
+          {
+            "weight": 1,
+            "sprite": 20105
+          }
+        ],
+        "corner": [
+          20089,
+          20092,
+          20091,
+          20090
+        ],
+        "t_connection": [
+          20093,
+          20096,
+          20095,
+          20094
+        ],
+        "edge": [
+          20097,
+          20098
+        ],
+        "end_piece": [
+          20099,
+          20102,
+          20101,
+          20100
+        ],
+        "unconnected": [
+          20103
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_water_murky",
+      "season": "winter",
+      "material": "fresh-murky",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20088
+          },
+          {
+            "weight": 1,
+            "sprite": 20104
+          },
+          {
+            "weight": 1,
+            "sprite": 20105
+          }
+        ],
+        "corner": [
+          20089,
+          20092,
+          20091,
+          20090
+        ],
+        "t_connection": [
+          20093,
+          20096,
+          20095,
+          20094
+        ],
+        "edge": [
+          20097,
+          20098
+        ],
+        "end_piece": [
+          20099,
+          20102,
+          20101,
+          20100
+        ],
+        "unconnected": [
+          20103
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_water_sh_murky_underground",
+      "season": "spring",
+      "material": "fresh-murky",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20088
+          },
+          {
+            "weight": 1,
+            "sprite": 20104
+          },
+          {
+            "weight": 1,
+            "sprite": 20105
+          }
+        ],
+        "corner": [
+          20089,
+          20092,
+          20091,
+          20090
+        ],
+        "t_connection": [
+          20093,
+          20096,
+          20095,
+          20094
+        ],
+        "edge": [
+          20097,
+          20098
+        ],
+        "end_piece": [
+          20099,
+          20102,
+          20101,
+          20100
+        ],
+        "unconnected": [
+          20103
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_sh_murky_underground",
+      "season": "summer",
+      "material": "fresh-murky",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20088
+          },
+          {
+            "weight": 1,
+            "sprite": 20104
+          },
+          {
+            "weight": 1,
+            "sprite": 20105
+          }
+        ],
+        "corner": [
+          20089,
+          20092,
+          20091,
+          20090
+        ],
+        "t_connection": [
+          20093,
+          20096,
+          20095,
+          20094
+        ],
+        "edge": [
+          20097,
+          20098
+        ],
+        "end_piece": [
+          20099,
+          20102,
+          20101,
+          20100
+        ],
+        "unconnected": [
+          20103
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_sh_murky_underground",
+      "season": "autumn",
+      "material": "fresh-murky",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20088
+          },
+          {
+            "weight": 1,
+            "sprite": 20104
+          },
+          {
+            "weight": 1,
+            "sprite": 20105
+          }
+        ],
+        "corner": [
+          20089,
+          20092,
+          20091,
+          20090
+        ],
+        "t_connection": [
+          20093,
+          20096,
+          20095,
+          20094
+        ],
+        "edge": [
+          20097,
+          20098
+        ],
+        "end_piece": [
+          20099,
+          20102,
+          20101,
+          20100
+        ],
+        "unconnected": [
+          20103
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_sh_murky_underground",
+      "season": "winter",
+      "material": "fresh-murky",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20088
+          },
+          {
+            "weight": 1,
+            "sprite": 20104
+          },
+          {
+            "weight": 1,
+            "sprite": 20105
+          }
+        ],
+        "corner": [
+          20089,
+          20092,
+          20091,
+          20090
+        ],
+        "t_connection": [
+          20093,
+          20096,
+          20095,
+          20094
+        ],
+        "edge": [
+          20097,
+          20098
+        ],
+        "end_piece": [
+          20099,
+          20102,
+          20101,
+          20100
+        ],
+        "unconnected": [
+          20103
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_cube",
+      "season": "spring",
+      "material": "fresh-submerged",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20128
+          },
+          {
+            "weight": 1,
+            "sprite": 20144
+          },
+          {
+            "weight": 1,
+            "sprite": 20145
+          }
+        ],
+        "corner": [
+          20129,
+          20132,
+          20131,
+          20130
+        ],
+        "t_connection": [
+          20133,
+          20136,
+          20135,
+          20134
+        ],
+        "edge": [
+          20137,
+          20138
+        ],
+        "end_piece": [
+          20139,
+          20142,
+          20141,
+          20140
+        ],
+        "unconnected": [
+          20143
+        ]
+      },
+      "background": 20128
+    },
+    {
+      "id": "t_water_cube",
+      "season": "summer",
+      "material": "fresh-submerged",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20128
+          },
+          {
+            "weight": 1,
+            "sprite": 20144
+          },
+          {
+            "weight": 1,
+            "sprite": 20145
+          }
+        ],
+        "corner": [
+          20129,
+          20132,
+          20131,
+          20130
+        ],
+        "t_connection": [
+          20133,
+          20136,
+          20135,
+          20134
+        ],
+        "edge": [
+          20137,
+          20138
+        ],
+        "end_piece": [
+          20139,
+          20142,
+          20141,
+          20140
+        ],
+        "unconnected": [
+          20143
+        ]
+      },
+      "background": 20128
+    },
+    {
+      "id": "t_water_cube",
+      "season": "autumn",
+      "material": "fresh-submerged",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20128
+          },
+          {
+            "weight": 1,
+            "sprite": 20144
+          },
+          {
+            "weight": 1,
+            "sprite": 20145
+          }
+        ],
+        "corner": [
+          20129,
+          20132,
+          20131,
+          20130
+        ],
+        "t_connection": [
+          20133,
+          20136,
+          20135,
+          20134
+        ],
+        "edge": [
+          20137,
+          20138
+        ],
+        "end_piece": [
+          20139,
+          20142,
+          20141,
+          20140
+        ],
+        "unconnected": [
+          20143
+        ]
+      },
+      "background": 20128
+    },
+    {
+      "id": "t_water_cube",
+      "season": "winter",
+      "material": "fresh-submerged",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20128
+          },
+          {
+            "weight": 1,
+            "sprite": 20144
+          },
+          {
+            "weight": 1,
+            "sprite": 20145
+          }
+        ],
+        "corner": [
+          20129,
+          20132,
+          20131,
+          20130
+        ],
+        "t_connection": [
+          20133,
+          20136,
+          20135,
+          20134
+        ],
+        "edge": [
+          20137,
+          20138
+        ],
+        "end_piece": [
+          20139,
+          20142,
+          20141,
+          20140
+        ],
+        "unconnected": [
+          20143
+        ]
+      },
+      "background": 20128
+    },
+    {
+      "id": "t_lake_bed",
+      "season": "spring",
+      "material": "lake-bed",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20248
+          },
+          {
+            "weight": 1,
+            "sprite": 20264
+          },
+          {
+            "weight": 1,
+            "sprite": 20265
+          }
+        ],
+        "corner": [
+          20249,
+          20252,
+          20251,
+          20250
+        ],
+        "t_connection": [
+          20253,
+          20256,
+          20255,
+          20254
+        ],
+        "edge": [
+          20257,
+          20258
+        ],
+        "end_piece": [
+          20259,
+          20262,
+          20261,
+          20260
+        ],
+        "unconnected": [
+          20263
+        ]
+      },
+      "background": 20248
+    },
+    {
+      "id": "t_lake_bed",
+      "season": "summer",
+      "material": "lake-bed",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20248
+          },
+          {
+            "weight": 1,
+            "sprite": 20264
+          },
+          {
+            "weight": 1,
+            "sprite": 20265
+          }
+        ],
+        "corner": [
+          20249,
+          20252,
+          20251,
+          20250
+        ],
+        "t_connection": [
+          20253,
+          20256,
+          20255,
+          20254
+        ],
+        "edge": [
+          20257,
+          20258
+        ],
+        "end_piece": [
+          20259,
+          20262,
+          20261,
+          20260
+        ],
+        "unconnected": [
+          20263
+        ]
+      },
+      "background": 20248
+    },
+    {
+      "id": "t_lake_bed",
+      "season": "autumn",
+      "material": "lake-bed",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20248
+          },
+          {
+            "weight": 1,
+            "sprite": 20264
+          },
+          {
+            "weight": 1,
+            "sprite": 20265
+          }
+        ],
+        "corner": [
+          20249,
+          20252,
+          20251,
+          20250
+        ],
+        "t_connection": [
+          20253,
+          20256,
+          20255,
+          20254
+        ],
+        "edge": [
+          20257,
+          20258
+        ],
+        "end_piece": [
+          20259,
+          20262,
+          20261,
+          20260
+        ],
+        "unconnected": [
+          20263
+        ]
+      },
+      "background": 20248
+    },
+    {
+      "id": "t_lake_bed",
+      "season": "winter",
+      "material": "lake-bed",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20248
+          },
+          {
+            "weight": 1,
+            "sprite": 20264
+          },
+          {
+            "weight": 1,
+            "sprite": 20265
+          }
+        ],
+        "corner": [
+          20249,
+          20252,
+          20251,
+          20250
+        ],
+        "t_connection": [
+          20253,
+          20256,
+          20255,
+          20254
+        ],
+        "edge": [
+          20257,
+          20258
+        ],
+        "end_piece": [
+          20259,
+          20262,
+          20261,
+          20260
+        ],
+        "unconnected": [
+          20263
+        ]
+      },
+      "background": 20248
+    },
+    {
+      "id": "t_water_hot",
+      "season": "spring",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_water_hot",
+      "season": "summer",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_water_hot",
+      "season": "autumn",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_water_hot",
+      "season": "winter",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_water_cube_hot",
+      "season": "spring",
+      "material": "fresh-submerged",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20128
+          },
+          {
+            "weight": 1,
+            "sprite": 20144
+          },
+          {
+            "weight": 1,
+            "sprite": 20145
+          }
+        ],
+        "corner": [
+          20129,
+          20132,
+          20131,
+          20130
+        ],
+        "t_connection": [
+          20133,
+          20136,
+          20135,
+          20134
+        ],
+        "edge": [
+          20137,
+          20138
+        ],
+        "end_piece": [
+          20139,
+          20142,
+          20141,
+          20140
+        ],
+        "unconnected": [
+          20143
+        ]
+      },
+      "background": 20128
+    },
+    {
+      "id": "t_water_cube_hot",
+      "season": "summer",
+      "material": "fresh-submerged",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20128
+          },
+          {
+            "weight": 1,
+            "sprite": 20144
+          },
+          {
+            "weight": 1,
+            "sprite": 20145
+          }
+        ],
+        "corner": [
+          20129,
+          20132,
+          20131,
+          20130
+        ],
+        "t_connection": [
+          20133,
+          20136,
+          20135,
+          20134
+        ],
+        "edge": [
+          20137,
+          20138
+        ],
+        "end_piece": [
+          20139,
+          20142,
+          20141,
+          20140
+        ],
+        "unconnected": [
+          20143
+        ]
+      },
+      "background": 20128
+    },
+    {
+      "id": "t_water_cube_hot",
+      "season": "autumn",
+      "material": "fresh-submerged",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20128
+          },
+          {
+            "weight": 1,
+            "sprite": 20144
+          },
+          {
+            "weight": 1,
+            "sprite": 20145
+          }
+        ],
+        "corner": [
+          20129,
+          20132,
+          20131,
+          20130
+        ],
+        "t_connection": [
+          20133,
+          20136,
+          20135,
+          20134
+        ],
+        "edge": [
+          20137,
+          20138
+        ],
+        "end_piece": [
+          20139,
+          20142,
+          20141,
+          20140
+        ],
+        "unconnected": [
+          20143
+        ]
+      },
+      "background": 20128
+    },
+    {
+      "id": "t_water_cube_hot",
+      "season": "winter",
+      "material": "fresh-submerged",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20128
+          },
+          {
+            "weight": 1,
+            "sprite": 20144
+          },
+          {
+            "weight": 1,
+            "sprite": 20145
+          }
+        ],
+        "corner": [
+          20129,
+          20132,
+          20131,
+          20130
+        ],
+        "t_connection": [
+          20133,
+          20136,
+          20135,
+          20134
+        ],
+        "edge": [
+          20137,
+          20138
+        ],
+        "end_piece": [
+          20139,
+          20142,
+          20141,
+          20140
+        ],
+        "unconnected": [
+          20143
+        ]
+      },
+      "background": 20128
+    },
+    {
+      "id": "t_water_dp_underground_hot",
+      "season": "spring",
+      "material": "fresh-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20068
+          },
+          {
+            "weight": 1,
+            "sprite": 20084
+          },
+          {
+            "weight": 1,
+            "sprite": 20085
+          }
+        ],
+        "corner": [
+          20069,
+          20072,
+          20071,
+          20070
+        ],
+        "t_connection": [
+          20073,
+          20076,
+          20075,
+          20074
+        ],
+        "edge": [
+          20077,
+          20078
+        ],
+        "end_piece": [
+          20079,
+          20082,
+          20081,
+          20080
+        ],
+        "unconnected": [
+          20083
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_dp_underground_hot",
+      "season": "summer",
+      "material": "fresh-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20068
+          },
+          {
+            "weight": 1,
+            "sprite": 20084
+          },
+          {
+            "weight": 1,
+            "sprite": 20085
+          }
+        ],
+        "corner": [
+          20069,
+          20072,
+          20071,
+          20070
+        ],
+        "t_connection": [
+          20073,
+          20076,
+          20075,
+          20074
+        ],
+        "edge": [
+          20077,
+          20078
+        ],
+        "end_piece": [
+          20079,
+          20082,
+          20081,
+          20080
+        ],
+        "unconnected": [
+          20083
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_dp_underground_hot",
+      "season": "autumn",
+      "material": "fresh-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20068
+          },
+          {
+            "weight": 1,
+            "sprite": 20084
+          },
+          {
+            "weight": 1,
+            "sprite": 20085
+          }
+        ],
+        "corner": [
+          20069,
+          20072,
+          20071,
+          20070
+        ],
+        "t_connection": [
+          20073,
+          20076,
+          20075,
+          20074
+        ],
+        "edge": [
+          20077,
+          20078
+        ],
+        "end_piece": [
+          20079,
+          20082,
+          20081,
+          20080
+        ],
+        "unconnected": [
+          20083
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_dp_underground_hot",
+      "season": "winter",
+      "material": "fresh-deep",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20068
+          },
+          {
+            "weight": 1,
+            "sprite": 20084
+          },
+          {
+            "weight": 1,
+            "sprite": 20085
+          }
+        ],
+        "corner": [
+          20069,
+          20072,
+          20071,
+          20070
+        ],
+        "t_connection": [
+          20073,
+          20076,
+          20075,
+          20074
+        ],
+        "edge": [
+          20077,
+          20078
+        ],
+        "end_piece": [
+          20079,
+          20082,
+          20081,
+          20080
+        ],
+        "unconnected": [
+          20083
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_sh_flood",
+      "season": "spring",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_sh_flood",
+      "season": "summer",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_sh_flood",
+      "season": "autumn",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_water_sh_flood",
+      "season": "winter",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": 19988
+    },
+    {
+      "id": "t_ice_sh_thin",
+      "season": "spring",
+      "material": "ice-sh-thin",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20228
+          },
+          {
+            "weight": 1,
+            "sprite": 20244
+          },
+          {
+            "weight": 1,
+            "sprite": 20245
+          }
+        ],
+        "corner": [
+          20229,
+          20232,
+          20231,
+          20230
+        ],
+        "t_connection": [
+          20233,
+          20236,
+          20235,
+          20234
+        ],
+        "edge": [
+          20237,
+          20238
+        ],
+        "end_piece": [
+          20239,
+          20242,
+          20241,
+          20240
+        ],
+        "unconnected": [
+          20243
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_ice_sh_thin",
+      "season": "summer",
+      "material": "ice-sh-thin",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20228
+          },
+          {
+            "weight": 1,
+            "sprite": 20244
+          },
+          {
+            "weight": 1,
+            "sprite": 20245
+          }
+        ],
+        "corner": [
+          20229,
+          20232,
+          20231,
+          20230
+        ],
+        "t_connection": [
+          20233,
+          20236,
+          20235,
+          20234
+        ],
+        "edge": [
+          20237,
+          20238
+        ],
+        "end_piece": [
+          20239,
+          20242,
+          20241,
+          20240
+        ],
+        "unconnected": [
+          20243
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_ice_sh_thin",
+      "season": "autumn",
+      "material": "ice-sh-thin",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20228
+          },
+          {
+            "weight": 1,
+            "sprite": 20244
+          },
+          {
+            "weight": 1,
+            "sprite": 20245
+          }
+        ],
+        "corner": [
+          20229,
+          20232,
+          20231,
+          20230
+        ],
+        "t_connection": [
+          20233,
+          20236,
+          20235,
+          20234
+        ],
+        "edge": [
+          20237,
+          20238
+        ],
+        "end_piece": [
+          20239,
+          20242,
+          20241,
+          20240
+        ],
+        "unconnected": [
+          20243
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_ice_sh_thin",
+      "season": "winter",
+      "material": "ice-sh-thin",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20228
+          },
+          {
+            "weight": 1,
+            "sprite": 20244
+          },
+          {
+            "weight": 1,
+            "sprite": 20245
+          }
+        ],
+        "corner": [
+          20229,
+          20232,
+          20231,
+          20230
+        ],
+        "t_connection": [
+          20233,
+          20236,
+          20235,
+          20234
+        ],
+        "edge": [
+          20237,
+          20238
+        ],
+        "end_piece": [
+          20239,
+          20242,
+          20241,
+          20240
+        ],
+        "unconnected": [
+          20243
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_ice_sh_thick",
+      "season": "spring",
+      "material": "ice-sh-thick",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20208
+          },
+          {
+            "weight": 1,
+            "sprite": 20224
+          },
+          {
+            "weight": 1,
+            "sprite": 20225
+          }
+        ],
+        "corner": [
+          20209,
+          20212,
+          20211,
+          20210
+        ],
+        "t_connection": [
+          20213,
+          20216,
+          20215,
+          20214
+        ],
+        "edge": [
+          20217,
+          20218
+        ],
+        "end_piece": [
+          20219,
+          20222,
+          20221,
+          20220
+        ],
+        "unconnected": [
+          20223
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_ice_sh_thick",
+      "season": "summer",
+      "material": "ice-sh-thick",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20208
+          },
+          {
+            "weight": 1,
+            "sprite": 20224
+          },
+          {
+            "weight": 1,
+            "sprite": 20225
+          }
+        ],
+        "corner": [
+          20209,
+          20212,
+          20211,
+          20210
+        ],
+        "t_connection": [
+          20213,
+          20216,
+          20215,
+          20214
+        ],
+        "edge": [
+          20217,
+          20218
+        ],
+        "end_piece": [
+          20219,
+          20222,
+          20221,
+          20220
+        ],
+        "unconnected": [
+          20223
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_ice_sh_thick",
+      "season": "autumn",
+      "material": "ice-sh-thick",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20208
+          },
+          {
+            "weight": 1,
+            "sprite": 20224
+          },
+          {
+            "weight": 1,
+            "sprite": 20225
+          }
+        ],
+        "corner": [
+          20209,
+          20212,
+          20211,
+          20210
+        ],
+        "t_connection": [
+          20213,
+          20216,
+          20215,
+          20214
+        ],
+        "edge": [
+          20217,
+          20218
+        ],
+        "end_piece": [
+          20219,
+          20222,
+          20221,
+          20220
+        ],
+        "unconnected": [
+          20223
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_ice_sh_thick",
+      "season": "winter",
+      "material": "ice-sh-thick",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20208
+          },
+          {
+            "weight": 1,
+            "sprite": 20224
+          },
+          {
+            "weight": 1,
+            "sprite": 20225
+          }
+        ],
+        "corner": [
+          20209,
+          20212,
+          20211,
+          20210
+        ],
+        "t_connection": [
+          20213,
+          20216,
+          20215,
+          20214
+        ],
+        "edge": [
+          20217,
+          20218
+        ],
+        "end_piece": [
+          20219,
+          20222,
+          20221,
+          20220
+        ],
+        "unconnected": [
+          20223
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_ice_dp_thin",
+      "season": "spring",
+      "material": "ice-dp-thin",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20188
+          },
+          {
+            "weight": 1,
+            "sprite": 20204
+          },
+          {
+            "weight": 1,
+            "sprite": 20205
+          }
+        ],
+        "corner": [
+          20189,
+          20192,
+          20191,
+          20190
+        ],
+        "t_connection": [
+          20193,
+          20196,
+          20195,
+          20194
+        ],
+        "edge": [
+          20197,
+          20198
+        ],
+        "end_piece": [
+          20199,
+          20202,
+          20201,
+          20200
+        ],
+        "unconnected": [
+          20203
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_ice_dp_thin",
+      "season": "summer",
+      "material": "ice-dp-thin",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20188
+          },
+          {
+            "weight": 1,
+            "sprite": 20204
+          },
+          {
+            "weight": 1,
+            "sprite": 20205
+          }
+        ],
+        "corner": [
+          20189,
+          20192,
+          20191,
+          20190
+        ],
+        "t_connection": [
+          20193,
+          20196,
+          20195,
+          20194
+        ],
+        "edge": [
+          20197,
+          20198
+        ],
+        "end_piece": [
+          20199,
+          20202,
+          20201,
+          20200
+        ],
+        "unconnected": [
+          20203
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_ice_dp_thin",
+      "season": "autumn",
+      "material": "ice-dp-thin",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20188
+          },
+          {
+            "weight": 1,
+            "sprite": 20204
+          },
+          {
+            "weight": 1,
+            "sprite": 20205
+          }
+        ],
+        "corner": [
+          20189,
+          20192,
+          20191,
+          20190
+        ],
+        "t_connection": [
+          20193,
+          20196,
+          20195,
+          20194
+        ],
+        "edge": [
+          20197,
+          20198
+        ],
+        "end_piece": [
+          20199,
+          20202,
+          20201,
+          20200
+        ],
+        "unconnected": [
+          20203
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_ice_dp_thin",
+      "season": "winter",
+      "material": "ice-dp-thin",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20188
+          },
+          {
+            "weight": 1,
+            "sprite": 20204
+          },
+          {
+            "weight": 1,
+            "sprite": 20205
+          }
+        ],
+        "corner": [
+          20189,
+          20192,
+          20191,
+          20190
+        ],
+        "t_connection": [
+          20193,
+          20196,
+          20195,
+          20194
+        ],
+        "edge": [
+          20197,
+          20198
+        ],
+        "end_piece": [
+          20199,
+          20202,
+          20201,
+          20200
+        ],
+        "unconnected": [
+          20203
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_ice_dp_thick",
+      "season": "spring",
+      "material": "ice-dp-thick",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20168
+          },
+          {
+            "weight": 1,
+            "sprite": 20184
+          },
+          {
+            "weight": 1,
+            "sprite": 20185
+          }
+        ],
+        "corner": [
+          20169,
+          20172,
+          20171,
+          20170
+        ],
+        "t_connection": [
+          20173,
+          20176,
+          20175,
+          20174
+        ],
+        "edge": [
+          20177,
+          20178
+        ],
+        "end_piece": [
+          20179,
+          20182,
+          20181,
+          20180
+        ],
+        "unconnected": [
+          20183
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_ice_dp_thick",
+      "season": "summer",
+      "material": "ice-dp-thick",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20168
+          },
+          {
+            "weight": 1,
+            "sprite": 20184
+          },
+          {
+            "weight": 1,
+            "sprite": 20185
+          }
+        ],
+        "corner": [
+          20169,
+          20172,
+          20171,
+          20170
+        ],
+        "t_connection": [
+          20173,
+          20176,
+          20175,
+          20174
+        ],
+        "edge": [
+          20177,
+          20178
+        ],
+        "end_piece": [
+          20179,
+          20182,
+          20181,
+          20180
+        ],
+        "unconnected": [
+          20183
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_ice_dp_thick",
+      "season": "autumn",
+      "material": "ice-dp-thick",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20168
+          },
+          {
+            "weight": 1,
+            "sprite": 20184
+          },
+          {
+            "weight": 1,
+            "sprite": 20185
+          }
+        ],
+        "corner": [
+          20169,
+          20172,
+          20171,
+          20170
+        ],
+        "t_connection": [
+          20173,
+          20176,
+          20175,
+          20174
+        ],
+        "edge": [
+          20177,
+          20178
+        ],
+        "end_piece": [
+          20179,
+          20182,
+          20181,
+          20180
+        ],
+        "unconnected": [
+          20183
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_ice_dp_thick",
+      "season": "winter",
+      "material": "ice-dp-thick",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20168
+          },
+          {
+            "weight": 1,
+            "sprite": 20184
+          },
+          {
+            "weight": 1,
+            "sprite": 20185
+          }
+        ],
+        "corner": [
+          20169,
+          20172,
+          20171,
+          20170
+        ],
+        "t_connection": [
+          20173,
+          20176,
+          20175,
+          20174
+        ],
+        "edge": [
+          20177,
+          20178
+        ],
+        "end_piece": [
+          20179,
+          20182,
+          20181,
+          20180
+        ],
+        "unconnected": [
+          20183
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "terrain_ids": 41,
+    "calendar_bindings": 164,
+    "material_sets": 25,
+    "new_terrain_used_cells": 450,
+    "new_terrain_allocated_cells": 500,
+    "sprite_slots": 20468,
+    "sprite_references_checked": 30013,
+    "all_references_valid": true,
+    "unrelated_installed_mappings_preserved": true,
+    "approved_flora_sprites_verified": 600,
+    "grass_alternatives": 16,
+    "matching_underlay_cells": 140,
+    "client_modified": false,
+    "live_gameplay": "pending; no client launch",
+    "all_16_masks_verified_from_packed_pixels": true,
+    "packed_cells_checked": 450,
+    "source_checkpoints_verified": true,
+    "checkpoint_file_hashes_checked": 1369,
+    "offline_visual_review": "passed",
+    "visual_review_scope": "All 25 material sets, 16 connections each, three centers; final colors verified against approved 600-sprite palette manifest. Live map review remains pending."
+  }
+}

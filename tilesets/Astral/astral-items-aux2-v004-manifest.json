@@ -1,0 +1,406 @@
+{
+  "version": "aux-2-v004",
+  "status": "packaged in Astral 0.1.34; user/live acceptance pending",
+  "preserve": "All prior Astral art including nine shields; see preserved-art.json",
+  "entries": [
+    {
+      "id": "candle_small",
+      "aliases": [],
+      "state": "unlit",
+      "source_path": "sources/candle_small.png",
+      "source_sha256": "f0ae2a3102c16b8490c2a8dd91577c80f0d0790d4c47b5a829971ebb51d4882e",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/candle_small.png",
+      "png_sha256": "cb6800bd7db7c705461d1efe1db68340b0718e595d0612e90c0839140c68c643",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 106,
+      "content_bounds": [
+        115,
+        47,
+        201,
+        223
+      ],
+      "prompt_path": "prompts/candle_small.txt",
+      "prompt_sha256": "c8816cef68204272275ea34a6ca38628897597af7ca2405441359765eef183d6",
+      "native_preview": "previews/candle_small-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_candle_small.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "candle_small",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/lighting.json",
+          "array_index": 40,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [
+        {
+          "field": "use_action.target",
+          "target": "candle_small_lit"
+        }
+      ],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed128/64/32px review: slender ivory wax body with dark unlit wick; remains legible at32. Same body framing as lit state.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "candle_small",
+          "page_url": "https://www.hobbylobby.com/home-decor-frames/candles-fragrance/candles/white---mini-taper-candles/p/80944139",
+          "image_url": "https://cdn.media.amplience.net/s/hobbylobby/1818129-80944139-IMGSET?h=1600&w=900",
+          "local_path": "references/candle_small.image",
+          "sha256": "5f607f822fe4576f0c39f5042900b0d9ec9b850eeac4b9874f97274343e632cd",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation, in contact sheet or full original; no photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "candle_small_lit",
+      "aliases": [],
+      "state": "lit",
+      "source_path": "sources/candle_small_lit.png",
+      "source_sha256": "9b524dcb90c36463318c30aaac2feb5469a9a65232e73ec52522854c8c60c8fc",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/candle_small_lit.png",
+      "png_sha256": "5915e88dc079c73cd313cb2762b4a94e827a96a9cd9cc67b16ccf6c5524b89f3",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 70,
+      "content_bounds": [
+        110,
+        45,
+        144,
+        252
+      ],
+      "prompt_path": "prompts/candle_small_lit.txt",
+      "prompt_sha256": "5064baa4682864e9b3b7eedb191b4742840feef522ed918f28eaf0531c0c4fc2",
+      "native_preview": "previews/candle_small_lit-native-32.png",
+      "generation": "built-in image_gen edit of corresponding unlit source",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_candle_small_lit.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "candle_small_lit",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/lighting.json",
+          "array_index": 41,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [
+        {
+          "field": "use_action[1].target",
+          "target": "candle_small"
+        }
+      ],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed128/64/32px review: small warm flame survives at32, distinct from unlit state. Body retained with slight edge differences; 256px lower body opaque IoU0.9648.",
+      "live_acceptance": "not tested",
+      "edit_target": {
+        "path": "sources/candle_small.png",
+        "sha256": "f0ae2a3102c16b8490c2a8dd91577c80f0d0790d4c47b5a829971ebb51d4882e"
+      },
+      "references": [
+        {
+          "subject": "candle_small_lit",
+          "page_url": "https://www.hobbylobby.com/home-decor-frames/candles-fragrance/candles/white---mini-taper-candles/p/80944139",
+          "image_url": "https://cdn.media.amplience.net/s/hobbylobby/1818129-80944139-IMGSET?h=1600&w=900",
+          "local_path": "references/candle_small.image",
+          "sha256": "5f607f822fe4576f0c39f5042900b0d9ec9b850eeac4b9874f97274343e632cd",
+          "purpose": "Same physical candle reference for matching body in lit state",
+          "inspection": "Real object photo visually inspected before generation, in contact sheet or full original; no photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "fire_drill_large",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/fire_drill_large.png",
+      "source_sha256": "bd05d5a9d31babae54d2768310942b8466ba7989de7cab2ffd4e82b3d43edd3a",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/fire_drill_large.png",
+      "png_sha256": "c5b52677bba10157190cf96ded037462caee40adf6f37434e6ff1539f3f39bdc",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 192,
+      "content_bounds": [
+        33,
+        27,
+        217,
+        228
+      ],
+      "prompt_path": "prompts/fire_drill_large.txt",
+      "prompt_sha256": "57beef48820b33256ae2af97ab35a3625195fc417508599bbdaacd1e36e3b082",
+      "native_preview": "previews/fire_drill_large-native-32.png",
+      "generation": "built-in image_gen with targeted edit of center joint",
+      "export": "nearest-neighbor resize to 224 square and transparent center padding to 256; no alpha repainting",
+      "mapping": {
+        "file": "astral_item_aux2_fire_drill_large.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "fire_drill_large",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/fire.json",
+          "array_index": 2,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed128/64/32px review: triangular cords, central shaft, horizontal crossbar, gray stone flywheel and fireboard remain distinguishable. Center-joint binding corrected by imagegen; export padding added.",
+      "live_acceptance": "not tested",
+      "edit_target": {
+        "path": "sources/iterations/fire_drill_large-initial.png",
+        "sha256": "2939ed3d7c04a25840ca053d55beef3859cccbcfc2a339acf230f6f340545105"
+      },
+      "initial_prompt": {
+        "path": "prompts/iterations/fire_drill_large-initial.txt",
+        "sha256": "0bcc83ac3710a5bf25d192a21a2b8c50b8404476b5376205167082cc54d0bb27"
+      },
+      "references": [
+        {
+          "subject": "fire_drill_large",
+          "page_url": "https://www.etsy.com/listing/4355666716/handmade-pump-drill-friction-fire",
+          "image_url": "https://i.etsystatic.com/35494521/r/il/e6dbb4/7126893878/il_fullxfull.7126893878_ly7d.jpg",
+          "local_path": "references/fire_drill_large.image",
+          "sha256": "0d48b909dbc3ee39be6c8c7ccfe2197a56d8d81d66e77c5ccf7156dac758ad0c",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation, in contact sheet or full original; no photo pixels copied."
+        },
+        {
+          "subject": "fire_drill_large",
+          "page_url": "https://www.etsy.com/listing/4355666716/handmade-pump-drill-friction-fire",
+          "image_url": "https://i.etsystatic.com/35494521/r/il/785482/7126891284/il_fullxfull.7126891284_q55t.jpg",
+          "local_path": "references/fire_drill_large_full.image",
+          "sha256": "c4b41df92cd93e575f272127042b9815f7f693f1c836b086dd5af58b1818c3b6",
+          "purpose": "Full assembled wood shaft, crossbar, cord and stone flywheel reference; no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation, in contact sheet or full original; no photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "tinderbox",
+      "aliases": [],
+      "state": "unlit",
+      "source_path": "sources/tinderbox.png",
+      "source_sha256": "53eaff8f43f15dcb730b794763518e2cf76ca363073c64ff0d62d4bb296e48ba",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/tinderbox.png",
+      "png_sha256": "cce306d63809f721f0139d3b852a93442b26e158d6075ded056a4e6bfb8df005",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 52,
+      "content_bounds": [
+        10,
+        20,
+        201,
+        225
+      ],
+      "prompt_path": "prompts/tinderbox.txt",
+      "prompt_sha256": "670c627a2ecbcf01e8b311fdeda88d5bb006059ed16160069dcf369a5e6b7d0c",
+      "native_preview": "previews/tinderbox-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_tinderbox.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "tinderbox",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/fire.json",
+          "array_index": 14,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [
+        {
+          "field": "use_action.target",
+          "target": "tinderbox_on"
+        }
+      ],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed128/64/32px review: dark perforated steel tin and seated lid. Same shape and perspective as lit state.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "tinderbox",
+          "page_url": "https://survivalstore.dk/de/blogs/outdoor-udstyr/punk-wood-hvordan-laver-jeg-det-selv",
+          "image_url": "https://cdn.shopify.com/s/files/1/1334/4537/t/51/assets/punk_wood_hvordan_laver_jeg_punk_wood_4_.jpg-1695723342610_1000x.jpg?v=1695723343",
+          "local_path": "references/tinderbox.image",
+          "sha256": "87094a2ed3a9abf43b3dca2989171e4887aefa5c975ca874e8a484d8e7bd8656",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation, in contact sheet or full original; no photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "tinderbox_on",
+      "aliases": [],
+      "state": "lit",
+      "source_path": "sources/tinderbox_on.png",
+      "source_sha256": "f15b429477d98bacd15ed06a508daf1dd6883b650b415d81e84eee9cbf597608",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/tinderbox_on.png",
+      "png_sha256": "cdd3515ad0fddd275e511e3e83f2bcd618f66272497abe229c00f972cfb63871",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 117,
+      "content_bounds": [
+        24,
+        57,
+        190,
+        238
+      ],
+      "prompt_path": "prompts/tinderbox_on.txt",
+      "prompt_sha256": "7af3cfb07ecbad697b13ca7376398db2e830782be784e95e1a0185fcb34267a9",
+      "native_preview": "previews/tinderbox_on-native-32.png",
+      "generation": "built-in image_gen edit of corresponding unlit source",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_tinderbox_on.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "tinderbox_on",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/fire.json",
+          "array_index": 15,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [
+        {
+          "field": "use_action[1].target",
+          "target": "tinderbox"
+        },
+        {
+          "field": "revert_to",
+          "target": "tinderbox"
+        }
+      ],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed128/64/32px review after glow revision: orange ember pixels remain in ventilation holes at32. No external flame/halo. Opaque silhouette IoU0.9955 against unlit.",
+      "live_acceptance": "not tested",
+      "edit_target": {
+        "path": "sources/tinderbox.png",
+        "sha256": "53eaff8f43f15dcb730b794763518e2cf76ca363073c64ff0d62d4bb296e48ba"
+      },
+      "references": [
+        {
+          "subject": "tinderbox_on",
+          "page_url": "https://www.instructables.com/How-to-Carry-Embers/",
+          "image_url": "https://content.instructables.com/FXO/6MMS/IU5NJK8Y/FXO6MMSIU5NJK8Y.jpg",
+          "local_path": "references/tinderbox_on.image",
+          "sha256": "49092f0f59e4185962a449a808267b8f02a71f8cde24e668e5c9e8c8b8cf7dba",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation, in contact sheet or full original; no photo pixels copied."
+        }
+      ]
+    }
+  ],
+  "generated_count": 5,
+  "creative_method": "built-in imagegen only",
+  "static_checks": "dimensions, transparent alpha, non-clipped bounds, exact prompt/source/export hashes",
+  "live_acceptance": "not tested",
+  "release": "0.1.34"
+}

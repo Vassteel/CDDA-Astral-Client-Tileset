@@ -19,6 +19,8 @@
     "magazine": 100,
     "subtype": "distribution",
     "entries": [
+      { "item": "astral_shield_riot", "prob": 8 },
+      { "item": "astral_shield_ballistic", "prob": 2 },
       { "group": "ammo_cop", "prob": 80 },
       { "group": "guns_cop", "prob": 100 },
       { "group": "mags_cop", "prob": 40 },

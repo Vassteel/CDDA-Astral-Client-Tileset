@@ -1,6 +1,7 @@
 #include "ui_telemetry.h"
 #include "cata_imgui.h"
 #include "ui_hybrid_chrome.h"
+#include "ui_hybrid_widgets.h"
 
 #include <cmath>
 
@@ -17,6 +18,7 @@
 #include "input.h"
 #include "output.h"
 #include "path_info.h"
+#include "filesystem.h"
 #include "point.h"
 #include "ui_manager.h"
 #include "input_context.h"
@@ -420,12 +422,15 @@ void cataimgui::client::load_fonts( UNUSED const Font_Ptr &gui_font,
         // ensure_unifont_loaded() supplies CJK / non-Latin coverage.
 
         const bool cjk = get_option<bool>( "IMGUI_LOAD_CHINESE" );
-        // Fonts[0] = gui, Fonts[1] = mono, Fonts[2] = gui 1.5x (non-CJK only)
+        // Fonts[0] = gui, Fonts[1] = mono, Fonts[2] = gui 1.5x (title role),
+        // Fonts[3] = gui 1.25x (section role); the scaled faces are non-CJK only.
         load_font( io, gui_typefaces );
         load_font( io, mono_typefaces );
         if( !cjk ) {
             load_font( io, gui_typefaces,
                        static_cast<float>( lroundf( fontheight * 1.5f ) ) );
+            load_font( io, gui_typefaces,
+                       static_cast<float>( lroundf( fontheight * 1.25f ) ) );
         }
         for( int i = 0; i < io.Fonts->Fonts.Size; i++ ) {
             check_font( io.Fonts->Fonts[i] );
@@ -555,6 +560,8 @@ void cataimgui::client::new_frame( int display_buffer_w, int display_buffer_h )
     }
     ImGui_ImplSDLRenderer3_NewFrame();
     ImGui_ImplSDL3_NewFrame();
+    ui_hybrid_chrome::theme::refresh_options();
+    ui_hybrid_widgets::probe::flush_frame();
 
     // ImGui draws into display_buffer, whose size differs from the window under
     // SCALING_FACTOR or android letterboxing. Prefer the caller's dims; fall
@@ -940,6 +947,13 @@ cataimgui::window::window( const std::string &id_, int window_flags ) : window( 
     p_impl = std::make_unique<cataimgui::window_impl>( this );
     id = id_ + "##" + std::to_string( uint64_t( this ) );
     is_open = true;
+#if defined(TILES)
+    // Every titled window gets the shared Astral dialog shell by default;
+    // large screens opt into the large frame with set_shell( 0 ).
+    if( !id_.empty() && !( window_flags & ImGuiWindowFlags_NoTitleBar ) ) {
+        astral_shell = 1;
+    }
+#endif
     ui_telemetry::record( "window.open", {{ "id", id }} );
 }
 
@@ -1090,7 +1104,33 @@ void cataimgui::window::draw()
                     std::min( viewport.y * 0.96f, 840.f * scale ) ) );
     }
 #endif
-    if( ImGui::Begin( id.c_str(), &is_open, window_flags ) ) {
+    int flags = window_flags;
+    int shell_style_vars = 0;
+#if defined(TILES)
+    if( astral_shell >= 0 ) {
+        // The Astral shell draws its own frame/title/close; the content is
+        // inset by the frame's content inset instead of the default padding.
+        flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground;
+        const float inset = ( astral_shell == 0 ? 20.f : astral_shell == 1 ? 14.f : 10.f ) *
+                            ui_hybrid_chrome::theme::scale();
+        ImGui::PushStyleVar( ImGuiStyleVar_WindowPadding, ImVec2( inset, inset ) );
+        ImGui::PushStyleVar( ImGuiStyleVar_WindowBorderSize, 0.f );
+        shell_style_vars = 2;
+    }
+#endif
+    if( ImGui::Begin( id.c_str(), &is_open, flags ) ) {
+#if defined(TILES)
+        if( astral_shell >= 0 ) {
+            const ui_hybrid_widgets::frame_kind kind = astral_shell == 0 ?
+                    ui_hybrid_widgets::frame_kind::large : astral_shell == 1 ?
+                    ui_hybrid_widgets::frame_kind::dialog : ui_hybrid_widgets::frame_kind::popup;
+            const std::string display_title = id.substr( 0, id.find( "##" ) );
+            if( ui_hybrid_widgets::window_shell( display_title, kind, true, astral_shell_icon,
+                                                 astral_shell_title ) ) {
+                is_open = false;
+            }
+        }
+#endif
         draw_controls();
         if( p_impl->window_adaptor->is_on_top && !force_to_back &&
             !ImGui::IsPopupOpen( nullptr, ImGuiPopupFlags_AnyPopupId | ImGuiPopupFlags_AnyPopupLevel ) ) {
@@ -1115,9 +1155,19 @@ void cataimgui::window::draw()
         }
     }
     ImGui::End();
+    if( shell_style_vars > 0 ) {
+        ImGui::PopStyleVar( shell_style_vars );
+    }
     if( handled_resize ) {
         p_impl->is_resized = false;
     }
+}
+
+void cataimgui::window::set_shell( int kind, const char *icon, bool show_title )
+{
+    astral_shell = kind;
+    astral_shell_icon = icon;
+    astral_shell_title = show_title;
 }
 
 /// <summary>
@@ -1244,6 +1294,22 @@ void cataimgui::PopGuiFont1_5x()
     ImGui::PopFont();
 }
 
+void cataimgui::PushGuiFont1_25x()
+{
+    if( ImGui::GetIO().Fonts->Fonts.Size > 3 ) {
+        ImFont *font = ImGui::GetIO().Fonts->Fonts[3];
+        ImGui::PushFont( font, font->LegacySize );
+    } else {
+        ImFont *font = ImGui::GetIO().Fonts->Fonts[0];
+        ImGui::PushFont( font, font->LegacySize * 1.25f );
+    }
+}
+
+void cataimgui::PopGuiFont1_25x()
+{
+    ImGui::PopFont();
+}
+
 
 bool cataimgui::BeginRightAlign( const char *str_id )
 {
@@ -1321,7 +1387,7 @@ static void inherit_base_colors()
     style.Colors[ImGuiCol_NavCursor] = c_blue;
 }
 
-static void load_imgui_style_file( const cata_path &style_path )
+static void load_imgui_style_file( const cata_path &style_path, bool ignore_colors = false )
 {
     ImGuiStyle &style = ImGui::GetStyle();
     // reset style first to unset colors
@@ -1332,11 +1398,25 @@ static void load_imgui_style_file( const cata_path &style_path )
 
     JsonObject jo = jsin.get_object();
 
+#if defined(TILES)
+    // Precedence: ImGui dark -> Astral tokens (unless the file opts out with
+    // "astral_base": false) -> the file's own colors. The user's choice in the
+    // style picker therefore applies on top of the theme instead of being
+    // overwritten by it.
+    const bool astral_base = !jo.has_bool( "astral_base" ) || jo.get_bool( "astral_base" );
+    if( astral_base ) {
+        ui_hybrid_chrome::apply_defaults();
+    }
+#endif
 
     if( jo.has_bool( "inherit_base_colors" ) && jo.get_bool( "inherit_base_colors" ) ) {
         inherit_base_colors();
     }
     JsonObject joc = jo.get_object( "colors" );
+    if( ignore_colors ) {
+        joc.allow_omitted_members();
+        return;
+    }
 
     std::unordered_map<std::string, int> key_options = {
         {"ImGuiCol_Text", ImGuiCol_Text},
@@ -1420,20 +1500,41 @@ void cataimgui::init_colors()
 {
     const cata_path default_style_path = PATH_INFO::datadir_path() / "raw" / "imgui_styles" /
                                          "default_style.json";
+#if defined(TILES)
+    const cata_path first_run_style_path = PATH_INFO::datadir_path() / "raw" / "imgui_styles" /
+                                           "astral_style.json";
+#else
+    const cata_path first_run_style_path = default_style_path;
+#endif
     const cata_path style_path = PATH_INFO::config_dir_path() / "imgui_style.json";
     if( !file_exist( style_path ) ) {
         assure_dir_exist( PATH_INFO::config_dir() );
-        copy_file( default_style_path, style_path );
+        copy_file( file_exist( first_run_style_path ) ? first_run_style_path : default_style_path,
+                   style_path );
     }
+    // A config that is still the untouched upstream default (copied by older
+    // builds) is not a deliberate choice: keep the Astral base instead of
+    // overlaying the upstream dark palette. Users pick "ImGui dark" explicitly
+    // from the style picker to get that look.
+    bool untouched_default = false;
+#if defined(TILES)
+    if( file_exist( default_style_path ) ) {
+        untouched_default = read_entire_file( style_path.get_unrelative_path() ) ==
+                            read_entire_file( default_style_path.get_unrelative_path() );
+    }
+#endif
 
     try {
-        load_imgui_style_file( style_path );
+        load_imgui_style_file( style_path, untouched_default );
     } catch( const JsonError &err ) {
         debugmsg( "Failed to load imgui color data from \"%s\": %s",
                   style_path.generic_u8string(), err.what() );
+#if defined(TILES)
+        ui_hybrid_chrome::apply_defaults();
+#endif
     }
 #if defined(TILES)
-    ui_hybrid_chrome::apply_defaults();
+    ui_hybrid_chrome::theme::refresh_options();
 #endif
 }
 

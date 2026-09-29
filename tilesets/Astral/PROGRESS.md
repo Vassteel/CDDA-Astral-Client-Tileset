@@ -1,14 +1,12 @@
 # Remaining tileset work
 
-Autumn olive: all eight exports rebuilt at 256px texture resolution with the same map footprint. Gameplay review pending.
+## Flora — Current static glyph-flora priority cleared through0.1.40; existing-sprite replacement backlog retained
 
-## Flora — Autumn olive 8/8 detail exports rebuilt; long grass 88/88 and peanut 8/8 retained; visual/gameplay review pending
+Current core/active-mod flora glyph candidates covered. Sea lettuce and bladderwrack still need distinct art; both resolve through green algae. Eight special/compatibility tree IDs remain. Finish glyph creatures before existing-sprite replacements; complete every defined state and season per family.
 
-Review rebuilt autumn olive detail exports before advancing. Audit older flora exports for the same resolution loss. Next new family: hobblebush, then strawberry, blackberry, huckleberry, raspberry, grape, spicebush, chokeberry, rose, hydrangea and lilac. Complete every season and harvested state per family. Tall grass and older botanical/state audits remain open. Use real photos and the established process without subagents.
+## Natural terrain — Aux-1 frozen candidates: mud, clay, raised mound, gravel, moss, neutral cave-rock, cave-dirt and revised cave-sand; moving freshwater next
 
-## Natural terrain — Foundation and shore connections packaged; cleanup pending
-
-Add mud, clay, gravel, moss, cave floors, moving/salt water and other missing terrain. Replace retained UltiCa dirt/pavement/rock/deep-water edges. Clean up narrow shore joins and repeated water texture; add random variants. All four source seasons exist; shared rock, dirt and pavement stay neutral year-round pending exposure support.
+Review and integrate frozen natural-terrain-v2 candidates. Cave rock/dirt/sand each have eight selected sources, 18 used and 20 allocated cells, all 16 masks and three centers. Root verified 44 sand and four mixed-scene hashes and inspected the mixed preview. Preserve ROCKFLOOR/DIRT/SAND connection groups, neutral calendar aliases, exposure policies and renderer rotations. Resolve material-boundary gaps, brightness contrast, visible texture repeats and proposed BG7336 compositing for rock/dirt before accepting the cave set. All candidates remain outside release packages; user/live acceptance pending.
 
 ## Buildings and roads — UltiCa fallback
 
@@ -18,15 +16,15 @@ Walls, doors and open/broken states, windows, floors, roofs, stairs, ramps, fenc
 
 Indoor/outdoor furniture, containers, crafting stations, machinery, lighting, signs, plumbing, powered/open/broken/empty states and transparency.
 
-## Creatures — 50 Megafauna IDs packaged; others fallback
+## Creatures — Glyph-first creature families active; Domestic and cottontail rabbits packaged in 0.1.40
 
-Verify the 46 approved adult/juvenile sprites and four intentional aliases in live play. Create remaining wildlife/monsters, corpses, friendly/hostile variants, mount/rider behavior and mod creatures.
+337 IDs remain likely glyph fallbacks in current static world audits. Next butterfly lifecycle: oversized, giant, emperor, caterpillar and cocoon, plus renderer corpse states; inspect real references and preserve distinct sizes. Then other glyph families before existing-sprite replacements. Preserve Megafauna. Shared zombie meat-cocoons need separate cross-species audit. User/live review pending.
 
 ## Characters and overlays — UltiCa fallback
 
 Player/NPC bodies, gender and movement variants; worn and wielded items; mutations, bionics, effects, riding, facing and overlay order. Derive dynamic IDs from renderer; static inventory alone is insufficient.
 
-## Items — UltiCa fallback
+## Items — 77 item sprites packaged: nine preserved shields plus68 Aux-2 sprites covering71 item IDs; Aux-2 continues glyph-first items
 
 Weapons, tools, armor/clothing, ammo, food/drinks, medicine, books, containers, components, artifacts and mod items; active/inactive, filled/empty and other visual states. Review legitimate aliases instead of promising unique art for every ID.
 
@@ -46,10 +44,10 @@ Titled splash ../astral-main-menu/astral-main-menu-v2-titled.png is saved with p
 
 Track current world mods and dependencies; keep optional/disabled mods separate. Reconcile runtime-generated, migrated, pseudo and overridden IDs. Maintain intentional exclusions and alias decisions with evidence.
 
-## Integration and seasonal policy — Astral 0.1.5 packages rebuilt autumn olive textures; not installed
+## Integration and seasonal policy — Astral 0.1.44 packaged separately; client untouched
 
-Use 256x256 autumn olive textures with pixelscale 0.125 for the existing 32x32 map footprint. Ground textures use matching scale. Preserve UltiCa fallback and independent shoreline rotation fix. Shared cave rock stays neutral. No installation while the client is running. Visual/gameplay review pending.
+Original oak, pine, birch and willow harvested states match their original 96px texture resolution. New trees use 768px textures at pixelscale 0.125, a 96px tree canvas and offsets -32,-64. Matching 32px seasonal ground is aligned at the trunk. Preserve all previously completed trees, shrubs, grass variants, terrain, creatures and UltiCa fallback. Complete tree queue, static checks and live visual review; no installation into the client.
 
-## Validation and release — Astral 0.1.5 static and archive checks passed; live review pending
+## Validation and release — Astral 0.1.44 static and archive checks passed; live review pending
 
-All eight autumn olive exports and all 10 seasonal/state IDs checked. Shared source crop and original source hashes verified; 16 ground alignment checks across 1x/2x/4x/8x zoom. All other mappings and previous atlas bytes preserved from 0.1.4. User visual/gameplay acceptance and broader work remain open.
+Latest batch: five Aux-2 v011 measuring-tool sprites. Source/prompt/export hashes, state closure, mapping/art preservation and sprite-index checks passed. ZIP CRC and exact staged-byte verification passed; user/live review remains pending.

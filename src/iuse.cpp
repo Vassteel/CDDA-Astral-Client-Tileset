@@ -1,3 +1,4 @@
+#include "achievement_rewards.h"
 #include "iuse.h"
 
 #include <algorithm>
@@ -1291,8 +1292,12 @@ std::optional<int> iuse::petfood( Character *p, item *it, const tripoint_bub_ms 
             p->add_msg_if_player( m_good, petfood.feed, mon->get_name() );
         }
 
+        const bool already_tame = mon->has_effect( effect_pet );
         mon->friendly = -1;
         mon->add_effect( effect_pet, 1_turns, true );
+        if( !already_tame ) {
+            achievement_rewards::on_tame( *p, *mon );
+        }
         if( halluc ) {
             item drop_me = p->reduce_charges( it, 1 );
             p->i_drop_at( drop_me );
@@ -4288,7 +4293,7 @@ static int chop_moves( Character *p, item *it )
     int moves = to_moves<int>( time_duration::from_minutes( 60 - attr ) / std::pow( 2, quality - 1 ) );
     const int helpersize = p->get_num_crafting_helpers( 3 );
     moves *= ( 1.0f - ( helpersize / 10.0f ) );
-    return moves;
+    return static_cast<int>( std::ceil( moves * achievement_rewards::chopping_time_multiplier( *it ) ) );
 }
 
 std::optional<int> iuse::chop_tree( Character *p, item *it, const tripoint_bub_ms &target )

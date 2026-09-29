@@ -1,0 +1,324 @@
+{
+  "version": "aux-2-v010",
+  "status": "packaged in Astral 0.1.43; user/live acceptance pending",
+  "preserve": "All prior Astral art including nine shields; see preserved-art.json",
+  "entries": [
+    {
+      "id": "emf_detector",
+      "aliases": [],
+      "state": "powered_off",
+      "source_path": "sources/emf_detector.png",
+      "source_sha256": "c1279cd381ed10a343905993698e526960cfa716f22a971b7772d10956c7c64c",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/emf_detector.png",
+      "png_sha256": "074ced514a1de3c204fd7c9aeb8636bd1971cf21d91341076a594e5c814cd647",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 158,
+      "content_bounds": [
+        79,
+        25,
+        179,
+        221
+      ],
+      "prompt_path": "prompts/emf_detector.txt",
+      "prompt_sha256": "c7ce9e2c78d14adaab2333b4b3850c3517fe85e11ba86659747cb3929c6919fb",
+      "native_preview": "previews/emf_detector-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving nearest-neighbor resize to224 and transparent pad to256; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_emf_detector.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "emf_detector",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/electronics.json",
+          "array_index": 36,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [
+        {
+          "field": "use_action.target",
+          "target": "emf_detector_on"
+        }
+      ],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed at128/64/32: charcoal portrait case, dark LCD, gray dial panel and selector arc; recognizable silhouette and complete off/on pairing.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "emf_detector",
+          "page_url": "https://trifield.com/products/trifield%C2%AE-emf-meter-model-tf2",
+          "image_url": "https://cdn.shopify.com/s/files/1/0652/0117/6753/files/NewTrifieldTF2byAlphaLabInc.CE2023Web.jpg?v=1713448982",
+          "local_path": "references/emf_detector.image",
+          "sha256": "cda5eee7732e04894386a27b7b918b514d49aaf7169fb0801f5d2ac0daf22b9a",
+          "purpose": "Source-named real detector exterior reference only; no photo pixels copied",
+          "inspection": "Manufacturer real product photo inspected before generation; display/control/speaker geometry and overall casing proportions reviewed.",
+          "adaptation": "Source-named exterior generalized without labels/logos. Game battery substitution is internal and does not require separate exterior art. Off body generated first; on state is imagegen edit preserving geometry.",
+          "source_model_evidence": "Game definition explicitly names TriField TF2; source changes battery specification internally. LCD state is visual cue, not a new mode or emitted world light."
+        }
+      ]
+    },
+    {
+      "id": "emf_detector_on",
+      "aliases": [],
+      "state": "powered_on",
+      "source_path": "sources/emf_detector_on.png",
+      "source_sha256": "e5e9632b0713f48df9a40ccf914be508efa48d7521b5768029d4f0462577ab81",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/emf_detector_on.png",
+      "png_sha256": "c5109bb70e93bc3da522280d5d609ca47c80e265950e60472758c1b9fd74e24a",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 127,
+      "content_bounds": [
+        79,
+        25,
+        179,
+        221
+      ],
+      "prompt_path": "prompts/emf_detector_on.txt",
+      "prompt_sha256": "a340b5eed852766716d279e6f32211baf8e6aadfb4883c4e14ced3048e3f57e2",
+      "native_preview": "previews/emf_detector_on-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving nearest-neighbor resize to224 and transparent pad to256; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_emf_detector_on.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "emf_detector_on",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/electronics.json",
+          "array_index": 37,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [
+        {
+          "field": "use_action.target",
+          "target": "emf_detector"
+        },
+        {
+          "field": "revert_to",
+          "target": "emf_detector"
+        }
+      ],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed at128/64/32: same charcoal case and framing, pale gray-green active LCD and turned selector; no external glow.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "emf_detector_on",
+          "page_url": "https://trifield.com/products/trifield%C2%AE-emf-meter-model-tf2",
+          "image_url": "https://cdn.shopify.com/s/files/1/0652/0117/6753/files/NewTrifieldTF2byAlphaLabInc.CE2023Web.jpg?v=1713448982",
+          "local_path": "references/emf_detector.image",
+          "sha256": "cda5eee7732e04894386a27b7b918b514d49aaf7169fb0801f5d2ac0daf22b9a",
+          "purpose": "Source-named real detector exterior reference only; no photo pixels copied",
+          "inspection": "Manufacturer real product photo inspected before generation; display/control/speaker geometry and overall casing proportions reviewed.",
+          "adaptation": "Source-named exterior generalized without labels/logos. Game battery substitution is internal and does not require separate exterior art. Off body generated first; on state is imagegen edit preserving geometry.",
+          "source_model_evidence": "Game definition explicitly names TriField TF2; source changes battery specification internally. LCD state is visual cue, not a new mode or emitted world light."
+        }
+      ]
+    },
+    {
+      "id": "geiger_off",
+      "aliases": [],
+      "state": "powered_off",
+      "source_path": "sources/geiger_off.png",
+      "source_sha256": "7e5c5709f608cb43487a67eea3d2e8cc355941e9a9c5e9d933cb04f389e686a3",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/geiger_off.png",
+      "png_sha256": "a997893ac425b8f21d07f71f3896e2470643b913d167782c3027c8cb8d104a7f",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 136,
+      "content_bounds": [
+        30,
+        25,
+        223,
+        211
+      ],
+      "prompt_path": "prompts/geiger_off.txt",
+      "prompt_sha256": "bb4f52627cd88cbaee1453733b3db2986bf094cb67be28db4b69a9ab120cb179",
+      "native_preview": "previews/geiger_off-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving nearest-neighbor resize to224 and transparent pad to256; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_geiger_off.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "geiger_off",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/electronics.json",
+          "array_index": 25,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [
+        {
+          "field": "native.GEIGER.continuous_scan",
+          "target": "geiger_on"
+        }
+      ],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed at128/64/32: cream landscape case, dark LCD, four buttons, right speaker grille and unlit indicator; complete off/on body pairing.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "geiger_off",
+          "page_url": "https://gq-llc.myshopify.com/products/gmc-300s-gq-gmc-300s-digital-nuclear-radiation-detector",
+          "image_url": "https://gq-llc.myshopify.com/cdn/shop/files/WeixinImage_20230719160451_1024x1024%402x.jpg?v=1697673025",
+          "local_path": "references/geiger_off.image",
+          "sha256": "3e6a35e04c32a208149438876faaab50c3ebe005007f1a975a2de7fdc508575e",
+          "purpose": "Source-named real detector exterior reference only; no photo pixels copied",
+          "inspection": "Manufacturer real product photo inspected before generation; display/control/speaker geometry and overall casing proportions reviewed.",
+          "adaptation": "Source-named exterior generalized without labels/logos. Game battery substitution is internal and does not require separate exterior art. Off body generated first; on state is imagegen edit preserving geometry.",
+          "source_model_evidence": "Game definition cites Amazon ASIN B0B541D433; current product page identifies GQ GMC-300S. Native GEIGER continuous scan enables scan LED."
+        }
+      ]
+    },
+    {
+      "id": "geiger_on",
+      "aliases": [],
+      "state": "powered_on",
+      "source_path": "sources/geiger_on.png",
+      "source_sha256": "107c6fd6339f24d1accd3243249698070fa5fb8824ebb65a0192b089585f0c75",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/geiger_on.png",
+      "png_sha256": "7c797d1a40a3aade5df688187cd2cfe7f03acfa69fc798866899afae08098d67",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 154,
+      "content_bounds": [
+        28,
+        25,
+        224,
+        234
+      ],
+      "prompt_path": "prompts/geiger_on.txt",
+      "prompt_sha256": "69653e618d89016e94edfc8b211068bc06eef4f849b38e26401497b9f3a060a2",
+      "native_preview": "previews/geiger_on-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving nearest-neighbor resize to224 and transparent pad to256; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_geiger_on.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "geiger_on",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/electronics.json",
+          "array_index": 26,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [
+        {
+          "field": "use_action.target",
+          "target": "geiger_off"
+        },
+        {
+          "field": "revert_to",
+          "target": "geiger_off"
+        }
+      ],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed at128/64/32: unchanged cream body and layout, active blue-gray LCD and one native32 red-orange scan-indicator pixel; no halo.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "geiger_on",
+          "page_url": "https://gq-llc.myshopify.com/products/gmc-300s-gq-gmc-300s-digital-nuclear-radiation-detector",
+          "image_url": "https://gq-llc.myshopify.com/cdn/shop/files/WeixinImage_20230719160451_1024x1024%402x.jpg?v=1697673025",
+          "local_path": "references/geiger_off.image",
+          "sha256": "3e6a35e04c32a208149438876faaab50c3ebe005007f1a975a2de7fdc508575e",
+          "purpose": "Source-named real detector exterior reference only; no photo pixels copied",
+          "inspection": "Manufacturer real product photo inspected before generation; display/control/speaker geometry and overall casing proportions reviewed.",
+          "adaptation": "Source-named exterior generalized without labels/logos. Game battery substitution is internal and does not require separate exterior art. Off body generated first; on state is imagegen edit preserving geometry.",
+          "source_model_evidence": "Game definition cites Amazon ASIN B0B541D433; current product page identifies GQ GMC-300S. Native GEIGER continuous scan enables scan LED."
+        }
+      ]
+    }
+  ],
+  "generated_count": 4,
+  "creative_method": "built-in imagegen only",
+  "static_checks": "dimensions, transparent alpha, non-clipped bounds, exact prompt/source/export hashes",
+  "live_acceptance": "not tested",
+  "release": "0.1.43"
+}

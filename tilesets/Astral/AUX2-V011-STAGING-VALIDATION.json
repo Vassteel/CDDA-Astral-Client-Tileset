@@ -1,0 +1,20 @@
+{
+  "base": "/home/deck/Astra & Grok/CDDA/artifacts/astral-tileset/release-0.1.43/gfx/Astral",
+  "output": "/home/deck/Astra & Grok/CDDA/artifacts/astral-tileset/integration-staging/aux2-v011-on-0.1.43/gfx/Astral",
+  "new_ids": [
+    "glass_thermometer",
+    "hygrometer",
+    "hygroscope",
+    "sextant",
+    "tape_measure"
+  ],
+  "all_unrelated_mappings_preserved": true,
+  "prior_files_bytes_verified": 363,
+  "source_hashes_verified": 5,
+  "new_sprite_slots": 5,
+  "base_slots": 19662,
+  "final_slots": 19667,
+  "live_validation": "not performed",
+  "release_archive_modified": false,
+  "client_modified": false
+}

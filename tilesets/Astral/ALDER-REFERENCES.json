@@ -1,0 +1,8 @@
+{
+  "plant": "alder; Alnus incana used for anatomy",
+  "page": "https://www.zelen.cz/detail_galerie_rostlin/Alnus_incana_olse_seda",
+  "image": "https://www.zelen.cz/images/galerie/galerie255/images/galerie/alnus_incana_02.jpg",
+  "local": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/flora/references/alder-photo.jpg",
+  "botanical_source": "https://gobotany.nativeplanttrust.org/species/alnus/incana/",
+  "use": "Generic game alder using speckled/grey alder anatomy. Existing tree art style only."
+}

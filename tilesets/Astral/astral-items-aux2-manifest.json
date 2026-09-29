@@ -1,0 +1,426 @@
+{
+  "version": "aux-2-v001",
+  "status": "packaged in Astral 0.1.29; user/live acceptance pending",
+  "preserve": "All prior Astral art including nine shields; see preserved-art.json",
+  "entries": [
+    {
+      "id": "2x4",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/2x4.png",
+      "source_sha256": "9f1546d08964895ee92b4d708c71f5197c824eb3a32e5b7bbae7d31788d46fe1",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/2x4.png",
+      "png_sha256": "7bc83f034c41162c419f6b6cf4a6eea4c04bad79b7e2b8a330d3f17ca37cbe50",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 165,
+      "content_bounds": [
+        30,
+        47,
+        225,
+        225
+      ],
+      "prompt_path": "prompts/2x4.txt",
+      "prompt_sha256": "6cbffca96fd365a895ba2e70bb768166627bf90377fc6e8ffff5a4416062b89e",
+      "native_preview": "previews/2x4-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_2x4.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "2x4",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/resources/wood.json",
+          "array_index": 8,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Inspected source and 128/64/32 previews: square-cut planar plank distinct from bark stick and splinter. User/live approval pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "2x4",
+          "image_url": "https://images.thdstatic.com/productImages/35f3b4cf-ffb9-4e26-a6eb-a6b536d3c329/svn/brown-pressure-treated-lumber-14776-20-64_1000.jpg",
+          "page_url": "https://www.homedepot.com/p/310218265",
+          "purpose": "Object reference only, not copied into artwork or release",
+          "inspection": "Photo visually inspected; shape/material construction only, no source pixels copied to sprite.",
+          "local_path": "references/2x4.jpg",
+          "sha256": "9f6278197eeddd6b25450f437218b213d01e2f9966dbf83ab65eeeb9d3f08138"
+        }
+      ]
+    },
+    {
+      "id": "hammer",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/hammer.png",
+      "source_sha256": "d8abe4c3f7f920ce734c529ff8f6d66e486a0743c9840d035ed1d208049e9e71",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/hammer.png",
+      "png_sha256": "ccfad8fd4f1afe49a228fc74e75b17c2235283bfecc16c0e518cfdcb2f65d564",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 182,
+      "content_bounds": [
+        33,
+        32,
+        225,
+        249
+      ],
+      "prompt_path": "prompts/hammer.txt",
+      "prompt_sha256": "be9bba76f6dec8cfb315f07d9695ccfd97bf9e74aa009b48ce4acb1cfd91aba7",
+      "native_preview": "previews/hammer-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_hammer.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "hammer",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/workshop.json",
+          "array_index": 21,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Inspected source and 128/64/32 previews: curved split claw, striking face and wood handle read distinctly; no native clipping or obvious background residue. User/live approval pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "hammer",
+          "image_url": "https://grace-son.co.uk/cdn/shop/products/16ozClawHammer.jpg?v=1587814383",
+          "page_url": "https://grace-son.co.uk/products/16oz-claw-hammer",
+          "purpose": "Object construction reference only; no photo pixels copied into game artwork.",
+          "local_path": "references/hammer.jpg",
+          "inspection": "Photo visually inspected; shape/material construction only, no source pixels copied to sprite.",
+          "sha256": "5b67ec8e616f5dff9436bd8d603c849f538e0530c484e059ca1b76f975846c6f"
+        }
+      ]
+    },
+    {
+      "id": "hatchet",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/hatchet.png",
+      "source_sha256": "e6e0a444f8f25315a05f275518e46ee1807ec6cf0f336efba940a3d3c9e379e0",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/hatchet.png",
+      "png_sha256": "117bd50ff11a30103967eab6c985d44c3499da885bb7d81ca4b2fdb5a5e0f9f7",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 178,
+      "content_bounds": [
+        36,
+        40,
+        220,
+        225
+      ],
+      "prompt_path": "prompts/hatchet.txt",
+      "prompt_sha256": "2ec52f4c6f656edf5036507fd5af4cff9556f38f4e33c72e4a73a8e772090e37",
+      "native_preview": "previews/hatchet-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_hatchet.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "hatchet",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/woodworking.json",
+          "array_index": 10,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Inspected source and 128/64/32 previews: broad wedge blade and curved short wooden handle distinguish from hammer. User/live approval pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "hatchet",
+          "image_url": "https://i5.walmartimages.com/asr/f20ca8f4-0fc2-4aaa-80bd-5f5cdd8f35b8_1.da8d0d19363d05dce3b4ef00475856e3.jpeg",
+          "page_url": "https://beta.walmart.com/ip/Ozark-Trail-1-25lbs-Wooden-Handle-Hatchet-Axe-Model-5039/295960150",
+          "purpose": "Object construction reference only; no photo pixels copied into game artwork.",
+          "local_path": "references/hatchet.jpg",
+          "inspection": "Photo visually inspected; shape/material construction only, no source pixels copied to sprite.",
+          "sha256": "2d56823458b0e20b194c33681ab9deffa5ac670ed19a307fd0ac73167b96ae96"
+        }
+      ]
+    },
+    {
+      "id": "rock",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/rock.png",
+      "source_sha256": "a143680588a6ca0f1fd102a6659c9dd317c307035914e9d9d1cd1bfac8683cce",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/rock.png",
+      "png_sha256": "511f9509f2e7b8e0b61a1a947f44474701a2a7ba994a4008c8036e9cd3114c82",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 119,
+      "content_bounds": [
+        63,
+        47,
+        201,
+        204
+      ],
+      "prompt_path": "prompts/rock.txt",
+      "prompt_sha256": "6cb50ea8cfd7c9cd3f2426dd958109db4e645ecc9130fe55e06138f38b853f8e",
+      "native_preview": "previews/rock-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_rock.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "rock",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/ammo.json",
+          "array_index": 29,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Inspected source and 128/64/32 previews: small compact gray stone with coarse broad facets. User/live approval pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "rock",
+          "image_url": "https://www.tervex.com/uploads/fotos_galeria/77/488-.jpg",
+          "page_url": "https://www.tervex.com/ca/producte/codol-de-riu-gris-77",
+          "purpose": "Object reference only, not copied into artwork or release",
+          "inspection": "Photo visually inspected; shape/material construction only, no source pixels copied to sprite.",
+          "local_path": "references/rock.jpg",
+          "sha256": "c23efa2fe4dff460db55dc53b79c8e956381e19ae027f81f2b89817630c927fc"
+        }
+      ]
+    },
+    {
+      "id": "splinter",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/splinter.png",
+      "source_sha256": "3b94faa96921ec84b9924b47f5b417d85b757be8f2ae9398a3f868829ae017d3",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/splinter.png",
+      "png_sha256": "d9beaed854ee135165a66b5c131aacb755c02a846a3e338f5774f82a23614617",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 161,
+      "content_bounds": [
+        49,
+        47,
+        201,
+        209
+      ],
+      "prompt_path": "prompts/splinter.txt",
+      "prompt_sha256": "d27f23066a31585803acb7ed4750296912bc0f39341d42c2ebe6d81df0ffa766",
+      "native_preview": "previews/splinter-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_splinter.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "splinter",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/resources/wood.json",
+          "array_index": 1,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Inspected source and 128/64/32 previews: pale angular split wood reads distinctly from bark stick and square lumber. User/live approval pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "splinter",
+          "image_url": "https://surefirewood.com/cdn/shop/products/Surefire19_76573793-105e-4a40-abbb-dcbdb929eb61.jpg?v=1570551346",
+          "page_url": "https://surefirewood.com/products/scoop-of-kindling",
+          "local_path": "references/splinter.jpg",
+          "purpose": "Split grain and fibrous edges reference only; no copied photo pixels",
+          "inspection": "Photo visually inspected; shape/material construction only, no source pixels copied to sprite.",
+          "sha256": "8ee756b305d72acd57bc8e749693bee7cd2cb34753ce1735f87e30fd056c78b9"
+        }
+      ]
+    },
+    {
+      "id": "stick",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/stick.png",
+      "source_sha256": "5fe082dc0e27a192d6b7e2e30f6be5ef90148ea230e80a1934d3c0a3ed49f820",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/stick.png",
+      "png_sha256": "da80aac053823c3f92cc248cdf7d83b72bc7999c56bd6525db9f6ba550a5aa86",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 173,
+      "content_bounds": [
+        14,
+        16,
+        244,
+        239
+      ],
+      "prompt_path": "prompts/stick.txt",
+      "prompt_sha256": "e365c438911a4e8e613fdc89a029c240c9e2cd5d28b3df918079c6010beef0ce",
+      "native_preview": "previews/stick-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_stick.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "stick",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/resources/wood.json",
+          "array_index": 2,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Inspected source and 128/64/32 previews: bark, broken ends and twig nub distinguish from plank. User/live approval pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "stick",
+          "image_url": "https://st4.depositphotos.com/1002007/24559/i/450/depositphotos_245599276-stock-photo-single-dry-tree-branch-isolated.jpg",
+          "page_url": "https://depositphotos.com/ru/photo/single-dry-tree-branch-isolated-white-background-stick-tree-branch-240089724.html",
+          "purpose": "Object reference only, not copied into artwork or release",
+          "inspection": "Photo visually inspected; shape/material construction only, no source pixels copied to sprite.",
+          "local_path": "references/stick.jpg",
+          "sha256": "67744540e7af01df22088c0d93686f8b3df5d04a678ff95240b966d506e8c56a"
+        }
+      ]
+    }
+  ],
+  "generated_count": 6,
+  "creative_method": "built-in imagegen only",
+  "static_checks": "dimensions, transparent alpha, non-clipped bounds, exact prompt/source/export hashes",
+  "live_acceptance": "not tested",
+  "release": "0.1.29"
+}

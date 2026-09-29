@@ -1,0 +1,45 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Astral main menu — MOCKUP</title>
+<link rel="stylesheet" href="astral.css"><link rel="stylesheet" href="icons.css">
+<style>
+:root { --u: var(--scale, 1px); }
+.art { position:absolute; inset:0; background:url("../../../data/title/astral.png") center/cover no-repeat; image-rendering:auto; }
+.vignette { position:absolute; inset:0; background:linear-gradient(90deg, rgba(8,10,12,.78) 0, rgba(8,10,12,.55) 34%, rgba(8,10,12,0) 60%), linear-gradient(0deg, rgba(8,10,12,.7) 0, rgba(8,10,12,0) 30%); }
+.menu { left:calc(72*var(--u)); top:50%; transform:translateY(-44%); width:calc(420*var(--u)); padding:var(--md) var(--md) var(--lg); }
+.menu .kicker { color:var(--text-muted); font-size:calc(var(--body)*.9); margin:0 0 var(--md); display:flex; gap:var(--sm); align-items:center; }
+.mi { display:flex; align-items:center; gap:var(--md); height:calc(46*var(--u)); padding:0 var(--md); border:1px solid transparent; border-radius:3px; color:var(--text); }
+.mi .k { color:var(--accent); width:calc(16*var(--u)); }
+.mi .sub { margin-left:auto; color:var(--text-muted); font-size:calc(var(--body)*.85); }
+.mi.primary { height:calc(56*var(--u)); font-size:var(--section); background:var(--raised); border-color:var(--edge-quiet); }
+.mi.selected { background:var(--selected-bg); border-color:var(--accent); }
+.mi.hover { background:var(--raised-hover); }
+.sep { height:1px; background:var(--edge-quiet); margin:var(--md) 0; }
+.secondary-row { display:flex; gap:var(--xs); flex-wrap:wrap; }
+.secondary-row .mi { height:calc(38*var(--u)); color:var(--text-muted); padding:0 var(--sm); }
+.version { position:absolute; right:calc(20*var(--u)); bottom:calc(14*var(--u)); color:#b7ae9dcc; font-size:calc(var(--body)*.85); text-shadow:0 1px 0 #000; text-align:right; }
+.motd { position:absolute; right:calc(20*var(--u)); top:calc(20*var(--u)); width:calc(360*var(--u)); padding:var(--sm) var(--md); }
+.motd h3 { margin:0 0 var(--xs); font-weight:normal; font-size:var(--body); color:var(--accent); }
+.motd p { margin:0; color:var(--text-muted); font-size:calc(var(--body)*.9); }
+</style></head>
+<body><div class="viewport">
+<div class="art"></div><div class="vignette"></div>
+<div class="mock-tag">MOCKUP — generated HTML, not a runtime capture</div>
+<div class="win menu frame-dialog">
+  <div class="kicker"><span class="ic i-world" style="width:18px;height:18px"></span>Last played: <span style="color:var(--text)">Lockett · Astral world · Autumn day 12</span></div>
+  <div class="mi primary selected"><span class="k">c</span>Continue<span class="sub">Lockett</span></div>
+  <div class="mi primary"><span class="k">n</span>New Game<span class="sub"><span class="ic muted i-chevron_right" style="width:14px;height:14px"></span></span></div>
+  <div class="mi primary"><span class="k">l</span>Load<span class="sub">2 worlds</span></div>
+  <div class="mi"><span class="k">w</span>World<span class="sub">manage</span></div>
+  <div class="mi"><span class="k">t</span>Tutorial Game</div>
+  <div class="sep"></div>
+  <div class="secondary-row">
+    <div class="mi"><span class="k">s</span>Settings</div>
+    <div class="mi"><span class="k">h</span>Help</div>
+    <div class="mi"><span class="k">r</span>Credits</div>
+    <div class="mi" style="margin-left:auto;color:var(--danger)"><span class="k">q</span>Quit</div>
+  </div>
+</div>
+<div class="win motd frame-popup"><h3>Message of the day</h3><p>Astral client 0.1.2 · Astral tileset 0.1.44. Equipment now shows inventory beside the tree. See Help for the controls overview.</p></div>
+<div class="version">Astral client 0.1.2 · Cataclysm: Dark Days Ahead · build 2026-09-28<br>title art: Astral project · CC-BY-SA</div>
+<div class="legend">Mockup. Menu entries and hotkeys are the existing main-menu strings; the title art is the shipped data/title/astral.png.</div>
+</div></body></html>

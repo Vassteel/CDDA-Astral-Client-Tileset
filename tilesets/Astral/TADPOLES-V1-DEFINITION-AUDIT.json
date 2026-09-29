@@ -1,0 +1,320 @@
+{
+  "active_mods": [
+    "bombastic_perks",
+    "dda",
+    "innawood",
+    "limitless_backpack",
+    "megafauna",
+    "no_npc_food",
+    "perk_melee_system",
+    "personal_portal_storms"
+  ],
+  "records": [
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "abstract": "mon_proxy_tadpole",
+        "type": "MONSTER",
+        "description": {
+          "str": "The larval form of some species of frog.  This one is only hypothetical and you shouldn't be seeing it without debug.",
+          "//~": "NO_I18N"
+        },
+        "name": {
+          "str": "tadpole"
+        },
+        "default_faction": "fish_tiny",
+        "bodytype": "fish",
+        "categories": [
+          "WILDLIFE"
+        ],
+        "species": [
+          "AMPHIBIAN"
+        ],
+        "volume": "5 ml",
+        "weight": "3 g",
+        "hp": 1,
+        "speed": 70,
+        "move_skills": {
+          "swim": 8
+        },
+        "material": [
+          "flesh"
+        ],
+        "symbol": "t",
+        "color": "brown",
+        "aggression": -60,
+        "morale": -5,
+        "dodge": 10,
+        "melee_training_cap": 0,
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology"
+        ],
+        "harvest": "exempt",
+        "vision_night": 30,
+        "fear_triggers": [
+          "PLAYER_CLOSE",
+          "HURT",
+          "FRIEND_ATTACKED",
+          "SOUND"
+        ],
+        "death_function": {
+          "corpse_type": "NO_CORPSE",
+          "message": "The %s is smashed to non-recognizable pieces."
+        },
+        "flags": [
+          "FISHABLE",
+          "SEES",
+          "SMELLS",
+          "HEARS",
+          "AQUATIC",
+          "WATER_CAMOUFLAGE",
+          "SWARMS"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_leo_tadpole",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_tadpole",
+        "name": {
+          "str": "tadpole"
+        },
+        "description": "A speckled, gray-brown tadpole.  Its tail is broad and paddle-like, and its body rotund.  Sometime soon it will grow legs and lose its tail entirely.",
+        "color": "dark_gray",
+        "upgrades": {
+          "age_grow": 22,
+          "into_group": "GROUP_TADPOLE_LEO"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_bullfrog_tadpole",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_tadpole",
+        "name": {
+          "str": "tadpole"
+        },
+        "description": "Every part of this speckled, green-brown tadpole is thick and broad.  It must be from some larger species of frog.",
+        "color": "green",
+        "volume": "240 ml",
+        "weight": "120 g",
+        "hp": 2,
+        "upgrades": {
+          "age_grow": 91,
+          "into_group": "GROUP_TADPOLE_BULLFROG"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_fowler_tadpole",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_tadpole",
+        "name": {
+          "str": "tadpole"
+        },
+        "description": "The larval form of some species of frog.  Soon enough it will undergo metamorphosis into its adult form.  This dark, speckled one has a rather large, bulbous body compared to its thin, tapered tail.",
+        "upgrades": {
+          "age_grow": 8,
+          "into_group": "GROUP_TADPOLE_FOWLER"
+        },
+        "extend": {
+          "flags": [
+            "POISON"
+          ]
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_freedom_tadpole",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_tadpole",
+        "name": {
+          "str": "tadpole"
+        },
+        "description": "The larval form of some species of frog.  Soon enough it will undergo metamorphosis into its adult form.  This dark, speckled one has a rather large, bulbous body compared to its thin, tapered tail.",
+        "upgrades": {
+          "age_grow": 15,
+          "into_group": "GROUP_TADPOLE_FREEDOM"
+        },
+        "extend": {
+          "flags": [
+            "POISON"
+          ]
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_peeper_tadpole",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_tadpole",
+        "name": {
+          "str": "tadpole"
+        },
+        "description": "A tiny larval frog.  Almost solid black, this one is barely a speck in the water around it.",
+        "color": "dark_gray",
+        "upgrades": {
+          "age_grow": 15,
+          "into_group": "GROUP_TADPOLE_PEEPER"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_gray_tadpole",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_tadpole",
+        "name": {
+          "str": "tadpole"
+        },
+        "description": "This rather unique tadpole might be mistaken for a small fish.  It sports a very broad tail with bright red-orange coloration at its end, dotted with black spots.",
+        "color": "red",
+        "upgrades": {
+          "age_grow": 15,
+          "into_group": "GROUP_TADPOLE_GRAY"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_mink_tadpole",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_tadpole",
+        "description": "A brown and tan speckled tadpole with a wide body and very broad, feather-shaped tail.",
+        "name": {
+          "str": "tadpole"
+        },
+        "upgrades": {
+          "age_grow": 91,
+          "into": "mon_mink_frog"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_pickerel_tadpole",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_tadpole",
+        "description": "This yellowish tadpole is covered in flecks of brown and cream coloring.  Its eyes rest close together on a notably pointed face.",
+        "name": {
+          "str": "tadpole"
+        },
+        "color": "yellow",
+        "upgrades": {
+          "age_grow": 22,
+          "into_group": "GROUP_TADPOLE_PICKEREL"
+        },
+        "extend": {
+          "flags": [
+            "POISON"
+          ]
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_green_tadpole",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_tadpole",
+        "description": "A corpulent green tadpole with a yellow underbelly and black speckles.",
+        "name": {
+          "str": "tadpole"
+        },
+        "color": "green",
+        "upgrades": {
+          "age_grow": 22,
+          "into_group": "GROUP_TADPOLE_GREEN"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_wood_tadpole",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_tadpole",
+        "description": "This mottled brown tadpole appears rather typical until you can get a glimpse from the side.  Then its high, peaked mouth and low round belly stand out in profile.",
+        "name": {
+          "str": "tadpole"
+        },
+        "upgrades": {
+          "age_grow": 15,
+          "into_group": "GROUP_TADPOLE_WOOD"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_spade_tadpole",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_tadpole",
+        "description": "A squat and wide-bellied tadpole with wide-set eyes.",
+        "name": {
+          "str": "tadpole"
+        },
+        "upgrades": {
+          "age_grow": 8,
+          "into": "mon_spade_frog"
+        },
+        "extend": {
+          "flags": [
+            "POISON"
+          ]
+        }
+      }
+    }
+  ],
+  "creature_ids": [
+    "mon_leo_tadpole",
+    "mon_bullfrog_tadpole",
+    "mon_fowler_tadpole",
+    "mon_freedom_tadpole",
+    "mon_peeper_tadpole",
+    "mon_gray_tadpole",
+    "mon_mink_tadpole",
+    "mon_pickerel_tadpole",
+    "mon_green_tadpole",
+    "mon_wood_tadpole",
+    "mon_spade_tadpole"
+  ],
+  "renderer_states": [],
+  "evidence": "src/cata_tiles.cpp:3680 prefixes corpse_ to monster id",
+  "seasons": "Neutral year-round pre-leg larval states. Species-specific body/tail/color descriptions retained. Fowler and freedom toad tadpoles share identical appearance fields; only growth behavior differs. All inherit NO_CORPSE. Adult and mutant growth-group branches remain in their own visual-family queue.",
+  "runtime_review": "pending; conditional mod interactions outside this static audit",
+  "conditional_files_skipped": [
+    "data/mods/innawood/mod_interactions/bombastic_perks/experience_eocs.json",
+    "data/mods/innawood/mod_interactions/sorcerer/experience_eocs.json",
+    "data/mods/innawood/mod_interactions/skyisland/region_overlay.json",
+    "data/mods/innawood/mod_interactions/perk_melee_system/experience_eocs.json",
+    "data/mods/Megafauna/mod_interactions/defense_mode/monsters.json",
+    "data/mods/Megafauna/mod_interactions/defense_mode/monstergroups.json"
+  ]
+}

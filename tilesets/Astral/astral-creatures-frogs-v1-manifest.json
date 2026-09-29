@@ -1,0 +1,655 @@
+{
+  "name": "Frogs and toads",
+  "revision": "frogs-v1",
+  "seasonal_policy": "Neutral living and corpse states across all seasons. Breeding seasons are behavior, not named appearance states. Tailed frog is the game mutant with a broad paddle tail, not real Ascaphus. All species inherit ordinary corpse behavior. Gray frog camouflage has no dedicated renderer state.",
+  "assets": [
+    {
+      "key": "fowler-living",
+      "id": "mon_fowler_toad",
+      "label": "Fowler / living",
+      "max": [
+        144,
+        96
+      ],
+      "state": "living",
+      "description": "Fowler's toads secrete a harmful and distasteful compound from their backs.  This helps safeguard them from predators and also gives them a distinctive odor like boiled peanuts.",
+      "source": "sources/fowler-living.png",
+      "native": "native/fowler-living.png",
+      "source_sha256": "7f22458f1a8fb409d93a88be63b7883d490ede682b5f12f7962f37fbeb92d1ed",
+      "native_sha256": "c15aa2eec9b3baa1490f819f7f89b5d5755325b23fb0080d3780a7ad6df786bf",
+      "prompt_sha256": "a74ae905f4848ff9d3c3808ec96037ad2e9889588007444d301853ccd82d03f5",
+      "source_dimensions": [
+        666,
+        696
+      ],
+      "crop": [
+        130,
+        198,
+        572,
+        550
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        8.375,
+        17.0,
+        23.5,
+        29.0
+      ]
+    },
+    {
+      "key": "fowler-corpse",
+      "id": "corpse_mon_fowler_toad",
+      "label": "Fowler / corpse",
+      "max": [
+        144,
+        64
+      ],
+      "state": "corpse",
+      "description": "Fowler's toads secrete a harmful and distasteful compound from their backs.  This helps safeguard them from predators and also gives them a distinctive odor like boiled peanuts.",
+      "source": "sources/fowler-corpse.png",
+      "native": "native/fowler-corpse.png",
+      "source_sha256": "825e01f36aa422dc3aeb0c17fe55d9a6e7eb985822111e6923ffaadeed39b410",
+      "native_sha256": "26a194d3e8fae9f7b0266c6cba1ceb6a281b7ee449fd1b4d9f63bad587da12d2",
+      "prompt_sha256": "a74ae905f4848ff9d3c3808ec96037ad2e9889588007444d301853ccd82d03f5",
+      "source_dimensions": [
+        660,
+        566
+      ],
+      "crop": [
+        42,
+        126,
+        619,
+        425
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        8.25,
+        21.0,
+        23.75,
+        29.0
+      ]
+    },
+    {
+      "key": "gray-living",
+      "id": "mon_gray_frog",
+      "label": "Gray / living",
+      "max": [
+        120,
+        96
+      ],
+      "state": "living",
+      "description": "This treefrog can change its coloration much like a chameleon, shifting from a near-white gray, through greens and browns, to a dark, almost charcoal color.",
+      "source": "sources/gray-living.png",
+      "native": "native/gray-living.png",
+      "source_sha256": "cde9b76315806a26615486b5c47413bee08d781e8787084ffde3ef172524a534",
+      "native_sha256": "25ee32431bfa03ce333c1f9b4b7d6a67fcfdf38b98e39fe587b4aaf2ddd68b9d",
+      "prompt_sha256": "a74ae905f4848ff9d3c3808ec96037ad2e9889588007444d301853ccd82d03f5",
+      "source_dimensions": [
+        596,
+        696
+      ],
+      "crop": [
+        95,
+        218,
+        516,
+        570
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        8.75,
+        17.0,
+        23.125,
+        29.0
+      ]
+    },
+    {
+      "key": "gray-corpse",
+      "id": "corpse_mon_gray_frog",
+      "label": "Gray / corpse",
+      "max": [
+        120,
+        64
+      ],
+      "state": "corpse",
+      "description": "This treefrog can change its coloration much like a chameleon, shifting from a near-white gray, through greens and browns, to a dark, almost charcoal color.",
+      "source": "sources/gray-corpse.png",
+      "native": "native/gray-corpse.png",
+      "source_sha256": "7485acc54d6267dd34cf30382d18b82a17ea476bc4d644506fba6893fc8fdc44",
+      "native_sha256": "e4fbe0a6744cf7a4630e1b8de5fc9027cf2e8363affb1bdcaa5db022988a70b8",
+      "prompt_sha256": "a74ae905f4848ff9d3c3808ec96037ad2e9889588007444d301853ccd82d03f5",
+      "source_dimensions": [
+        602,
+        566
+      ],
+      "crop": [
+        42,
+        153,
+        570,
+        454
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        9.0,
+        21.0,
+        23.0,
+        29.0
+      ]
+    },
+    {
+      "key": "leo-living",
+      "id": "mon_leo_frog",
+      "label": "Leo / living",
+      "max": [
+        144,
+        96
+      ],
+      "state": "living",
+      "description": "Leopard frogs are named for the brown spots on their backs and legs.  Although limited by size, they too are voracious predators.",
+      "source": "sources/leo-living.png",
+      "native": "native/leo-living.png",
+      "source_sha256": "0aeadb11af3d4e0eb62c81ed9c468227ffd40ff9c1cace3098f5f55333d9faf2",
+      "native_sha256": "093e46e41a748cf32a38f317eb11790c0da17b9aadd712e8159530e01cfb07f7",
+      "prompt_sha256": "4f310ed4eb3ebb9d07543d0684a98270122b32e0fb923ed61f7f69cf71156b07",
+      "source_dimensions": [
+        652,
+        686
+      ],
+      "crop": [
+        105,
+        199,
+        556,
+        557
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        8.375,
+        17.0,
+        23.5,
+        29.0
+      ]
+    },
+    {
+      "key": "leo-corpse",
+      "id": "corpse_mon_leo_frog",
+      "label": "Leo / corpse",
+      "max": [
+        144,
+        64
+      ],
+      "state": "corpse",
+      "description": "Leopard frogs are named for the brown spots on their backs and legs.  Although limited by size, they too are voracious predators.",
+      "source": "sources/leo-corpse.png",
+      "native": "native/leo-corpse.png",
+      "source_sha256": "a0bb4a89f837ef07212312a674d7cc0da15267214d842d2dd363c121940908ba",
+      "native_sha256": "356a85dab04f85928df1902fed0602b7b40d7376d631f42b0e34781ffc1f4552",
+      "prompt_sha256": "4f310ed4eb3ebb9d07543d0684a98270122b32e0fb923ed61f7f69cf71156b07",
+      "source_dimensions": [
+        661,
+        547
+      ],
+      "crop": [
+        60,
+        130,
+        610,
+        385
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        7.375,
+        21.0,
+        24.625,
+        29.0
+      ]
+    },
+    {
+      "key": "mink-living",
+      "id": "mon_mink_frog",
+      "label": "Mink / living",
+      "max": [
+        128,
+        96
+      ],
+      "state": "living",
+      "description": "This pungent frog is named for the mammal with which it shares both name and odor.  Its skin is light green underneath a heavy spatter of almost black mottling.",
+      "source": "sources/mink-living.png",
+      "native": "native/mink-living.png",
+      "source_sha256": "4330f26b417bb8367e275eef83e77d25f153dcdd8865c1c31cee9630c7971842",
+      "native_sha256": "b8b5132248120ba15e3d83e963a275c1b372ac2f8739938cfb1ebdcd40d7f5cd",
+      "prompt_sha256": "4f310ed4eb3ebb9d07543d0684a98270122b32e0fb923ed61f7f69cf71156b07",
+      "source_dimensions": [
+        640,
+        686
+      ],
+      "crop": [
+        96,
+        212,
+        541,
+        551
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        8.125,
+        17.0,
+        23.875,
+        29.0
+      ]
+    },
+    {
+      "key": "mink-corpse",
+      "id": "corpse_mon_mink_frog",
+      "label": "Mink / corpse",
+      "max": [
+        128,
+        64
+      ],
+      "state": "corpse",
+      "description": "This pungent frog is named for the mammal with which it shares both name and odor.  Its skin is light green underneath a heavy spatter of almost black mottling.",
+      "source": "sources/mink-corpse.png",
+      "native": "native/mink-corpse.png",
+      "source_sha256": "0b29d017d00e1ac04202d94b2179b943bd9f4f59b553f405a08528af4c2b305c",
+      "native_sha256": "78782db3df3c35e2456986c699f285b03b41bd9828deb5ca439da84c70a64ba6",
+      "prompt_sha256": "4f310ed4eb3ebb9d07543d0684a98270122b32e0fb923ed61f7f69cf71156b07",
+      "source_dimensions": [
+        631,
+        547
+      ],
+      "crop": [
+        51,
+        140,
+        585,
+        407
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        8.0,
+        21.0,
+        24.0,
+        29.0
+      ]
+    },
+    {
+      "key": "peeper-living",
+      "id": "mon_peeper_frog",
+      "label": "Peeper / living",
+      "max": [
+        96,
+        96
+      ],
+      "state": "living",
+      "description": "This diminutive frog has a distinctive chirping call and bands of darker skin that come to form a rough 'X' shape on its back.",
+      "source": "sources/peeper-living.png",
+      "native": "native/peeper-living.png",
+      "source_sha256": "16d7a51e305ad1f442f35833307fdb7a0b5289fd7b107fc9a750f87882fc15d0",
+      "native_sha256": "fd3c59d288efc61dcbbeb66d391c4e072987f745f7cc35c6ffafe438aacf8290",
+      "prompt_sha256": "cdad29df7fda30fbe3278093c6257917626428bf94514d686ae60c6e6ec27835",
+      "source_dimensions": [
+        617,
+        700
+      ],
+      "crop": [
+        139,
+        244,
+        528,
+        551
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        10.0,
+        19.5,
+        22.0,
+        29.0
+      ]
+    },
+    {
+      "key": "peeper-corpse",
+      "id": "corpse_mon_peeper_frog",
+      "label": "Peeper / corpse",
+      "max": [
+        96,
+        64
+      ],
+      "state": "corpse",
+      "description": "This diminutive frog has a distinctive chirping call and bands of darker skin that come to form a rough 'X' shape on its back.",
+      "source": "sources/peeper-corpse.png",
+      "native": "native/peeper-corpse.png",
+      "source_sha256": "f53094ddad5b8d37d604a0981bc094c95926d1d2902865b0f4b0e606932cc086",
+      "native_sha256": "3dbfe02c38255ea8ff51c6b2ee4002db55fa3cec98e6304e7b958ee7bfb8dd1a",
+      "prompt_sha256": "cdad29df7fda30fbe3278093c6257917626428bf94514d686ae60c6e6ec27835",
+      "source_dimensions": [
+        641,
+        562
+      ],
+      "crop": [
+        86,
+        160,
+        599,
+        396
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        10.0,
+        23.5,
+        22.0,
+        29.0
+      ]
+    },
+    {
+      "key": "spade-living",
+      "id": "mon_spade_frog",
+      "label": "Spade / living",
+      "max": [
+        128,
+        96
+      ],
+      "state": "living",
+      "description": "The eastern variety of the American spadefoot toad is a squat, round toad with vertical pupils.  Its body is colored a muddy mixture of browns, tans, and yellow-greens.  Their name comes from the keratinous projection on their hind legs that aids them in digging.",
+      "source": "sources/spade-living.png",
+      "native": "native/spade-living.png",
+      "source_sha256": "d845dd64b4cc47a15509180e118aaf0a99bacd7408508988777845d7e8f217a6",
+      "native_sha256": "642c00dc4528529e9c6a88db0ef5af198fdfb2155e75b5a473e1aee191e04f53",
+      "prompt_sha256": "cdad29df7fda30fbe3278093c6257917626428bf94514d686ae60c6e6ec27835",
+      "source_dimensions": [
+        645,
+        700
+      ],
+      "crop": [
+        90,
+        244,
+        559,
+        562
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        8.0,
+        18.125,
+        24.0,
+        29.0
+      ]
+    },
+    {
+      "key": "spade-corpse",
+      "id": "corpse_mon_spade_frog",
+      "label": "Spade / corpse",
+      "max": [
+        128,
+        64
+      ],
+      "state": "corpse",
+      "description": "The eastern variety of the American spadefoot toad is a squat, round toad with vertical pupils.  Its body is colored a muddy mixture of browns, tans, and yellow-greens.  Their name comes from the keratinous projection on their hind legs that aids them in digging.",
+      "source": "sources/spade-corpse.png",
+      "native": "native/spade-corpse.png",
+      "source_sha256": "96b4b3c6b870d8711d24adbbbf7ff1240c5eaef524edf392ec7dcb50ac21a3fc",
+      "native_sha256": "4c76939d778641ced1cf9579424bf1e404b95405b539ce77efc480534edf8138",
+      "prompt_sha256": "cdad29df7fda30fbe3278093c6257917626428bf94514d686ae60c6e6ec27835",
+      "source_dimensions": [
+        621,
+        562
+      ],
+      "crop": [
+        42,
+        138,
+        573,
+        414
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        8.25,
+        21.0,
+        23.625,
+        29.0
+      ]
+    },
+    {
+      "key": "wood-living",
+      "id": "mon_wood_frog",
+      "label": "Wood / living",
+      "max": [
+        128,
+        96
+      ],
+      "state": "living",
+      "description": "This frog wears a pattern of tans and browns, with a darker eye mask and a light cream underbelly.  Its coverings make for great camouflage among the dry leaves and tree bark.",
+      "source": "sources/wood-living.png",
+      "native": "native/wood-living.png",
+      "source_sha256": "81b5e72328d6814efb26dac9aae8221217f85b4175359d2bdf2a3b7beb8e157e",
+      "native_sha256": "eecda6defe0f34769ccb316afcfe2f966c76098afddd018ebf6fec5135a7470e",
+      "prompt_sha256": "b1ee43073880e8907793486ce89832d323b446779741cb350facd4bccd8ac599",
+      "source_dimensions": [
+        625,
+        664
+      ],
+      "crop": [
+        78,
+        226,
+        516,
+        534
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        8.0,
+        17.75,
+        24.0,
+        29.0
+      ]
+    },
+    {
+      "key": "wood-corpse",
+      "id": "corpse_mon_wood_frog",
+      "label": "Wood / corpse",
+      "max": [
+        128,
+        64
+      ],
+      "state": "corpse",
+      "description": "This frog wears a pattern of tans and browns, with a darker eye mask and a light cream underbelly.  Its coverings make for great camouflage among the dry leaves and tree bark.",
+      "source": "sources/wood-corpse.png",
+      "native": "native/wood-corpse.png",
+      "source_sha256": "0a566d8299481703f3355f336cc3b57eaed2afe3b81130b87be73c21ee61d41e",
+      "native_sha256": "c998a3cb4e3fd2fe1fc7e7e7bf2e1d2b7a4713ca2d19559eca0f9a11839a9b51",
+      "prompt_sha256": "b1ee43073880e8907793486ce89832d323b446779741cb350facd4bccd8ac599",
+      "source_dimensions": [
+        662,
+        492
+      ],
+      "crop": [
+        59,
+        120,
+        610,
+        345
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        8.0,
+        22.5,
+        24.0,
+        29.0
+      ]
+    },
+    {
+      "key": "tail-living",
+      "id": "mon_tail_frog",
+      "label": "Tail / living",
+      "max": [
+        176,
+        96
+      ],
+      "state": "living",
+      "description": "This very large, funky frog has an accentuated, paddle-like tail that accounts for half its body mass.  It is green with many brown spots scattering across its back.",
+      "source": "sources/tail-living.png",
+      "native": "native/tail-living.png",
+      "source_sha256": "dfe14a6c7a802ffd0ada6653062348ab3bda29617812a18ee9996e4fa722b16f",
+      "native_sha256": "4379a08a380ddaff6395b823b4dd6fe5a6028b2947fb5e55205cfd6f3689628d",
+      "prompt_sha256": "b1ee43073880e8907793486ce89832d323b446779741cb350facd4bccd8ac599",
+      "source_dimensions": [
+        753,
+        664
+      ],
+      "crop": [
+        110,
+        248,
+        719,
+        544
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        5.0,
+        18.25,
+        27.0,
+        29.0
+      ]
+    },
+    {
+      "key": "tail-corpse",
+      "id": "corpse_mon_tail_frog",
+      "label": "Tail / corpse",
+      "max": [
+        176,
+        64
+      ],
+      "state": "corpse",
+      "description": "This very large, funky frog has an accentuated, paddle-like tail that accounts for half its body mass.  It is green with many brown spots scattering across its back.",
+      "source": "sources/tail-corpse.png",
+      "native": "native/tail-corpse.png",
+      "source_sha256": "8dc9acaca238abc9bed0241363adf9c125343f3f0c60a0c860aaab42ba19a900",
+      "native_sha256": "4858a394cda99f5b057b209918b268f661fe1eb0960725636445fcce1c14a757",
+      "prompt_sha256": "b1ee43073880e8907793486ce89832d323b446779741cb350facd4bccd8ac599",
+      "source_dimensions": [
+        716,
+        492
+      ],
+      "crop": [
+        52,
+        124,
+        683,
+        355
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        5.0,
+        21.0,
+        26.875,
+        29.0
+      ]
+    }
+  ],
+  "status": "staged in creatures-glyph-batch-01; archive and user/live acceptance pending",
+  "generator": "built-in imagegen",
+  "client_modified": false,
+  "visual_review": "source and native preview inspected; user/live review pending",
+  "review_notes": [
+    "All sixteen silhouettes isolated with transparent gutters; native 4x and true-scale preview inspected.",
+    "Species retain differentiating palette, compact toad versus frog shape, eye mask, dorsal markings, and game-mutant paddle tail. Fine markings are necessarily reduced at tiny game sizes.",
+    "Living and corpse pairs remain distinct; no live-client validation."
+  ],
+  "validation": {
+    "unique_sprites": 16,
+    "creature_ids": [
+      "mon_fowler_toad",
+      "mon_gray_frog",
+      "mon_leo_frog",
+      "mon_mink_frog",
+      "mon_peeper_frog",
+      "mon_spade_frog",
+      "mon_wood_frog",
+      "mon_tail_frog"
+    ],
+    "corpse_ids": [
+      "corpse_mon_fowler_toad",
+      "corpse_mon_gray_frog",
+      "corpse_mon_leo_frog",
+      "corpse_mon_mink_frog",
+      "corpse_mon_peeper_frog",
+      "corpse_mon_spade_frog",
+      "corpse_mon_wood_frog",
+      "corpse_mon_tail_frog"
+    ],
+    "total_slots": 19715,
+    "prior_non_config_files_preserved": 391,
+    "unrelated_mappings_preserved": true,
+    "atlas_bytes": "passed",
+    "source_prompt_native_hashes": "passed",
+    "reference_indices": "passed",
+    "client_modified": false,
+    "live_review": "pending"
+  }
+}

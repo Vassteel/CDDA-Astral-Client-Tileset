@@ -1,0 +1,21 @@
+{
+  "species": "Fragaria virginiana",
+  "reference_role": "Anatomy only; existing Astral trees remain mandatory style reference",
+  "photos": [
+    {
+      "source_page": "https://wcbotanicalclub.org/wild-strawberry-fragaria-virginiana-20210510_123407/",
+      "image": "https://wcbotanicalclub.org/wp-content/uploads/2021/05/wild-strawberry-fragaria-virginiana-20210510_123407.jpg",
+      "local": "strawberry-habit.jpg"
+    },
+    {
+      "source_page": "https://www.prairiemoon.com/fragaria-virginiana-wild-strawberry",
+      "image": "https://www.prairiemoon.com/mm5/graphics/00000001/3/Wild%20Strawberry%20Flower%20and%20Fruit_483x730_2.jpg",
+      "local": "strawberry-fruit.jpg"
+    }
+  ],
+  "observations": "Low herbaceous rosettes, toothed trifoliate leaves, slender runners, five white flower petals and yellow centers; small red fruits with seed dimples and green calyx. Game fruit season summer.",
+  "game_ids": [
+    "t_shrub_strawberry",
+    "t_shrub_strawberry_harvested"
+  ]
+}

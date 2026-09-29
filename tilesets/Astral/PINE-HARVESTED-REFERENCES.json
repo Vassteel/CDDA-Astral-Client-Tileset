@@ -1,0 +1,8 @@
+{
+  "species": "Pinus strobus",
+  "page": "https://www.treesandshrubsonline.org/articles/pinus/pinus-strobus/",
+  "photo": "https://www.treesandshrubsonline.org/site/assets/files/6732/pinus-strobus-6.jpg",
+  "local_photo": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/flora/references/pine-photo.jpg",
+  "use": "Missing harvested state only; approved original pine seasonal sources are exact edit targets.",
+  "game": "t_tree_pine_harvested: some branches and resin clumps stripped, cones not developed. Retain evergreen foliage and main silhouette; remove two small low branch tips and mature cones/resin."
+}

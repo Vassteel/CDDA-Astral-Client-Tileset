@@ -1,0 +1,182 @@
+{
+  "name": "Black-capped chickadee",
+  "revision": "chickadee-v1",
+  "seasonal_policy": "Natural plumage shared across spring, summer, autumn and winter; no seasonal morph defined.",
+  "assets": [
+    {
+      "key": "chickadee-adult",
+      "id": "mon_chickadee",
+      "label": "Adult / living",
+      "max": [
+        176,
+        176
+      ],
+      "state": "adult living",
+      "source": "sources/chickadee-adult.png",
+      "native": "native/chickadee-adult.png",
+      "source_sha256": "4a49b8958d6e94a2996e754868e5d236d8557fddebaaf30412963dfbe1adcaaa",
+      "native_sha256": "e9c6bc025d795d69ae9cd69ba32c8c30b1c96ce4ed0f5b8300e32a32a7ce7ec3",
+      "prompt_sha256": "61ebaa48aceccf4421f989f47418790536a43ed94abddbe03aac27e8990c8e2a",
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "crop": [
+        137,
+        314,
+        1205,
+        1097
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        5.0,
+        12.875,
+        27.0,
+        29.0
+      ]
+    },
+    {
+      "key": "chickadee-chick",
+      "id": "mon_chickadee_chick",
+      "label": "Chick / living",
+      "max": [
+        128,
+        128
+      ],
+      "state": "chick living",
+      "source": "sources/chickadee-chick.png",
+      "native": "native/chickadee-chick.png",
+      "source_sha256": "d5f53cc9dd5360c29017d2256cb21ff1021701a5221887dd5cd19358d0ad7acf",
+      "native_sha256": "4342f93ff7eca9f29bdd9bfd6f268ea3102443d9a0c21b445763fc3c3b392a03",
+      "prompt_sha256": "c2399fb0530fd64c39b924a1c24c77dd9ecdb1ee423ed654052fb225e060516e",
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "crop": [
+        296,
+        390,
+        1052,
+        1101
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        8.0,
+        14.0,
+        24.0,
+        29.0
+      ]
+    },
+    {
+      "key": "chickadee-adult-corpse",
+      "id": "corpse_mon_chickadee",
+      "label": "Adult / corpse",
+      "max": [
+        176,
+        96
+      ],
+      "state": "adult corpse",
+      "source": "sources/chickadee-adult-corpse.png",
+      "native": "native/chickadee-adult-corpse.png",
+      "source_sha256": "7ab0db36a206c453fd81cca255500a26d1a88ed3365724618953fd4b54541c2e",
+      "native_sha256": "1ee5b385e17004eb8e95794d2f5cf7a0b2317f05e8a70d54a66265beefc9eb7c",
+      "prompt_sha256": "8d0533fd7ef4b6149dea0481cbeac89dc0b5fefcaff258d5efbd24c06956d3cd",
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "crop": [
+        135,
+        511,
+        1203,
+        915
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        5.0,
+        20.625,
+        27.0,
+        29.0
+      ]
+    },
+    {
+      "key": "chickadee-chick-corpse",
+      "id": "corpse_mon_chickadee_chick",
+      "label": "Chick / corpse",
+      "max": [
+        128,
+        72
+      ],
+      "state": "chick corpse",
+      "source": "sources/chickadee-chick-corpse.png",
+      "native": "native/chickadee-chick-corpse.png",
+      "source_sha256": "447ce4fab8468f7ee3b4aa1b8a1901b51d4c989a79a4add9b1246bfe5d53cfbf",
+      "native_sha256": "a17fcef94e0ffb8a0dc216b241fa7a9619c9539f886da66d687f1e5171c0b294",
+      "prompt_sha256": "0718d303d8293fd4be38f2dd570aec662fb7a37d0a103d55c550ed148fbc77b1",
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "crop": [
+        206,
+        557,
+        1050,
+        987
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        8.0,
+        20.875,
+        24.0,
+        29.0
+      ]
+    }
+  ],
+  "status": "packaged in Astral 0.1.37; user/live review pending",
+  "generator": "built-in imagegen",
+  "client_modified": false,
+  "visual_review": "source and native preview inspected; user/live review pending",
+  "release": "0.1.37",
+  "validation": {
+    "version": "0.1.37",
+    "unique_sprites": 4,
+    "creature_ids": [
+      "mon_chickadee",
+      "mon_chickadee_chick"
+    ],
+    "corpse_ids": [
+      "corpse_mon_chickadee",
+      "corpse_mon_chickadee_chick"
+    ],
+    "seasonal_policy": "Natural plumage shared across spring, summer, autumn and winter; no seasonal morph defined.",
+    "seasonal_mapping_ids": 20,
+    "source_prompt_export_hashes": "passed",
+    "binary_alpha_and_bounds": "passed",
+    "unrelated_mappings_and_previous_art_bytes": "preserved",
+    "atlas_bytes": "passed",
+    "all_sprite_references_in_range": true,
+    "total_sprite_slots": 19618,
+    "client_modified": false,
+    "user_live_acceptance": "pending"
+  }
+}

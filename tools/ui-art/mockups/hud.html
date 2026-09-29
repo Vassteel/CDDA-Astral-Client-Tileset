@@ -1,0 +1,94 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Astral HUD — MOCKUP</title>
+<link rel="stylesheet" href="astral.css"><link rel="stylesheet" href="icons.css">
+<style>
+:root { --u: var(--scale, 1px); }
+.map-bg { opacity:1; }
+.side { position:absolute; right:0; top:0; bottom:calc(52*var(--u)); width:calc(330*var(--u)); display:flex; flex-direction:column; gap:var(--sm); padding:var(--sm); background:rgba(17,21,22,.92); border-left:2px solid var(--edge-quiet); }
+.pane { padding:var(--sm) var(--md); background:var(--surface); border:1px solid var(--edge-quiet); border-radius:3px; }
+.pane h4 { margin:0 0 var(--xs); font-weight:normal; font-size:calc(var(--body)*.85); color:var(--text-muted); display:flex; align-items:center; gap:var(--xs); }
+.pane h4 .ic { width:14px; height:14px; }
+.stat { display:grid; grid-template-columns:calc(72*var(--u)) 1fr calc(48*var(--u)); gap:var(--sm); align-items:center; margin:calc(3*var(--u)) 0; font-size:calc(var(--body)*.95); }
+.stat .v { text-align:right; color:var(--text-muted); }
+.warn { display:flex; align-items:center; gap:var(--sm); padding:var(--sm) var(--md); border:1px solid var(--danger); border-radius:3px; color:var(--text); background:#2a1a17; }
+.warn .ic { width:20px; height:20px; }
+.combat { display:grid; grid-template-columns:repeat(5,1fr); gap:var(--xs); }
+.cbtn { display:flex; flex-direction:column; align-items:center; gap:2px; padding:var(--xs) 0; background:var(--raised); border:1px solid var(--edge-quiet); border-radius:3px; font-size:calc(var(--body)*.8); color:var(--text); }
+.cbtn .ic { width:22px; height:22px; }
+.cbtn .cost { color:var(--text-muted); font-size:calc(var(--body)*.7); }
+.cbtn.disabled { opacity:.45; }
+.cbtn.active { border-color:var(--accent); background:var(--selected-bg); }
+.policy { display:flex; gap:var(--xs); margin-top:var(--xs); align-items:center; font-size:calc(var(--body)*.85); }
+.pill { padding:2px var(--sm); border:1px solid var(--edge-quiet); border-radius:10px; color:var(--text-muted); }
+.pill.on { color:var(--text-on-accent); background:var(--accent); border-color:var(--accent); }
+.log { flex:1; min-height:0; overflow:hidden; font-size:calc(var(--body)*.9); }
+.log p { margin:2px 0; } .log .old { color:var(--text-muted); } .log .bad { color:var(--danger); } .log .good { color:var(--success); }
+.mini { height:calc(120*var(--u)); background:var(--deep-bg); border:1px solid var(--edge-quiet); display:grid; place-items:center; color:var(--text-muted); font-size:12px; }
+.toolbar { position:absolute; left:0; right:0; bottom:0; height:calc(52*var(--u)); display:flex; align-items:center; gap:var(--xs); padding:0 var(--sm); background:rgba(17,21,22,.94); border-top:2px solid var(--edge-quiet); }
+.tb { display:flex; align-items:center; gap:var(--xs); height:calc(38*var(--u)); padding:0 var(--md); background:var(--raised); border:1px solid var(--edge-quiet); border-radius:3px; color:var(--text); font-size:calc(var(--body)*.9); }
+.tb .ic { width:18px; height:18px; } .tb .k { color:var(--accent); font-size:calc(var(--body)*.75); }
+.tb.on { border-color:var(--accent); background:var(--selected-bg); }
+.tb.auto { color:var(--text-muted); }
+.tb.auto.on { color:var(--text); }
+.tb.more { margin-left:auto; }
+.target { position:absolute; left:calc(50% - 300*var(--u)); top:calc(40%); padding:var(--xs) var(--sm); border:1px solid var(--accent); background:#1b1d1dee; border-radius:3px; font-size:calc(var(--body)*.85); }
+.target b { color:var(--danger); font-weight:normal; }
+.player { position:absolute; left:calc(50% - 165*var(--u)); top:calc(50% - 26*var(--u)); width:20px; height:20px; background:#d6a457; outline:2px solid #fff8; }
+</style></head>
+<body><div class="viewport">
+<div class="map-bg"></div>
+<div class="mock-tag">MOCKUP — generated HTML, not a runtime capture</div>
+<div class="player"></div>
+<div class="target"><b>zombie</b> · 3 tiles · telegraph: lunge (from visible state)</div>
+<div class="side">
+  <div class="pane">
+    <h4>Lockett · Autumn, day 12 · 14:20 · Overcast</h4>
+    <div class="stat"><span>Health</span><div class="meter"><div class="fill" style="width:72%;--c:var(--success)"></div><div class="txt">72%</div></div><span class="v">72%</span></div>
+    <div class="stat"><span>Stamina</span><div class="meter"><div class="fill" style="width:40%;--c:var(--warning)"></div><div class="txt">40%</div></div><span class="v">40%</span></div>
+    <div class="stat"><span>Pain</span><div class="meter"><div class="fill" style="width:15%;--c:var(--danger)"></div></div><span class="v">mild</span></div>
+    <div class="stat"><span>Morale</span><div class="meter"><div class="fill" style="width:60%;--c:var(--info)"></div></div><span class="v">+12</span></div>
+    <div style="display:flex;gap:var(--sm);margin-top:var(--xs);color:var(--text-muted);font-size:calc(var(--body)*.85)"><span>Hungry</span><span>·</span><span>Tired</span><span>·</span><span>Chilly</span><span>·</span><span>Wet</span></div>
+  </div>
+  <div class="warn"><span class="ic danger i-warning"></span><span><b style="font-weight:normal;color:var(--danger)">Hostile seen</b> — safe mode stopped you. <span class="hint"><b>!</b> ignore</span></span></div>
+  <div class="pane">
+    <h4><span class="ic muted i-attack"></span>Combat · target: zombie (3 tiles) · stance: Balanced</h4>
+    <div class="combat">
+      <div class="cbtn"><span class="ic i-attack"></span>Attack<span class="cost">~120 mv</span></div>
+      <div class="cbtn active"><span class="ic i-guard"></span>Guard<span class="cost">100 mv</span></div>
+      <div class="cbtn"><span class="ic i-evade"></span>Evade<span class="cost">in place</span></div>
+      <div class="cbtn disabled"><span class="ic i-bash"></span>Bash<span class="cost">no shield</span></div>
+      <div class="cbtn"><span class="ic i-recover"></span>Recover<span class="cost">rest</span></div>
+    </div>
+    <div class="policy"><span class="ic muted i-manual" style="width:16px;height:16px"></span>Manual <span class="pill on">Balanced</span><span class="pill">Aggressive</span><span class="pill">Defensive</span><span style="margin-left:auto" class="hint"><b>Esc</b> stops auto</span></div>
+  </div>
+  <div class="pane">
+    <h4><span class="ic muted i-star"></span>Tracked: Find the hunting cabin · 2 km NW</h4>
+  </div>
+  <div class="pane log">
+    <h4>Log</h4>
+    <p class="old">You feel the cold wind.</p>
+    <p class="old">You see a zombie to the north.</p>
+    <p class="bad">The zombie lunges but you guard the blow.</p>
+    <p class="good">Your longsword slashes the zombie's arm.</p>
+    <p>Safe mode: hostile in view.</p>
+  </div>
+  <div class="mini">pixel minimap (native)</div>
+</div>
+<div class="toolbar">
+  <div class="tb"><span class="ic i-tab_equipment"></span>Inv<span class="k">i</span></div>
+  <div class="tb"><span class="ic i-recover"></span>Consume<span class="k">E</span></div>
+  <div class="tb"><span class="ic i-gear"></span>Craft<span class="k">&amp;</span></div>
+  <div class="tb"><span class="ic i-expand"></span>Build<span class="k">*</span></div>
+  <div class="tb"><span class="ic i-world"></span>Map<span class="k">m</span></div>
+  <div class="tb"><span class="ic i-star"></span>Missions</div>
+  <div class="tb"><span class="ic i-hp"></span>Char<span class="k">@</span></div>
+  <div class="tb"><span class="ic i-clock"></span>Wait<span class="k">|</span></div>
+  <div class="tb"><span class="ic i-list"></span>Log<span class="k">P</span></div>
+  <div class="tb on"><span class="ic i-guard"></span>Safe<span class="k">^</span></div>
+  <div class="tb auto on"><span class="ic i-auto"></span>Pick●</div>
+  <div class="tb auto"><span class="ic i-auto"></span>Forage○</div>
+  <div class="tb auto"><span class="ic i-auto"></span>Combat○</div>
+  <div class="tb more"><span class="ic i-more"></span>More<span class="k">?</span></div>
+</div>
+<div class="legend" style="bottom:calc(60*var(--u))">Mockup. Map area is a placeholder; sidebar shows the intended hierarchy: status → critical warning → combat group → tracked objective → log → minimap.</div>
+</div></body></html>

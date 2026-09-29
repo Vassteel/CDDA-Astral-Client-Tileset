@@ -1,0 +1,18 @@
+{
+  "species": "Vaccinium angustifolium",
+  "reference_role": "Anatomy only; existing Astral trees remain the mandatory style benchmark",
+  "source_page": "https://gobotany.nativeplanttrust.org/species/vaccinium/angustifolium/",
+  "image": "https://newfs.s3.amazonaws.com/taxon-images-1000s1000/Ericaceae/vaccinium-angustifolium-ha-dcameron.jpg",
+  "local": "blueberry-habit.jpg",
+  "observations": "Low branching shrub with small elliptic leaves and small pendent pale urn/bell flowers; game fruit season is summer.",
+  "game_ids": [
+    "t_shrub_blueberry",
+    "t_shrub_blueberry_harvested"
+  ],
+  "fruit_photo": {
+    "source_page": "https://www.jeffpippen.com/plants/vaccinium.htm",
+    "image": "https://www.jeffpippen.com/plants/vaccinium-angustifolium050805-5407st.michelz.jpg",
+    "local": "blueberry-fruit.jpg",
+    "observations": "Round powdery blue fruit with dark calyx opening, borne in small clusters on thin reddish stalks."
+  }
+}

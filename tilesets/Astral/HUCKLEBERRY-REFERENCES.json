@@ -1,0 +1,17 @@
+{
+  "species": "Gaylussacia baccata",
+  "sources": [
+    {
+      "page": "https://www.jeffpippen.com/plants/gaylussacia.htm",
+      "image": "https://www.jeffpippen.com/plants/gaylussacia-baccata060514-1845whtsidez.jpg",
+      "local": "huckleberry-flowers.jpg"
+    },
+    {
+      "page": "https://gobotany.nativeplanttrust.org/species/gaylussacia/baccata/",
+      "image": "https://newfs.s3.amazonaws.com/taxon-images-1000s1000/Ericaceae/gaylussacia-baccata-fr-mlovit-b.jpg",
+      "local": "huckleberry-fruit.jpg"
+    }
+  ],
+  "inspected": true,
+  "style": "Existing deciduous-tree-spring and birch-spring source sprites"
+}

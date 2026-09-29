@@ -206,6 +206,13 @@ enum action_id : int {
     ACTION_SORT_ARMOR,
     /** Auto select and attack hostile creature within range */
     ACTION_AUTOATTACK,
+    ACTION_COMBAT_MENU,
+    ACTION_COMBAT_ATTACK,
+    ACTION_COMBAT_GUARD,
+    ACTION_COMBAT_EVADE,
+    ACTION_COMBAT_BASH,
+    ACTION_COMBAT_RECOVER,
+
     /**@}*/
 
     // Long-term / special actions

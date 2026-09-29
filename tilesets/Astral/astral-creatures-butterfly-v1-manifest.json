@@ -1,0 +1,411 @@
+{
+  "name": "Butterfly lifecycle",
+  "revision": "butterfly-v1",
+  "seasonal_policy": "Each normal, giant, emperor, caterpillar and cocoon state uses neutral year-round artwork. Spring/summer reproduction flags do not change adult appearance. Shared zombie meat-cocoons are separate creatures, not substituted with butterfly art.",
+  "canvas": 512,
+  "anchor_bottom": 488,
+  "sprite_offset_x": -16,
+  "sprite_offset_y": -32,
+  "assets": [
+    {
+      "key": "oversized-living",
+      "id": "mon_butterfly",
+      "label": "Oversized butterfly / living",
+      "max": [
+        224,
+        192
+      ],
+      "state": "living",
+      "source": "sources/oversized-living.png",
+      "native": "native/oversized-living.png",
+      "source_sha256": "237b8fc7fd681a84244399253090c7e497360e02f549cd718f6f5e9b7c7d4f6d",
+      "native_sha256": "3a298c6593dfdf461a9e9e8147b61755337248193b198c4d6d3bdf49955dcd05",
+      "prompt_sha256": "3debea2ae058cb317d04e89f9218e3d92a9890991cf23b567a3ce83793ba3fca",
+      "source_dimensions": [
+        638,
+        592
+      ],
+      "crop": [
+        90,
+        124,
+        590,
+        521
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        18.0,
+        38.75,
+        46.0,
+        61.0
+      ]
+    },
+    {
+      "key": "oversized-corpse",
+      "id": "corpse_mon_butterfly",
+      "label": "Oversized butterfly / corpse",
+      "max": [
+        224,
+        96
+      ],
+      "state": "corpse",
+      "source": "sources/oversized-corpse.png",
+      "native": "native/oversized-corpse.png",
+      "source_sha256": "9b4da8eb772e978fdfb2f38d0b2202a1a8ead68233b4c3a037512aa169bc57bb",
+      "native_sha256": "7c17828bff6157d4311431468332454dbfc0659c4db83828f7117dd10864f2ce",
+      "prompt_sha256": "c714d73f733bd0cb9917ad47ace7c3c7ff201553e419be690084825965581fda",
+      "source_dimensions": [
+        617,
+        605
+      ],
+      "crop": [
+        45,
+        358,
+        559,
+        563
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        18.0,
+        49.875,
+        46.0,
+        61.0
+      ]
+    },
+    {
+      "key": "giant-living",
+      "id": "mon_butterfly_giant",
+      "label": "Giant butterfly / living",
+      "max": [
+        352,
+        304
+      ],
+      "state": "living",
+      "source": "sources/giant-living.png",
+      "native": "native/giant-living.png",
+      "source_sha256": "8832d59c65f8e8ea6dab73563a1d59e63fed798e41785284ce7fc7c2f7a23dc4",
+      "native_sha256": "f61f76cd6ac33c99b3714c08317b6a808f09d605adf0038e044d7dc3848c4c37",
+      "prompt_sha256": "3debea2ae058cb317d04e89f9218e3d92a9890991cf23b567a3ce83793ba3fca",
+      "source_dimensions": [
+        665,
+        662
+      ],
+      "crop": [
+        38,
+        58,
+        641,
+        559
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        10.0,
+        24.5,
+        54.0,
+        61.0
+      ]
+    },
+    {
+      "key": "giant-corpse",
+      "id": "corpse_mon_butterfly_giant",
+      "label": "Giant butterfly / corpse",
+      "max": [
+        352,
+        152
+      ],
+      "state": "corpse",
+      "source": "sources/giant-corpse.png",
+      "native": "native/giant-corpse.png",
+      "source_sha256": "e98463c4a18d9a733bb5430fc194446fecfece35363cf091a9fea7ba0116142d",
+      "native_sha256": "2f681f49e68e1ffeb2304d07a4ad5f587cbf16bc775e9ef471d148724a3ca90b",
+      "prompt_sha256": "c714d73f733bd0cb9917ad47ace7c3c7ff201553e419be690084825965581fda",
+      "source_dimensions": [
+        603,
+        649
+      ],
+      "crop": [
+        9,
+        337,
+        579,
+        575
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        10.0,
+        42.625,
+        54.0,
+        61.0
+      ]
+    },
+    {
+      "key": "emperor-living",
+      "id": "mon_butterfly_titan",
+      "label": "Emperor butterfly / living",
+      "max": [
+        448,
+        368
+      ],
+      "state": "living",
+      "source": "sources/emperor-living.png",
+      "native": "native/emperor-living.png",
+      "source_sha256": "2cf590f958ac1b34b20847d35c90465be32d452046543ece734fe3c0d9811661",
+      "native_sha256": "313a4dd8fa33fa72d20c65d9623815bd537c11366171429a0ab75b3f42fc598b",
+      "prompt_sha256": "365b0f9ee30207bc7f0b1b58dac47897cdff98d98652f5bd9f1e14ea0eacb69f",
+      "source_dimensions": [
+        974,
+        887
+      ],
+      "crop": [
+        53,
+        119,
+        946,
+        781
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        4.0,
+        19.5,
+        60.0,
+        61.0
+      ]
+    },
+    {
+      "key": "emperor-corpse",
+      "id": "corpse_mon_butterfly_titan",
+      "label": "Emperor butterfly / corpse",
+      "max": [
+        448,
+        184
+      ],
+      "state": "corpse",
+      "source": "sources/emperor-corpse.png",
+      "native": "native/emperor-corpse.png",
+      "source_sha256": "63efdf40713f8ecd9a0748e718e587790fc1d1fa8d1a501cc9642de2442f24d1",
+      "native_sha256": "c7ed546bbfd1d2ef4b2cb3eef2781d316a84a251331375a53a3e77cd5d1bf1c3",
+      "prompt_sha256": "365b0f9ee30207bc7f0b1b58dac47897cdff98d98652f5bd9f1e14ea0eacb69f",
+      "source_dimensions": [
+        800,
+        887
+      ],
+      "crop": [
+        29,
+        526,
+        772,
+        832
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        4.0,
+        38.0,
+        59.875,
+        61.0
+      ]
+    },
+    {
+      "key": "caterpillar-living",
+      "id": "mon_caterpillar_butterfly",
+      "label": "Giant caterpillar / living",
+      "max": [
+        352,
+        144
+      ],
+      "state": "living",
+      "source": "sources/caterpillar-living.png",
+      "native": "native/caterpillar-living.png",
+      "source_sha256": "91751dfc7502a565c1e2a995531b016908a028b83793a3cd471d6c56f52a8bff",
+      "native_sha256": "9cec226f967749c54d38f3907d9f44e834525b9fcf0c04cc105bd1b008caa05a",
+      "prompt_sha256": "a0ae006a79dd8d1650b9d7ca1d2bb1b864aba6ad4753572da003555b3ef5acac",
+      "source_dimensions": [
+        713,
+        556
+      ],
+      "crop": [
+        39,
+        154,
+        687,
+        497
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        15.0,
+        43.0,
+        49.0,
+        61.0
+      ]
+    },
+    {
+      "key": "caterpillar-corpse",
+      "id": "corpse_mon_caterpillar_butterfly",
+      "label": "Giant caterpillar / corpse",
+      "max": [
+        352,
+        88
+      ],
+      "state": "corpse",
+      "source": "sources/caterpillar-corpse.png",
+      "native": "native/caterpillar-corpse.png",
+      "source_sha256": "53040e5525e17601ce641573668e3ccff9a17d4726d0e0aa0b962d2cdfee5808",
+      "native_sha256": "5ec3bafe9604ffddb34df649a4eeb6610a191e8503d722c576a03999cc753863",
+      "prompt_sha256": "a0ae006a79dd8d1650b9d7ca1d2bb1b864aba6ad4753572da003555b3ef5acac",
+      "source_dimensions": [
+        703,
+        556
+      ],
+      "crop": [
+        27,
+        294,
+        677,
+        521
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        16.25,
+        50.0,
+        47.75,
+        61.0
+      ]
+    },
+    {
+      "key": "cocoon-living",
+      "id": "mon_butterfly_cocoon",
+      "label": "Giant cocoon / living",
+      "max": [
+        208,
+        320
+      ],
+      "state": "living",
+      "source": "sources/cocoon-living.png",
+      "native": "native/cocoon-living.png",
+      "source_sha256": "af7e62d19eead64d92091fd1de2bbc69e18f580e75df32dfbaf4ce2aba443e51",
+      "native_sha256": "038756393393a8b5f13622608eddc157d0a4bbbaa9efbd04aff7814b86024aaf",
+      "prompt_sha256": "a0ae006a79dd8d1650b9d7ca1d2bb1b864aba6ad4753572da003555b3ef5acac",
+      "source_dimensions": [
+        648,
+        555
+      ],
+      "crop": [
+        211,
+        36,
+        496,
+        507
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        19.875,
+        21.0,
+        44.125,
+        61.0
+      ]
+    },
+    {
+      "key": "cocoon-corpse",
+      "id": "corpse_mon_butterfly_cocoon",
+      "label": "Giant cocoon / corpse",
+      "max": [
+        320,
+        144
+      ],
+      "state": "corpse",
+      "source": "sources/cocoon-corpse.png",
+      "native": "native/cocoon-corpse.png",
+      "source_sha256": "71b27285b75b374d4dba833a43d1353a43fb6a41e864f642f2ceb2f90ee77944",
+      "native_sha256": "e4469bb707af6f40021cf25cef05cf5f325a44ed410ad399893d4ced7f487658",
+      "prompt_sha256": "a0ae006a79dd8d1650b9d7ca1d2bb1b864aba6ad4753572da003555b3ef5acac",
+      "source_dimensions": [
+        768,
+        555
+      ],
+      "crop": [
+        153,
+        243,
+        654,
+        504
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        14.75,
+        43.0,
+        49.25,
+        61.0
+      ]
+    }
+  ],
+  "status": "staged in creatures-glyph-batch-01; archive and user/live acceptance pending",
+  "generator": "built-in imagegen",
+  "client_modified": false,
+  "visual_review": "source and native preview inspected; user/live review pending",
+  "review_notes": "All10 states inspected. Normal/giant/emperor have distinct28/44/56px target wing spans and warm palettes; larva and cocoon follow real references. No named variants in inspected records. Life-stage transitions all covered; zombify_into targets belong to separately queued shared meat-cocoon family. User accepted the sheet workflow; individual final sprites still pending user/live review.",
+  "validation": {
+    "unique_sprites": 10,
+    "creature_ids": [
+      "mon_butterfly",
+      "mon_butterfly_giant",
+      "mon_butterfly_titan",
+      "mon_caterpillar_butterfly",
+      "mon_butterfly_cocoon"
+    ],
+    "corpse_ids": [
+      "corpse_mon_butterfly",
+      "corpse_mon_butterfly_giant",
+      "corpse_mon_butterfly_titan",
+      "corpse_mon_caterpillar_butterfly",
+      "corpse_mon_butterfly_cocoon"
+    ],
+    "total_slots": 19677,
+    "prior_non_config_files_preserved": 371,
+    "unrelated_mappings_preserved": true,
+    "atlas_bytes": "passed",
+    "source_prompt_native_hashes": "passed",
+    "reference_indices": "passed",
+    "client_modified": false,
+    "live_review": "pending"
+  }
+}

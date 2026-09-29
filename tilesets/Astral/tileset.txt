@@ -1,4 +1,4 @@
-# Astral 0.1.5
+# Astral 0.1.44 + local creature/item work + terrain and color playtest v1
 NAME: Astral
 VIEW: Astral
 JSON: tile_config.json

@@ -1,3 +1,4 @@
+#include "achievement_rewards.h"
 #include "init.h"
 
 #include <algorithm>
@@ -502,6 +503,7 @@ void DynamicDataLoader::initialize()
     add( "event_transformation", &event_transformation::load_transformation );
     add( "event_statistic", &event_statistic::load_statistic );
     add( "score", &score::load_score );
+    add( "achievement_reward", &achievement_rewards::load );
     add( "achievement", &achievement::load_achievement );
     add( "conduct", &achievement::load_achievement );
     add( "widget", &widget::load_widget );
@@ -599,7 +601,13 @@ void DynamicDataLoader::load_mod_interaction_files_from_path( const cata_path &p
 
         for( const cata_path &f : interaction_folders ) {
             const mod_id associated_mod = mod_id( f.get_unrelative_path().filename().string() );
-            bool is_mod_loaded = std::find( loaded_mods.begin(), loaded_mods.end(),
+            // These systems are core Astral content. Keep loading optional
+            // mods' existing compatibility extensions even in new worlds
+            // that do not list the retired progression mod IDs.
+            const bool native_progression = associated_mod.str() == "bombastic_perks" ||
+                                            associated_mod.str() == "perk_melee_system";
+            bool is_mod_loaded = native_progression ||
+                                 std::find( loaded_mods.begin(), loaded_mods.end(),
                                             associated_mod ) != loaded_mods.end();
 
             if( is_mod_loaded ) {
@@ -646,6 +654,7 @@ void DynamicDataLoader::unload_data()
 {
     finalized = false;
 
+    achievement_rewards::reset();
     achievement::reset();
     activity_type::reset();
     add_type::reset();
@@ -1041,6 +1050,7 @@ void DynamicDataLoader::check_consistency()
             { _( "Scent types" ), &scent_type::check_scent_consistency },
             { _( "Scores" ), &score::check_consistency },
             { _( "Achievements" ), &achievement::check_consistency },
+            { _( "Achievement rewards" ), &achievement_rewards::check },
             { _( "Disease types" ), &disease_type::check_disease_consistency },
             { _( "Factions" ), &faction_template::check_consistency },
             { _( "Damage types" ), &damage_type::check },

@@ -21,6 +21,10 @@ input_popup::input_popup( int width, const std::string &title, const point &pos,
     pos( pos ),
     width( width )
 {
+#if defined(TILES)
+    // Astral dialog shell; untitled prompts get the frame only.
+    set_shell( title.empty() ? 2 : 1, nullptr, !title.empty() );
+#endif
     ctxt = input_context( "STRING_INPUT", keyboard_mode::keychar );
     ctxt.register_action( "TEXT.CONFIRM" );
     ctxt.register_action( "TEXT.QUIT" );

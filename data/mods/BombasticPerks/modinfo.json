@@ -5,8 +5,9 @@
     "name": "Bombastic Perks",
     "authors": [ "bombasticSlacks" ],
     "maintainers": [ "Maleclypse" ],
-    "description": "Killing enemies allows you to level up, unlocking powerful and fun perks for your character.  Just after game start a configuration menu should open to let you enable the mod.",
+    "description": "Compatibility entry for existing worlds.  This progression system is built into the Astral client.",
     "category": "misc_additions",
-    "dependencies": [ "dda" ]
+    "dependencies": [ "dda" ],
+    "obsolete": true
   }
 ]

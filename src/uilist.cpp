@@ -25,6 +25,7 @@
 #include "translations.h"
 #include "ui_manager.h"
 #include "cata_imgui.h"
+#include "ui_hybrid_chrome.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
 
@@ -641,7 +642,7 @@ void uilist::calc_data()
 {
     ImGuiStyle s = ImGui::GetStyle();
     const float frame_padding_y = s.FramePadding.y * 2.0;
-    const float window_border = s.WindowBorderSize * 2.0;
+    float window_border_extra = 0.f;
     const float window_padding_x = s.WindowPadding.x * 2.0;
     const float main_view_max_y = std::min( 0.9f * ImGui::GetMainViewport()->Size.y,
                                         840.f * std::max( 1.f, ImGui::GetFontSize() / 16.f ) );
@@ -687,6 +688,19 @@ void uilist::calc_data()
         title_size = calc_size( title );
         float expected_num_lines = title_size.y / ImGui::GetTextLineHeight();
         title_size.y += ( s.ItemSpacing.y * expected_num_lines ) + item_double_spacing_y;
+#if defined(TILES)
+        // Astral dialog shell: the title bar is taller (title font + close
+        // control) and the frame inset replaces the default window padding.
+        const float scale = ui_hybrid_chrome::theme::scale();
+        const ui_hybrid_chrome::theme::tokens &tk = ui_hybrid_chrome::theme::get();
+        cataimgui::PushGuiFont1_5x();
+        const ImVec2 tsz = calc_size( title );
+        cataimgui::PopGuiFont1_5x();
+        title_size.x = tsz.x + ( tk.close_hit + tk.lg ) * scale;
+        title_size.y = ( tk.title_bar + tk.md + 2.f ) * scale + item_double_spacing_y;
+        // In-window shell inset (see cataimgui::window::draw) is 14 logical px.
+        window_border_extra = 2.f * std::max( 0.f, 14.f * scale - s.WindowPadding.x );
+#endif
     }
 
     ImVec2 text_size = ImVec2();
@@ -717,6 +731,7 @@ void uilist::calc_data()
         float expected_num_lines = desc_size.y / ImGui::GetTextLineHeight();
         desc_size.y += ( s.ItemSpacing.y * expected_num_lines ) + item_double_spacing_y;
     }
+    const float window_border = s.WindowBorderSize * 2.0 + window_border_extra;
     float additional_height = title_size.y + text_size.y + desc_size.y + tabs_size.y +
                               window_border + frame_padding_y;
 

@@ -1019,7 +1019,7 @@ void monster::move()
     // this into another monster type). Therefore we can not iterate over it
     // directly and instead iterate over the map from the monster type
     // (properties of monster types should never change).
-    if( !has_flag( json_flag_CANNOT_ATTACK ) ) {
+    if( !has_flag( json_flag_CANNOT_ATTACK ) && !has_effect( efftype_id( "astral_windup" ) ) ) {
         for( const auto &sp_type : type->special_attacks ) {
             const std::string &special_name = sp_type.first;
             const auto local_iter = special_attacks.find( special_name );

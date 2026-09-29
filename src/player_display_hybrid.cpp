@@ -19,7 +19,9 @@
 #include "bodygraph.h"
 #include "color.h"
 #include "display.h"
+#include "dialogue.h"
 #include "effect.h"
+#include "effect_on_condition.h"
 #include "flag.h"
 #include "enum_conversions.h"
 #include "game.h"
@@ -33,6 +35,7 @@
 #include "skill.h"
 #include "skill_ui.h"
 #include "string_formatter.h"
+#include "talker.h"
 #include "translations.h"
 #include "ui_hybrid_chrome.h"
 #include "ui_manager.h"
@@ -91,6 +94,7 @@ class player_display_hybrid_ui : public cataimgui::window
         player_display_hybrid_ui( Character &you_in, bool customize_in )
             : cataimgui::window( _( "Character" ), ImGuiWindowFlags_None ),
               you( you_in ), customize( customize_in ) {
+            set_shell( 0, "person" );
             rebuild();
         }
 
@@ -137,6 +141,13 @@ class player_display_hybrid_ui : public cataimgui::window
                 } else if( detail == "variant" && line < traits.size() ) {
                     const mutation_variant *variant = traits[line].trait->pick_variant_menu();
                     you.set_mut_variant( traits[line].trait, variant );
+                } else if( ( detail == "perks" || detail == "martial" ) && you.is_avatar() ) {
+                    dialogue d( get_talker_for( you ), nullptr );
+                    const bool martial = detail == "martial";
+                    effect_on_condition_id( martial ? "EOC_give_ma_perk_menu" :
+                                            "EOC_give_perk_menu" )->activate( d );
+                    effect_on_condition_id( martial ? "EOC_open_ma_perk_menu" :
+                                            "EOC_open_perk_menu" )->activate( d );
                 }
                 rebuild();
             }
@@ -268,6 +279,15 @@ class player_display_hybrid_ui : public cataimgui::window
             }
 
             draw_header();
+            if( you.is_avatar() && you.has_trait( trait_id( "perk_perk_menu" ) ) ) {
+                if( ImGui::Button( _( "Perks" ) ) ) {
+                    pending_detail = "perks";
+                }
+                ImGui::SameLine();
+                if( ImGui::Button( _( "Martial Mastery" ) ) ) {
+                    pending_detail = "martial";
+                }
+            }
             draw_tabs();
 
             const float footer_h = ImGui::GetFrameHeightWithSpacing() * 1.6f;

@@ -22,7 +22,8 @@
     "longest_side": "1202 mm",
     "relative": { "range": -2, "ranged_damage": { "damage_type": "bullet", "amount": -4 } },
     "proportional": { "dispersion": 1.35, "reload": 0.9, "melee_damage": { "bash": 0.6 } },
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "flintlock": 1 } } ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "flintlock": 1 } } ],
+    "extend": { "flags": [ "OLD_GUN" ] }
   },
   {
     "id": "carbine_flintlock_double",
@@ -66,7 +67,7 @@
     "clip_size": 1,
     "reload": 2500,
     "valid_mod_locations": [ [ "rail mount", 1 ], [ "sights mount", 1 ], [ "stock mount", 1 ], [ "underbarrel mount", 1 ] ],
-    "flags": [ "NEVER_JAMS", "EASY_CLEAN" ],
+    "flags": [ "NEVER_JAMS", "EASY_CLEAN", "OLD_GUN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "flintlock": 1 } } ],
     "melee_damage": { "bash": 5 }
   },
@@ -105,7 +106,7 @@
       [ "sights mount", 1 ],
       [ "stock mount", 1 ]
     ],
-    "flags": [ "NEVER_JAMS", "DURABLE_MELEE", "EASY_CLEAN" ],
+    "flags": [ "NEVER_JAMS", "DURABLE_MELEE", "EASY_CLEAN", "OLD_GUN" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "flintlock": 1 } } ],
     "melee_damage": { "bash": 15 }
   },

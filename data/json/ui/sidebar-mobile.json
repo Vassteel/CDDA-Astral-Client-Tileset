@@ -26,56 +26,56 @@
     "id": "l_sw",
     "width": 1,
     "copy-from": "t_border",
-    "string": { "str": "╰", "//~": "NO_I18N" },
+    "string": { "str": "\u2570", "//~": "NO_I18N" },
     "type": "widget"
   },
   {
     "id": "l_nw",
     "width": 1,
     "copy-from": "t_border",
-    "string": { "str": "╭", "//~": "NO_I18N" },
+    "string": { "str": "\u256d", "//~": "NO_I18N" },
     "type": "widget"
   },
   {
     "id": "l_se",
     "width": 1,
     "copy-from": "t_border",
-    "string": { "str": "╯", "//~": "NO_I18N" },
+    "string": { "str": "\u256f", "//~": "NO_I18N" },
     "type": "widget"
   },
   {
     "id": "l_ne",
     "width": 1,
     "copy-from": "t_border",
-    "string": { "str": "╮", "//~": "NO_I18N" },
+    "string": { "str": "\u256e", "//~": "NO_I18N" },
     "type": "widget"
   },
   {
     "id": "l_sc_cl",
     "width": 1,
     "copy-from": "t_border",
-    "string": { "str": "┴", "//~": "NO_I18N" },
+    "string": { "str": "\u2534", "//~": "NO_I18N" },
     "type": "widget"
   },
   {
     "id": "l_nc_cl",
     "width": 1,
     "copy-from": "t_border",
-    "string": { "str": "┬", "//~": "NO_I18N" },
+    "string": { "str": "\u252c", "//~": "NO_I18N" },
     "type": "widget"
   },
   {
     "id": "l_hc",
     "width": 1,
     "copy-from": "t_border",
-    "string": { "str": "─", "//~": "NO_I18N" },
+    "string": { "str": "\u2500", "//~": "NO_I18N" },
     "type": "widget"
   },
   {
     "id": "l_vc",
     "width": 1,
     "copy-from": "t_border",
-    "string": { "str": "│", "//~": "NO_I18N" },
+    "string": { "str": "\u2502", "//~": "NO_I18N" },
     "type": "widget"
   },
   {
@@ -83,7 +83,7 @@
     "width": 41,
     "copy-from": "t_border",
     "string": {
-      "str": "═══════╧═══════════════════════╧═════════",
+      "str": "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2567\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2567\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550",
       "//~": "NO_I18N"
     },
     "type": "widget"
@@ -93,7 +93,7 @@
     "width": 41,
     "copy-from": "t_border",
     "string": {
-      "str": "═════════════════════════════════════════",
+      "str": "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550",
       "//~": "NO_I18N"
     },
     "type": "widget"
@@ -168,7 +168,7 @@
     "id": "t_vert_graph",
     "width": 1,
     "style": "graph",
-    "symbols": " ▁▂▃▄▅▆▇█",
+    "symbols": " \u2581\u2582\u2583\u2584\u2585\u2586\u2587\u2588",
     "fill": "bucket",
     "type": "widget"
   },
@@ -176,7 +176,7 @@
     "id": "t_horiz_graph",
     "width": 5,
     "style": "graph",
-    "symbols": " ▏▎▍▍▌▋▊▉█",
+    "symbols": " \u258f\u258e\u258d\u258d\u258c\u258b\u258a\u2589\u2588",
     "fill": "bucket",
     "type": "widget"
   },
@@ -229,7 +229,7 @@
     "width": 1,
     "copy-from": "t_vert_graph",
     "var": "bp_encumb",
-    "symbols": " ▂▄▆▇▇▇██████",
+    "symbols": " \u2582\u2584\u2586\u2587\u2587\u2587\u2588\u2588\u2588\u2588\u2588\u2588",
     "colors": [ "h_dark_gray", "h_yellow", "h_light_red" ],
     "type": "widget"
   },
@@ -237,7 +237,7 @@
     "id": "i_splinted_sym",
     "width": 1,
     "style": "symbol",
-    "string": { "str": "‡", "//~": "NO_I18N" },
+    "string": { "str": "\u2021", "//~": "NO_I18N" },
     "colors": [ "h_white" ],
     "type": "widget"
   },
@@ -346,7 +346,7 @@
     "width": 1,
     "copy-from": "t_vert_graph",
     "var": "bp_warmth",
-    "symbols": "▼∨∙∧▲",
+    "symbols": "\u25bc\u2228\u2219\u2227\u25b2",
     "colors": [ "h_light_cyan", "h_cyan", "h_dark_gray", "h_light_red", "h_red" ],
     "type": "widget"
   },
@@ -435,7 +435,7 @@
     "width": 7,
     "style": "symbol",
     "colors": [ "c_white_red" ],
-    "string": { "str": "══╾⠡╼══", "//~": "NO_I18N" },
+    "string": { "str": "\u2550\u2550\u257e\u2821\u257c\u2550\u2550", "//~": "NO_I18N" },
     "type": "widget"
   },
   {
@@ -482,7 +482,12 @@
     "style": "symbol",
     "clauses": [
       { "id": "mending", "sym": "+", "color": "h_white", "condition": { "u_has_effect": "mending" } },
-      { "id": "notmending", "sym": "▮", "color": "h_black", "condition": { "not": { "u_has_effect": "mending" } } }
+      {
+        "id": "notmending",
+        "sym": "\u25ae",
+        "color": "h_black",
+        "condition": { "not": { "u_has_effect": "mending" } }
+      }
     ],
     "type": "widget"
   },
@@ -515,8 +520,8 @@
     "width": 1,
     "style": "symbol",
     "clauses": [
-      { "id": "stunned", "sym": "õ", "color": "h_red", "condition": { "u_has_effect": "stunned" } },
-      { "id": "ok", "sym": "▮", "color": "h_black", "condition": { "not": { "u_has_effect": "stunned" } } }
+      { "id": "stunned", "sym": "\u00f5", "color": "h_red", "condition": { "u_has_effect": "stunned" } },
+      { "id": "ok", "sym": "\u25ae", "color": "h_black", "condition": { "not": { "u_has_effect": "stunned" } } }
     ],
     "type": "widget"
   },
@@ -525,8 +530,8 @@
     "width": 1,
     "style": "symbol",
     "clauses": [
-      { "id": "stunned", "sym": "♥", "color": "h_red", "condition": { "u_has_effect": "hypovolemia" } },
-      { "id": "ok", "sym": "▮", "color": "h_black", "condition": { "not": { "u_has_effect": "hypovolemia" } } }
+      { "id": "stunned", "sym": "\u2665", "color": "h_red", "condition": { "u_has_effect": "hypovolemia" } },
+      { "id": "ok", "sym": "\u25ae", "color": "h_black", "condition": { "not": { "u_has_effect": "hypovolemia" } } }
     ],
     "type": "widget"
   },
@@ -537,13 +542,13 @@
     "clauses": [
       {
         "id": "1bleeding0",
-        "sym": "▮",
+        "sym": "\u25ae",
         "color": "h_black",
         "condition": { "not": { "u_has_effect": "bleed", "intensity": 1 } }
       },
       {
         "id": "1bleeding1",
-        "sym": "│",
+        "sym": "\u2502",
         "color": "h_light_red",
         "condition": {
           "and": [ { "u_has_effect": "bleed", "intensity": 1 }, { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] } ]
@@ -551,7 +556,7 @@
       },
       {
         "id": "1bleeding2",
-        "sym": "║",
+        "sym": "\u2551",
         "color": "h_red",
         "condition": {
           "and": [
@@ -562,30 +567,35 @@
       },
       {
         "id": "1bleeding3",
-        "sym": "║",
+        "sym": "\u2551",
         "color": "c_red_red",
         "condition": { "u_has_effect": "bleed", "intensity": 21 }
       },
       { "id": "2bandaged", "sym": "@", "color": "h_white", "condition": { "u_has_effect": "bandaged" } },
-      { "id": "2intact", "sym": "▮", "color": "h_black", "condition": { "not": { "u_has_effect": "bandaged" } } },
-      { "id": "3bitten", "sym": "⣿", "color": "h_red", "condition": { "u_has_effect": "bite" } },
-      { "id": "3notbitten", "sym": "▮", "color": "h_black", "condition": { "not": { "u_has_effect": "bite" } } },
-      { "id": "4disinfected", "sym": "Ọ", "color": "h_white", "condition": { "u_has_effect": "disinfected" } },
+      { "id": "2intact", "sym": "\u25ae", "color": "h_black", "condition": { "not": { "u_has_effect": "bandaged" } } },
+      { "id": "3bitten", "sym": "\u28ff", "color": "h_red", "condition": { "u_has_effect": "bite" } },
+      { "id": "3notbitten", "sym": "\u25ae", "color": "h_black", "condition": { "not": { "u_has_effect": "bite" } } },
+      { "id": "4disinfected", "sym": "\u1ecc", "color": "h_white", "condition": { "u_has_effect": "disinfected" } },
       {
         "id": "4notdisinfected",
-        "sym": "▮",
+        "sym": "\u25ae",
         "color": "h_black",
         "condition": { "not": { "u_has_effect": "disinfected" } }
       },
-      { "id": "5blisters", "sym": "∞", "color": "h_red", "condition": { "u_has_effect": "blisters" } },
+      { "id": "5blisters", "sym": "\u221e", "color": "h_red", "condition": { "u_has_effect": "blisters" } },
       {
         "id": "5notblisters",
-        "sym": "▮",
+        "sym": "\u25ae",
         "color": "h_black",
         "condition": { "not": { "u_has_effect": "blisters" } }
       },
-      { "id": "6chafing", "sym": "Ξ", "color": "h_red", "condition": { "u_has_effect": "chafing" } },
-      { "id": "6notchafing", "sym": "▮", "color": "h_black", "condition": { "not": { "u_has_effect": "chafing" } } }
+      { "id": "6chafing", "sym": "\u039e", "color": "h_red", "condition": { "u_has_effect": "chafing" } },
+      {
+        "id": "6notchafing",
+        "sym": "\u25ae",
+        "color": "h_black",
+        "condition": { "not": { "u_has_effect": "chafing" } }
+      }
     ],
     "type": "widget"
   },
@@ -944,88 +954,93 @@
     "width": 5,
     "style": "symbol",
     "clauses": [
-      { "id": "new_moon", "sym": "⎛   ⎞", "color": "c_light_gray", "condition": { "math": [ "moon_phase() == 0" ] } },
+      {
+        "id": "new_moon",
+        "sym": "\u239b   \u239e",
+        "color": "c_light_gray",
+        "condition": { "math": [ "moon_phase() == 0" ] }
+      },
       {
         "id": "waxing_crescent1",
-        "sym": "⎛  ",
+        "sym": "\u239b  ",
         "color": "c_light_gray",
         "condition": { "math": [ "moon_phase() == 1" ] }
       },
       {
         "id": "waxing_crescent2",
-        "sym": "▊⎞",
+        "sym": "\u258a\u239e",
         "color": "c_black_white",
         "condition": { "math": [ "moon_phase() == 1" ] }
       },
       {
         "id": "half_moon1",
-        "sym": "⎛ ▐",
+        "sym": "\u239b \u2590",
         "color": "c_light_gray",
         "condition": { "math": [ "moon_phase() == 2" ] }
       },
       {
         "id": "half_moon2",
-        "sym": "⡡⎞",
+        "sym": "\u2861\u239e",
         "color": "c_black_white",
         "condition": { "math": [ "moon_phase() == 2" ] }
       },
       {
         "id": "waxing_gibbous1",
-        "sym": "⎛",
+        "sym": "\u239b",
         "color": "c_light_gray",
         "condition": { "math": [ "moon_phase() == 3" ] }
       },
       {
         "id": "waxing_gibbous2",
-        "sym": "▎⢁⡡⎞",
+        "sym": "\u258e\u2881\u2861\u239e",
         "color": "c_black_white",
         "condition": { "math": [ "moon_phase() == 4" ] }
       },
       {
         "id": "full_moon",
-        "sym": "⎛⡐⢁⡡⎞",
+        "sym": "\u239b\u2850\u2881\u2861\u239e",
         "color": "c_black_white",
         "condition": { "math": [ "moon_phase() == 4" ] }
       },
       {
         "id": "waning_gibbous1",
-        "sym": "⎛⡐⢁",
+        "sym": "\u239b\u2850\u2881",
         "color": "c_black_white",
         "condition": { "math": [ "moon_phase() == 5" ] }
       },
       {
         "id": "waning_gibbous2",
-        "sym": "▎⎞",
+        "sym": "\u258e\u239e",
         "color": "c_light_gray",
         "condition": { "math": [ "moon_phase() == 5" ] }
       },
       {
         "id": "half_moon1",
-        "sym": "⎛⡐",
+        "sym": "\u239b\u2850",
         "color": "c_black_white",
         "condition": { "math": [ "moon_phase() == 6" ] }
       },
       {
         "id": "half_moon2",
-        "sym": "▌ ⎞",
+        "sym": "\u258c \u239e",
         "color": "c_light_gray",
         "condition": { "math": [ "moon_phase() == 6" ] }
       },
       {
         "id": "waning_crescent1",
-        "sym": "⎛",
+        "sym": "\u239b",
         "color": "c_black_white",
         "condition": { "math": [ "moon_phase() == 7" ] }
       },
       {
         "id": "waning_crescent2",
-        "sym": "▎  ⎞",
+        "sym": "\u258e  \u239e",
         "color": "c_light_gray",
         "condition": { "math": [ "moon_phase() == 7" ] }
       },
       {
         "id": "dark_moon",
-        "sym": "⎛   ⎞",
+        "sym": "\u239b   \u239e",
         "color": "c_light_gray",
         "condition": { "math": [ "moon_phase() == 8" ] }
       }
@@ -1118,31 +1133,31 @@
     "clauses": [
       {
         "id": "bright",
-        "text": { "str": "☼☼☼☼☼", "//~": "NO_I18N" },
+        "text": { "str": "\u263c\u263c\u263c\u263c\u263c", "//~": "NO_I18N" },
         "color": "c_white",
         "condition": { "math": [ "u_val('fine_detail_vision_mod') <= 1" ] }
       },
       {
         "id": "cloudy",
-        "text": { "str": "☼☼☼☼", "//~": "NO_I18N" },
+        "text": { "str": "\u263c\u263c\u263c\u263c", "//~": "NO_I18N" },
         "color": "c_yellow",
         "condition": { "math": [ "u_val('fine_detail_vision_mod') == 2" ] }
       },
       {
         "id": "shady",
-        "text": { "str": "☼☼☼", "//~": "NO_I18N" },
+        "text": { "str": "\u263c\u263c\u263c", "//~": "NO_I18N" },
         "color": "c_light_gray",
         "condition": { "math": [ "u_val('fine_detail_vision_mod') == 3" ] }
       },
       {
         "id": "dark",
-        "text": { "str": "☼☼", "//~": "NO_I18N" },
+        "text": { "str": "\u263c\u263c", "//~": "NO_I18N" },
         "color": "c_dark_gray",
         "condition": { "math": [ "u_val('fine_detail_vision_mod') == 4" ] }
       },
       {
         "id": "very dark",
-        "text": { "str": "☼", "//~": "NO_I18N" },
+        "text": { "str": "\u263c", "//~": "NO_I18N" },
         "color": "c_dark_gray",
         "condition": { "math": [ "u_val('fine_detail_vision_mod') >= 5" ] }
       }
@@ -1154,7 +1169,7 @@
     "width": 5,
     "style": "graph",
     "fill": "bucket",
-    "symbols": " ▎▍▌▊▉▉███",
+    "symbols": " \u258e\u258d\u258c\u258a\u2589\u2589\u2588\u2588\u2588",
     "var": "sound",
     "colors": [ "c_green", "c_yellow", "c_light_red", "c_red" ],
     "type": "widget"
@@ -1320,7 +1335,7 @@
     "//": "current variant",
     "style": "graph",
     "fill": "bucket",
-    "symbols": "┈=≡Ξ",
+    "symbols": "\u2508=\u2261\u039e",
     "var": "power_percentage",
     "colors": [ "h_dark_gray", "h_brown", "h_yellow", "h_white" ],
     "type": "widget"
@@ -1330,7 +1345,7 @@
     "width": 1,
     "style": "graph",
     "var": "log_power_balance",
-    "symbols": "▼⎽⎼⎯⎻⎺▲",
+    "symbols": "\u25bc\u23bd\u23bc\u23af\u23bb\u23ba\u25b2",
     "fill": "bucket",
     "colors": [ "h_red", "h_light_red", "h_yellow", "h_white", "h_light_green", "h_green", "h_light_cyan" ],
     "breaks": [ 23, 40, 50, 51, 60, 77 ],
@@ -1398,19 +1413,19 @@
     "clauses": [
       {
         "id": "engorged",
-        "text": { "str": "o⁰ₒ○", "//~": "NO_I18N" },
+        "text": { "str": "o\u2070\u2092\u25cb", "//~": "NO_I18N" },
         "color": "c_light_green_green",
         "condition": { "u_has_effect": "hunger_engorged" }
       },
       {
         "id": "full",
-        "text": { "str": "████", "//~": "NO_I18N" },
+        "text": { "str": "\u2588\u2588\u2588\u2588", "//~": "NO_I18N" },
         "color": "h_green",
         "condition": { "u_has_effect": "hunger_full" }
       },
       {
         "id": "satisfied",
-        "text": { "str": "  ██", "//~": "NO_I18N" },
+        "text": { "str": "  \u2588\u2588", "//~": "NO_I18N" },
         "color": "h_green",
         "condition": { "u_has_effect": "hunger_satisfied" }
       },
@@ -1422,25 +1437,25 @@
       },
       {
         "id": "hungry",
-        "text": { "str": "█   ", "//~": "NO_I18N" },
+        "text": { "str": "\u2588   ", "//~": "NO_I18N" },
         "color": "c_light_gray",
         "condition": { "u_has_effect": "hunger_hungry" }
       },
       {
         "id": "very_hungry",
-        "text": { "str": "██  ", "//~": "NO_I18N" },
+        "text": { "str": "\u2588\u2588  ", "//~": "NO_I18N" },
         "color": "h_yellow",
         "condition": { "u_has_effect": "hunger_very_hungry" }
       },
       {
         "id": "near_starving",
-        "text": { "str": "███ ", "//~": "NO_I18N" },
+        "text": { "str": "\u2588\u2588\u2588 ", "//~": "NO_I18N" },
         "color": "h_red",
         "condition": { "u_has_effect": "hunger_near_starving" }
       },
       {
         "id": "starving",
-        "text": { "str": "████", "//~": "NO_I18N" },
+        "text": { "str": "\u2588\u2588\u2588\u2588", "//~": "NO_I18N" },
         "color": "h_red",
         "condition": { "u_has_effect": "hunger_starving" }
       },
@@ -1467,19 +1482,19 @@
     "clauses": [
       {
         "id": "turgid",
-        "text": { "str": "o⁰ₒ○", "//~": "NO_I18N" },
+        "text": { "str": "o\u2070\u2092\u25cb", "//~": "NO_I18N" },
         "color": "c_light_green_green",
         "condition": { "math": [ "u_val('instant_thirst') < -60" ] }
       },
       {
         "id": "hydrated",
-        "text": { "str": "████", "//~": "NO_I18N" },
+        "text": { "str": "\u2588\u2588\u2588\u2588", "//~": "NO_I18N" },
         "color": "h_green",
         "condition": { "and": [ { "math": [ "u_val('instant_thirst') >= -60" ] }, { "math": [ "u_val('instant_thirst') < -20" ] } ] }
       },
       {
         "id": "slaked",
-        "text": { "str": "  ██", "//~": "NO_I18N" },
+        "text": { "str": "  \u2588\u2588", "//~": "NO_I18N" },
         "color": "h_green",
         "condition": { "and": [ { "math": [ "u_val('instant_thirst') >= -20" ] }, { "math": [ "u_val('instant_thirst') < 0" ] } ] }
       },
@@ -1491,25 +1506,25 @@
       },
       {
         "id": "thirsty",
-        "text": { "str": "█   ", "//~": "NO_I18N" },
+        "text": { "str": "\u2588   ", "//~": "NO_I18N" },
         "color": "h_yellow",
         "condition": { "and": [ { "math": [ "u_val('instant_thirst') > 40" ] }, { "math": [ "u_val('instant_thirst') <= 80" ] } ] }
       },
       {
         "id": "very_thirsty",
-        "text": { "str": "██  ", "//~": "NO_I18N" },
+        "text": { "str": "\u2588\u2588  ", "//~": "NO_I18N" },
         "color": "h_yellow",
         "condition": { "and": [ { "math": [ "u_val('instant_thirst') > 80" ] }, { "math": [ "u_val('instant_thirst') <= 240" ] } ] }
       },
       {
         "id": "dehydrated",
-        "text": { "str": "███ ", "//~": "NO_I18N" },
+        "text": { "str": "\u2588\u2588\u2588 ", "//~": "NO_I18N" },
         "color": "h_red",
         "condition": { "and": [ { "math": [ "u_val('instant_thirst') > 240" ] }, { "math": [ "u_val('instant_thirst') <= 450" ] } ] }
       },
       {
         "id": "dehydrated2",
-        "text": { "str": "████", "//~": "NO_I18N" },
+        "text": { "str": "\u2588\u2588\u2588\u2588", "//~": "NO_I18N" },
         "color": "h_red",
         "condition": { "and": [ { "math": [ "u_val('instant_thirst') > 450" ] }, { "math": [ "u_val('instant_thirst') <= 520" ] } ] }
       },
@@ -1535,44 +1550,44 @@
     "width": 1,
     "style": "symbol",
     "clauses": [
-      { "id": "sk", "sym": "ₒ", "color": "c_red", "condition": { "math": [ "u_val('bmi_permil') <= 1000" ] } },
+      { "id": "sk", "sym": "\u2092", "color": "c_red", "condition": { "math": [ "u_val('bmi_permil') <= 1000" ] } },
       {
         "id": "e",
-        "sym": "ₒ",
+        "sym": "\u2092",
         "color": "c_light_red",
         "condition": { "and": [ { "math": [ "u_val('bmi_permil') > 1000" ] }, { "math": [ "u_val('bmi_permil') <= 2000" ] } ] }
       },
       {
         "id": "u_w",
-        "sym": "ₒ",
+        "sym": "\u2092",
         "color": "c_yellow",
         "condition": { "and": [ { "math": [ "u_val('bmi_permil') > 2000" ] }, { "math": [ "u_val('bmi_permil') <= 3000" ] } ] }
       },
       {
         "id": "n",
-        "sym": "ₒ",
+        "sym": "\u2092",
         "color": "c_brown",
         "condition": { "and": [ { "math": [ "u_val('bmi_permil') > 3000" ] }, { "math": [ "u_val('bmi_permil') <= 5000" ] } ] }
       },
       {
         "id": "o_w",
-        "sym": "ₒ",
+        "sym": "\u2092",
         "color": "c_yellow",
         "condition": { "and": [ { "math": [ "u_val('bmi_permil') > 5000" ] }, { "math": [ "u_val('bmi_permil') <= 10000" ] } ] }
       },
       {
         "id": "o",
-        "sym": "ₒ",
+        "sym": "\u2092",
         "color": "c_light_red",
         "condition": { "and": [ { "math": [ "u_val('bmi_permil') > 10000" ] }, { "math": [ "u_val('bmi_permil') <= 15000" ] } ] }
       },
       {
         "id": "v_o",
-        "sym": "ₒ",
+        "sym": "\u2092",
         "color": "c_red",
         "condition": { "and": [ { "math": [ "u_val('bmi_permil') > 15000" ] }, { "math": [ "u_val('bmi_permil') <= 20000" ] } ] }
       },
-      { "id": "m_o", "sym": "ₒ", "color": "c_white", "condition": { "math": [ "u_val('bmi_permil') > 20000" ] } }
+      { "id": "m_o", "sym": "\u2092", "color": "c_white", "condition": { "math": [ "u_val('bmi_permil') > 20000" ] } }
     ],
     "type": "widget"
   },
@@ -1581,12 +1596,12 @@
     "width": 5,
     "style": "symbol",
     "clauses": [
-      { "id": "sk", "sym": "⎻⎺", "color": "c_brown", "condition": { "math": [ "u_val('bmi_permil') <= 1000" ] } },
-      { "id": "sk", "sym": "ₗ", "color": "c_yellow", "condition": { "math": [ "u_val('bmi_permil') <= 1000" ] } },
+      { "id": "sk", "sym": "\u23bb\u23ba", "color": "c_brown", "condition": { "math": [ "u_val('bmi_permil') <= 1000" ] } },
+      { "id": "sk", "sym": "\u2097", "color": "c_yellow", "condition": { "math": [ "u_val('bmi_permil') <= 1000" ] } },
       { "id": "sk", "sym": "  ", "color": "c_brown", "condition": { "math": [ "u_val('bmi_permil') <= 1000" ] } },
       {
         "id": "e",
-        "sym": "∕ʻ",
+        "sym": "\u2215\u02bb",
         "color": "c_brown",
         "condition": { "and": [ { "math": [ "u_val('bmi_permil') > 1000" ] }, { "math": [ "u_val('bmi_permil') <= 2000" ] } ] }
       },
@@ -1604,7 +1619,7 @@
       },
       {
         "id": "unw",
-        "sym": " ╱",
+        "sym": " \u2571",
         "color": "c_brown",
         "condition": { "and": [ { "math": [ "u_val('bmi_permil') > 2000" ] }, { "math": [ "u_val('bmi_permil') <= 3000" ] } ] }
       },
@@ -1628,7 +1643,7 @@
       },
       {
         "id": "nrm",
-        "sym": "╿",
+        "sym": "\u257f",
         "color": "c_brown",
         "condition": { "and": [ { "math": [ "u_val('bmi_permil') > 3000" ] }, { "math": [ "u_val('bmi_permil') <= 5000" ] } ] }
       },
@@ -1652,7 +1667,7 @@
       },
       {
         "id": "ovw",
-        "sym": "╲ ",
+        "sym": "\u2572 ",
         "color": "c_brown",
         "condition": { "and": [ { "math": [ "u_val('bmi_permil') > 5000" ] }, { "math": [ "u_val('bmi_permil') <= 10000" ] } ] }
       },
@@ -1670,7 +1685,7 @@
       },
       {
         "id": "o",
-        "sym": "ʽ∖",
+        "sym": "\u02bd\u2216",
         "color": "c_brown",
         "condition": { "and": [ { "math": [ "u_val('bmi_permil') > 10000" ] }, { "math": [ "u_val('bmi_permil') <= 15000" ] } ] }
       },
@@ -1682,19 +1697,24 @@
       },
       {
         "id": "v_o",
-        "sym": "ₕ",
+        "sym": "\u2095",
         "color": "c_yellow",
         "condition": { "and": [ { "math": [ "u_val('bmi_permil') > 15000" ] }, { "math": [ "u_val('bmi_permil') <= 20000" ] } ] }
       },
       {
         "id": "v_o",
-        "sym": "⎺⎻",
+        "sym": "\u23ba\u23bb",
         "color": "c_brown",
         "condition": { "and": [ { "math": [ "u_val('bmi_permil') > 15000" ] }, { "math": [ "u_val('bmi_permil') <= 20000" ] } ] }
       },
       { "id": "m_o", "sym": "  ", "color": "c_brown", "condition": { "math": [ "u_val('bmi_permil') > 20000" ] } },
-      { "id": "m_o", "sym": "ₕ", "color": "c_red", "condition": { "math": [ "u_val('bmi_permil') > 20000" ] } },
-      { "id": "m_o", "sym": " ⎺", "color": "c_brown", "condition": { "math": [ "u_val('bmi_permil') > 20000" ] } }
+      { "id": "m_o", "sym": "\u2095", "color": "c_red", "condition": { "math": [ "u_val('bmi_permil') > 20000" ] } },
+      {
+        "id": "m_o",
+        "sym": " \u23ba",
+        "color": "c_brown",
+        "condition": { "math": [ "u_val('bmi_permil') > 20000" ] }
+      }
     ],
     "type": "widget"
   },
@@ -2211,7 +2231,7 @@
     "separator": ": ",
     "padding": 0,
     "label": { "str": "mobile", "ctxt": "UI sidebar" },
-    "widgets": [ "r_1", "r_separator-space", "r_2", "r_separator-space", "r_3", "oxygen_classic_layout" ],
+    "widgets": [ "r_1", "r_separator-space", "r_2", "r_separator-space", "r_3", "oxygen_classic_layout", "martial_mastery" ],
     "type": "widget"
   }
 ]

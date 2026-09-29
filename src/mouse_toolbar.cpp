@@ -1,8 +1,14 @@
 #include "mouse_toolbar.h"
 #include "workstation_ui.h"
+#include "tactical_combat.h"
+#include "avatar.h"
+#include "creature.h"
+#include "type_id.h"
+#include <array>
 
 #include <algorithm>
 #include <memory>
+#include <map>
 #include <optional>
 #include <string>
 #include <utility>
@@ -10,6 +16,8 @@
 
 #include "cata_imgui.h"
 #include "ui_hybrid_chrome.h"
+#include "ui_hybrid_widgets.h"
+#include "input_context.h"
 #include "action.h"
 #include "game.h"
 #include "imgui/imgui.h"
@@ -48,6 +56,62 @@ const std::vector<std::pair<action_id, translation>> &toolbar_buttons()
     return buttons;
 }
 
+/** Atlas icon for a toolbar action. */
+static const char *toolbar_icon( action_id id )
+{
+    switch( id ) {
+        case ACTION_INVENTORY:
+            return "tab_equipment";
+        case ACTION_EAT:
+            return "consume";
+        case ACTION_CRAFT:
+            return "craft";
+        case ACTION_CONSTRUCT:
+            return "build";
+        case ACTION_MAP:
+            return "world";
+        case ACTION_MISSIONS:
+            return "star";
+        case ACTION_PL_INFO:
+            return "person";
+        case ACTION_WAIT:
+            return "wait";
+        case ACTION_MESSAGES:
+            return "log";
+        case ACTION_ZONES:
+            return "zones";
+        case ACTION_OPEN_MOVEMENT:
+            return "move";
+        case ACTION_TOGGLE_SAFEMODE:
+            return "guard";
+        case ACTION_ACTIONMENU:
+            return "more";
+        default:
+            return nullptr;
+    }
+}
+
+/** Short binding label for the toolbar (empty when unbound). */
+static std::string toolbar_key( action_id id )
+{
+    // Bindings rarely change; refresh the cache every few seconds of frames so
+    // the toolbar never builds an input context per button per frame.
+    static std::map<action_id, std::string> cache;
+    static int cached_frame = -1000;
+    const int frame = ImGui::GetFrameCount();
+    if( frame - cached_frame > 300 ) {
+        cache.clear();
+        cached_frame = frame;
+    }
+    auto it = cache.find( id );
+    if( it == cache.end() ) {
+        const input_context ctxt = get_default_mode_input_context();
+        const std::string desc = ctxt.get_desc( action_ident( id ), 1 );
+        it = cache.emplace( id, desc.empty() || desc.size() > 4 ? std::string() : desc ).first;
+    }
+    return it->second;
+}
+
 class mouse_toolbar_window : public cataimgui::window
 {
     public:
@@ -80,8 +144,9 @@ class mouse_toolbar_window : public cataimgui::window
             float row_width = 0.f;
             float widest = 0.f;
             int rows = 1;
-            auto measure = [&]( const std::string & label ) {
-                const float width = ImGui::CalcTextSize( label.c_str() ).x + 20.f;
+            auto measure = [&]( const std::string & label, const char *icon = nullptr,
+            const std::string & key = std::string() ) {
+                const float width = ui_hybrid_widgets::toolbar_button_width( label, icon, key );
                 if( row_width > 0.f && row_width + 6.f + width > max_content ) {
                     widest = std::max( widest, row_width );
                     row_width = 0.f;
@@ -90,19 +155,22 @@ class mouse_toolbar_window : public cataimgui::window
                 row_width += ( row_width > 0.f ? 6.f : 0.f ) + width;
             };
             for( const auto &button : toolbar_buttons() ) {
-                measure( button.second.translated() );
+                measure( button.second.translated(), toolbar_icon( button.first ), toolbar_key( button.first ) );
             }
-            measure( _( "Stations" ) );
+            measure( _( "Stations" ), "gear" );
             if( get_option<bool>( "MOUSE_TOOLBAR_AUTO_TOGGLES" ) ) {
                 // Reserve enough room for the active state labels.
-                measure( _( "Pick●" ) );
-                measure( std::string( _( "Forage●" ) ) + ":x" );
-                measure( _( "Combat●" ) );
-                measure( _( "Eat●" ) );
+                measure( _( "Pick●" ), "auto" );
+                measure( std::string( _( "Forage●" ) ) + ":x", "auto" );
+                measure( _( "Auto combat●" ), "auto" );
+                measure( _( "Eat●" ), "auto" );
             }
-            const float width = std::max( widest, row_width ) + padding;
-            const float height = rows * ( ImGui::GetFontSize() + 12.f ) +
-                                 ( rows - 1 ) * 4.f + ImGui::GetStyle().WindowPadding.y * 2.f;
+            const bool combat = get_option<bool>( "TACTICAL_COMBAT" );
+            const float width = combat ? max_content + padding : std::max( widest, row_width ) + padding;
+            const float row_h = 36.f * ui_hybrid_chrome::theme::scale();
+            const float height = rows * row_h +
+                                 ( rows - 1 ) * 4.f + ImGui::GetStyle().WindowPadding.y * 2.f +
+                                 ( combat ? 5.f * ImGui::GetFontSize() + 42.f : 0.f );
             return { left + ( map_width - width ) * 0.5f, display.y - height - 8.f,
                      width, height };
         }
@@ -130,9 +198,13 @@ class mouse_toolbar_window : public cataimgui::window
 
             ImGui::PushStyleVar( ImGuiStyleVar_FramePadding, ImVec2( 10.f, 6.f ) );
             ImGui::PushStyleVar( ImGuiStyleVar_ItemSpacing, ImVec2( 6.f, 4.f ) );
+            if( get_option<bool>( "TACTICAL_COMBAT" ) ) {
+                draw_combat_hotbar();
+            }
             bool first = true;
-            auto place_button = [&]( const std::string & label ) {
-                const float width = ImGui::CalcTextSize( label.c_str() ).x + 20.f;
+            auto place_button = [&]( const std::string & label, const char *icon = nullptr,
+            const std::string & key = std::string() ) {
+                const float width = ui_hybrid_widgets::toolbar_button_width( label, icon, key );
                 if( !first && ImGui::GetItemRectMax().x + 6.f + width <=
                     ImGui::GetWindowPos().x + ImGui::GetWindowContentRegionMax().x ) {
                     ImGui::SameLine();
@@ -142,25 +214,24 @@ class mouse_toolbar_window : public cataimgui::window
             for( const auto &btn : toolbar_buttons() ) {
                 // Own the label string — ImGui may keep the pointer until end of frame.
                 const std::string label = btn.second.translated();
-                place_button( label );
-                const int tb_cols = ui_hybrid_chrome::push_toolbar_button(
-                                        btn.first == ACTION_TOGGLE_SAFEMODE && g->safe_mode != SAFE_MODE_OFF );
-                if( ImGui::Button( label.c_str() ) ) {
+                const char *icon = toolbar_icon( btn.first );
+                const std::string key = toolbar_key( btn.first );
+                place_button( label, icon, key );
+                const bool active = btn.first == ACTION_TOGGLE_SAFEMODE && g->safe_mode != SAFE_MODE_OFF;
+                if( ui_hybrid_widgets::toolbar_button( ( "##tb_" + label ).c_str(), label, icon, key, active ) ) {
                     pending = btn.first;
                 }
                 if( ImGui::IsItemHovered() ) {
-                    ImGui::SetTooltip( "%s", press_x( btn.first ).c_str() );
+                    ui_hybrid_widgets::tooltip( press_x( btn.first ) );
                 }
-                ui_hybrid_chrome::draw_item_bezel( false, ImGui::IsItemHovered(), false );
-                ImGui::PopStyleColor( tb_cols );
             }
 
-            place_button( _( "Stations" ) );
-            if( ImGui::Button( _( "Stations" ) ) ) {
+            place_button( _( "Stations" ), "gear" );
+            if( ui_hybrid_widgets::toolbar_button( "##tb_stations", _( "Stations" ), "gear", std::string(), false ) ) {
                 workstation_ui::request_nearby();
             }
             if( ImGui::IsItemHovered() ) {
-                ImGui::SetTooltip( "%s", _( "Manage nearby workstations: load, operate and unload." ) );
+                ui_hybrid_widgets::tooltip( _( "Manage nearby workstations: load, operate and unload." ) );
             }
 
             // Compact auto-action toggles (upstream AUTO_PICKUP / AUTO_FORAGING).
@@ -175,18 +246,15 @@ class mouse_toolbar_window : public cataimgui::window
 
                 auto draw_styled_button = [&]( const char *id, const std::string & label,
                 bool active ) {
-                    place_button( label );
-                    const int n = ui_hybrid_chrome::push_toolbar_button( active );
+                    place_button( label, "auto" );
                     ImGui::PushID( id );
-                    ImGui::Button( label.c_str() );
+                    ui_hybrid_widgets::toolbar_button( "##auto", label, "auto", std::string(), active );
                     const bool left = ImGui::IsItemClicked( ImGuiMouseButton_Left );
                     const bool right = ImGui::IsItemClicked( ImGuiMouseButton_Right );
                     if( ImGui::IsItemHovered() ) {
-                        ImGui::SetTooltip( "%s", _( "Left-click: toggle. Right-click: settings and help." ) );
+                        ui_hybrid_widgets::tooltip( _( "Left-click: toggle. Right-click: settings and help." ) );
                     }
-                    ui_hybrid_chrome::draw_item_bezel( active, ImGui::IsItemHovered(), false );
                     ImGui::PopID();
-                    ImGui::PopStyleColor( n );
                     return std::pair<bool, bool> { left, right };
                 };
 
@@ -197,7 +265,7 @@ class mouse_toolbar_window : public cataimgui::window
                     // Hint active mode when not the default bushes setting.
                     forage_label += ":" + forage_mode.substr( 0, 1 );
                 }
-                const std::string combat_label = combat_on ? _( "Combat●" ) : _( "Combat" );
+                const std::string combat_label = combat_on ? _( "Auto combat●" ) : _( "Auto combat" );
                 const std::string eat_label = eat_on ? _( "Eat●" ) : _( "Eat" );
 
                 const auto pick_clicks = draw_styled_button( "tb_pick", pick_label, pickup_on );
@@ -258,8 +326,20 @@ class mouse_toolbar_window : public cataimgui::window
                 if( ImGui::BeginPopup( "tb_combat_help" ) ) {
                     ImGui::TextUnformatted( _( "Auto combat" ) );
                     ImGui::Separator();
+                    const std::pair<const char *, const char *> profiles[] = {
+                        { "aggressive", _( "Aggressive" ) }, { "balanced", _( "Balanced" ) },
+                        { "defensive", _( "Defensive" ) }
+                    };
+                    for( const auto &profile : profiles ) {
+                        if( ImGui::Selectable( profile.second,
+                                               get_option<std::string>( "AUTO_COMBAT_PROFILE" ) == profile.first ) ) {
+                            get_options().get_option( "AUTO_COMBAT_PROFILE" ).setValue( profile.first );
+                            get_options().save();
+                        }
+                    }
+                    ImGui::Separator();
                     ImGui::TextWrapped( "%s",
-                                        _( "When Combat● is on, each of your turns fights "
+                                        _( "When Auto combat● is on, each of your turns fights "
                                            "automatically if a hostile is in range.\n\n"
                                            "Melee / reach: normal attack (martial style + "
                                            "weapon + worn armor techniques).  Blocks and "
@@ -311,6 +391,97 @@ class mouse_toolbar_window : public cataimgui::window
         }
 
     private:
+        void draw_combat_hotbar() {
+            avatar &you = get_avatar();
+            Creature *target = tactical_combat::selected_target( you );
+            if( target ) {
+                if( ImGui::SmallButton( _( "Clear target" ) ) ) {
+                    tactical_combat::clear_target();
+                    target = nullptr;
+                }
+                ImGui::SameLine();
+            }
+            const std::string target_text = target ? target->disp_name() : _( "Select a creature for combat" );
+            ImGui::TextUnformatted( target_text.c_str() );
+            if( target && target->has_effect( efftype_id( "astral_windup" ) ) ) {
+                ImGui::SameLine();
+                ImGui::TextColored( ImVec4( 1.f, 0.5f, 0.2f, 1.f ), "%s", _( "Heavy strike incoming!" ) );
+            }
+            const float stamina_fraction = static_cast<float>( you.get_stamina() ) /
+                                           std::max( 1, you.get_stamina_max() );
+            ImGui::PushStyleColor( ImGuiCol_PlotHistogram, ImVec4( 0.35f, 0.60f, 0.32f, 1.f ) );
+            ImGui::ProgressBar( stamina_fraction, ImVec2( -1.f, ImGui::GetFontSize() + 2.f ),
+                                string_format( _( "Stamina %d / %d" ), you.get_stamina(),
+                                               you.get_stamina_max() ).c_str() );
+            ImGui::PopStyleColor();
+
+            const std::array<tactical_combat::action, 5> actions = {{
+                    tactical_combat::action::attack, tactical_combat::action::guard,
+                    tactical_combat::action::evade, tactical_combat::action::bash,
+                    tactical_combat::action::recover
+                }
+            };
+            const action_id ids[] = { ACTION_COMBAT_ATTACK, ACTION_COMBAT_GUARD, ACTION_COMBAT_EVADE,
+                                     ACTION_COMBAT_BASH, ACTION_COMBAT_RECOVER };
+            std::array<tactical_combat::assessment, 5> checks;
+            int max_moves = 100;
+            int max_stamina_cost = 1;
+            for( size_t i = 0; i < actions.size(); ++i ) {
+                checks[i] = tactical_combat::assess_manual( you, actions[i], target );
+                max_moves = std::max( max_moves, checks[i].moves );
+                max_stamina_cost = std::max( max_stamina_cost, checks[i].stamina );
+            }
+            const float width = std::max( 1.f, ( ImGui::GetContentRegionAvail().x - 24.f ) / 5.f );
+            for( size_t i = 0; i < actions.size(); ++i ) {
+                if( i != 0 ) {
+                    ImGui::SameLine();
+                }
+                ImGui::PushID( static_cast<int>( i ) );
+                ImGui::BeginGroup();
+                const auto &check = checks[i];
+                ImGui::BeginDisabled( !check.available );
+                if( ImGui::Button( tactical_combat::name( actions[i] ).c_str(), ImVec2( width, 0 ) ) ) {
+                    pending = ids[i];
+                }
+                const bool button_hovered = ImGui::IsItemHovered( ImGuiHoveredFlags_AllowWhenDisabled );
+                ImGui::EndDisabled();
+                ImGui::PushStyleColor( ImGuiCol_PlotHistogram, ImVec4( 0.32f, 0.48f, 0.65f, 1.f ) );
+                ImGui::ProgressBar( static_cast<float>( check.moves ) / max_moves,
+                                    ImVec2( width, ImGui::GetFontSize() + 2.f ),
+                                    string_format( _( "%d moves" ), check.moves ).c_str() );
+                ImGui::PopStyleColor();
+                const bool restores = check.stamina < 0;
+                const float fraction = restores ? static_cast<float>( -check.stamina ) /
+                                       std::max( 1, you.get_stamina_max() - you.get_stamina() ) :
+                                       static_cast<float>( check.stamina ) / max_stamina_cost;
+                ImGui::PushStyleColor( ImGuiCol_PlotHistogram, restores ?
+                                      ImVec4( 0.35f, 0.60f, 0.32f, 1.f ) :
+                                      check.stamina > you.get_stamina() ? ImVec4( 0.7f, 0.25f, 0.2f, 1.f ) :
+                                      ImVec4( 0.65f, 0.48f, 0.24f, 1.f ) );
+                const std::string stamina = restores ?
+                                            string_format( _( "+%d stamina" ), -check.stamina ) :
+                                            string_format( _( "-%d stamina" ), check.stamina );
+                ImGui::ProgressBar( std::clamp( fraction, 0.f, 1.f ),
+                                    ImVec2( width, ImGui::GetFontSize() + 2.f ), stamina.c_str() );
+                ImGui::PopStyleColor();
+                ImGui::EndGroup();
+                if( button_hovered || ImGui::IsItemHovered() ) {
+                    ImGui::BeginTooltip();
+                    ImGui::PushTextWrapPos( ImGui::GetFontSize() * 26.f );
+                    ImGui::TextWrapped( "%s", tactical_combat::description( actions[i] ).c_str() );
+                    ImGui::TextWrapped( "%s", press_x( ids[i] ).c_str() );
+                    if( !check.available ) {
+                        ImGui::TextWrapped( "%s", check.reason.c_str() );
+                    }
+                    ImGui::TextWrapped( "%s", _( "Blue compares move costs; amber compares stamina costs. Green shows stamina restored. Attack costs are estimates." ) );
+                    ImGui::PopTextWrapPos();
+                    ImGui::EndTooltip();
+                }
+                ImGui::PopID();
+            }
+            ImGui::Separator();
+        }
+
         std::optional<action_id> pending;
         cataimgui::bounds last_bounds = { 0.f, 0.f, 0.f, 0.f };
 
@@ -350,6 +521,7 @@ void hide()
     hud_pending.reset();
     in_default_mode_wait = false;
     g_toolbar.reset();
+    tactical_combat::clear_target();
 }
 
 void set_default_mode_wait( bool waiting )

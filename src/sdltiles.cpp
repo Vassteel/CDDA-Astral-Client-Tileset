@@ -1,3 +1,4 @@
+#include "achievement_rewards_ui.h"
 #include "cursesdef.h" // IWYU pragma: associated
 #include "sdltiles.h" // IWYU pragma: associated
 
@@ -67,6 +68,7 @@
 #include "path_info.h"
 #include "sdl_geometry.h"
 #include "sdl_renderer_recovery.h"
+#include "ui_hybrid_textures.h"
 #include "sdl_wrappers.h"
 #include "sdl_font.h"
 #include "tileset_loader.h"
@@ -786,6 +788,7 @@ static void WinDestroy()
 #if defined(__ANDROID__)
     touch_joystick.reset();
 #endif
+    ui_hybrid_textures::shutdown();
     imclient.reset();
     shutdown_sound();
     tilecontext.reset();
@@ -1714,6 +1717,7 @@ recipe_result renderer_resource_coordinator::recipe_device_reset()
     }
 #endif
     loading_ui::release_gpu_resources();
+    achievement_rewards_ui::release_gpu_resources();
     display_buffer.reset();
     if( check_pause_abort() ) {
         return { recipe_outcome::failure };
@@ -1904,6 +1908,7 @@ recipe_result renderer_resource_coordinator::recipe_device_lost()
     }
 #endif
     loading_ui::release_gpu_resources();
+    achievement_rewards_ui::release_gpu_resources();
     display_buffer.reset();
     if( check_pause_abort() ) {
         return { recipe_outcome::failure };
@@ -1956,6 +1961,9 @@ void renderer_resource_coordinator::record_display_buffer_dims()
 void renderer_resource_coordinator::release_live_atlases() const
 {
     ts_cache.release_live_atlases();
+    // Decorative UI textures are owned by the same renderer; drop them while
+    // it is still valid. They recreate lazily on the next healthy frame.
+    ui_hybrid_textures::release_all();
 }
 
 atlas_upload_interrupt renderer_resource_coordinator::replay_poll()
@@ -3614,8 +3622,6 @@ static bool draw_window( Font_Ptr &font, const catacurses::window &w, const poin
         if( texture ) {
             RenderCopy( renderer, texture, nullptr, &dst );
         }
-        geometry->rect( renderer, offset + point( 0, height - font->height * 5 ),
-                        width, font->height * 5, hybrid_background );
     }
     const auto background_color = [&]( catacurses::base_color color ) {
         return hybrid_ui && color == catacurses::blue ? hybrid_selection : color_as_sdl( color );
@@ -6449,6 +6455,16 @@ void catacurses::init_interface()
         use_tiles = false;
     }
 
+    // First run: seed config/base_colors.json from the Astral palette so the text-drawn
+    // screens share the client's neutrals (ui-art overhaul M6). An existing file is always
+    // respected; the Colors screen can load any template later.
+    if( !file_exist( PATH_INFO::base_colors() ) ) {
+        const cata_path astral_palette = PATH_INFO::color_themes() / "base_colors-astral.json";
+        if( file_exist( astral_palette ) ) {
+            assure_dir_exist( PATH_INFO::config_dir() );
+            copy_file( astral_palette, PATH_INFO::base_colors() );
+        }
+    }
     color_loader<SDL_Color>().load( windowsPalette );
     init_colors();
 

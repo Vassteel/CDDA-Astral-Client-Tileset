@@ -1,0 +1,26 @@
+[
+  {
+    "subject": "Painted lady dorsal wing anatomy and markings",
+    "page_url": "https://nebraskalepidoptera.com/carduii2/",
+    "image_url": "https://nebraskalepidoptera.com/wp-content/uploads/2022/04/Vanessa-carduii-Dorsal-1024x767.jpg",
+    "local_path": "/home/deck/Astra & Grok/CDDA/artifacts/astral-creature-art/butterfly-sheet-pilot-v1/references/painted-lady-dorsal.jpg",
+    "sha256": "b058e3a40e4707331f0b4852f58c403798daba769dc1c6b92c7f8d6ce7976a5a",
+    "use": "Anatomy reference only; mutant game creature interpreted through original Astral tree style; no photo pixels copied."
+  },
+  {
+    "subject": "green-caterpillar",
+    "image_url": "https://i0.wp.com/blog.greatparks.org/wp-content/uploads/2022/03/Luna-Moth-Caterpillar-Actias-Luna-Thomas-Shahan.jpg?ssl=1",
+    "page_url": "https://blog.greatparks.org/2022/03/look-on-the-bright-side-the-lives-of-ohio-moths/",
+    "local_path": "/home/deck/Astra & Grok/CDDA/artifacts/astral-creature-art/butterfly-v1/references/green-caterpillar.jpg",
+    "sha256": "058a2e61c6a7582897011f53d7be385900541f8c91e3ec62e75060f6a876d2ec",
+    "use": "Anatomy/material reference only; no photo pixels copied. Mutant game definition controls scale and appearance."
+  },
+  {
+    "subject": "silk-cocoon",
+    "image_url": "https://www.agraria.org/coltivazioniforestali/gelso-bozzolo.jpg",
+    "page_url": "https://www.agraria.org/coltivazioniforestali/gelso.htm",
+    "local_path": "/home/deck/Astra & Grok/CDDA/artifacts/astral-creature-art/butterfly-v1/references/silk-cocoon.jpg",
+    "sha256": "7ec292d771df06a78525feb8f47c8ecff8a3f59a79df6e581218774d932c430b",
+    "use": "Anatomy/material reference only; no photo pixels copied. Mutant game definition controls scale and appearance."
+  }
+]

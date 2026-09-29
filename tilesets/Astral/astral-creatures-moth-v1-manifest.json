@@ -1,0 +1,342 @@
+{
+  "name": "Moth lifecycle",
+  "revision": "moth-v1",
+  "seasonal_policy": "Neutral natural year-round appearance; spring/summer egg production is behavior, not a coat state. Wood-patterned ordinary/giant and pale lunar moth remain separate. Moth cocoon shares the completed butterfly cocoon because appearance fields are identical.",
+  "canvas": 512,
+  "anchor_bottom": 488,
+  "sprite_offset_x": -16,
+  "sprite_offset_y": -32,
+  "assets": [
+    {
+      "key": "oversized-living",
+      "id": "mon_moth",
+      "label": "Oversized moth / living",
+      "max": [
+        224,
+        192
+      ],
+      "state": "living",
+      "source": "sources/oversized-living.png",
+      "native": "native/oversized-living.png",
+      "source_sha256": "f241f8971046ce26be170c30b6deb9956a48c6766654843660b8a970abc703bc",
+      "native_sha256": "c461a669565362551c20f48159b0b66460b6fde07c3abf03e6576c092a5f1256",
+      "prompt_sha256": "bea1c48cad079a22fd8ae4f0768b6868938beb043ce649d270ccd18b90158244",
+      "source_dimensions": [
+        787,
+        468
+      ],
+      "crop": [
+        171,
+        75,
+        698,
+        426
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        18.0,
+        42.375,
+        46.0,
+        61.0
+      ]
+    },
+    {
+      "key": "oversized-corpse",
+      "id": "corpse_mon_moth",
+      "label": "Oversized moth / corpse",
+      "max": [
+        224,
+        106
+      ],
+      "state": "corpse",
+      "source": "sources/oversized-corpse.png",
+      "native": "native/oversized-corpse.png",
+      "source_sha256": "865ce06637da3a6b4fed726b69452a52b733411be11dcda547191101c12ef592",
+      "native_sha256": "26888bc5ac5e7fe3e783fcfb156f5262059836f75e2ea4e403c12c10e39db150",
+      "prompt_sha256": "bea1c48cad079a22fd8ae4f0768b6868938beb043ce649d270ccd18b90158244",
+      "source_dimensions": [
+        757,
+        468
+      ],
+      "crop": [
+        89,
+        166,
+        621,
+        426
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        18.375,
+        47.75,
+        45.5,
+        61.0
+      ]
+    },
+    {
+      "key": "giant-living",
+      "id": "mon_moth_giant",
+      "label": "Giant moth / living",
+      "max": [
+        352,
+        304
+      ],
+      "state": "living",
+      "source": "sources/giant-living.png",
+      "native": "native/giant-living.png",
+      "source_sha256": "045768f7cfadf60e714ec3b6266d83c70f43510bc25d4f965339cd4dc06d057e",
+      "native_sha256": "ecbbaa1722855073f10cd6a6a0761b2deb7b9419c72d7ba2a66cb54e14104501",
+      "prompt_sha256": "bea1c48cad079a22fd8ae4f0768b6868938beb043ce649d270ccd18b90158244",
+      "source_dimensions": [
+        849,
+        564
+      ],
+      "crop": [
+        47,
+        43,
+        847,
+        463
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        10.0,
+        37.875,
+        54.0,
+        61.0
+      ]
+    },
+    {
+      "key": "giant-corpse",
+      "id": "corpse_mon_moth_giant",
+      "label": "Giant moth / corpse",
+      "max": [
+        352,
+        167
+      ],
+      "state": "corpse",
+      "source": "sources/giant-corpse.png",
+      "native": "native/giant-corpse.png",
+      "source_sha256": "34ecbc2a78b4a637616b497e86e902b98d7b155908948dc1a94f298d9a7643a5",
+      "native_sha256": "6e7022c5758f257f168322ecb454fa90a96fdfc5f90b799ff12bf6a16890dd0b",
+      "prompt_sha256": "bea1c48cad079a22fd8ae4f0768b6868938beb043ce649d270ccd18b90158244",
+      "source_dimensions": [
+        695,
+        564
+      ],
+      "crop": [
+        3,
+        173,
+        644,
+        463
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        10.0,
+        41.125,
+        54.0,
+        61.0
+      ]
+    },
+    {
+      "key": "lunar-living",
+      "id": "mon_moth_titan",
+      "label": "Lunar moth / living",
+      "max": [
+        448,
+        400
+      ],
+      "state": "living",
+      "source": "sources/lunar-living.png",
+      "native": "native/lunar-living.png",
+      "source_sha256": "9c05df54da6ca58582e1df5e265eabbb798bb807c29504f28779101cd4dae76c",
+      "native_sha256": "7ed21ab9e8932fc6b59c10cd7360b7eb0a9177343558d5dc692c247b1f346664",
+      "prompt_sha256": "b52515913ff08ab7924e21953cd1a24ef06bc362da5dd3e95235814a7fd3f248",
+      "source_dimensions": [
+        739,
+        746
+      ],
+      "crop": [
+        29,
+        70,
+        722,
+        721
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        5.375,
+        11.0,
+        58.625,
+        61.0
+      ]
+    },
+    {
+      "key": "lunar-corpse",
+      "id": "corpse_mon_moth_titan",
+      "label": "Lunar moth / corpse",
+      "max": [
+        448,
+        220
+      ],
+      "state": "corpse",
+      "source": "sources/lunar-corpse.png",
+      "native": "native/lunar-corpse.png",
+      "source_sha256": "b3883170a93e8557f4ad881f1680cd2b3e60afd697bcd650d0b7a9195af45d7b",
+      "native_sha256": "2449d5b3835c885335ed3e5c67b0828cfb9f341c8178ec673fac3aef0fba362b",
+      "prompt_sha256": "b52515913ff08ab7924e21953cd1a24ef06bc362da5dd3e95235814a7fd3f248",
+      "source_dimensions": [
+        715,
+        746
+      ],
+      "crop": [
+        17,
+        316,
+        662,
+        692
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        8.375,
+        33.5,
+        55.5,
+        61.0
+      ]
+    },
+    {
+      "key": "caterpillar-living",
+      "id": "mon_caterpillar_moth",
+      "label": "Moth caterpillar / living",
+      "max": [
+        352,
+        160
+      ],
+      "state": "living",
+      "source": "sources/caterpillar-living.png",
+      "native": "native/caterpillar-living.png",
+      "source_sha256": "db20a0becbb5a7127e9fe7109232df20403d6401c5341217a5db3ff324b6e2d3",
+      "native_sha256": "f547d4050bc8ddfa3ded2fe653bd3e549b81f2fb60c5dea5efbd9963b120510e",
+      "prompt_sha256": "b52515913ff08ab7924e21953cd1a24ef06bc362da5dd3e95235814a7fd3f248",
+      "source_dimensions": [
+        729,
+        336
+      ],
+      "crop": [
+        65,
+        26,
+        690,
+        306
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        10.0,
+        41.25,
+        54.0,
+        61.0
+      ]
+    },
+    {
+      "key": "caterpillar-corpse",
+      "id": "corpse_mon_caterpillar_moth",
+      "label": "Moth caterpillar / corpse",
+      "max": [
+        352,
+        88
+      ],
+      "state": "corpse",
+      "source": "sources/caterpillar-corpse.png",
+      "native": "native/caterpillar-corpse.png",
+      "source_sha256": "64263d6db86741409865916530244365f8e022df7940c6cb41e0d22e63c1d61f",
+      "native_sha256": "0e3c9a2fd3d139d5c895ebc6b970f952461f893b68bcff6fa87e1d019fd1b83c",
+      "prompt_sha256": "b52515913ff08ab7924e21953cd1a24ef06bc362da5dd3e95235814a7fd3f248",
+      "source_dimensions": [
+        725,
+        336
+      ],
+      "crop": [
+        40,
+        111,
+        688,
+        310
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        14.0,
+        50.0,
+        49.875,
+        61.0
+      ]
+    }
+  ],
+  "existing_sprite_aliases": {
+    "mon_moth_cocoon": "mon_butterfly_cocoon",
+    "corpse_mon_moth_cocoon": "corpse_mon_butterfly_cocoon"
+  },
+  "alias_evidence": "Core cocoon name, description, bodytype, color, volume, weight, material and IMMOBILE flags match exactly. Upgrade target differs but does not change shell artwork. Both have the same shared zombie target.",
+  "status": "staged in creatures-glyph-batch-01; archive and user/live acceptance pending",
+  "generator": "built-in imagegen",
+  "client_modified": false,
+  "visual_review": "source and native preview inspected; user/live review pending",
+  "review_notes": "Eight new sprites inspected at game size. Tiny antenna segments simplify, and the giant pair has a narrow sheet gutter, but native outlines remain readable. Two cocoon states share completed butterfly art based on identical core appearance fields. Three imagegen calls including an unnecessary alpha correction: raw RGB preview looked like glow, but actual alpha was transparent; inspect composited alpha before future correction calls.",
+  "validation": {
+    "unique_sprites": 8,
+    "creature_ids": [
+      "mon_moth",
+      "mon_moth_giant",
+      "mon_moth_titan",
+      "mon_caterpillar_moth",
+      "mon_moth_cocoon"
+    ],
+    "corpse_ids": [
+      "corpse_mon_moth",
+      "corpse_mon_moth_giant",
+      "corpse_mon_moth_titan",
+      "corpse_mon_caterpillar_moth",
+      "corpse_mon_moth_cocoon"
+    ],
+    "total_slots": 19685,
+    "prior_non_config_files_preserved": 376,
+    "unrelated_mappings_preserved": true,
+    "atlas_bytes": "passed",
+    "source_prompt_native_hashes": "passed",
+    "reference_indices": "passed",
+    "client_modified": false,
+    "live_review": "pending"
+  }
+}

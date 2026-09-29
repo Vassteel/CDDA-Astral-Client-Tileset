@@ -1,0 +1,1831 @@
+[
+  {
+    "type": "ITEM",
+    "id": "astral_master_machete",
+    "copy-from": "machete",
+    "name": {
+      "str": "Dawncleaver"
+    },
+    "description": "A named achievement weapon dealing 6 bash, 30 cut damage.  Its standard techniques and tool qualities are retained.",
+    "looks_like": "machete",
+    "subtypes": [
+      "TOOL"
+    ],
+    "melee_damage": {
+      "bash": 6,
+      "cut": 30
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_master_mace",
+    "copy-from": "mace",
+    "name": {
+      "str": "Citadel"
+    },
+    "description": "A named achievement weapon dealing 56 bash damage.  Its standard techniques and tool qualities are retained.",
+    "looks_like": "mace",
+    "melee_damage": {
+      "bash": 56
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_master_spear",
+    "copy-from": "spear_steel",
+    "name": {
+      "str": "Starwarden"
+    },
+    "description": "A named achievement weapon dealing 6 bash, 42 stab damage.  Its standard techniques and tool qualities are retained.",
+    "looks_like": "spear_steel",
+    "melee_damage": {
+      "bash": 6,
+      "stab": 42
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_last_word",
+    "copy-from": "machete",
+    "name": {
+      "str": "Last Word"
+    },
+    "description": "A named achievement weapon dealing 6 bash, 32 cut damage.  Its standard techniques and tool qualities are retained.",
+    "looks_like": "machete",
+    "subtypes": [
+      "TOOL"
+    ],
+    "melee_damage": {
+      "bash": 6,
+      "cut": 32
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_last_stand",
+    "copy-from": "mace",
+    "name": {
+      "str": "Last Stand"
+    },
+    "description": "A named achievement weapon dealing 60 bash damage.  Its standard techniques and tool qualities are retained.",
+    "looks_like": "mace",
+    "melee_damage": {
+      "bash": 60
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_last_light",
+    "copy-from": "spear_steel",
+    "name": {
+      "str": "Last Light"
+    },
+    "description": "A named achievement weapon dealing 6 bash, 45 stab damage.  Its standard techniques and tool qualities are retained.",
+    "looks_like": "spear_steel",
+    "melee_damage": {
+      "bash": 6,
+      "stab": 45
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_master_pistol",
+    "copy-from": "glock_19",
+    "name": {
+      "str": "Dead Reckoning"
+    },
+    "description": "A tuned carry pistol with 25% less dispersion and 15% less recoil than the standard model.",
+    "looks_like": "glock_19",
+    "subtypes": [
+      "GUN"
+    ],
+    "variants": [],
+    "proportional": {
+      "dispersion": 0.75,
+      "recoil": 0.85
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_legend_pistol",
+    "copy-from": "glock_19",
+    "name": {
+      "str": "Final Answer"
+    },
+    "description": "A lightweight tuned carry pistol with half the standard mass, 25% less dispersion and 15% less recoil.",
+    "looks_like": "glock_19",
+    "subtypes": [
+      "GUN"
+    ],
+    "variants": [],
+    "proportional": {
+      "weight": 0.5,
+      "dispersion": 0.75,
+      "recoil": 0.85
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_last_word",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Last Word trophy"
+    },
+    "description": "A survivor trophy engraved with one hundred thousand tally marks, arranged into a star.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_homesteader",
+    "copy-from": "backpack",
+    "name": {
+      "str": "Homesteader pack"
+    },
+    "description": "A roomy travel pack with 25% more capacity in its main compartment.  Standard attachment pockets and encumbrance are retained.",
+    "looks_like": "backpack",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "31250 ml",
+        "max_contains_weight": "30 kg",
+        "max_item_length": "40 cm",
+        "moves": 300
+      },
+      {
+        "//": "water bottle pocket",
+        "pocket_type": "CONTAINER",
+        "holster": true,
+        "max_contains_volume": "510 ml",
+        "max_contains_weight": "1 kg",
+        "max_item_length": "24 cm",
+        "min_item_length": "18 cm",
+        "moves": 80,
+        "description": "Small pocket for a water bottle.",
+        "ripoff": 2
+      },
+      {
+        "//": "tucked against back",
+        "pocket_type": "CONTAINER",
+        "holster": true,
+        "max_contains_volume": "5 L",
+        "max_contains_weight": "4 kg",
+        "max_item_length": "150 cm",
+        "min_item_length": "60 cm",
+        "moves": 200,
+        "extra_encumbrance": 10,
+        "description": "Tucked between your back and the backpack.",
+        "ripoff": 3,
+        "transparent": true
+      },
+      {
+        "//": "carabiner pocket",
+        "pocket_type": "CONTAINER",
+        "holster": true,
+        "max_contains_volume": "5 L",
+        "max_contains_weight": "6 kg",
+        "max_item_length": "120 cm",
+        "min_item_length": "20 cm",
+        "moves": 150,
+        "extra_encumbrance": 3,
+        "ripoff": 2,
+        "description": "Attached with a carabiner or strap.",
+        "activity_noise": {
+          "volume": 8,
+          "chance": 10
+        },
+        "transparent": true
+      }
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_trailwalker",
+    "copy-from": "boots_hiking",
+    "name": {
+      "str_sp": "Trailwalker boots"
+    },
+    "description": "Protective hiking boots with 25% less weight and one less foot encumbrance than the standard pair.",
+    "looks_like": "boots_hiking",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "proportional": {
+      "weight": 0.75
+    },
+    "armor": [
+      {
+        "covers": [
+          "foot_l",
+          "foot_r"
+        ],
+        "specifically_covers": [
+          "foot_toes_r",
+          "foot_toes_l",
+          "foot_ankle_r",
+          "foot_ankle_l",
+          "foot_heel_r",
+          "foot_heel_l",
+          "foot_arch_r",
+          "foot_arch_l"
+        ],
+        "material": [
+          {
+            "type": "leather",
+            "covered_by_mat": 100,
+            "thickness": 2.0
+          }
+        ],
+        "encumbrance": 11,
+        "coverage": 100
+      },
+      {
+        "covers": [
+          "foot_l",
+          "foot_r"
+        ],
+        "specifically_covers": [
+          "foot_sole_r",
+          "foot_sole_l"
+        ],
+        "material": [
+          {
+            "type": "leather",
+            "covered_by_mat": 100,
+            "thickness": 0.1
+          },
+          {
+            "type": "rubber",
+            "covered_by_mat": 100,
+            "thickness": 4.0
+          }
+        ],
+        "coverage": 100
+      }
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_wayfarer_flask",
+    "copy-from": "thermos",
+    "name": {
+      "str": "Wayfarer flask"
+    },
+    "description": "A two-litre vacuum flask with the insulation of a standard thermos.",
+    "looks_like": "thermos",
+    "volume": "2250 ml",
+    "weight": "730 g",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "watertight": true,
+        "insulation": 10,
+        "max_contains_volume": "2 L",
+        "max_contains_weight": "4 kg"
+      }
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_lumberjack_axe",
+    "copy-from": "ax",
+    "name": {
+      "str": "Lumberjack axe"
+    },
+    "description": "A carefully balanced wood axe.  Tree and log chopping is 25% faster when this is the tool used.",
+    "looks_like": "ax",
+    "subtypes": [
+      "TOOL"
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_forester_axe",
+    "copy-from": "ax",
+    "name": {
+      "str": "Forester axe"
+    },
+    "description": "A masterwork wood axe.  Tree and log chopping is 40% faster with this tool, and its cutting damage is increased by 30%.",
+    "looks_like": "ax",
+    "subtypes": [
+      "TOOL"
+    ],
+    "melee_damage": {
+      "bash": 14,
+      "cut": 37
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_research_cell",
+    "copy-from": "medium_battery_cell",
+    "name": {
+      "str": "Research battery",
+      "str_pl": "Research batteries"
+    },
+    "description": "A rechargeable medium-format cell with three times the standard capacity.",
+    "looks_like": "medium_battery_cell",
+    "subtypes": [
+      "MAGAZINE"
+    ],
+    "capacity": 168,
+    "pocket_data": [
+      {
+        "pocket_type": "MAGAZINE",
+        "rigid": true,
+        "ammo_restriction": {
+          "battery": 168
+        }
+      }
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_research_light",
+    "copy-from": "flashlight",
+    "name": {
+      "str": "Research light (off)",
+      "str_pl": "Research lights (off)"
+    },
+    "description": "A laboratory flashlight fitted for a three-capacity rechargeable cell.  Standard medium batteries also fit.",
+    "looks_like": "flashlight",
+    "subtypes": [
+      "TOOL"
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "MAGAZINE_WELL",
+        "rigid": true,
+        "flag_restriction": [
+          "BATTERY_MEDIUM"
+        ],
+        "default_magazine": "astral_research_cell"
+      }
+    ],
+    "use_action": {
+      "type": "transform",
+      "target": "astral_research_light_on",
+      "need_charges": 1,
+      "msg": "You switch the research light."
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_research_light_on",
+    "copy-from": "flashlight_on",
+    "name": {
+      "str": "Research light (on)",
+      "str_pl": "Research lights (on)"
+    },
+    "description": "A laboratory flashlight fitted for a three-capacity rechargeable cell.  Standard medium batteries also fit.",
+    "looks_like": "flashlight_on",
+    "subtypes": [
+      "TOOL"
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "MAGAZINE_WELL",
+        "rigid": true,
+        "flag_restriction": [
+          "BATTERY_MEDIUM"
+        ],
+        "default_magazine": "astral_research_cell"
+      }
+    ],
+    "use_action": {
+      "type": "transform",
+      "target": "astral_research_light",
+      "need_charges": 0,
+      "msg": "You switch the research light."
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_archivist_plain",
+    "copy-from": "sunglasses",
+    "name": {
+      "str_sp": "Archivist's glasses (clear lenses)"
+    },
+    "description": "A carefully fitted reading aid.  Reading takes 15% less time while these glasses are worn.",
+    "looks_like": "sunglasses",
+    "subtypes": [
+      "ARMOR",
+      "ARTIFACT"
+    ],
+    "variants": [],
+    "passive_effects": [
+      {
+        "has": "WORN",
+        "condition": "ALWAYS",
+        "values": [
+          {
+            "value": "READING_SPEED_MULTIPLIER",
+            "multiply": -0.15
+          }
+        ]
+      }
+    ],
+    "flags": [
+      "WATER_FRIENDLY",
+      "FRAGILE",
+      "SKINTIGHT"
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_archivist_near",
+    "copy-from": "glasses_eye",
+    "name": {
+      "str_sp": "Archivist's glasses (nearsight correction)"
+    },
+    "description": "A carefully fitted reading aid.  Reading takes 15% less time while these glasses are worn.",
+    "looks_like": "glasses_eye",
+    "subtypes": [
+      "ARMOR",
+      "ARTIFACT"
+    ],
+    "variants": [],
+    "passive_effects": [
+      {
+        "has": "WORN",
+        "condition": "ALWAYS",
+        "values": [
+          {
+            "value": "READING_SPEED_MULTIPLIER",
+            "multiply": -0.15
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_archivist_far",
+    "copy-from": "glasses_reading",
+    "name": {
+      "str_sp": "Archivist's glasses (farsight correction)"
+    },
+    "description": "A carefully fitted reading aid.  Reading takes 15% less time while these glasses are worn.",
+    "looks_like": "glasses_reading",
+    "subtypes": [
+      "ARMOR",
+      "ARTIFACT"
+    ],
+    "passive_effects": [
+      {
+        "has": "WORN",
+        "condition": "ALWAYS",
+        "values": [
+          {
+            "value": "READING_SPEED_MULTIPLIER",
+            "multiply": -0.15
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_archivist_desk",
+    "copy-from": "workbench",
+    "name": {
+      "str": "Archivist's desk (folded)",
+      "str_pl": "Archivist's desks (folded)"
+    },
+    "description": "A folding study and crafting desk.  It weighs 12 kg and unfolds into a work surface with a 1.3 crafting multiplier.",
+    "looks_like": "workbench",
+    "weight": "12 kg",
+    "volume": "30 L",
+    "use_action": {
+      "type": "deploy_furn",
+      "furn_type": "f_astral_archivist_desk"
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_alpha",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Alpha keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your alpha transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_batrachian",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Batrachian keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your batrachian transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_beast",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Beast keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your beast transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_bird",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Bird keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your bird transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_cattle",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Cattle keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your cattle transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_cephalapod",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Cephalapod keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your cephalapod transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_chimera",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Chimera keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your chimera transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_elfa",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Elfa keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your elfa transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_feline",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Feline keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your feline transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_fish",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Fish keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your fish transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_gastropod",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Gastropod keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your gastropod transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_insect",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Insect keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your insect transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_lizard",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Lizard keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your lizard transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_lupine",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Lupine keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your lupine transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_medical",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Medical keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your medical transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_mouse",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Mouse keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your mouse transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_plant",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Plant keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your plant transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_rabbit",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Rabbit keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your rabbit transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_raptor",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Raptor keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your raptor transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_rat",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Rat keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your rat transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_slime",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Slime keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your slime transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_spider",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Spider keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your spider transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_troglobite",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Troglobite keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your troglobite transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_threshold_ursine",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Ursine keepsake"
+    },
+    "description": "A small engraved keepsake commemorating your ursine transformation.  It has no hidden stat effects.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_archery_10",
+    "copy-from": "longbow",
+    "name": {
+      "str": "Masterwork Whisperstring bow"
+    },
+    "description": "A tuned achievement weapon with 35% less weight, 25% less dispersion and 15% less recoil.  Standard ammunition compatibility is retained.",
+    "looks_like": "longbow",
+    "subtypes": [
+      "ARMOR",
+      "GUN"
+    ],
+    "proportional": {
+      "weight": 0.65,
+      "dispersion": 0.75,
+      "recoil": 0.85
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_bashing_10",
+    "copy-from": "mace",
+    "name": {
+      "str": "Masterwork Crowdkeeper mace"
+    },
+    "description": "A named combat reward dealing 56 bash damage, with 35% less empty weight.  Its normal techniques are retained.",
+    "looks_like": "mace",
+    "proportional": {
+      "weight": 0.65
+    },
+    "melee_damage": {
+      "bash": 56
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_chemistry_10",
+    "copy-from": "chemistry_set",
+    "name": {
+      "str": "Masterwork Alchemist chemistry kit"
+    },
+    "description": "A named achievement tool with 35% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "chemistry_set",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.65
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_computer_10",
+    "copy-from": "electrohack",
+    "name": {
+      "str": "Masterwork Cipher electronic toolkit"
+    },
+    "description": "A named achievement tool with 35% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "electrohack",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.65
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_cooking_10",
+    "copy-from": "pot",
+    "name": {
+      "str": "Masterwork Hearthkeeper pot"
+    },
+    "description": "A named achievement tool with 35% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "pot",
+    "proportional": {
+      "weight": 0.65
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_cutting_10",
+    "copy-from": "machete",
+    "name": {
+      "str": "Masterwork Duskcleaver machete"
+    },
+    "description": "A named combat reward dealing 29 cut damage, with 35% less empty weight.  Its normal techniques are retained.",
+    "looks_like": "machete",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.65
+    },
+    "melee_damage": {
+      "cut": 29
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_dodge_10",
+    "copy-from": "sneakers",
+    "name": {
+      "str_sp": "Masterwork Featherstep shoes"
+    },
+    "description": "A named achievement tool with 35% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "sneakers",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "proportional": {
+      "weight": 0.65
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_driving_10",
+    "copy-from": "gloves_light",
+    "name": {
+      "str_sp": "Masterwork Touring gloves"
+    },
+    "description": "A named achievement tool with 35% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "gloves_light",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "proportional": {
+      "weight": 0.65
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_electronics_10",
+    "copy-from": "soldering_iron",
+    "name": {
+      "str": "Masterwork Sparkkeeper soldering iron"
+    },
+    "description": "A named achievement tool with 35% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "soldering_iron",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.65
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_fabrication_10",
+    "copy-from": "hammer",
+    "name": {
+      "str": "Masterwork Cornerstone hammer"
+    },
+    "description": "A named achievement tool with 35% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "hammer",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.65
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_firstaid_10",
+    "copy-from": "scalpel",
+    "name": {
+      "str": "Masterwork Steadyhand scalpel"
+    },
+    "description": "A named achievement tool with 35% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "scalpel",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.65
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_gun_10",
+    "copy-from": "binoculars",
+    "name": {
+      "str_sp": "Masterwork Steadyglass binoculars"
+    },
+    "description": "A named achievement tool with 35% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "binoculars",
+    "subtypes": [
+      "TOOL",
+      "ARMOR"
+    ],
+    "proportional": {
+      "weight": 0.65
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_launcher_10",
+    "copy-from": "m79",
+    "name": {
+      "str": "Masterwork Thunderhead launcher"
+    },
+    "description": "A tuned achievement weapon with 35% less weight, 25% less dispersion and 15% less recoil.  Standard ammunition compatibility is retained.",
+    "looks_like": "m79",
+    "subtypes": [
+      "GUN"
+    ],
+    "proportional": {
+      "weight": 0.65,
+      "dispersion": 0.75,
+      "recoil": 0.85
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_mechanics_10",
+    "copy-from": "welder",
+    "name": {
+      "str": "Masterwork Roadsmith welder"
+    },
+    "description": "A named achievement tool with 35% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "welder",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.65
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_melee_10",
+    "copy-from": "machete",
+    "name": {
+      "str": "Masterwork Hearthguard machete"
+    },
+    "description": "A named combat reward dealing 29 cut damage, with 35% less empty weight.  Its normal techniques are retained.",
+    "looks_like": "machete",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.65
+    },
+    "melee_damage": {
+      "cut": 29
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_pistol_10",
+    "copy-from": "glock_19",
+    "name": {
+      "str": "Masterwork Last Chance pistol"
+    },
+    "description": "A tuned achievement weapon with 35% less weight, 25% less dispersion and 15% less recoil.  Standard ammunition compatibility is retained.",
+    "looks_like": "glock_19",
+    "subtypes": [
+      "GUN"
+    ],
+    "variants": [],
+    "proportional": {
+      "weight": 0.65,
+      "dispersion": 0.75,
+      "recoil": 0.85
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_rifle_10",
+    "copy-from": "sks",
+    "name": {
+      "str": "Masterwork Farwatch rifle"
+    },
+    "description": "A tuned achievement weapon with 35% less weight, 25% less dispersion and 15% less recoil.  Standard ammunition compatibility is retained.",
+    "looks_like": "sks",
+    "subtypes": [
+      "GUN"
+    ],
+    "variants": [],
+    "proportional": {
+      "weight": 0.65,
+      "dispersion": 0.75,
+      "recoil": 0.85
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_shotgun_10",
+    "copy-from": "remington_870",
+    "name": {
+      "str": "Masterwork Doorwarden shotgun"
+    },
+    "description": "A tuned achievement weapon with 35% less weight, 25% less dispersion and 15% less recoil.  Standard ammunition compatibility is retained.",
+    "looks_like": "remington_870",
+    "subtypes": [
+      "GUN"
+    ],
+    "variants": [],
+    "proportional": {
+      "weight": 0.65,
+      "dispersion": 0.75,
+      "recoil": 0.85
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_smg_10",
+    "copy-from": "hk_mp5",
+    "name": {
+      "str": "Masterwork Nightfall SMG"
+    },
+    "description": "A tuned achievement weapon with 35% less weight, 25% less dispersion and 15% less recoil.  Standard ammunition compatibility is retained.",
+    "looks_like": "hk_mp5",
+    "subtypes": [
+      "GUN"
+    ],
+    "proportional": {
+      "weight": 0.65,
+      "dispersion": 0.75,
+      "recoil": 0.85
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_speech_10",
+    "copy-from": "bookstrap",
+    "name": {
+      "str": "Masterwork Silver Tongue book strap"
+    },
+    "description": "A named achievement tool with 35% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "bookstrap",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "proportional": {
+      "weight": 0.65
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_stabbing_10",
+    "copy-from": "spear_steel",
+    "name": {
+      "str": "Masterwork Longreach spear"
+    },
+    "description": "A named combat reward dealing 8 bash, 42 stab damage, with 35% less empty weight.  Its normal techniques are retained.",
+    "looks_like": "spear_steel",
+    "proportional": {
+      "weight": 0.65
+    },
+    "melee_damage": {
+      "bash": 8,
+      "stab": 42
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_survival_10",
+    "copy-from": "knife_hunting",
+    "name": {
+      "str": "Masterwork Redleaf hunting knife"
+    },
+    "description": "A named achievement tool with 35% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "knife_hunting",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.65
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_swimming_10",
+    "copy-from": "flotation_vest",
+    "name": {
+      "str": "Masterwork Riverguard vest"
+    },
+    "description": "A named achievement tool with 35% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "flotation_vest",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "proportional": {
+      "weight": 0.65
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_tailor_10",
+    "copy-from": "sewing_kit",
+    "name": {
+      "str": "Masterwork Mender sewing kit"
+    },
+    "description": "A named achievement tool with 35% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "sewing_kit",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.65
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_throw_10",
+    "copy-from": "throwing_knife",
+    "name": {
+      "str": "Masterwork Comet throwing knife"
+    },
+    "description": "A named combat reward dealing 14 stab damage, with 35% less empty weight.  Its normal techniques are retained.",
+    "looks_like": "throwing_knife",
+    "proportional": {
+      "weight": 0.65
+    },
+    "melee_damage": {
+      "stab": 14
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_traps_10",
+    "copy-from": "beartrap",
+    "name": {
+      "str": "Masterwork Trailkeeper trap"
+    },
+    "description": "A named achievement tool with 35% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "beartrap",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.65
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_unarmed_10",
+    "copy-from": "knuckle_brass",
+    "name": {
+      "str_sp": "Masterwork Knucklestar knuckles"
+    },
+    "description": "A named combat reward dealing 8 bash damage, with 35% less empty weight.  Its normal techniques are retained.",
+    "looks_like": "knuckle_brass",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "proportional": {
+      "weight": 0.65
+    },
+    "melee_damage": {
+      "bash": 8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_archery_7",
+    "copy-from": "longbow",
+    "name": {
+      "str": "Whisperstring bow"
+    },
+    "description": "A tuned achievement weapon with 20% less weight, 15% less dispersion and 10% less recoil.  Standard ammunition compatibility is retained.",
+    "looks_like": "longbow",
+    "subtypes": [
+      "ARMOR",
+      "GUN"
+    ],
+    "proportional": {
+      "weight": 0.8,
+      "dispersion": 0.85,
+      "recoil": 0.9
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_bashing_7",
+    "copy-from": "mace",
+    "name": {
+      "str": "Crowdkeeper mace"
+    },
+    "description": "A named combat reward dealing 48 bash damage, with 20% less empty weight.  Its normal techniques are retained.",
+    "looks_like": "mace",
+    "proportional": {
+      "weight": 0.8
+    },
+    "melee_damage": {
+      "bash": 48
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_chemistry_7",
+    "copy-from": "chemistry_set",
+    "name": {
+      "str": "Alchemist chemistry kit"
+    },
+    "description": "A named achievement tool with 20% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "chemistry_set",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_computer_7",
+    "copy-from": "electrohack",
+    "name": {
+      "str": "Cipher electronic toolkit"
+    },
+    "description": "A named achievement tool with 20% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "electrohack",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_cooking_7",
+    "copy-from": "pot",
+    "name": {
+      "str": "Hearthkeeper pot"
+    },
+    "description": "A named achievement tool with 20% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "pot",
+    "proportional": {
+      "weight": 0.8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_cutting_7",
+    "copy-from": "machete",
+    "name": {
+      "str": "Duskcleaver machete"
+    },
+    "description": "A named combat reward dealing 25 cut damage, with 20% less empty weight.  Its normal techniques are retained.",
+    "looks_like": "machete",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.8
+    },
+    "melee_damage": {
+      "cut": 25
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_dodge_7",
+    "copy-from": "sneakers",
+    "name": {
+      "str_sp": "Featherstep shoes"
+    },
+    "description": "A named achievement tool with 20% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "sneakers",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "proportional": {
+      "weight": 0.8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_driving_7",
+    "copy-from": "gloves_light",
+    "name": {
+      "str_sp": "Touring gloves"
+    },
+    "description": "A named achievement tool with 20% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "gloves_light",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "proportional": {
+      "weight": 0.8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_electronics_7",
+    "copy-from": "soldering_iron",
+    "name": {
+      "str": "Sparkkeeper soldering iron"
+    },
+    "description": "A named achievement tool with 20% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "soldering_iron",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_fabrication_7",
+    "copy-from": "hammer",
+    "name": {
+      "str": "Cornerstone hammer"
+    },
+    "description": "A named achievement tool with 20% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "hammer",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_firstaid_7",
+    "copy-from": "scalpel",
+    "name": {
+      "str": "Steadyhand scalpel"
+    },
+    "description": "A named achievement tool with 20% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "scalpel",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_gun_7",
+    "copy-from": "binoculars",
+    "name": {
+      "str_sp": "Steadyglass binoculars"
+    },
+    "description": "A named achievement tool with 20% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "binoculars",
+    "subtypes": [
+      "TOOL",
+      "ARMOR"
+    ],
+    "proportional": {
+      "weight": 0.8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_launcher_7",
+    "copy-from": "m79",
+    "name": {
+      "str": "Thunderhead launcher"
+    },
+    "description": "A tuned achievement weapon with 20% less weight, 15% less dispersion and 10% less recoil.  Standard ammunition compatibility is retained.",
+    "looks_like": "m79",
+    "subtypes": [
+      "GUN"
+    ],
+    "proportional": {
+      "weight": 0.8,
+      "dispersion": 0.85,
+      "recoil": 0.9
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_mechanics_7",
+    "copy-from": "welder",
+    "name": {
+      "str": "Roadsmith welder"
+    },
+    "description": "A named achievement tool with 20% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "welder",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_melee_7",
+    "copy-from": "machete",
+    "name": {
+      "str": "Hearthguard machete"
+    },
+    "description": "A named combat reward dealing 25 cut damage, with 20% less empty weight.  Its normal techniques are retained.",
+    "looks_like": "machete",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.8
+    },
+    "melee_damage": {
+      "cut": 25
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_pistol_7",
+    "copy-from": "glock_19",
+    "name": {
+      "str": "Last Chance pistol"
+    },
+    "description": "A tuned achievement weapon with 20% less weight, 15% less dispersion and 10% less recoil.  Standard ammunition compatibility is retained.",
+    "looks_like": "glock_19",
+    "subtypes": [
+      "GUN"
+    ],
+    "variants": [],
+    "proportional": {
+      "weight": 0.8,
+      "dispersion": 0.85,
+      "recoil": 0.9
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_rifle_7",
+    "copy-from": "sks",
+    "name": {
+      "str": "Farwatch rifle"
+    },
+    "description": "A tuned achievement weapon with 20% less weight, 15% less dispersion and 10% less recoil.  Standard ammunition compatibility is retained.",
+    "looks_like": "sks",
+    "subtypes": [
+      "GUN"
+    ],
+    "variants": [],
+    "proportional": {
+      "weight": 0.8,
+      "dispersion": 0.85,
+      "recoil": 0.9
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_shotgun_7",
+    "copy-from": "remington_870",
+    "name": {
+      "str": "Doorwarden shotgun"
+    },
+    "description": "A tuned achievement weapon with 20% less weight, 15% less dispersion and 10% less recoil.  Standard ammunition compatibility is retained.",
+    "looks_like": "remington_870",
+    "subtypes": [
+      "GUN"
+    ],
+    "variants": [],
+    "proportional": {
+      "weight": 0.8,
+      "dispersion": 0.85,
+      "recoil": 0.9
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_smg_7",
+    "copy-from": "hk_mp5",
+    "name": {
+      "str": "Nightfall SMG"
+    },
+    "description": "A tuned achievement weapon with 20% less weight, 15% less dispersion and 10% less recoil.  Standard ammunition compatibility is retained.",
+    "looks_like": "hk_mp5",
+    "subtypes": [
+      "GUN"
+    ],
+    "proportional": {
+      "weight": 0.8,
+      "dispersion": 0.85,
+      "recoil": 0.9
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_speech_7",
+    "copy-from": "bookstrap",
+    "name": {
+      "str": "Silver Tongue book strap"
+    },
+    "description": "A named achievement tool with 20% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "bookstrap",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "proportional": {
+      "weight": 0.8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_stabbing_7",
+    "copy-from": "spear_steel",
+    "name": {
+      "str": "Longreach spear"
+    },
+    "description": "A named combat reward dealing 7 bash, 36 stab damage, with 20% less empty weight.  Its normal techniques are retained.",
+    "looks_like": "spear_steel",
+    "proportional": {
+      "weight": 0.8
+    },
+    "melee_damage": {
+      "bash": 7,
+      "stab": 36
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_survival_7",
+    "copy-from": "knife_hunting",
+    "name": {
+      "str": "Redleaf hunting knife"
+    },
+    "description": "A named achievement tool with 20% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "knife_hunting",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_swimming_7",
+    "copy-from": "flotation_vest",
+    "name": {
+      "str": "Riverguard vest"
+    },
+    "description": "A named achievement tool with 20% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "flotation_vest",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "proportional": {
+      "weight": 0.8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_tailor_7",
+    "copy-from": "sewing_kit",
+    "name": {
+      "str": "Mender sewing kit"
+    },
+    "description": "A named achievement tool with 20% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "sewing_kit",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_throw_7",
+    "copy-from": "throwing_knife",
+    "name": {
+      "str": "Comet throwing knife"
+    },
+    "description": "A named combat reward dealing 12 stab damage, with 20% less empty weight.  Its normal techniques are retained.",
+    "looks_like": "throwing_knife",
+    "proportional": {
+      "weight": 0.8
+    },
+    "melee_damage": {
+      "stab": 12
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_traps_7",
+    "copy-from": "beartrap",
+    "name": {
+      "str": "Trailkeeper trap"
+    },
+    "description": "A named achievement tool with 20% less empty weight.  Normal tool qualities and compatibility are retained.",
+    "looks_like": "beartrap",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.8
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_skill_unarmed_7",
+    "copy-from": "knuckle_brass",
+    "name": {
+      "str_sp": "Knucklestar knuckles"
+    },
+    "description": "A named combat reward dealing 7 bash damage, with 20% less empty weight.  Its normal techniques are retained.",
+    "looks_like": "knuckle_brass",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "proportional": {
+      "weight": 0.8
+    },
+    "melee_damage": {
+      "bash": 7
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_remembrance_shovel",
+    "copy-from": "shovel",
+    "name": {
+      "str": "Remembrance shovel"
+    },
+    "description": "A carefully balanced shovel with 25% less weight and its normal digging qualities.",
+    "looks_like": "shovel",
+    "subtypes": [
+      "TOOL"
+    ],
+    "proportional": {
+      "weight": 0.75
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_remembrance",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Remembrance keepsake"
+    },
+    "description": "An engraved remembrance of those you laid to rest.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_stormglass",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Stormglass keepsake"
+    },
+    "description": "A polished glass keepsake commemorating your first witnessed portal storm.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_autodoc",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Autodoc witness keepsake"
+    },
+    "description": "A keepsake recording what you discovered about the autodoc.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_keepsake_survivor",
+    "copy-from": "dog_tag",
+    "name": {
+      "str_sp": "Astral survivor trophy"
+    },
+    "description": "A star-shaped trophy commemorating escape from the Cataclysm.",
+    "looks_like": "dog_tag",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "variants": []
+  }
+]

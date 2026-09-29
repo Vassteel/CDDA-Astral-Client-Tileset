@@ -212,6 +212,16 @@ void Character::rem_morale( const morale_type &type, const itype *item_type )
     morale->remove( type, item_type );
 }
 
+void Character::clear_temporary_negative_morale()
+{
+    morale->clear_temporary_negative();
+}
+
+bool Character::has_temporary_negative_morale() const
+{
+    return morale->has_temporary_negative();
+}
+
 void Character::clear_morale()
 {
     morale->clear();

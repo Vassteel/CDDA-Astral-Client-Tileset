@@ -1,3 +1,4 @@
+#include "achievement_rewards.h"
 #include "crafting.h"
 
 #include <algorithm>
@@ -3763,6 +3764,7 @@ void Character::complete_craft( item &craft, const std::optional<tripoint_bub_ms
                 craft_result.set_random_fault_of_type( "crafting_defect" );
             }
         }
+        achievement_rewards::on_craft( *this, making, newits );
         // only wield crafted items if there's only one
         bool allow_wield = newits.size() == 1;
         spawn_items( *this, newits, loc, relative_rot, should_heat, allow_wield );

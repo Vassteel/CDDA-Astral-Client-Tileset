@@ -1,0 +1,105 @@
+[
+  {
+    "type": "recipe",
+    "result": "astral_shield_scrap",
+    "activity_level": "MODERATE_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_ARMS",
+    "skill_used": "fabrication",
+    "difficulty": 1,
+    "time": "45 m",
+    "autolearn": true,
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ],
+    "components": [ [ [ "2x4", 3 ] ], [ [ "cordage_6_leather", 2 ], [ "cordage_6", 2 ] ] ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_shield_buckler",
+    "activity_level": "MODERATE_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_ARMS",
+    "skill_used": "fabrication",
+    "difficulty": 3,
+    "time": "90 m",
+    "autolearn": true,
+    "qualities": [
+      { "id": "CUT", "level": 1 },
+      { "id": "HAMMER", "level": 1 },
+      { "id": "SAW_M", "level": 1 },
+      { "id": "DRILL", "level": 1 }
+    ],
+    "components": [ [ [ "sheet_metal", 1 ] ], [ [ "cordage_6_leather", 2 ] ] ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_shield_round",
+    "activity_level": "MODERATE_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_ARMS",
+    "skill_used": "fabrication",
+    "difficulty": 3,
+    "time": "2 h",
+    "autolearn": true,
+    "qualities": [
+      { "id": "CUT", "level": 1 },
+      { "id": "HAMMER", "level": 1 },
+      { "id": "SAW_M", "level": 1 },
+      { "id": "DRILL", "level": 1 }
+    ],
+    "components": [ [ [ "2x4", 4 ] ], [ [ "sheet_metal", 1 ] ], [ [ "cordage_6_leather", 4 ] ] ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_shield_kite",
+    "activity_level": "MODERATE_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_ARMS",
+    "skill_used": "fabrication",
+    "difficulty": 4,
+    "time": "3 h",
+    "autolearn": true,
+    "qualities": [
+      { "id": "CUT", "level": 1 },
+      { "id": "HAMMER", "level": 1 },
+      { "id": "SAW_M", "level": 1 },
+      { "id": "DRILL", "level": 1 }
+    ],
+    "components": [ [ [ "2x4", 5 ] ], [ [ "sheet_metal", 2 ] ], [ [ "cordage_6_leather", 4 ] ] ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_shield_tower",
+    "activity_level": "MODERATE_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_ARMS",
+    "skill_used": "fabrication",
+    "difficulty": 5,
+    "time": "4 h",
+    "autolearn": true,
+    "qualities": [
+      { "id": "CUT", "level": 1 },
+      { "id": "HAMMER", "level": 1 },
+      { "id": "SAW_M", "level": 1 },
+      { "id": "DRILL", "level": 1 }
+    ],
+    "components": [ [ [ "2x4", 8 ] ], [ [ "sheet_metal", 3 ] ], [ [ "cordage_6_leather", 6 ] ] ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_shield_riot",
+    "activity_level": "MODERATE_EXERCISE",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_ARMS",
+    "skill_used": "fabrication",
+    "difficulty": 5,
+    "time": "3 h",
+    "autolearn": true,
+    "qualities": [
+      { "id": "CUT", "level": 1 },
+      { "id": "HAMMER", "level": 1 },
+      { "id": "SAW_M", "level": 1 },
+      { "id": "DRILL", "level": 1 }
+    ],
+    "components": [ [ [ "polycarbonate_sheet", 2 ] ], [ [ "sheet_metal", 1 ] ], [ [ "cordage_6_leather", 4 ] ] ]
+  }
+]

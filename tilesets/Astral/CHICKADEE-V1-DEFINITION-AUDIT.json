@@ -1,0 +1,243 @@
+{
+  "active_mods": [
+    "bombastic_perks",
+    "dda",
+    "innawood",
+    "limitless_backpack",
+    "megafauna",
+    "no_npc_food",
+    "perk_melee_system",
+    "personal_portal_storms"
+  ],
+  "records": [
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/bird.json",
+      "definition": {
+        "abstract": "mon_bird_flying_base",
+        "type": "MONSTER",
+        "name": {
+          "str": "flying bird abstract",
+          "//~": "NO_I18N"
+        },
+        "description": {
+          "str": "This is an abstract monster for other flying birds to copy from, so that we have some common foundation to work with.  If it appears in the game that's a bug.  Use this when your bird can fly, but cannot swim.",
+          "//~": "NO_I18N"
+        },
+        "bodytype": "bird",
+        "default_faction": "bird_small_flying",
+        "categories": [
+          "WILDLIFE"
+        ],
+        "species": [
+          "BIRD"
+        ],
+        "volume": "467 ml",
+        "weight": "350 g",
+        "//": "~0.75g/ml density for most wild birds",
+        "hp": 1,
+        "speed": 200,
+        "material": [
+          "flesh"
+        ],
+        "symbol": "v",
+        "color": "dark_gray",
+        "aggression": -99,
+        "morale": 5,
+        "melee_dice": 1,
+        "melee_dice_sides": 1,
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 0
+          }
+        ],
+        "dodge": 4,
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology",
+          "prof_wp_flying",
+          "prof_wp_basic_bird"
+        ],
+        "weakpoint_sets": [
+          "wps_bird_body"
+        ],
+        "harvest": "bird_tiny",
+        "dissect": "dissect_bird_sample_single",
+        "baby_flags": [
+          "SPRING",
+          "SUMMER"
+        ],
+        "fear_triggers": [
+          "SOUND",
+          "PLAYER_CLOSE",
+          "FRIEND_ATTACKED",
+          "FRIEND_DIED",
+          "FIRE",
+          "HURT"
+        ],
+        "biosignature": {
+          "biosig_item": "feces_bird",
+          "biosig_timer": 4
+        },
+        "flags": [
+          "SEES",
+          "HEARS",
+          "ANIMAL",
+          "PATH_AVOID_DANGER",
+          "WARM",
+          "FLIES",
+          "SWARMS",
+          "CANPLAY",
+          "CAN_BE_CULLED",
+          "PET_WONT_FOLLOW",
+          "SMALL_HIDER"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/bird.json",
+      "definition": {
+        "abstract": "mon_generic_chick",
+        "type": "MONSTER",
+        "name": {
+          "str": "brown chick"
+        },
+        "description": "A tiny darkly-colored chick, it could be from a number of different species.",
+        "default_faction": "bird_tiny_flightless",
+        "bodytype": "bird",
+        "categories": [
+          "WILDLIFE"
+        ],
+        "species": [
+          "BIRD"
+        ],
+        "volume": "80 ml",
+        "weight": "60 g",
+        "hp": 1,
+        "speed": 40,
+        "material": [
+          "flesh"
+        ],
+        "symbol": "v",
+        "color": "yellow",
+        "aggression": -99,
+        "morale": -8,
+        "melee_skill": 1,
+        "melee_dice": 1,
+        "melee_dice_sides": 1,
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 0
+          }
+        ],
+        "dodge": 1,
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology",
+          "prof_wp_basic_bird"
+        ],
+        "harvest": "bird_tiny",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_chicken"
+        },
+        "//": "Grows up into a standard chicken as a fallback",
+        "fear_triggers": [
+          "SOUND",
+          "PLAYER_CLOSE",
+          "FRIEND_ATTACKED",
+          "FRIEND_DIED",
+          "FIRE",
+          "HURT"
+        ],
+        "flags": [
+          "SEES",
+          "HEARS",
+          "ANIMAL",
+          "PATH_AVOID_DANGER",
+          "PATH_AVOID_FIRE",
+          "WARM",
+          "SWARMS",
+          "CAN_BE_CULLED",
+          "CANPLAY",
+          "SMALL_HIDER"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/bird.json",
+      "definition": {
+        "abstract": "mon_generic_chick_tiny",
+        "type": "MONSTER",
+        "name": {
+          "str": "gray chick"
+        },
+        "description": "A tiny dull-colored chick, it could be from a number of different species.",
+        "copy-from": "mon_generic_chick",
+        "looks_like": "mon_generic_chick_tiny",
+        "volume": "7 ml",
+        "weight": "5 g",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_sparrow"
+        },
+        "//": "Grows up into a sparrow as a fallback"
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/bird.json",
+      "definition": {
+        "id": "mon_chickadee",
+        "type": "MONSTER",
+        "name": {
+          "str": "black-capped chickadee"
+        },
+        "description": "A tiny species of tit native to North America, with a distinctive black cap on its head.",
+        "copy-from": "mon_bird_flying_base",
+        "default_faction": "bird_tiny_flying",
+        "volume": "16 ml",
+        "weight": "12 g",
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_chickadee"
+          },
+          "baby_count": 8,
+          "baby_timer": 14
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/bird.json",
+      "definition": {
+        "id": "mon_chickadee_chick",
+        "type": "MONSTER",
+        "copy-from": "mon_generic_chick_tiny",
+        "upgrades": {
+          "age_grow": 28,
+          "into": "mon_chickadee"
+        }
+      }
+    }
+  ],
+  "creature_ids": [
+    "mon_chickadee",
+    "mon_chickadee_chick"
+  ],
+  "renderer_states": [
+    "corpse_mon_chickadee",
+    "corpse_mon_chickadee_chick"
+  ],
+  "evidence": "src/cata_tiles.cpp:3680 prefixes corpse_ to monster id",
+  "seasons": "Same natural markings shared across all four seasons; no separate seasonal morph defined.",
+  "named_variants": [],
+  "runtime_review": "pending; conditional mod interactions outside static audit",
+  "egg_item": "egg_chickadee delegated to Aux-2 items"
+}

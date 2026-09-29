@@ -61,7 +61,8 @@
         "ammo_restriction": { "38": 6 },
         "allowed_speedloaders": [ "38_speedloader6" ]
       }
-    ]
+    ],
+    "extend": { "flags": [ "OLD_GUN" ] }
   },
   {
     "id": "rifle_38",

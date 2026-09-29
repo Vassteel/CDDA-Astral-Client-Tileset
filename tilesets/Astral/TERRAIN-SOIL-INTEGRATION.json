@@ -1,0 +1,2287 @@
+{
+  "status": "validated local playtest candidate; live acceptance pending",
+  "assets": {
+    "dirt-mound-neutral": {
+      "first_sprite": 20468,
+      "file": "astral_terrain_soil_dirt_mound_neutral.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/dirt-mound-neutral/atlas.png",
+      "sha256": "71a58ef9af384387ffb4b3eb0ca21a34affdef6b80508a464217f9fa13bb8a21",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      },
+      "reused_installed_material": false
+    },
+    "forest-floor-autumn": {
+      "first_sprite": 20488,
+      "file": "astral_terrain_soil_forest_floor_autumn.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/forest-floor-autumn/atlas.png",
+      "sha256": "8bfca0e8dad21cb51c0d8c826fac8e13b2a31a6ed9c0c45a12f1dd960918b548",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      },
+      "reused_installed_material": false
+    },
+    "forest-floor-spring": {
+      "first_sprite": 20508,
+      "file": "astral_terrain_soil_forest_floor_spring.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/forest-floor-spring/atlas.png",
+      "sha256": "0b41a21a68204ab6d00f6540913de2d56dc2d8b0c2ca588c966098de1aa5ba97",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      },
+      "reused_installed_material": false
+    },
+    "forest-floor-summer": {
+      "first_sprite": 20528,
+      "file": "astral_terrain_soil_forest_floor_summer.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/forest-floor-summer/atlas.png",
+      "sha256": "6aada5f8244790e44bb48f22de06067e76e78a6537352e6e4fb4ecc149f68bc7",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      },
+      "reused_installed_material": false
+    },
+    "forest-floor-winter": {
+      "first_sprite": 20548,
+      "file": "astral_terrain_soil_forest_floor_winter.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/forest-floor-winter/atlas.png",
+      "sha256": "002ce596a59f0b69f500fe69f5a05c32430a0be196772af4d796ac0372bf7201",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      },
+      "reused_installed_material": false
+    },
+    "fresh-shallow": {
+      "first_sprite": 20108,
+      "file": "astral_terrain_complete_fresh_shallow.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/fresh-shallow/atlas.png",
+      "sha256": "cdb04c3894c6e8b6cebdf7d1cd2be16a426c3a1340a2227d6362a295e3b52984",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      },
+      "reused_installed_material": true
+    },
+    "glassed-sand-neutral": {
+      "first_sprite": 20568,
+      "file": "astral_terrain_soil_glassed_sand_neutral.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/glassed-sand-neutral/atlas.png",
+      "sha256": "9c8adb1dcb330e53ce73720420830e46a879627a14c0b89dcb2bda1eaab10f71",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      },
+      "reused_installed_material": false
+    },
+    "sand-mound-neutral": {
+      "first_sprite": 20588,
+      "file": "astral_terrain_soil_sand_mound_neutral.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/sand-mound-neutral/atlas.png",
+      "sha256": "40b7f393a611ee9de0fd918a8a8e8016d59802e63e42c3da4cc9ddd0ad889447",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      },
+      "reused_installed_material": false
+    },
+    "surface-dirt": {
+      "first_sprite": 20608,
+      "file": "astral_terrain_soil_surface_dirt.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/surface-dirt/atlas.png",
+      "sha256": "629b08ca9ef8b1ae90e1a12fcd52e3a52af51ded3904551be8f08a7c292071a7",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      },
+      "reused_installed_material": false
+    },
+    "surface-sand": {
+      "first_sprite": 20628,
+      "file": "astral_terrain_soil_surface_sand.png",
+      "source": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/terrain/completion-v1/surface-sand/atlas.png",
+      "sha256": "7bd379257fee76c5858634531141c3350ef6674029fcb2924268bd5845a36cf4",
+      "local_foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 0
+          },
+          {
+            "weight": 1,
+            "sprite": 16
+          },
+          {
+            "weight": 1,
+            "sprite": 17
+          }
+        ],
+        "corner": [
+          1,
+          4,
+          3,
+          2
+        ],
+        "t_connection": [
+          5,
+          8,
+          7,
+          6
+        ],
+        "edge": [
+          9,
+          10
+        ],
+        "end_piece": [
+          11,
+          14,
+          13,
+          12
+        ],
+        "unconnected": [
+          15
+        ]
+      },
+      "reused_installed_material": false
+    }
+  },
+  "bindings": [
+    {
+      "id": "t_forestfloor",
+      "season": "spring",
+      "material": "forest-floor-spring",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20508
+          },
+          {
+            "weight": 1,
+            "sprite": 20524
+          },
+          {
+            "weight": 1,
+            "sprite": 20525
+          }
+        ],
+        "corner": [
+          20509,
+          20512,
+          20511,
+          20510
+        ],
+        "t_connection": [
+          20513,
+          20516,
+          20515,
+          20514
+        ],
+        "edge": [
+          20517,
+          20518
+        ],
+        "end_piece": [
+          20519,
+          20522,
+          20521,
+          20520
+        ],
+        "unconnected": [
+          20523
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_forestfloor",
+      "season": "summer",
+      "material": "forest-floor-summer",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20528
+          },
+          {
+            "weight": 1,
+            "sprite": 20544
+          },
+          {
+            "weight": 1,
+            "sprite": 20545
+          }
+        ],
+        "corner": [
+          20529,
+          20532,
+          20531,
+          20530
+        ],
+        "t_connection": [
+          20533,
+          20536,
+          20535,
+          20534
+        ],
+        "edge": [
+          20537,
+          20538
+        ],
+        "end_piece": [
+          20539,
+          20542,
+          20541,
+          20540
+        ],
+        "unconnected": [
+          20543
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_forestfloor",
+      "season": "autumn",
+      "material": "forest-floor-autumn",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20488
+          },
+          {
+            "weight": 1,
+            "sprite": 20504
+          },
+          {
+            "weight": 1,
+            "sprite": 20505
+          }
+        ],
+        "corner": [
+          20489,
+          20492,
+          20491,
+          20490
+        ],
+        "t_connection": [
+          20493,
+          20496,
+          20495,
+          20494
+        ],
+        "edge": [
+          20497,
+          20498
+        ],
+        "end_piece": [
+          20499,
+          20502,
+          20501,
+          20500
+        ],
+        "unconnected": [
+          20503
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_forestfloor",
+      "season": "winter",
+      "material": "forest-floor-winter",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20548
+          },
+          {
+            "weight": 1,
+            "sprite": 20564
+          },
+          {
+            "weight": 1,
+            "sprite": 20565
+          }
+        ],
+        "corner": [
+          20549,
+          20552,
+          20551,
+          20550
+        ],
+        "t_connection": [
+          20553,
+          20556,
+          20555,
+          20554
+        ],
+        "edge": [
+          20557,
+          20558
+        ],
+        "end_piece": [
+          20559,
+          20562,
+          20561,
+          20560
+        ],
+        "unconnected": [
+          20563
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_dirtmound",
+      "season": "spring",
+      "material": "dirt-mound-neutral",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20468
+          },
+          {
+            "weight": 1,
+            "sprite": 20484
+          },
+          {
+            "weight": 1,
+            "sprite": 20485
+          }
+        ],
+        "corner": [
+          20469,
+          20472,
+          20471,
+          20470
+        ],
+        "t_connection": [
+          20473,
+          20476,
+          20475,
+          20474
+        ],
+        "edge": [
+          20477,
+          20478
+        ],
+        "end_piece": [
+          20479,
+          20482,
+          20481,
+          20480
+        ],
+        "unconnected": [
+          20483
+        ]
+      },
+      "background": 20608
+    },
+    {
+      "id": "t_dirtmound",
+      "season": "summer",
+      "material": "dirt-mound-neutral",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20468
+          },
+          {
+            "weight": 1,
+            "sprite": 20484
+          },
+          {
+            "weight": 1,
+            "sprite": 20485
+          }
+        ],
+        "corner": [
+          20469,
+          20472,
+          20471,
+          20470
+        ],
+        "t_connection": [
+          20473,
+          20476,
+          20475,
+          20474
+        ],
+        "edge": [
+          20477,
+          20478
+        ],
+        "end_piece": [
+          20479,
+          20482,
+          20481,
+          20480
+        ],
+        "unconnected": [
+          20483
+        ]
+      },
+      "background": 20608
+    },
+    {
+      "id": "t_dirtmound",
+      "season": "autumn",
+      "material": "dirt-mound-neutral",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20468
+          },
+          {
+            "weight": 1,
+            "sprite": 20484
+          },
+          {
+            "weight": 1,
+            "sprite": 20485
+          }
+        ],
+        "corner": [
+          20469,
+          20472,
+          20471,
+          20470
+        ],
+        "t_connection": [
+          20473,
+          20476,
+          20475,
+          20474
+        ],
+        "edge": [
+          20477,
+          20478
+        ],
+        "end_piece": [
+          20479,
+          20482,
+          20481,
+          20480
+        ],
+        "unconnected": [
+          20483
+        ]
+      },
+      "background": 20608
+    },
+    {
+      "id": "t_dirtmound",
+      "season": "winter",
+      "material": "dirt-mound-neutral",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20468
+          },
+          {
+            "weight": 1,
+            "sprite": 20484
+          },
+          {
+            "weight": 1,
+            "sprite": 20485
+          }
+        ],
+        "corner": [
+          20469,
+          20472,
+          20471,
+          20470
+        ],
+        "t_connection": [
+          20473,
+          20476,
+          20475,
+          20474
+        ],
+        "edge": [
+          20477,
+          20478
+        ],
+        "end_piece": [
+          20479,
+          20482,
+          20481,
+          20480
+        ],
+        "unconnected": [
+          20483
+        ]
+      },
+      "background": 20608
+    },
+    {
+      "id": "t_sandmound",
+      "season": "spring",
+      "material": "sand-mound-neutral",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20588
+          },
+          {
+            "weight": 1,
+            "sprite": 20604
+          },
+          {
+            "weight": 1,
+            "sprite": 20605
+          }
+        ],
+        "corner": [
+          20589,
+          20592,
+          20591,
+          20590
+        ],
+        "t_connection": [
+          20593,
+          20596,
+          20595,
+          20594
+        ],
+        "edge": [
+          20597,
+          20598
+        ],
+        "end_piece": [
+          20599,
+          20602,
+          20601,
+          20600
+        ],
+        "unconnected": [
+          20603
+        ]
+      },
+      "background": 20628
+    },
+    {
+      "id": "t_sandmound",
+      "season": "summer",
+      "material": "sand-mound-neutral",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20588
+          },
+          {
+            "weight": 1,
+            "sprite": 20604
+          },
+          {
+            "weight": 1,
+            "sprite": 20605
+          }
+        ],
+        "corner": [
+          20589,
+          20592,
+          20591,
+          20590
+        ],
+        "t_connection": [
+          20593,
+          20596,
+          20595,
+          20594
+        ],
+        "edge": [
+          20597,
+          20598
+        ],
+        "end_piece": [
+          20599,
+          20602,
+          20601,
+          20600
+        ],
+        "unconnected": [
+          20603
+        ]
+      },
+      "background": 20628
+    },
+    {
+      "id": "t_sandmound",
+      "season": "autumn",
+      "material": "sand-mound-neutral",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20588
+          },
+          {
+            "weight": 1,
+            "sprite": 20604
+          },
+          {
+            "weight": 1,
+            "sprite": 20605
+          }
+        ],
+        "corner": [
+          20589,
+          20592,
+          20591,
+          20590
+        ],
+        "t_connection": [
+          20593,
+          20596,
+          20595,
+          20594
+        ],
+        "edge": [
+          20597,
+          20598
+        ],
+        "end_piece": [
+          20599,
+          20602,
+          20601,
+          20600
+        ],
+        "unconnected": [
+          20603
+        ]
+      },
+      "background": 20628
+    },
+    {
+      "id": "t_sandmound",
+      "season": "winter",
+      "material": "sand-mound-neutral",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20588
+          },
+          {
+            "weight": 1,
+            "sprite": 20604
+          },
+          {
+            "weight": 1,
+            "sprite": 20605
+          }
+        ],
+        "corner": [
+          20589,
+          20592,
+          20591,
+          20590
+        ],
+        "t_connection": [
+          20593,
+          20596,
+          20595,
+          20594
+        ],
+        "edge": [
+          20597,
+          20598
+        ],
+        "end_piece": [
+          20599,
+          20602,
+          20601,
+          20600
+        ],
+        "unconnected": [
+          20603
+        ]
+      },
+      "background": 20628
+    },
+    {
+      "id": "t_dirt",
+      "season": "spring",
+      "material": "surface-dirt",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20608
+          },
+          {
+            "weight": 1,
+            "sprite": 20624
+          },
+          {
+            "weight": 1,
+            "sprite": 20625
+          }
+        ],
+        "corner": [
+          20609,
+          20612,
+          20611,
+          20610
+        ],
+        "t_connection": [
+          20613,
+          20616,
+          20615,
+          20614
+        ],
+        "edge": [
+          20617,
+          20618
+        ],
+        "end_piece": [
+          20619,
+          20622,
+          20621,
+          20620
+        ],
+        "unconnected": [
+          20623
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_dirt",
+      "season": "summer",
+      "material": "surface-dirt",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20608
+          },
+          {
+            "weight": 1,
+            "sprite": 20624
+          },
+          {
+            "weight": 1,
+            "sprite": 20625
+          }
+        ],
+        "corner": [
+          20609,
+          20612,
+          20611,
+          20610
+        ],
+        "t_connection": [
+          20613,
+          20616,
+          20615,
+          20614
+        ],
+        "edge": [
+          20617,
+          20618
+        ],
+        "end_piece": [
+          20619,
+          20622,
+          20621,
+          20620
+        ],
+        "unconnected": [
+          20623
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_dirt",
+      "season": "autumn",
+      "material": "surface-dirt",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20608
+          },
+          {
+            "weight": 1,
+            "sprite": 20624
+          },
+          {
+            "weight": 1,
+            "sprite": 20625
+          }
+        ],
+        "corner": [
+          20609,
+          20612,
+          20611,
+          20610
+        ],
+        "t_connection": [
+          20613,
+          20616,
+          20615,
+          20614
+        ],
+        "edge": [
+          20617,
+          20618
+        ],
+        "end_piece": [
+          20619,
+          20622,
+          20621,
+          20620
+        ],
+        "unconnected": [
+          20623
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_dirt",
+      "season": "winter",
+      "material": "surface-dirt",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20608
+          },
+          {
+            "weight": 1,
+            "sprite": 20624
+          },
+          {
+            "weight": 1,
+            "sprite": 20625
+          }
+        ],
+        "corner": [
+          20609,
+          20612,
+          20611,
+          20610
+        ],
+        "t_connection": [
+          20613,
+          20616,
+          20615,
+          20614
+        ],
+        "edge": [
+          20617,
+          20618
+        ],
+        "end_piece": [
+          20619,
+          20622,
+          20621,
+          20620
+        ],
+        "unconnected": [
+          20623
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_sand",
+      "season": "spring",
+      "material": "surface-sand",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20628
+          },
+          {
+            "weight": 1,
+            "sprite": 20644
+          },
+          {
+            "weight": 1,
+            "sprite": 20645
+          }
+        ],
+        "corner": [
+          20629,
+          20632,
+          20631,
+          20630
+        ],
+        "t_connection": [
+          20633,
+          20636,
+          20635,
+          20634
+        ],
+        "edge": [
+          20637,
+          20638
+        ],
+        "end_piece": [
+          20639,
+          20642,
+          20641,
+          20640
+        ],
+        "unconnected": [
+          20643
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18572
+        },
+        {
+          "weight": 1,
+          "sprite": 19956
+        },
+        {
+          "weight": 1,
+          "sprite": 19957
+        },
+        {
+          "weight": 1,
+          "sprite": 19958
+        }
+      ]
+    },
+    {
+      "id": "t_sand",
+      "season": "summer",
+      "material": "surface-sand",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20628
+          },
+          {
+            "weight": 1,
+            "sprite": 20644
+          },
+          {
+            "weight": 1,
+            "sprite": 20645
+          }
+        ],
+        "corner": [
+          20629,
+          20632,
+          20631,
+          20630
+        ],
+        "t_connection": [
+          20633,
+          20636,
+          20635,
+          20634
+        ],
+        "edge": [
+          20637,
+          20638
+        ],
+        "end_piece": [
+          20639,
+          20642,
+          20641,
+          20640
+        ],
+        "unconnected": [
+          20643
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18573
+        },
+        {
+          "weight": 1,
+          "sprite": 19959
+        },
+        {
+          "weight": 1,
+          "sprite": 19960
+        },
+        {
+          "weight": 1,
+          "sprite": 19961
+        }
+      ]
+    },
+    {
+      "id": "t_sand",
+      "season": "autumn",
+      "material": "surface-sand",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20628
+          },
+          {
+            "weight": 1,
+            "sprite": 20644
+          },
+          {
+            "weight": 1,
+            "sprite": 20645
+          }
+        ],
+        "corner": [
+          20629,
+          20632,
+          20631,
+          20630
+        ],
+        "t_connection": [
+          20633,
+          20636,
+          20635,
+          20634
+        ],
+        "edge": [
+          20637,
+          20638
+        ],
+        "end_piece": [
+          20639,
+          20642,
+          20641,
+          20640
+        ],
+        "unconnected": [
+          20643
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18574
+        },
+        {
+          "weight": 1,
+          "sprite": 19962
+        },
+        {
+          "weight": 1,
+          "sprite": 19963
+        },
+        {
+          "weight": 1,
+          "sprite": 19964
+        }
+      ]
+    },
+    {
+      "id": "t_sand",
+      "season": "winter",
+      "material": "surface-sand",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20628
+          },
+          {
+            "weight": 1,
+            "sprite": 20644
+          },
+          {
+            "weight": 1,
+            "sprite": 20645
+          }
+        ],
+        "corner": [
+          20629,
+          20632,
+          20631,
+          20630
+        ],
+        "t_connection": [
+          20633,
+          20636,
+          20635,
+          20634
+        ],
+        "edge": [
+          20637,
+          20638
+        ],
+        "end_piece": [
+          20639,
+          20642,
+          20641,
+          20640
+        ],
+        "unconnected": [
+          20643
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 18575
+        },
+        {
+          "weight": 1,
+          "sprite": 19965
+        },
+        {
+          "weight": 1,
+          "sprite": 19966
+        },
+        {
+          "weight": 1,
+          "sprite": 19967
+        }
+      ]
+    },
+    {
+      "id": "t_glassed_sand",
+      "season": "spring",
+      "material": "glassed-sand-neutral",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20568
+          },
+          {
+            "weight": 1,
+            "sprite": 20584
+          },
+          {
+            "weight": 1,
+            "sprite": 20585
+          }
+        ],
+        "corner": [
+          20569,
+          20572,
+          20571,
+          20570
+        ],
+        "t_connection": [
+          20573,
+          20576,
+          20575,
+          20574
+        ],
+        "edge": [
+          20577,
+          20578
+        ],
+        "end_piece": [
+          20579,
+          20582,
+          20581,
+          20580
+        ],
+        "unconnected": [
+          20583
+        ]
+      },
+      "background": 20628
+    },
+    {
+      "id": "t_glassed_sand",
+      "season": "summer",
+      "material": "glassed-sand-neutral",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20568
+          },
+          {
+            "weight": 1,
+            "sprite": 20584
+          },
+          {
+            "weight": 1,
+            "sprite": 20585
+          }
+        ],
+        "corner": [
+          20569,
+          20572,
+          20571,
+          20570
+        ],
+        "t_connection": [
+          20573,
+          20576,
+          20575,
+          20574
+        ],
+        "edge": [
+          20577,
+          20578
+        ],
+        "end_piece": [
+          20579,
+          20582,
+          20581,
+          20580
+        ],
+        "unconnected": [
+          20583
+        ]
+      },
+      "background": 20628
+    },
+    {
+      "id": "t_glassed_sand",
+      "season": "autumn",
+      "material": "glassed-sand-neutral",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20568
+          },
+          {
+            "weight": 1,
+            "sprite": 20584
+          },
+          {
+            "weight": 1,
+            "sprite": 20585
+          }
+        ],
+        "corner": [
+          20569,
+          20572,
+          20571,
+          20570
+        ],
+        "t_connection": [
+          20573,
+          20576,
+          20575,
+          20574
+        ],
+        "edge": [
+          20577,
+          20578
+        ],
+        "end_piece": [
+          20579,
+          20582,
+          20581,
+          20580
+        ],
+        "unconnected": [
+          20583
+        ]
+      },
+      "background": 20628
+    },
+    {
+      "id": "t_glassed_sand",
+      "season": "winter",
+      "material": "glassed-sand-neutral",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20568
+          },
+          {
+            "weight": 1,
+            "sprite": 20584
+          },
+          {
+            "weight": 1,
+            "sprite": 20585
+          }
+        ],
+        "corner": [
+          20569,
+          20572,
+          20571,
+          20570
+        ],
+        "t_connection": [
+          20573,
+          20576,
+          20575,
+          20574
+        ],
+        "edge": [
+          20577,
+          20578
+        ],
+        "end_piece": [
+          20579,
+          20582,
+          20581,
+          20580
+        ],
+        "unconnected": [
+          20583
+        ]
+      },
+      "background": 20628
+    },
+    {
+      "id": "t_puddle",
+      "season": "spring",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": 20608
+    },
+    {
+      "id": "t_puddle",
+      "season": "summer",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": 20608
+    },
+    {
+      "id": "t_puddle",
+      "season": "autumn",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": 20608
+    },
+    {
+      "id": "t_puddle",
+      "season": "winter",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": 20608
+    },
+    {
+      "id": "t_puddle_underground",
+      "season": "spring",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 19968
+        },
+        {
+          "weight": 1,
+          "sprite": 19984
+        },
+        {
+          "weight": 1,
+          "sprite": 19985
+        }
+      ]
+    },
+    {
+      "id": "t_puddle_underground",
+      "season": "summer",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 19968
+        },
+        {
+          "weight": 1,
+          "sprite": 19984
+        },
+        {
+          "weight": 1,
+          "sprite": 19985
+        }
+      ]
+    },
+    {
+      "id": "t_puddle_underground",
+      "season": "autumn",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 19968
+        },
+        {
+          "weight": 1,
+          "sprite": 19984
+        },
+        {
+          "weight": 1,
+          "sprite": 19985
+        }
+      ]
+    },
+    {
+      "id": "t_puddle_underground",
+      "season": "winter",
+      "material": "fresh-shallow",
+      "foregrounds": {
+        "center": [
+          {
+            "weight": 1,
+            "sprite": 20108
+          },
+          {
+            "weight": 1,
+            "sprite": 20124
+          },
+          {
+            "weight": 1,
+            "sprite": 20125
+          }
+        ],
+        "corner": [
+          20109,
+          20112,
+          20111,
+          20110
+        ],
+        "t_connection": [
+          20113,
+          20116,
+          20115,
+          20114
+        ],
+        "edge": [
+          20117,
+          20118
+        ],
+        "end_piece": [
+          20119,
+          20122,
+          20121,
+          20120
+        ],
+        "unconnected": [
+          20123
+        ]
+      },
+      "background": [
+        {
+          "weight": 1,
+          "sprite": 19968
+        },
+        {
+          "weight": 1,
+          "sprite": 19984
+        },
+        {
+          "weight": 1,
+          "sprite": 19985
+        }
+      ]
+    }
+  ],
+  "refreshed_underlays": {
+    "t_mud": 20608,
+    "t_mud_season_spring": 20608,
+    "t_mud_season_summer": 20608,
+    "t_mud_season_autumn": 20608,
+    "t_mud_season_winter": 20608,
+    "t_swater_surf": 20628,
+    "t_swater_surf_season_spring": 20628,
+    "t_swater_surf_season_summer": 20628,
+    "t_swater_surf_season_autumn": 20628,
+    "t_swater_surf_season_winter": 20628,
+    "t_tidepool": 20628,
+    "t_tidepool_season_spring": 20628,
+    "t_tidepool_season_summer": 20628,
+    "t_tidepool_season_autumn": 20628,
+    "t_tidepool_season_winter": 20628
+  },
+  "checks": {
+    "new_terrain_ids": 8,
+    "total_integrated_terrain_ids": 49,
+    "remaining_terrain_ids": 31,
+    "calendar_bindings": 32,
+    "new_material_sets": 9,
+    "reused_material_sets": 1,
+    "new_used_cells": 162,
+    "new_allocated_cells": 180,
+    "packed_mask_cells_checked": 180,
+    "sprite_slots": 20648,
+    "sprite_references_checked": 31021,
+    "all_references_valid": true,
+    "unrelated_installed_mappings_preserved": true,
+    "all_prior_png_bytes_preserved": true,
+    "approved_flora_sprites_verified": 600,
+    "all_16_masks_verified_from_packed_pixels": true,
+    "source_checkpoints_verified": true,
+    "client_modified": false,
+    "live_gameplay": "pending; no client launch",
+    "offline_visual_review": "passed",
+    "visual_review_notes": "Inspected final packed connection masks, three centers, seasonal forest-floor palette sheets, and eight native-scale repeated context panels. Edge coverage and material distinctions passed offline review. Repeated mound relief and final game appearance remain subject to live review."
+  }
+}

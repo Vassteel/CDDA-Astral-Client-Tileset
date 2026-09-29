@@ -1,0 +1,512 @@
+{
+  "version": "aux-2-v005",
+  "status": "packaged in Astral 0.1.36; user/live acceptance pending",
+  "preserve": "All prior Astral art including nine shields; see preserved-art.json",
+  "entries": [
+    {
+      "id": "carding_paddles",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/carding_paddles.png",
+      "source_sha256": "b044a5243d2b2b54f04bf2e100a2aac7add1bcd65d0c75a3a3266495425537f3",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/carding_paddles.png",
+      "png_sha256": "e6cbf7ac3353f97809a6bbcd7a6fec24107f4d1e80ec0fd3e81eb7a023e60c14",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 189,
+      "content_bounds": [
+        14,
+        19,
+        243,
+        238
+      ],
+      "prompt_path": "prompts/carding_paddles.txt",
+      "prompt_sha256": "e20a80bdf5055609a2665b40dc83cdb90df61408c9ce38fffa18c65a456ac016",
+      "native_preview": "previews/carding_paddles-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_carding_paddles.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "carding_paddles",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/workshop.json",
+          "array_index": 6,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed128/64/32px review: two heads and two handles visible; primitive pale teeth contrast with wood and differ from a single brush.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "carding_paddles",
+          "page_url": "https://threadcollective.com.au/products/schacht-cotton-hand-cards-208-tpi",
+          "image_url": "https://cdn.shopify.com/s/files/1/2314/4741/products/Schahctcurvedcottonhandcards_2000x.jpg?v=1629611004",
+          "local_path": "references/carding_paddles.image",
+          "sha256": "6c951adbcf287fe97ea11a0fc2f5e74bf727930414d6f78ddfa8a57e63dc9324",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation; full distaff photo separately inspected.",
+          "adaptation": "Use paddle pair shape only; substitute primitive wooden/bone teeth for modern wire-card cloth as game recipe requires."
+        }
+      ]
+    },
+    {
+      "id": "casting_mold",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/casting_mold.png",
+      "source_sha256": "524514a34888a95dea477c28dc4a0bc8088fff2b35e9f90eb8413824f3c17560",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/casting_mold.png",
+      "png_sha256": "3764cb35deb79274f28f1fceb273f61eb4d9d3736145b27e20e060c8b1a61863",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 123,
+      "content_bounds": [
+        47,
+        55,
+        215,
+        213
+      ],
+      "prompt_path": "prompts/casting_mold.txt",
+      "prompt_sha256": "6eed4a2db0f60032cafc4cbbaed43218a3f05e2ea8c5869f1a40b5e9641b9f00",
+      "native_preview": "previews/casting_mold-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "nearest-neighbor 192 square resize and transparent center pad to256; intentional family size separation and safe padding, no painting",
+      "mapping": {
+        "file": "astral_item_aux2_casting_mold.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "casting_mold",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/metalworking.json",
+          "array_index": 34,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed128/64/32px review: medium square packed mold, larger than small and smaller than large; wood/sand distinction survives.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "casting_mold",
+          "page_url": "https://fab.cba.mit.edu/classes/863.15/doc/tutorials/sandcasting/index.html",
+          "image_url": "https://fab.cba.mit.edu/classes/863.15/doc/tutorials/sandcasting/img/sprues.jpg",
+          "local_path": "references/casting_mold.image",
+          "sha256": "9df0873665271292cc20f4c3160cc086690a315ab08cdde5268026fad94ca852",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation; full distaff photo separately inspected.",
+          "adaptation": "Game definition and recipe control final geometry. No reference photo pixels, branding or backdrop copied."
+        }
+      ]
+    },
+    {
+      "id": "casting_mold_large",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/casting_mold_large.png",
+      "source_sha256": "28671d3d541c73b4bbc61ea05d15e8d95fccdfdc727105c9a11f6bebbcf1f256",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/casting_mold_large.png",
+      "png_sha256": "fc348c7ae3eb6b635cc1a72ef3f2c155593665badc7e1e56d8c4bfc5a7a78c06",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 136,
+      "content_bounds": [
+        22,
+        25,
+        235,
+        230
+      ],
+      "prompt_path": "prompts/casting_mold_large.txt",
+      "prompt_sha256": "c35a5ad35ea405eece66d6248e9255f172717d3a7eceba4ae8f1bdc9d3829c27",
+      "native_preview": "previews/casting_mold_large-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "nearest-neighbor 224 square resize and transparent center pad to256; intentional family size separation and safe padding, no painting",
+      "mapping": {
+        "file": "astral_item_aux2_casting_mold_large.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "casting_mold_large",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/metalworking.json",
+          "array_index": 32,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed128/64/32px review: broad deep square mold with corner bracing, distinctly largest square member.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "casting_mold_large",
+          "page_url": "https://fab.cba.mit.edu/classes/863.15/doc/tutorials/sandcasting/index.html",
+          "image_url": "https://fab.cba.mit.edu/classes/863.15/doc/tutorials/sandcasting/img/sprues.jpg",
+          "local_path": "references/casting_mold.image",
+          "sha256": "9df0873665271292cc20f4c3160cc086690a315ab08cdde5268026fad94ca852",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation; full distaff photo separately inspected.",
+          "adaptation": "Game definition and recipe control final geometry. No reference photo pixels, branding or backdrop copied."
+        }
+      ]
+    },
+    {
+      "id": "casting_mold_long",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/casting_mold_long.png",
+      "source_sha256": "14343e251f0df6f9b434c93ea0708ad58d1d0dde2b3a698bdd68cd846ced7b03",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/casting_mold_long.png",
+      "png_sha256": "8af60976665faca2115e066a8dd57b9a3b7f8a97b6ab23979afe7f6343378a45",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 174,
+      "content_bounds": [
+        27,
+        33,
+        229,
+        223
+      ],
+      "prompt_path": "prompts/casting_mold_long.txt",
+      "prompt_sha256": "3c0a02e9db14ad4be3b91158aaa89169bb2f831b9c29609ba31e4e63c41f01a9",
+      "native_preview": "previews/casting_mold_long-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "nearest-neighbor 208 square resize and transparent center pad to256; intentional family size separation and safe padding, no painting",
+      "mapping": {
+        "file": "astral_item_aux2_casting_mold_long.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "casting_mold_long",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/metalworking.json",
+          "array_index": 33,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed128/64/32px review: elongated narrow trough, both short ends enclosed; distinct from all square mold sizes.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "casting_mold_long",
+          "page_url": "https://fab.cba.mit.edu/classes/863.15/doc/tutorials/sandcasting/index.html",
+          "image_url": "https://fab.cba.mit.edu/classes/863.15/doc/tutorials/sandcasting/img/sprues.jpg",
+          "local_path": "references/casting_mold.image",
+          "sha256": "9df0873665271292cc20f4c3160cc086690a315ab08cdde5268026fad94ca852",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation; full distaff photo separately inspected.",
+          "adaptation": "Game definition and recipe control final geometry. No reference photo pixels, branding or backdrop copied."
+        }
+      ]
+    },
+    {
+      "id": "casting_mold_small",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/casting_mold_small.png",
+      "source_sha256": "6ad01030667510a94b0bd94bcec950de70a7f83b8d72fa57ae870a6eda76a693",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/casting_mold_small.png",
+      "png_sha256": "8022160d1a02f3156ff92d9b75adc56cdcb2749b2c8a680ed116f30b236a81fa",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 105,
+      "content_bounds": [
+        75,
+        47,
+        201,
+        183
+      ],
+      "prompt_path": "prompts/casting_mold_small.txt",
+      "prompt_sha256": "0cea595e12a86d649f9be9db4bc7459b301efdcee905fd262ffd0478b51cd21c",
+      "native_preview": "previews/casting_mold_small-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_casting_mold_small.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "casting_mold_small",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/metalworking.json",
+          "array_index": 31,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed128/64/32px review: smallest square packed mold, 13px approximate native width; pour opening and stacked frame seam survive.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "casting_mold_small",
+          "page_url": "https://fab.cba.mit.edu/classes/863.15/doc/tutorials/sandcasting/index.html",
+          "image_url": "https://fab.cba.mit.edu/classes/863.15/doc/tutorials/sandcasting/img/sprues.jpg",
+          "local_path": "references/casting_mold.image",
+          "sha256": "9df0873665271292cc20f4c3160cc086690a315ab08cdde5268026fad94ca852",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation; full distaff photo separately inspected.",
+          "adaptation": "Game definition and recipe control final geometry. No reference photo pixels, branding or backdrop copied."
+        }
+      ]
+    },
+    {
+      "id": "distaff_spindle",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/distaff_spindle.png",
+      "source_sha256": "6064d057972f07652fca70be90c8cedd261296a69f11f0a8c1c7b1fd67e1999f",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/distaff_spindle.png",
+      "png_sha256": "75841218b7785909bd5677910aa36fb7c3b5da2d259549fa79684c76cd8ebb25",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 188,
+      "content_bounds": [
+        65,
+        22,
+        203,
+        229
+      ],
+      "prompt_path": "prompts/distaff_spindle.txt",
+      "prompt_sha256": "e42cd94c82defea904edf0823a3387c3a75e3e7fe08893714c798acffed755f1",
+      "native_preview": "previews/distaff_spindle-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "nearest-neighbor 224 square resize and transparent center pad to256; intentional family size separation and safe padding, no painting",
+      "mapping": {
+        "file": "astral_item_aux2_distaff_spindle.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "distaff_spindle",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/workshop.json",
+          "array_index": 16,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed128/64/32px review: two separate rods; wider distaff head versus shorter spindle with wooden whorl. Transparent gap maintained.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "distaff_spindle",
+          "page_url": "https://www.etsy.com/listing/264633172/xxl-antique-wooden-distaff-rustic-home",
+          "image_url": "https://i.etsystatic.com/7939921/r/il/f6bce1/4488043734/il_794xN.4488043734_7u2w.jpg",
+          "local_path": "references/distaff_spindle.image",
+          "sha256": "83df8eda86601ed92fd91b161b7ba04419446c7b107df07ae894fbd3f2d156d0",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation; full distaff photo separately inspected.",
+          "adaptation": "Plain carved rod and wooden whorl geometry; omit ornate carving, metal hook, labels and surrounding objects."
+        },
+        {
+          "subject": "distaff_spindle",
+          "page_url": "https://www.worldofwool.co.uk/products/drop-spindle-60g",
+          "image_url": "https://www.worldofwool.co.uk/cdn/shop/files/wow-equipment-and-accessories-drop-spindle-60g-23515662087.webp?v=1759243274",
+          "local_path": "references/distaff_spindle_whorl.image",
+          "sha256": "74eba8e439c3ef05e91351275da972093aaa7ad00a279a657c20d948eef3e6df",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation; full distaff photo separately inspected.",
+          "adaptation": "Plain carved rod and wooden whorl geometry; omit ornate carving, metal hook, labels and surrounding objects."
+        }
+      ]
+    },
+    {
+      "id": "loom_frame",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/loom_frame.png",
+      "source_sha256": "88b628c3a6a325f249b4fd6d15965b46aa820e48412162b92427288b5764f5f0",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/loom_frame.png",
+      "png_sha256": "cbd5ecda4465e7c30575d5ccd0e09fb8d5af8d9a20d6bca201b1ea2b69739f8c",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 254,
+      "content_bounds": [
+        8,
+        10,
+        245,
+        245
+      ],
+      "prompt_path": "prompts/loom_frame.txt",
+      "prompt_sha256": "e529c74ccbaad20a23a4965e53219f0eb5713e07946650029802cab089ea60a0",
+      "native_preview": "previews/loom_frame-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_loom_frame.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "loom_frame",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/tailoring.json",
+          "array_index": 3,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed128/64/32px review: four bound wooden rails, visible warp lines with transparent interior gaps; no opaque backdrop or woven cloth.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "loom_frame",
+          "page_url": "https://indigenousinnovation.wordpress.com/2009/10/27/artesania-mapuche-textile/",
+          "image_url": "https://indigenousinnovation.wordpress.com/files/2009/10/traditional-loom.jpg?w=640",
+          "local_path": "references/loom_frame.image",
+          "sha256": "dfb9971d44724878b008c56d5b16d8263445fb7af4c8a14cb8749b4bbcf8b07c",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation; full distaff photo separately inspected.",
+          "adaptation": "Cord-bound four-rail frame with sparse visible warp; omit woven cloth, colored yarn, legs and surrounding objects."
+        }
+      ]
+    }
+  ],
+  "generated_count": 7,
+  "creative_method": "built-in imagegen only",
+  "static_checks": "dimensions, transparent alpha, non-clipped bounds, exact prompt/source/export hashes",
+  "live_acceptance": "not tested",
+  "release": "0.1.36"
+}

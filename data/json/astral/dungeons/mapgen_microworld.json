@@ -1,0 +1,98 @@
+[
+  {
+    "type": "mapgen",
+    "om_terrain": "astral_microworld_center",
+    "//": "Arrival courtyard of the test microworld.  Return portal at rows 3-7, cols 9-13; the player arrives on its platform tile r2c2 (row 5, col 11).  Stone shelter with an empty crate for the persistence test.",
+    "object": {
+      "fill_ter": "t_grass",
+      "palettes": [ "astral_wild_palette", "astral_portal_active_palette" ],
+      "terrain": {
+        "m": [
+          [ "t_grass", 30 ],
+          [ "t_grass_long", 8 ],
+          [ "t_tree", 2 ],
+          [ "t_tree_pine", 1 ],
+          [ "t_shrub", 2 ],
+          [ "t_underbrush", 2 ]
+        ],
+        "c": "t_rock_floor"
+      },
+      "furniture": { "c": "f_crate_o" },
+      "rows": [
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mm....................mm",
+        "m........t.....t.......m",
+        "m........ABCDE.........m",
+        "m........FGHIJ.........m",
+        "m........KLMNO.........m",
+        "m........PQRST.........m",
+        "m........UVWXY.........m",
+        "m..........___.........m",
+        "m...........__.........m",
+        "m....~~.....__.........m",
+        "m...~ww~....__...####..m",
+        "m...~ww~...._....#==#..m",
+        "m....~~....._....#c=+..m",
+        "m...........__...####..m",
+        "m............_.........m",
+        "m..o.........__........m",
+        "m.............__.....o.m",
+        "m..t...........__......m",
+        "m...............___....m",
+        "m.................___..m",
+        "mm...................mmm",
+        "mmm.................mmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm"
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": "astral_microworld_grounds",
+    "//": "Wooded meadow ring around the courtyard.  Everything beyond the 3x3 special is t_astral_veil.",
+    "object": {
+      "fill_ter": "t_grass",
+      "terrain": {
+        "m": [
+          [ "t_grass", 30 ],
+          [ "t_grass_long", 8 ],
+          [ "t_tree", 2 ],
+          [ "t_tree_pine", 1 ],
+          [ "t_shrub", 2 ],
+          [ "t_underbrush", 2 ]
+        ]
+      },
+      "rows": [
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm"
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": "astral_veil",
+    "object": { "fill_ter": "t_astral_veil" }
+  }
+]

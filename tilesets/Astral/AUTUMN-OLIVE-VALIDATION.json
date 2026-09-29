@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "autumn_olive_sources": 8,
   "states": [
     "normal",
@@ -30,8 +30,11 @@
   "grass_88_variants_preserved": true,
   "shoreline_fix_preserved": true,
   "sprite_references_checked": 24559,
-  "total_sprite_slots": 18956,
-  "original_sources_unchanged": true,
+  "total_sprite_slots": 18968,
+  "all_eight_sources_redrawn": true,
+  "previous_sources_archived_and_verified": true,
   "client_modified": false,
+  "normal_source_style": "approved by user",
+  "final_harvested_review": "pending",
   "visual_gameplay_acceptance": "pending"
 }

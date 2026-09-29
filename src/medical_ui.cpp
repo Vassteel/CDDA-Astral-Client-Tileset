@@ -87,6 +87,7 @@ class medical_ui : public cataimgui::window
         explicit medical_ui( Character *guy ) : cataimgui::window( _( "Medical" ),
                     ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoNav ) {
             you = guy;
+            set_shell( 0, "hp" );
         };
 
         bool execute();

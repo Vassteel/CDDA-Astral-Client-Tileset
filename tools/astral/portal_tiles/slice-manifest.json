@@ -1,0 +1,712 @@
+{
+  "crop_box": [
+    46,
+    45,
+    1212,
+    1224
+  ],
+  "square_side": 1179,
+  "scaled_to": [
+    160,
+    160
+  ],
+  "tile_px": 32,
+  "grid": [
+    5,
+    5
+  ],
+  "resample": "LANCZOS",
+  "atlas": "astral_portal_32.png",
+  "atlas_layout": "25 columns (row*5+col) x 3 rows (active, inactive, ruined)",
+  "sources": {
+    "active": {
+      "file": "astral-portal-active-v3.png",
+      "sha256": "2cdbb64f293883f0649fbcf30978dbae06c1914ab1b42e2c9867d6809d0b86fc"
+    },
+    "inactive": {
+      "file": "astral-portal-inactive-v3.png",
+      "sha256": "dfdbf3cdcf5c6b45d12bf3c3edbf5ad353f69bc3150544c2571ee88d96368fb0"
+    },
+    "ruined": {
+      "file": "astral-portal-ruined-v3.png",
+      "sha256": "5cc1d68cc266abd94e5256b2ad345b5b193f9528a2bf4f99799f0f93fae304cb"
+    }
+  },
+  "tiles": [
+    {
+      "id": "t_astral_portal_active_r0c0",
+      "state": "active",
+      "row": 0,
+      "col": 0,
+      "role": "corner_stone",
+      "passable": false,
+      "local_sprite": 0
+    },
+    {
+      "id": "t_astral_portal_active_r0c1",
+      "state": "active",
+      "row": 0,
+      "col": 1,
+      "role": "arch_left_top",
+      "passable": false,
+      "local_sprite": 1
+    },
+    {
+      "id": "t_astral_portal_active_r0c2",
+      "state": "active",
+      "row": 0,
+      "col": 2,
+      "role": "crown",
+      "passable": false,
+      "local_sprite": 2
+    },
+    {
+      "id": "t_astral_portal_active_r0c3",
+      "state": "active",
+      "row": 0,
+      "col": 3,
+      "role": "arch_right_top",
+      "passable": false,
+      "local_sprite": 3
+    },
+    {
+      "id": "t_astral_portal_active_r0c4",
+      "state": "active",
+      "row": 0,
+      "col": 4,
+      "role": "corner_stone",
+      "passable": false,
+      "local_sprite": 4
+    },
+    {
+      "id": "t_astral_portal_active_r1c0",
+      "state": "active",
+      "row": 1,
+      "col": 0,
+      "role": "support_left",
+      "passable": false,
+      "local_sprite": 5
+    },
+    {
+      "id": "t_astral_portal_active_r1c1",
+      "state": "active",
+      "row": 1,
+      "col": 1,
+      "role": "support_left_inner",
+      "passable": false,
+      "local_sprite": 6
+    },
+    {
+      "id": "t_astral_portal_active_r1c2",
+      "state": "active",
+      "row": 1,
+      "col": 2,
+      "role": "threshold",
+      "passable": true,
+      "local_sprite": 7
+    },
+    {
+      "id": "t_astral_portal_active_r1c3",
+      "state": "active",
+      "row": 1,
+      "col": 3,
+      "role": "support_right_inner",
+      "passable": false,
+      "local_sprite": 8
+    },
+    {
+      "id": "t_astral_portal_active_r1c4",
+      "state": "active",
+      "row": 1,
+      "col": 4,
+      "role": "support_right",
+      "passable": false,
+      "local_sprite": 9
+    },
+    {
+      "id": "t_astral_portal_active_r2c0",
+      "state": "active",
+      "row": 2,
+      "col": 0,
+      "role": "buttress_left",
+      "passable": false,
+      "local_sprite": 10
+    },
+    {
+      "id": "t_astral_portal_active_r2c1",
+      "state": "active",
+      "row": 2,
+      "col": 1,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 11
+    },
+    {
+      "id": "t_astral_portal_active_r2c2",
+      "state": "active",
+      "row": 2,
+      "col": 2,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 12
+    },
+    {
+      "id": "t_astral_portal_active_r2c3",
+      "state": "active",
+      "row": 2,
+      "col": 3,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 13
+    },
+    {
+      "id": "t_astral_portal_active_r2c4",
+      "state": "active",
+      "row": 2,
+      "col": 4,
+      "role": "buttress_right",
+      "passable": false,
+      "local_sprite": 14
+    },
+    {
+      "id": "t_astral_portal_active_r3c0",
+      "state": "active",
+      "row": 3,
+      "col": 0,
+      "role": "platform_edge",
+      "passable": true,
+      "local_sprite": 15
+    },
+    {
+      "id": "t_astral_portal_active_r3c1",
+      "state": "active",
+      "row": 3,
+      "col": 1,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 16
+    },
+    {
+      "id": "t_astral_portal_active_r3c2",
+      "state": "active",
+      "row": 3,
+      "col": 2,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 17
+    },
+    {
+      "id": "t_astral_portal_active_r3c3",
+      "state": "active",
+      "row": 3,
+      "col": 3,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 18
+    },
+    {
+      "id": "t_astral_portal_active_r3c4",
+      "state": "active",
+      "row": 3,
+      "col": 4,
+      "role": "platform_edge",
+      "passable": true,
+      "local_sprite": 19
+    },
+    {
+      "id": "t_astral_portal_active_r4c0",
+      "state": "active",
+      "row": 4,
+      "col": 0,
+      "role": "step_corner",
+      "passable": true,
+      "local_sprite": 20
+    },
+    {
+      "id": "t_astral_portal_active_r4c1",
+      "state": "active",
+      "row": 4,
+      "col": 1,
+      "role": "step",
+      "passable": true,
+      "local_sprite": 21
+    },
+    {
+      "id": "t_astral_portal_active_r4c2",
+      "state": "active",
+      "row": 4,
+      "col": 2,
+      "role": "step",
+      "passable": true,
+      "local_sprite": 22
+    },
+    {
+      "id": "t_astral_portal_active_r4c3",
+      "state": "active",
+      "row": 4,
+      "col": 3,
+      "role": "step",
+      "passable": true,
+      "local_sprite": 23
+    },
+    {
+      "id": "t_astral_portal_active_r4c4",
+      "state": "active",
+      "row": 4,
+      "col": 4,
+      "role": "step_corner",
+      "passable": true,
+      "local_sprite": 24
+    },
+    {
+      "id": "t_astral_portal_inactive_r0c0",
+      "state": "inactive",
+      "row": 0,
+      "col": 0,
+      "role": "corner_stone",
+      "passable": false,
+      "local_sprite": 25
+    },
+    {
+      "id": "t_astral_portal_inactive_r0c1",
+      "state": "inactive",
+      "row": 0,
+      "col": 1,
+      "role": "arch_left_top",
+      "passable": false,
+      "local_sprite": 26
+    },
+    {
+      "id": "t_astral_portal_inactive_r0c2",
+      "state": "inactive",
+      "row": 0,
+      "col": 2,
+      "role": "crown",
+      "passable": false,
+      "local_sprite": 27
+    },
+    {
+      "id": "t_astral_portal_inactive_r0c3",
+      "state": "inactive",
+      "row": 0,
+      "col": 3,
+      "role": "arch_right_top",
+      "passable": false,
+      "local_sprite": 28
+    },
+    {
+      "id": "t_astral_portal_inactive_r0c4",
+      "state": "inactive",
+      "row": 0,
+      "col": 4,
+      "role": "corner_stone",
+      "passable": false,
+      "local_sprite": 29
+    },
+    {
+      "id": "t_astral_portal_inactive_r1c0",
+      "state": "inactive",
+      "row": 1,
+      "col": 0,
+      "role": "support_left",
+      "passable": false,
+      "local_sprite": 30
+    },
+    {
+      "id": "t_astral_portal_inactive_r1c1",
+      "state": "inactive",
+      "row": 1,
+      "col": 1,
+      "role": "support_left_inner",
+      "passable": false,
+      "local_sprite": 31
+    },
+    {
+      "id": "t_astral_portal_inactive_r1c2",
+      "state": "inactive",
+      "row": 1,
+      "col": 2,
+      "role": "threshold",
+      "passable": true,
+      "local_sprite": 32
+    },
+    {
+      "id": "t_astral_portal_inactive_r1c3",
+      "state": "inactive",
+      "row": 1,
+      "col": 3,
+      "role": "support_right_inner",
+      "passable": false,
+      "local_sprite": 33
+    },
+    {
+      "id": "t_astral_portal_inactive_r1c4",
+      "state": "inactive",
+      "row": 1,
+      "col": 4,
+      "role": "support_right",
+      "passable": false,
+      "local_sprite": 34
+    },
+    {
+      "id": "t_astral_portal_inactive_r2c0",
+      "state": "inactive",
+      "row": 2,
+      "col": 0,
+      "role": "buttress_left",
+      "passable": false,
+      "local_sprite": 35
+    },
+    {
+      "id": "t_astral_portal_inactive_r2c1",
+      "state": "inactive",
+      "row": 2,
+      "col": 1,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 36
+    },
+    {
+      "id": "t_astral_portal_inactive_r2c2",
+      "state": "inactive",
+      "row": 2,
+      "col": 2,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 37
+    },
+    {
+      "id": "t_astral_portal_inactive_r2c3",
+      "state": "inactive",
+      "row": 2,
+      "col": 3,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 38
+    },
+    {
+      "id": "t_astral_portal_inactive_r2c4",
+      "state": "inactive",
+      "row": 2,
+      "col": 4,
+      "role": "buttress_right",
+      "passable": false,
+      "local_sprite": 39
+    },
+    {
+      "id": "t_astral_portal_inactive_r3c0",
+      "state": "inactive",
+      "row": 3,
+      "col": 0,
+      "role": "platform_edge",
+      "passable": true,
+      "local_sprite": 40
+    },
+    {
+      "id": "t_astral_portal_inactive_r3c1",
+      "state": "inactive",
+      "row": 3,
+      "col": 1,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 41
+    },
+    {
+      "id": "t_astral_portal_inactive_r3c2",
+      "state": "inactive",
+      "row": 3,
+      "col": 2,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 42
+    },
+    {
+      "id": "t_astral_portal_inactive_r3c3",
+      "state": "inactive",
+      "row": 3,
+      "col": 3,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 43
+    },
+    {
+      "id": "t_astral_portal_inactive_r3c4",
+      "state": "inactive",
+      "row": 3,
+      "col": 4,
+      "role": "platform_edge",
+      "passable": true,
+      "local_sprite": 44
+    },
+    {
+      "id": "t_astral_portal_inactive_r4c0",
+      "state": "inactive",
+      "row": 4,
+      "col": 0,
+      "role": "step_corner",
+      "passable": true,
+      "local_sprite": 45
+    },
+    {
+      "id": "t_astral_portal_inactive_r4c1",
+      "state": "inactive",
+      "row": 4,
+      "col": 1,
+      "role": "step",
+      "passable": true,
+      "local_sprite": 46
+    },
+    {
+      "id": "t_astral_portal_inactive_r4c2",
+      "state": "inactive",
+      "row": 4,
+      "col": 2,
+      "role": "step",
+      "passable": true,
+      "local_sprite": 47
+    },
+    {
+      "id": "t_astral_portal_inactive_r4c3",
+      "state": "inactive",
+      "row": 4,
+      "col": 3,
+      "role": "step",
+      "passable": true,
+      "local_sprite": 48
+    },
+    {
+      "id": "t_astral_portal_inactive_r4c4",
+      "state": "inactive",
+      "row": 4,
+      "col": 4,
+      "role": "step_corner",
+      "passable": true,
+      "local_sprite": 49
+    },
+    {
+      "id": "t_astral_portal_ruined_r0c0",
+      "state": "ruined",
+      "row": 0,
+      "col": 0,
+      "role": "corner_stone",
+      "passable": false,
+      "local_sprite": 50
+    },
+    {
+      "id": "t_astral_portal_ruined_r0c1",
+      "state": "ruined",
+      "row": 0,
+      "col": 1,
+      "role": "arch_left_top",
+      "passable": false,
+      "local_sprite": 51
+    },
+    {
+      "id": "t_astral_portal_ruined_r0c2",
+      "state": "ruined",
+      "row": 0,
+      "col": 2,
+      "role": "crown",
+      "passable": false,
+      "local_sprite": 52
+    },
+    {
+      "id": "t_astral_portal_ruined_r0c3",
+      "state": "ruined",
+      "row": 0,
+      "col": 3,
+      "role": "arch_right_top",
+      "passable": false,
+      "local_sprite": 53
+    },
+    {
+      "id": "t_astral_portal_ruined_r0c4",
+      "state": "ruined",
+      "row": 0,
+      "col": 4,
+      "role": "corner_stone",
+      "passable": false,
+      "local_sprite": 54
+    },
+    {
+      "id": "t_astral_portal_ruined_r1c0",
+      "state": "ruined",
+      "row": 1,
+      "col": 0,
+      "role": "support_left",
+      "passable": false,
+      "local_sprite": 55
+    },
+    {
+      "id": "t_astral_portal_ruined_r1c1",
+      "state": "ruined",
+      "row": 1,
+      "col": 1,
+      "role": "support_left_inner",
+      "passable": false,
+      "local_sprite": 56
+    },
+    {
+      "id": "t_astral_portal_ruined_r1c2",
+      "state": "ruined",
+      "row": 1,
+      "col": 2,
+      "role": "threshold",
+      "passable": true,
+      "local_sprite": 57
+    },
+    {
+      "id": "t_astral_portal_ruined_r1c3",
+      "state": "ruined",
+      "row": 1,
+      "col": 3,
+      "role": "support_right_inner",
+      "passable": false,
+      "local_sprite": 58
+    },
+    {
+      "id": "t_astral_portal_ruined_r1c4",
+      "state": "ruined",
+      "row": 1,
+      "col": 4,
+      "role": "support_right",
+      "passable": false,
+      "local_sprite": 59
+    },
+    {
+      "id": "t_astral_portal_ruined_r2c0",
+      "state": "ruined",
+      "row": 2,
+      "col": 0,
+      "role": "buttress_left",
+      "passable": false,
+      "local_sprite": 60
+    },
+    {
+      "id": "t_astral_portal_ruined_r2c1",
+      "state": "ruined",
+      "row": 2,
+      "col": 1,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 61
+    },
+    {
+      "id": "t_astral_portal_ruined_r2c2",
+      "state": "ruined",
+      "row": 2,
+      "col": 2,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 62
+    },
+    {
+      "id": "t_astral_portal_ruined_r2c3",
+      "state": "ruined",
+      "row": 2,
+      "col": 3,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 63
+    },
+    {
+      "id": "t_astral_portal_ruined_r2c4",
+      "state": "ruined",
+      "row": 2,
+      "col": 4,
+      "role": "buttress_right",
+      "passable": false,
+      "local_sprite": 64
+    },
+    {
+      "id": "t_astral_portal_ruined_r3c0",
+      "state": "ruined",
+      "row": 3,
+      "col": 0,
+      "role": "platform_edge",
+      "passable": true,
+      "local_sprite": 65
+    },
+    {
+      "id": "t_astral_portal_ruined_r3c1",
+      "state": "ruined",
+      "row": 3,
+      "col": 1,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 66
+    },
+    {
+      "id": "t_astral_portal_ruined_r3c2",
+      "state": "ruined",
+      "row": 3,
+      "col": 2,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 67
+    },
+    {
+      "id": "t_astral_portal_ruined_r3c3",
+      "state": "ruined",
+      "row": 3,
+      "col": 3,
+      "role": "platform",
+      "passable": true,
+      "local_sprite": 68
+    },
+    {
+      "id": "t_astral_portal_ruined_r3c4",
+      "state": "ruined",
+      "row": 3,
+      "col": 4,
+      "role": "platform_edge",
+      "passable": true,
+      "local_sprite": 69
+    },
+    {
+      "id": "t_astral_portal_ruined_r4c0",
+      "state": "ruined",
+      "row": 4,
+      "col": 0,
+      "role": "step_corner",
+      "passable": true,
+      "local_sprite": 70
+    },
+    {
+      "id": "t_astral_portal_ruined_r4c1",
+      "state": "ruined",
+      "row": 4,
+      "col": 1,
+      "role": "step",
+      "passable": true,
+      "local_sprite": 71
+    },
+    {
+      "id": "t_astral_portal_ruined_r4c2",
+      "state": "ruined",
+      "row": 4,
+      "col": 2,
+      "role": "step",
+      "passable": true,
+      "local_sprite": 72
+    },
+    {
+      "id": "t_astral_portal_ruined_r4c3",
+      "state": "ruined",
+      "row": 4,
+      "col": 3,
+      "role": "step",
+      "passable": true,
+      "local_sprite": 73
+    },
+    {
+      "id": "t_astral_portal_ruined_r4c4",
+      "state": "ruined",
+      "row": 4,
+      "col": 4,
+      "role": "step_corner",
+      "passable": true,
+      "local_sprite": 74
+    }
+  ]
+}

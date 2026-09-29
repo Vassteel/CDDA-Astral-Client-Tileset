@@ -1,0 +1,17 @@
+{
+  "version": "0.1.41",
+  "unique_new_sprites": 4,
+  "new_ids": [
+    "leather_filing",
+    "pin_reamer",
+    "scraper_steel",
+    "stone_polishing"
+  ],
+  "sprite_slots": 19653,
+  "source_prompt_export_hashes": "passed",
+  "unrelated_mappings_and_prior_art_bytes": "preserved",
+  "all_sprite_references_valid": true,
+  "frozen_handoff_hashes_verified": true,
+  "client_modified": false,
+  "user_live_review": "pending"
+}

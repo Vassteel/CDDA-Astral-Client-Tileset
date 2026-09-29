@@ -1,0 +1,12 @@
+{
+  "subject": "Short grassy green marine algae patch",
+  "image_url": "https://img.algaebase.org/images/AC100CF30785b1B9FCkIj38A1EE0/DVYFZ8tr4794.jpg",
+  "page_url": "https://www.algaebase.org/search/species/detail/?species_id=rb002466c8dcdd6cc",
+  "local_photo": "references/algae-green-photo.jpg",
+  "purpose": "Real compact filamentous marine algae anatomy only; generic game plant not claimed exact species. No reference pixels copied.",
+  "style_reference": "../sources/deciduous-tree-spring.png",
+  "states": [
+    "normal"
+  ],
+  "season_policy": "Evergreen marine fronds retained with restrained four-season palette shifts; no snow underwater. Game harvesting clears furniture rather than providing a distinct harvested ID."
+}

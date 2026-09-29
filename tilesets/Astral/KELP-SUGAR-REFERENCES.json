@@ -1,0 +1,13 @@
+{
+  "subject": "Sugar kelp single long blade and holdfast",
+  "image_url": "https://www.seaweedsofalaska.com/photos/seaweed/Saccharina_latissima_004.jpg",
+  "page_url": "https://www.seaweedsofalaska.com/species.asp?SeaweedID=40",
+  "local_photo": "references/kelp-sugar-photo.jpg",
+  "purpose": "Real sugar kelp blade/stipe/holdfast anatomy; no pixels copied.",
+  "style_reference": "../sources/deciduous-tree-spring.png",
+  "states": [
+    "normal"
+  ],
+  "season_policy": "Spring fresh blade, summer mature blade, autumn worn tip, winter reduced older blade/new growth; perennial marine plant, no snow. Harvest furniture cleared, no separate harvested ID.",
+  "harvest_evidence": "src/activity_actor.cpp:7481 harvest_activity_actor::finish clears furniture to NULL_ID."
+}

@@ -1,0 +1,8 @@
+{
+  "plant": "butternut",
+  "page": "https://florafinder.org/Species/Juglans_cinerea.php",
+  "image": "https://florafinder.org/LargePhotos/D5/Juglans_cinerea-8E96C88975.jpg",
+  "local": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/flora/references/butternut-photo.jpg",
+  "use": "Anatomy reference only. Existing Astral tree sprites define art style.",
+  "botanical_source": "https://gobotany.nativeplanttrust.org/species/juglans/cinerea/"
+}

@@ -1,0 +1,77 @@
+[
+  {
+    "type": "dimension",
+    "id": "astral_test_world",
+    "region_layout": "astral_test_world"
+  },
+  {
+    "type": "dimension_region_layout",
+    "id": "astral_test_world",
+    "generation_mode": "UNIFORM",
+    "uniform_region": "astral_test_world"
+  },
+  {
+    "type": "weather_generator",
+    "id": "astral_test_world",
+    "copy-from": "default",
+    "base_temperature": 14.0,
+    "base_humidity": 65.0,
+    "base_pressure": 1015.0,
+    "base_wind": 2.0,
+    "base_wind_distrib_peaks": 80,
+    "base_wind_season_variation": 0,
+    "weather_black_list": [ "early_portal_storm", "portal_storm" ]
+  },
+  {
+    "type": "region_settings_map_extras",
+    "id": "astral_none",
+    "extras": [  ]
+  },
+  {
+    "type": "region_settings",
+    "id": "astral_test_world",
+    "copy-from": "default",
+    "//": "Pocket world used by the prototype portal.  Everything outside the placed microworld special is t_astral_veil (solid, opaque, indestructible) so exploration cannot generate endless terrain.  default_oter runs top (z+10) to bottom (z-10).",
+    "rivers": null,
+    "lakes": null,
+    "ocean": null,
+    "forests": null,
+    "ravines": null,
+    "forest_trails": null,
+    "forest_composition": "no_forests",
+    "highways": null,
+    "cities": "no_cities",
+    "map_extras": "astral_none",
+    "terrain_furniture": "default",
+    "weather": "astral_test_world",
+    "npc_spawntime": 0,
+    "neighbor_connections": false,
+    "place_roads": false,
+    "place_specials": true,
+    "default_oter": [
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "astral_veil",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock"
+    ],
+    "default_groundcover": [ [ "t_grass", 1 ] ],
+    "feature_flag_settings": { "blacklist": [  ], "whitelist": [ "ASTRAL_MICROWORLD" ] }
+  }
+]

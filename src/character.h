@@ -3649,6 +3649,8 @@ class Character : public Creature, public visitable
         int has_morale( const morale_type &type ) const;
         void rem_morale( const morale_type &type, const itype *item_type = nullptr );
         void clear_morale();
+        void clear_temporary_negative_morale();
+        bool has_temporary_negative_morale() const;
         bool has_morale_to_read() const;
         bool has_morale_to_craft() const;
         const temp_crafting_inventory &crafting_inventory( bool clear_path ) const;

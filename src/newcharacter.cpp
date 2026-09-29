@@ -24,6 +24,7 @@
 #include "calendar.h"
 #include "calendar_ui.h"
 #include "cata_imgui.h"
+#include "ui_hybrid_widgets.h"
 #include "cata_path.h"
 #include "cata_scope_helpers.h"
 #include "cata_utility.h"
@@ -3278,6 +3279,8 @@ character_creator_ui_impl::character_creator_ui_impl( character_creator_ui *pare
                        ImGuiWindowFlags_NoNav )
 {
     ui_parent = parent;
+    // Large Astral frame; the creator draws its own tab strip instead of a title bar.
+    set_shell( 0, "person", false );
 }
 
 character_creator_ui::character_creator_ui()
@@ -3654,6 +3657,11 @@ void character_creator_ui::setup_avatar()
 
 void character_creator_ui_impl::draw_controls()
 {
+    if( ui_hybrid_widgets::probe::enabled() ) {
+        ui_hybrid_widgets::probe::record( "window", "Character creator", ImGui::GetWindowPos(),
+                                          ImVec2( ImGui::GetWindowPos().x + ImGui::GetWindowSize().x,
+                                                  ImGui::GetWindowPos().y + ImGui::GetWindowSize().y ) );
+    }
     ImGui::BeginDisabled( cc_modal_active );
     avatar &pc = get_avatar();
 

@@ -1,0 +1,421 @@
+{
+  "name": "Natural tadpoles",
+  "revision": "tadpoles-v1",
+  "seasonal_policy": "Neutral year-round larval states. Species-specific body/tail/color descriptions retained. Fowler and freedom toad tadpoles share identical appearance fields; only growth behavior differs. All inherit NO_CORPSE. Adult and mutant growth-group branches remain in their own visual-family queue.",
+  "assets": [
+    {
+      "key": "leo",
+      "id": "mon_leo_tadpole",
+      "label": "Leo tadpole",
+      "max": [
+        96,
+        56
+      ],
+      "state": "living; inherited NO_CORPSE",
+      "description": "A speckled, gray-brown tadpole.  Its tail is broad and paddle-like, and its body rotund.  Sometime soon it will grow legs and lose its tail entirely.",
+      "source": "sources/leo.png",
+      "native": "native/leo.png",
+      "source_sha256": "5cc8a063ec0912cc7d1375fc5a7d7ac7e9c8c233f7b37af5584f5939c155bc90",
+      "native_sha256": "1c6d8efc1ad2157104bf0b58cc236122295962e0d8992ef2bbda4d84655757e6",
+      "prompt_sha256": "ea57fd0fe320c5e1d3fee1a79dbf11db26d142042b06105d200bfffd7c428df9",
+      "source_dimensions": [
+        741,
+        574
+      ],
+      "crop": [
+        70,
+        256,
+        700,
+        475
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        10.0,
+        24.875,
+        22.0,
+        29.0
+      ]
+    },
+    {
+      "key": "bullfrog",
+      "id": "mon_bullfrog_tadpole",
+      "label": "Bullfrog tadpole",
+      "max": [
+        160,
+        80
+      ],
+      "state": "living; inherited NO_CORPSE",
+      "description": "Every part of this speckled, green-brown tadpole is thick and broad.  It must be from some larger species of frog.",
+      "source": "sources/bullfrog.png",
+      "native": "native/bullfrog.png",
+      "source_sha256": "89b017d7559466d307d6b70774561da8587ce4fe19756653f9ddfdd0eec28105",
+      "native_sha256": "213f3bb8c68914eb6a2eeda260f7117f1c4cffe6fe315a4e5dd99cfe50120b1a",
+      "prompt_sha256": "ea57fd0fe320c5e1d3fee1a79dbf11db26d142042b06105d200bfffd7c428df9",
+      "source_dimensions": [
+        803,
+        574
+      ],
+      "crop": [
+        41,
+        185,
+        767,
+        475
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        6.0,
+        21.0,
+        26.0,
+        29.0
+      ]
+    },
+    {
+      "key": "fowler",
+      "id": "mon_fowler_tadpole",
+      "label": "Toad tadpole / shared",
+      "max": [
+        96,
+        56
+      ],
+      "state": "living; inherited NO_CORPSE",
+      "description": "The larval form of some species of frog.  Soon enough it will undergo metamorphosis into its adult form.  This dark, speckled one has a rather large, bulbous body compared to its thin, tapered tail.",
+      "aliases": [
+        "mon_freedom_tadpole"
+      ],
+      "source": "sources/fowler.png",
+      "native": "native/fowler.png",
+      "source_sha256": "1b5a1af46bbbff145489bbb0cf12ebc4e1fea5376ba69bee3b82e9021adb6844",
+      "native_sha256": "2f062e136686827fb1f48ce453e68200fa9def2abe5288a7517c409a5ee73a01",
+      "prompt_sha256": "ea57fd0fe320c5e1d3fee1a79dbf11db26d142042b06105d200bfffd7c428df9",
+      "source_dimensions": [
+        899,
+        458
+      ],
+      "crop": [
+        109,
+        100,
+        795,
+        320
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        10.0,
+        25.125,
+        22.0,
+        29.0
+      ]
+    },
+    {
+      "key": "peeper",
+      "id": "mon_peeper_tadpole",
+      "label": "Peeper tadpole",
+      "max": [
+        96,
+        56
+      ],
+      "state": "living; inherited NO_CORPSE",
+      "description": "A tiny larval frog.  Almost solid black, this one is barely a speck in the water around it.",
+      "source": "sources/peeper.png",
+      "native": "native/peeper.png",
+      "source_sha256": "7e2622f214adf2a27438a5d683aa69b5b9e51a34b23cc919eb75b73eac6ffbc1",
+      "native_sha256": "8e7c6e3357ea53c4d6c4eda1b436987373d8005fd45732cd468e27bd4b8212f6",
+      "prompt_sha256": "ea57fd0fe320c5e1d3fee1a79dbf11db26d142042b06105d200bfffd7c428df9",
+      "source_dimensions": [
+        645,
+        458
+      ],
+      "crop": [
+        117,
+        155,
+        511,
+        287
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        10.0,
+        25.0,
+        22.0,
+        29.0
+      ]
+    },
+    {
+      "key": "gray",
+      "id": "mon_gray_tadpole",
+      "label": "Gray tadpole",
+      "max": [
+        96,
+        56
+      ],
+      "state": "living; inherited NO_CORPSE",
+      "description": "This rather unique tadpole might be mistaken for a small fish.  It sports a very broad tail with bright red-orange coloration at its end, dotted with black spots.",
+      "source": "sources/gray.png",
+      "native": "native/gray.png",
+      "source_sha256": "8a10da6cb9ec4cfb4bd2c2a0776cc71ae84b64667bf2fceae9b31c263ea44670",
+      "native_sha256": "1e34db442b8d01765da031d5e4a4735da39d2274656aff360a1bcfa2d0a3368c",
+      "prompt_sha256": "84f2608c836717d6dbfa9d1f24a6562b3c09eaa9f44787a165d30221837a48a1",
+      "source_dimensions": [
+        761,
+        511
+      ],
+      "crop": [
+        37,
+        168,
+        730,
+        410
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        10.0,
+        24.75,
+        22.0,
+        29.0
+      ]
+    },
+    {
+      "key": "mink",
+      "id": "mon_mink_tadpole",
+      "label": "Mink tadpole",
+      "max": [
+        96,
+        56
+      ],
+      "state": "living; inherited NO_CORPSE",
+      "description": "A brown and tan speckled tadpole with a wide body and very broad, feather-shaped tail.",
+      "source": "sources/mink.png",
+      "native": "native/mink.png",
+      "source_sha256": "804f5feede90ab8bc3853efc2566a23874217ee5ce2061e70ff36ceaa103f68c",
+      "native_sha256": "d045d00312faa2cf404008b49af5d0a2b6f9e54ce6f0a64597650bf4feb16266",
+      "prompt_sha256": "84f2608c836717d6dbfa9d1f24a6562b3c09eaa9f44787a165d30221837a48a1",
+      "source_dimensions": [
+        783,
+        511
+      ],
+      "crop": [
+        32,
+        169,
+        752,
+        424
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        10.0,
+        24.75,
+        22.0,
+        29.0
+      ]
+    },
+    {
+      "key": "pickerel",
+      "id": "mon_pickerel_tadpole",
+      "label": "Pickerel tadpole",
+      "max": [
+        96,
+        56
+      ],
+      "state": "living; inherited NO_CORPSE",
+      "description": "This yellowish tadpole is covered in flecks of brown and cream coloring.  Its eyes rest close together on a notably pointed face.",
+      "source": "sources/pickerel.png",
+      "native": "native/pickerel.png",
+      "source_sha256": "08e393e0e727aaeaf63bd41ef2b03cd69014e5ac6736de6f8b6640e121bc4151",
+      "native_sha256": "b7e4c67b118de8841f59dc46cd0897af9093002182ee5171252bd28500a3a68b",
+      "prompt_sha256": "84f2608c836717d6dbfa9d1f24a6562b3c09eaa9f44787a165d30221837a48a1",
+      "source_dimensions": [
+        772,
+        521
+      ],
+      "crop": [
+        30,
+        115,
+        752,
+        338
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        10.0,
+        25.25,
+        22.0,
+        29.0
+      ]
+    },
+    {
+      "key": "green",
+      "id": "mon_green_tadpole",
+      "label": "Green tadpole",
+      "max": [
+        96,
+        56
+      ],
+      "state": "living; inherited NO_CORPSE",
+      "description": "A corpulent green tadpole with a yellow underbelly and black speckles.",
+      "source": "sources/green.png",
+      "native": "native/green.png",
+      "source_sha256": "b5fbd2bced71af54b64119964b7d821e6fe742d81781440682cbb23c1ec42d5e",
+      "native_sha256": "d0fa7570b398e079bf90da4b29ff18aaf3a034ddce4f2844cf1b8a611be29779",
+      "prompt_sha256": "84f2608c836717d6dbfa9d1f24a6562b3c09eaa9f44787a165d30221837a48a1",
+      "source_dimensions": [
+        772,
+        521
+      ],
+      "crop": [
+        21,
+        87,
+        741,
+        359
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        10.0,
+        24.5,
+        22.0,
+        29.0
+      ]
+    },
+    {
+      "key": "wood",
+      "id": "mon_wood_tadpole",
+      "label": "Wood tadpole",
+      "max": [
+        96,
+        56
+      ],
+      "state": "living; inherited NO_CORPSE",
+      "description": "This mottled brown tadpole appears rather typical until you can get a glimpse from the side.  Then its high, peaked mouth and low round belly stand out in profile.",
+      "source": "sources/wood.png",
+      "native": "native/wood.png",
+      "source_sha256": "978b3646682974581680b355ec0ea3835e92f2ea024ed1d49a3916176a1e731d",
+      "native_sha256": "19538944c6da8c11acfcc234c759ebe99ba85585d4aa11be0680ad90feda8504",
+      "prompt_sha256": "f813c3b27a7265dd8f5a6931dd691224daa5176d4ae27285ccf8fa2c38fcfac4",
+      "source_dimensions": [
+        1032,
+        797
+      ],
+      "crop": [
+        95,
+        317,
+        953,
+        529
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        10.0,
+        26.0,
+        22.0,
+        29.0
+      ]
+    },
+    {
+      "key": "spade",
+      "id": "mon_spade_tadpole",
+      "label": "Spade tadpole",
+      "max": [
+        96,
+        56
+      ],
+      "state": "living; inherited NO_CORPSE",
+      "description": "A squat and wide-bellied tadpole with wide-set eyes.",
+      "source": "sources/spade.png",
+      "native": "native/spade.png",
+      "source_sha256": "422c7e478ae71905b021433a84b08854312f5c5bab8f6f22e6d8cf42bdf155dc",
+      "native_sha256": "26db1e711be59ed2bec4dad337482373baa05347b669d22c1fca507959928d6a",
+      "prompt_sha256": "f813c3b27a7265dd8f5a6931dd691224daa5176d4ae27285ccf8fa2c38fcfac4",
+      "source_dimensions": [
+        959,
+        797
+      ],
+      "crop": [
+        79,
+        298,
+        868,
+        566
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        10.0,
+        24.875,
+        22.0,
+        29.0
+      ]
+    }
+  ],
+  "alias_evidence": "Fowler/freedom names, descriptions and inherited appearance fields are identical. No legged substate IDs are defined for these larvae. mon_proxy_tadpole death_function.corpse_type is NO_CORPSE.",
+  "status": "staged in creatures-glyph-batch-01; archive and user/live acceptance pending",
+  "generator": "built-in imagegen",
+  "client_modified": false,
+  "visual_review": "source and native preview inspected; user/live review pending",
+  "review_notes": "Ten tadpole images cover eleven IDs; Fowler/freedom identical visual fields share one image. All required corpse states excluded by inherited NO_CORPSE. Species-specific tails/colors and larger bullfrog checked at native12/20px length; fine spots and small source limb buds simplify at this scale. The source descriptions define no separate legged tadpole ID. No mod overrides in12 audited records. Natural tadpole visual family complete; frog/mutant growth group members retain separate queue entries.",
+  "validation": {
+    "unique_sprites": 10,
+    "creature_ids": [
+      "mon_leo_tadpole",
+      "mon_bullfrog_tadpole",
+      "mon_fowler_tadpole",
+      "mon_freedom_tadpole",
+      "mon_peeper_tadpole",
+      "mon_gray_tadpole",
+      "mon_mink_tadpole",
+      "mon_pickerel_tadpole",
+      "mon_green_tadpole",
+      "mon_wood_tadpole",
+      "mon_spade_tadpole"
+    ],
+    "corpse_ids": [],
+    "total_slots": 19699,
+    "prior_non_config_files_preserved": 386,
+    "unrelated_mappings_preserved": true,
+    "atlas_bytes": "passed",
+    "source_prompt_native_hashes": "passed",
+    "reference_indices": "passed",
+    "client_modified": false,
+    "live_review": "pending"
+  }
+}

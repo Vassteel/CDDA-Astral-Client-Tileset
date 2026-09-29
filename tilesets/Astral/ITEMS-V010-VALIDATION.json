@@ -1,0 +1,35 @@
+{
+  "state_edges_verified": [
+    [
+      "emf_detector",
+      "emf_detector_on"
+    ],
+    [
+      "emf_detector_on",
+      "emf_detector"
+    ],
+    [
+      "geiger_off",
+      "geiger_on"
+    ],
+    [
+      "geiger_on",
+      "geiger_off"
+    ]
+  ],
+  "version": "0.1.43",
+  "unique_new_sprites": 4,
+  "new_ids": [
+    "emf_detector",
+    "emf_detector_on",
+    "geiger_off",
+    "geiger_on"
+  ],
+  "sprite_slots": 19662,
+  "source_prompt_export_hashes": "passed",
+  "unrelated_mappings_and_prior_art_bytes": "preserved",
+  "all_sprite_references_valid": true,
+  "frozen_handoff_hashes_verified": true,
+  "client_modified": false,
+  "user_live_review": "pending"
+}

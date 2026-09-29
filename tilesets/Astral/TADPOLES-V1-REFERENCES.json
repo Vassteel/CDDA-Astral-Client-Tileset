@@ -1,0 +1,26 @@
+[
+  {
+    "subject": "bullfrog",
+    "image_url": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/RCAT%20Larva.jpg",
+    "page_url": "https://www.usgs.gov/media/images/american-bullfrog-tadpole",
+    "local_path": "/home/deck/Astra & Grok/CDDA/artifacts/astral-creature-art/tadpoles-v1/references/bullfrog.jpg",
+    "sha256": "54602efe3195a14a6db7ffa4b3ecbec373035b27896751e3d3cfa2f5d888180f",
+    "use": "Real tadpole anatomy and coloring reference; game descriptions govern individual variation. No photo pixels copied."
+  },
+  {
+    "subject": "gray-treefrog",
+    "image_url": "https://a-z-animals.com/media/2021/02/Gray-treefrog-tadpole-768x401.jpg",
+    "page_url": "https://a-z-animals.com/animals/gray-tree-frog/",
+    "local_path": "/home/deck/Astra & Grok/CDDA/artifacts/astral-creature-art/tadpoles-v1/references/gray-treefrog.jpg",
+    "sha256": "9f7617f3ba1617d016e4dea0394fc20b9753790b707360af5f753f9606276875",
+    "use": "Real tadpole anatomy and coloring reference; game descriptions govern individual variation. No photo pixels copied."
+  },
+  {
+    "subject": "wood-frog",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/11/Woodfrog_tadpole.jpg",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Woodfrog_tadpole.jpg",
+    "local_path": "/home/deck/Astra & Grok/CDDA/artifacts/astral-creature-art/tadpoles-v1/references/wood-frog.jpg",
+    "sha256": "38bde6d458c3b86764a290428fcc0823d7397a87c1892dddfb51f2692fad3751",
+    "use": "Real tadpole anatomy and coloring reference; game descriptions govern individual variation. No photo pixels copied."
+  }
+]

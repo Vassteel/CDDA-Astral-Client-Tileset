@@ -1,0 +1,34 @@
+[
+  {
+    "subject": "brown-moth",
+    "image_url": "https://projects.biodiversity.be/lepidoptera/media/specimen_pictures/NOCTPRON_iAM_01.jpg",
+    "page_url": "https://projects.biodiversity.be/lepidoptera/species/4242/",
+    "local_path": "/home/deck/Astra & Grok/CDDA/artifacts/astral-creature-art/moth-v1/references/brown-moth.jpg",
+    "sha256": "c1791597df682ec4408a2f267470b777882f5435acb90ab6adc8644bb46614d7",
+    "use": "Real anatomy reference inspected; no photo pixels copied. Game describes wood-patterned ordinary moth and pale lunar titan."
+  },
+  {
+    "subject": "luna-moth",
+    "image_url": "https://www.zoology.ubc.ca/~biodiv/entomology/main/Lepidoptera/Saturniidae/Actias%20luna%20female%20%281dorsal%29.jpg",
+    "page_url": "https://www.zoology.ubc.ca/~biodiv/entomology/main/Lepidoptera/Saturniidae/",
+    "local_path": "/home/deck/Astra & Grok/CDDA/artifacts/astral-creature-art/moth-v1/references/luna-moth-ubc.jpg",
+    "sha256": "af63144ee0f8634a129430de972bad26e6124664a21876c860e40778d6bb8616",
+    "use": "Real museum specimen anatomy; no photo pixels copied."
+  },
+  {
+    "subject": "green-caterpillar",
+    "image_url": "https://i0.wp.com/blog.greatparks.org/wp-content/uploads/2022/03/Luna-Moth-Caterpillar-Actias-Luna-Thomas-Shahan.jpg?ssl=1",
+    "page_url": "https://blog.greatparks.org/2022/03/look-on-the-bright-side-the-lives-of-ohio-moths/",
+    "local_path": "/home/deck/Astra & Grok/CDDA/artifacts/astral-creature-art/butterfly-v1/references/green-caterpillar.jpg",
+    "sha256": "058a2e61c6a7582897011f53d7be385900541f8c91e3ec62e75060f6a876d2ec",
+    "use": "Anatomy/material reference only; no photo pixels copied. Mutant game definition controls scale and appearance."
+  },
+  {
+    "subject": "silk-cocoon",
+    "image_url": "https://www.agraria.org/coltivazioniforestali/gelso-bozzolo.jpg",
+    "page_url": "https://www.agraria.org/coltivazioniforestali/gelso.htm",
+    "local_path": "/home/deck/Astra & Grok/CDDA/artifacts/astral-creature-art/butterfly-v1/references/silk-cocoon.jpg",
+    "sha256": "7ec292d771df06a78525feb8f47c8ecff8a3f59a79df6e581218774d932c430b",
+    "use": "Anatomy/material reference only; no photo pixels copied. Mutant game definition controls scale and appearance."
+  }
+]

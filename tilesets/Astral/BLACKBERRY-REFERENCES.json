@@ -1,0 +1,21 @@
+{
+  "species_reference": "Rubus allegheniensis",
+  "role": "Real anatomy references; existing Astral trees fix art style",
+  "photos": [
+    {
+      "source_page": "https://www.wotncr.org/wildflowers/rubus_allegheniensis.html",
+      "image": "https://www.wotncr.org/wildflowers/photos/rubus_allegheniensis_plant_2.jpg",
+      "local": "blackberry-habit.jpg"
+    },
+    {
+      "source_page": "https://nativeplantscapes.com/rubus-allegheniensis",
+      "image": "https://images.squarespace-cdn.com/content/v1/61fa91bac8a0d8712c6dfdd2/e61397cc-00a7-40df-a840-e6e906e3db45/Ruball1.JPG",
+      "local": "blackberry-fruit.jpg"
+    }
+  ],
+  "observations": "Arching prickly canes, toothed compound foliage, white five-petal blossoms and dark aggregate blackberry fruit. Summer fruiting matches game harvest season.",
+  "game_ids": [
+    "t_shrub_blackberry",
+    "t_shrub_blackberry_harvested"
+  ]
+}

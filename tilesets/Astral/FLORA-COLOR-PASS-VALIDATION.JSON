@@ -1,0 +1,20 @@
+{
+  "flora_sprites": 600,
+  "flora_state_families": 129,
+  "all_four_seasons_audited": true,
+  "grass_variants": 16,
+  "grass_background_cells": 140,
+  "changed_existing_atlases": 66,
+  "exact_alpha_and_dimensions_preserved": true,
+  "non_target_pixels_preserved": true,
+  "resampling_or_spatial_filtering_in_color_pass": false,
+  "client_modified": false,
+  "live_review": "pending",
+  "skipped": [],
+  "all_sprite_references_valid": true,
+  "sprite_references_checked": 25200,
+  "total_sprite_slots": 19679,
+  "all_existing_mapping_geometry_preserved": true,
+  "unrelated_baseline_files_preserved": true,
+  "comparison_pages_visually_inspected": 13
+}

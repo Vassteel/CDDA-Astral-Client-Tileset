@@ -392,6 +392,20 @@ void player_morale::remove( const morale_type &type, const itype *item_type )
 
 }
 
+bool player_morale::has_temporary_negative() const
+{
+    return std::any_of( points.begin(), points.end(), []( const morale_point &m ) {
+        return !m.is_permanent() && m.get_net_bonus() < 0;
+    } );
+}
+
+void player_morale::clear_temporary_negative()
+{
+    remove_if( []( const morale_point &m ) {
+        return !m.is_permanent() && m.get_net_bonus() < 0;
+    } );
+}
+
 void player_morale::remove_expired()
 {
     remove_if( []( const morale_point & m ) -> bool {

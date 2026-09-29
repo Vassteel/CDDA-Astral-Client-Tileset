@@ -1,3 +1,4 @@
+#include "achievement_rewards.h"
 #include "activity_handlers.h" // IWYU pragma: associated
 #include "activity_item_handling.h" // IWYU pragma: associated
 
@@ -3450,7 +3451,7 @@ static int chop_moves( Character &you, item &it )
     int moves = to_moves<int>( time_duration::from_minutes( 60 - attr ) / std::pow( 2, quality - 1 ) );
     const int helpersize = you.get_num_crafting_helpers( 3 );
     moves *= ( 1.0f - ( helpersize / 10.0f ) );
-    return moves;
+    return static_cast<int>( std::ceil( moves * achievement_rewards::chopping_time_multiplier( it ) ) );
 }
 
 static bool mine_activity( Character &you, const tripoint_bub_ms &src_loc )

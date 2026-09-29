@@ -1,3 +1,4 @@
+#include "achievement_rewards.h"
 #include "workstation_ui.h"
 #include "iexamine.h"
 
@@ -3190,6 +3191,7 @@ bool iexamine::kiln_fire( Character &you, const tripoint_bub_ms &examp )
     here.furn_set( examp, next_kiln_type );
     item result( itype_unfinished_charcoal, calendar::turn );
     result.charges = char_charges;
+    achievement_rewards::mark_kiln_batch( you, result );
     here.add_item( examp, result );
 
     return true;
@@ -3240,9 +3242,13 @@ void iexamine::kiln_full( Character &, const tripoint_bub_ms &examp )
     }
 
     units::volume total_volume = 0_ml;
+    std::string batch;
     // Burn stuff that should get charred, leave out the rest
     for( auto item_it = items.begin(); item_it != items.end(); ) {
         if( item_it->typeId() == itype_unfinished_charcoal || item_it->typeId() == itype_charcoal ) {
+            if( item_it->typeId() == itype_unfinished_charcoal ) {
+                batch = item_it->get_var( "astral_kiln_batch" );
+            }
             total_volume += item_it->volume();
             item_it = items.erase( item_it );
         } else {
@@ -3252,6 +3258,9 @@ void iexamine::kiln_full( Character &, const tripoint_bub_ms &examp )
 
     item result( itype_charcoal, calendar::turn );
     result.charges = char_type->charges_per_volume( total_volume );
+    if( !batch.empty() ) {
+        result.set_var( "astral_kiln_batch", batch );
+    }
     here.add_item( examp, result );
     here.furn_set( examp, next_kiln_type );
     add_msg( _( "It has finished burning, yielding %d charcoal." ), result.charges );

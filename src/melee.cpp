@@ -1,3 +1,5 @@
+#include "tactical_combat.h"
+#include "achievement_rewards.h"
 #include "melee.h"
 
 #include <algorithm>
@@ -98,6 +100,8 @@ static const character_modifier_id
 character_modifier_melee_thrown_move_balance_mod( "melee_thrown_move_balance_mod" );
 static const character_modifier_id
 character_modifier_melee_thrown_move_lift_mod( "melee_thrown_move_lift_mod" );
+
+static const flag_id flag_ASTRAL_SHIELD( "ASTRAL_SHIELD" );
 
 static const damage_type_id damage_bash( "bash" );
 static const damage_type_id damage_cold( "cold" );
@@ -575,6 +579,8 @@ bool Character::melee_attack( Creature &t, bool allow_special, const matec_id &f
         !get_map().on_matching_stairs( pos_bub(), t.pos_bub() ) ) {
         return false;
     }
+
+    tactical_combat::clear_defense( *this );
 
     // Max out recoil & reset aim point
     recoil = MAX_RECOIL;
@@ -1217,6 +1223,12 @@ float Character::get_dodge() const
     }
 
     float ret = Creature::get_dodge();
+    if( has_effect( efftype_id( "astral_evade" ) ) ) {
+        ret += 2.0f;
+    }
+    if( has_effect( efftype_id( "astral_recover" ) ) ) {
+        ret *= 0.5f;
+    }
     add_msg_debug( debugmode::DF_MELEE, "Base dodge %.1f", ret );
 
     // Chop in half if we are unable to move
@@ -1981,7 +1993,8 @@ item_location Character::best_shield()
     best_value = best_value == 2 ? 0 : best_value;
     item_location best = best_value > 0 ? get_wielded_item() : item_location();
     item *best_worn = worn.best_shield();
-    if( best_worn && melee::blocking_ability( *best_worn ) >= best_value ) {
+    if( best_worn && ( best_worn->has_flag( flag_ASTRAL_SHIELD ) ||
+                       melee::blocking_ability( *best_worn ) >= best_value ) ) {
         best = item_location( *this, best_worn );
     }
 
@@ -1990,6 +2003,10 @@ item_location Character::best_shield()
 
 bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instance &dam )
 {
+
+    if( has_effect( efftype_id( "astral_recover" ) ) ) {
+        return false;
+    }
 
     // Shouldn't block if player is asleep or winded
     if( in_sleep_state() || has_effect( effect_narcosis ) ||
@@ -2023,10 +2040,18 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
         return false;
     }
 
+    item_location shield = best_shield();
+    const bool held_shield = shield && shield->has_flag( flag_ASTRAL_SHIELD ) &&
+                             is_worn( *shield ) && has_two_arms_lifting() &&
+                             !weapon.is_two_handed( *this );
+
     // Melee skill and reaction score governs if you can react in time
     // Skill of 5 without relevant encumbrance guarantees a block attempt
     float melee_skill = has_active_bionic( bio_cqb ) ? 5 : get_skill_level( skill_melee );
-    if( !x_in_y( melee_skill * 20.0 * get_limb_score( limb_score_reaction ), 100 ) ) {
+    const bool guarding = held_shield && has_effect( efftype_id( "astral_guard" ) );
+    const float reaction = guarding ? std::min( 100.0f, 60.0f + melee_skill * 8.0f ) : held_shield ? std::min( 100.0f, 20.0f + melee_skill * 16.0f ) :
+                           melee_skill * 20.0f;
+    if( !x_in_y( reaction * get_limb_score( limb_score_reaction ), 100 ) ) {
         add_msg_debug( debugmode::DF_MELEE, "Block roll failed" );
         return false;
     }
@@ -2035,10 +2060,8 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
 
     // This bonus absorbs damage from incoming attacks before they land,
     // but it still counts as a block even if it absorbs all the damage.
-    float total_phys_block = mabuff_block_bonus();
+    float total_phys_block = mabuff_block_bonus() + ( guarding ? 5.0f : 0.0f );
 
-    // Extract this to make it easier to implement shields/multiwield later
-    item_location shield = best_shield();
 
     // Check if we are going to block with an item. This could
     // be worn equipment with the BLOCK_WHILE_WORN flag.
@@ -2052,7 +2075,8 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
     bool armed_body_block = weapon.has_flag( flag_ALLOWS_BODY_BLOCK );
 
     // boolean check if blocking is being done with unarmed or not
-    const bool item_blocking = allow_weapon_blocking && has_shield && !unarmed && !armed_body_block;
+    const bool item_blocking = held_shield ||
+                               ( allow_weapon_blocking && has_shield && !unarmed && !armed_body_block );
 
     bool arm_block = false;
     bool leg_block = false;
@@ -2069,8 +2093,10 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
 
     /** @ARM_STR increases attack blocking effectiveness with a limb or worn/wielded item */
     /** @EFFECT_UNARMED increases attack blocking effectiveness with a limb or worn item */
-    if( unarmed || force_unarmed || worn_shield || armed_body_block || ( has_shield &&
-            !allow_weapon_blocking ) ) {
+    if( held_shield ) {
+        block_score = get_arm_str() + block_bonus + melee_skill;
+    } else if( unarmed || force_unarmed || worn_shield || armed_body_block || ( has_shield &&
+               !allow_weapon_blocking ) ) {
         arm_block = martial_arts_data->can_arm_block( *this );
         leg_block = martial_arts_data->can_leg_block( *this );
         nonstandard_block = martial_arts_data->can_nonstandard_block( *this );
@@ -2096,7 +2122,8 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
     // weapon blocks are preferred to limb blocks
     std::string thing_blocked_with;
     // Do we block with a weapon? Handle melee wear but leave bp the same
-    if( !( unarmed || force_unarmed || worn_shield || armed_body_block ) && allow_weapon_blocking ) {
+    if( held_shield || ( !( unarmed || force_unarmed || worn_shield || armed_body_block ) &&
+                         allow_weapon_blocking ) ) {
         thing_blocked_with = shield->tname();
         // TODO: Change this depending on damage blocked
         float wear_modifier = 1.0f;
@@ -2220,6 +2247,8 @@ bool Character::block_hit( Creature *source, bodypart_id &bp_hit, damage_instanc
     burn_energy_legs( -block_stamina_cost );
     set_activity_level( EXTRA_EXERCISE );
     add_msg_debug( debugmode::DF_MELEE, "Blocking stamina cost %.1f", block_stamina_cost );
+
+    achievement_rewards::on_block( *this, *source, damage_blocked );
 
     // fire martial arts block-triggered effects
     martial_arts_data->ma_onblock_effects( *this );

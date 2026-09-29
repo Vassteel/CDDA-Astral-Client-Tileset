@@ -1,0 +1,342 @@
+{
+  "active_mods": [
+    "bombastic_perks",
+    "dda",
+    "innawood",
+    "limitless_backpack",
+    "megafauna",
+    "no_npc_food",
+    "perk_melee_system",
+    "personal_portal_storms"
+  ],
+  "records": [
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/insect_spider.json",
+      "definition": {
+        "abstract": "mon_larva_abstract",
+        "type": "MONSTER",
+        "name": {
+          "str": "larva",
+          "str_pl": "larvae",
+          "//~": "NO_I18N"
+        },
+        "description": {
+          "str": "A fake monster.  If you're seeing this something went wrong.",
+          "//~": "NO_I18N"
+        },
+        "default_faction": "insect",
+        "bodytype": "insect",
+        "species": [
+          "INSECT"
+        ],
+        "volume": "800 ml",
+        "weight": "800 g",
+        "hp": 2,
+        "speed": 50,
+        "move_skills": {
+          "climb": 2
+        },
+        "material": [
+          "iflesh"
+        ],
+        "symbol": "a",
+        "color": "red",
+        "aggression": -99,
+        "morale": -8,
+        "melee_skill": 3,
+        "melee_dice": 2,
+        "melee_dice_sides": 3,
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 0
+          }
+        ],
+        "weakpoint_sets": [
+          "wps_arthropod"
+        ],
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology",
+          "prof_wp_basic_bug"
+        ],
+        "vision_day": 10,
+        "vision_night": 3,
+        "harvest": "arachnid",
+        "fear_triggers": [
+          "HURT",
+          "FIRE"
+        ],
+        "flags": [
+          "SEES",
+          "HEARS",
+          "STUMBLES",
+          "PATH_AVOID_FIRE",
+          "NO_BREED",
+          "SMALL_HIDER"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/insect_spider.json",
+      "definition": {
+        "id": "mon_butterfly",
+        "type": "MONSTER",
+        "name": {
+          "str": "oversized butterfly",
+          "str_pl": "oversized butterflies"
+        },
+        "description": "An oversized butterfly with vibrant colored markings.  Unlike the other big insects of the Cataclysm this is a very peaceful nectivore.",
+        "bodytype": "flying insect",
+        "species": [
+          "INSECT_FLYING"
+        ],
+        "default_faction": "insect",
+        "material": [
+          "iflesh"
+        ],
+        "symbol": "l",
+        "color": "white",
+        "volume": "15 L",
+        "weight": "20 kg",
+        "hp": 25,
+        "speed": 95,
+        "vision_day": 15,
+        "dodge": 2,
+        "harvest": "arachnid_flying",
+        "weakpoint_sets": [
+          "wps_arthropod",
+          "wps_arthropod_flying"
+        ],
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology",
+          "prof_wp_basic_bug",
+          "prof_wp_flying"
+        ],
+        "upgrades": {
+          "age_grow": 30,
+          "into": "mon_butterfly_giant"
+        },
+        "fear_triggers": [
+          "HURT",
+          "FIRE"
+        ],
+        "zombify_into": "mon_meat_cocoon_tiny",
+        "flags": [
+          "SEES",
+          "HEARS",
+          "FLIES",
+          "STUMBLES"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/insect_spider.json",
+      "definition": {
+        "id": "mon_butterfly_giant",
+        "type": "MONSTER",
+        "name": {
+          "str": "giant butterfly",
+          "str_pl": "giant butterflies"
+        },
+        "description": "A mutated butterfly larger than a human.  Despite its size it is very lightweight and feeds mainly on the nectar produced by triffid flowers.",
+        "bodytype": "flying insect",
+        "species": [
+          "INSECT_FLYING"
+        ],
+        "default_faction": "insect",
+        "material": [
+          "iflesh"
+        ],
+        "symbol": "L",
+        "color": "white",
+        "volume": "75 L",
+        "weight": "40 kg",
+        "hp": 50,
+        "speed": 95,
+        "vision_day": 15,
+        "dodge": 2,
+        "harvest": "arachnid_flying",
+        "dissect": "dissect_insect_sample_single",
+        "weakpoint_sets": [
+          "wps_arthropod",
+          "wps_arthropod_flying"
+        ],
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology",
+          "prof_wp_basic_bug",
+          "prof_wp_flying"
+        ],
+        "biosignature": {
+          "biosig_item": "insect_dust",
+          "biosig_timer": 3
+        },
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_butterfly"
+          },
+          "baby_count": 1,
+          "baby_timer": 15
+        },
+        "baby_flags": [
+          "SPRING",
+          "SUMMER"
+        ],
+        "fear_triggers": [
+          "HURT",
+          "FIRE"
+        ],
+        "zombify_into": "mon_meat_cocoon_small",
+        "flags": [
+          "SEES",
+          "HEARS",
+          "FLIES",
+          "STUMBLES"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/insect_spider.json",
+      "definition": {
+        "id": "mon_butterfly_titan",
+        "type": "MONSTER",
+        "name": {
+          "str": "emperor butterfly",
+          "str_pl": "emperor butterflies"
+        },
+        "description": "An enormous butterfly with regal looking wings.  This giant of the sky flies cheerfully under the sun, leaving dust as it passes.",
+        "copy-from": "mon_butterfly_giant",
+        "dissect": "dissect_insect_sample_large",
+        "proportional": {
+          "hp": 3,
+          "speed": 1.1,
+          "morale": 1.1,
+          "melee_dice_sides": 1.1
+        },
+        "symbol": "L",
+        "color": "yellow",
+        "volume": "120 L",
+        "weight": "75 kg"
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/insect_spider.json",
+      "definition": {
+        "id": "mon_caterpillar_butterfly",
+        "type": "MONSTER",
+        "name": {
+          "str": "giant caterpillar"
+        },
+        "description": "The larval stage of a butterfly or a moth.  This one appears to be about your size so you can only imagine the size of the insect that it will grow into.",
+        "copy-from": "mon_larva_abstract",
+        "bodytype": "snake",
+        "volume": "60 L",
+        "weight": "75 kg",
+        "hp": 30,
+        "symbol": "C",
+        "color": "light_green",
+        "speed": 30,
+        "dissect": "dissect_insect_sample_large",
+        "upgrades": {
+          "age_grow": 20,
+          "into": "mon_butterfly_cocoon"
+        },
+        "special_attacks": [
+          [
+            "EAT_CROP",
+            100
+          ],
+          [
+            "GRAZE",
+            1000
+          ]
+        ],
+        "extend": {
+          "flags": [
+            "EATS"
+          ]
+        },
+        "zombify_into": "mon_meat_cocoon_small"
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/insect_spider.json",
+      "definition": {
+        "id": "mon_butterfly_cocoon",
+        "type": "MONSTER",
+        "name": {
+          "str": "giant cocoon"
+        },
+        "description": "A caterpillar undergoing a metamorphosis.  Considering the size of the cocoon you have a feeling the emerging adult will be massive as well.",
+        "symbol": "0",
+        "color": "light_gray",
+        "default_faction": "insect",
+        "bodytype": "blob",
+        "material": [
+          "iflesh"
+        ],
+        "species": [
+          "INSECT"
+        ],
+        "volume": "120 L",
+        "weight": "100 kg",
+        "hp": 100,
+        "weakpoint_sets": [
+          "wps_arthropod"
+        ],
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology",
+          "prof_wp_basic_bug"
+        ],
+        "harvest": "arachnid",
+        "dissect": "dissect_insect_sample_large",
+        "upgrades": {
+          "age_grow": 50,
+          "into": "mon_butterfly_giant"
+        },
+        "zombify_into": "mon_meat_cocoon_small",
+        "flags": [
+          "IMMOBILE"
+        ]
+      }
+    }
+  ],
+  "creature_ids": [
+    "mon_butterfly",
+    "mon_butterfly_giant",
+    "mon_butterfly_titan",
+    "mon_caterpillar_butterfly",
+    "mon_butterfly_cocoon"
+  ],
+  "renderer_states": [
+    "corpse_mon_butterfly",
+    "corpse_mon_butterfly_giant",
+    "corpse_mon_butterfly_titan",
+    "corpse_mon_caterpillar_butterfly",
+    "corpse_mon_butterfly_cocoon"
+  ],
+  "evidence": "src/cata_tiles.cpp:3680 prefixes corpse_ to monster id",
+  "seasons": "Each normal, giant, emperor, caterpillar and cocoon state uses neutral year-round artwork. Spring/summer reproduction flags do not change adult appearance. Shared zombie meat-cocoons are separate creatures, not substituted with butterfly art.",
+  "runtime_review": "pending; conditional mod interactions outside this static audit",
+  "conditional_files_skipped": [
+    "data/mods/innawood/mod_interactions/bombastic_perks/experience_eocs.json",
+    "data/mods/innawood/mod_interactions/sorcerer/experience_eocs.json",
+    "data/mods/innawood/mod_interactions/skyisland/region_overlay.json",
+    "data/mods/innawood/mod_interactions/perk_melee_system/experience_eocs.json",
+    "data/mods/Megafauna/mod_interactions/defense_mode/monsters.json",
+    "data/mods/Megafauna/mod_interactions/defense_mode/monstergroups.json"
+  ]
+}

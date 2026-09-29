@@ -1,0 +1,18 @@
+[
+  {
+    "subject": "fish-larva",
+    "image_url": "https://pnwdiving.com/assets/images/seacrest-park-cove-2-hatching-whitespotted-greenling.webp",
+    "page_url": "https://pnwdiving.com/seacrest-cove-2",
+    "local_path": "/home/deck/Astra & Grok/CDDA/artifacts/astral-creature-art/fry-v1/references/fish-larva.image",
+    "sha256": "1d8dbe96c2b822f8c7057d3542268c9651b51a03a6d9b9a197642d3df4ac37fc",
+    "use": "Real larval silhouette and translucence reference; no photo pixels copied."
+  },
+  {
+    "subject": "crayfish-young",
+    "image_url": "https://cdn.coconuts.co/public/field/image/cf2_0.jpg",
+    "page_url": "https://coconuts.co/bangkok/news/man-sells-cow-patterned-crayfish-1-million-baht/",
+    "local_path": "/home/deck/Astra & Grok/CDDA/artifacts/astral-creature-art/fry-v1/references/crayfish-young.image",
+    "sha256": "ffade89656e474ff5ea97e36ce0ec6bd244405188429dcb102ad9582a0e50a30",
+    "use": "Real larval silhouette and translucence reference; no photo pixels copied."
+  }
+]

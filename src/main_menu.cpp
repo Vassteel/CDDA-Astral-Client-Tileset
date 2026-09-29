@@ -98,6 +98,10 @@ static nc_color bronze()
 #include "uilist.h"
 #include "ui_manager.h"
 #include "ui_style_picker.h"
+#include "ui_hybrid_showcase.h"
+#if defined(TILES)
+#include "main_menu_hybrid.h"
+#endif
 #include "wcwidth.h"
 #include "worldfactory.h"
 
@@ -119,6 +123,10 @@ enum class main_menu_opts : int {
     NUM_MENU_OPTS,
 };
 } // namespace
+
+main_menu::main_menu() : ctxt( "MAIN_MENU", keyboard_mode::keychar ) { }
+
+main_menu::~main_menu() = default;
 
 std::string main_menu::queued_world_to_load;
 std::string main_menu::queued_save_id_to_load;
@@ -334,6 +342,15 @@ void main_menu::print_menu( const catacurses::window &w_open, int iSel, const po
 
     // Clear Lines
     werase( w_open );
+
+#if defined(TILES)
+    if( hybrid_overlay ) {
+        // The ImGui overlay draws the menu; the curses window only carries the art.
+        main_menu_sub_button_map.clear();
+        wnoutrefresh( w_open );
+        return;
+    }
+#endif
 
     // Define window size
     int window_width = getmaxx( w_open );
@@ -627,6 +644,7 @@ void main_menu::init_strings()
     vSettingsSubItems.emplace_back( pgettext( "Main Menu|Settings", "Colo<r|R>s" ) );
     vSettingsSubItems.emplace_back( pgettext( "Main Menu|Settings", "ImGui <S|s>tyles" ) );
     vSettingsSubItems.emplace_back( pgettext( "Main Menu|Settings", "<I|i>mGui Demo Screen" ) );
+    vSettingsSubItems.emplace_back( pgettext( "Main Menu|Settings", "<A|a>stral UI showcase" ) );
 
     vSettingsHotkeys.clear();
     for( const std::string &item : vSettingsSubItems ) {
@@ -734,7 +752,7 @@ bool main_menu::opening_screen()
     avatar &player_character = get_avatar();
     player_character = avatar();
 
-    int sel_line = 0;
+    sel_line = 0;
 
     // Make [Load Game] the default cursor position if there's game save available
     if( !world_generator->get_all_worlds().empty() ) {
@@ -758,6 +776,28 @@ bool main_menu::opening_screen()
         ui.position_from_window( w_open );
     } );
     ui.mark_resize();
+
+#if defined(TILES)
+    // init_windows() decides titled_background; run it now instead of waiting
+    // for the deferred resize callback.
+    init_windows();
+    if( titled_background ) {
+        hybrid_overlay = std::make_unique<main_menu_overlay>( *this );
+    }
+    on_out_of_scope drop_overlay( [this]() {
+        hybrid_overlay.reset();
+    } );
+#endif
+
+#if defined(TILES)
+    // Development capture hook: open the component showcase once at startup.
+    static bool showcase_shown = false;
+    if( !showcase_shown && std::getenv( "CDDA_UI_SHOWCASE" ) != nullptr ) {
+        showcase_shown = true;
+        ui_manager::redraw();
+        ui_hybrid_showcase::show();
+    }
+#endif
 
     if( !queued_world_to_load.empty() ) {
         WORLD *world_to_load{};
@@ -794,7 +834,15 @@ bool main_menu::opening_screen()
 
     while( !start ) {
         ui_manager::redraw();
+#if defined(TILES)
+        // Poll so mouse activations queued by the ImGui overlay are consumed.
+        std::string action = ctxt.handle_input( hybrid_overlay ? 50 : -1 );
+        if( hybrid_overlay && hybrid_overlay->has_action() ) {
+            action = hybrid_overlay->take_action();
+        }
+#else
         std::string action = ctxt.handle_input();
+#endif
         input_event sInput = ctxt.get_raw_input();
 
         // check automatic menu shortcuts
@@ -1022,6 +1070,8 @@ bool main_menu::opening_screen()
                     } else if( sel2 == 7 ) { /// ImGui demo
                         imgui_demo_ui demo;
                         demo.run();
+                    } else if( sel2 == 8 ) { /// Astral UI showcase (development)
+                        ui_hybrid_showcase::show();
                     }
                     break;
                 case main_menu_opts::WORLD:

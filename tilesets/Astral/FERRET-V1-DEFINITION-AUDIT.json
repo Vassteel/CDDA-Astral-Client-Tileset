@@ -1,0 +1,148 @@
+{
+  "active_mods": [
+    "bombastic_perks",
+    "dda",
+    "innawood",
+    "limitless_backpack",
+    "megafauna",
+    "no_npc_food",
+    "perk_melee_system",
+    "personal_portal_storms"
+  ],
+  "records": [
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/mammal.json",
+      "definition": {
+        "id": "mon_ferret",
+        "type": "MONSTER",
+        "name": {
+          "str": "ferret"
+        },
+        "description": "Domesticated from the European polecat, this sleek and energetic mammal was commonly kept as a pet before the Cataclysm.",
+        "bodytype": "pig",
+        "default_faction": "ferret",
+        "categories": [
+          "WILDLIFE"
+        ],
+        "species": [
+          "MAMMAL"
+        ],
+        "volume": "120 ml",
+        "weight": "120 g",
+        "hp": 12,
+        "speed": 110,
+        "move_skills": {
+          "swim": 4
+        },
+        "material": [
+          "flesh"
+        ],
+        "symbol": "f",
+        "color": "light_gray",
+        "morale": 40,
+        "melee_skill": 3,
+        "melee_dice": 1,
+        "melee_dice_sides": 4,
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 2
+          }
+        ],
+        "dodge": 14,
+        "vision_night": 5,
+        "harvest": "mammal_tiny",
+        "petfood": {
+          "food": [
+            "CATFOOD"
+          ],
+          "feed": "The %s seems to like you!  It lets you pat its head and seems friendly.",
+          "pet": "The %s lets out a happy squeak as you give its head a small scritch."
+        },
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology"
+        ],
+        "reproduction": {
+          "baby_type": {
+            "baby_monster": "mon_ferret_kit"
+          },
+          "baby_count": 5,
+          "baby_timer": 100
+        },
+        "fear_triggers": [
+          "SOUND",
+          "PLAYER_CLOSE"
+        ],
+        "flags": [
+          "SEES",
+          "HEARS",
+          "SMELLS",
+          "ANIMAL",
+          "PATH_AVOID_DANGER",
+          "WARM",
+          "CANPLAY",
+          "CAN_BE_CULLED",
+          "SMALL_HIDER"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/mammal.json",
+      "definition": {
+        "id": "mon_ferret_kit",
+        "type": "MONSTER",
+        "copy-from": "mon_ferret",
+        "name": {
+          "str": "ferret kit"
+        },
+        "description": "A young domesticated ferret, known as a kit.",
+        "volume": "10 ml",
+        "weight": "10 g",
+        "hp": 5,
+        "//": "Kits do not have their full fur yet and are really sensitive to cold temperature",
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 1
+          }
+        ],
+        "dodge": 9,
+        "flags": [
+          "SEES",
+          "HEARS",
+          "SMELLS",
+          "ANIMAL",
+          "CANPLAY",
+          "PATH_AVOID_DANGER",
+          "WARM",
+          "HIT_AND_RUN",
+          "NO_BREED"
+        ],
+        "upgrades": {
+          "age_grow": 90,
+          "into": "mon_ferret"
+        },
+        "armor": {
+          "cold": 0
+        }
+      }
+    }
+  ],
+  "creature_ids": [
+    "mon_ferret",
+    "mon_ferret_kit"
+  ],
+  "renderer_states": [
+    "corpse_mon_ferret",
+    "corpse_mon_ferret_kit"
+  ],
+  "evidence": "src/cata_tiles.cpp:3680 prefixes corpse_ to monster id",
+  "seasons": "Same natural markings shared across all four seasons; no separate seasonal morph defined.",
+  "named_variants": [],
+  "runtime_review": "pending; conditional mod interactions outside static audit",
+  "anatomy_note": "Kit is 10g with incomplete coat per game comment; use pale sparse-fur kit photograph, not fully coated juvenile."
+}

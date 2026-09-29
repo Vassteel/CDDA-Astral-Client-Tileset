@@ -1,0 +1,362 @@
+{
+  "version": "aux-2-v009",
+  "status": "packaged in Astral 0.1.42; user/live acceptance pending",
+  "preserve": "All prior Astral art including nine shields; see preserved-art.json",
+  "entries": [
+    {
+      "id": "knife_sharpener_handheld",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/knife_sharpener_handheld.png",
+      "source_sha256": "e37d01ec6d1c76b58505fa142683be07932f31eb355af8eb240c4703170f1ee0",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/knife_sharpener_handheld.png",
+      "png_sha256": "f938c163ce088c9865aae6b7553399f67b4fb65f67e0afec97e1b92e614ce435",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 147,
+      "content_bounds": [
+        28,
+        57,
+        226,
+        200
+      ],
+      "prompt_path": "prompts/knife_sharpener_handheld.txt",
+      "prompt_sha256": "b54b38f8ab3c7c45a6cdf0a24ddfc2c7ed6abf68876840cd891b9bb85c560163",
+      "native_preview": "previews/knife_sharpener_handheld-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; honing rod and sharpener inset224 centered256",
+      "mapping": {
+        "file": "astral_item_aux2_knife_sharpener_handheld.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "knife_sharpener_handheld",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/cooking.json",
+          "array_index": 54,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel inspection: three sharpening slots, handle and restrained red trim remain readable. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "knife_sharpener_handheld",
+          "page_url": "https://www.falabella.com.co/falabella-co/product/119256652/Combo-Afilador-Cuchillos-Pro-Cuchillo-Pelapapas-Ceramica/119256654",
+          "image_url": "https://media.falabella.com/falabellaCO/119256654_03/w%3D1500%2Ch%3D1500%2Cfit%3Dcover",
+          "local_path": "references/knife_sharpener_handheld.image",
+          "sha256": "fb803e65c18c2baf5725b7e12ff66463671b6115cc4e5bd5e226fa8fe918162d",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real photo inspected before generation for rim/mesh or shaft/slot construction.",
+          "adaptation": "Reference repeated sharpening slots and handle profile. Game ASCII picture shows three grit slots with dark-gray body and red trim; draw three slots, muted dark red painted accents, no labels or extra scissors slot."
+        }
+      ]
+    },
+    {
+      "id": "metal_honing_rod",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/metal_honing_rod.png",
+      "source_sha256": "c5b09e445617b0e6d185ed98b8188259ca6fc4eb2125ac4bacac1fc4572fd81a",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/metal_honing_rod.png",
+      "png_sha256": "67f08a7d6efb2e48c476bf894e3a3e2ed68b379c1a1bfc3b07c2b63c1854d9de",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 168,
+      "content_bounds": [
+        37,
+        41,
+        219,
+        223
+      ],
+      "prompt_path": "prompts/metal_honing_rod.txt",
+      "prompt_sha256": "772ec067d0bcd70a3e0faa4396d99456850bb26da9572a22ad5297dc511a293c",
+      "native_preview": "previews/metal_honing_rod-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; honing rod and sharpener inset224 centered256",
+      "mapping": {
+        "file": "astral_item_aux2_metal_honing_rod.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "metal_honing_rod",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/cooking.json",
+          "array_index": 53,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel inspection: blunt rod, small guard and shorter grip remain readable. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "metal_honing_rod",
+          "page_url": "https://rozetka.com.ua/396973251/p396973251/",
+          "image_url": "https://content.rozetka.com.ua/goods/images/big/367162600.png",
+          "local_path": "references/metal_honing_rod.image",
+          "sha256": "6f530ab7b0a2950829082e4c0be04aedb31dbab3cee881af93751b4619f33d6b",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real photo inspected before generation for rim/mesh or shaft/slot construction.",
+          "adaptation": "Game definitions and recipes control construction; muted pixel palette, no labels or copied photo pixels."
+        }
+      ]
+    },
+    {
+      "id": "sieve_primitive",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/sieve_primitive.png",
+      "source_sha256": "bdcbb92a5148480af251eddfb4c9890ab65c73103611014f73c2dcd67cd52ed1",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/sieve_primitive.png",
+      "png_sha256": "8327cea57413a0fc189da2c903d6ab6ab482fabcb5e653d49a2085ee0f4aa04c",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 78,
+      "content_bounds": [
+        31,
+        42,
+        239,
+        238
+      ],
+      "prompt_path": "prompts/sieve_primitive.txt",
+      "prompt_sha256": "01637266ba8b9def15ec69d0c5f7c97e6ac215d961c9e8aff31df26bedb44ba1",
+      "native_preview": "previews/sieve_primitive-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; honing rod and sharpener inset224 centered256",
+      "mapping": {
+        "file": "astral_item_aux2_sieve_primitive.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "sieve_primitive",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/cooking.json",
+          "array_index": 37,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel inspection: tightly woven plant strips and bound low rim read clearly; revised wide gaps removed. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "sieve_primitive",
+          "page_url": "https://www.magazineluiza.com.br/peneira-de-buzios-reta-de-palha-40cm-artesanal/p/cef76ghc35/ud/enei/",
+          "image_url": "https://a-static.mlcdn.com.br/800x800/peneira-de-buzios-reta-de-palha-40cm-artesanal/barracaocasagrande/16007048942/9e1396b8f868313422db72a745972601.jpeg",
+          "local_path": "references/sieve_primitive.image",
+          "sha256": "2a49a42532eba74a538631dbae1d1c982151a9c51ace6e9426ffe1144f9a5042",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real photo inspected before generation for rim/mesh or shaft/slot construction.",
+          "adaptation": "Game definitions and recipes control construction; muted pixel palette, no labels or copied photo pixels."
+        }
+      ]
+    },
+    {
+      "id": "sieve_steel",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/sieve_steel.png",
+      "source_sha256": "f0223a683e98fb17ea1551d7d804f73d78b01a5d502cd524bd25b6a40cb23de5",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/sieve_steel.png",
+      "png_sha256": "a9084e37039c181b2aa6d774e5931bc95e3d667603b55d8b1e654adef632c179",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 142,
+      "content_bounds": [
+        35,
+        62,
+        251,
+        238
+      ],
+      "prompt_path": "prompts/sieve_steel.txt",
+      "prompt_sha256": "a8cea502fe8179a087fe4cdae47aa835fd229ee0285db9945257979af19ea591",
+      "native_preview": "previews/sieve_steel-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; honing rod and sharpener inset224 centered256",
+      "mapping": {
+        "file": "astral_item_aux2_sieve_steel.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "sieve_steel",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/cooking.json",
+          "array_index": 38,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel inspection: rigid cylindrical steel band and mesh floor distinct from makeshift wire hoop. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "sieve_steel",
+          "page_url": "https://www.globalgilson.com/200mm-sieve-all-stainless-full-height-1-point-25mm",
+          "image_url": "https://www.globalgilson.com/content/images/thumbs/0029906_200mm-sieve-all-stainless-full-height-125mm_600.jpeg",
+          "local_path": "references/sieve_steel.image",
+          "sha256": "bab0c6b9b545e7ddf5258d24b3c935b9e2f394605cb16bdb7d664b819ac1fdd1",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real photo inspected before generation for rim/mesh or shaft/slot construction.",
+          "adaptation": "Game definitions and recipes control construction; muted pixel palette, no labels or copied photo pixels."
+        }
+      ]
+    },
+    {
+      "id": "sieve_steel_makeshift",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/sieve_steel_makeshift.png",
+      "source_sha256": "fe497d4333c0db5c530078bb3d0a2b472feeb85d9d30ecf6af85fa336f10118e",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/sieve_steel_makeshift.png",
+      "png_sha256": "207841125f6807b3676a790120bec93e35295b76521a8495b189d52454645812",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 255,
+      "content_bounds": [
+        43,
+        47,
+        213,
+        238
+      ],
+      "prompt_path": "prompts/sieve_steel_makeshift.txt",
+      "prompt_sha256": "73fe87f1f7ad96b08edee19b2b3e3b7f1b4415317e3a06e937bae172a2170028",
+      "native_preview": "previews/sieve_steel_makeshift-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; honing rod and sharpener inset224 centered256",
+      "mapping": {
+        "file": "astral_item_aux2_sieve_steel_makeshift.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "sieve_steel_makeshift",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/cooking.json",
+          "array_index": 39,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel inspection: thin low wire hoop and mesh distinguish from solid laboratory band. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "sieve_steel_makeshift",
+          "page_url": "https://www.globalgilson.com/200mm-sieve-all-stainless-full-height-1-point-25mm",
+          "image_url": "https://www.globalgilson.com/content/images/thumbs/0029906_200mm-sieve-all-stainless-full-height-125mm_600.jpeg",
+          "local_path": "references/sieve_steel.image",
+          "sha256": "bab0c6b9b545e7ddf5258d24b3c935b9e2f394605cb16bdb7d664b819ac1fdd1",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real photo inspected before generation for rim/mesh or shaft/slot construction.",
+          "adaptation": "Lab sieve photo references steel mesh only. Game definition/recipe specify mesh plus thick wire; replace solid lab band with a thin wire hoop, no wooden frame."
+        }
+      ]
+    }
+  ],
+  "generated_count": 5,
+  "creative_method": "built-in imagegen only",
+  "static_checks": "dimensions, transparent alpha, non-clipped bounds, exact prompt/source/export hashes",
+  "live_acceptance": "not tested",
+  "release": "0.1.42"
+}

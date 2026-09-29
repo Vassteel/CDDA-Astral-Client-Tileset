@@ -1,0 +1,8 @@
+{
+  "species": "Quercus; red oak anatomy reference",
+  "page": "https://www.marylandbiodiversity.com/species/1560",
+  "photo": "https://objects.liquidweb.services/images/201912/matthew_beziat_49119900677_0a219745cb_c.jpg",
+  "local_photo": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/flora/references/oak-photo.jpg",
+  "use": "Harvested state only. Existing approved deciduous-tree seasonal sources are exact edit targets; preserve original art.",
+  "game": "t_tree_harvested is acorns picked, not dead. Keep seasonal foliage. Original source has no prominent nuts; use only restrained minor outer leaf variation."
+}

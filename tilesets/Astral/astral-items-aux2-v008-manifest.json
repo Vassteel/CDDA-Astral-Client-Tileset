@@ -1,0 +1,292 @@
+{
+  "version": "aux-2-v008",
+  "status": "packaged in Astral 0.1.41; user/live acceptance pending",
+  "preserve": "All prior Astral art including nine shields; see preserved-art.json",
+  "entries": [
+    {
+      "id": "leather_filing",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/leather_filing.png",
+      "source_sha256": "4bb0bbbedc623e5b77d8a33cd6d3450cc4e878be94dc1286e2329e426b7599c4",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/leather_filing.png",
+      "png_sha256": "18bc6553bec1bfcc6b3b144f62c66230d369bf71a476fca68b1e4954eae56f9b",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 138,
+      "content_bounds": [
+        56,
+        57,
+        202,
+        206
+      ],
+      "prompt_path": "prompts/leather_filing.txt",
+      "prompt_sha256": "3a358991c31caf405990d00389b9c8cd5ac63ea3279f623cd17e7429f71e18be",
+      "native_preview": "previews/leather_filing-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; leather and stone inset224, reamer inset208 centered256",
+      "mapping": {
+        "file": "astral_item_aux2_leather_filing.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "leather_filing",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/metalworking.json",
+          "array_index": 29,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel inspection: sand patch, thin curled leather and brown/tan material separation remain visible. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "leather_filing",
+          "page_url": "https://tandyleather.ca/products/suede-remnants",
+          "image_url": "https://tandyleather.ca/cdn/shop/products/5046-10_512x512.jpg?v=1588213707",
+          "local_path": "references/leather_filing.image",
+          "sha256": "1f10a5e9767a5933f356b189d5ebf65c5be8e0da4451cb496b3a41e9a22a85ae",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real photo inspected before generation for silhouette, material and working surfaces.",
+          "adaptation": "Photo references flexible brown leather only. Game description and recipe specify leather patch plus abrasive sand; one patch with sand on top, not a pile of scraps."
+        }
+      ]
+    },
+    {
+      "id": "pin_reamer",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/pin_reamer.png",
+      "source_sha256": "9bb9ab769f6cb48ce08218480b9d4f8a138131abc57784c68e8b17151d98b92f",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/pin_reamer.png",
+      "png_sha256": "421319c36bcd09b22fad4a2a3f7dff7bd173091510f2cfd3702faab1e38cf415",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 172,
+      "content_bounds": [
+        53,
+        62,
+        188,
+        193
+      ],
+      "prompt_path": "prompts/pin_reamer.txt",
+      "prompt_sha256": "2525f77ea7b6087af7805dc731e3cd9cf3a72809eb97ce08af788152d64d49fc",
+      "native_preview": "previews/pin_reamer-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; leather and stone inset224, reamer inset208 centered256",
+      "mapping": {
+        "file": "astral_item_aux2_pin_reamer.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "pin_reamer",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/workshop.json",
+          "array_index": 45,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel inspection: T-handle and tapered straight flutes remain readable with safe margins. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "pin_reamer",
+          "page_url": "https://www.infinitias.com/products/t-handle-tapered-reamer?variant=43757992673505",
+          "image_url": "https://cdn.shopify.com/s/files/1/0617/5716/1632/files/Reamer-6_480x480.jpg?v=1676110105",
+          "local_path": "references/pin_reamer.image",
+          "sha256": "f8da6b4abcc7c00440cf2edaa420f9973905dd16f1965ae715cb788b3c3ff572",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real photo inspected before generation for silhouette, material and working surfaces.",
+          "adaptation": "Game source controls neutral item construction; use muted Astral pixel clusters, remove labels/scenery, no photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "scraper_steel",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/scraper_steel.png",
+      "source_sha256": "04a6581e290a9a9ea6374e55708fc14debab3672e32a5711c90476d2bd6e6c0d",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/scraper_steel.png",
+      "png_sha256": "7240395cadb39bf55ff5e1481e824e3961336e9d7d2cee62c7c96a4bdd304dba",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 188,
+      "content_bounds": [
+        20,
+        67,
+        247,
+        208
+      ],
+      "prompt_path": "prompts/scraper_steel.txt",
+      "prompt_sha256": "8164d7d6e0681c793958aa86d52305496f9107a72be580dd7df11dc8abbecf14",
+      "native_preview": "previews/scraper_steel-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; leather and stone inset224, reamer inset208 centered256",
+      "mapping": {
+        "file": "astral_item_aux2_scraper_steel.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "scraper_steel",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/metalworking.json",
+          "array_index": 37,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel inspection: both wood grips, bent steel tangs and straight scraping blade remain visible. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "scraper_steel",
+          "page_url": "https://www.br-rinaldi.it/coltelli.html",
+          "image_url": "https://www.br-rinaldi.it/img/prodotti/coltelli/small/231.jpg",
+          "local_path": "references/scraper_steel.image",
+          "sha256": "40dc3a308706580983f12080358a768e9916bf1c47e12be998c96bf089bc15f1",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real photo inspected before generation for silhouette, material and working surfaces.",
+          "adaptation": "Manufacturer drawknife photo references two wooden grips and blade/tang structure. Game specifies analogous hardened steel tool for metal; no claim that photo is a metal scraper. Use compact straight scraping edge and both grips per recipe."
+        }
+      ]
+    },
+    {
+      "id": "stone_polishing",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/stone_polishing.png",
+      "source_sha256": "42a785f63101df24c143170f2b5601293cac40cd225ad48f6684691581cefadd",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/stone_polishing.png",
+      "png_sha256": "cc69d2322279b09015bbe89ff63497d42ede06f73ea9cc9e95d123340d0dfaae",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 143,
+      "content_bounds": [
+        31,
+        57,
+        228,
+        205
+      ],
+      "prompt_path": "prompts/stone_polishing.txt",
+      "prompt_sha256": "1f60d185a044351d28b186ad72bc0cd185d683af0a863b6ba75da5b3dd4bd525",
+      "native_preview": "previews/stone_polishing-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; leather and stone inset224, reamer inset208 centered256",
+      "mapping": {
+        "file": "astral_item_aux2_stone_polishing.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "stone_polishing",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/metalworking.json",
+          "array_index": 35,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel inspection: broad flat upper grinding face and rough low stone sidewall remain distinct. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "stone_polishing",
+          "page_url": "https://br.ebay.com/b/Grinding-Stone-In-Antique-Primitives/1217/bn_7022269732",
+          "image_url": "https://i.ebayimg.com/images/g/h3UAAOSwdK9nwlvk/s-l1200.webp",
+          "local_path": "references/stone_polishing.image",
+          "sha256": "40643e3abb2ce36a10ad83ebb5efb8479f259c9d5521a618e3da081fbe4a6741",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real photo inspected before generation for silhouette, material and working surfaces.",
+          "adaptation": "Natural flat grinding stone reference; maintain flat broad working face and rough perimeter, no second rubbing stone or concavity. Game recipe smooths a large natural rock with grit and water."
+        }
+      ]
+    }
+  ],
+  "generated_count": 4,
+  "creative_method": "built-in imagegen only",
+  "static_checks": "dimensions, transparent alpha, non-clipped bounds, exact prompt/source/export hashes",
+  "live_acceptance": "not tested",
+  "release": "0.1.41"
+}

@@ -1,0 +1,119 @@
+{
+  "active_mods": [
+    "bombastic_perks",
+    "dda",
+    "innawood",
+    "limitless_backpack",
+    "megafauna",
+    "no_npc_food",
+    "perk_melee_system",
+    "personal_portal_storms"
+  ],
+  "records": [
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/mammal.json",
+      "definition": {
+        "id": "mon_skunk",
+        "type": "MONSTER",
+        "name": {
+          "str": "skunk"
+        },
+        "description": "The common striped skunk, similar in size to opossum or domestic cats, these mammals can often be smelled before they are seen.",
+        "default_faction": "skunk",
+        "bodytype": "pig",
+        "categories": [
+          "WILDLIFE"
+        ],
+        "species": [
+          "MAMMAL"
+        ],
+        "volume": "4000 ml",
+        "weight": "5 kg",
+        "hp": 12,
+        "speed": 110,
+        "move_skills": {
+          "climb": 6
+        },
+        "material": [
+          "flesh"
+        ],
+        "symbol": "s",
+        "color": "black_white",
+        "//": "Note on Aggression and triggers, keeping player_close as both anger and fear triggers gives me the desired result, I don't know if it causes issues somehow but it's the hacky way I found to get them to behave properly with spraying 'defensively'.",
+        "aggression": 7,
+        "morale": 10,
+        "melee_dice": 1,
+        "melee_dice_sides": 4,
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 1
+          }
+        ],
+        "special_attacks": [
+          {
+            "type": "spell",
+            "spell_data": {
+              "id": "skunk_squirt",
+              "min_level": 0
+            },
+            "monster_message": "A skunk raises its tail and squirts!",
+            "cooldown": 10
+          },
+          [
+            "BROWSE",
+            150
+          ]
+        ],
+        "dodge": 2,
+        "vision_day": 9,
+        "vision_night": 9,
+        "harvest": "skunk_with_skull",
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology"
+        ],
+        "anger_triggers": [
+          "FRIEND_ATTACKED",
+          "HURT",
+          "PLAYER_CLOSE"
+        ],
+        "fear_triggers": [
+          "PLAYER_CLOSE"
+        ],
+        "flags": [
+          "SEES",
+          "HEARS",
+          "SMELLS",
+          "ANIMAL",
+          "PATH_AVOID_DANGER",
+          "WARM",
+          "KEENNOSE",
+          "GOODHEARING",
+          "EATS",
+          "CORNERED_FIGHTER",
+          "SMALL_HIDER"
+        ]
+      }
+    }
+  ],
+  "creature_ids": [
+    "mon_skunk"
+  ],
+  "renderer_states": [
+    "corpse_mon_skunk"
+  ],
+  "evidence": "src/cata_tiles.cpp:3680 prefixes corpse_ to monster id",
+  "seasons": "Natural black-and-white coat shared across all four seasons; no seasonal morph or separate young ID defined.",
+  "runtime_review": "pending; conditional mod interactions outside this static audit",
+  "conditional_files_skipped": [
+    "data/mods/innawood/mod_interactions/bombastic_perks/experience_eocs.json",
+    "data/mods/innawood/mod_interactions/sorcerer/experience_eocs.json",
+    "data/mods/innawood/mod_interactions/skyisland/region_overlay.json",
+    "data/mods/innawood/mod_interactions/perk_melee_system/experience_eocs.json",
+    "data/mods/Megafauna/mod_interactions/defense_mode/monsters.json",
+    "data/mods/Megafauna/mod_interactions/defense_mode/monstergroups.json"
+  ]
+}

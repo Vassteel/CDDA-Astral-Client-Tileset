@@ -28,7 +28,8 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "m1carbinemag", "m1carbinebigmag" ] } ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "m1carbinemag", "m1carbinebigmag" ] } ],
+    "extend": { "flags": [ "OLD_GUN" ] }
   },
   {
     "id": "m2carbine",

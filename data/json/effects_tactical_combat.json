@@ -1,0 +1,67 @@
+[
+  {
+    "type": "effect_type",
+    "id": "astral_guard",
+    "name": [
+      "Guarding"
+    ],
+    "desc": [
+      "You are braced behind your shield.  Block attempts are more reliable and absorb more physical damage."
+    ],
+    "max_duration": "2 s",
+    "rating": "good",
+    "show_in_info": true
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_evade",
+    "name": [
+      "Evading"
+    ],
+    "desc": [
+      "You are concentrating on evading attacks.  Your dodge improves, subject to normal limb and stamina limits."
+    ],
+    "max_duration": "2 s",
+    "rating": "good",
+    "show_in_info": true
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_recover",
+    "name": [
+      "Recovering"
+    ],
+    "desc": [
+      "You are catching your breath.  Dodging is weakened and you cannot block."
+    ],
+    "max_duration": "2 s",
+    "rating": "bad",
+    "show_in_info": true
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_windup",
+    "name": [
+      "Winding up"
+    ],
+    "desc": [
+      "A heavy strike is being prepared.  Guard, evade, interrupt, or move out of the threatened tile."
+    ],
+    "max_duration": "4 s",
+    "rating": "bad",
+    "show_in_info": true
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_heavy_recovery",
+    "name": [
+      "Heavy strike recovery"
+    ],
+    "desc": [
+      "This creature cannot prepare another heavy strike yet."
+    ],
+    "max_duration": "4 s",
+    "rating": "neutral",
+    "show_in_info": true
+  }
+]

@@ -2,14 +2,99 @@
   {
     "type": "martial_art",
     "id": "style_none",
-    "name": { "str": "No style" },
-    "description": "Not a martial art, this is just plain old punching and kicking.",
-    "initiate": [ "You decide to not use any martial arts.", "%s enters a generic combat stance." ],
+    "name": { "str": "Fighting Style" },
+    "description": "Fight in accordance with your training or lack thereof.",
+    "initiate": [ "You focus on your training.", "%s remembers their training." ],
     "priority": 0,
     "arm_block": 1,
     "leg_block": 99,
     "allow_all_weapons": true,
-    "teachable": false
+    "teachable": false,
+    "onmove_buffs": [
+      {
+        "id": "buff_perk_momentum",
+        "name": "Momentum",
+        "description": "Strike with the momentum of your previous movement.",
+        "max_stacks": 6,
+        "buff_duration": 2,
+        "unarmed_allowed": true,
+        "melee_allowed": true,
+        "required_char_flags": [ "MELEE_PERK_MOMENTUM" ],
+        "flat_bonuses": [
+          { "stat": "damage", "type": "cut", "scaling-stat": "dex", "scale": 0.2 },
+          { "stat": "damage", "type": "stab", "scaling-stat": "dex", "scale": 0.2 }
+        ]
+      }
+    ],
+    "onattack_buffs": [
+      {
+        "id": "buff_perk_tempo",
+        "name": "Tempo",
+        "description": "The rhythm of combat is in your favor.",
+        "max_stacks": 3,
+        "buff_duration": 2,
+        "unarmed_allowed": true,
+        "melee_allowed": true,
+        "required_char_flags": [ "MELEE_PERK_TEMPO" ],
+        "flat_bonuses": [
+          { "stat": "damage", "type": "bash", "scaling-stat": "str", "scale": 0.2 },
+          { "stat": "damage", "type": "stab", "scaling-stat": "str", "scale": 0.2 }
+        ]
+      }
+    ],
+    "onblock_buffs": [
+      {
+        "id": "MELEE_PERK_RIPOSTE",
+        "name": "Parry",
+        "description": "Successful blocking has left you in a favorable position.",
+        "melee_allowed": true,
+        "buff_duration": 2,
+        "required_char_flags": [ "MELEE_PERK_RIPOSTE" ],
+        "flat_bonuses": [ { "stat": "hit", "scale": 1.0 } ]
+      }
+    ],
+    "static_eocs": [
+      {
+        "id": "EOC_PERK_CHECK_BLIND",
+        "condition": { "and": [ { "u_has_flag": "MELEE_PERK_BLIND_CALCULUS" }, { "not": "u_can_see" } ] },
+        "effect": { "u_add_effect": "perk_blind_check", "duration": "4 days" },
+        "false_effect": { "u_lose_effect": "perk_blind_check" }
+      }
+    ],
+    "onhit_eocs": [ "EOC_PERK_SPEND_INSIGHT", "EOC_PERK_PRESSURE_STRIKES_SCHEDULE" ],
+    "onkill_eocs": [ "EOC_PERK_TWILIGHT_FORM", "EOC_PERK_tempo_zoning" ],
+    "onmove_eocs": [ "EOC_PERK_MOMENTUM_2", "EOC_PERK_duelist_insert_reach", "EOC_PERK_POISE_MOUNTAIN_MOVE" ],
+    "ondodge_eocs": [ "EOC_PERK_DODGE_RETREAT", "EOC_POISE_LOSE" ],
+    "onblock_eocs": [ "EOC_POISE_GAIN" ],
+    "onpause_eocs": [
+      {
+        "id": "EOC_PERK_CAREFREE_STANCE",
+        "condition": { "u_has_flag": "MELEE_PERK_CAREFREE_STANCE" },
+        "effect": { "run_eocs": "EOC_CLEAR_BUFFS" }
+      },
+      "EOC_CLEAR_MOMENTUM_DUELIST",
+      "EOC_PERK_POISE_MOUNTAIN_WAIT"
+    ],
+    "techniques": [
+      "tec_perk_stagger_strike",
+      "tec_perk_feint",
+      "tec_perk_fore",
+      "tec_perk_fore_stunned",
+      "tec_perk_poise_parry",
+      "tec_perk_execution_sword",
+      "tec_perk_execution_axe",
+      "tec_perk_execution_hammer",
+      "tec_perk_shoulder_tackle",
+      "tec_perk_vulgar_opening",
+      "tec_perk_coiling_strike",
+      "tec_perk_knife_counter_dodge",
+      "tec_perk_knife_finisher",
+      "tec_perk_make_way",
+      "tec_perk_estocada",
+      "tec_perk_duelist_lunge",
+      "tec_perk_duelist_combo",
+      "tec_perk_staff_kick"
+    ]
   },
   {
     "type": "martial_art",
@@ -97,8 +182,8 @@
   {
     "type": "martial_art",
     "id": "style_bojutsu",
-    "name": { "str": "Bōjutsu" },
-    "description": "Bōjutsu, \"The Way of the Staff\", is the Japanese martial art of fighting with a staff.  Bōjutsu focuses on maintaining a good stance to effectively block and counterattack.",
+    "name": { "str": "B\u014djutsu" },
+    "description": "B\u014djutsu, \"The Way of the Staff\", is the Japanese martial art of fighting with a staff.  B\u014djutsu focuses on maintaining a good stance to effectively block and counterattack.",
     "initiate": [ "You position yourself into an agile stance.", "%s enters an agile stance." ],
     "priority": 1,
     "learn_difficulty": 5,
@@ -107,7 +192,7 @@
     "static_buffs": [
       {
         "id": "buff_bojutsu_static",
-        "name": "Bōjutsu Stance",
+        "name": "B\u014djutsu Stance",
         "description": "An agile stance that allows your blocks to reduce incoming damage.\n\nBlocked damage reduced by 100% of Dexterity.",
         "melee_allowed": true,
         "flat_bonuses": [ { "stat": "block", "scaling-stat": "dex", "scale": 1 } ]
@@ -1267,8 +1352,8 @@
   {
     "type": "martial_art",
     "id": "style_sojutsu",
-    "name": { "str": "Sōjutsu" },
-    "description": "Sōjutsu, \"The Way of the Spear\", is the Japanese martial art of fighting with a spear.  Sōjutsu focuses on keeping opponents at a distance in order to maintain the advantage in combat.  Standing still gives you an extra block attempt but moving will briefly increase your damage.",
+    "name": { "str": "S\u014djutsu" },
+    "description": "S\u014djutsu, \"The Way of the Spear\", is the Japanese martial art of fighting with a spear.  S\u014djutsu focuses on keeping opponents at a distance in order to maintain the advantage in combat.  Standing still gives you an extra block attempt but moving will briefly increase your damage.",
     "initiate": [ "You prepare to defend against all that approach you.", "%s assumes a wide, defensive stance." ],
     "priority": 1,
     "learn_difficulty": 7,
@@ -1277,7 +1362,7 @@
     "static_buffs": [
       {
         "id": "buff_sojutsu_static",
-        "name": "Sōjutsu Stance",
+        "name": "S\u014djutsu Stance",
         "description": "Your training grants better defense while using a polearm.\n\n+1 block attempt, +2 blocking effectiveness.",
         "melee_allowed": true,
         "bonus_blocks": 1,
@@ -1569,7 +1654,7 @@
       {
         "id": "debug_miss_buff",
         "name": "Getting Angry",
-        "description": "When I get my hands on you…\n\n+2 bash damage.\nLasts 2 turns.  Stacks 5 times.",
+        "description": "When I get my hands on you\u2026\n\n+2 bash damage.\nLasts 2 turns.  Stacks 5 times.",
         "unarmed_allowed": true,
         "buff_duration": 2,
         "max_stacks": 5,

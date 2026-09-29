@@ -1,0 +1,22 @@
+{
+  "family": "dead-tree",
+  "real_photo_url": "https://www.virginiaplaces.org/natural/graphics/oakdeadbranches.png",
+  "source_page": "https://www.virginiaplaces.org/natural/trees.html",
+  "local_photo": "references/dead-tree-photo.png",
+  "reference_note": "Geograph image returned403; inspected this alternative photograph.",
+  "anatomy": "Gnarled deciduous snag, bare asymmetric branching and weathered exposed wood.",
+  "style_reference": "Original Astral deciduous seasonal sprites",
+  "states": {
+    "normal": "standing bare dead tree",
+    "stripped": "most branches broken off after gathering wood",
+    "warped": "branches twisted into spiral per game description",
+    "burnt": "charcoal standing snag from Magiclysm",
+    "holy": "twisted dead tree hung with censers and candlelamps, sword embedded in trunk"
+  },
+  "client_modified": false,
+  "game_item_sources": [
+    "data/json/items/relics/highland_censer.json",
+    "data/json/items/melee/swords_and_blades.json"
+  ],
+  "ground_policy": "Burnt and holy trees do not force ordinary grass backgrounds onto scorched or otherworldly terrain."
+}

@@ -1,0 +1,1163 @@
+{
+  "instruction": "All remaining trees and missing states; preserve completed tree art. Real photographs for anatomy, fixed existing tree sprite style, no agents or client writes.",
+  "records": [
+    {
+      "id": "f_mutant_tree_adult",
+      "name": "mutant tree",
+      "status": "pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ]
+    },
+    {
+      "id": "f_mutant_tree_sapling",
+      "name": "mutant sapling",
+      "status": "pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ]
+    },
+    {
+      "id": "f_mutant_tree_sprout",
+      "name": "sprout",
+      "status": "pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ]
+    },
+    {
+      "id": "t_highland_holy_tree",
+      "name": "dead holy tree",
+      "status": "packaged in Astral 0.1.24; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.24"
+    },
+    {
+      "id": "t_stump",
+      "name": "tree stump",
+      "status": "packaged in Astral 0.1.26; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.26"
+    },
+    {
+      "id": "t_tree",
+      "name": null,
+      "status": "preserve existing art",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ]
+    },
+    {
+      "id": "t_tree_alder",
+      "name": "alder tree",
+      "status": "packaged in Astral 0.1.12; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.12"
+    },
+    {
+      "id": "t_tree_alder_harvested",
+      "name": null,
+      "status": "packaged in Astral 0.1.12; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.12"
+    },
+    {
+      "id": "t_tree_almond",
+      "name": "almond tree",
+      "status": "packaged in Astral 0.1.19; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.19"
+    },
+    {
+      "id": "t_tree_almond_harvested",
+      "name": "almond tree",
+      "status": "packaged in Astral 0.1.19; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.19"
+    },
+    {
+      "id": "t_tree_apple",
+      "name": "apple tree",
+      "status": "packaged in Astral 0.1.17; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.17"
+    },
+    {
+      "id": "t_tree_apple_harvested",
+      "name": null,
+      "status": "packaged in Astral 0.1.17; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.17"
+    },
+    {
+      "id": "t_tree_apple_vitrified",
+      "name": "tree of glass apples",
+      "status": "packaged in Astral 0.1.17; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.17"
+    },
+    {
+      "id": "t_tree_apricot",
+      "name": "apricot tree",
+      "status": "packaged in Astral 0.1.19; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.19"
+    },
+    {
+      "id": "t_tree_apricot_harvested",
+      "name": "apricot tree",
+      "status": "packaged in Astral 0.1.19; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.19"
+    },
+    {
+      "id": "t_tree_basswood",
+      "name": "basswood tree",
+      "status": "packaged in Astral 0.1.13; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.13"
+    },
+    {
+      "id": "t_tree_basswood_harvested",
+      "name": null,
+      "status": "packaged in Astral 0.1.13; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.13"
+    },
+    {
+      "id": "t_tree_beech",
+      "name": "beech tree",
+      "status": "packaged in Astral 0.1.13; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.13"
+    },
+    {
+      "id": "t_tree_beech_harvested",
+      "name": null,
+      "status": "packaged in Astral 0.1.13; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.13"
+    },
+    {
+      "id": "t_tree_birch",
+      "name": "birch tree",
+      "status": "preserve existing art",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ]
+    },
+    {
+      "id": "t_tree_birch_harvested",
+      "name": "birch tree",
+      "status": "packaged in Astral 0.1.23; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.23"
+    },
+    {
+      "id": "t_tree_blackjack",
+      "name": "blackjack oak",
+      "status": "packaged in Astral 0.1.12; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.12"
+    },
+    {
+      "id": "t_tree_blackjack_harvested",
+      "name": null,
+      "status": "packaged in Astral 0.1.12; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.12"
+    },
+    {
+      "id": "t_tree_burnt",
+      "name": "burnt tree",
+      "status": "packaged in Astral 0.1.24; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.24"
+    },
+    {
+      "id": "t_tree_butternut",
+      "name": "butternut tree",
+      "status": "packaged in Astral 0.1.12; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.12"
+    },
+    {
+      "id": "t_tree_butternut_harvested",
+      "name": null,
+      "status": "packaged in Astral 0.1.12; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.12"
+    },
+    {
+      "id": "t_tree_cherry",
+      "name": "cherry tree",
+      "status": "packaged in Astral 0.1.20; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.20"
+    },
+    {
+      "id": "t_tree_cherry_harvested",
+      "name": "cherry tree",
+      "status": "packaged in Astral 0.1.20; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.20"
+    },
+    {
+      "id": "t_tree_chestnut",
+      "name": "chestnut tree",
+      "status": "packaged in Astral 0.1.13; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.13"
+    },
+    {
+      "id": "t_tree_chestnut_harvested",
+      "name": null,
+      "status": "packaged in Astral 0.1.13; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.13"
+    },
+    {
+      "id": "t_tree_coffee",
+      "name": "coffee tree",
+      "status": "packaged in Astral 0.1.16; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.16"
+    },
+    {
+      "id": "t_tree_coffee_harvested",
+      "name": null,
+      "status": "packaged in Astral 0.1.16; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.16"
+    },
+    {
+      "id": "t_tree_cottonwood",
+      "name": "cottonwood tree",
+      "status": "packaged in Astral 0.1.14; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.14"
+    },
+    {
+      "id": "t_tree_cottonwood_harvested",
+      "name": "cottonwood tree",
+      "status": "packaged in Astral 0.1.14; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.14"
+    },
+    {
+      "id": "t_tree_crabapple",
+      "name": "crabapple tree",
+      "status": "packaged in Astral 0.1.18; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.18"
+    },
+    {
+      "id": "t_tree_crabapple_harvested",
+      "name": null,
+      "status": "packaged in Astral 0.1.18; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.18"
+    },
+    {
+      "id": "t_tree_dead",
+      "name": "dead tree",
+      "status": "packaged in Astral 0.1.24; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.24"
+    },
+    {
+      "id": "t_tree_dead_warped",
+      "name": "warped dead tree",
+      "status": "packaged in Astral 0.1.24; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.24"
+    },
+    {
+      "id": "t_tree_deadpine",
+      "name": "dead pine tree",
+      "status": "packaged in Astral 0.1.25; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.25"
+    },
+    {
+      "id": "t_tree_deadpine_warped",
+      "name": "warped dead pine tree",
+      "status": "packaged in Astral 0.1.25; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.25"
+    },
+    {
+      "id": "t_tree_elderberry",
+      "name": "elderberry tree",
+      "status": "packaged in Astral 0.1.22; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.22"
+    },
+    {
+      "id": "t_tree_elderberry_harvested",
+      "name": "elderberry tree",
+      "status": "packaged in Astral 0.1.22; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.22"
+    },
+    {
+      "id": "t_tree_elm",
+      "name": "elm tree",
+      "status": "packaged in Astral 0.1.14; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.14"
+    },
+    {
+      "id": "t_tree_fungal",
+      "name": "fungal tree",
+      "status": "pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ]
+    },
+    {
+      "id": "t_tree_fungal_young",
+      "name": "young fungal tree",
+      "status": "pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ]
+    },
+    {
+      "id": "t_tree_harvested",
+      "name": null,
+      "status": "packaged in Astral 0.1.23; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.23"
+    },
+    {
+      "id": "t_tree_hazelnut",
+      "name": "hazelnut tree",
+      "status": "packaged in Astral 0.1.13; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.13"
+    },
+    {
+      "id": "t_tree_hazelnut_harvested",
+      "name": "hazelnut tree",
+      "status": "packaged in Astral 0.1.13; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.13"
+    },
+    {
+      "id": "t_tree_hickory",
+      "name": "hickory tree",
+      "status": "packaged in Astral 0.1.14; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.14"
+    },
+    {
+      "id": "t_tree_hickory_dead",
+      "name": "dead hickory tree",
+      "status": "packaged in Astral 0.1.14; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.14"
+    },
+    {
+      "id": "t_tree_hickory_harvested",
+      "name": "hickory tree",
+      "status": "packaged in Astral 0.1.14; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.14"
+    },
+    {
+      "id": "t_tree_juniper",
+      "name": "juniper tree",
+      "status": "packaged in Astral 0.1.15; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.15"
+    },
+    {
+      "id": "t_tree_juniper_harvested",
+      "name": "juniper tree",
+      "status": "packaged in Astral 0.1.15; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.15"
+    },
+    {
+      "id": "t_tree_maple",
+      "name": "maple tree",
+      "status": "packaged in Astral 0.1.14; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.14"
+    },
+    {
+      "id": "t_tree_maple_tapped",
+      "name": "maple tree",
+      "status": "packaged in Astral 0.1.14; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.14"
+    },
+    {
+      "id": "t_tree_mulberry",
+      "name": "mulberry tree",
+      "status": "packaged in Astral 0.1.22; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.22"
+    },
+    {
+      "id": "t_tree_mulberry_harvested",
+      "name": "mulberry tree",
+      "status": "packaged in Astral 0.1.22; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.22"
+    },
+    {
+      "id": "t_tree_nannyberry",
+      "name": "nannyberry tree",
+      "status": "packaged in Astral 0.1.22; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.22"
+    },
+    {
+      "id": "t_tree_nannyberry_harvested",
+      "name": "nannyberry tree",
+      "status": "packaged in Astral 0.1.22; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.22"
+    },
+    {
+      "id": "t_tree_peach",
+      "name": "peach tree",
+      "status": "packaged in Astral 0.1.20; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.20"
+    },
+    {
+      "id": "t_tree_peach_harvested",
+      "name": "peach tree",
+      "status": "packaged in Astral 0.1.20; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.20"
+    },
+    {
+      "id": "t_tree_pear",
+      "name": "pear tree",
+      "status": "packaged in Astral 0.1.18; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.18"
+    },
+    {
+      "id": "t_tree_pear_harvested",
+      "name": "pear tree",
+      "status": "packaged in Astral 0.1.18; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.18"
+    },
+    {
+      "id": "t_tree_pecan",
+      "name": "pecan tree",
+      "status": "packaged in Astral 0.1.15; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.15"
+    },
+    {
+      "id": "t_tree_pecan_harvested",
+      "name": "pecan tree",
+      "status": "packaged in Astral 0.1.15; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.15"
+    },
+    {
+      "id": "t_tree_pine",
+      "name": "pine tree",
+      "status": "preserve existing art",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ]
+    },
+    {
+      "id": "t_tree_pine_harvested",
+      "name": "pine tree",
+      "status": "packaged in Astral 0.1.23; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.23"
+    },
+    {
+      "id": "t_tree_pistachio",
+      "name": "pistachio tree",
+      "status": "packaged in Astral 0.1.21; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.21"
+    },
+    {
+      "id": "t_tree_pistachio_harvested",
+      "name": "pistachio tree",
+      "status": "packaged in Astral 0.1.21; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.21"
+    },
+    {
+      "id": "t_tree_plum",
+      "name": "plum tree",
+      "status": "packaged in Astral 0.1.21; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.21"
+    },
+    {
+      "id": "t_tree_plum_harvested",
+      "name": "plum tree",
+      "status": "packaged in Astral 0.1.21; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.21"
+    },
+    {
+      "id": "t_tree_sassafras",
+      "name": "sassafras tree",
+      "status": "packaged in Astral 0.1.16; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.16"
+    },
+    {
+      "id": "t_tree_sassafras_harvested",
+      "name": "sassafras tree",
+      "status": "packaged in Astral 0.1.16; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.16"
+    },
+    {
+      "id": "t_tree_spruce",
+      "name": "spruce tree",
+      "status": "packaged in Astral 0.1.15; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.15"
+    },
+    {
+      "id": "t_tree_tupelo",
+      "name": "tupelo tree",
+      "status": "packaged in Astral 0.1.16; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.16"
+    },
+    {
+      "id": "t_tree_tupelo_harvested",
+      "name": "tupelo tree",
+      "status": "packaged in Astral 0.1.16; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.16"
+    },
+    {
+      "id": "t_tree_very_dead",
+      "name": "dead tree",
+      "status": "packaged in Astral 0.1.24; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.24"
+    },
+    {
+      "id": "t_tree_walnut",
+      "name": "walnut tree",
+      "status": "packaged in Astral 0.1.12; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.12"
+    },
+    {
+      "id": "t_tree_walnut_harvested",
+      "name": null,
+      "status": "packaged in Astral 0.1.12; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.12"
+    },
+    {
+      "id": "t_tree_willow",
+      "name": "willow tree",
+      "status": "preserve existing art",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ]
+    },
+    {
+      "id": "t_tree_willow_harvested",
+      "name": "willow tree",
+      "status": "packaged in Astral 0.1.23; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.23"
+    },
+    {
+      "id": "t_tree_young",
+      "name": "young tree",
+      "status": "packaged in Astral 0.1.24; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.24"
+    },
+    {
+      "id": "t_treetop",
+      "name": "treetop",
+      "status": "packaged in Astral 0.1.27; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.27"
+    },
+    {
+      "id": "t_treetop_dead",
+      "name": "dead treetop",
+      "status": "packaged in Astral 0.1.27; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.27"
+    },
+    {
+      "id": "t_treetop_evergreen",
+      "name": "treetop",
+      "status": "packaged in Astral 0.1.28; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.28"
+    },
+    {
+      "id": "t_treetop_giant_fern",
+      "name": "giant fern top",
+      "status": "packaged in Astral 0.1.28; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.28"
+    },
+    {
+      "id": "t_trunk",
+      "name": "tree trunk",
+      "status": "packaged in Astral 0.1.26; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "release": "0.1.26"
+    },
+    {
+      "id": "t_vitrified_tree",
+      "name": "black glass tree",
+      "status": "pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "audit_note": "Added from current terrain data; special environment seasonal/exposure behavior must follow game definition."
+    },
+    {
+      "id": "t_marloss_tree",
+      "name": "Marloss tree",
+      "status": "pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "audit_note": "Added from current terrain data; special environment seasonal/exposure behavior must follow game definition."
+    },
+    {
+      "id": "f_decorative_tree",
+      "name": "decorative tree",
+      "status": "pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "audit_note": "Added from current terrain data; special environment seasonal/exposure behavior must follow game definition."
+    },
+    {
+      "id": "t_alien_meadow_tree_1",
+      "name": "alien tree 1",
+      "status": "packaged in Astral 0.1.29; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "audit_note": "Added from current terrain data; special environment seasonal/exposure behavior must follow game definition.",
+      "release": "0.1.29"
+    },
+    {
+      "id": "t_alien_meadow_tree_2",
+      "name": "alien tree 2",
+      "status": "packaged in Astral 0.1.30; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "audit_note": "Added from current terrain data; special environment seasonal/exposure behavior must follow game definition.",
+      "release": "0.1.30"
+    },
+    {
+      "id": "t_alien_meadow_tree_3",
+      "name": "alien tree 3",
+      "status": "packaged in Astral 0.1.31; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "audit_note": "Added from current terrain data; special environment seasonal/exposure behavior must follow game definition.",
+      "release": "0.1.31"
+    },
+    {
+      "id": "t_alien_meadow_tree_3_harvested",
+      "name": "harvested alien tree 3",
+      "status": "packaged in Astral 0.1.31; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "audit_note": "Added from current terrain data; special environment seasonal/exposure behavior must follow game definition.",
+      "release": "0.1.31"
+    },
+    {
+      "id": "t_alien_meadow_tree_trap",
+      "name": "alien trap tree",
+      "status": "packaged in Astral 0.1.29; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "audit_note": "Added from current terrain data; special environment seasonal/exposure behavior must follow game definition.",
+      "release": "0.1.29"
+    },
+    {
+      "id": "t_alien_meadow_tree_trap_roots_obvious",
+      "name": "alien roots",
+      "status": "packaged in Astral 0.1.29; live review pending",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "audit_note": "Added from current terrain data; special environment seasonal/exposure behavior must follow game definition.",
+      "release": "0.1.29"
+    }
+  ],
+  "next": "Glyph creatures first; then existing-art flora and creatures, including sea lettuce/bladderwrack and eight special/compatibility tree IDs. Follow FLORA-CREATURE-PRIORITY.json.",
+  "scope_audit": "Includes nonstandard tree IDs found in terrain/furniture data; abstract and regional pseudo IDs excluded. Alien grass-root overlays stay with ground flora. Rechecked current data after 0.1.27: no additional concrete tree IDs missing; regional pseudo/abstract terrain and alien grass-root overlays remain excluded. Three mutant growth IDs are retained for obsolete-save compatibility.",
+  "previous_blocker": {
+    "type": "image_generation_usage_limit",
+    "resume_after_utc": "2026-10-05T06:20:27+00:00",
+    "first_family": "treetop-evergreen",
+    "remaining_ids": 16,
+    "preserve_original_art": true
+  }
+}

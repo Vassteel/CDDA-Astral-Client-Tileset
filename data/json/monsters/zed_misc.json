@@ -137,7 +137,7 @@
     "fungalize_into": "mon_zombie_brute_dusted",
     "armor": { "bash": 4, "cut": 6, "bullet": 5, "electric": 2 },
     "extend": {
-      "flags": [ "SMELLS", "PUSH_VEH" ],
+      "flags": [ "SMELLS", "PUSH_VEH", "ASTRAL_HEAVY_STRIKE" ],
       "weakpoint_sets": [ "wps_humanoid_head_small" ],
       "special_attacks": [
         { "id": "staggering_blow" },

@@ -1,0 +1,46 @@
+{
+  "version": "0.1.36",
+  "status": "passed",
+  "source_and_export_sprites": 8,
+  "families": [
+    "sea-anemone",
+    "sea-sponge"
+  ],
+  "states": [
+    "normal"
+  ],
+  "seasons": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+  ],
+  "mapped_ids": 10,
+  "texture_size": [
+    768,
+    768
+  ],
+  "pixelscale": 0.125,
+  "tree_canvas": [
+    96,
+    96
+  ],
+  "ground_footprint": [
+    32,
+    32
+  ],
+  "offset": [
+    -32,
+    -64
+  ],
+  "shared_crop_per_family": true,
+  "ground_alignment_checks": 16,
+  "archived_old_sources_verified": 0,
+  "all_other_mappings_and_atlas_bytes_preserved": true,
+  "existing_tree_art_preserved": true,
+  "grass_88_variants_and_shoreline_fix_preserved": true,
+  "sprite_references_checked": 25137,
+  "total_sprite_slots": 19614,
+  "client_modified": false,
+  "visual_gameplay_acceptance": "pending"
+}

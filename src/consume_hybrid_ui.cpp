@@ -150,6 +150,7 @@ class consume_hybrid_window : public cataimgui::window
                                  ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoNav ),
               you( you ), collector( collector ), hint( hint ),
               filter_text( std::move( filter ) ), active_tab( std::move( tab ) ) {
+            set_shell( 0, "consume" );
             if( active_tab.empty() ) {
                 active_tab = "ALL";
             }

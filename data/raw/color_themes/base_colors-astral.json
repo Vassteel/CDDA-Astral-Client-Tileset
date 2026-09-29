@@ -1,0 +1,22 @@
+[
+  {
+    "type": "colordef",
+    "//": "Astral curses palette (ui-art overhaul M6). Neutrals follow data/ui/astral/theme.json: BLACK = deep_bg, WHITE = text, GRAY = text_muted, BROWN = bronze, YELLOW = accent. Semantic hues stay recognisable; brights are kept legible on charcoal. The debugmsg prompt uses LRED and is left as shipped.",
+    "BLACK": [ 17, 21, 22 ],
+    "RED": [ 214, 84, 72 ],
+    "GREEN": [ 96, 140, 84 ],
+    "BROWN": [ 155, 117, 68 ],
+    "BLUE": [ 62, 92, 170 ],
+    "MAGENTA": [ 140, 84, 140 ],
+    "CYAN": [ 58, 142, 160 ],
+    "GRAY": [ 183, 174, 157 ],
+    "DGRAY": [ 106, 100, 90 ],
+    "LRED": [ 255, 150, 150 ],
+    "LGREEN": [ 145, 177, 124 ],
+    "YELLOW": [ 214, 164, 87 ],
+    "LBLUE": [ 143, 174, 187 ],
+    "LMAGENTA": [ 200, 130, 200 ],
+    "LCYAN": [ 120, 205, 220 ],
+    "WHITE": [ 238, 227, 203 ]
+  }
+]

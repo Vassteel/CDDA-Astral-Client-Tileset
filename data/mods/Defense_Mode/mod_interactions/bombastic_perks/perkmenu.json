@@ -4,9 +4,16 @@
     "id": "TALK_PERK_MENU_MAIN",
     "responses": [
       {
-        "condition": { "not": { "u_has_trait": "perk_money_maker_merc" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_money_maker_merc" } },
+            { "or": [ { "math": [ "u_no_prerecs > 0" ] }, { "math": [ "wave_number >= 1" ] } ] },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_money_maker_merc>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_money_maker_merc>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_money_maker_merc>",
@@ -23,9 +30,16 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_slice&dice" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_slice&dice" } },
+            { "or": [ { "math": [ "u_no_prerecs > 0" ] }, { "math": [ "0 == 0" ] } ] },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_slice&dice>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_slice&dice>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_slice&dice>",
@@ -42,9 +56,16 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_bash&mash" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_bash&mash" } },
+            { "or": [ { "math": [ "u_no_prerecs > 0" ] }, { "math": [ "0 == 0" ] } ] },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_bash&mash>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_bash&mash>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_bash&mash>",
@@ -61,9 +82,16 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_knifey" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_knifey" } },
+            { "or": [ { "math": [ "u_no_prerecs > 0" ] }, { "math": [ "0 == 0" ] } ] },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_knifey>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_knifey>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_knifey>",
@@ -80,9 +108,23 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_melee_master" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_melee_master" } },
+            {
+              "or": [
+                { "math": [ "u_no_prerecs > 0" ] },
+                {
+                  "and": [ { "u_has_trait": "perk_slice&dice" }, { "u_has_trait": "perk_bash&mash" }, { "u_has_trait": "perk_knifey" } ]
+                }
+              ]
+            },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_melee_master>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_melee_master>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_melee_master>",
@@ -104,9 +146,21 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_gymrat_king" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_gymrat_king" } },
+            {
+              "or": [
+                { "math": [ "u_no_prerecs > 0" ] },
+                { "and": [ { "math": [ "u_skill('swimming') >= 5" ] }, { "u_has_trait": "perk_gymrat" } ] }
+              ]
+            },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_gymrat_king>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_gymrat_king>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_gymrat_king>",
@@ -126,9 +180,16 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_extra_life" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_extra_life" } },
+            { "or": [ { "math": [ "u_no_prerecs > 0" ] }, { "math": [ "0 == 0" ] } ] },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_extra_life>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_extra_life>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_extra_life>",
@@ -145,9 +206,16 @@
         "topic": "TALK_PERK_MENU_SELECT"
       },
       {
-        "condition": { "not": { "u_has_trait": "perk_mysterious_stranger" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_mysterious_stranger" } },
+            { "or": [ { "math": [ "u_no_prerecs > 0" ] }, { "math": [ "0 == 0" ] } ] },
+            { "math": [ "u_num_perks > 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_mysterious_stranger>]",
         "effect": [
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
           { "set_string_var": "<trait_name:perk_mysterious_stranger>", "target_var": { "context_val": "trait_name" } },
           {
             "set_string_var": "<trait_description:perk_mysterious_stranger>",

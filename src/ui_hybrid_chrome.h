@@ -2,25 +2,68 @@
 #ifndef CATA_SRC_UI_HYBRID_CHROME_H
 #define CATA_SRC_UI_HYBRID_CHROME_H
 
+#include <cstdint>
+#include <string>
+
 /**
- * Soft-fork "D Hybrid" ImGui chrome (BG3-mock reference): warm dark wood /
- * bronze panels + muted amber accents, charcoal grit. Phase-1 = colors /
- * frames / slot bezels / dense grid chrome shared by all menus. Equipment
- * adds the active tileset's character overlays and surrounding body slots.
+ * Astral client shared UI theme ("Hybrid chrome").
  *
- * Equipped gear lives ONLY on the paper-doll / slot ring — do not add a
- * duplicate equipped-item list beside the doll.
+ * One place for the palette, spacing ladder, type roles, control sizes and
+ * decoration level used by every ImGui screen (equipment tree, HUD, crafting,
+ * dialogs, uilist/popup engines). Screens draw with the primitives declared in
+ * ui_hybrid_widgets.h instead of pushing their own colors or drawing their own
+ * frames. Texture-backed decoration (nine-slice frames, icon atlas) lives in
+ * ui_hybrid_textures.h and degrades to code-drawn geometry when assets are
+ * missing or decoration is set to "none".
  *
- * Scoped push/pop so Character Equipment, mouse toolbar, and later chargen
- * EQUIPMENT can share the look without rewriting each panel.
+ * Token values mirror data/ui/astral/theme.json (see doc/astral/ui-art-theme.md);
+ * keep both in sync when changing a value.
+ *
+ * Theme precedence (cataimgui::init_colors): ImGui dark → Astral tokens →
+ * the user's config/imgui_style.json colors on top. Per-window scoped_style
+ * pushes only structural style vars, never colors, so the style picker wins.
  */
 
 struct ImVec4;
+struct ImVec2;
 
 namespace ui_hybrid_chrome
 {
 
-/** Palette constants (float RGBA 0–1). */
+/** Decoration strength, from the ASTRAL_UI_DECORATION option. */
+enum class decoration : int {
+    full = 0,    // textured surface, bevelled bronze frame, corner detail
+    reduced = 1, // flat surfaces, single bronze line
+    none = 2,    // flat surfaces, quiet edge only
+};
+
+namespace theme
+{
+/** Colors as 0xAABBGGRR (ImU32 layout) at 1.0 alpha unless noted. */
+struct tokens {
+    uint32_t deep_bg, surface, raised, raised_hover, edge_dark, edge_quiet, edge_bronze,
+             bronze_light, bronze_dark, accent, accent_dim, selected_bg, focus_bg, text,
+             text_muted, text_on_accent, danger, success, info, warning, meter_track, scrim;
+    // spacing ladder (logical px at scale 1)
+    float xs, sm, md, lg, xl;
+    float radius_window, radius_panel, radius_control;
+    float border_frame, border_quiet, border_focus;
+    float row, row_featured, row_compact, button, button_min_w, footer, title_bar, close_hit,
+          icon, icon_featured, tree_indent, scrollbar;
+};
+const tokens &get();
+/** Current UI scale: GUI font size / 16, never below 1. */
+float scale();
+/** token * scale() */
+float px( float logical );
+decoration level();
+/** Re-read the decoration option (cheap; called once per frame by the client). */
+void refresh_options();
+/** Force a level (tests / showcase); pass -1 to return to the option. */
+void override_level( int level );
+} // namespace theme
+
+/** Palette accessors (ImVec4) kept for existing callers; all derive from theme::get(). */
 namespace palette
 {
 ImVec4 window_bg();
@@ -46,16 +89,27 @@ ImVec4 grid_selected();
 ImVec4 toolbar_active();
 ImVec4 toolbar_active_hovered();
 ImVec4 toolbar_active_pressed();
+ImVec4 danger();
+ImVec4 success();
+ImVec4 info();
+ImVec4 warning();
+ImVec4 from_u32( uint32_t c );
 } // namespace palette
 
 /**
- * Push Hybrid window / child / button / border / header colors + light
- * rounding / border size. Pair with pop().
+ * Push structural style vars (rounding, borders, padding) for a themed window.
+ * Colors are NOT pushed: they come from the base style set by apply_defaults()
+ * plus the user's style file. Pair with pop().
  */
 void push();
 void pop();
-/** Set the baseline for direct ImGui windows, popups and tooltips. */
+/**
+ * Write the Astral tokens into ImGui::GetStyle() (colors + structure). Called by
+ * cataimgui::init_colors() before the user's style file is overlaid.
+ */
 void apply_defaults();
+/** Names of ImGuiCol_ slots the theme sets, for the style picker/json overlay. */
+bool theme_sets_color( int imgui_col );
 
 class scoped_style
 {
@@ -84,16 +138,10 @@ int push_grid_button( bool selected );
  */
 int push_toolbar_button( bool active );
 
-/**
- * Amber section label + ImGui separator (replaces -----SECTION----- ASCII bars).
- * Call inside an open ImGui window after push().
- */
+/** Amber section label + separator. Prefer ui_hybrid_widgets::section_label. */
 void section_header( const char *title );
 
-/**
- * Hybrid-styled horizontal meter (ImGui ProgressBar). fraction in [0,1]
- * (values outside are clamped). overlay_text may be null for default %.
- */
+/** Themed horizontal meter. Prefer ui_hybrid_widgets::meter. */
 void progress_meter( float fraction, const char *overlay_text = nullptr );
 
 } // namespace ui_hybrid_chrome

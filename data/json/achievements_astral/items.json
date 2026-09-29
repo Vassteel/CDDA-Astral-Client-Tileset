@@ -1,0 +1,427 @@
+[
+  {
+    "type": "ITEM",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "id": "astral_dreamweave",
+    "copy-from": "sleeping_bag",
+    "name": {
+      "str": "Dreamweave bedroll"
+    },
+    "description": "A carefully stitched bedroll awarded for restful nights.  Lightweight insulation preserves its warmth when unrolled.",
+    "weight": "350 g",
+    "looks_like": "sleeping_bag",
+    "use_action": {
+      "type": "transform",
+      "target": "astral_dreamweave_roll",
+      "menu_text": "Roll up",
+      "msg": "You adjust the bedroll."
+    },
+    "warmth": 100
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "id": "astral_dreamweave_roll",
+    "copy-from": "sleeping_bag_roll",
+    "name": {
+      "str": "Dreamweave bedroll (rolled)",
+      "str_pl": "Dreamweave bedrolls (rolled)"
+    },
+    "description": "A carefully stitched bedroll awarded for restful nights.  Lightweight insulation preserves its warmth when unrolled.",
+    "weight": "350 g",
+    "looks_like": "sleeping_bag_roll",
+    "use_action": {
+      "type": "transform",
+      "target": "astral_dreamweave",
+      "menu_text": "Unroll",
+      "msg": "You adjust the bedroll."
+    }
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "id": "astral_restkeeper",
+    "copy-from": "sleeping_bag",
+    "name": {
+      "str": "Restkeeper bedroll"
+    },
+    "description": "A carefully stitched bedroll awarded for restful nights.  Lightweight insulation preserves its warmth when unrolled.",
+    "weight": "500 g",
+    "looks_like": "sleeping_bag",
+    "use_action": {
+      "type": "transform",
+      "target": "astral_restkeeper_roll",
+      "menu_text": "Roll up",
+      "msg": "You adjust the bedroll."
+    },
+    "warmth": 90,
+    "volume": "750 ml"
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "id": "astral_restkeeper_roll",
+    "copy-from": "sleeping_bag_roll",
+    "name": {
+      "str": "Restkeeper bedroll (rolled)",
+      "str_pl": "Restkeeper bedrolls (rolled)"
+    },
+    "description": "A carefully stitched bedroll awarded for restful nights.  Lightweight insulation preserves its warmth when unrolled.",
+    "weight": "500 g",
+    "looks_like": "sleeping_bag_roll",
+    "use_action": {
+      "type": "transform",
+      "target": "astral_restkeeper",
+      "menu_text": "Unroll",
+      "msg": "You adjust the bedroll."
+    },
+    "volume": "750 ml"
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "id": "astral_work_apron",
+    "copy-from": "apron_leather",
+    "name": {
+      "str": "Astral work apron"
+    },
+    "description": "A leather work apron with two enlarged 1.5 L tool pockets and a cut that leaves your torso free to move.",
+    "looks_like": "apron_leather",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "1500 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "21 cm",
+        "moves": 80
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "1500 ml",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "21 cm",
+        "moves": 80
+      }
+    ],
+    "armor": [
+      {
+        "covers": [
+          "torso"
+        ],
+        "coverage": 70,
+        "encumbrance": 0,
+        "volume_encumber_modifier": 0.3
+      },
+      {
+        "covers": [
+          "leg_l",
+          "leg_r"
+        ],
+        "coverage": 42,
+        "encumbrance": [
+          1,
+          1
+        ],
+        "specifically_covers": [
+          "leg_draped_l",
+          "leg_draped_r"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "astral_nightwatch",
+    "type": "ITEM",
+    "subtypes": [
+      "TOOL"
+    ],
+    "name": {
+      "str": "Nightwatch lantern"
+    },
+    "description": "A reward lantern with a 3000-charge reservoir.  Use it to light it.",
+    "weight": "1720 g",
+    "volume": "1 L",
+    "price": "10 USD",
+    "price_postapoc": "1 USD",
+    "material": [
+      "glass",
+      "iron"
+    ],
+    "symbol": ";",
+    "color": "yellow",
+    "pocket_data": [
+      {
+        "pocket_type": "MAGAZINE",
+        "watertight": true,
+        "ammo_restriction": {
+          "lamp_oil": 3000
+        }
+      }
+    ],
+    "charges_per_use": 1,
+    "use_action": {
+      "target": "astral_nightwatch_on",
+      "menu_text": {
+        "str": "Light",
+        "ctxt": "verb"
+      },
+      "msg": "You light the lamp.",
+      "need_fire": 1,
+      "need_charges": 1,
+      "need_charges_msg": "The lamp is empty.",
+      "type": "transform"
+    },
+    "flags": [
+      "ALLOWS_REMOTE_USE"
+    ],
+    "melee_damage": {
+      "bash": 1
+    },
+    "tool_ammo": [
+      "lamp_oil"
+    ],
+    "looks_like": "oil_lamp"
+  },
+  {
+    "id": "astral_nightwatch_on",
+    "type": "ITEM",
+    "subtypes": [
+      "TOOL"
+    ],
+    "name": {
+      "str": "Nightwatch lantern (lit)",
+      "str_pl": "Nightwatch lanterns (lit)"
+    },
+    "description": "A reward lantern with a 3000-charge reservoir.  It is lit.",
+    "turns_per_charge": 240,
+    "revert_to": "astral_nightwatch",
+    "//COMMENT": "Open flame or effectively so. ~5 seconds to transfer flame assuming optimal conditions, a minute at worst.",
+    "use_action": [
+      {
+        "ammo_scale": 0,
+        "target": "astral_nightwatch",
+        "msg": "The lamp is extinguished.",
+        "menu_text": "Turn off",
+        "type": "transform"
+      },
+      {
+        "type": "firestarter",
+        "moves": 500,
+        "moves_slow": 6000
+      }
+    ],
+    "light": 10,
+    "flags": [
+      "TRADER_AVOID",
+      "FIRE",
+      "ALLOWS_REMOTE_USE",
+      "WATER_EXTINGUISH",
+      "FIRESTARTER",
+      "SPAWN_ACTIVE"
+    ],
+    "copy-from": "astral_nightwatch",
+    "looks_like": "oil_lamp_on",
+    "pocket_data": [
+      {
+        "pocket_type": "MAGAZINE",
+        "watertight": true,
+        "ammo_restriction": {
+          "lamp_oil": 3000
+        }
+      }
+    ]
+  },
+  {
+    "id": "astral_everlight",
+    "type": "ITEM",
+    "subtypes": [
+      "TOOL"
+    ],
+    "name": {
+      "str": "Everlight lantern"
+    },
+    "description": "A reward lantern with a 6000-charge reservoir.  Its efficient wick burns fuel at half the usual rate.  Use it to light it.",
+    "weight": "1720 g",
+    "volume": "1 L",
+    "price": "10 USD",
+    "price_postapoc": "1 USD",
+    "material": [
+      "glass",
+      "iron"
+    ],
+    "symbol": ";",
+    "color": "yellow",
+    "pocket_data": [
+      {
+        "pocket_type": "MAGAZINE",
+        "watertight": true,
+        "ammo_restriction": {
+          "lamp_oil": 6000
+        }
+      }
+    ],
+    "charges_per_use": 1,
+    "use_action": {
+      "target": "astral_everlight_on",
+      "menu_text": {
+        "str": "Light",
+        "ctxt": "verb"
+      },
+      "msg": "You light the lamp.",
+      "need_fire": 1,
+      "need_charges": 1,
+      "need_charges_msg": "The lamp is empty.",
+      "type": "transform"
+    },
+    "flags": [
+      "ALLOWS_REMOTE_USE"
+    ],
+    "melee_damage": {
+      "bash": 1
+    },
+    "tool_ammo": [
+      "lamp_oil"
+    ],
+    "looks_like": "oil_lamp"
+  },
+  {
+    "id": "astral_everlight_on",
+    "type": "ITEM",
+    "subtypes": [
+      "TOOL"
+    ],
+    "name": {
+      "str": "Everlight lantern (lit)",
+      "str_pl": "Everlight lanterns (lit)"
+    },
+    "description": "A reward lantern with a 6000-charge reservoir.  Its efficient wick burns fuel at half the usual rate.  It is lit.",
+    "turns_per_charge": 480,
+    "revert_to": "astral_everlight",
+    "//COMMENT": "Open flame or effectively so. ~5 seconds to transfer flame assuming optimal conditions, a minute at worst.",
+    "use_action": [
+      {
+        "ammo_scale": 0,
+        "target": "astral_everlight",
+        "msg": "The lamp is extinguished.",
+        "menu_text": "Turn off",
+        "type": "transform"
+      },
+      {
+        "type": "firestarter",
+        "moves": 500,
+        "moves_slow": 6000
+      }
+    ],
+    "light": 10,
+    "flags": [
+      "TRADER_AVOID",
+      "FIRE",
+      "ALLOWS_REMOTE_USE",
+      "WATER_EXTINGUISH",
+      "FIRESTARTER",
+      "SPAWN_ACTIVE"
+    ],
+    "copy-from": "astral_everlight",
+    "looks_like": "oil_lamp_on",
+    "pocket_data": [
+      {
+        "pocket_type": "MAGAZINE",
+        "watertight": true,
+        "ammo_restriction": {
+          "lamp_oil": 6000
+        }
+      }
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_ashfall",
+    "copy-from": "machete",
+    "name": {
+      "str": "Ashfall machete"
+    },
+    "looks_like": "machete",
+    "description": "A finely balanced reward weapon with improved striking surfaces.  Its original tool qualities and techniques are retained.",
+    "melee_damage": {
+      "bash": 6,
+      "cut": 28
+    },
+    "subtypes": [
+      "TOOL"
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_gatekeeper",
+    "copy-from": "mace",
+    "name": {
+      "str": "Gatekeeper mace"
+    },
+    "looks_like": "mace",
+    "description": "A finely balanced reward weapon with improved striking surfaces.  Its original tool qualities and techniques are retained.",
+    "melee_damage": {
+      "bash": 52
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_longwatch",
+    "copy-from": "spear_steel",
+    "name": {
+      "str": "Longwatch spear"
+    },
+    "looks_like": "spear_steel",
+    "description": "A finely balanced reward weapon with improved striking surfaces.  Its original tool qualities and techniques are retained.",
+    "melee_damage": {
+      "bash": 6,
+      "stab": 38
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_midnight_thermos",
+    "copy-from": "thermos",
+    "name": {
+      "str": "Midnight thermos",
+      "str_pl": "Midnight thermoses"
+    },
+    "description": "An insulated flask awarded for late-night workshop sessions.  Its enlarged reservoir holds two litres while retaining the insulation of a standard thermos.",
+    "volume": "2250 ml",
+    "weight": "730 g",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "watertight": true,
+        "insulation": 10,
+        "max_contains_volume": "2 L",
+        "max_contains_weight": "4 kg"
+      }
+    ]
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [
+      "ARMOR"
+    ],
+    "id": "astral_recovery_quilt",
+    "copy-from": "blanket",
+    "name": {
+      "str": "Recovery quilt"
+    },
+    "description": "A warm, carefully packed quilt awarded for natural recovery during sleep.  Lofted insulation makes it warmer and more compact than an ordinary blanket.",
+    "volume": "8 L",
+    "weight": "700 g",
+    "warmth": 65
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "species": "Malus domestica",
+  "photo": "https://www.baumwelten.net/pictures/darmstadt/34.wgd.malus.domestica.290521.1200px.jpg",
+  "page": "https://www.baumwelten.net/baeume.darmstadt.html",
+  "local_photo": "/home/deck/Astra & Grok/CDDA/artifacts/landscape-new-tileset/flora/references/apple-photo.jpg",
+  "use": "Anatomy only; approved Astral tree controls style.",
+  "vitrified_definition": "data/json/furniture_and_terrain/terrain_vitrified.json:t_tree_apple_vitrified",
+  "vitrified_policy": "Full black glass leaves and apples retained throughout year; subtle seasonal reflection changes. No snow or ordinary grass background; no matching black glass ground artwork exists yet."
+}

@@ -1,41 +1,20 @@
-# Astral 0.1.5 validation
-
-Eight autumn olive sprites, every season/state mapping, archive bytes, sprite references, and preservation of all other mappings and images checked. No client was launched or modified. Live review pending.
+# Static validation
 
 {
-  "status": "passed",
-  "version": "0.1.5",
-  "autumn_olive_sources": 8,
-  "states": [
-    "normal",
-    "harvested"
+  "version": "0.1.44",
+  "unique_new_sprites": 5,
+  "new_ids": [
+    "glass_thermometer",
+    "hygrometer",
+    "hygroscope",
+    "sextant",
+    "tape_measure"
   ],
-  "seasons": [
-    "spring",
-    "summer",
-    "autumn",
-    "winter"
-  ],
-  "texture_size": [
-    256,
-    256
-  ],
-  "map_footprint": [
-    32,
-    32
-  ],
-  "pixelscale": 0.125,
-  "ground_alignment_checks": 16,
-  "all_states_share_crop": true,
-  "distinct_native_sprites": 8,
-  "all_season_state_mappings": true,
-  "preserved_original_ids": 12224,
-  "all_other_mappings_and_atlases_unchanged": true,
-  "grass_88_variants_preserved": true,
-  "shoreline_fix_preserved": true,
-  "sprite_references_checked": 24559,
-  "total_sprite_slots": 18956,
-  "original_sources_unchanged": true,
+  "sprite_slots": 19667,
+  "source_prompt_export_hashes": "passed",
+  "unrelated_mappings_and_prior_art_bytes": "preserved",
+  "all_sprite_references_valid": true,
+  "frozen_handoff_hashes_verified": true,
   "client_modified": false,
-  "visual_gameplay_acceptance": "pending"
+  "user_live_review": "pending"
 }

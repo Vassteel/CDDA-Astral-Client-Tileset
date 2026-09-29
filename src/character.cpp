@@ -1,3 +1,4 @@
+#include "achievement_rewards.h"
 #include "ui_telemetry.h"
 #include "character.h"
 
@@ -5489,6 +5490,7 @@ void Character::fall_asleep( const time_duration &duration )
     } else {
         add_effect( effect_sleep, duration );
         get_event_bus().send<event_type::character_falls_asleep>( getID(), to_seconds<int>( duration ) );
+        achievement_rewards::on_sleep( *this );
     }
 }
 

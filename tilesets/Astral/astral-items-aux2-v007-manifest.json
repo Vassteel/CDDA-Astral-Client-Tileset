@@ -1,0 +1,362 @@
+{
+  "version": "aux-2-v007",
+  "status": "packaged in Astral 0.1.40; user/live acceptance pending",
+  "preserve": "All prior Astral art including nine shields; see preserved-art.json",
+  "entries": [
+    {
+      "id": "draw_plate",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/draw_plate.png",
+      "source_sha256": "da97f3be87c194a5fc94fcd99826bc5bf631d8ae8d7eb3e7603a53a4623ff6d2",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/draw_plate.png",
+      "png_sha256": "e56b912f4326555c08b93fef31da1d564a92fa8181e75075a4ce31977ba310c4",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 55,
+      "content_bounds": [
+        21,
+        57,
+        232,
+        213
+      ],
+      "prompt_path": "prompts/draw_plate.txt",
+      "prompt_sha256": "7dad1caebdf4f9ebfd863cb3b80274dbd0d4a119c6c2d87d6013216169994197",
+      "native_preview": "previews/draw_plate-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; draw plate inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_draw_plate.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "draw_plate",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/metalworking.json",
+          "array_index": 30,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: two rows of graduated holes remain visible; transparent larger holes and inset margins preserved. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "draw_plate",
+          "page_url": "https://www.esslinger.com/31-hole-round-steel-drawplate-economy-0-5-mm-to-3-0-mm/",
+          "image_url": "https://cdn11.bigcommerce.com/s-iic0hc/images/stencil/1280x1280/products/50137/98562/round-hole-drawplate-21.0408__34250.1659442512.jpg?c=2",
+          "local_path": "references/draw_plate.image",
+          "sha256": "97768ff3832ed528e9211ab4a1b610ddc026af047b9d6a01a2652ab529ebf8bc",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real photo inspected before generation: outline, working surfaces, holes, steel facets and grouped construction reviewed.",
+          "adaptation": "Game description controls geometry; coarse pixel clusters, no labels, branding or photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "drift",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/drift.png",
+      "source_sha256": "c6b91e3f600e896a3d862a2ac72cf643ae2be9d3b9fdb29af242687c8a760ca7",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/drift.png",
+      "png_sha256": "01127caacc75b135659908090d367bfb6f690285720ffc02a97427b13ba92dc6",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 222,
+      "content_bounds": [
+        24,
+        40,
+        220,
+        223
+      ],
+      "prompt_path": "prompts/drift.txt",
+      "prompt_sha256": "5bd15280de3c68680ab4e874fab7ae06afa47892ce5ebfef40b67e4b41f12ce0",
+      "native_preview": "previews/drift-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; draw plate inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_drift.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "drift",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/metalworking.json",
+          "array_index": 24,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: five graduated pins remain separately readable with gaps and distinct tips. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "drift",
+          "page_url": "https://www.ebay.com/itm/175502126597",
+          "image_url": "https://i.ebayimg.com/images/g/ClwAAOSwvnhjfn0B/s-l1600.jpg",
+          "local_path": "references/drift.image",
+          "sha256": "f244d6099d4c0a180546b73b2dd21b803afae563070405b6ce57e18716f5beba",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real photo inspected before generation: outline, working surfaces, holes, steel facets and grouped construction reviewed.",
+          "adaptation": "Photo shows fifteen forged punches/drifts; simplify the set to five representative different tool sizes with clear gaps for native32 readability. No fixed tool count in item definition."
+        }
+      ]
+    },
+    {
+      "id": "nail_header",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/nail_header.png",
+      "source_sha256": "afe8a1011f3586e62b6431d40016117a52750bd0b179eb939f908b4842f70746",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/nail_header.png",
+      "png_sha256": "e08d16f63f8b8eabb73d7d240627044292c5537ed57da67605045a0e549eb857",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 173,
+      "content_bounds": [
+        33,
+        39,
+        221,
+        226
+      ],
+      "prompt_path": "prompts/nail_header.txt",
+      "prompt_sha256": "a1f5daeb06ff32ebe79e82cdf72ceb92f734b8e3c24baa864ae5c571ff24030f",
+      "native_preview": "previews/nail_header-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; draw plate inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_nail_header.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "nail_header",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/workshop.json",
+          "array_index": 85,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: gray steel paddle head, square opening and narrow handle visible. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "nail_header",
+          "page_url": "https://piehtoolco.com/contents/en-us/p10175.html",
+          "image_url": "https://piehtoolco.com/contents/media/l_cdnh-1.jpg",
+          "local_path": "references/nail_header.image",
+          "sha256": "26e23da0e68b9ac9d2f3c3b0e08a62d7c16aa9be3e78d3c9bf8b77f9a002ac29",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real photo inspected before generation: outline, working surfaces, holes, steel facets and grouped construction reviewed.",
+          "adaptation": "Game description controls geometry; coarse pixel clusters, no labels, branding or photo pixels copied."
+        }
+      ]
+    },
+    {
+      "id": "nail_header_bronze",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/nail_header_bronze.png",
+      "source_sha256": "0adef8cc5b04b0b3765fc75b7815a817e3422fb47e1e3cb929374be507a995a9",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/nail_header_bronze.png",
+      "png_sha256": "4d10fc5edca29f865712c35b82c79f67fb4e7c11c9c2bf2fc3461122889b2753",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 174,
+      "content_bounds": [
+        33,
+        39,
+        240,
+        224
+      ],
+      "prompt_path": "prompts/nail_header_bronze.txt",
+      "prompt_sha256": "139da53c6082686d4c6d4bd90cdfb9367578a676b41ec51251a329b55f132a99",
+      "native_preview": "previews/nail_header_bronze-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; draw plate inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_nail_header_bronze.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "nail_header_bronze",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/workshop.json",
+          "array_index": 86,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: bronze material visibly distinct from steel; same square opening, outline and handle. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "nail_header_bronze",
+          "page_url": "https://piehtoolco.com/contents/en-us/p10175.html",
+          "image_url": "https://piehtoolco.com/contents/media/l_cdnh-1.jpg",
+          "local_path": "references/nail_header.image",
+          "sha256": "26e23da0e68b9ac9d2f3c3b0e08a62d7c16aa9be3e78d3c9bf8b77f9a002ac29",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real photo inspected before generation: outline, working surfaces, holes, steel facets and grouped construction reviewed.",
+          "adaptation": "Same square-hole header construction as steel photo. Material changes to bronze per current inherited item definition; use imagegen edit to preserve geometry."
+        }
+      ]
+    },
+    {
+      "id": "temper_block",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/temper_block.png",
+      "source_sha256": "fec461695daa92233f1908ae8bbed26b04776445136c6f53efe567ae79f9c883",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/temper_block.png",
+      "png_sha256": "6c484d52e67ba71d35f84e10d2a4d266d7d8762e6b8a7c58e5d0c69f14ec4d81",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 134,
+      "content_bounds": [
+        20,
+        63,
+        221,
+        241
+      ],
+      "prompt_path": "prompts/temper_block.txt",
+      "prompt_sha256": "b82f1cac37b1153b5fd79235dcb16114ce7009bf4ad661e257e16bb9eba5617c",
+      "native_preview": "previews/temper_block-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained; draw plate inset224 centered256 for safe margins",
+      "mapping": {
+        "file": "astral_item_aux2_temper_block.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "temper_block",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/metalworking.json",
+          "array_index": 39,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32 pixel contact inspection: two overlapping square blocks and separating seam are visible. Live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "temper_block",
+          "page_url": "https://www.micro-tools.com/products/sbb-6x6",
+          "image_url": "https://www.micro-tools.com/cdn/shop/products/sbb-6x6_1_78f19b7d-7d96-4bef-a727-d79dd898e96d_1024x1024.jpg?v=1708373500",
+          "local_path": "references/temper_block.image",
+          "sha256": "5e31978b2c3f9ab797c685ace8ff3b2644375e7debde327f189cc77f269f6055",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Real photo inspected before generation: outline, working surfaces, holes, steel facets and grouped construction reviewed.",
+          "adaptation": "Square bench-block photo is shape/material reference, not claimed to depict a tempering set. Game specifies TWO square steel blocks; both drawn equally sized and cold, no heated workpiece."
+        }
+      ]
+    }
+  ],
+  "generated_count": 5,
+  "creative_method": "built-in imagegen only",
+  "static_checks": "dimensions, transparent alpha, non-clipped bounds, exact prompt/source/export hashes",
+  "live_acceptance": "not tested",
+  "release": "0.1.40"
+}

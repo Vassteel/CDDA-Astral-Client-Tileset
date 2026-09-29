@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Stage a clean client distribution from tracked data, never from player profiles."""
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import shutil
@@ -53,9 +54,15 @@ set -euo pipefail
 client_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 exec python3 "$client_dir/tools/hybrid-updater/updater.py" gui --client "$client_dir" "$@"
 ''')
+    (root / 'Rollback Astral Client.sh').write_text('''#!/usr/bin/env bash
+set -euo pipefail
+client_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+exec python3 "$client_dir/tools/hybrid-updater/updater.py" gui-rollback --client "$client_dir" "$@"
+''')
     for p in root.glob('*.sh'):
         p.chmod(0o755)
     (root / 'VERSION.json').write_text(json.dumps({'product': 'Astral Client', 'version': version,
+        'executable_sha256': hashlib.sha256((root / 'cataclysm-tiles').read_bytes()).hexdigest(),
         'source_commit': subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip()}, indent=2) + '\n')
     shutil.copy2(source / 'doc/hybrid/README.md', root / 'README.md')
     (root / 'START-HERE.txt').write_text('''Astral Client — Linux x86_64 / SteamOS
@@ -64,8 +71,12 @@ Run "Launch Astral Client.sh". This distribution includes standard tilesets; Ast
 is a separate optional download. Extract that art package into this directory
 and select Astral in Graphics. Saves/config are created here on first launch.
 
-Run "Update Astral Client.sh" to check for client updates (Python 3 + Zenity).
-Close CDDA before installing an update. Your tileset and saves are preserved.
+Run "Update Astral Client.sh" to check for client updates. It needs Python 3
+and Zenity or kdialog (both included with SteamOS desktop mode), or a terminal.
+Updates can download while CDDA is running and install the next time you run
+the updater after quitting. Your tileset, saves, settings and mods are preserved.
+"Rollback Astral Client.sh" restores the version you had before the last update.
+Backups and downloads are kept beside this folder in a hidden updates directory.
 
 Requires a Linux desktop with X11/Wayland, glibc 2.38 or newer, libstdc++,
 FreeType, zlib and their normal system dependencies. SDL3 libraries are bundled.

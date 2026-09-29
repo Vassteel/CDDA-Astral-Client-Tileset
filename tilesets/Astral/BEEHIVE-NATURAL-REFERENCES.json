@@ -1,0 +1,13 @@
+{
+  "subject": "Natural bee hive within tree cavity",
+  "image_url": "https://www.nps.gov/foma/learn/nature/images/Bees-1.JPG",
+  "page_url": "https://www.nps.gov/foma/learn/nature/honeybees.htm",
+  "local_photo": "references/beehive-natural-photo.jpg",
+  "purpose": "Real hive entrance/cavity anatomy only, no source pixels copied. Game definition requires cavity inside tree, not hanging exposed comb.",
+  "style_reference": "../sources/deciduous-tree-spring.png",
+  "states": [
+    "normal hive in all seasons"
+  ],
+  "transition": "harvesting and bashing both produce existing t_tree; no new harvested hive ID.",
+  "season_policy": "ordinary deciduous host tree seasonal foliage, cavity retained all seasons; bees represented by sparse small marks rather than oversized insects."
+}

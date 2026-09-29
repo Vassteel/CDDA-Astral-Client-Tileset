@@ -1,0 +1,549 @@
+{
+  "version": "aux-2-v003",
+  "status": "packaged in Astral 0.1.32; user/live acceptance pending",
+  "preserve": "All prior Astral art including nine shields; see preserved-art.json",
+  "entries": [
+    {
+      "id": "anvil_crude",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/anvil_crude.png",
+      "source_sha256": "af5f9f80d5798937669a54320a5e1729278856081488bbba4dcfa6955e8f4dc7",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/anvil_crude.png",
+      "png_sha256": "96e62ed8f71ed0335ee86129a4e7b568de85b53294e27b054a4d4f9f049f6701",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 162,
+      "content_bounds": [
+        42,
+        47,
+        203,
+        194
+      ],
+      "prompt_path": "prompts/anvil_crude.txt",
+      "prompt_sha256": "7fcba7c846c4937ad0862ebf6ef45904b1edd8fc9c856295873fba9f58794394",
+      "native_preview": "previews/anvil_crude-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_anvil_crude.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "anvil_crude",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/metalworking.json",
+          "array_index": 3,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32px inspection: low rail-web silhouette, short horn and hardy opening remain readable.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "anvil_crude",
+          "page_url": "https://www.collectorsweekly.com/stories/47528-anvil-made-from-old-railroad-track",
+          "image_url": "https://d3h6k4kfl8m9p0.cloudfront.net/stories/CN38aN09OD8ws97ATKDYaQ.jpg",
+          "local_path": "references/anvil_crude.image",
+          "sha256": "fb35707912109294a3e2454794393a021a05f512f2bca4eced449ad203ea7324",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Visually inspected in references/contact.jpg before generation; real object construction and materials only.",
+          "adaptation": "Game description controls final geometry. Do not reproduce reference backdrop, accessories or branding."
+        }
+      ]
+    },
+    {
+      "id": "anvil_heavy",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/anvil_heavy.png",
+      "source_sha256": "ab3ba953246108945b0a68f4e228a449665f6ac1a514602d8caa500d9e9cfb27",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/anvil_heavy.png",
+      "png_sha256": "5a49ebb7c473ac50e4e083aebdb5ea71485f683629f9828a641b798fc9507a84",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 166,
+      "content_bounds": [
+        26,
+        69,
+        228,
+        213
+      ],
+      "prompt_path": "prompts/anvil_heavy.txt",
+      "prompt_sha256": "6557562691226d8db961f8a4c77bd89c2246e703b84313548e2b284708a9c165",
+      "native_preview": "previews/anvil_heavy-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "nearest-neighbor resize to 208 square, centered in transparent 256 square to retain safe padding; source alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_anvil_heavy.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "anvil_heavy",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/metalworking.json",
+          "array_index": 2,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32px inspection: broader body, heavy splayed feet and large horn distinguish from rail anvil. Export padding added without repainting; tiny pritchel detail may merge at 32px.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "anvil_heavy",
+          "page_url": "https://www.ebay.fr/itm/371840763831",
+          "image_url": "https://i.ebayimg.com/images/g/SVkAAOSwkBtedPOy/s-l1600.jpg",
+          "local_path": "references/anvil_heavy.image",
+          "sha256": "982625b0074de42b6d475d662faaa794076f2c9dddd8ab562292672c3071bafc",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Visually inspected in references/contact.jpg before generation; real object construction and materials only.",
+          "adaptation": "Game description controls final geometry. Do not reproduce reference backdrop, accessories or branding."
+        }
+      ]
+    },
+    {
+      "id": "anvil_scavenged",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/anvil_scavenged.png",
+      "source_sha256": "5426c19b44d863987857ba37ccbdbf951a602a0857288ee6d83be949ec80e997",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/anvil_scavenged.png",
+      "png_sha256": "571fd197ac6130c91fe9740fb7e99aa6c97bc0f36a1afafdbf6a4b005c90df81",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 110,
+      "content_bounds": [
+        40,
+        54,
+        225,
+        245
+      ],
+      "prompt_path": "prompts/anvil_scavenged.txt",
+      "prompt_sha256": "d0f91a844cecfe394e0b32f12d0ccc892bbd0cd840026b051792e57a2d115578",
+      "native_preview": "previews/anvil_scavenged-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_anvil_scavenged.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "anvil_scavenged",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/metalworking.json",
+          "array_index": 4,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32px inspection: chunky stepped machine block, top work face and mounting hole distinguish from horn anvils; standalone as defined.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "anvil_scavenged",
+          "page_url": "https://www.instructables.com/How-to-Make-an-Anvil-1/",
+          "image_url": "https://content.instructables.com/FPN/OC5F/JDUKDXW6/FPNOC5FJDUKDXW6.jpg",
+          "local_path": "references/anvil_scavenged.image",
+          "sha256": "50f2882e73ebfa63db8cdd986d3197d605e77e8bb227b1280d124fbe869a1e02",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Visually inspected in references/contact.jpg before generation; real object construction and materials only.",
+          "adaptation": "Steel block construction and ground surface only; game description requires unmounted machinery block, no horn/waist."
+        }
+      ]
+    },
+    {
+      "id": "anvil_stump",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/anvil_stump.png",
+      "source_sha256": "69b0187a7fdd0687e4823bd46d2694a9a22bd993e743777a284cf398fd1a92cf",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/anvil_stump.png",
+      "png_sha256": "4246fece5ec668768f333fb85b8265d4c7053bb587bd4d6c9ab82e19580910c3",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 136,
+      "content_bounds": [
+        24,
+        16,
+        219,
+        235
+      ],
+      "prompt_path": "prompts/anvil_stump.txt",
+      "prompt_sha256": "85f199fb369f87a002a06d8dc40b55dc7b610bb6f5467448c6efe228de4371ad",
+      "native_preview": "previews/anvil_stump-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_anvil_stump.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "anvil_stump",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/metalworking.json",
+          "array_index": 5,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32px inspection: wood cylinder, split steel top and seated bolts visible. No projecting spike or separate horn anvil.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "anvil_stump",
+          "page_url": "https://forgeofechos.blogspot.com/2014/10/pounding-surface-out-of-railroad-tie.html",
+          "image_url": "https://4.bp.blogspot.com/-txEndrMPenA/VEZ5hmViHWI/AAAAAAAADm0/2X5UXgV01gY/s1600/IMG_4277.JPG",
+          "local_path": "references/anvil_stump.image",
+          "sha256": "12e8e0f472f724d535b1c80424c965bc4a4d3fce86882f40a19213b38b02d1e7",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Visually inspected in references/contact.jpg before generation; real object construction and materials only.",
+          "adaptation": "Wood log and flat steel mounting only; replace tall spikes with seated bolts per game description."
+        }
+      ]
+    },
+    {
+      "id": "billet_bone",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/billet_bone.png",
+      "source_sha256": "5d3454c1189364b3b7c07874dc13de95ad645e3761c1cfca01fa860c0ab754aa",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/billet_bone.png",
+      "png_sha256": "cbbc7eb2f3d39e88daf91e1aef21521b31bd74baf6c1f9d44868ebcb0d3942a0",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 175,
+      "content_bounds": [
+        43,
+        41,
+        214,
+        223
+      ],
+      "prompt_path": "prompts/billet_bone.txt",
+      "prompt_sha256": "2bf1dfbfdc962453d18ddd856c293267096bd96f2693a7fd7d094e99df7809ad",
+      "native_preview": "previews/billet_bone-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_billet_bone.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "billet_bone",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/stoneworking.json",
+          "array_index": 0,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32px inspection: pale curved baton with broad blunt ends, distinguishable from pointed punch.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "billet_bone",
+          "page_url": "https://goknapping.com/products/large-antler-billet",
+          "image_url": "https://goknapping.com/cdn/shop/products/large_antler_billet2_1024x1024.jpg?v=1577592221",
+          "local_path": "references/billet_bone.image",
+          "sha256": "ee2ff6a252db260394893457a7e478d5117eca6138a1df81bb59068627eee68d",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Visually inspected in references/contact.jpg before generation; real object construction and materials only.",
+          "adaptation": "Game description controls final geometry. Do not reproduce reference backdrop, accessories or branding."
+        }
+      ]
+    },
+    {
+      "id": "billet_wood",
+      "aliases": [
+        "drill_rock_primitive"
+      ],
+      "state": "neutral_intact",
+      "source_path": "sources/billet_wood.png",
+      "source_sha256": "f2572a880d258fe879e508f0ad7999b6e40f213fa19b4a3d8fab81e82c314f5f",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/billet_wood.png",
+      "png_sha256": "f12bb0a68e2a0323e1bf0257afab79e0cc11c3b68f6976f6a2d8019d06c0af2b",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 168,
+      "content_bounds": [
+        32,
+        37,
+        222,
+        232
+      ],
+      "prompt_path": "prompts/billet_wood.txt",
+      "prompt_sha256": "e745736fb963271f47e8141e6cf535fc0badf50fc4124aa679fdac8687483abc",
+      "native_preview": "previews/billet_wood-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_billet_wood.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": [
+            "billet_wood",
+            "drill_rock_primitive"
+          ],
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/stoneworking.json",
+          "array_index": 1,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32px inspection: solid warm-brown blunt wooden baton. Shared neutral exterior fits reviewed wooden billet and primitive wood drill definitions.",
+      "live_acceptance": "not tested",
+      "alias_reason": "Both definitions describe a thick blunt wooden stick with identical wood material, 150 g mass, 100 ml volume and 20 cm length; function differs but visible geometry and neutral state match.",
+      "alias_definitions": [
+        {
+          "id": "drill_rock_primitive",
+          "family": "tools",
+          "status": "remaining_art_or_alias_review",
+          "scope": "core",
+          "origins": [
+            {
+              "path": "data/json/items/tool/stoneworking.json",
+              "array_index": 2,
+              "scope": "core"
+            }
+          ],
+          "name": {
+            "str": "primitive rock drill"
+          },
+          "description": "A thick, blunted wooden stick.  Can be used to drill rough holes in rock, if water and sand are available, but the process is lengthy.",
+          "subtypes": [],
+          "material": [
+            "wood"
+          ],
+          "flags": [],
+          "copy_from": null,
+          "looks_like": null,
+          "looks_like_chain": [],
+          "resolved_mapping_candidate": null,
+          "direct_mapping": null,
+          "baseline_direct": false,
+          "shared_mapping_candidates": [],
+          "transitions": [],
+          "variants": [],
+          "seasonal_mappings": [],
+          "orientation": "ground renderer passes rotation=0; no invented directional variants",
+          "state_review": "pending family review; no generic empty/full suffix emitted by ground renderer",
+          "overlay_handoff": {
+            "wielded": "overlay_wielded_drill_rock_primitive",
+            "worn": null
+          },
+          "inheritance_warning": null
+        }
+      ],
+      "references": [
+        {
+          "subject": "billet_wood",
+          "page_url": "https://elfshotgallery.blogspot.com/2012/03/munarch-flintknapping-pressure-flaking.html",
+          "image_url": "https://3.bp.blogspot.com/-YwHecUBm6-Y/TLw7fHBKj_I/AAAAAAAACJc/Hd7BytW_2JY/s1600/Oetzi%2527s%2Bpressure%2Bflaker%2B015.jpg",
+          "local_path": "references/billet_wood.image",
+          "sha256": "39b5268511b63bb981e135fd1326d33df248b2a84307d84da07e1bcdf741d1b0",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Visually inspected in references/contact.jpg before generation; real object construction and materials only.",
+          "adaptation": "Use plain wood material and baton proportions only; exclude the reference metal/bone tip and wrappings."
+        }
+      ]
+    },
+    {
+      "id": "punch_bone",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/punch_bone.png",
+      "source_sha256": "23d8daa2134dea26c80cb778749fc762e2f7cbda0528234b04ee297af2ab1df3",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/punch_bone.png",
+      "png_sha256": "ed8c8822340415619d8f8531eafc6c95492c90b0d3fcb65c70f0f1a167715db5",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 168,
+      "content_bounds": [
+        35,
+        47,
+        219,
+        215
+      ],
+      "prompt_path": "prompts/punch_bone.txt",
+      "prompt_sha256": "f4881a84dd32b497db593123bcfaef233a2e45525550c031d440adc7f1f72eac",
+      "native_preview": "previews/punch_bone-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_punch_bone.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "punch_bone",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/stoneworking.json",
+          "array_index": 3,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Passed 128/64/32px inspection: pale thick body ends in clearly tapered small point; no added metal or bindings.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "punch_bone",
+          "page_url": "https://www.silurianbushcraft.com/training-courses",
+          "image_url": "https://primary.jwwb.nl/public/r/w/z/temp-zdoxigezlhhekppfuxbl/4lodib/img_20230326_173415_839.jpg",
+          "local_path": "references/punch_bone.image",
+          "sha256": "3d62f2547410941a9a11e73fe828eb37645f0ab984602a2ee55f69fffddc40a9",
+          "purpose": "Real construction/material reference only; no photo pixels copied",
+          "inspection": "Visually inspected in references/contact.jpg before generation; real object construction and materials only.",
+          "adaptation": "Game description controls final geometry. Do not reproduce reference backdrop, accessories or branding."
+        }
+      ]
+    }
+  ],
+  "generated_count": 7,
+  "creative_method": "built-in imagegen only",
+  "static_checks": "dimensions, transparent alpha, non-clipped bounds, exact prompt/source/export hashes",
+  "live_acceptance": "not tested",
+  "release": "0.1.32"
+}

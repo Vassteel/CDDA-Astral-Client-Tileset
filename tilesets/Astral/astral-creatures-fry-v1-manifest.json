@@ -1,0 +1,333 @@
+{
+  "name": "Fish fry and crustacean larva",
+  "revision": "fry-v1",
+  "seasonal_policy": "Neutral year-round larval appearance. Ordinary fish fry share the deliberately indistinguishable mon_fry description, color, size and bodytype; only growth targets differ. Ordinary fish/crustacean larva have NO_CORPSE, so no unused corpse sprites are generated. Mutant fry have a distinct larger body and corpse. Existing adult fish art is preserved; flagged adult mutant growth stages remain separately queued.",
+  "assets": [
+    {
+      "key": "ordinary-fry",
+      "id": "mon_fry_blackfish",
+      "aliases": [
+        "mon_fry_bluefin_tuna",
+        "mon_fry_bluefish",
+        "mon_fry_bluegill",
+        "mon_fry_bowfin",
+        "mon_fry_brook_trout",
+        "mon_fry_brown_trout",
+        "mon_fry_bullhead",
+        "mon_fry_bullhead_yellow",
+        "mon_fry_burbot",
+        "mon_fry_calico_bass",
+        "mon_fry_carp",
+        "mon_fry_channel_catfish",
+        "mon_fry_cod",
+        "mon_fry_fallfish",
+        "mon_fry_flounder",
+        "mon_fry_gar_longnose",
+        "mon_fry_goldfish",
+        "mon_fry_grass_carp",
+        "mon_fry_green_sunfish",
+        "mon_fry_haddock",
+        "mon_fry_halibut",
+        "mon_fry_kokanee_salmon",
+        "mon_fry_lake_trout",
+        "mon_fry_lbass",
+        "mon_fry_mackerel",
+        "mon_fry_muskellunge",
+        "mon_fry_pbass",
+        "mon_fry_perch",
+        "mon_fry_pickerel",
+        "mon_fry_pickerel_american",
+        "mon_fry_pike",
+        "mon_fry_pollock",
+        "mon_fry_porgy",
+        "mon_fry_pumpkinseed",
+        "mon_fry_rainbow_trout",
+        "mon_fry_redbreast",
+        "mon_fry_rock_bass",
+        "mon_fry_salmon",
+        "mon_fry_sbass",
+        "mon_fry_sturgeon_lake",
+        "mon_fry_sturgeon_shortnose",
+        "mon_fry_sunfish",
+        "mon_fry_walleye",
+        "mon_fry_warmouth",
+        "mon_fry_white_catfish",
+        "mon_fry_white_sucker",
+        "mon_fry_whitefish",
+        "mon_fry_whitefish_round"
+      ],
+      "label": "Ordinary fish fry / shared",
+      "max": [
+        80,
+        40
+      ],
+      "state": "living; NO_CORPSE",
+      "source": "sources/ordinary-fry.png",
+      "native": "native/ordinary-fry.png",
+      "source_sha256": "28828b4f38c882f68b5a8cbd2cbc313bc005e4c0936ab6e493437426e57abbdc",
+      "native_sha256": "9aad895bd528126f65a4f7624828f6a423312ec30246cc724f608f95d4b22a8c",
+      "prompt_sha256": "11e94b8e867eda25018aa590a9d8b416c6c7e0de7c775af1af6c12cb1318ce73",
+      "source_dimensions": [
+        598,
+        673
+      ],
+      "crop": [
+        162,
+        311,
+        513,
+        441
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        11.0,
+        25.25,
+        21.0,
+        29.0
+      ]
+    },
+    {
+      "key": "crustacean-larva",
+      "id": "mon_fry_crayfish",
+      "label": "Crustacean larva / living",
+      "max": [
+        80,
+        64
+      ],
+      "state": "living; inherited NO_CORPSE",
+      "source": "sources/crustacean-larva.png",
+      "native": "native/crustacean-larva.png",
+      "source_sha256": "3bff40610cfc8f87fe4bea739f3b303396e074c4fc71a75f68c8bd5d4a7638bb",
+      "native_sha256": "00a71c3858b856858090664faa872ac56d685e07aeb16a200e1a0d7fb02a4a81",
+      "prompt_sha256": "11e94b8e867eda25018aa590a9d8b416c6c7e0de7c775af1af6c12cb1318ce73",
+      "source_dimensions": [
+        664,
+        673
+      ],
+      "crop": [
+        86,
+        225,
+        535,
+        527
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        11.0,
+        22.25,
+        21.0,
+        29.0
+      ]
+    },
+    {
+      "key": "mutant-fry",
+      "id": "mon_fry_mutant_salmon",
+      "label": "Mutant fish fry / living",
+      "max": [
+        128,
+        64
+      ],
+      "state": "living",
+      "source": "sources/mutant-fry.png",
+      "native": "native/mutant-fry.png",
+      "source_sha256": "5218a89053aecd8b2358ca8837e0b9b64333b0014d6bb0f3d509f0b1fdbbad79",
+      "native_sha256": "ca62ccf4abe81639c34821363e8eff00cd9142cacf122d4c2386df003ef79f65",
+      "prompt_sha256": "11e94b8e867eda25018aa590a9d8b416c6c7e0de7c775af1af6c12cb1318ce73",
+      "source_dimensions": [
+        656,
+        589
+      ],
+      "crop": [
+        61,
+        146,
+        610,
+        342
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        8.0,
+        23.25,
+        24.0,
+        29.0
+      ]
+    },
+    {
+      "key": "mutant-fry-corpse",
+      "id": "corpse_mon_fry_mutant_salmon",
+      "label": "Mutant fish fry / corpse",
+      "max": [
+        128,
+        56
+      ],
+      "state": "corpse",
+      "source": "sources/mutant-fry-corpse.png",
+      "native": "native/mutant-fry-corpse.png",
+      "source_sha256": "2fdb65bb32e692c20df62a0783004d9f0dd65491f71863d652350655dc942e01",
+      "native_sha256": "6d35d5f208d0898e1523c5c7a865ea46a41dba3ff3f0f4a40485b1294a46103f",
+      "prompt_sha256": "11e94b8e867eda25018aa590a9d8b416c6c7e0de7c775af1af6c12cb1318ce73",
+      "source_dimensions": [
+        606,
+        589
+      ],
+      "crop": [
+        46,
+        184,
+        506,
+        411
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 32,
+      "display_bounds": [
+        8.875,
+        22.0,
+        23.0,
+        29.0
+      ]
+    }
+  ],
+  "alias_evidence": {
+    "ordinary_ids": [
+      "mon_fry_blackfish",
+      "mon_fry_bluefin_tuna",
+      "mon_fry_bluefish",
+      "mon_fry_bluegill",
+      "mon_fry_bowfin",
+      "mon_fry_brook_trout",
+      "mon_fry_brown_trout",
+      "mon_fry_bullhead",
+      "mon_fry_bullhead_yellow",
+      "mon_fry_burbot",
+      "mon_fry_calico_bass",
+      "mon_fry_carp",
+      "mon_fry_channel_catfish",
+      "mon_fry_cod",
+      "mon_fry_fallfish",
+      "mon_fry_flounder",
+      "mon_fry_gar_longnose",
+      "mon_fry_goldfish",
+      "mon_fry_grass_carp",
+      "mon_fry_green_sunfish",
+      "mon_fry_haddock",
+      "mon_fry_halibut",
+      "mon_fry_kokanee_salmon",
+      "mon_fry_lake_trout",
+      "mon_fry_lbass",
+      "mon_fry_mackerel",
+      "mon_fry_muskellunge",
+      "mon_fry_pbass",
+      "mon_fry_perch",
+      "mon_fry_pickerel",
+      "mon_fry_pickerel_american",
+      "mon_fry_pike",
+      "mon_fry_pollock",
+      "mon_fry_porgy",
+      "mon_fry_pumpkinseed",
+      "mon_fry_rainbow_trout",
+      "mon_fry_redbreast",
+      "mon_fry_rock_bass",
+      "mon_fry_salmon",
+      "mon_fry_sbass",
+      "mon_fry_sturgeon_lake",
+      "mon_fry_sturgeon_shortnose",
+      "mon_fry_sunfish",
+      "mon_fry_walleye",
+      "mon_fry_warmouth",
+      "mon_fry_white_catfish",
+      "mon_fry_white_sucker",
+      "mon_fry_whitefish",
+      "mon_fry_whitefish_round"
+    ],
+    "ordinary_count": 49,
+    "ordinary_overrides": "Only id/type/copy-from/upgrades fields; no visual differences. Active-mod audit follows.",
+    "no_corpse": "mon_fry.death_function.corpse_type == NO_CORPSE; crustacean larva inherits it."
+  },
+  "status": "staged in creatures-glyph-batch-01; archive and user/live acceptance pending",
+  "generator": "built-in imagegen",
+  "client_modified": false,
+  "visual_review": "source and native preview inspected; user/live review pending",
+  "review_notes": "Four new larval sprites inspected at intended tiny game scale.49 ordinary fry share one deliberately indistinguishable appearance; crustacean larva is separate, larger mutant fry has a distinct corpse. Core and active-mod audit records show no mod overrides or named variants. NO_CORPSE explicitly verified for ordinary fish and inherited by crustacean. Fine legs/eyes simplify at10px; no adult anatomy or species-specific markings claimed.",
+  "validation": {
+    "unique_sprites": 4,
+    "creature_ids": [
+      "mon_fry_blackfish",
+      "mon_fry_bluefin_tuna",
+      "mon_fry_bluefish",
+      "mon_fry_bluegill",
+      "mon_fry_bowfin",
+      "mon_fry_brook_trout",
+      "mon_fry_brown_trout",
+      "mon_fry_bullhead",
+      "mon_fry_bullhead_yellow",
+      "mon_fry_burbot",
+      "mon_fry_calico_bass",
+      "mon_fry_carp",
+      "mon_fry_channel_catfish",
+      "mon_fry_cod",
+      "mon_fry_fallfish",
+      "mon_fry_flounder",
+      "mon_fry_gar_longnose",
+      "mon_fry_goldfish",
+      "mon_fry_grass_carp",
+      "mon_fry_green_sunfish",
+      "mon_fry_haddock",
+      "mon_fry_halibut",
+      "mon_fry_kokanee_salmon",
+      "mon_fry_lake_trout",
+      "mon_fry_lbass",
+      "mon_fry_mackerel",
+      "mon_fry_muskellunge",
+      "mon_fry_pbass",
+      "mon_fry_perch",
+      "mon_fry_pickerel",
+      "mon_fry_pickerel_american",
+      "mon_fry_pike",
+      "mon_fry_pollock",
+      "mon_fry_porgy",
+      "mon_fry_pumpkinseed",
+      "mon_fry_rainbow_trout",
+      "mon_fry_redbreast",
+      "mon_fry_rock_bass",
+      "mon_fry_salmon",
+      "mon_fry_sbass",
+      "mon_fry_sturgeon_lake",
+      "mon_fry_sturgeon_shortnose",
+      "mon_fry_sunfish",
+      "mon_fry_walleye",
+      "mon_fry_warmouth",
+      "mon_fry_white_catfish",
+      "mon_fry_white_sucker",
+      "mon_fry_whitefish",
+      "mon_fry_whitefish_round",
+      "mon_fry_crayfish",
+      "mon_fry_mutant_salmon"
+    ],
+    "corpse_ids": [
+      "corpse_mon_fry_mutant_salmon"
+    ],
+    "total_slots": 19689,
+    "prior_non_config_files_preserved": 381,
+    "unrelated_mappings_preserved": true,
+    "atlas_bytes": "passed",
+    "source_prompt_native_hashes": "passed",
+    "reference_indices": "passed",
+    "client_modified": false,
+    "live_review": "pending"
+  }
+}

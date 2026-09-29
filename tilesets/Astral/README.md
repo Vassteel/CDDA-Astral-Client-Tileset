@@ -1,5 +1,5 @@
-# Astral 0.1.5
+# Astral 0.1.44
 
-Rebuilds all eight autumn olive exports from the original detailed artwork. Textures are 256x256 with pixelscale 0.125, retaining a 32x32 map footprint. Detail is preserved for zoomed views; a 32-pixel on-screen tile still has only 32 pixels of detail. Includes the complete 88-variant long grass, existing Astral art, shoreline correction and UltiCa fallback.
+Adds a tape measure, glass thermometer, hygrometer, wood-cased hygroscope and plastic sextant. Each standalone item has inspected real references and complete defined states; native reading functions do not introduce extra transformed states. Prior Astral flora, creatures, terrain, items and UltiCa fallback are preserved.
 
-Close the game before extracting gfx/Astral into the game folder. Select Astral in graphics options. This art-only package was not installed automatically. Static checks passed; live appearance still needs review.
+Static source/prompt/image/mapping checks passed; user visual and live gameplay acceptance remain pending. Packaged offline, not installed; client untouched. Close the game before manual installation of gfx/Astral.

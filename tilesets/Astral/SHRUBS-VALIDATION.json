@@ -1,0 +1,45 @@
+{
+  "version": "0.1.11",
+  "status": "passed",
+  "source_and_export_sprites": 64,
+  "families": [
+    "huckleberry",
+    "raspberry",
+    "grape",
+    "spicebush",
+    "chokeberry",
+    "rose",
+    "hydrangea",
+    "lilac"
+  ],
+  "states": [
+    "normal",
+    "harvested"
+  ],
+  "seasons": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+  ],
+  "mapped_ids": 80,
+  "texture_size": [
+    256,
+    256
+  ],
+  "pixelscale": 0.125,
+  "map_footprint": [
+    32,
+    32
+  ],
+  "shared_crop_per_family": true,
+  "ground_alignment_checks": 16,
+  "archived_old_sources_verified": 0,
+  "all_other_mappings_and_atlas_bytes_preserved": true,
+  "existing_tree_art_preserved": true,
+  "grass_88_variants_and_shoreline_fix_preserved": true,
+  "sprite_references_checked": 24661,
+  "total_sprite_slots": 19108,
+  "client_modified": false,
+  "visual_gameplay_acceptance": "pending"
+}

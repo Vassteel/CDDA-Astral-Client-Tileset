@@ -2048,6 +2048,10 @@
     "type": "item_group",
     "id": "museum_armor",
     "items": [
+      { "item": "astral_shield_buckler", "prob": 25 },
+      { "item": "astral_shield_round", "prob": 25 },
+      { "item": "astral_shield_kite", "prob": 15 },
+      { "item": "astral_shield_tower", "prob": 10 },
       { "item": "armor_junk_plate", "prob": 60, "damage": [ 2, 4 ] },
       { "item": "chainmail_junk_hauberk", "prob": 60, "damage": [ 2, 4 ] },
       { "item": "gloves_plate", "prob": 60, "damage": [ 2, 4 ] },

@@ -179,10 +179,22 @@
     "insert_before_standard_exits": true,
     "responses": [
       {
-        "condition": { "not": { "u_has_trait": "perk_portal_storm_mutator_mana" } },
+        "condition": {
+          "and": [
+            { "not": { "u_has_trait": "perk_portal_storm_mutator_mana" } },
+            { "or": [ { "math": [ "u_no_prerecs > 0" ] }, { "math": [ " 0 == 0" ] } ] },
+            { "math": [ "u_num_perks > 0" ] },
+            { "math": [ "u_playstyle_perks_available >= 1" ] },
+            { "math": [ "u_no_playstyle == 0" ] }
+          ]
+        },
         "text": "Gain [<trait_name:perk_portal_storm_mutator_mana>]",
         "effect": [
-          { "set_string_var": "<trait_name:perk_portal_storm_mutator_mana>", "target_var": { "context_val": "trait_name" } },
+          { "set_string_var": "", "target_var": { "context_val": "trait_additional_details" } },
+          {
+            "set_string_var": "<trait_name:perk_portal_storm_mutator_mana>",
+            "target_var": { "context_val": "trait_name" }
+          },
           {
             "set_string_var": "<trait_description:perk_portal_storm_mutator_mana>",
             "target_var": { "context_val": "trait_description" }

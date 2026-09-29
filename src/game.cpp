@@ -1,4 +1,7 @@
+#include "achievement_rewards_ui.h"
+#include "achievement_rewards.h"
 #include "game.h"
+#include "tactical_combat.h"
 #include "map_memory.h"
 
 #include <algorithm>
@@ -431,13 +434,7 @@ static void achievement_attained( const achievement *a, bool achievements_enable
         }
 
         if( show_popup ) {
-            std::string message = colorize( _( "Achievement completed!" ), c_light_green );
-            message += "\n\n";
-            message += get_achievements().ui_text_for( a );
-            message += "\n";
-            message += colorize( _( "Achievement completion popups can be\nconfigured via the "
-                                    "Interface options" ), c_dark_gray );
-            popup( message );
+            achievement_rewards_ui::popup( *a );
         }
     }
     get_event_bus().send<event_type::player_gets_achievement>( a->id, achievements_enabled );
@@ -2465,6 +2462,14 @@ bool game::handle_mouseview( input_context &ctxt, std::string &action )
                                        ImGuiPopupFlags_AnyPopupLevel );
 #endif
         action = ctxt.handle_input();
+        if( action == "CLICK_AND_DRAG" ) {
+            // Mouse-down has no world action. Keep the HUD alive through release so
+            // a first click entering a button is not lost when ImGui capture lags a frame.
+            tactical_combat::stop_auto_combat();
+            action = "TIMEOUT";
+            ui_manager::redraw();
+            return true;
+        }
 #if defined(TILES)
         if( hud_popup ) {
             action = "TIMEOUT";
@@ -2677,6 +2682,13 @@ input_context get_default_mode_input_context()
         ctxt.register_action( "safemode" );
         ctxt.register_action( "autosafe" );
         ctxt.register_action( "autoattack" );
+        ctxt.register_action( "combat_menu" );
+        ctxt.register_action( "combat_attack" );
+        ctxt.register_action( "combat_guard" );
+        ctxt.register_action( "combat_evade" );
+        ctxt.register_action( "combat_bash" );
+        ctxt.register_action( "combat_recover" );
+
         ctxt.register_action( "ignore_enemy" );
         ctxt.register_action( "whitelist_enemy" );
         ctxt.register_action( "workout" );
@@ -2796,6 +2808,15 @@ bool game::try_get_left_click_action( action_id &act, const tripoint_bub_ms &mou
     const int dist = square_dist( mouse_target.xy(), player_pos.xy() );
     const bool is_self = dist <= 0;
     const bool is_adjacent = dist <= 1;
+
+    // Select a visible creature for the combat hotbar without spending a turn.
+    // Friendly NPCs and pets keep their ordinary talk/interact shortcut.
+    if( tactical_combat::can_target_from_map( u, get_creature_tracker().creature_at( mouse_target ) ) ) {
+        destination_preview.clear();
+        u.clear_destination();
+        act = ACTION_COMBAT_MENU;
+        return true;
+    }
 
     // RPG UI shell: left-click primary world interact when in range (Stardew/Elin).
     // Priority: talk → open → close → pickup → examine(+pickup) → examine.
@@ -7888,7 +7909,8 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
         }
         const double base_moves = u.run_cost( mcost, diag ) * 100.0 / crit_speed;
         const double encumb_moves = u.get_weight() / 4800.0_gram;
-        u.mod_moves( -static_cast<int>( std::ceil( base_moves + encumb_moves ) ) );
+        u.mod_moves( -static_cast<int>( std::ceil( ( base_moves + encumb_moves ) *
+                     achievement_rewards::mounted_move_multiplier( u, *crit ) ) ) );
         crit->use_mech_power( u.current_movement_mode()->mech_power_use() );
     } else {
         u.mod_moves( -u.run_cost( mcost, diag ) );

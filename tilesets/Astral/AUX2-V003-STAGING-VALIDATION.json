@@ -1,0 +1,23 @@
+{
+  "base": "/home/deck/Astra & Grok/CDDA/artifacts/astral-tileset/release-0.1.31/gfx/Astral",
+  "output": "/home/deck/Astra & Grok/CDDA/artifacts/astral-tileset/integration-staging/aux2-v003-on-0.1.31/gfx/Astral",
+  "new_ids": [
+    "anvil_crude",
+    "anvil_heavy",
+    "anvil_scavenged",
+    "anvil_stump",
+    "billet_bone",
+    "billet_wood",
+    "drill_rock_primitive",
+    "punch_bone"
+  ],
+  "all_unrelated_mappings_preserved": true,
+  "prior_files_bytes_verified": 251,
+  "source_hashes_verified": 7,
+  "new_sprite_slots": 7,
+  "base_slots": 19547,
+  "final_slots": 19554,
+  "live_validation": "not performed",
+  "release_archive_modified": false,
+  "client_modified": false
+}

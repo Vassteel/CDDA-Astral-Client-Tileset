@@ -1,0 +1,505 @@
+{
+  "name": "Fungal mounds and constructs",
+  "revision": "fungal-constructs-v1",
+  "canvas": 512,
+  "anchor_bottom": 488,
+  "sprite_offset_x": -16,
+  "sprite_offset_y": -32,
+  "seasonal_policy": "All six real growth forms have living and ordinary corpse states; no NO_CORPSE flags. REVIVES is behavior, not a distinct appearance. Each sprite maps identically across all four seasons; no invented seasonal fungus colors. Mounds upgrade to matching size constructs.",
+  "assets": [
+    {
+      "key": "fungal_mound-living",
+      "id": "mon_fungal_mound",
+      "label": "Normal mound / live",
+      "max": [
+        216,
+        136
+      ],
+      "state": "living",
+      "description": "A pale white pile of fungus, growing over a mass of gore.  The ground below it seems to be actively keeping whatever was left of the corpse 'alive', slowly rebuilding it from the ground up.",
+      "source": "sources/fungal_mound-living.png",
+      "native": "native/fungal_mound-living.png",
+      "source_sha256": "0619b4dda2f2025ac6f11fb7ed1f93f7c94b3b9c9ec4292a6ad5261cd20c72ad",
+      "native_sha256": "0fd3fb8eb0baa5d3d7da20873a5faa49a5eca61796d40c5615f237a06d2592df",
+      "prompt_sha256": "dc172da48a4f7dec5d1770ab497ef27e072977b7eb0112e682348307d3a3c5a6",
+      "source_dimensions": [
+        724,
+        637
+      ],
+      "crop": [
+        132,
+        226,
+        695,
+        599
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        19.125,
+        44.0,
+        44.75,
+        61.0
+      ]
+    },
+    {
+      "key": "fungal_construct-living",
+      "id": "mon_fungal_construct",
+      "label": "Normal construct / live",
+      "max": [
+        224,
+        208
+      ],
+      "state": "living",
+      "description": "A pale white pile of moving fungus, growing over a mass of gore.  The interwoven vines and constricting roots force the pulp beneath to move, even though nothing is set right.  It creaks like a loose floorboard.",
+      "source": "sources/fungal_construct-living.png",
+      "native": "native/fungal_construct-living.png",
+      "source_sha256": "38cada7ce1392e1868d2bbedf96e193287e0d24c8a0af834dd83ee3e055eae1c",
+      "native_sha256": "80e95ea247489bb5a8c40c1b683ed361b76bf5cb99a504801026f39b3d852062",
+      "prompt_sha256": "dc172da48a4f7dec5d1770ab497ef27e072977b7eb0112e682348307d3a3c5a6",
+      "source_dimensions": [
+        737,
+        637
+      ],
+      "crop": [
+        30,
+        74,
+        667,
+        605
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        18.0,
+        37.625,
+        46.0,
+        61.0
+      ]
+    },
+    {
+      "key": "fungal_mound-corpse",
+      "id": "corpse_mon_fungal_mound",
+      "label": "Normal mound / dead",
+      "max": [
+        216,
+        84
+      ],
+      "state": "corpse",
+      "description": "A pale white pile of fungus, growing over a mass of gore.  The ground below it seems to be actively keeping whatever was left of the corpse 'alive', slowly rebuilding it from the ground up.",
+      "source": "sources/fungal_mound-corpse.png",
+      "native": "native/fungal_mound-corpse.png",
+      "source_sha256": "9d89af50434274f2335c305fdaf4ee3a8b6e8f5a5f824c912809790ad62490d8",
+      "native_sha256": "cf0e17c6c2f6bea42176ce416fc43bdf015f7e8c26fd6e5c93ab32c01277be25",
+      "prompt_sha256": "dc172da48a4f7dec5d1770ab497ef27e072977b7eb0112e682348307d3a3c5a6",
+      "source_dimensions": [
+        716,
+        453
+      ],
+      "crop": [
+        55,
+        67,
+        682,
+        361
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        20.75,
+        50.5,
+        43.125,
+        61.0
+      ]
+    },
+    {
+      "key": "fungal_construct-corpse",
+      "id": "corpse_mon_fungal_construct",
+      "label": "Normal construct / dead",
+      "max": [
+        224,
+        129
+      ],
+      "state": "corpse",
+      "description": "A pale white pile of moving fungus, growing over a mass of gore.  The interwoven vines and constricting roots force the pulp beneath to move, even though nothing is set right.  It creaks like a loose floorboard.",
+      "source": "sources/fungal_construct-corpse.png",
+      "native": "native/fungal_construct-corpse.png",
+      "source_sha256": "ff5879159cc53820a99112078aa39c8897a915c0f3da54cdfbb2cabb9a8e539b",
+      "native_sha256": "a7a50d2da815b4f46cbea13d5d468a53b88ce1df484d9452c602cc9e11d06c76",
+      "prompt_sha256": "dc172da48a4f7dec5d1770ab497ef27e072977b7eb0112e682348307d3a3c5a6",
+      "source_dimensions": [
+        745,
+        453
+      ],
+      "crop": [
+        34,
+        32,
+        719,
+        386
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        18.0,
+        46.5,
+        46.0,
+        61.0
+      ]
+    },
+    {
+      "key": "fungal_mound_large-living",
+      "id": "mon_fungal_mound_large",
+      "label": "Large mound / live",
+      "max": [
+        280,
+        168
+      ],
+      "state": "living",
+      "description": "A pale white pile of fungus, growing over a large mass of gore.  The ground below it seems to be actively keeping whatever was left of the corpse 'alive', slowly rebuilding into a large mass.",
+      "source": "sources/fungal_mound_large-living.png",
+      "native": "native/fungal_mound_large-living.png",
+      "source_sha256": "fa6e165895d7b5d8a9d707f2cf87b493233b0ddb55dc9a929b8d15bca7e49bfa",
+      "native_sha256": "2610e6cd8749a2797d981f93a319ea253c1508bd80ed895941c9df0e9b06a67e",
+      "prompt_sha256": "fffccca5bac84e5f5f4635012cb34b5e18ce9ddeec7f74d7a074ba3f973a5500",
+      "source_dimensions": [
+        738,
+        666
+      ],
+      "crop": [
+        24,
+        194,
+        734,
+        630
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        14.875,
+        40.0,
+        49.125,
+        61.0
+      ]
+    },
+    {
+      "key": "fungal_construct_large-living",
+      "id": "mon_fungal_construct_large",
+      "label": "Large construct / live",
+      "max": [
+        296,
+        264
+      ],
+      "state": "living",
+      "description": "A pale white pile of moving fungus, growing over a large mass of gore.  The interwoven vines and constricting roots force the large pulp beneath to move, even though nothing is set right.  Its own weight seems to grind on the bones keeping it together.",
+      "source": "sources/fungal_construct_large-living.png",
+      "native": "native/fungal_construct_large-living.png",
+      "source_sha256": "97ba4e0c0681a464bcdf4b6f0fedc73c5328bfd492389feaac42d9e2ab4d021b",
+      "native_sha256": "96bceb7bf5d0048cdf7507268984952287e3fee476ae75e01205dbcebd3160aa",
+      "prompt_sha256": "fffccca5bac84e5f5f4635012cb34b5e18ce9ddeec7f74d7a074ba3f973a5500",
+      "source_dimensions": [
+        723,
+        666
+      ],
+      "crop": [
+        5,
+        55,
+        703,
+        640
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        13.5,
+        30.0,
+        50.5,
+        61.0
+      ]
+    },
+    {
+      "key": "fungal_mound_large-corpse",
+      "id": "corpse_mon_fungal_mound_large",
+      "label": "Large mound / dead",
+      "max": [
+        280,
+        104
+      ],
+      "state": "corpse",
+      "description": "A pale white pile of fungus, growing over a large mass of gore.  The ground below it seems to be actively keeping whatever was left of the corpse 'alive', slowly rebuilding into a large mass.",
+      "source": "sources/fungal_mound_large-corpse.png",
+      "native": "native/fungal_mound_large-corpse.png",
+      "source_sha256": "e93e7954c651839c61077df4364f6a1ff0460cc9d057fcb690134aa581677c4a",
+      "native_sha256": "c69e949ababc3bea7b0b03ca15b70f3bdfed5862fc7c02c8595535dfc5b423d6",
+      "prompt_sha256": "fffccca5bac84e5f5f4635012cb34b5e18ce9ddeec7f74d7a074ba3f973a5500",
+      "source_dimensions": [
+        729,
+        424
+      ],
+      "crop": [
+        33,
+        49,
+        707,
+        359
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        17.875,
+        48.0,
+        46.125,
+        61.0
+      ]
+    },
+    {
+      "key": "fungal_construct_large-corpse",
+      "id": "corpse_mon_fungal_construct_large",
+      "label": "Large construct / dead",
+      "max": [
+        296,
+        164
+      ],
+      "state": "corpse",
+      "description": "A pale white pile of moving fungus, growing over a large mass of gore.  The interwoven vines and constricting roots force the large pulp beneath to move, even though nothing is set right.  Its own weight seems to grind on the bones keeping it together.",
+      "source": "sources/fungal_construct_large-corpse.png",
+      "native": "native/fungal_construct_large-corpse.png",
+      "source_sha256": "3d8c3f9ee4f5f60ae787460124d5e37fb280e52de7836ba5cdda1c028e2b3ea4",
+      "native_sha256": "5a74e82fa6de395a1376362d6b826a7229b6760e72c0087a1419e30e228f55fe",
+      "prompt_sha256": "fffccca5bac84e5f5f4635012cb34b5e18ce9ddeec7f74d7a074ba3f973a5500",
+      "source_dimensions": [
+        732,
+        424
+      ],
+      "crop": [
+        22,
+        27,
+        701,
+        359
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        13.5,
+        42.875,
+        50.5,
+        61.0
+      ]
+    },
+    {
+      "key": "fungal_mound_massive-living",
+      "id": "mon_fungal_mound_massive",
+      "label": "Massive mound / live",
+      "max": [
+        384,
+        224
+      ],
+      "state": "living",
+      "description": "A pale white pile of fungus, growing over a giant mass of gore.  The ground below it seems to be actively keeping whatever was left of the corpse 'alive', slowly rebuilding it from the ground up.",
+      "source": "sources/fungal_mound_massive-living.png",
+      "native": "native/fungal_mound_massive-living.png",
+      "source_sha256": "d3e91d42667d113ba5154c0f752dc4bd7c24b982a81caed2d47951e53a47cf4c",
+      "native_sha256": "d38efcd03557b662c040b7cfe943c6bfe51ce43e883e353d5228f7f3b6fac442",
+      "prompt_sha256": "9772cc01fb38e26bba68dea701901249bbebe08d7b4455d4d1bdc417b11927a0",
+      "source_dimensions": [
+        728,
+        667
+      ],
+      "crop": [
+        33,
+        215,
+        718,
+        634
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        9.125,
+        33.0,
+        54.875,
+        61.0
+      ]
+    },
+    {
+      "key": "fungal_construct_massive-living",
+      "id": "mon_fungal_construct_massive",
+      "label": "Massive construct / live",
+      "max": [
+        392,
+        344
+      ],
+      "state": "living",
+      "description": "A pale white pile of moving fungus, growing over a giant mass of gore.  The interwoven vines and constricting roots force the pulp beneath to move, even though nothing is set right.  Its form is unnaturally hunched over, but its mass alone makes it a threat nonetheless.",
+      "source": "sources/fungal_construct_massive-living.png",
+      "native": "native/fungal_construct_massive-living.png",
+      "source_sha256": "4882093778d6c052c64aa92f6969a51c41af58da4a58559e1b48398830dccaca",
+      "native_sha256": "3d9d2cba02585f5eafb7efd742fe6d71bf14e5369d7e623cc581d7f04c139d14",
+      "prompt_sha256": "9772cc01fb38e26bba68dea701901249bbebe08d7b4455d4d1bdc417b11927a0",
+      "source_dimensions": [
+        733,
+        667
+      ],
+      "crop": [
+        11,
+        44,
+        712,
+        632
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        7.5,
+        19.875,
+        56.5,
+        61.0
+      ]
+    },
+    {
+      "key": "fungal_mound_massive-corpse",
+      "id": "corpse_mon_fungal_mound_massive",
+      "label": "Massive mound / dead",
+      "max": [
+        384,
+        139
+      ],
+      "state": "corpse",
+      "description": "A pale white pile of fungus, growing over a giant mass of gore.  The ground below it seems to be actively keeping whatever was left of the corpse 'alive', slowly rebuilding it from the ground up.",
+      "source": "sources/fungal_mound_massive-corpse.png",
+      "native": "native/fungal_mound_massive-corpse.png",
+      "source_sha256": "d5919bb4444a870d14458c9a64bfe09b812787a7596867039bd329306eecfe03",
+      "native_sha256": "644aec504da88d50acc8c6d843ac75ea8be727789a1912caf50d752d0cbb65bb",
+      "prompt_sha256": "9772cc01fb38e26bba68dea701901249bbebe08d7b4455d4d1bdc417b11927a0",
+      "source_dimensions": [
+        730,
+        423
+      ],
+      "crop": [
+        24,
+        71,
+        717,
+        377
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        12.25,
+        43.625,
+        51.625,
+        61.0
+      ]
+    },
+    {
+      "key": "fungal_construct_massive-corpse",
+      "id": "corpse_mon_fungal_construct_massive",
+      "label": "Massive construct / dead",
+      "max": [
+        392,
+        213
+      ],
+      "state": "corpse",
+      "description": "A pale white pile of moving fungus, growing over a giant mass of gore.  The interwoven vines and constricting roots force the pulp beneath to move, even though nothing is set right.  Its form is unnaturally hunched over, but its mass alone makes it a threat nonetheless.",
+      "source": "sources/fungal_construct_massive-corpse.png",
+      "native": "native/fungal_construct_massive-corpse.png",
+      "source_sha256": "c935668300a6022612baaf60bab33b87891799b62a8f63585f6673702c1cfdc7",
+      "native_sha256": "54f159e948faae0fb25bd129338cecca9cf21ae2da0e61afd239f547b5dd4f9f",
+      "prompt_sha256": "9772cc01fb38e26bba68dea701901249bbebe08d7b4455d4d1bdc417b11927a0",
+      "source_dimensions": [
+        731,
+        423
+      ],
+      "crop": [
+        13,
+        33,
+        710,
+        384
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        7.5,
+        36.375,
+        56.5,
+        61.0
+      ]
+    }
+  ],
+  "status": "staged in creatures-glyph-batch-01; archive and user/live acceptance pending",
+  "generator": "built-in imagegen",
+  "client_modified": false,
+  "visual_review": "source and native preview inspected; user/live review pending",
+  "review_findings": [
+    "All six living silhouettes and matching collapsed states present, with no head/face added.",
+    "Normal/large/massive form sizes increase at game scale; broad ivory growth contrasts with muted dark organic core.",
+    "Sources use moderate square clusters consistent across sheets; fine gill texture is lost at native size as expected.",
+    "Headless construct has arched root supports rather than a humanoid face or intact corpse; intended fictional anatomy.",
+    "Static export review only; user and live game acceptance pending."
+  ],
+  "validation": {
+    "unique_sprites": 12,
+    "creature_ids": [
+      "mon_fungal_mound",
+      "mon_fungal_construct",
+      "mon_fungal_mound_large",
+      "mon_fungal_construct_large",
+      "mon_fungal_mound_massive",
+      "mon_fungal_construct_massive"
+    ],
+    "corpse_ids": [
+      "corpse_mon_fungal_mound",
+      "corpse_mon_fungal_construct",
+      "corpse_mon_fungal_mound_large",
+      "corpse_mon_fungal_construct_large",
+      "corpse_mon_fungal_mound_massive",
+      "corpse_mon_fungal_construct_massive"
+    ],
+    "total_slots": 19797,
+    "prior_non_config_files_preserved": 406,
+    "unrelated_mappings_preserved": true,
+    "atlas_bytes": "passed",
+    "source_prompt_native_hashes": "passed",
+    "reference_indices": "passed",
+    "client_modified": false,
+    "live_review": "pending"
+  }
+}

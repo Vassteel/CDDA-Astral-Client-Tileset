@@ -1,0 +1,12 @@
+{
+  "subject": "Mundane mushroom colony on mound of decaying organic matter",
+  "image_url": "https://www.biozentrum.uni-wuerzburg.de/fileadmin/uniwue/Presse/EinBLICK/2020/25bioholz3w.jpg",
+  "page_url": "https://www.biozentrum.uni-wuerzburg.de/aktuelles/nachrichtenarchiv/archiv-single/news/mehr-lebendiges-totholz-im-wald-1/",
+  "local_photo": "references/fungus-colony-photo.jpg",
+  "purpose": "Real clustered mushroom cap/stem and decaying substrate anatomy. No source pixels copied. The game describes mundane inedible mushrooms, not a glowing alien fungal tower.",
+  "style_reference": "../sources/deciduous-tree-spring.png",
+  "states": [
+    "normal"
+  ],
+  "season_policy": "Caps and decaying mound retained in four seasons with restrained moisture/color changes. No harvested state in definition. No thick snow covering recognizable caps."
+}

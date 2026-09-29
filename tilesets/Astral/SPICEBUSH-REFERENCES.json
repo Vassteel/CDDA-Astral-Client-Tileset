@@ -1,0 +1,14 @@
+{
+  "species": "Lindera benzoin",
+  "page": "https://www.missouriplants.com/Lindera_benzoin_page.html",
+  "images": [
+    "https://www.missouriplants.com/images/Lindera_benzoin_fruits.jpg",
+    "https://www.missouriplants.com/images/Lindera_benzoin_flowers.jpg"
+  ],
+  "local": [
+    "spicebush-fruits.jpg",
+    "spicebush-flowers.jpg"
+  ],
+  "inspected": true,
+  "style": "Existing tree source sprites"
+}

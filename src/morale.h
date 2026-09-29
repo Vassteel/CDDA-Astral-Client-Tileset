@@ -40,6 +40,8 @@ class player_morale
         void remove( const morale_type &type, const itype *item_type = nullptr );
         /** Clears up all morale points */
         void clear();
+        void clear_temporary_negative();
+        bool has_temporary_negative() const;
         /** Returns overall morale level */
         int get_level() const;
         /** Ticks down morale counters and removes them */

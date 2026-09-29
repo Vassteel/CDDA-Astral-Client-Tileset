@@ -784,7 +784,7 @@ std::vector<const achievement *> achievements_tracker::valid_achievements() cons
 {
     std::vector<const achievement *> result;
     for( const achievement &ach : achievement::get_all() ) {
-        if( initial_achievements_.count( ach.id ) ) {
+        if( initial_achievements_.count( ach.id ) && achievement_rewards::available( ach.id.str() ) ) {
             result.push_back( &ach );
         }
     }
@@ -794,7 +794,9 @@ std::vector<const achievement *> achievements_tracker::valid_achievements() cons
 void achievements_tracker::report_achievement( const achievement *a, achievement_completion comp )
 {
     cata_assert( comp != achievement_completion::pending );
-    cata_assert( !achievements_status_.count( a->id ) );
+    if( achievements_status_.count( a->id ) || !trackers_.count( a->id ) ) {
+        return;
+    }
 
     auto tracker_it = trackers_.find( a->id );
     achievements_status_.emplace(
@@ -889,6 +891,7 @@ std::string achievements_tracker::ui_text_for( const achievement *ach ) const
 void achievements_tracker::clear()
 {
     enabled_ = true;
+    reward_bank = achievement_rewards::bank();
     trackers_.clear();
     initial_achievements_.clear();
     achievements_status_.clear();
@@ -908,6 +911,7 @@ void achievements_tracker::notify( const cata::event &e )
 void achievements_tracker::serialize( JsonOut &jsout ) const
 {
     jsout.start_object();
+    jsout.member( "reward_bank", reward_bank );
     jsout.member( "enabled", enabled_ );
     jsout.member( "initial_achievements", initial_achievements_ );
     jsout.member( "achievements_status", achievements_status_ );
@@ -919,10 +923,27 @@ void achievements_tracker::deserialize( const JsonObject &jo )
     if( !jo.read( "enabled", enabled_ ) ) {
         enabled_ = true;
     }
+    reward_bank = achievement_rewards::bank();
+    jo.read( "reward_bank", reward_bank );
     jo.read( "initial_achievements", initial_achievements_ );
     jo.read( "achievements_status", achievements_status_ );
-
+    enroll_astral();
     init_watchers();
+}
+
+void achievements_tracker::enroll_astral()
+{
+    if( !active_ ) {
+        return;
+    }
+    for( const auto &entry : achievement_rewards::all() ) {
+        const achievement_id id( entry.first );
+        if( entry.second.enroll && id.is_valid() && achievement_rewards::available( entry.first ) &&
+            initial_achievements_.insert( id ).second && !achievements_status_.count( id ) ) {
+            trackers_.emplace( std::piecewise_construct, std::forward_as_tuple( id ),
+                               std::forward_as_tuple( id.obj(), *this, *stats_ ) );
+        }
+    }
 }
 
 void achievements_tracker::init_watchers()

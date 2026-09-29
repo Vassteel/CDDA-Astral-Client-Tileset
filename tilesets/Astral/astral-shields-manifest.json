@@ -1,0 +1,60 @@
+{
+  "base": "/home/deck/Astra & Grok/CDDA/artifacts/install-staged-20260928-062116/tileset-base/gfx/Astral",
+  "entries": [
+    {
+      "id": "astral_shield_scrap",
+      "file": "astral_shield_scrap.png",
+      "fg": 19452,
+      "sha256": "b41abfb45a0950761eb3784ee4aea4c2d5d9c0d2b99889db9042f56ea4175172"
+    },
+    {
+      "id": "astral_shield_buckler",
+      "file": "astral_shield_buckler.png",
+      "fg": 19453,
+      "sha256": "d1a88228b8a22c4a7d3b6ca89a707c51a262efcf86a858fd1a652b91ec85578c"
+    },
+    {
+      "id": "astral_shield_round",
+      "file": "astral_shield_round.png",
+      "fg": 19454,
+      "sha256": "d25d8c7b6464f2748e41d444d2a64d5ca85ffa7d1c451c2248af5de7200bcacf"
+    },
+    {
+      "id": "astral_shield_kite",
+      "file": "astral_shield_kite.png",
+      "fg": 19455,
+      "sha256": "17a026e63d3782fb9513a287f76a5ad544166cf757dc209db353ef17053af0d3"
+    },
+    {
+      "id": "astral_shield_tower",
+      "file": "astral_shield_tower.png",
+      "fg": 19456,
+      "sha256": "735a46f74b20b5d6ac90568c4d78142c610e121da6e3faa5e8e4acfee63dc93b"
+    },
+    {
+      "id": "astral_shield_riot",
+      "file": "astral_shield_riot.png",
+      "fg": 19457,
+      "sha256": "6d15a570e565b8d3b9823d6e1d69a95ede333ade83da24d27f323cb1ec291343"
+    },
+    {
+      "id": "astral_shield_ballistic",
+      "file": "astral_shield_ballistic.png",
+      "fg": 19458,
+      "sha256": "b495e7373ed1453442010b4319b0749f6b85c51bb6575d2f2d4f0384f32dcf29"
+    },
+    {
+      "id": "astral_shield_bulwark",
+      "file": "astral_shield_bulwark.png",
+      "fg": 19459,
+      "sha256": "307247356b0f49c355713972e5a5241b8780dcc2146e0ffb0c320dae2e1be116"
+    },
+    {
+      "id": "astral_shield_escort",
+      "file": "astral_shield_escort.png",
+      "fg": 19460,
+      "sha256": "243858781b5d30818b1af2d051b26c8113a57c42d1e92a50849ef136522aef51"
+    }
+  ],
+  "status": "staged; live visual acceptance pending"
+}

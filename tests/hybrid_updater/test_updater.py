@@ -1,4 +1,5 @@
 """Run with python3 -m unittest discover -s tests/hybrid_updater -v."""
+import contextlib
 import hashlib
 import importlib.util
 import json
@@ -60,6 +61,20 @@ class UpdaterTest(unittest.TestCase):
         self.assertEqual(stat.S_IMODE(self.exe.stat().st_mode), 0o751)
         self.assertFalse((self.client / 'data/title/astral.png').exists())
         self.assertEqual(self.protected, {p: u.digest(p) for p in self.protected})
+
+    def test_full_release_does_not_fall_back_to_old_executable(self):
+        releases = [
+            {'tag_name': 'client-v0.1.2', 'html_url': 'https://example.test/new', 'assets': []},
+            {'tag_name': 'client-v0.1.1', 'html_url': 'https://example.test/old',
+             'assets': [{'name': 'old-linux-update.zip', 'size': 10}]},
+        ]
+        with patch.object(u, 'github_json', return_value=releases):
+            release = u.check('owner/repo')
+        self.assertEqual(release['version'], 'client-v0.1.2')
+        self.assertTrue(release['full_download_required'])
+        with self.assertRaisesRegex(u.UpdateError, 'full client download'):
+            u.download('owner/repo', release, self.state)
+        self.assertEqual(self.exe.read_bytes(), b'previous client')
 
     def test_corruption_does_not_touch_installation(self):
         package = self.package(lambda m: m['files'][1].update(sha256='0' * 64))
@@ -148,6 +163,138 @@ class UpdaterTest(unittest.TestCase):
         for value in [None, {}, 'files', [None], [{'path': 'cataclysm-tiles', 'size': -1, 'sha256': 'bad'}]]:
             with self.subTest(value=value), self.assertRaises(u.UpdateError):
                 u.inspect_package(self.package(lambda m: m.update(files=value)))
+
+    def release(self, version='client-v0.1.0', package=None):
+        package = package or self.package(version=version)
+        return {'version': version, 'url': 'https://github.com/owner/repo/releases/tag/' + version,
+                'asset': {'id': 7, 'name': 'Astral-Client-linux-update.zip', 'size': package.stat().st_size,
+                          'digest': 'sha256:' + u.digest(package),
+                          'browser_download_url': 'https://github.com/owner/repo/releases/download/x/Astral-Client-linux-update.zip'}}
+
+    def serve(self, package):
+        def fake_open(url, accept=None):
+            self.downloads += 1
+            return open(package, 'rb')
+        self.downloads = 0
+        return patch.object(u, 'http_open', side_effect=fake_open)
+
+    def test_version_comparison_never_offers_downgrade(self):
+        self.assertEqual(u.parse_version('client-v0.10.2'), (0, 10, 2))
+        self.assertIsNone(u.parse_version('tileset-v1.0'))
+        self.assertTrue(u.is_current('client-v0.10.0', 'client-v0.9.9'))
+        self.assertTrue(u.is_current('client-v0.1.2', 'client-v0.1.2'))
+        self.assertFalse(u.is_current('client-v0.1.1', 'client-v0.1.2'))
+
+    def test_default_state_is_per_installation_with_legacy_support(self):
+        self.assertEqual(u.default_state(self.client), self.root / '.client-updates')
+        legacy = self.root / 'hybrid-updates'
+        u.write_json(legacy / 'installed.json', {'client': str(self.root / 'other')})
+        self.assertEqual(u.default_state(self.client), self.root / '.client-updates')
+        u.write_json(legacy / 'installed.json', {'client': str(self.client)})
+        self.assertEqual(u.default_state(self.client), legacy)
+
+    def test_installed_version_sources(self):
+        self.assertIsNone(u.installed_version(self.client, self.state))
+        u.write_json(self.client / 'VERSION.json', {'version': '0.1.0', 'executable_sha256': u.digest(self.exe)})
+        self.assertEqual(u.installed_version(self.client, self.state), 'client-v0.1.0')
+        u.apply(self.package(version='client-v0.1.1'), self.client, self.state)
+        self.assertEqual(u.installed_version(self.client, self.state), 'client-v0.1.1')
+        self.exe.write_bytes(b'manual build')
+        self.assertIsNone(u.installed_version(self.client, self.state))
+
+    def test_download_verifies_and_reuses_staged_package(self):
+        release = self.release()
+        with self.serve(self.package()):
+            first = u.download('owner/repo', release, self.state, progress=lambda d, t: None)
+            second = u.download('owner/repo', release, self.state)
+        self.assertEqual(first, second)
+        self.assertEqual(self.downloads, 1)
+        first.write_bytes(b'damaged')
+        with self.serve(self.package()):
+            u.download('owner/repo', release, self.state)
+        self.assertEqual(self.downloads, 1)
+        self.assertEqual(u.digest(first), release['asset']['digest'][7:])
+
+    def test_download_rejects_mismatches_and_foreign_urls(self):
+        release = self.release()
+        with self.serve(self.package(version='client-v0.0.9')), patch.object(u, 'gh_binary', return_value=None):
+            with self.assertRaises(u.UpdateError):
+                u.download('owner/repo', release, self.state)
+        release['asset']['browser_download_url'] = 'https://example.test/evil.zip'
+        with self.assertRaisesRegex(u.UpdateError, 'URL'):
+            u.download('owner/repo', release, self.state)
+        self.assertEqual(list(self.state.glob('release-*')), [])
+
+    def test_cancelled_download_leaves_nothing_behind(self):
+        def cancel(done, total):
+            raise u.Cancelled()
+        with self.serve(self.package()), self.assertRaises(u.Cancelled):
+            u.download('owner/repo', self.release(), self.state, progress=cancel)
+        self.assertEqual(list(self.state.glob('release-*')), [])
+
+    def test_prune_keeps_rollback_chain_and_interrupted_backups(self):
+        u.apply(self.package(), self.client, self.state)
+        self.files['cataclysm-tiles'] = b'newer client'
+        u.apply(self.package(version='client-v0.1.1'), self.client, self.state)
+        self.files['cataclysm-tiles'] = b'newest client'
+        u.apply(self.package(version='client-v0.1.2'), self.client, self.state)
+        u.rollback(self.client, self.state)
+        interrupted = self.state / 'backups/1'
+        u.write_json(interrupted / 'backup.json', {'status': 'prepared'})
+        (self.state / 'release-1.zip').write_bytes(b'old download')
+        u.prune(self.state)
+        backups = sorted((self.state / 'backups').iterdir())
+        self.assertEqual(len(backups), 3)
+        self.assertIn(interrupted, backups)
+        self.assertFalse((self.state / 'release-1.zip').exists())
+        u.rollback(self.client, self.state)
+        u.rollback(self.client, self.state)
+        self.assertEqual(self.exe.read_bytes(), b'previous client')
+
+    def test_http_retries_then_reports_friendly_error(self):
+        error = u.urllib.error.URLError('offline')
+        with patch.object(u.urllib.request, 'urlopen', side_effect=error) as opened, patch.object(u.time, 'sleep'):
+            with self.assertRaisesRegex(u.UpdateError, 'internet connection'):
+                u.http_open('https://api.github.com/x')
+        self.assertEqual(opened.call_count, u.RETRIES)
+
+    def test_public_api_preferred_over_gh(self):
+        with patch.object(u, 'http_open', return_value=__import__('io').BytesIO(b'[]')), \
+                patch.object(u, 'gh_binary', return_value='/usr/bin/gh'), patch.object(u.subprocess, 'run') as run:
+            self.assertEqual(u.github_json('owner/repo', 'releases'), [])
+        run.assert_not_called()
+
+    def gui(self, releases_version, running=False, answer=True):
+        messages = []
+        class Dialogs:
+            kind = 'test'
+            info = messages.append
+            error = messages.append
+            def question(self, text, yes='Yes', no='No'):
+                messages.append(text)
+                return answer
+            @contextlib.contextmanager
+            def progress(self, text):
+                yield lambda done, total: None
+        release = self.release(releases_version)
+        with self.serve(self.package(version=releases_version)), patch.object(u, 'check', return_value=release), \
+                patch.object(u, 'running', return_value=[1] if running else []):
+            u.gui_update('owner/repo', self.client, self.state, Dialogs())
+        return messages
+
+    def test_gui_flow(self):
+        u.write_json(self.client / 'VERSION.json', {'version': '0.2.0', 'executable_sha256': u.digest(self.exe)})
+        self.assertIn('up to date', self.gui('client-v0.1.9')[-1])
+        u.write_json(self.client / 'VERSION.json', {'version': '0.1.0', 'executable_sha256': u.digest(self.exe)})
+        self.assertIn('still running', self.gui('client-v0.1.1', running=True)[-1])
+        self.assertEqual(self.exe.read_bytes(), b'previous client')
+        self.assertEqual(len(list(self.state.glob('release-*.zip'))), 1)
+        messages = self.gui('client-v0.1.1')
+        self.assertTrue(messages[0].startswith('Install Astral Client 0.1.1'))
+        self.assertIn('Installed Astral Client 0.1.1', messages[-1])
+        self.assertEqual(self.exe.read_bytes(), b'new client')
+        self.assertEqual(list(self.state.glob('release-*.zip')), [])
+        self.assertIn('up to date', self.gui('client-v0.1.1')[-1])
 
 if __name__ == '__main__':
     unittest.main()

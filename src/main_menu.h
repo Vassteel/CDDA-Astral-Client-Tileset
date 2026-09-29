@@ -3,6 +3,7 @@
 #define CATA_SRC_MAIN_MENU_H
 
 #include <cstddef>
+#include <memory>
 #include <string>
 #include <utility>
 #include <vector>
@@ -15,10 +16,15 @@
 #include "point.h"
 #include "worldfactory.h"
 
+class main_menu_overlay;
+
 class main_menu
 {
+        friend class main_menu_overlay;
     public:
-        main_menu() : ctxt( "MAIN_MENU", keyboard_mode::keychar ) { }
+        // Out of line: hybrid_overlay's type is incomplete in this header.
+        main_menu();
+        ~main_menu();
         // Shows the main menu and returns whether a game was started or not
         bool opening_screen();
 
@@ -76,11 +82,16 @@ class main_menu
         input_context ctxt;
         int sel1 = 1;
         int sel2 = 1;
+        int sel_line = 0; // scroll line for MOTD / credits
         size_t last_world_pos = 0;
         int sub_opt_off = 0;
         point LAST_TERM;
         bool titled_background = false;
         catacurses::window w_open;
+#if defined(TILES)
+        /** Native ImGui presentation over the title art (see main_menu_hybrid.h). */
+        std::unique_ptr<main_menu_overlay> hybrid_overlay;
+#endif
         point menu_offset;
         std::vector<std::string> templates;
         int extra_w = 0;

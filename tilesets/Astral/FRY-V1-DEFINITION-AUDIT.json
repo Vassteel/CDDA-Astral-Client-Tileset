@@ -1,0 +1,873 @@
+{
+  "active_mods": [
+    "bombastic_perks",
+    "dda",
+    "innawood",
+    "limitless_backpack",
+    "megafauna",
+    "no_npc_food",
+    "perk_melee_system",
+    "personal_portal_storms"
+  ],
+  "records": [
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "abstract": "mon_fry",
+        "type": "MONSTER",
+        "name": {
+          "str_sp": "fish fry"
+        },
+        "//": "a default fish type - does not appear in-game",
+        "description": "A minuscule half-translucent fish larva.  Impossible to identify which species it belongs to.",
+        "default_faction": "fish_tiny",
+        "bodytype": "fish",
+        "categories": [
+          "WILDLIFE"
+        ],
+        "species": [
+          "FISH"
+        ],
+        "volume": "3 ml",
+        "weight": "1 g",
+        "hp": 1,
+        "speed": 150,
+        "move_skills": {
+          "swim": 1
+        },
+        "dodge": 10,
+        "material": [
+          "flesh"
+        ],
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology"
+        ],
+        "symbol": "f",
+        "color": "white",
+        "aggression": -60,
+        "morale": 5,
+        "melee_dice": 1,
+        "melee_dice_sides": 1,
+        "harvest": "exempt",
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 0
+          }
+        ],
+        "melee_training_cap": 0,
+        "fear_triggers": [
+          "PLAYER_CLOSE",
+          "SOUND"
+        ],
+        "death_function": {
+          "corpse_type": "NO_CORPSE",
+          "message": "The %s is smashed to non-recognizable pieces."
+        },
+        "flags": [
+          "SEES",
+          "SMELLS",
+          "AQUATIC",
+          "WATER_CAMOUFLAGE"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "abstract": "mon_fry_mutant",
+        "type": "MONSTER",
+        "name": {
+          "str_sp": "mutant fish fry"
+        },
+        "//": "a default fish type - does not appear in-game",
+        "description": "A half-translucent fish larva\u2026 though this one is far larger than the usual.  Impossible to identify which species it belongs to but you can safely tell that it is going to outgrow normal fish you're used to seeing.",
+        "default_faction": "fish_mutant_passive",
+        "bodytype": "fish",
+        "species": [
+          "FISH"
+        ],
+        "volume": "300 ml",
+        "weight": "275 g",
+        "hp": 3,
+        "speed": 150,
+        "move_skills": {
+          "swim": 1
+        },
+        "dodge": 8,
+        "material": [
+          "flesh"
+        ],
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology"
+        ],
+        "symbol": "f",
+        "color": "white",
+        "aggression": -60,
+        "morale": 5,
+        "melee_dice": 1,
+        "melee_dice_sides": 1,
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 0
+          }
+        ],
+        "melee_training_cap": 1,
+        "fear_triggers": [
+          "PLAYER_CLOSE",
+          "SOUND"
+        ],
+        "harvest": "mutant_fish",
+        "dissect": "dissect_fish_sample_single",
+        "flags": [
+          "SEES",
+          "AQUATIC",
+          "WATER_CAMOUFLAGE"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_brown_trout",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_brown_trout"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_brook_trout",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_brook_trout"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_lake_trout",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_lake_trout"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_rainbow_trout",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_rainbow_trout"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_salmon",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_salmon"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_kokanee_salmon",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_kokanee_salmon"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_whitefish",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_whitefish"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_whitefish_round",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_whitefish_round"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_lbass",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_lbass"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_sbass",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_sbass"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_pbass",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_pbass"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_perch",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_perch"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_walleye",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_walleye"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_sunfish",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_sunfish"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_pumpkinseed",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_pumpkinseed"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_bluegill",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_bluegill"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_redbreast",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_redbreast"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_green_sunfish",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_green_sunfish"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_rock_bass",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_rock_bass"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_calico_bass",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_calico_bass"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_warmouth",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_warmouth"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_bullhead",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_bullhead"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_bullhead_yellow",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_bullhead_yellow"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_channel_catfish",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_channel_catfish"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_white_catfish",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_white_catfish"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_pike",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_pike"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_pickerel",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_pickerel"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_pickerel_american",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_pickerel_american"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_muskellunge",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_muskellunge"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_white_sucker",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_white_sucker"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_carp",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_carp"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_grass_carp",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_grass_carp"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_goldfish",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_goldfish"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_bowfin",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_bowfin"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_gar_longnose",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_gar_longnose"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_burbot",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_burbot"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_sturgeon_lake",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_sturgeon_lake"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_sturgeon_shortnose",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_sturgeon_shortnose"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_fallfish",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_fallfish"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_crayfish",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "half_life": 56,
+          "into": "mon_fish_crayfish"
+        },
+        "name": {
+          "str": "crustacean larva",
+          "str_pl": "crustacean larvae"
+        },
+        "description": "A minuscule half-translucent crustacean larva.  Impossible to identify which species it belongs to.",
+        "bodytype": "crab"
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_mutant_salmon",
+        "type": "MONSTER",
+        "copy-from": "mon_fry_mutant",
+        "upgrades": {
+          "age_grow": 30,
+          "into": "mon_mutant_salmon"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_mackerel",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_mackerel"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_flounder",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_flounder"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_blackfish",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_blackfish"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_porgy",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_porgy"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_bluefish",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_bluefish"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_cod",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_cod"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_haddock",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_haddock"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_bluefin_tuna",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_bluefin_tuna"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_halibut",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_halibut"
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/fish.json",
+      "definition": {
+        "id": "mon_fry_pollock",
+        "type": "MONSTER",
+        "copy-from": "mon_fry",
+        "upgrades": {
+          "age_grow": 14,
+          "into": "mon_fish_pollock"
+        }
+      }
+    }
+  ],
+  "creature_ids": [
+    "mon_fry_blackfish",
+    "mon_fry_bluefin_tuna",
+    "mon_fry_bluefish",
+    "mon_fry_bluegill",
+    "mon_fry_bowfin",
+    "mon_fry_brook_trout",
+    "mon_fry_brown_trout",
+    "mon_fry_bullhead",
+    "mon_fry_bullhead_yellow",
+    "mon_fry_burbot",
+    "mon_fry_calico_bass",
+    "mon_fry_carp",
+    "mon_fry_channel_catfish",
+    "mon_fry_cod",
+    "mon_fry_fallfish",
+    "mon_fry_flounder",
+    "mon_fry_gar_longnose",
+    "mon_fry_goldfish",
+    "mon_fry_grass_carp",
+    "mon_fry_green_sunfish",
+    "mon_fry_haddock",
+    "mon_fry_halibut",
+    "mon_fry_kokanee_salmon",
+    "mon_fry_lake_trout",
+    "mon_fry_lbass",
+    "mon_fry_mackerel",
+    "mon_fry_muskellunge",
+    "mon_fry_pbass",
+    "mon_fry_perch",
+    "mon_fry_pickerel",
+    "mon_fry_pickerel_american",
+    "mon_fry_pike",
+    "mon_fry_pollock",
+    "mon_fry_porgy",
+    "mon_fry_pumpkinseed",
+    "mon_fry_rainbow_trout",
+    "mon_fry_redbreast",
+    "mon_fry_rock_bass",
+    "mon_fry_salmon",
+    "mon_fry_sbass",
+    "mon_fry_sturgeon_lake",
+    "mon_fry_sturgeon_shortnose",
+    "mon_fry_sunfish",
+    "mon_fry_walleye",
+    "mon_fry_warmouth",
+    "mon_fry_white_catfish",
+    "mon_fry_white_sucker",
+    "mon_fry_whitefish",
+    "mon_fry_whitefish_round",
+    "mon_fry_crayfish",
+    "mon_fry_mutant_salmon"
+  ],
+  "renderer_states": [
+    "corpse_mon_fry_mutant_salmon"
+  ],
+  "evidence": "src/cata_tiles.cpp:3680 prefixes corpse_ to monster id",
+  "seasons": "Neutral year-round larval appearance. Ordinary fish fry share the deliberately indistinguishable mon_fry description, color, size and bodytype; only growth targets differ. Ordinary fish/crustacean larva have NO_CORPSE, so no unused corpse sprites are generated. Mutant fry have a distinct larger body and corpse. Existing adult fish art is preserved; flagged adult mutant growth stages remain separately queued.",
+  "runtime_review": "pending; conditional mod interactions outside this static audit",
+  "conditional_files_skipped": [
+    "data/mods/innawood/mod_interactions/bombastic_perks/experience_eocs.json",
+    "data/mods/innawood/mod_interactions/sorcerer/experience_eocs.json",
+    "data/mods/innawood/mod_interactions/skyisland/region_overlay.json",
+    "data/mods/innawood/mod_interactions/perk_melee_system/experience_eocs.json",
+    "data/mods/Megafauna/mod_interactions/defense_mode/monsters.json",
+    "data/mods/Megafauna/mod_interactions/defense_mode/monstergroups.json"
+  ]
+}

@@ -1,0 +1,894 @@
+{
+  "name": "Undead amphibians",
+  "revision": "undead-amphibians-v1",
+  "canvas": 512,
+  "anchor_bottom": 488,
+  "sprite_offset_x": -16,
+  "sprite_offset_y": -32,
+  "seasonal_policy": "Neutral year-round undead and corpse states. Bloated zombie toad and warted monstrosity explicitly use NO_CORPSE and receive living sprites only. Smoke/acid death effects on other forms do not suppress ordinary corpse creation. REVIVES is behavior, not a separate appearance state. Already illustrated frog mother, tadpole constrictor and giant zombie bullfrog are preserved.",
+  "assets": [
+    {
+      "key": "frog_dad-living",
+      "id": "mon_frog_dad",
+      "label": "Colossal zombie bullfrog / live",
+      "max": [
+        352,
+        248
+      ],
+      "state": "living",
+      "description": "This gigantic zombified frog lets out an ear splitting unholy wail as it slowly takes notice of you.  Its mostly lethargic movements are offset by its ability to leap great distances using its gargantuan stout legs.",
+      "source": "sources/frog_dad-living.png",
+      "native": "native/frog_dad-living.png",
+      "source_sha256": "247db23f2c35e18d1673a3c52f46fc42020635a7174b9613514050a2680408a2",
+      "native_sha256": "703551c857191e002a27e8a47231dea039f9f815c96251784a66d0cf52215bb8",
+      "prompt_sha256": "31f307359b9ea000a311b11322e4b492c2a8c75a43b4952722bfcde15bcedad4",
+      "source_dimensions": [
+        746,
+        638
+      ],
+      "crop": [
+        59,
+        139,
+        697,
+        577
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        10.0,
+        30.75,
+        54.0,
+        61.0
+      ]
+    },
+    {
+      "key": "toad_zombie-living",
+      "id": "mon_toad_zombie",
+      "label": "Giant zombie toad / live",
+      "max": [
+        304,
+        216
+      ],
+      "state": "living",
+      "description": "The revivified remains of a giant mutant toad.  Its condition has left it slowed but no less dangerous.",
+      "source": "sources/toad_zombie-living.png",
+      "native": "native/toad_zombie-living.png",
+      "source_sha256": "f802bb293d5761dfca97be3b69c6f0a3c978a749dc48b08d5a5d3094b64e75c8",
+      "native_sha256": "41abc54e70dbaf1116d658d55bc995a521b0920e0924c9d59c8a3991de46bd7f",
+      "prompt_sha256": "31f307359b9ea000a311b11322e4b492c2a8c75a43b4952722bfcde15bcedad4",
+      "source_dimensions": [
+        632,
+        638
+      ],
+      "crop": [
+        50,
+        206,
+        570,
+        577
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        13.0,
+        34.0,
+        50.875,
+        61.0
+      ]
+    },
+    {
+      "key": "frog_dad-corpse",
+      "id": "corpse_mon_frog_dad",
+      "label": "Colossal zombie bullfrog / dead",
+      "max": [
+        352,
+        154
+      ],
+      "state": "corpse",
+      "description": "This gigantic zombified frog lets out an ear splitting unholy wail as it slowly takes notice of you.  Its mostly lethargic movements are offset by its ability to leap great distances using its gargantuan stout legs.",
+      "source": "sources/frog_dad-corpse.png",
+      "native": "native/frog_dad-corpse.png",
+      "source_sha256": "e9dd650f49523a75b420483d489bf21ad4a529554ae5c129aa86f697045f1ab1",
+      "native_sha256": "8e278d8b23cac9fe8f024f4867a9c92ab0a6e223c98f2f990bba49d6b6efb56d",
+      "prompt_sha256": "31f307359b9ea000a311b11322e4b492c2a8c75a43b4952722bfcde15bcedad4",
+      "source_dimensions": [
+        772,
+        518
+      ],
+      "crop": [
+        54,
+        61,
+        732,
+        415
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        13.5,
+        41.75,
+        50.375,
+        61.0
+      ]
+    },
+    {
+      "key": "toad_zombie-corpse",
+      "id": "corpse_mon_toad_zombie",
+      "label": "Giant zombie toad / dead",
+      "max": [
+        304,
+        134
+      ],
+      "state": "corpse",
+      "description": "The revivified remains of a giant mutant toad.  Its condition has left it slowed but no less dangerous.",
+      "source": "sources/toad_zombie-corpse.png",
+      "native": "native/toad_zombie-corpse.png",
+      "source_sha256": "21254191e148acb5a35624261d0a8e0de5623af0d5483a0f66ebc224cad9ce17",
+      "native_sha256": "1b16b2c81472aa16cd9469e1c837346fd97a07f2a79d0ce3fa4a79751dfbd89f",
+      "prompt_sha256": "31f307359b9ea000a311b11322e4b492c2a8c75a43b4952722bfcde15bcedad4",
+      "source_dimensions": [
+        606,
+        518
+      ],
+      "crop": [
+        40,
+        120,
+        552,
+        398
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        16.5,
+        44.25,
+        47.375,
+        61.0
+      ]
+    },
+    {
+      "key": "frog_shocker-living",
+      "id": "mon_frog_shocker",
+      "label": "Bioelectric zombie frog / live",
+      "max": [
+        304,
+        216
+      ],
+      "state": "living",
+      "description": "The hum coming from this giant, rotten frog sounds unlike any kind of vocalization.  The sound is clearly a result of the bolts of electricity that skip across its skin and arc between its lips.",
+      "source": "sources/frog_shocker-living.png",
+      "native": "native/frog_shocker-living.png",
+      "source_sha256": "66cbf8b6f430c681e5800cb85885459d862087bdfae48b250577aad2566cf37e",
+      "native_sha256": "e48eed62434d4066f8f6a8e11eaf2ff9adec419d23eb321b93deef0e33fbad7d",
+      "prompt_sha256": "7205ae38cefacf3c02c5abd0d68a2cd7a11664a28ce6bd4feb3c9947b16118f1",
+      "source_dimensions": [
+        694,
+        706
+      ],
+      "crop": [
+        124,
+        233,
+        633,
+        607
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        13.625,
+        34.0,
+        50.375,
+        61.0
+      ]
+    },
+    {
+      "key": "zombtreefrog-living",
+      "id": "mon_zombtreefrog",
+      "label": "Giant zombie treefrog / live",
+      "max": [
+        288,
+        200
+      ],
+      "state": "living",
+      "description": "The pale, empty eyes of this large, reanimated treefrog still swivel in their sockets, searching for prey.  Its steps are ungainly but its hind legs look capable of great leaps.",
+      "source": "sources/zombtreefrog-living.png",
+      "native": "native/zombtreefrog-living.png",
+      "source_sha256": "85cef13382e3bdd5409345be73a592c6dc695d0a9e547c6cd0ff3f4155629d6e",
+      "native_sha256": "1ee938c153b1a0fc8020ff3f1d30b7d0f57149a2ca6bd455648d6f7ecbcc4433",
+      "prompt_sha256": "7205ae38cefacf3c02c5abd0d68a2cd7a11664a28ce6bd4feb3c9947b16118f1",
+      "source_dimensions": [
+        684,
+        706
+      ],
+      "crop": [
+        62,
+        142,
+        570,
+        618
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        18.625,
+        36.0,
+        45.25,
+        61.0
+      ]
+    },
+    {
+      "key": "frog_shocker-corpse",
+      "id": "corpse_mon_frog_shocker",
+      "label": "Bioelectric zombie frog / dead",
+      "max": [
+        304,
+        134
+      ],
+      "state": "corpse",
+      "description": "The hum coming from this giant, rotten frog sounds unlike any kind of vocalization.  The sound is clearly a result of the bolts of electricity that skip across its skin and arc between its lips.",
+      "source": "sources/frog_shocker-corpse.png",
+      "native": "native/frog_shocker-corpse.png",
+      "source_sha256": "cbd808abc9ca81f5b36cc36861681401ab12690c6243442ddc474f7c98505724",
+      "native_sha256": "9c3136f19d7f013bb3f16f81f3622b39da5538d635e86c08f7fc1ff734ec14a9",
+      "prompt_sha256": "7205ae38cefacf3c02c5abd0d68a2cd7a11664a28ce6bd4feb3c9947b16118f1",
+      "source_dimensions": [
+        661,
+        450
+      ],
+      "crop": [
+        58,
+        119,
+        632,
+        342
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        13.0,
+        46.25,
+        51.0,
+        61.0
+      ]
+    },
+    {
+      "key": "zombtreefrog-corpse",
+      "id": "corpse_mon_zombtreefrog",
+      "label": "Giant zombie treefrog / dead",
+      "max": [
+        288,
+        124
+      ],
+      "state": "corpse",
+      "description": "The pale, empty eyes of this large, reanimated treefrog still swivel in their sockets, searching for prey.  Its steps are ungainly but its hind legs look capable of great leaps.",
+      "source": "sources/zombtreefrog-corpse.png",
+      "native": "native/zombtreefrog-corpse.png",
+      "source_sha256": "8287885550eb60281195acb2952350bb1d351b1699517beeb30c82896ec8e04a",
+      "native_sha256": "514f7746eff5f0a1e2b0cfeac77a57c31652ba2de9ab9635a846787aad01aa92",
+      "prompt_sha256": "7205ae38cefacf3c02c5abd0d68a2cd7a11664a28ce6bd4feb3c9947b16118f1",
+      "source_dimensions": [
+        717,
+        450
+      ],
+      "crop": [
+        30,
+        89,
+        664,
+        344
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        14.0,
+        46.5,
+        50.0,
+        61.0
+      ]
+    },
+    {
+      "key": "frog_shadow-living",
+      "id": "mon_frog_shadow",
+      "label": "Shadow leaper / live",
+      "max": [
+        288,
+        200
+      ],
+      "state": "living",
+      "description": "A lithe and leggy form rests flat against the ground, wreathed in darkness.  When it leaps, the shadows follow with it.",
+      "source": "sources/frog_shadow-living.png",
+      "native": "native/frog_shadow-living.png",
+      "source_sha256": "066e4d00064f295a7381a35c064a0f04737d48dccf5b35a9a3dac70afed30ff0",
+      "native_sha256": "47a4036eedd8d534127e25098832175032ef14965cb63afeea6e949e71a62edd",
+      "prompt_sha256": "a0219e4e6d86efa21bc1228b9c3dd4ebb56546b31567bd0eb50cd4fdcb3b8e4c",
+      "source_dimensions": [
+        661,
+        655
+      ],
+      "crop": [
+        48,
+        231,
+        630,
+        604
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        14.0,
+        37.875,
+        50.0,
+        61.0
+      ]
+    },
+    {
+      "key": "toad_bone-living",
+      "id": "mon_toad_bone",
+      "label": "Death mask zombie toad / live",
+      "max": [
+        352,
+        248
+      ],
+      "state": "living",
+      "description": "The face and head of this enormous once-frog is encased in ossified tissue.  Its dead eyes peer out from this death mask of hardened bone, which curves into a jagged beak around its mouth.  Even its warts appear to have stiffened into dense osteoderms.",
+      "source": "sources/toad_bone-living.png",
+      "native": "native/toad_bone-living.png",
+      "source_sha256": "667ac9ce4a17d723578573b36c0ce1a5e5c1a8083bd0d81beb85201be65891de",
+      "native_sha256": "a2be46864c9a3c867099690c31623128efb5e8fcc8c31731ca0861fc3cf41232",
+      "prompt_sha256": "a0219e4e6d86efa21bc1228b9c3dd4ebb56546b31567bd0eb50cd4fdcb3b8e4c",
+      "source_dimensions": [
+        717,
+        655
+      ],
+      "crop": [
+        31,
+        132,
+        677,
+        597
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        10.375,
+        30.0,
+        53.5,
+        61.0
+      ]
+    },
+    {
+      "key": "frog_shadow-corpse",
+      "id": "corpse_mon_frog_shadow",
+      "label": "Shadow leaper / dead",
+      "max": [
+        288,
+        124
+      ],
+      "state": "corpse",
+      "description": "A lithe and leggy form rests flat against the ground, wreathed in darkness.  When it leaps, the shadows follow with it.",
+      "source": "sources/frog_shadow-corpse.png",
+      "native": "native/frog_shadow-corpse.png",
+      "source_sha256": "889f909f588800e392bb75185161e69a331679cb33852fbeb35dce49c98eeff8",
+      "native_sha256": "7a89ed34d46789204eb084245da52fd375a338223ea41c401e768262bd692c07",
+      "prompt_sha256": "a0219e4e6d86efa21bc1228b9c3dd4ebb56546b31567bd0eb50cd4fdcb3b8e4c",
+      "source_dimensions": [
+        677,
+        501
+      ],
+      "crop": [
+        45,
+        140,
+        659,
+        408
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        14.25,
+        45.5,
+        49.75,
+        61.0
+      ]
+    },
+    {
+      "key": "toad_bone-corpse",
+      "id": "corpse_mon_toad_bone",
+      "label": "Death mask zombie toad / dead",
+      "max": [
+        352,
+        154
+      ],
+      "state": "corpse",
+      "description": "The face and head of this enormous once-frog is encased in ossified tissue.  Its dead eyes peer out from this death mask of hardened bone, which curves into a jagged beak around its mouth.  Even its warts appear to have stiffened into dense osteoderms.",
+      "source": "sources/toad_bone-corpse.png",
+      "native": "native/toad_bone-corpse.png",
+      "source_sha256": "d9d082532f76849a947c52edb8b66bb44df44057fe408c77744184982d436adf",
+      "native_sha256": "bdadd629d7896ef4572cc2eb9fd9232900dcf09203d4e94570de3493982e4238",
+      "prompt_sha256": "a0219e4e6d86efa21bc1228b9c3dd4ebb56546b31567bd0eb50cd4fdcb3b8e4c",
+      "source_dimensions": [
+        701,
+        501
+      ],
+      "crop": [
+        19,
+        51,
+        664,
+        375
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        12.75,
+        41.75,
+        51.125,
+        61.0
+      ]
+    },
+    {
+      "key": "frog_husk-living",
+      "id": "mon_frog_husk",
+      "label": "Leaping husk / live",
+      "max": [
+        256,
+        184
+      ],
+      "state": "living",
+      "description": "The dehydrated remains of a frog, like the unfortunate sort you might find trapped between a window and screen.  This one is much larger than those and surely capable of doing you real harm.  You see its dry skin crack and shed wisps of tainted dust as it moves.",
+      "source": "sources/frog_husk-living.png",
+      "native": "native/frog_husk-living.png",
+      "source_sha256": "ad15a76afb97357e6fbbd19dd547c4069e2acaaf7ea45439dfafed93d02d75b4",
+      "native_sha256": "2849bc6a42f777983299066a0b92457b49d5cc2f5bd50b4368f20783090a4f06",
+      "prompt_sha256": "0ccd54024da1ae896d6e7c4b1b7215c0b92e2cb7c4863fd1e60035a000bd2396",
+      "source_dimensions": [
+        661,
+        670
+      ],
+      "crop": [
+        72,
+        175,
+        632,
+        583
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        16.125,
+        38.0,
+        47.75,
+        61.0
+      ]
+    },
+    {
+      "key": "frog_mummy-living",
+      "id": "mon_frog_mummy",
+      "label": "Batrachian mummy / live",
+      "max": [
+        304,
+        216
+      ],
+      "state": "living",
+      "description": "The ambulatory, desiccated corpse of an enormous amphibian.  What papery skin remains hugs tightly to the bones and shrunken flesh beneath.  Each stuttering leap it makes leaves it looking worse off as it sheds clouds of ash and soot.",
+      "source": "sources/frog_mummy-living.png",
+      "native": "native/frog_mummy-living.png",
+      "source_sha256": "21a1471b5ce0556d8bf009202df71b2c91d3b957262e02e3080116afd99df2e8",
+      "native_sha256": "0b1c4ed0fe64d58f181e734848700689a6bc7763319d4adc4dfeb6d731ffdbf0",
+      "prompt_sha256": "0ccd54024da1ae896d6e7c4b1b7215c0b92e2cb7c4863fd1e60035a000bd2396",
+      "source_dimensions": [
+        717,
+        670
+      ],
+      "crop": [
+        29,
+        139,
+        672,
+        600
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        13.125,
+        34.0,
+        50.75,
+        61.0
+      ]
+    },
+    {
+      "key": "frog_husk-corpse",
+      "id": "corpse_mon_frog_husk",
+      "label": "Leaping husk / dead",
+      "max": [
+        256,
+        114
+      ],
+      "state": "corpse",
+      "description": "The dehydrated remains of a frog, like the unfortunate sort you might find trapped between a window and screen.  This one is much larger than those and surely capable of doing you real harm.  You see its dry skin crack and shed wisps of tainted dust as it moves.",
+      "source": "sources/frog_husk-corpse.png",
+      "native": "native/frog_husk-corpse.png",
+      "source_sha256": "28622508cb5630f0023b110ff2706907f5588b6c1645fa715f7a3ee52fd21bd6",
+      "native_sha256": "9bcca32536f729522dd68dc3e89c8fe0f0c51d90bf6836989440502f41175d55",
+      "prompt_sha256": "0ccd54024da1ae896d6e7c4b1b7215c0b92e2cb7c4863fd1e60035a000bd2396",
+      "source_dimensions": [
+        665,
+        486
+      ],
+      "crop": [
+        52,
+        126,
+        641,
+        366
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        16.0,
+        48.0,
+        48.0,
+        61.0
+      ]
+    },
+    {
+      "key": "frog_mummy-corpse",
+      "id": "corpse_mon_frog_mummy",
+      "label": "Batrachian mummy / dead",
+      "max": [
+        304,
+        134
+      ],
+      "state": "corpse",
+      "description": "The ambulatory, desiccated corpse of an enormous amphibian.  What papery skin remains hugs tightly to the bones and shrunken flesh beneath.  Each stuttering leap it makes leaves it looking worse off as it sheds clouds of ash and soot.",
+      "source": "sources/frog_mummy-corpse.png",
+      "native": "native/frog_mummy-corpse.png",
+      "source_sha256": "1d76b055eb2f0d036ed538d3f4b5de5323261dd18d4b3ac7f25bd9db9c3d491e",
+      "native_sha256": "a1c77165020bd1bf04baa9b3633877ed249f07c41299479e0c483afa1d819dd3",
+      "prompt_sha256": "0ccd54024da1ae896d6e7c4b1b7215c0b92e2cb7c4863fd1e60035a000bd2396",
+      "source_dimensions": [
+        713,
+        486
+      ],
+      "crop": [
+        25,
+        70,
+        682,
+        381
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        14.25,
+        44.25,
+        49.625,
+        61.0
+      ]
+    },
+    {
+      "key": "frog_smoker_hulk-living",
+      "id": "mon_frog_smoker_hulk",
+      "label": "Batrachian smoker / live",
+      "max": [
+        368,
+        264
+      ],
+      "state": "living",
+      "description": "Even without the haze of smoke that constantly fumes off of it, it would be difficult to tell what this once was.  The massive thing seems to have dried out and shriveled up, though unevenly.  Rind through core it has warped.  Its whole dry body crinkles and folds as it moves.",
+      "source": "sources/frog_smoker_hulk-living.png",
+      "native": "native/frog_smoker_hulk-living.png",
+      "source_sha256": "84c74b08510105703ffb72f456b26961e4f1e635183c7f198e26a38e4bec1045",
+      "native_sha256": "87c7eefffff7256a01d271a7dc13b00c483e70f038c7fc1f0ff34dad9dd0670f",
+      "prompt_sha256": "91ad99729dbfcec16d0914160cbff08510561c00111490514939d5035c6ccf0d",
+      "source_dimensions": [
+        626,
+        789
+      ],
+      "crop": [
+        47,
+        137,
+        582,
+        695
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        16.125,
+        28.0,
+        47.75,
+        61.0
+      ]
+    },
+    {
+      "key": "gastro_bufo-living",
+      "id": "mon_gastro_bufo",
+      "label": "Gastro bufo / live",
+      "max": [
+        352,
+        248
+      ],
+      "state": "living",
+      "description": "A massive toad stumbling around while leaking acid from its skin.  Doesn't look friendly at all.",
+      "source": "sources/gastro_bufo-living.png",
+      "native": "native/gastro_bufo-living.png",
+      "source_sha256": "bbc9db958eb6fd740fb97c586e58c2c592f9cf240446b514b4503852901e2c7b",
+      "native_sha256": "3afed83f89f446e85cfa1d5c0bc523999c9f2f5cab8bfe14a0d430cb2fa82e31",
+      "prompt_sha256": "91ad99729dbfcec16d0914160cbff08510561c00111490514939d5035c6ccf0d",
+      "source_dimensions": [
+        607,
+        789
+      ],
+      "crop": [
+        44,
+        279,
+        566,
+        690
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        12.25,
+        30.0,
+        51.625,
+        61.0
+      ]
+    },
+    {
+      "key": "frog_smoker_hulk-corpse",
+      "id": "corpse_mon_frog_smoker_hulk",
+      "label": "Batrachian smoker / dead",
+      "max": [
+        368,
+        164
+      ],
+      "state": "corpse",
+      "description": "Even without the haze of smoke that constantly fumes off of it, it would be difficult to tell what this once was.  The massive thing seems to have dried out and shriveled up, though unevenly.  Rind through core it has warped.  Its whole dry body crinkles and folds as it moves.",
+      "source": "sources/frog_smoker_hulk-corpse.png",
+      "native": "native/frog_smoker_hulk-corpse.png",
+      "source_sha256": "cb70d24b6c06642c096b3223b3ac6040d72928f4c4426845d502cc6ddfa6370a",
+      "native_sha256": "7eb3c491fad51ffdbed17773d034efb1854cc8a49b6f870c930be46b9ac8b0dd",
+      "prompt_sha256": "91ad99729dbfcec16d0914160cbff08510561c00111490514939d5035c6ccf0d",
+      "source_dimensions": [
+        618,
+        503
+      ],
+      "crop": [
+        33,
+        94,
+        599,
+        384
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        12.0,
+        40.5,
+        52.0,
+        61.0
+      ]
+    },
+    {
+      "key": "gastro_bufo-corpse",
+      "id": "corpse_mon_gastro_bufo",
+      "label": "Gastro bufo / dead",
+      "max": [
+        352,
+        154
+      ],
+      "state": "corpse",
+      "description": "A massive toad stumbling around while leaking acid from its skin.  Doesn't look friendly at all.",
+      "source": "sources/gastro_bufo-corpse.png",
+      "native": "native/gastro_bufo-corpse.png",
+      "source_sha256": "e58701087fde08131e349a2499980040dbcff8d231a98288db5915be553186ac",
+      "native_sha256": "ac79628a052cfadf67591bf23dd62cc05d22e09011c1861c0871a691d3403f07",
+      "prompt_sha256": "91ad99729dbfcec16d0914160cbff08510561c00111490514939d5035c6ccf0d",
+      "source_dimensions": [
+        615,
+        503
+      ],
+      "crop": [
+        19,
+        99,
+        589,
+        384
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        12.75,
+        41.75,
+        51.25,
+        61.0
+      ]
+    },
+    {
+      "key": "toad_bloat-living",
+      "id": "mon_toad_bloat",
+      "label": "Bloated zombie toad / live",
+      "max": [
+        336,
+        240
+      ],
+      "state": "living",
+      "description": "This zombified toad wobbles as it drags along its immense, inflated form.  A yellow-brown sludge dribbles from its mouth and seeps out from its bulging, cracking skin.",
+      "source": "sources/toad_bloat-living.png",
+      "native": "native/toad_bloat-living.png",
+      "source_sha256": "09dadd7012bd85faf659c87b4a326520402bb26e6a253dfb84ce61c8ed3130a0",
+      "native_sha256": "df9ef15971345d76685aa95b91a86fc4c1cbc65fd90416bf1db6804e5fa0b47d",
+      "prompt_sha256": "b35dfddb81a4d7bba7ddbfbf2bb3170dc42a42b1e6ee19c1d50c8ae646845f2e",
+      "source_dimensions": [
+        854,
+        813
+      ],
+      "crop": [
+        45,
+        166,
+        785,
+        700
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        11.125,
+        31.0,
+        52.75,
+        61.0
+      ]
+    },
+    {
+      "key": "toad_wart-living",
+      "id": "mon_toad_wart",
+      "label": "Warted monstrosity / live",
+      "max": [
+        400,
+        288
+      ],
+      "state": "living",
+      "description": "A festering toad the size of a dune buggy.  It struggles to pull its bulk towards you.  The warts covering its back appear fit to burst with yellow sludge, and more of the stuff flows freely from both ends of it.",
+      "source": "sources/toad_wart-living.png",
+      "native": "native/toad_wart-living.png",
+      "source_sha256": "a33e397ca560a014c8fab5d8c7c44170c5896cc486ef6f641da74d7793b1e33c",
+      "native_sha256": "a2c4250fa19772eb02e5cdddc9a92f21e6fbdc55fb7aa7e14c15ac7cd14aa884",
+      "prompt_sha256": "b35dfddb81a4d7bba7ddbfbf2bb3170dc42a42b1e6ee19c1d50c8ae646845f2e",
+      "source_dimensions": [
+        1096,
+        813
+      ],
+      "crop": [
+        70,
+        150,
+        1054,
+        743
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        7.0,
+        30.875,
+        57.0,
+        61.0
+      ]
+    }
+  ],
+  "status": "staged in creatures-glyph-batch-01; archive and user/live acceptance pending",
+  "generator": "built-in imagegen",
+  "client_modified": false,
+  "visual_review": "source and native preview inspected; user/live review pending",
+  "review_notes": [
+    "All 22 silhouettes and both native-preview pages inspected; background alpha and gutters pass.",
+    "Dead bioelectric and smoker sprites omit active electricity/smoke; dead poses remain distinguishable.",
+    "Bloated and warted toads explicitly leave NO_CORPSE and have no invented corpse states.",
+    "Source frogs are fictional undead versions based on game descriptions; native appearance and live gameplay await user acceptance."
+  ],
+  "validation": {
+    "unique_sprites": 22,
+    "creature_ids": [
+      "mon_frog_dad",
+      "mon_toad_zombie",
+      "mon_frog_shocker",
+      "mon_zombtreefrog",
+      "mon_frog_shadow",
+      "mon_toad_bone",
+      "mon_frog_husk",
+      "mon_frog_mummy",
+      "mon_frog_smoker_hulk",
+      "mon_gastro_bufo",
+      "mon_toad_bloat",
+      "mon_toad_wart"
+    ],
+    "corpse_ids": [
+      "corpse_mon_frog_dad",
+      "corpse_mon_toad_zombie",
+      "corpse_mon_frog_shocker",
+      "corpse_mon_zombtreefrog",
+      "corpse_mon_frog_shadow",
+      "corpse_mon_toad_bone",
+      "corpse_mon_frog_husk",
+      "corpse_mon_frog_mummy",
+      "corpse_mon_frog_smoker_hulk",
+      "corpse_mon_gastro_bufo"
+    ],
+    "total_slots": 19785,
+    "prior_non_config_files_preserved": 401,
+    "unrelated_mappings_preserved": true,
+    "atlas_bytes": "passed",
+    "source_prompt_native_hashes": "passed",
+    "reference_indices": "passed",
+    "client_modified": false,
+    "live_review": "pending"
+  }
+}

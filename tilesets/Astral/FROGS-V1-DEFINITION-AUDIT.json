@@ -1,0 +1,333 @@
+{
+  "active_mods": [
+    "bombastic_perks",
+    "dda",
+    "innawood",
+    "limitless_backpack",
+    "megafauna",
+    "no_npc_food",
+    "perk_melee_system",
+    "personal_portal_storms"
+  ],
+  "records": [
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "abstract": "mon_proxy_frog",
+        "type": "MONSTER",
+        "description": "A hypothetical frog, if you're seeing this there's a problem.",
+        "name": {
+          "str": "proxy frog"
+        },
+        "default_faction": "amphibian_tiny",
+        "bodytype": "frog",
+        "looks_like": "mon_frog",
+        "categories": [
+          "WILDLIFE"
+        ],
+        "species": [
+          "AMPHIBIAN"
+        ],
+        "volume": "300 ml",
+        "weight": "30 g",
+        "hp": 3,
+        "speed": 80,
+        "move_skills": {
+          "swim": 8
+        },
+        "material": [
+          "flesh"
+        ],
+        "symbol": "b",
+        "color": "brown",
+        "melee_damage": [
+          {
+            "damage_type": "cut",
+            "amount": 0
+          }
+        ],
+        "dodge": 6,
+        "families": [
+          "prof_gross_anatomy",
+          "prof_intro_biology",
+          "prof_physiology",
+          "prof_wp_basic_amphibian"
+        ],
+        "weakpoint_sets": [
+          "wps_amphibian_body",
+          "wps_amphibian_frog"
+        ],
+        "dissect": "dissect_batrachian_sample_single",
+        "harvest": "mammal_tiny",
+        "vision_night": 30,
+        "special_attacks": [
+          {
+            "type": "leap",
+            "cooldown": 32,
+            "max_range": 4,
+            "allow_no_target": true
+          }
+        ],
+        "fear_triggers": [
+          "PLAYER_CLOSE",
+          "FIRE",
+          "HURT",
+          "FRIEND_ATTACKED",
+          "SOUND"
+        ],
+        "baby_flags": [
+          "SPRING",
+          "SUMMER"
+        ],
+        "flags": [
+          "FISHABLE",
+          "SEES",
+          "SMELLS",
+          "HEARS",
+          "WATER_CAMOUFLAGE",
+          "SMALL_HIDER",
+          "SWARMS"
+        ]
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_leo_frog",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_frog",
+        "description": "Leopard frogs are named for the brown spots on their backs and legs.  Although limited by size, they too are voracious predators.",
+        "name": {
+          "str": "leopard frog"
+        },
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_leo_frog"
+          },
+          "baby_count": 6,
+          "baby_timer": 20
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_fowler_toad",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_frog",
+        "description": "Fowler's toads secrete a harmful and distasteful compound from their backs.  This helps safeguard them from predators and also gives them a distinctive odor like boiled peanuts.",
+        "name": {
+          "str": "Fowler's toad"
+        },
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_fowler_toad"
+          },
+          "baby_count": 8,
+          "baby_timer": 36
+        },
+        "extend": {
+          "flags": [
+            "POISON"
+          ]
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_peeper_frog",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_frog",
+        "description": "This diminutive frog has a distinctive chirping call and bands of darker skin that come to form a rough 'X' shape on its back.",
+        "name": {
+          "str": "spring peeper"
+        },
+        "volume": "20 ml",
+        "weight": "4 g",
+        "hp": 1,
+        "special_attacks": [
+          [
+            "PARROT",
+            30
+          ],
+          {
+            "type": "leap",
+            "cooldown": 32,
+            "max_range": 4,
+            "allow_no_target": true
+          }
+        ],
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_peeper_frog"
+          },
+          "baby_count": 8,
+          "baby_timer": 20
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_gray_frog",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_frog",
+        "description": "This treefrog can change its coloration much like a chameleon, shifting from a near-white gray, through greens and browns, to a dark, almost charcoal color.",
+        "name": {
+          "str": "gray treefrog"
+        },
+        "volume": "150 ml",
+        "weight": "10 g",
+        "hp": 2,
+        "color": "light_gray",
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_gray_frog"
+          },
+          "baby_count": 8,
+          "baby_timer": 26
+        },
+        "extend": {
+          "flags": [
+            "CAMOUFLAGE"
+          ]
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_mink_frog",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_frog",
+        "description": "This pungent frog is named for the mammal with which it shares both name and odor.  Its skin is light green underneath a heavy spatter of almost black mottling.",
+        "name": {
+          "str": "mink frog"
+        },
+        "volume": "150 ml",
+        "weight": "10 g",
+        "hp": 2,
+        "color": "green",
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_mink_frog"
+          },
+          "baby_count": 8,
+          "baby_timer": 26
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_tail_frog",
+        "type": "MONSTER",
+        "copy-from": "mon_mink_frog",
+        "description": "This very large, funky frog has an accentuated, paddle-like tail that accounts for half its body mass.  It is green with many brown spots scattering across its back.",
+        "name": {
+          "str": "tailed frog"
+        },
+        "categories": [
+          "NULL"
+        ],
+        "harvest": "mutant_tiny"
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_wood_frog",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_frog",
+        "description": "This frog wears a pattern of tans and browns, with a darker eye mask and a light cream underbelly.  Its coverings make for great camouflage among the dry leaves and tree bark.",
+        "name": {
+          "str": "wood frog"
+        },
+        "volume": "150 ml",
+        "weight": "10 g",
+        "hp": 2,
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_wood_frog"
+          },
+          "baby_count": 8,
+          "baby_timer": 36
+        }
+      }
+    },
+    {
+      "scope": "core",
+      "source": "artifacts/client/data/json/monsters/reptile_amphibian.json",
+      "definition": {
+        "id": "mon_spade_frog",
+        "type": "MONSTER",
+        "copy-from": "mon_proxy_frog",
+        "description": "The eastern variety of the American spadefoot toad is a squat, round toad with vertical pupils.  Its body is colored a muddy mixture of browns, tans, and yellow-greens.  Their name comes from the keratinous projection on their hind legs that aids them in digging.",
+        "name": {
+          "str": "spadefoot toad"
+        },
+        "volume": "150 ml",
+        "weight": "10 g",
+        "hp": 2,
+        "reproduction": {
+          "baby_type": {
+            "baby_egg": "egg_spade_frog"
+          },
+          "baby_count": 8,
+          "baby_timer": 20
+        },
+        "baby_flags": [
+          "SPRING",
+          "SUMMER",
+          "FALL",
+          "WINTER"
+        ],
+        "extend": {
+          "flags": [
+            "POISON"
+          ]
+        }
+      }
+    }
+  ],
+  "creature_ids": [
+    "mon_fowler_toad",
+    "mon_gray_frog",
+    "mon_leo_frog",
+    "mon_mink_frog",
+    "mon_peeper_frog",
+    "mon_spade_frog",
+    "mon_wood_frog",
+    "mon_tail_frog"
+  ],
+  "renderer_states": [
+    "corpse_mon_fowler_toad",
+    "corpse_mon_gray_frog",
+    "corpse_mon_leo_frog",
+    "corpse_mon_mink_frog",
+    "corpse_mon_peeper_frog",
+    "corpse_mon_spade_frog",
+    "corpse_mon_wood_frog",
+    "corpse_mon_tail_frog"
+  ],
+  "evidence": "src/cata_tiles.cpp:3680 prefixes corpse_ to monster id",
+  "seasons": "Neutral living and corpse states across all seasons. Breeding seasons are behavior, not named appearance states. Tailed frog is the game mutant with a broad paddle tail, not real Ascaphus. All species inherit ordinary corpse behavior. Gray frog camouflage has no dedicated renderer state.",
+  "runtime_review": "pending; conditional mod interactions outside this static audit",
+  "conditional_files_skipped": [
+    "data/mods/innawood/mod_interactions/bombastic_perks/experience_eocs.json",
+    "data/mods/innawood/mod_interactions/sorcerer/experience_eocs.json",
+    "data/mods/innawood/mod_interactions/skyisland/region_overlay.json",
+    "data/mods/innawood/mod_interactions/perk_melee_system/experience_eocs.json",
+    "data/mods/Megafauna/mod_interactions/defense_mode/monsters.json",
+    "data/mods/Megafauna/mod_interactions/defense_mode/monstergroups.json"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "subject": "Alien fruit-bearing tree raised on tangled stilt roots",
+  "image_url": "https://www.manggear.com/cdn/shop/articles/2017-03-07-11-02-34.jpg?v=1692717918",
+  "page_url": "https://www.manggear.com/blogs/stories/what-is-a-red-mangrove",
+  "local_photo": "references/alien-tree3-photo.jpg",
+  "purpose": "Real mangrove stilt-root anatomy only. Fictional dark-red long leaf clusters and watermelon-sized hanging fruit follow terrain_alien_meadow.json. No source pixels copied.",
+  "style_reference": "../sources/deciduous-tree-spring.png",
+  "states": [
+    "normal",
+    "harvested"
+  ],
+  "season_policy": "Retain alien red foliage in all four seasons; normal terrain has dark-red fruit, harvested terrain has no fruit. Spring-only harvestability is game logic; normal and harvested appearances follow their respective descriptions."
+}

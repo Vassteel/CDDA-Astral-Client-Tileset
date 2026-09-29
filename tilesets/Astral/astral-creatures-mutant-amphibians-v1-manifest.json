@@ -1,0 +1,1916 @@
+{
+  "name": "Mutated amphibian growth families",
+  "revision": "mutant-amphibians-v1",
+  "canvas": 512,
+  "anchor_bottom": 488,
+  "sprite_offset_x": -16,
+  "sprite_offset_y": -32,
+  "seasonal_policy": "Every remaining core mutated amphibian growth form in this family has living and corpse states; unlike tiny natural tadpoles the giant tadpole parent does not specify NO_CORPSE. Neutral calendar aliases; breeding flags do not create separate appearance states. Previously drawn growth forms remain unchanged. Foul toad has the same inherited Fowler toad appearance and size, with odor and behavior only, so uses the reviewed Fowler pair.",
+  "existing_sprite_aliases": {
+    "mon_foul_toad": "mon_fowler_toad",
+    "corpse_mon_foul_toad": "corpse_mon_fowler_toad"
+  },
+  "assets": [
+    {
+      "key": "pattern_bigtad-living",
+      "id": "mon_pattern_bigtad",
+      "label": "giant tadpole / live",
+      "max": [
+        192,
+        136
+      ],
+      "state": "living",
+      "description": "A giant, gray-brown tadpole.  Its body is covered in irregular, chaotic speckles of pitch black and chalk white.",
+      "source": "sources/pattern_bigtad-living.png",
+      "native": "native/pattern_bigtad-living.png",
+      "source_sha256": "f6df4986578a02edad19a4cf4d94b1a9698dfebc3bec706fc9eda8370f13851e",
+      "native_sha256": "99abe45d05c772ca6151f981032378b576dc3988b9a90214996a86b288f3663f",
+      "prompt_sha256": "36ec68905fa60427b1b13cda9f00d01c43d212d46b08e2e9b9adb0d31b8ab759",
+      "source_dimensions": [
+        783,
+        626
+      ],
+      "crop": [
+        52,
+        119,
+        748,
+        533
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        20.0,
+        46.75,
+        44.0,
+        61.0
+      ]
+    },
+    {
+      "key": "pattern_bigtad-corpse",
+      "id": "corpse_mon_pattern_bigtad",
+      "label": "giant tadpole / dead",
+      "max": [
+        192,
+        80
+      ],
+      "state": "corpse",
+      "description": "A giant, gray-brown tadpole.  Its body is covered in irregular, chaotic speckles of pitch black and chalk white.",
+      "source": "sources/pattern_bigtad-corpse.png",
+      "native": "native/pattern_bigtad-corpse.png",
+      "source_sha256": "2410848386caeabf83860a2770e01530057ffb54818b62540f1353a805911aa2",
+      "native_sha256": "8ec2f682ee63fe6bce4d9fcb90e7e39bc8c87d2b04a3fe7aaa5f4223fc68a451",
+      "prompt_sha256": "36ec68905fa60427b1b13cda9f00d01c43d212d46b08e2e9b9adb0d31b8ab759",
+      "source_dimensions": [
+        778,
+        406
+      ],
+      "crop": [
+        52,
+        93,
+        737,
+        278
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        20.0,
+        54.5,
+        44.0,
+        61.0
+      ]
+    },
+    {
+      "key": "strange_bigtad-living",
+      "id": "mon_strange_bigtad",
+      "label": "giant tadpole / live",
+      "max": [
+        192,
+        136
+      ],
+      "state": "living",
+      "description": "This giant, green tadpole would have been an oddity before the collapse.  Now it's simply part of the scenery.",
+      "source": "sources/strange_bigtad-living.png",
+      "native": "native/strange_bigtad-living.png",
+      "source_sha256": "2b61ba0fb486eb964edc2b92fa0f1bf2db51bf5f6c56031e9c17bacb5957f9e1",
+      "native_sha256": "11e6432095236a173503613987cebc9f69104393769260659ecc0524c8648f63",
+      "prompt_sha256": "36ec68905fa60427b1b13cda9f00d01c43d212d46b08e2e9b9adb0d31b8ab759",
+      "source_dimensions": [
+        761,
+        626
+      ],
+      "crop": [
+        36,
+        119,
+        737,
+        533
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        20.0,
+        46.875,
+        44.0,
+        61.0
+      ]
+    },
+    {
+      "key": "strange_bigtad-corpse",
+      "id": "corpse_mon_strange_bigtad",
+      "label": "giant tadpole / dead",
+      "max": [
+        192,
+        80
+      ],
+      "state": "corpse",
+      "description": "This giant, green tadpole would have been an oddity before the collapse.  Now it's simply part of the scenery.",
+      "source": "sources/strange_bigtad-corpse.png",
+      "native": "native/strange_bigtad-corpse.png",
+      "source_sha256": "2e9dfea27d03b88a58a5e12087dec8119a517de3bb565439c37cda12416b80e7",
+      "native_sha256": "65ef76bc0014f0f0696a4fc3a334667b3d1679d80ca40ac48cf794f006e50a05",
+      "prompt_sha256": "36ec68905fa60427b1b13cda9f00d01c43d212d46b08e2e9b9adb0d31b8ab759",
+      "source_dimensions": [
+        766,
+        406
+      ],
+      "crop": [
+        41,
+        94,
+        723,
+        278
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        20.0,
+        54.5,
+        44.0,
+        61.0
+      ]
+    },
+    {
+      "key": "foul_bigtad-living",
+      "id": "mon_foul_bigtad",
+      "label": "giant tadpole / live",
+      "max": [
+        192,
+        136
+      ],
+      "state": "living",
+      "description": "This big tadpole has already grown some warty bumps on its softball-sized body.  Its nearly whip-thin tail appears to have no trouble propelling its much larger core.",
+      "source": "sources/foul_bigtad-living.png",
+      "native": "native/foul_bigtad-living.png",
+      "source_sha256": "bb7d66ed8e51be0551d6ef5440c9bb0adaf94428acd869553c1d5bfdf1373ab1",
+      "native_sha256": "5779418977796ba0bc40968515cfe9fbb15958cde339ea215a7eed6a34898a6c",
+      "prompt_sha256": "68a316a10d99917ec5080c2618262e762cc2f982b046247724924fd6f4257cb0",
+      "source_dimensions": [
+        739,
+        661
+      ],
+      "crop": [
+        45,
+        196,
+        707,
+        559
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        20.0,
+        47.875,
+        44.0,
+        61.0
+      ]
+    },
+    {
+      "key": "foul_bigtad-corpse",
+      "id": "corpse_mon_foul_bigtad",
+      "label": "giant tadpole / dead",
+      "max": [
+        192,
+        80
+      ],
+      "state": "corpse",
+      "description": "This big tadpole has already grown some warty bumps on its softball-sized body.  Its nearly whip-thin tail appears to have no trouble propelling its much larger core.",
+      "source": "sources/foul_bigtad-corpse.png",
+      "native": "native/foul_bigtad-corpse.png",
+      "source_sha256": "304a6c38970f0210ad3ec774fa53e5974bec723317db327afb934ee1865b3a43",
+      "native_sha256": "1ba4261871f833e56e928f317f650fdd9213afb1e4b5e172f3206d9d0dadcf37",
+      "prompt_sha256": "68a316a10d99917ec5080c2618262e762cc2f982b046247724924fd6f4257cb0",
+      "source_dimensions": [
+        730,
+        433
+      ],
+      "crop": [
+        38,
+        102,
+        698,
+        295
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        20.0,
+        54.0,
+        44.0,
+        61.0
+      ]
+    },
+    {
+      "key": "odd_bigtad-living",
+      "id": "mon_odd_bigtad",
+      "label": "giant tadpole / live",
+      "max": [
+        192,
+        136
+      ],
+      "state": "living",
+      "description": "Some kind of giant tadpole.  This speckled one has a body the size of a grapefruit and a thin, tapered tail.  It flits about the water in quick bursts.",
+      "source": "sources/odd_bigtad-living.png",
+      "native": "native/odd_bigtad-living.png",
+      "source_sha256": "a78e2daf9320433ddd07dbe836cc54796eaf5dea457af9c283be6637ece3e3e7",
+      "native_sha256": "7039e77c2cd60b9796bfdc17da9b713d5eeacb52cc54a6deef7c914ba6d46171",
+      "prompt_sha256": "68a316a10d99917ec5080c2618262e762cc2f982b046247724924fd6f4257cb0",
+      "source_dimensions": [
+        717,
+        661
+      ],
+      "crop": [
+        33,
+        205,
+        695,
+        552
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        20.0,
+        48.375,
+        44.0,
+        61.0
+      ]
+    },
+    {
+      "key": "odd_bigtad-corpse",
+      "id": "corpse_mon_odd_bigtad",
+      "label": "giant tadpole / dead",
+      "max": [
+        192,
+        80
+      ],
+      "state": "corpse",
+      "description": "Some kind of giant tadpole.  This speckled one has a body the size of a grapefruit and a thin, tapered tail.  It flits about the water in quick bursts.",
+      "source": "sources/odd_bigtad-corpse.png",
+      "native": "native/odd_bigtad-corpse.png",
+      "source_sha256": "e5c3588c0ad27d1762faebe6428338deb772b031c87e54f654799d98a92d2353",
+      "native_sha256": "7a9b40596c0534252e490c3a91800db0c2d047e8e2e278f76aad264e6cfb1ba2",
+      "prompt_sha256": "68a316a10d99917ec5080c2618262e762cc2f982b046247724924fd6f4257cb0",
+      "source_dimensions": [
+        726,
+        433
+      ],
+      "crop": [
+        33,
+        128,
+        688,
+        288
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        20.0,
+        55.125,
+        44.0,
+        61.0
+      ]
+    },
+    {
+      "key": "vocal_bigtad-living",
+      "id": "mon_vocal_bigtad",
+      "label": "giant tadpole / live",
+      "max": [
+        192,
+        136
+      ],
+      "state": "living",
+      "description": "A much larger than average tadpole.  Despite its unusual size, it is hard to make out any features from its dark, almost black, tint.",
+      "source": "sources/vocal_bigtad-living.png",
+      "native": "native/vocal_bigtad-living.png",
+      "source_sha256": "7269e7b58ce867e63cf8ef433eeaaf6d9748e0c338a14025b9a1adc1dcc2c9ca",
+      "native_sha256": "afe65becd9e40ec156e8a63fb713e3e70f5fc814b8004fc696da4cc265dcb306",
+      "prompt_sha256": "f8eb50f7705ff53945824c574587a7053a72ab3cd45a4712b50a124a50058c24",
+      "source_dimensions": [
+        739,
+        632
+      ],
+      "crop": [
+        66,
+        199,
+        708,
+        510
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        20.0,
+        49.375,
+        44.0,
+        61.0
+      ]
+    },
+    {
+      "key": "vocal_bigtad-corpse",
+      "id": "corpse_mon_vocal_bigtad",
+      "label": "giant tadpole / dead",
+      "max": [
+        192,
+        80
+      ],
+      "state": "corpse",
+      "description": "A much larger than average tadpole.  Despite its unusual size, it is hard to make out any features from its dark, almost black, tint.",
+      "source": "sources/vocal_bigtad-corpse.png",
+      "native": "native/vocal_bigtad-corpse.png",
+      "source_sha256": "13adf657c083326aba06037e8ec06ce31bb830157ea33248e1e5906903a3f18b",
+      "native_sha256": "3480cc82ff81261ad76ae35485c6b2fdd2ab58dadf0eeb2d51c37a3bdd2b5964",
+      "prompt_sha256": "f8eb50f7705ff53945824c574587a7053a72ab3cd45a4712b50a124a50058c24",
+      "source_dimensions": [
+        735,
+        462
+      ],
+      "crop": [
+        66,
+        106,
+        700,
+        293
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        20.0,
+        53.875,
+        44.0,
+        61.0
+      ]
+    },
+    {
+      "key": "shift_bigtad-living",
+      "id": "mon_shift_bigtad",
+      "label": "giant tadpole / live",
+      "max": [
+        192,
+        136
+      ],
+      "state": "living",
+      "description": "This tadpole's expanded size only accentuates its other unique feature.  Its tail fin is a vibrant gradient of crimson to yellow.",
+      "source": "sources/shift_bigtad-living.png",
+      "native": "native/shift_bigtad-living.png",
+      "source_sha256": "9f02c5badbcb7b9db8dd6e998cb3f48342c53224d7dd1e7063fc4194ced9bc6d",
+      "native_sha256": "276f00722b43b0f18cfa3ccf2e2dc402bc271b4cbab50edac7c270d2411a4f0c",
+      "prompt_sha256": "f8eb50f7705ff53945824c574587a7053a72ab3cd45a4712b50a124a50058c24",
+      "source_dimensions": [
+        717,
+        632
+      ],
+      "crop": [
+        32,
+        212,
+        685,
+        526
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        20.0,
+        49.5,
+        44.0,
+        61.0
+      ]
+    },
+    {
+      "key": "shift_bigtad-corpse",
+      "id": "corpse_mon_shift_bigtad",
+      "label": "giant tadpole / dead",
+      "max": [
+        192,
+        80
+      ],
+      "state": "corpse",
+      "description": "This tadpole's expanded size only accentuates its other unique feature.  Its tail fin is a vibrant gradient of crimson to yellow.",
+      "source": "sources/shift_bigtad-corpse.png",
+      "native": "native/shift_bigtad-corpse.png",
+      "source_sha256": "cf73bb219f1dccda8503acd6bbf1b7266eadb738303193328e91801d09e52ff7",
+      "native_sha256": "799496deb2cc3671f7c23bba3d38d01af268194c2db5233041669772a68ebf74",
+      "prompt_sha256": "f8eb50f7705ff53945824c574587a7053a72ab3cd45a4712b50a124a50058c24",
+      "source_dimensions": [
+        721,
+        462
+      ],
+      "crop": [
+        36,
+        134,
+        679,
+        308
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        20.0,
+        54.5,
+        44.0,
+        61.0
+      ]
+    },
+    {
+      "key": "pattern_frog-living",
+      "id": "mon_pattern_frog",
+      "label": "strangely-patterned frog / live",
+      "max": [
+        160,
+        112
+      ],
+      "state": "living",
+      "description": "This large frog is covered in chaotic markings like a fractal river map over a background of TV static.  While most lose their gills during metamorphosis, this frog seems to have retained them, or something like them.",
+      "source": "sources/pattern_frog-living.png",
+      "native": "native/pattern_frog-living.png",
+      "source_sha256": "03fca0c534b0824a1ffed36c5cc9a169c6ba64626e5d0c982724731dd3b788c0",
+      "native_sha256": "56123ccae1beef83e4d2ea5d73dbfd79ec55f53e77dfe8ebb2c950fcaba5de43",
+      "prompt_sha256": "9c7ec6d1ff50975a5cca08824a18ee57148cfec962f1c7f6ee53d9cee2ca4995",
+      "source_dimensions": [
+        693,
+        682
+      ],
+      "crop": [
+        98,
+        206,
+        609,
+        571
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        22.125,
+        47.0,
+        41.75,
+        61.0
+      ]
+    },
+    {
+      "key": "pattern_frog-corpse",
+      "id": "corpse_mon_pattern_frog",
+      "label": "strangely-patterned frog / dead",
+      "max": [
+        160,
+        64
+      ],
+      "state": "corpse",
+      "description": "This large frog is covered in chaotic markings like a fractal river map over a background of TV static.  While most lose their gills during metamorphosis, this frog seems to have retained them, or something like them.",
+      "source": "sources/pattern_frog-corpse.png",
+      "native": "native/pattern_frog-corpse.png",
+      "source_sha256": "15199091ac9b7c17a9ff3018e3dec2f66af4011b8548bf50e506d05036e5de12",
+      "native_sha256": "246f32b469891263f93f8bbe70bc104054cd054090a559886b86c6b8abfeb329",
+      "prompt_sha256": "9c7ec6d1ff50975a5cca08824a18ee57148cfec962f1c7f6ee53d9cee2ca4995",
+      "source_dimensions": [
+        705,
+        474
+      ],
+      "crop": [
+        47,
+        113,
+        667,
+        356
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        22.0,
+        53.125,
+        42.0,
+        61.0
+      ]
+    },
+    {
+      "key": "odd_toad-living",
+      "id": "mon_odd_toad",
+      "label": "odd toad / live",
+      "max": [
+        208,
+        144
+      ],
+      "state": "living",
+      "description": "Wide as a watermelon and halfway up to your knee, this toad's size is alarming.  So too are its odd proportions.  It's as if it hasn't fully grown.",
+      "source": "sources/odd_toad-living.png",
+      "native": "native/odd_toad-living.png",
+      "source_sha256": "ec9b28af501b3f2aeca26b101d7cf3889a73c807c2ade4ac2c5ab379263d651e",
+      "native_sha256": "db16b39b9166e3210e5a7538d8edd19b32fcbbba4843547025d73308b857f605",
+      "prompt_sha256": "9c7ec6d1ff50975a5cca08824a18ee57148cfec962f1c7f6ee53d9cee2ca4995",
+      "source_dimensions": [
+        685,
+        682
+      ],
+      "crop": [
+        84,
+        227,
+        609,
+        567
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        19.0,
+        44.125,
+        45.0,
+        61.0
+      ]
+    },
+    {
+      "key": "odd_toad-corpse",
+      "id": "corpse_mon_odd_toad",
+      "label": "odd toad / dead",
+      "max": [
+        208,
+        88
+      ],
+      "state": "corpse",
+      "description": "Wide as a watermelon and halfway up to your knee, this toad's size is alarming.  So too are its odd proportions.  It's as if it hasn't fully grown.",
+      "source": "sources/odd_toad-corpse.png",
+      "native": "native/odd_toad-corpse.png",
+      "source_sha256": "e57dccaecd52355364553b38c4875500b9b67fda1e734b8249e4408d06f551eb",
+      "native_sha256": "b73e1e3dd8cfe97d4087766273823dc74a5ef580403b5fe357cae34dec3bf14e",
+      "prompt_sha256": "9c7ec6d1ff50975a5cca08824a18ee57148cfec962f1c7f6ee53d9cee2ca4995",
+      "source_dimensions": [
+        673,
+        474
+      ],
+      "crop": [
+        38,
+        112,
+        625,
+        362
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        19.0,
+        50.0,
+        44.875,
+        61.0
+      ]
+    },
+    {
+      "key": "shift_frog-living",
+      "id": "mon_shift_frog",
+      "label": "shifting treefrog / live",
+      "max": [
+        160,
+        112
+      ],
+      "state": "living",
+      "description": "You've seen it wrinkle its skin into bark and disappear on a tree; settle on a toadstool and take its spots.  It's no trick of the light, this frog's skin shifts not just color but texture.",
+      "source": "sources/shift_frog-living.png",
+      "native": "native/shift_frog-living.png",
+      "source_sha256": "45d6dac5c184023753e82ed79f2fa255a6018d958f84907bd954c09fcbe353ab",
+      "native_sha256": "6f6742a06d10a76f8f0353578923f8d1f1c600e68680bbb337e72a14bc25d76d",
+      "prompt_sha256": "6db68ec07328afc9dcd4ed5460bcbc1396d032ccbd9bf89adf5f8fd5650fbf88",
+      "source_dimensions": [
+        624,
+        558
+      ],
+      "crop": [
+        80,
+        154,
+        542,
+        517
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        23.0,
+        47.0,
+        40.875,
+        61.0
+      ]
+    },
+    {
+      "key": "shift_frog-corpse",
+      "id": "corpse_mon_shift_frog",
+      "label": "shifting treefrog / dead",
+      "max": [
+        160,
+        64
+      ],
+      "state": "corpse",
+      "description": "You've seen it wrinkle its skin into bark and disappear on a tree; settle on a toadstool and take its spots.  It's no trick of the light, this frog's skin shifts not just color but texture.",
+      "source": "sources/shift_frog-corpse.png",
+      "native": "native/shift_frog-corpse.png",
+      "source_sha256": "9e38f9b9e5771234605dbd8de2b0d9a4f5a8647eff295f8efef28ba95d100ca2",
+      "native_sha256": "b6f754b64f4f843291d666012daf75cbed5a3e310ce722d8e57b49a86fe99290",
+      "prompt_sha256": "6db68ec07328afc9dcd4ed5460bcbc1396d032ccbd9bf89adf5f8fd5650fbf88",
+      "source_dimensions": [
+        616,
+        290
+      ],
+      "crop": [
+        51,
+        32,
+        583,
+        258
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        22.5,
+        53.0,
+        41.375,
+        61.0
+      ]
+    },
+    {
+      "key": "palette_frog-living",
+      "id": "mon_palette_frog",
+      "label": "palette frog / live",
+      "max": [
+        160,
+        112
+      ],
+      "state": "living",
+      "description": "You're quite sure that no frog this bright and garish could be native to New England.  Most of its skin is a light brown, but the large, squarish patches on its back and legs are of every different hue, all of them bright.",
+      "source": "sources/palette_frog-living.png",
+      "native": "native/palette_frog-living.png",
+      "source_sha256": "760f0dacb22e031ab34103fcda5e3322948c1e0adacd616c9610c6318c9d78d0",
+      "native_sha256": "3e9dd7931876594f1fa37a163fc7ef1e064cf08a9b1a97b3a09790f20f279b6c",
+      "prompt_sha256": "6db68ec07328afc9dcd4ed5460bcbc1396d032ccbd9bf89adf5f8fd5650fbf88",
+      "source_dimensions": [
+        609,
+        558
+      ],
+      "crop": [
+        83,
+        157,
+        551,
+        526
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        23.125,
+        47.0,
+        40.875,
+        61.0
+      ]
+    },
+    {
+      "key": "palette_frog-corpse",
+      "id": "corpse_mon_palette_frog",
+      "label": "palette frog / dead",
+      "max": [
+        160,
+        64
+      ],
+      "state": "corpse",
+      "description": "You're quite sure that no frog this bright and garish could be native to New England.  Most of its skin is a light brown, but the large, squarish patches on its back and legs are of every different hue, all of them bright.",
+      "source": "sources/palette_frog-corpse.png",
+      "native": "native/palette_frog-corpse.png",
+      "source_sha256": "be8f4c1f26806551319f773c765000a2bdfc9fbd24bca13ff7040cbd404ced95",
+      "native_sha256": "772a4491858325987266956b9afc5aa8c89460d802e31f8465ba33e3f7b593b4",
+      "prompt_sha256": "6db68ec07328afc9dcd4ed5460bcbc1396d032ccbd9bf89adf5f8fd5650fbf88",
+      "source_dimensions": [
+        617,
+        290
+      ],
+      "crop": [
+        34,
+        52,
+        586,
+        270
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        22.0,
+        53.125,
+        42.0,
+        61.0
+      ]
+    },
+    {
+      "key": "leo_worm-living",
+      "id": "mon_leo_worm",
+      "label": "Many-legged leopard frog / live",
+      "max": [
+        192,
+        136
+      ],
+      "state": "living",
+      "description": "You see a whole leopard frog and then some.  This poor thing must have almost a dozen extra legs sticking off of it.  It is difficult to determine an exact number as most of them are underdeveloped or otherwise malformed.",
+      "source": "sources/leo_worm-living.png",
+      "native": "native/leo_worm-living.png",
+      "source_sha256": "a733e2ab506cba542bdb3a174c1c630c558753e6897bb186c45dfcca25341de3",
+      "native_sha256": "705eef9b59c17c611f90422057118b8ae2e5f5a31f5d60c79c76ab4886310f47",
+      "prompt_sha256": "0da4da0d3f6f80f2d554678803650c179dc725db66b6477013cd54237d74b0f5",
+      "source_dimensions": [
+        695,
+        631
+      ],
+      "crop": [
+        61,
+        144,
+        623,
+        547
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        20.125,
+        44.0,
+        43.875,
+        61.0
+      ]
+    },
+    {
+      "key": "leo_worm-corpse",
+      "id": "corpse_mon_leo_worm",
+      "label": "Many-legged leopard frog / dead",
+      "max": [
+        192,
+        80
+      ],
+      "state": "corpse",
+      "description": "You see a whole leopard frog and then some.  This poor thing must have almost a dozen extra legs sticking off of it.  It is difficult to determine an exact number as most of them are underdeveloped or otherwise malformed.",
+      "source": "sources/leo_worm-corpse.png",
+      "native": "native/leo_worm-corpse.png",
+      "source_sha256": "00c559338136dd2a84976293b8c1922f8ab85cfceed425ac9c6210452c9fae70",
+      "native_sha256": "8e963723b54500ef05cee11adeffe2eace9932f20aa84830a7f8f1d41109b959",
+      "prompt_sha256": "0da4da0d3f6f80f2d554678803650c179dc725db66b6477013cd54237d74b0f5",
+      "source_dimensions": [
+        700,
+        525
+      ],
+      "crop": [
+        36,
+        131,
+        678,
+        441
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        21.625,
+        51.0,
+        42.375,
+        61.0
+      ]
+    },
+    {
+      "key": "wood_worm-living",
+      "id": "mon_wood_worm",
+      "label": "Many-legged wood frog / live",
+      "max": [
+        192,
+        136
+      ],
+      "state": "living",
+      "description": "This cream and brown frog looks more like a great insect in profile.  It has evidently mutated, growing many additional, spindly legs that rise high before attempting to bend back downwards.",
+      "source": "sources/wood_worm-living.png",
+      "native": "native/wood_worm-living.png",
+      "source_sha256": "f3172030f21e8bfa661dea288b7a7729528eeebac00021b15c04fbe5b1131c6b",
+      "native_sha256": "e424165db438ea5110c8ea4de35b99ea6b3e555521db8d511f2edab7d253ca77",
+      "prompt_sha256": "0da4da0d3f6f80f2d554678803650c179dc725db66b6477013cd54237d74b0f5",
+      "source_dimensions": [
+        683,
+        631
+      ],
+      "crop": [
+        72,
+        61,
+        635,
+        553
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        22.25,
+        44.0,
+        41.75,
+        61.0
+      ]
+    },
+    {
+      "key": "wood_worm-corpse",
+      "id": "corpse_mon_wood_worm",
+      "label": "Many-legged wood frog / dead",
+      "max": [
+        192,
+        80
+      ],
+      "state": "corpse",
+      "description": "This cream and brown frog looks more like a great insect in profile.  It has evidently mutated, growing many additional, spindly legs that rise high before attempting to bend back downwards.",
+      "source": "sources/wood_worm-corpse.png",
+      "native": "native/wood_worm-corpse.png",
+      "source_sha256": "024915d57f0d468280c872ddf1d6bc7ecdaf5726f34fd92eec4d5f1b6e9ec878",
+      "native_sha256": "ff5cdfce19287892bd78e8527b5d74da889a5bf8fc81fd2290da5ffca2e63aba",
+      "prompt_sha256": "0da4da0d3f6f80f2d554678803650c179dc725db66b6477013cd54237d74b0f5",
+      "source_dimensions": [
+        678,
+        525
+      ],
+      "crop": [
+        23,
+        79,
+        642,
+        436
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        23.25,
+        51.0,
+        40.625,
+        61.0
+      ]
+    },
+    {
+      "key": "pattern_bigfrog-living",
+      "id": "mon_pattern_bigfrog",
+      "label": "staticskin frog / live",
+      "max": [
+        240,
+        168
+      ],
+      "state": "living",
+      "description": "Bioluminescent trails trace through the dark speckled patterns on this oversized frog's skin.  What would be cleanly defined spots on another frog, are instead fragmented collages of gray and black pigment over pale skin.  Its vestigial gills have grown into something else.  You can see them bulging the flesh under its mouth.",
+      "source": "sources/pattern_bigfrog-living.png",
+      "native": "native/pattern_bigfrog-living.png",
+      "source_sha256": "cdb0bfc3baad19ee5b34dbe0be06ce4910b9cd8613ad0128e553ec0afe7ad01a",
+      "native_sha256": "7d5d7ea7f28574d05b29b1fa0366bfa2263fba9389a02ff0468199dc8b89731c",
+      "prompt_sha256": "2f0d669d931e9c8acb7812f97010c82d4cc030d8993fa1092a8c79f84d5722a0",
+      "source_dimensions": [
+        679,
+        677
+      ],
+      "crop": [
+        83,
+        182,
+        614,
+        606
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        18.875,
+        40.0,
+        45.125,
+        61.0
+      ]
+    },
+    {
+      "key": "pattern_bigfrog-corpse",
+      "id": "corpse_mon_pattern_bigfrog",
+      "label": "staticskin frog / dead",
+      "max": [
+        240,
+        104
+      ],
+      "state": "corpse",
+      "description": "Bioluminescent trails trace through the dark speckled patterns on this oversized frog's skin.  What would be cleanly defined spots on another frog, are instead fragmented collages of gray and black pigment over pale skin.  Its vestigial gills have grown into something else.  You can see them bulging the flesh under its mouth.",
+      "source": "sources/pattern_bigfrog-corpse.png",
+      "native": "native/pattern_bigfrog-corpse.png",
+      "source_sha256": "42443d66e539bf5461d608ad6192e632e709e92fc7cd4e43890317342bcdbc8e",
+      "native_sha256": "7203ce196584c67b105bdfa367fa0167be2ac949e71624d50afdc49ea6c5e5c1",
+      "prompt_sha256": "2f0d669d931e9c8acb7812f97010c82d4cc030d8993fa1092a8c79f84d5722a0",
+      "source_dimensions": [
+        683,
+        479
+      ],
+      "crop": [
+        45,
+        81,
+        669,
+        358
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        17.375,
+        48.0,
+        46.625,
+        61.0
+      ]
+    },
+    {
+      "key": "foul_bigfrog-living",
+      "id": "mon_foul_bigfrog",
+      "label": "greasy stinktoad / live",
+      "max": [
+        240,
+        168
+      ],
+      "state": "living",
+      "description": "This lumpy oversized toad is a real stinker!  A miasma like rotted onions coated in rancid peanut butter surrounds it.  Even approaching it makes your eyes water and your throat tighten until you're coughing to catch breath.  It doesn't help that its leathery skin looks to be coated in a thick greasy substance, no doubt related to the creature's horrid odor.",
+      "source": "sources/foul_bigfrog-living.png",
+      "native": "native/foul_bigfrog-living.png",
+      "source_sha256": "933f7c5e980a910228d2b5ac5730d992d6dc9235391ebe13eeab6c5873608e0b",
+      "native_sha256": "e3438153510a75f39f87cdba22d63d7ca9e3125eacae58012f4e755511e5d800",
+      "prompt_sha256": "2f0d669d931e9c8acb7812f97010c82d4cc030d8993fa1092a8c79f84d5722a0",
+      "source_dimensions": [
+        699,
+        677
+      ],
+      "crop": [
+        66,
+        185,
+        650,
+        617
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        17.75,
+        40.0,
+        46.125,
+        61.0
+      ]
+    },
+    {
+      "key": "foul_bigfrog-corpse",
+      "id": "corpse_mon_foul_bigfrog",
+      "label": "greasy stinktoad / dead",
+      "max": [
+        240,
+        104
+      ],
+      "state": "corpse",
+      "description": "This lumpy oversized toad is a real stinker!  A miasma like rotted onions coated in rancid peanut butter surrounds it.  Even approaching it makes your eyes water and your throat tighten until you're coughing to catch breath.  It doesn't help that its leathery skin looks to be coated in a thick greasy substance, no doubt related to the creature's horrid odor.",
+      "source": "sources/foul_bigfrog-corpse.png",
+      "native": "native/foul_bigfrog-corpse.png",
+      "source_sha256": "5709813129bd481c70a9c2417d7dd53ecf67d6f90617c08f632f62935412c9c5",
+      "native_sha256": "694a6128f964f828cdb294d99daaddedea3c580f8c02fad633df45425328a816",
+      "prompt_sha256": "2f0d669d931e9c8acb7812f97010c82d4cc030d8993fa1092a8c79f84d5722a0",
+      "source_dimensions": [
+        695,
+        479
+      ],
+      "crop": [
+        14,
+        61,
+        667,
+        394
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        19.25,
+        48.0,
+        44.75,
+        61.0
+      ]
+    },
+    {
+      "key": "jumbo_bigfrog-living",
+      "id": "mon_jumbo_bigfrog",
+      "label": "jumbo treefrog / live",
+      "max": [
+        240,
+        168
+      ],
+      "state": "living",
+      "description": "On thick, over-proportioned legs, this large treefrog slings its weight with notable force.  It doesn't seem dangerous, but its size is still cause for concern.  Even scrunched up, it is as large as a Thanksgiving turkey.",
+      "source": "sources/jumbo_bigfrog-living.png",
+      "native": "native/jumbo_bigfrog-living.png",
+      "source_sha256": "38ec8d120e376813289d592371da3b88b097796bf6587ba119691c5de128d1df",
+      "native_sha256": "2724264a2939e3947f70923eaee7ebf4010bab1b0417329e7906d37f5ed031f3",
+      "prompt_sha256": "c259bedf21b05be573a7d51296257e66750364aefaa05739cf70f1ed039a989b",
+      "source_dimensions": [
+        632,
+        763
+      ],
+      "crop": [
+        88,
+        209,
+        562,
+        663
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        21.0,
+        40.0,
+        42.875,
+        61.0
+      ]
+    },
+    {
+      "key": "jumbo_bigfrog-corpse",
+      "id": "corpse_mon_jumbo_bigfrog",
+      "label": "jumbo treefrog / dead",
+      "max": [
+        240,
+        104
+      ],
+      "state": "corpse",
+      "description": "On thick, over-proportioned legs, this large treefrog slings its weight with notable force.  It doesn't seem dangerous, but its size is still cause for concern.  Even scrunched up, it is as large as a Thanksgiving turkey.",
+      "source": "sources/jumbo_bigfrog-corpse.png",
+      "native": "native/jumbo_bigfrog-corpse.png",
+      "source_sha256": "dd51c495a6dabde780e44225748a1b8c56be13570891ef674e33e8e4fdc0a5e5",
+      "native_sha256": "e23244c3a000bc3836641ca1a16a7573fe3e86da946bd95c85a71b0655d5a4a8",
+      "prompt_sha256": "c259bedf21b05be573a7d51296257e66750364aefaa05739cf70f1ed039a989b",
+      "source_dimensions": [
+        640,
+        529
+      ],
+      "crop": [
+        29,
+        95,
+        624,
+        414
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        19.875,
+        48.0,
+        44.125,
+        61.0
+      ]
+    },
+    {
+      "key": "vocal_bigfrog-living",
+      "id": "mon_vocal_bigfrog",
+      "label": "wailing treefrog / live",
+      "max": [
+        240,
+        168
+      ],
+      "state": "living",
+      "description": "Now the size of a dog, this tan, speckled tree frog will not stop making noise.  Its increased size has only boosted its volume.  It belts out sound in a relentless series of piercing, grinding chirps.",
+      "source": "sources/vocal_bigfrog-living.png",
+      "native": "native/vocal_bigfrog-living.png",
+      "source_sha256": "8a7d3149301db66f680eed161e9c5f885fe7cf3da431ed14cafc8ec5ca0c5bd7",
+      "native_sha256": "a4a39eb6d366ad44e382f166dca59e1f844a137624ad1df35c13ae71cc50a29f",
+      "prompt_sha256": "c259bedf21b05be573a7d51296257e66750364aefaa05739cf70f1ed039a989b",
+      "source_dimensions": [
+        601,
+        763
+      ],
+      "crop": [
+        70,
+        209,
+        552,
+        668
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        21.0,
+        40.0,
+        43.0,
+        61.0
+      ]
+    },
+    {
+      "key": "vocal_bigfrog-corpse",
+      "id": "corpse_mon_vocal_bigfrog",
+      "label": "wailing treefrog / dead",
+      "max": [
+        240,
+        104
+      ],
+      "state": "corpse",
+      "description": "Now the size of a dog, this tan, speckled tree frog will not stop making noise.  Its increased size has only boosted its volume.  It belts out sound in a relentless series of piercing, grinding chirps.",
+      "source": "sources/vocal_bigfrog-corpse.png",
+      "native": "native/vocal_bigfrog-corpse.png",
+      "source_sha256": "027408a27b006710ba2c4b920822e876bed922ce7a138152465a38e132e79e29",
+      "native_sha256": "8ad361e6e4b078a28967a0c4754bb74441959cc36ef3776bed0e671d9924988c",
+      "prompt_sha256": "c259bedf21b05be573a7d51296257e66750364aefaa05739cf70f1ed039a989b",
+      "source_dimensions": [
+        593,
+        529
+      ],
+      "crop": [
+        16,
+        116,
+        574,
+        413
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        19.75,
+        48.0,
+        44.125,
+        61.0
+      ]
+    },
+    {
+      "key": "shift_bigfrog-living",
+      "id": "mon_shift_bigfrog",
+      "label": "mimic treefrog / live",
+      "max": [
+        240,
+        168
+      ],
+      "state": "living",
+      "description": "You've seen enough to gather that this is a frog with some very specialized camouflage.  Its skin appears able to reactively change texture and color to match its surroundings.  Like a morphing ghillie suit it can extend filaments to mimic individual leaves and blades of grass.  It is keen enough to match the swaying of brush in the wind.",
+      "source": "sources/shift_bigfrog-living.png",
+      "native": "native/shift_bigfrog-living.png",
+      "source_sha256": "91fdc689529cb67414c5bb2a1bf423befd0761c3ffdfb4fdca41cea3302c594c",
+      "native_sha256": "e0bb6d20a6a82a5cfa9c9e0913502e2c4f95950147eba585c5debee137d3f212",
+      "prompt_sha256": "c1672c4b4c84b8a26c6a46cf2846b987d7c317783bbdaddef8936ede3fae77d5",
+      "source_dimensions": [
+        695,
+        655
+      ],
+      "crop": [
+        60,
+        135,
+        614,
+        585
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        19.0,
+        40.0,
+        44.875,
+        61.0
+      ]
+    },
+    {
+      "key": "shift_bigfrog-corpse",
+      "id": "corpse_mon_shift_bigfrog",
+      "label": "mimic treefrog / dead",
+      "max": [
+        240,
+        104
+      ],
+      "state": "corpse",
+      "description": "You've seen enough to gather that this is a frog with some very specialized camouflage.  Its skin appears able to reactively change texture and color to match its surroundings.  Like a morphing ghillie suit it can extend filaments to mimic individual leaves and blades of grass.  It is keen enough to match the swaying of brush in the wind.",
+      "source": "sources/shift_bigfrog-corpse.png",
+      "native": "native/shift_bigfrog-corpse.png",
+      "source_sha256": "aebc2223ef57df1a7c585a09d85491a3657c5545ea884651ac7015fd854c1c98",
+      "native_sha256": "525c7f8faf8bd7c4cf0c4caf50e7427733172c8c1ccda09f414e9826618e792f",
+      "prompt_sha256": "c1672c4b4c84b8a26c6a46cf2846b987d7c317783bbdaddef8936ede3fae77d5",
+      "source_dimensions": [
+        700,
+        501
+      ],
+      "crop": [
+        65,
+        65,
+        673,
+        378
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        19.375,
+        48.0,
+        44.625,
+        61.0
+      ]
+    },
+    {
+      "key": "pattern_giganfrog-living",
+      "id": "mon_pattern_giganfrog",
+      "label": "taser tongue / live",
+      "max": [
+        336,
+        240
+      ],
+      "state": "living",
+      "description": "This pale, trash can-sized frog sports a series of faintly glowing spots among its chaotic skin patterns.  The glow seems most concentrated around its unusually bulky neck and mouth.  Its dark eyes scan for an appetizing target.",
+      "source": "sources/pattern_giganfrog-living.png",
+      "native": "native/pattern_giganfrog-living.png",
+      "source_sha256": "85fad1eb3e5b5fcb0c325340fc6b1019124e6156a49db072dee8fcb6cbd195dc",
+      "native_sha256": "a23a614d4ae4e54a70f6a12ee37507f2ec629d94b22e29fd1b1ef1b935a11707",
+      "prompt_sha256": "c1672c4b4c84b8a26c6a46cf2846b987d7c317783bbdaddef8936ede3fae77d5",
+      "source_dimensions": [
+        683,
+        655
+      ],
+      "crop": [
+        82,
+        175,
+        642,
+        590
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        11.75,
+        31.0,
+        52.25,
+        61.0
+      ]
+    },
+    {
+      "key": "pattern_giganfrog-corpse",
+      "id": "corpse_mon_pattern_giganfrog",
+      "label": "taser tongue / dead",
+      "max": [
+        336,
+        144
+      ],
+      "state": "corpse",
+      "description": "This pale, trash can-sized frog sports a series of faintly glowing spots among its chaotic skin patterns.  The glow seems most concentrated around its unusually bulky neck and mouth.  Its dark eyes scan for an appetizing target.",
+      "source": "sources/pattern_giganfrog-corpse.png",
+      "native": "native/pattern_giganfrog-corpse.png",
+      "source_sha256": "b96e4214b59ed319f5d0ca35fbbed9668e773da1a45defd801401f62bbadd84d",
+      "native_sha256": "6bb9530f54f1f0fb766757bd94c3b3e70aa837b866cbb6bcadb280f58e3e59fb",
+      "prompt_sha256": "c1672c4b4c84b8a26c6a46cf2846b987d7c317783bbdaddef8936ede3fae77d5",
+      "source_dimensions": [
+        678,
+        501
+      ],
+      "crop": [
+        27,
+        102,
+        654,
+        419
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        14.125,
+        43.0,
+        49.75,
+        61.0
+      ]
+    },
+    {
+      "key": "strange_giganfrog-living",
+      "id": "mon_strange_giganfrog",
+      "label": "giant bullfrog / live",
+      "max": [
+        352,
+        248
+      ],
+      "state": "living",
+      "description": "A mutated bullfrog taller than you are.  It stares with amber eyes as it considers the easiest way to swallow you whole.",
+      "source": "sources/strange_giganfrog-living.png",
+      "native": "native/strange_giganfrog-living.png",
+      "source_sha256": "abb16c089923503902042b6a9f6533671737e1c46c6f58c4b06e6ccd9c409d61",
+      "native_sha256": "1552f58734f1b2496ff0217047227306cbcf2e6547d2562e07c980a4c7316ffa",
+      "prompt_sha256": "682973d28829855699f2b7d5159d59493325e38f4c187e960295a11667383a33",
+      "source_dimensions": [
+        640,
+        736
+      ],
+      "crop": [
+        37,
+        169,
+        600,
+        612
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        12.25,
+        30.0,
+        51.625,
+        61.0
+      ]
+    },
+    {
+      "key": "strange_giganfrog-corpse",
+      "id": "corpse_mon_strange_giganfrog",
+      "label": "giant bullfrog / dead",
+      "max": [
+        352,
+        152
+      ],
+      "state": "corpse",
+      "description": "A mutated bullfrog taller than you are.  It stares with amber eyes as it considers the easiest way to swallow you whole.",
+      "source": "sources/strange_giganfrog-corpse.png",
+      "native": "native/strange_giganfrog-corpse.png",
+      "source_sha256": "63cf8927e1137f23ad15bc913192190332675f811874c9a294e3ab8ba5838fab",
+      "native_sha256": "2b7332debf51efd1a9a12ee4e321b89ded73c65cb402bbe5baf1b1183323773e",
+      "prompt_sha256": "682973d28829855699f2b7d5159d59493325e38f4c187e960295a11667383a33",
+      "source_dimensions": [
+        624,
+        556
+      ],
+      "crop": [
+        29,
+        124,
+        621,
+        447
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        14.5,
+        42.0,
+        49.375,
+        61.0
+      ]
+    },
+    {
+      "key": "odd_giganfrog-living",
+      "id": "mon_odd_giganfrog",
+      "label": "giant toad / live",
+      "max": [
+        352,
+        248
+      ],
+      "state": "living",
+      "description": "This toad has grown bigger than a human.  It looks uninterested in eating you but you better not give it a chance.",
+      "source": "sources/odd_giganfrog-living.png",
+      "native": "native/odd_giganfrog-living.png",
+      "source_sha256": "d9bbb6158e94e2cb52d373ce74e5e848dc8891f0285d7d4988e2cd85c3afa65e",
+      "native_sha256": "bebe51dc53349020375bbf8e3d3b369f4b88da7258e7e62cecdba1facb764819",
+      "prompt_sha256": "682973d28829855699f2b7d5159d59493325e38f4c187e960295a11667383a33",
+      "source_dimensions": [
+        593,
+        736
+      ],
+      "crop": [
+        40,
+        193,
+        553,
+        609
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        12.875,
+        30.0,
+        51.125,
+        61.0
+      ]
+    },
+    {
+      "key": "odd_giganfrog-corpse",
+      "id": "corpse_mon_odd_giganfrog",
+      "label": "giant toad / dead",
+      "max": [
+        352,
+        152
+      ],
+      "state": "corpse",
+      "description": "This toad has grown bigger than a human.  It looks uninterested in eating you but you better not give it a chance.",
+      "source": "sources/odd_giganfrog-corpse.png",
+      "native": "native/odd_giganfrog-corpse.png",
+      "source_sha256": "59fb9e2b078c02ef9a47573f51e4b04efcfe21483becfbd099505d5527918b8e",
+      "native_sha256": "7820f9344673827c211a94d8ca956cb7127e41763a69cdbf9125dbf3c51fe820",
+      "prompt_sha256": "682973d28829855699f2b7d5159d59493325e38f4c187e960295a11667383a33",
+      "source_dimensions": [
+        609,
+        556
+      ],
+      "crop": [
+        3,
+        131,
+        585,
+        432
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        13.625,
+        42.0,
+        50.375,
+        61.0
+      ]
+    },
+    {
+      "key": "foul_giganfrog-living",
+      "id": "mon_foul_giganfrog",
+      "label": "giant hogtoad / live",
+      "max": [
+        352,
+        248
+      ],
+      "state": "living",
+      "description": "This large, odious, boar-sized toad shares some features with its namesake.  It grunts, roots and wallows, but more striking are the dense tusk-like growths sprouting from its face and jaw.  Though they seem to be most effective for burrowing and protection, in places they come to curved points that look quite sharp.",
+      "source": "sources/foul_giganfrog-living.png",
+      "native": "native/foul_giganfrog-living.png",
+      "source_sha256": "bf1cbf1cd3a1ef1fec6cc211a497cc4932a744ebb6d68679c5675e780bcdadbb",
+      "native_sha256": "85a7885b7575f04fd2eda805b183641de67611d936749045ce31eb5474c9f509",
+      "prompt_sha256": "3ec5c17bfe30e9336c35c25fb7cd4eb761c1dca57143b5d3dc3386d5f268c7f7",
+      "source_dimensions": [
+        610,
+        745
+      ],
+      "crop": [
+        26,
+        177,
+        591,
+        607
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        11.625,
+        30.0,
+        52.375,
+        61.0
+      ]
+    },
+    {
+      "key": "foul_giganfrog-corpse",
+      "id": "corpse_mon_foul_giganfrog",
+      "label": "giant hogtoad / dead",
+      "max": [
+        352,
+        152
+      ],
+      "state": "corpse",
+      "description": "This large, odious, boar-sized toad shares some features with its namesake.  It grunts, roots and wallows, but more striking are the dense tusk-like growths sprouting from its face and jaw.  Though they seem to be most effective for burrowing and protection, in places they come to curved points that look quite sharp.",
+      "source": "sources/foul_giganfrog-corpse.png",
+      "native": "native/foul_giganfrog-corpse.png",
+      "source_sha256": "c1ee3a144dcd328191bdd2b1a51c657a2d516a382da9d59c33bdb8e769777c0d",
+      "native_sha256": "24ebec8a9cd9065a3e81b2a364981b62d54ae359b9824e76e8fced3098228350",
+      "prompt_sha256": "3ec5c17bfe30e9336c35c25fb7cd4eb761c1dca57143b5d3dc3386d5f268c7f7",
+      "source_dimensions": [
+        615,
+        547
+      ],
+      "crop": [
+        21,
+        138,
+        594,
+        422
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        12.75,
+        42.0,
+        51.125,
+        61.0
+      ]
+    },
+    {
+      "key": "foul_megafrog-living",
+      "id": "mon_foul_megafrog",
+      "label": "great beaked toad / live",
+      "max": [
+        416,
+        296
+      ],
+      "state": "living",
+      "description": "This massive toad's jaw bones have grown out from its lips into a powerful beak, large enough to snap a bicycle in two.  The bony growths extend to its face, ringing its eyes and shielding its parotoid glands, swollen with poison.  Though intimidating, it appears more interested in a soothing mud bath than anything violent.",
+      "source": "sources/foul_megafrog-living.png",
+      "native": "native/foul_megafrog-living.png",
+      "source_sha256": "3505b223bca9001c9b0e15fe5a708191286da6f6e6c2a14216eaa063486dea2b",
+      "native_sha256": "2d3ce74381a369b9920a5be5cdfe6782adf214d251fa2263e2fe2b60844a4983",
+      "prompt_sha256": "3ec5c17bfe30e9336c35c25fb7cd4eb761c1dca57143b5d3dc3386d5f268c7f7",
+      "source_dimensions": [
+        623,
+        745
+      ],
+      "crop": [
+        20,
+        214,
+        593,
+        604
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        6.0,
+        25.625,
+        58.0,
+        61.0
+      ]
+    },
+    {
+      "key": "foul_megafrog-corpse",
+      "id": "corpse_mon_foul_megafrog",
+      "label": "great beaked toad / dead",
+      "max": [
+        416,
+        176
+      ],
+      "state": "corpse",
+      "description": "This massive toad's jaw bones have grown out from its lips into a powerful beak, large enough to snap a bicycle in two.  The bony growths extend to its face, ringing its eyes and shielding its parotoid glands, swollen with poison.  Though intimidating, it appears more interested in a soothing mud bath than anything violent.",
+      "source": "sources/foul_megafrog-corpse.png",
+      "native": "native/foul_megafrog-corpse.png",
+      "source_sha256": "3dcaf258f8dc159d4957ecef376c04e554c46353891471e10477f397905dd2b7",
+      "native_sha256": "3b48ed60a7eb4a846e2ebce1b985e9e5037727c60d35576c182c0afe3bfea401",
+      "prompt_sha256": "3ec5c17bfe30e9336c35c25fb7cd4eb761c1dca57143b5d3dc3386d5f268c7f7",
+      "source_dimensions": [
+        618,
+        547
+      ],
+      "crop": [
+        22,
+        150,
+        601,
+        407
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        7.125,
+        39.0,
+        56.75,
+        61.0
+      ]
+    },
+    {
+      "key": "strange_megafrog-living",
+      "id": "mon_strange_megafrog",
+      "label": "colossal croaker / live",
+      "max": [
+        448,
+        320
+      ],
+      "state": "living",
+      "description": "Bloated to titanic size, rivaling a moose, this mutated bullfrog takes several seconds just to blink each vacant eye.  In place of the cognition it has lost, the beast has gained an even more voracious appetite and the might to sustain it.",
+      "source": "sources/strange_megafrog-living.png",
+      "native": "native/strange_megafrog-living.png",
+      "source_sha256": "61a33edfc8d188f96d8fbb5c77661703cdf5ac4b4d9f6340eb9d6aa31fe21429",
+      "native_sha256": "e9f7b3ea01b7f83ad88e7d6a34105e191a532b57fa2279ff69078bc8124016e9",
+      "prompt_sha256": "3b660219bff139618ed769612a337419f836566340dc8bcf21f38d4839ee021e",
+      "source_dimensions": [
+        672,
+        697
+      ],
+      "crop": [
+        27,
+        168,
+        643,
+        649
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        6.375,
+        21.0,
+        57.625,
+        61.0
+      ]
+    },
+    {
+      "key": "strange_megafrog-corpse",
+      "id": "corpse_mon_strange_megafrog",
+      "label": "colossal croaker / dead",
+      "max": [
+        448,
+        192
+      ],
+      "state": "corpse",
+      "description": "Bloated to titanic size, rivaling a moose, this mutated bullfrog takes several seconds just to blink each vacant eye.  In place of the cognition it has lost, the beast has gained an even more voracious appetite and the might to sustain it.",
+      "source": "sources/strange_megafrog-corpse.png",
+      "native": "native/strange_megafrog-corpse.png",
+      "source_sha256": "792a0c8880bc8ccefc7a03660d56b783d8d973704b06afb39305eeb149e12609",
+      "native_sha256": "b490d87b41209d3988a60f06aae1ad82b8a0315b2aee849bf087835b6405bbf8",
+      "prompt_sha256": "3b660219bff139618ed769612a337419f836566340dc8bcf21f38d4839ee021e",
+      "source_dimensions": [
+        686,
+        459
+      ],
+      "crop": [
+        27,
+        44,
+        670,
+        363
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        7.75,
+        37.0,
+        56.125,
+        61.0
+      ]
+    },
+    {
+      "key": "odd_megafrog-living",
+      "id": "mon_odd_megafrog",
+      "label": "gargantuan toad / live",
+      "max": [
+        448,
+        320
+      ],
+      "state": "living",
+      "description": "This toad is of truly enormous stature, larger than many cars.  You can't help but wonder if it could fit as many people inside.",
+      "source": "sources/odd_megafrog-living.png",
+      "native": "native/odd_megafrog-living.png",
+      "source_sha256": "d61ba70b1334004ce4c8fa3aaf23ec891f22fbf9995d83028e5b97695ed8ad75",
+      "native_sha256": "745a93d0a7aab08ef8408658bbe0c45ed4cab15eaeae3bcf0a47a6fad0bacda8",
+      "prompt_sha256": "3b660219bff139618ed769612a337419f836566340dc8bcf21f38d4839ee021e",
+      "source_dimensions": [
+        706,
+        697
+      ],
+      "crop": [
+        30,
+        253,
+        681,
+        654
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        4.0,
+        26.5,
+        60.0,
+        61.0
+      ]
+    },
+    {
+      "key": "odd_megafrog-corpse",
+      "id": "corpse_mon_odd_megafrog",
+      "label": "gargantuan toad / dead",
+      "max": [
+        448,
+        192
+      ],
+      "state": "corpse",
+      "description": "This toad is of truly enormous stature, larger than many cars.  You can't help but wonder if it could fit as many people inside.",
+      "source": "sources/odd_megafrog-corpse.png",
+      "native": "native/odd_megafrog-corpse.png",
+      "source_sha256": "7d247fbd34938f7e5613760fb04554db6f2c877f7bb0820122a43ee9743bead9",
+      "native_sha256": "85b6e69ab1df710117ceb8cf68478b71f7839e10fb7c4675cb3e01f3dd7e50d4",
+      "prompt_sha256": "3b660219bff139618ed769612a337419f836566340dc8bcf21f38d4839ee021e",
+      "source_dimensions": [
+        692,
+        459
+      ],
+      "crop": [
+        16,
+        86,
+        669,
+        357
+      ],
+      "native_dimensions": [
+        512,
+        512
+      ],
+      "pixelscale": 0.125,
+      "display_cell": 64,
+      "display_bounds": [
+        4.0,
+        37.75,
+        60.0,
+        61.0
+      ]
+    }
+  ],
+  "status": "staged in creatures-glyph-batch-01; archive and user/live acceptance pending",
+  "generator": "built-in imagegen",
+  "client_modified": false,
+  "visual_review": "source and native preview inspected; user/live review pending",
+  "review_notes": [
+    "All 48 source silhouettes and game-size previews inspected, including all six larval pairs and 18 adult pairs.",
+    "Two many-legged frogs follow explicit game descriptions; additional legs are intentional mutations.",
+    "Mutants-05 extra unrequested larval rows excluded using documented rectangular crop; original generated sheet retained.",
+    "Alpha is binary on exports. Apparent background glow in source RGB has transparent alpha and is not part of exported sprites.",
+    "Foul toad reuses Fowler pair based on inherited appearance/size; odor and behavior do not require new art.",
+    "Actual game names added to previews; 512-cell preview pagination repaired to retain all native sprites. User/live acceptance pending."
+  ],
+  "validation": {
+    "unique_sprites": 48,
+    "creature_ids": [
+      "mon_pattern_bigtad",
+      "mon_strange_bigtad",
+      "mon_foul_bigtad",
+      "mon_odd_bigtad",
+      "mon_vocal_bigtad",
+      "mon_shift_bigtad",
+      "mon_pattern_frog",
+      "mon_odd_toad",
+      "mon_shift_frog",
+      "mon_palette_frog",
+      "mon_leo_worm",
+      "mon_wood_worm",
+      "mon_pattern_bigfrog",
+      "mon_foul_bigfrog",
+      "mon_jumbo_bigfrog",
+      "mon_vocal_bigfrog",
+      "mon_shift_bigfrog",
+      "mon_pattern_giganfrog",
+      "mon_strange_giganfrog",
+      "mon_odd_giganfrog",
+      "mon_foul_giganfrog",
+      "mon_foul_megafrog",
+      "mon_strange_megafrog",
+      "mon_odd_megafrog",
+      "mon_foul_toad"
+    ],
+    "corpse_ids": [
+      "corpse_mon_pattern_bigtad",
+      "corpse_mon_strange_bigtad",
+      "corpse_mon_foul_bigtad",
+      "corpse_mon_odd_bigtad",
+      "corpse_mon_vocal_bigtad",
+      "corpse_mon_shift_bigtad",
+      "corpse_mon_pattern_frog",
+      "corpse_mon_odd_toad",
+      "corpse_mon_shift_frog",
+      "corpse_mon_palette_frog",
+      "corpse_mon_leo_worm",
+      "corpse_mon_wood_worm",
+      "corpse_mon_pattern_bigfrog",
+      "corpse_mon_foul_bigfrog",
+      "corpse_mon_jumbo_bigfrog",
+      "corpse_mon_vocal_bigfrog",
+      "corpse_mon_shift_bigfrog",
+      "corpse_mon_pattern_giganfrog",
+      "corpse_mon_strange_giganfrog",
+      "corpse_mon_odd_giganfrog",
+      "corpse_mon_foul_giganfrog",
+      "corpse_mon_foul_megafrog",
+      "corpse_mon_strange_megafrog",
+      "corpse_mon_odd_megafrog",
+      "corpse_mon_foul_toad"
+    ],
+    "total_slots": 19763,
+    "prior_non_config_files_preserved": 396,
+    "unrelated_mappings_preserved": true,
+    "atlas_bytes": "passed",
+    "source_prompt_native_hashes": "passed",
+    "reference_indices": "passed",
+    "client_modified": false,
+    "live_review": "pending"
+  }
+}

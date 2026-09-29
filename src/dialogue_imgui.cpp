@@ -213,6 +213,35 @@ void dialogue_imgui_impl::draw_controls()
     if( hide_ui ) {
         ImGuiWindow *w = ImGui::GetCurrentWindowRead();
         ImGui::SetWindowHiddenAndSkipItemsForCurrentFrame( w );
+        return;
+    }
+
+    const std::string topic = conversation->topic_stack.empty() ? std::string() :
+                              conversation->topic_stack.back().id;
+    const bool martial_menu = topic.rfind( "TALK_MA_PERK_MENU_", 0 ) == 0;
+    const bool perk_menu = topic.rfind( "TALK_PERK_MENU_", 0 ) == 0;
+    if( is_not_conversation && ( martial_menu || perk_menu ) && !debug_mode ) {
+        ImGui::TextUnformatted( martial_menu ? _( "Martial Mastery" ) : _( "Perks" ) );
+        ImGui::Separator();
+        // Progression uses the dialogue conditions and purchase effects,
+        // but presents a character menu rather than an NPC conversation.
+        const float summary_height = ImGui::GetContentRegionAvail().y * 0.36f;
+        if( ImGui::BeginChild( "##PROGRESSION_DETAILS", ImVec2( 0, summary_height ),
+                               ImGuiChildFlags_Borders ) ) {
+            for( auto it = history.rbegin(); it != history.rend(); ++it ) {
+                if( !it->text.empty() ) {
+                    cataimgui::TextColoredParagraph( it->color, it->text );
+                    break;
+                }
+            }
+        }
+        ImGui::EndChild();
+        if( ImGui::BeginChild( "##PROGRESSION_CHOICES", ImVec2( 0, 0 ),
+                               ImGuiChildFlags_Borders ) ) {
+            draw_responses();
+        }
+        ImGui::EndChild();
+        return;
     }
 
     const ImVec2 origin = ImGui::GetWindowPos();

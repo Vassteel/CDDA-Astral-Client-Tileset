@@ -1,0 +1,726 @@
+{
+  "version": "aux-2-v002",
+  "status": "packaged in Astral 0.1.30; user/live acceptance pending",
+  "preserve": "All prior Astral art including nine shields; see preserved-art.json",
+  "entries": [
+    {
+      "id": "crowbar",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/crowbar.png",
+      "source_sha256": "5644759031004f85ead103479c225aa5e4d947ea6e878b2c23d84cf0ee70c76a",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/crowbar.png",
+      "png_sha256": "367ad7d68c83be7deb8c83a90ca87f4b479b0697d428ce2005bf3b5f31619cb5",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 181,
+      "content_bounds": [
+        22,
+        26,
+        236,
+        236
+      ],
+      "prompt_path": "prompts/crowbar.txt",
+      "prompt_sha256": "a35d38e0e1842cc53cb2b5adbc3a3eaf606b64547119e52ddca866bfa82c269f",
+      "native_preview": "previews/crowbar-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_crowbar.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "crowbar",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/entry_tools.json",
+          "array_index": 0,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Source plus 128/64/32px inspection: hook/notch and flattened opposite end distinguish tool; narrow continuous shaft remains readable. User/live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "crowbar",
+          "image_url": "https://i5.walmartimages.com/seo/GreatNeck-Drop-Forged-Steel-Wrecking-Bar-30-inch_da4cc307-8e0a-45bc-b204-dd951b17d689.2e016d00c41528dea8529659d8f6d766.jpeg",
+          "page_url": "https://www.walmart.com/c/kp/shingle-ripper-bar",
+          "purpose": "Real object construction reference; no photo pixels copied into generated art",
+          "inspection": "Real object photo visually inspected before generation; shape/material reference only, no copied photo pixels.",
+          "local_path": "references/crowbar.image",
+          "sha256": "f67e2abdb6a2119fe4fbb31edb7fb8dc3620508ed662f7e536f647dbe12cc178"
+        }
+      ]
+    },
+    {
+      "id": "flashlight",
+      "aliases": [
+        "astral_research_light"
+      ],
+      "state": "off",
+      "source_path": "sources/flashlight.png",
+      "source_sha256": "9756b3bb5bd06ebd9b8c180b7d702976e6aedace8c72f9c6df8c12e13103f38e",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/flashlight.png",
+      "png_sha256": "4620cce75af6b22fe2ded1f01778230b694b8bd8b4d3a7cd0d875edcd8949983",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 157,
+      "content_bounds": [
+        8,
+        29,
+        246,
+        245
+      ],
+      "prompt_path": "prompts/flashlight.txt",
+      "prompt_sha256": "e28e47577480dea9d3470e2e031911512ade648a3612832dfbf73ada389146a8",
+      "native_preview": "previews/flashlight-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_flashlight.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": [
+            "flashlight",
+            "astral_research_light"
+          ],
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/lighting.json",
+          "array_index": 4,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [
+        {
+          "field": "use_action.target",
+          "target": "flashlight_on"
+        }
+      ],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Source and 128/64/32px comparison inspected: cool-gray inactive lens distinguishable from warm active lens; body silhouette consistent. User/live acceptance pending.",
+      "live_acceptance": "not tested",
+      "family": "flashlight_off_on",
+      "required_family_ids": [
+        "flashlight",
+        "flashlight_on",
+        "astral_research_light",
+        "astral_research_light_on"
+      ],
+      "alias_reason": "Research light preserves flashlight dimensions/materials/exterior; only enclosed battery fitting differs. Explicit looks_like and descriptions support same ground sprite for corresponding powered state.",
+      "alias_definitions": [
+        {
+          "id": "astral_research_light",
+          "family": "tools",
+          "status": "remaining_art_or_alias_review",
+          "scope": "core",
+          "origins": [
+            {
+              "path": "data/json/achievements_astral/vanilla_reward_items.json",
+              "array_index": 15,
+              "scope": "core"
+            }
+          ],
+          "name": {
+            "str": "Research light (off)",
+            "str_pl": "Research lights (off)"
+          },
+          "description": "A laboratory flashlight fitted for a three-capacity rechargeable cell.  Standard medium batteries also fit.",
+          "subtypes": [
+            "TOOL"
+          ],
+          "material": [
+            "plastic",
+            "aluminum"
+          ],
+          "flags": [
+            "BELT_CLIP",
+            "WATER_BREAK_ACTIVE",
+            "HELMET_HEAD_ATTACHMENT",
+            "HEAD_STRAP_MOUNT"
+          ],
+          "copy_from": "flashlight",
+          "looks_like": "flashlight",
+          "looks_like_chain": [
+            "flashlight"
+          ],
+          "resolved_mapping_candidate": "flashlight",
+          "direct_mapping": null,
+          "baseline_direct": false,
+          "shared_mapping_candidates": [],
+          "transitions": [
+            {
+              "field": "use_action.target",
+              "target": "astral_research_light_on"
+            }
+          ],
+          "variants": [],
+          "seasonal_mappings": [],
+          "orientation": "ground renderer passes rotation=0; no invented directional variants",
+          "state_review": "pending family review; no generic empty/full suffix emitted by ground renderer",
+          "overlay_handoff": {
+            "wielded": "overlay_wielded_astral_research_light",
+            "worn": null
+          },
+          "inheritance_warning": null
+        }
+      ],
+      "references": [
+        {
+          "subject": "flashlight",
+          "image_url": "https://shimojima.jp/img/goods/Z/2500205438304.jpg",
+          "page_url": "https://shimojima.jp/shop/g/g2500205438304/",
+          "local_path": "references/flashlight.jpg",
+          "sha256": "3220c41ff1539c246d9f0d96628489d7872db25e9af2008d41d22416d04fda29",
+          "purpose": "Real plastic handheld flashlight construction; game dimensions/color determine sprite, no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation; shape/material reference only, no copied photo pixels."
+        }
+      ]
+    },
+    {
+      "id": "flashlight_on",
+      "aliases": [
+        "astral_research_light_on"
+      ],
+      "state": "on",
+      "source_path": "sources/flashlight_on.png",
+      "source_sha256": "6f10ff2779e5bb907818b04adf06454a2f0521a2ffc1cf65f807f3061b52e63d",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/flashlight_on.png",
+      "png_sha256": "3a5d8b8170e91e3a6e7c88cdd45c5ba02645d0cade08b33fef9656e8f245cc61",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 182,
+      "content_bounds": [
+        8,
+        38,
+        245,
+        204
+      ],
+      "prompt_path": "prompts/flashlight_on.txt",
+      "prompt_sha256": "28c18757c586fd21f33cbdc3727c1deb1af2053f0d08509c793c672e76780239",
+      "native_preview": "previews/flashlight_on-native-32.png",
+      "generation": "built-in image_gen edit of sources/flashlight.png",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_flashlight_on.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": [
+            "flashlight_on",
+            "astral_research_light_on"
+          ],
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/lighting.json",
+          "array_index": 5,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [
+        {
+          "field": "use_action.target",
+          "target": "flashlight"
+        },
+        {
+          "field": "revert_to",
+          "target": "flashlight"
+        }
+      ],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Built-in edit of off-state source; warm lens clearly distinguishable at 32px, blue body and placement consistent; no projected beam or halo. Opaque-mask IoU 0.9874 at 256px. User/live acceptance pending.",
+      "live_acceptance": "not tested",
+      "family": "flashlight_off_on",
+      "required_family_ids": [
+        "flashlight",
+        "flashlight_on",
+        "astral_research_light",
+        "astral_research_light_on"
+      ],
+      "alias_reason": "Research light preserves flashlight dimensions/materials/exterior; only enclosed battery fitting differs. Explicit looks_like and descriptions support same ground sprite for corresponding powered state.",
+      "alias_definitions": [
+        {
+          "id": "astral_research_light_on",
+          "family": "tools",
+          "status": "remaining_art_or_alias_review",
+          "scope": "core",
+          "origins": [
+            {
+              "path": "data/json/achievements_astral/vanilla_reward_items.json",
+              "array_index": 16,
+              "scope": "core"
+            }
+          ],
+          "name": {
+            "str": "Research light (on)",
+            "str_pl": "Research lights (on)"
+          },
+          "description": "A laboratory flashlight fitted for a three-capacity rechargeable cell.  Standard medium batteries also fit.",
+          "subtypes": [
+            "TOOL"
+          ],
+          "material": [
+            "plastic",
+            "aluminum"
+          ],
+          "flags": [
+            "CHARGEDIM",
+            "TRADER_AVOID",
+            "BELT_CLIP",
+            "WATER_BREAK",
+            "HELMET_HEAD_ATTACHMENT",
+            "HEAD_STRAP_MOUNT",
+            "SPAWN_ACTIVE"
+          ],
+          "copy_from": "flashlight_on",
+          "looks_like": "flashlight_on",
+          "looks_like_chain": [
+            "flashlight_on",
+            "flashlight"
+          ],
+          "resolved_mapping_candidate": "flashlight",
+          "direct_mapping": null,
+          "baseline_direct": false,
+          "shared_mapping_candidates": [],
+          "transitions": [
+            {
+              "field": "use_action.target",
+              "target": "astral_research_light"
+            },
+            {
+              "field": "revert_to",
+              "target": "flashlight"
+            }
+          ],
+          "variants": [],
+          "seasonal_mappings": [],
+          "orientation": "ground renderer passes rotation=0; no invented directional variants",
+          "state_review": "pending family review; no generic empty/full suffix emitted by ground renderer",
+          "overlay_handoff": {
+            "wielded": "overlay_wielded_astral_research_light_on",
+            "worn": null
+          },
+          "inheritance_warning": null
+        }
+      ],
+      "references": [
+        {
+          "subject": "flashlight_on",
+          "image_url": "https://shimojima.jp/img/goods/Z/2500205438304.jpg",
+          "page_url": "https://shimojima.jp/shop/g/g2500205438304/",
+          "local_path": "references/flashlight.jpg",
+          "sha256": "3220c41ff1539c246d9f0d96628489d7872db25e9af2008d41d22416d04fda29",
+          "purpose": "Real plastic handheld flashlight construction; game dimensions/color determine sprite, no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation; shape/material reference only, no copied photo pixels."
+        }
+      ]
+    },
+    {
+      "id": "log",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/log.png",
+      "source_sha256": "2172127e0b4063022695045fbf42c7fb6a497524e71156ef241531796a797872",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/log.png",
+      "png_sha256": "4a23a3022ed5f86a8c15c2c7691e0fc70a86f359bc9abf92a5c045663a6acdd5",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 47,
+      "content_bounds": [
+        8,
+        10,
+        243,
+        246
+      ],
+      "prompt_path": "prompts/log.txt",
+      "prompt_sha256": "e1161ec87d26a70d04ff1c08217e7a0ae38c422f728656ca80af257dbffa66c4",
+      "native_preview": "previews/log-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_log.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "log",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/resources/wood.json",
+          "array_index": 0,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Source plus 128/64/32px inspection: thick bark-covered trunk segment and broad cut ends remain distinct from plank/stick. User/live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "log",
+          "image_url": "https://www.mitcheltreebros.com/wp-content/uploads/2020/10/lfs2.png",
+          "page_url": "https://www.mitcheltreebros.com/logs/",
+          "local_path": "references/log.png",
+          "sha256": "db9911401ac11aa8fa9385f3ae6d80feaff47bfa7e9dcd9281936bda1e19c637",
+          "purpose": "Real sawn log end and bark reference; no photo pixels copied",
+          "inspection": "Real object photo visually inspected before generation; shape/material reference only, no copied photo pixels."
+        }
+      ]
+    },
+    {
+      "id": "nail",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/nail.png",
+      "source_sha256": "e0ad5a1f5ecb4c0a9c0736edffdfefdbc92087abaeee3a298e9852254cb976ff",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/nail.png",
+      "png_sha256": "8ff98dbaf13fe04dde8ea9ab96a174d5792bbe58f13902e95c6d3838c882672a",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 154,
+      "content_bounds": [
+        56,
+        58,
+        201,
+        225
+      ],
+      "prompt_path": "prompts/nail.txt",
+      "prompt_sha256": "751f3ba2878f3ea44ebc1eb4e117994474bf1bd7570950031dbce0f0b5f566c7",
+      "native_preview": "previews/nail-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_nail.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "nail",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/ammo/nail.json",
+          "array_index": 2,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Source plus 128/64/32px inspection: round flat head, straight shank and sharp end remain visible; scale intentionally emphasizes a single nail. User/live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "nail",
+          "image_url": "https://cpimg.tistatic.com/10087875/b/4/Bright-Steel-Smooth-Shank-Common-Nails-6D-8D-10D-16D-..jpg",
+          "page_url": "https://www.agfastener.com/bright-steel-smooth-shank-common-nails-6d-8d-10d-16d-.html",
+          "purpose": "Real object construction reference; no photo pixels copied into generated art",
+          "inspection": "Real object photo visually inspected before generation; shape/material reference only, no copied photo pixels.",
+          "local_path": "references/nail.image",
+          "sha256": "2ef90fb99b69fcaa110bf4b141e7e4c69d45533354c2e69f992d8803afbddd9b"
+        }
+      ]
+    },
+    {
+      "id": "scrap",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/scrap.png",
+      "source_sha256": "b3530e5036d4b5ca073c04ae77aeadb051345e4a841235b6b48f93cf0875955b",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/scrap.png",
+      "png_sha256": "452450f255947539e27f5acb0dc11fa354b41caf6957b6281dfc038f037b13e0",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 163,
+      "content_bounds": [
+        55,
+        47,
+        208,
+        187
+      ],
+      "prompt_path": "prompts/scrap.txt",
+      "prompt_sha256": "0575baaf0ab1de5f1d8875df3159f70005b12dfe7c0543c9da8976e13e3df5e2",
+      "native_preview": "previews/scrap-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_scrap.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "scrap",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/resources/metal.json",
+          "array_index": 1,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Source plus 128/64/32px inspection: compact separate bent gray-steel pieces with restrained rust read as salvage. User/live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "scrap",
+          "image_url": "https://www.metallparadies.de/images/product_images/info_images/Stahlreste4.webp",
+          "page_url": "https://www.metallparadies.de/reststuecke-stahl.html",
+          "purpose": "Real object construction reference; no photo pixels copied into generated art",
+          "inspection": "Real object photo visually inspected before generation; shape/material reference only, no copied photo pixels.",
+          "local_path": "references/scrap.image",
+          "sha256": "52ba82ca01634d3bf6c0604d2bba24f3d84ddf2c61ca0fc1f132164dbeb62eb3"
+        }
+      ]
+    },
+    {
+      "id": "screwdriver",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/screwdriver.png",
+      "source_sha256": "4f479442b75d4d0c534586c92b0edeb0e9431983daa16a5525685dafd8fb61ba",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/screwdriver.png",
+      "png_sha256": "5ec0ec4570cc223b54df1483b5ef4077528623442c40a4c7d52fcb30b9d4b40e",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 161,
+      "content_bounds": [
+        37,
+        36,
+        220,
+        253
+      ],
+      "prompt_path": "prompts/screwdriver.txt",
+      "prompt_sha256": "d77a9157dd106e2d2386d003341cbf53d225d84afacbade97789c85f78d798e2",
+      "native_preview": "previews/screwdriver-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_screwdriver.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "screwdriver",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/tool/workshop.json",
+          "array_index": 53,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Source plus 128/64/32px inspection: mustard-yellow plastic grip and steel shaft distinguish screwdriver, cross-tip geometry present in source; tiny native tip detail is necessarily limited. User/live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "screwdriver",
+          "image_url": "https://hemusa.com/cdn/shop/products/D449_1024x1024.jpg?v=1743702840",
+          "page_url": "https://hemusa.com/en/products/surtek-d449",
+          "purpose": "Real object construction reference; no photo pixels copied into generated art",
+          "inspection": "Real object photo visually inspected before generation; shape/material reference only, no copied photo pixels.",
+          "local_path": "references/screwdriver.image",
+          "sha256": "8ef128dbd476806b25bcadcfc66ba174d29b74baede3e8440897f9456c586b75"
+        }
+      ]
+    },
+    {
+      "id": "stick_long",
+      "aliases": [],
+      "state": "neutral_intact",
+      "source_path": "sources/stick_long.png",
+      "source_sha256": "134d077a5f891e317aa41a039db7b5b5c6f5f756babbba12af7a949ab69c29f8",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "png_path": "png/stick_long.png",
+      "png_sha256": "c368c37623129b01cc811b64b4c50945258bdc5301b950f4688e1f8abd3df3f6",
+      "png_size": [
+        256,
+        256
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_values": 176,
+      "content_bounds": [
+        23,
+        29,
+        231,
+        236
+      ],
+      "prompt_path": "prompts/stick_long.txt",
+      "prompt_sha256": "f7b7c66b2cde21ed738c8acb488fe2a78ebe4de8f5350c197a3b5f2476f9fd53",
+      "native_preview": "previews/stick_long-native-32.png",
+      "generation": "built-in image_gen",
+      "export": "aspect-preserving square pad and nearest-neighbor resize; alpha retained",
+      "mapping": {
+        "file": "astral_item_aux2_stick_long.png",
+        "sprite_width": 256,
+        "sprite_height": 256,
+        "pixelscale": 0.125,
+        "sprite_offset_x": 0,
+        "sprite_offset_y": 0,
+        "tile": {
+          "id": "stick_long",
+          "rotates": false
+        },
+        "fg": "allocated by integrator"
+      },
+      "definition_origins": [
+        {
+          "path": "data/json/items/resources/wood.json",
+          "array_index": 3,
+          "scope": "core"
+        }
+      ],
+      "variants": [],
+      "transitions": [],
+      "seasons": "neutral shared year-round; no seasonal behavior in reviewed definitions",
+      "visual_review": "Source plus 128/64/32px inspection: straight slender bark staff remains continuous and differs from shorter irregular stick with twig nub. Native silhouette intentionally thin. User/live acceptance pending.",
+      "live_acceptance": "not tested",
+      "references": [
+        {
+          "subject": "stick_long",
+          "image_url": "https://st4.depositphotos.com/1002007/24559/i/450/depositphotos_245599276-stock-photo-single-dry-tree-branch-isolated.jpg",
+          "page_url": "https://depositphotos.com/ru/photo/single-dry-tree-branch-isolated-white-background-stick-tree-branch-240089724.html",
+          "purpose": "Natural wood construction reference only; game long-stick proportions come from definition",
+          "inspection": "Real object photo visually inspected before generation; shape/material reference only, no copied photo pixels.",
+          "local_path": "references/stick_long.jpg",
+          "sha256": "67744540e7af01df22088c0d93686f8b3df5d04a678ff95240b966d506e8c56a"
+        }
+      ]
+    }
+  ],
+  "generated_count": 8,
+  "creative_method": "built-in imagegen only",
+  "static_checks": "dimensions, transparent alpha, non-clipped bounds, exact prompt/source/export hashes",
+  "live_acceptance": "not tested",
+  "release": "0.1.30"
+}

@@ -1,0 +1,14 @@
+{
+  "references": [
+    {
+      "page": "https://www.animalspot.net/frogs-in-us/frogs-in-new-york",
+      "local": "references/frogs-photo-guide.jpg",
+      "purpose": "Real frog/toad anatomy and markings, inspected before generation."
+    },
+    {
+      "page": "https://www.usgs.gov/media/images/american-bullfrog-tadpole",
+      "local": "references/bullfrog.jpg",
+      "purpose": "Real larval body/tail anatomy; game definitions supply mutations."
+    }
+  ]
+}
