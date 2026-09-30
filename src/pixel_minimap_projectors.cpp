@@ -4,16 +4,27 @@
 
 #include <algorithm>
 
+// Tiles per axis that cover `pixels` (fill) or fit inside it.
+static int tile_extent( int pixels, int tiles, bool fill, int minimum )
+{
+    const int fit = pixels / tiles;
+    const int cover = ( pixels + tiles - 1 ) / tiles;
+    return std::max( fill ? cover : fit, minimum );
+}
+
 pixel_minimap_ortho_projector::pixel_minimap_ortho_projector(
     const point &total_tiles_count,
     const SDL_Rect &max_screen_rect,
-    bool square_pixels )
+    bool square_pixels, bool fill )
 {
-    tile_size.x = std::max( max_screen_rect.w / total_tiles_count.x, 1 );
-    tile_size.y = std::max( max_screen_rect.h / total_tiles_count.y, 1 );
+    tile_size.x = tile_extent( max_screen_rect.w, total_tiles_count.x, fill, 1 );
+    tile_size.y = tile_extent( max_screen_rect.h, total_tiles_count.y, fill, 1 );
 
     if( square_pixels ) {
-        tile_size.x = tile_size.y = std::min( tile_size.x, tile_size.y );
+        // Fill keeps the larger extent so both axes are covered and the
+        // overflow is cropped by the screen rect.
+        tile_size.x = tile_size.y = fill ? std::max( tile_size.x, tile_size.y )
+                                    : std::min( tile_size.x, tile_size.y );
     }
 }
 
@@ -39,15 +50,16 @@ point pixel_minimap_ortho_projector::get_tile_pos( const point &p,
 pixel_minimap_iso_projector::pixel_minimap_iso_projector(
     const point &total_tiles_count,
     const SDL_Rect &max_screen_rect,
-    bool square_pixels ) :
+    bool square_pixels, bool fill ) :
 
     total_tiles_count( total_tiles_count )
 {
-    tile_size.x = std::max( max_screen_rect.w / ( 2 * total_tiles_count.x - 1 ), 2 );
-    tile_size.y = std::max( max_screen_rect.h / total_tiles_count.y, 2 );
+    tile_size.x = tile_extent( max_screen_rect.w, 2 * total_tiles_count.x - 1, fill, 2 );
+    tile_size.y = tile_extent( max_screen_rect.h, total_tiles_count.y, fill, 2 );
 
     if( square_pixels ) {
-        tile_size.x = tile_size.y = std::min( tile_size.x, tile_size.y );
+        tile_size.x = tile_size.y = fill ? std::max( tile_size.x, tile_size.y )
+                                    : std::min( tile_size.x, tile_size.y );
     }
 }
 

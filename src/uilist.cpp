@@ -38,6 +38,16 @@
 #include "sdl_wrappers.h"
 #endif
 
+/** Height of one entry row: the table adds CellPadding above and below the text, which
+ *  with the Astral spacing tokens is taller than a plain line-with-spacing. Using the same
+ *  value for sizing and drawing keeps the last entry inside the window. */
+static float entry_row_height()
+{
+    const ImGuiStyle &s = ImGui::GetStyle();
+    return std::max( ImGui::GetTextLineHeightWithSpacing(),
+                     ImGui::GetTextLineHeight() + 2.f * s.CellPadding.y );
+}
+
 void uilist_impl::draw_controls()
 {
 #if defined(TILES)
@@ -124,7 +134,7 @@ void uilist::draw_contents( bool embedded )
         ImGui::TableNextRow();
         ImGui::TableSetColumnIndex( 1 );
 
-        float entry_height = ImGui::GetTextLineHeightWithSpacing();
+        float entry_height = entry_row_height();
         ImGuiStyle &style = ImGui::GetStyle();
         // NoScrollWithMouse: wheel moves highlight/selection (shared list UX);
         // viewport follows via need_to_scroll / SetScrollHereY.
@@ -702,6 +712,13 @@ void uilist::calc_data()
         window_border_extra = 2.f * std::max( 0.f, 14.f * scale - s.WindowPadding.x );
 #endif
     }
+#if defined(TILES)
+    else {
+        // Untitled menus use the popup frame, whose inset is 10 logical px.
+        const float scale = ui_hybrid_chrome::theme::scale();
+        window_border_extra = 2.f * std::max( 0.f, 10.f * scale - s.WindowPadding.x );
+    }
+#endif
 
     ImVec2 text_size = ImVec2();
     if( !text.empty() ) {
@@ -735,11 +752,9 @@ void uilist::calc_data()
     float additional_height = title_size.y + text_size.y + desc_size.y + tabs_size.y +
                               window_border + frame_padding_y;
 
-    if( vmax * ImGui::GetTextLineHeightWithSpacing() + additional_height >
-        main_view_max_y ) {
-        vmax = floorf( ( main_view_max_y - additional_height +
-                         frame_padding_y ) /
-                       ImGui::GetTextLineHeightWithSpacing() );
+    const float row_h = entry_row_height();
+    if( vmax * row_h + additional_height > main_view_max_y ) {
+        vmax = floorf( ( main_view_max_y - additional_height + frame_padding_y ) / row_h );
     }
 
     float padding = 2.0f * s.CellPadding.x;
@@ -775,9 +790,8 @@ void uilist::calc_data()
             max_avail_height = std::min( max_avail_height, desired_height );
         }
     }
-    calculated_menu_size.y = std::min(
-                                 max_avail_height - additional_height,
-                                 vmax * ImGui::GetTextLineHeightWithSpacing() ) + frame_padding_y;
+    calculated_menu_size.y = std::min( max_avail_height - additional_height,
+                                       vmax * row_h ) + frame_padding_y;
 
     extra_space_left = 0.0;
     extra_space_right = 0.0;

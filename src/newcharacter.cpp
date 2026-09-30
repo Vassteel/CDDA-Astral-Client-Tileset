@@ -92,6 +92,7 @@
 #include "units_utility.h"
 #include "veh_type.h"
 #include "worldfactory.h"
+#include "ui_hybrid_chrome.h"
 
 static const std::string flag_CHALLENGE( "CHALLENGE" );
 static const std::string flag_CITY_START( "CITY_START" );
@@ -4115,10 +4116,8 @@ void character_creator_ui_impl::draw_summary()
 
 cataimgui::bounds character_creator_ui_impl::get_bounds()
 {
-    const ImVec2 vp = ImGui::GetMainViewport()->Size;
-    const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
-    return { -1.f, -1.f, std::min( vp.x * 0.94f, 1280.f * scale ),
-             std::min( vp.y * 0.92f, 800.f * scale ) };
+    return { -1.f, -1.f, ui_hybrid_chrome::theme::large_window_size().x,
+             ui_hybrid_chrome::theme::large_window_size().y };
 }
 
 template<typename T>

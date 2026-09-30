@@ -938,6 +938,12 @@ bool main_menu::opening_screen()
 
         // also check special keys
         if( action == "QUIT" ) {
+#if defined(TILES)
+            // Escape closes an open category popup before it means "quit".
+            if( hybrid_overlay && hybrid_overlay->close_popup() ) {
+                continue;
+            }
+#endif
 #if !defined(EMSCRIPTEN)
             if( query_yn( _( "Really quit?" ) ) ) {
                 return false;

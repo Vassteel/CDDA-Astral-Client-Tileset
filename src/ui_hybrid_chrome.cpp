@@ -90,6 +90,14 @@ float px( float logical )
     return logical * scale();
 }
 
+ImVec2 large_window_size()
+{
+    const ImVec2 vp = ImGui::GetMainViewport()->Size;
+    const float s = scale();
+    return ImVec2( std::min( vp.x * 0.94f, std::max( 1280.f * s, vp.x * 0.62f ) ),
+                   std::min( vp.y * 0.92f, std::max( 800.f * s, vp.y * 0.78f ) ) );
+}
+
 decoration level()
 {
     if( g_level_override >= 0 ) {

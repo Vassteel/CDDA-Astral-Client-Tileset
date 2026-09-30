@@ -56,6 +56,9 @@ enum class button_kind { primary, secondary, tertiary, danger };
  * Themed button. size.x <= 0 → auto (min width token); size.y <= 0 → button token.
  * Disabled buttons stay legible; pass a reason for the tooltip.
  */
+/** Width action_button() will use for `label` when no explicit width is given. */
+float action_button_width( const char *label, button_kind kind = button_kind::secondary,
+                           const char *icon = nullptr );
 bool action_button( const char *label, button_kind kind = button_kind::secondary,
                     const ImVec2 &size_logical = ImVec2( 0.f, 0.f ), bool enabled = true,
                     const char *disabled_reason = nullptr, const char *icon = nullptr );

@@ -39,6 +39,9 @@
 #include "point.h"
 #include "string_formatter.h"
 #include "translations.h"
+#if defined(TILES)
+#include "ui_hybrid_sidebar.h"
+#endif
 #include "type_id.h"
 #include "ui_manager.h"
 #include "widget.h"
@@ -456,20 +459,31 @@ std::string panel_manager::get_current_layout_id() const
     return current_layout_id;
 }
 
+// The Hybrid sidebar draws the layout's columns inside Astral chrome, so the
+// reserved strip is wider than the layout asks for (see ui_hybrid_sidebar).
+static int hybrid_sidebar_cells( int layout_cells )
+{
+#if defined(TILES)
+    return ui_hybrid_sidebar::width_cells( layout_cells );
+#else
+    return layout_cells;
+#endif
+}
+
 int panel_manager::get_width_right() const
 {
     if( get_option<std::string>( "SIDEBAR_POSITION" ) == "left" ) {
-        return width_left;
+        return hybrid_sidebar_cells( width_left );
     }
-    return width_right;
+    return hybrid_sidebar_cells( width_right );
 }
 
 int panel_manager::get_width_left() const
 {
     if( get_option<std::string>( "SIDEBAR_POSITION" ) == "left" ) {
-        return width_right;
+        return hybrid_sidebar_cells( width_right );
     }
-    return width_left;
+    return hybrid_sidebar_cells( width_left );
 }
 
 void panel_manager::init()

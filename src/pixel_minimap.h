@@ -30,6 +30,9 @@ struct pixel_minimap_settings {
     int beacon_blink_interval = 0;
     bool square_pixels = true;
     bool scale_to_fit = false;
+    // Size tiles so the map covers the whole screen rect (edges are cropped)
+    // instead of fitting inside it with margins.
+    bool fill = false;
 };
 
 class pixel_minimap

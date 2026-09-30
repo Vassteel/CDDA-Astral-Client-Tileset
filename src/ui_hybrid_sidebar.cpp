@@ -4,6 +4,7 @@
 #if defined(TILES)
 
 #include <algorithm>
+#include <cfloat>
 #include <cmath>
 #include <cstdio>
 #include <memory>
@@ -248,7 +249,7 @@ class hybrid_sidebar_window : public cataimgui::window
                     get_options().save();
                 }
                 int percent = get_option<int>( "HYBRID_STATUS_PERCENT" );
-                if( ImGui::SliderInt( _( "Status height (%)" ), &percent, 20, 80 ) ) {
+                if( ImGui::SliderInt( _( "Status height (%)" ), &percent, 20, 90 ) ) {
                     get_options().get_option( "HYBRID_STATUS_PERCENT" ).setValue( std::to_string( percent ) );
                 }
                 if( ImGui::IsItemDeactivatedAfterEdit() ) {
@@ -259,13 +260,17 @@ class hybrid_sidebar_window : public cataimgui::window
                 }
                 ImGui::EndPopup();
             }
+            // The status section takes only the height its rows need, up to the
+            // configured share of the sidebar; the message log gets the rest.
+            // No scrollbars in the HUD: a status section taller than its cap
+            // still scrolls with the wheel, the log follows its newest line.
             const float available = ImGui::GetContentRegionAvail().y;
-            const float stats_height = show_log ? std::max( 1.f,
-                                       std::floor( available * get_option<int>( "HYBRID_STATUS_PERCENT" ) / 100.f ) ) :
-                                       available;
-            ImGui::BeginChild( "hybrid_status", ImVec2( 0.f, stats_height ),
-                               ImGuiChildFlags_None, ImGuiWindowFlags_AlwaysVerticalScrollbar |
-                               ImGuiWindowFlags_AlwaysHorizontalScrollbar );
+            const float status_cap = show_log ? std::max( 1.f,
+                                     std::floor( available * get_option<int>( "HYBRID_STATUS_PERCENT" ) / 100.f ) ) :
+                                     available;
+            ImGui::SetNextWindowSizeConstraints( ImVec2( 0.f, 0.f ), ImVec2( FLT_MAX, status_cap ) );
+            ImGui::BeginChild( "hybrid_status", ImVec2( 0.f, 0.f ),
+                               ImGuiChildFlags_AutoResizeY, ImGuiWindowFlags_NoScrollbar );
             if( get_option<bool>( "HYBRID_HP_OVERVIEW" ) ) {
                 for( const bodypart_id &bp :
                      u.get_all_body_parts( get_body_part_flags::only_main |
@@ -300,8 +305,8 @@ class hybrid_sidebar_window : public cataimgui::window
                 const std::string text = row.layout( u, columns, row._label_width,
                                                      row.has_flag( "W_NO_PADDING" ) );
                 if( !text.empty() ) {
-                    // Keep one readable font size as values change. Reserved
-                    // scrollbar space keeps columns stable; wide rows scroll.
+                    // Keep one readable font size as values change. Columns
+                    // follow the section width, which no scrollbar changes.
                     ImGui::BeginGroup();
                     cataimgui::draw_colored_text( text );
                     ImGui::EndGroup();
@@ -327,7 +332,7 @@ class hybrid_sidebar_window : public cataimgui::window
             // Remaining vertical space for the scrollable log
             const float remain = std::max( 1.f, ImGui::GetContentRegionAvail().y );
             ui_hybrid_widgets::panel_begin( "hybrid_msg_log", ImVec2( 0.f, remain ), true,
-                                            ImGuiWindowFlags_AlwaysVerticalScrollbar );
+                                            ImGuiWindowFlags_NoScrollbar );
             const bool follow = log_from_top ? ImGui::GetScrollY() <= 4.f :
                                 ImGui::GetScrollY() >= ImGui::GetScrollMaxY() - 4.f;
             const auto msgs = Messages::sidebar_messages( 200 );
@@ -451,6 +456,21 @@ std::unique_ptr<hybrid_mouse_view_window> g_mouse_view;
 
 namespace ui_hybrid_sidebar
 {
+
+int width_cells( int layout_cells )
+{
+    if( layout_cells <= 0 ) {
+        return 0;
+    }
+    namespace theme = ui_hybrid_chrome::theme;
+    const float s = theme::scale();
+    // Window padding on both sides plus the quiet edge on the map side.
+    const float chrome_px = 2.f * theme::get().md * s + 4.f * s;
+    const int chrome = fontwidth > 0 ? static_cast<int>( std::ceil( chrome_px / fontwidth ) ) : 2;
+    const int percent = get_options().has_option( "HYBRID_SIDEBAR_WIDTH" ) ?
+                        get_option<int>( "HYBRID_SIDEBAR_WIDTH" ) : 100;
+    return std::max( 1, ( layout_cells + chrome ) * percent / 100 );
+}
 
 int minimap_height()
 {

@@ -5,6 +5,9 @@
 #include <memory>
 
 #include "cached_options.h"
+#if defined(TILES)
+#include "ui_hybrid_widgets.h"
+#endif
 #include "cata_imgui.h"
 #include "catacharset.h"
 #include "color.h"
@@ -13,6 +16,19 @@
 #include "output.h"
 #include "string_formatter.h"
 #include "ui_manager.h"
+
+#if defined(TILES)
+static size_t query_button_width( const std::string &text )
+{
+    return static_cast<size_t>( ui_hybrid_widgets::action_button_width(
+                                    remove_color_tags( text ).c_str() ) );
+}
+#else
+static size_t query_button_width( const std::string &text )
+{
+    return get_text_width( remove_color_tags( text ) );
+}
+#endif
 
 class query_popup_impl : public cataimgui::window
 {
@@ -98,7 +114,15 @@ void query_popup_impl::draw_controls()
             // Prefer Button()'s click return: sdltiles suppresses SELECT / mouse
             // button events while ImGui::WantCaptureMouse, so hover-only + SELECT
             // never activates Yes/No. Keyboard CONFIRM / Y/N are unchanged.
+#if defined(TILES)
+            // Astral action buttons: the keyboard-highlighted option is the primary one.
+            const bool primary = keyboard_selected_option == short( ind );
+            if( ui_hybrid_widgets::action_button( remove_color_tags( parent->buttons[ind].text ).c_str(),
+                                                  primary ? ui_hybrid_widgets::button_kind::primary :
+                                                  ui_hybrid_widgets::button_kind::secondary ) ) {
+#else
             if( ImGui::Button( remove_color_tags( parent->buttons[ind].text ).c_str() ) ) {
+#endif
                 mouse_selected_option = static_cast<short>( ind );
                 mouse_clicked_index = static_cast<short>( ind );
                 mouse_clicked_option = true;
@@ -120,7 +144,12 @@ void query_popup_impl::draw_controls()
 
 void query_popup_impl::on_resized()
 {
+#if defined(TILES)
+    // Astral action buttons carry their own padding; only item spacing separates them.
+    size_t frame_padding = 0;
+#else
     size_t frame_padding = size_t( ImGui::GetStyle().FramePadding.x * 2 );
+#endif
     size_t item_padding = size_t( ImGui::GetStyle().ItemSpacing.x );
     // constexpr size_t vert_padding = 1;
     size_t max_line_width = str_width_to_pixels( FULL_SCREEN_WIDTH - 3 );
@@ -147,7 +176,7 @@ void query_popup_impl::on_resized()
         if( !line.empty() ) {
             int button_width = 0;
             for( const auto &opt : line ) {
-                button_width += get_text_width( remove_color_tags( opt ) );
+                button_width += query_button_width( opt );
             }
             // extra item padding needed here to account for space left at the beginning of the window by ImGui
             msg_width = std::max( msg_width, button_width + btn_padding( line.size() ) + item_padding );
@@ -163,7 +192,7 @@ void query_popup_impl::on_resized()
             if( !line.empty() ) {
                 int button_width = 0;
                 for( const auto &opt : line ) {
-                    button_width += get_text_width( remove_color_tags( opt ) );
+                    button_width += query_button_width( opt );
                 }
                 button_width += btn_padding( line.size() );
                 // Right align.
@@ -172,7 +201,7 @@ void query_popup_impl::on_resized()
                                   size_t( msg_width - button_width );
                 for( const auto &opt : line ) {
                     parent->buttons.emplace_back( opt, point( button_x, line_idx ) );
-                    button_x += get_text_width( remove_color_tags( opt ) ) + frame_padding + item_padding;
+                    button_x += query_button_width( opt ) + frame_padding + item_padding;
                 }
             }
             line_idx++;
@@ -278,7 +307,7 @@ std::vector<std::vector<std::string>> query_popup_impl::fold_query(
     for( const query_popup::query_option &opt : options ) {
         const std::string &name = ctxt.get_action_name( opt.action );
         const std::string &desc = ctxt.get_desc( opt.action, name, opt.filter );
-        const int this_query_width = get_text_width( remove_color_tags( desc ) ) + horz_padding;
+        const int this_query_width = static_cast<int>( query_button_width( desc ) ) + horz_padding;
         ++query_cnt;
         query_width += this_query_width;
         if( query_width > max_width + horz_padding ) {

@@ -8,6 +8,7 @@
 #include <utility>
 
 #include "cata_imgui.h"
+#include "ui_hybrid_chrome.h"
 #include "imgui/imgui.h"
 
 /** Common resizable-viewport shell. Callbacks only render and queue actions;
@@ -24,10 +25,8 @@ class hybrid_window : public cataimgui::window
         void set_hidden( bool hidden ) { hide_ui = hidden; }
     protected:
         cataimgui::bounds get_bounds() override {
-            const ImVec2 vp = ImGui::GetMainViewport()->Size;
-            const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
-            return { -1.f, -1.f, std::min( vp.x * 0.94f, 1280.f * scale ),
-                     std::min( vp.y * 0.92f, 800.f * scale ) };
+            return { -1.f, -1.f, ui_hybrid_chrome::theme::large_window_size().x,
+                     ui_hybrid_chrome::theme::large_window_size().y };
         }
         void draw_controls() override {
             if( hide_ui ) {

@@ -23,6 +23,7 @@
 #if defined(TILES)
 #include "cata_tiles.h"
 #include "imgui_texture.h"
+#include "ui_hybrid_chrome.h"
 #endif
 
 struct character_portrait; // IWYU pragma: keep
@@ -256,10 +257,8 @@ void dialogue_imgui_impl::draw_controls()
 
 cataimgui::bounds dialogue_imgui_impl::get_bounds()
 {
-    const ImVec2 vp = ImGui::GetMainViewport()->Size;
-    const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
-    window_width = std::min( vp.x * 0.94f, 1280.f * scale );
-    window_height = std::min( vp.y * 0.92f, 800.f * scale );
+    window_width = ui_hybrid_chrome::theme::large_window_size().x;
+    window_height = ui_hybrid_chrome::theme::large_window_size().y;
     return { -1.f, -1.f, window_width, window_height };
 }
 

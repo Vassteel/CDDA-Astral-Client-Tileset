@@ -140,8 +140,10 @@ void pixel_minimap::set_screen_rect( const SDL_Rect &screen_rect )
     this->screen_rect = screen_rect;
     projector = create_projector( screen_rect );
     pixel_size = get_pixel_size( projector->get_tile_size(), settings.mode );
+    // A filled panel is already covered; scaling it to fit would bring the
+    // margins back.
     tf_ = compute_minimap_transform( projector->get_tiles_size( total_tiles_count ),
-                                     screen_rect, settings.scale_to_fit );
+                                     screen_rect, settings.scale_to_fit && !settings.fill );
 }
 
 void pixel_minimap::reset()
@@ -299,11 +301,11 @@ const
     switch( type ) {
         case pixel_minimap_type::ortho:
             return std::make_unique<pixel_minimap_ortho_projector> ( total_tiles_count, max_screen_rect,
-                    settings.square_pixels );
+                    settings.square_pixels, settings.fill );
 
         case pixel_minimap_type::iso:
             return std::make_unique<pixel_minimap_iso_projector>( total_tiles_count, max_screen_rect,
-                    settings.square_pixels );
+                    settings.square_pixels, settings.fill );
     }
 
     cata_fatal( "Invalid pixel_minimap_type %d", static_cast<int>( type ) );

@@ -12,9 +12,13 @@ class main_menu;
 
 /**
  * Native ImGui presentation of the main menu (Astral shell) drawn over the
- * title artwork. It is an adapter: the menu state (sel1/sel2/sel_line), the
- * hotkeys and every action handler stay in main_menu; this window only draws
- * and queues actions for the existing input loop.
+ * title artwork: a row of category buttons along the bottom of the screen and,
+ * when a category with sub-entries is open, one popup above the bar with its
+ * list (Load / World / New Game / Settings) or text (MOTD / Credits).
+ *
+ * It is an adapter: the menu state (sel1/sel2/sel_line), the hotkeys and every
+ * action handler stay in main_menu; this window only draws and queues actions
+ * for the existing input loop.
  */
 class main_menu_overlay : public cataimgui::window
 {
@@ -29,6 +33,10 @@ class main_menu_overlay : public cataimgui::window
         void layout_changed() {
             mark_resized();
         }
+        /** Escape while a category popup is open closes it; returns true if it did. */
+        bool close_popup();
+        /** A category hotkey / arrow key selected sel1: open its popup. */
+        void category_selected();
     protected:
         cataimgui::bounds get_bounds() override;
         void draw_controls() override;
@@ -37,9 +45,12 @@ class main_menu_overlay : public cataimgui::window
         std::string queued;
         int last_sel1 = -1;
         int last_text_line = -1;
-        void draw_categories( float width );
-        void draw_drawer( float width );
-        void draw_text_panel( const std::string &text, float width );
+        bool popup_open = false;
+        float bar_height = 0.f;
+        void draw_bar();
+        void draw_popup();
+        void draw_drawer();
+        void draw_text_panel( const std::string &text );
 };
 
 #endif // TILES

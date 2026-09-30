@@ -74,6 +74,7 @@
 #include "vehicle.h"
 #include "ui_hybrid_window.h"
 #include "ui_hybrid_chrome.h"
+#include "ui_hybrid_widgets.h"
 #include "item_context_menu.h"
 
 #if defined(__ANDROID__)
@@ -2204,197 +2205,269 @@ void advanced_inventory::display_hybrid()
                hybrid_area_name( squares[pane.get_area()], pane.in_vehicle() );
     };
     hybrid_window window( _( "Storage and transfer" ), [&]() {
-        ImGui::TextWrapped( "%s", _( "Choose storage, then select items to move. Use Manage station for buildables." ) );
-        const float body_height = std::max( 100.f, ImGui::GetContentRegionAvail().y -
-                                          ImGui::GetTextLineHeightWithSpacing() * 8.f );
-        for( side p : { left, right } ) {
-            if( p == right ) {
-                ImGui::SameLine();
-            }
-            ImGui::PushID( static_cast<int>( p ) );
-            ImGui::BeginChild( "pane", ImVec2( ( ImGui::GetContentRegionAvail().x -
-                              ( p == left ? ImGui::GetStyle().ItemSpacing.x : 0.f ) ) /
-                              ( p == left ? 2.f : 1.f ), body_height ), ImGuiChildFlags_Borders );
-            advanced_inventory_pane &pane = panes[p];
-            const advanced_inv_area &area = squares[pane.get_area()];
-            const auto activate = [&]() {
-                if( src != p ) {
-                    hybrid_selection.clear();
-                    recalc = true;
+        namespace w = ui_hybrid_widgets;
+        namespace theme = ui_hybrid_chrome::theme;
+        const theme::tokens &tk = theme::get();
+        const float s = theme::scale();
+        // Footer: status line + inspector summary, then one row of actions.
+        const float footer_h = tk.footer + 34.f;
+        if( w::body_begin( "aim_body", footer_h, ImGuiWindowFlags_NoScrollbar ) ) {
+            const float gap = tk.sm * s;
+            const float pane_w = std::floor( ( ImGui::GetContentRegionAvail().x - gap ) / 2.f );
+            const float pane_h = ImGui::GetContentRegionAvail().y;
+            for( side p : { left, right } ) {
+                if( p == right ) {
+                    ImGui::SameLine( 0.f, gap );
                 }
-                src = p;
-                dest = p == left ? right : left;
-            };
-            if( ImGui::Selectable( p == src ? _( "SOURCE" ) : _( "DESTINATION" ), p == src ) ) {
-                activate();
-            }
-            const std::string location_name = pane_name( p );
-            ImGui::SetNextItemWidth( -1 );
-            if( ImGui::BeginCombo( "##location", location_name.c_str(), ImGuiComboFlags_HeightLarge ) ) {
-                for( const advanced_inv_area &choice : squares ) {
-                    if( choice.id == AIM_PARENT || choice.id == AIM_CONTAINER ) {
-                        continue;
+                ImGui::PushID( static_cast<int>( p ) );
+                advanced_inventory_pane &pane = panes[p];
+                const advanced_inv_area &area = squares[pane.get_area()];
+                const auto activate = [&]() {
+                    if( src != p ) {
+                        hybrid_selection.clear();
+                        recalc = true;
                     }
-                    const std::string choice_name = hybrid_area_name( choice,
-                                                    choice.can_store_in_vehicle() );
-                    ImGui::PushID( static_cast<int>( choice.id ) );
-                    const bool available = choice.canputitems() || hybrid_can_manage( choice );
-                    ImGui::BeginDisabled( !available );
-                    if( ImGui::Selectable( choice_name.c_str(), pane.get_area() == choice.id ) ) {
-                        // Choosing a destination must not reverse the transfer direction.
-                        // Use the actual area ID; keyboard directions may rotate isometrically.
-                        queued_location = std::make_pair( p, choice.id );
-                    }
-                    ImGui::EndDisabled();
-                    if( ImGui::IsItemHovered() ) {
-                        ImGui::SetTooltip( "%s", choice.name.c_str() );
-                    }
+                    src = p;
+                    dest = p == left ? right : left;
+                };
+                // Panes fill the body; the source pane is the raised one.
+                if( !w::panel_begin( "pane", ImVec2( pane_w, pane_h ), p != src,
+                                     ImGuiWindowFlags_NoScrollbar ) ) {
+                    w::panel_end();
                     ImGui::PopID();
+                    continue;
                 }
-                ImGui::EndCombo();
-            }
-            if( ImGui::SmallButton( _( "Open container" ) ) ) {
-                activate();
-                hybrid_selection.clear();
-                queued_action = "ITEMS_CONTAINER";
-            }
-            ImGui::SameLine();
-            if( ImGui::SmallButton( _( "Parent" ) ) ) {
-                activate();
-                hybrid_selection.clear();
-                queued_action = "ITEMS_PARENT";
-            }
-            if( area.can_store_in_vehicle() ) {
-                ImGui::SameLine();
-                if( ImGui::SmallButton( pane.in_vehicle() ? _( "Ground" ) : _( "Cargo" ) ) ) {
+                if( w::tab( p == src ? _( "Source" ) : _( "Destination" ), p == src,
+                            p == src ? "chevron_right" : "tab_inventory" ) ) {
                     activate();
-                    hybrid_selection.clear();
-                    queued_action = "TOGGLE_VEH";
                 }
-            }
-            if( !pane.container && !pane.in_vehicle() && hybrid_can_manage( area ) ) {
-                if( ImGui::Button( _( "Manage station" ) ) ) {
-                    queued_manage = area.pos;
-                }
-            }
-            const std::string description = pane.container ?
-                                            string_format( _( "Contents of %s" ), pane.container->type_name() ) :
-                                            area.desc[pane.in_vehicle() ? 1 : 0];
-            ImGui::TextWrapped( "%s", remove_color_tags( description ).c_str() );
-            if( !area.canputitems( pane.container ) ) {
-                ImGui::TextWrapped( "%s", _( "Use Manage station for this fixture's loading, fuel and access options." ) );
-            } else if( pane.get_area() != AIM_ALL ) {
-                ImGui::Text( "%s", string_format( _( "Free space: %.2f L" ),
-                             units::to_milliliter( pane.free_volume( area ) ) / 1000.0 ).c_str() );
-            } else {
-                ImGui::TextDisabled( "%s", _( "All adjacent ground and cargo" ) );
-            }
-            char filter[512];
-            std::snprintf( filter, sizeof( filter ), "%s", pane.get_filter().c_str() );
-            if( focus_filter && p == src ) {
-                ImGui::SetKeyboardFocusHere();
-                focus_filter = false;
-            }
-            ImGui::SetNextItemWidth( -70.f );
-            if( ImGui::InputTextWithHint( "##filter", _( "Filter items…" ), filter, sizeof( filter ) ) ) {
-                pane.set_filter( filter );
-                if( src == p ) {
-                    hybrid_selection.clear();
-                }
-            }
-            ImGui::SameLine();
-            if( ImGui::Button( _( "Sort" ) ) ) {
-                activate();
-                queued_action = "SORT";
-            }
-            if( ImGui::BeginTable( "items", 4, ImGuiTableFlags_ScrollY | ImGuiTableFlags_RowBg |
-                                  ImGuiTableFlags_Resizable, ImVec2( 0, 0 ) ) ) {
-                ImGui::TableSetupColumn( "##mark_header", ImGuiTableColumnFlags_WidthFixed, 26.f );
-                ImGui::TableSetupColumn( _( "Item" ), ImGuiTableColumnFlags_WidthStretch );
-                ImGui::TableSetupColumn( _( "Count" ), ImGuiTableColumnFlags_WidthFixed, 48.f );
-                ImGui::TableSetupColumn( _( "Liters" ), ImGuiTableColumnFlags_WidthFixed, 55.f );
-                ImGui::TableSetupScrollFreeze( 0, 1 );
-                ImGui::TableHeadersRow();
-                ImGuiListClipper clipper;
-                clipper.Begin( pane.items.size() );
-                while( clipper.Step() ) {
-                    for( int i = clipper.DisplayStart; i < clipper.DisplayEnd; ++i ) {
-                        advanced_inv_listitem &entry = pane.items[i];
-                        if( entry.items.empty() || !entry.items.front() ) {
+                ImGui::SameLine( 0.f, tk.sm * s );
+                const std::string location_name = pane_name( p );
+                ImGui::SetNextItemWidth( -1 );
+                if( ImGui::BeginCombo( "##location", location_name.c_str(), ImGuiComboFlags_HeightLarge ) ) {
+                    for( const advanced_inv_area &choice : squares ) {
+                        if( choice.id == AIM_PARENT || choice.id == AIM_CONTAINER ) {
                             continue;
                         }
-                        ImGui::PushID( i );
-                        ImGui::TableNextRow();
-                        ImGui::TableSetColumnIndex( 0 );
-                        bool marked = src == p && std::find( hybrid_selection.begin(), hybrid_selection.end(),
-                                      entry.items.front() ) != hybrid_selection.end();
-                        if( ImGui::Checkbox( "##mark", &marked ) ) {
-                            activate();
-                            if( marked ) {
-                                hybrid_selection.insert( hybrid_selection.end(), entry.items.begin(), entry.items.end() );
-                            } else {
-                                for( const item_location &loc : entry.items ) {
-                                    hybrid_selection.erase( std::remove( hybrid_selection.begin(), hybrid_selection.end(), loc ),
-                                                            hybrid_selection.end() );
-                                }
-                            }
+                        const std::string choice_name = hybrid_area_name( choice,
+                                                        choice.can_store_in_vehicle() );
+                        ImGui::PushID( static_cast<int>( choice.id ) );
+                        const bool available = choice.canputitems() || hybrid_can_manage( choice );
+                        ImGui::BeginDisabled( !available );
+                        if( ImGui::Selectable( choice_name.c_str(), pane.get_area() == choice.id ) ) {
+                            // Choosing a destination must not reverse the transfer direction.
+                            // Use the actual area ID; keyboard directions may rotate isometrically.
+                            queued_location = std::make_pair( p, choice.id );
                         }
-                        ImGui::TableSetColumnIndex( 1 );
-                        const std::string name = remove_color_tags( entry.name );
-                        if( ImGui::Selectable( name.c_str(), src == p && pane.index == i ) ) {
-                            activate();
-                            pane.index = i;
-                        }
+                        ImGui::EndDisabled();
                         if( ImGui::IsItemHovered() ) {
-                            ImGui::SetTooltip( "%s", name.c_str() );
+                            ImGui::SetTooltip( "%s", choice.name.c_str() );
                         }
-                        ImGui::TableSetColumnIndex( 2 );
-                        ImGui::Text( "%d", entry.items.front()->count_by_charges() ?
-                                     entry.items.front()->charges : entry.stacks );
-                        ImGui::TableSetColumnIndex( 3 );
-                        ImGui::Text( "%.2f", units::to_milliliter( entry.volume ) / 1000.0 );
                         ImGui::PopID();
                     }
+                    ImGui::EndCombo();
                 }
-                ImGui::EndTable();
+                const float small_h = 28.f;
+                if( w::action_button( _( "Open container" ), w::button_kind::tertiary, ImVec2( 0, small_h ) ) ) {
+                    activate();
+                    hybrid_selection.clear();
+                    queued_action = "ITEMS_CONTAINER";
+                }
+                ImGui::SameLine();
+                if( w::action_button( _( "Parent" ), w::button_kind::tertiary, ImVec2( 0, small_h ) ) ) {
+                    activate();
+                    hybrid_selection.clear();
+                    queued_action = "ITEMS_PARENT";
+                }
+                if( area.can_store_in_vehicle() ) {
+                    ImGui::SameLine();
+                    if( w::action_button( pane.in_vehicle() ? _( "Ground" ) : _( "Cargo" ),
+                                          w::button_kind::tertiary, ImVec2( 0, small_h ) ) ) {
+                        activate();
+                        hybrid_selection.clear();
+                        queued_action = "TOGGLE_VEH";
+                    }
+                }
+                if( !pane.container && !pane.in_vehicle() && hybrid_can_manage( area ) ) {
+                    ImGui::SameLine();
+                    if( w::action_button( _( "Manage station" ), w::button_kind::secondary, ImVec2( 0, small_h ) ) ) {
+                        queued_manage = area.pos;
+                    }
+                }
+                const std::string description = pane.container ?
+                                                string_format( _( "Contents of %s" ), pane.container->type_name() ) :
+                                                area.desc[pane.in_vehicle() ? 1 : 0];
+                std::string detail;
+                if( !area.canputitems( pane.container ) ) {
+                    detail = _( "Use Manage station for this fixture's loading, fuel and access options." );
+                } else if( pane.get_area() != AIM_ALL ) {
+                    detail = string_format( _( "Free space: %.2f L" ),
+                                            units::to_milliliter( pane.free_volume( area ) ) / 1000.0 );
+                } else {
+                    detail = _( "All adjacent ground and cargo" );
+                }
+                const std::string plain_desc = remove_color_tags( description );
+                ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                                    w::fit_text( plain_desc.empty() ? detail : plain_desc + "  ·  " + detail,
+                                                 ImGui::GetContentRegionAvail().x ).c_str() );
+                char filter[512];
+                std::snprintf( filter, sizeof( filter ), "%s", pane.get_filter().c_str() );
+                if( focus_filter && p == src ) {
+                    ImGui::SetKeyboardFocusHere();
+                    focus_filter = false;
+                }
+                const float sort_w = w::action_button_width( _( "Sort" ) );
+                ImGui::SetNextItemWidth( -( sort_w + ImGui::GetStyle().ItemSpacing.x ) );
+                if( ImGui::InputTextWithHint( "##filter", _( "Filter items…" ), filter, sizeof( filter ) ) ) {
+                    pane.set_filter( filter );
+                    if( src == p ) {
+                        hybrid_selection.clear();
+                    }
+                }
+                ImGui::SameLine();
+                if( w::action_button( _( "Sort" ), w::button_kind::secondary, ImVec2( 0, small_h ) ) ) {
+                    activate();
+                    queued_action = "SORT";
+                }
+                if( pane.items.empty() ) {
+                    w::empty_state( _( "Nothing here" ), pane.get_filter().empty() ? std::string() :
+                                    _( "No items match the filter." ) );
+                } else if( ImGui::BeginTable( "items", 4, ImGuiTableFlags_ScrollY | ImGuiTableFlags_RowBg |
+                                              ImGuiTableFlags_Resizable, ImVec2( 0, 0 ) ) ) {
+                    ImGui::TableSetupColumn( "##mark_header", ImGuiTableColumnFlags_WidthFixed, 26.f * s );
+                    ImGui::TableSetupColumn( _( "Item" ), ImGuiTableColumnFlags_WidthStretch );
+                    ImGui::TableSetupColumn( _( "Count" ), ImGuiTableColumnFlags_WidthFixed, 48.f * s );
+                    ImGui::TableSetupColumn( _( "Liters" ), ImGuiTableColumnFlags_WidthFixed, 55.f * s );
+                    ImGui::TableSetupScrollFreeze( 0, 1 );
+                    ImGui::TableHeadersRow();
+                    ImGuiListClipper clipper;
+                    clipper.Begin( pane.items.size() );
+                    while( clipper.Step() ) {
+                        for( int i = clipper.DisplayStart; i < clipper.DisplayEnd; ++i ) {
+                            advanced_inv_listitem &entry = pane.items[i];
+                            if( entry.items.empty() || !entry.items.front() ) {
+                                continue;
+                            }
+                            ImGui::PushID( i );
+                            ImGui::TableNextRow();
+                            ImGui::TableSetColumnIndex( 0 );
+                            bool marked = src == p && std::find( hybrid_selection.begin(), hybrid_selection.end(),
+                                          entry.items.front() ) != hybrid_selection.end();
+                            if( ImGui::Checkbox( "##mark", &marked ) ) {
+                                activate();
+                                if( marked ) {
+                                    hybrid_selection.insert( hybrid_selection.end(), entry.items.begin(), entry.items.end() );
+                                } else {
+                                    for( const item_location &loc : entry.items ) {
+                                        hybrid_selection.erase( std::remove( hybrid_selection.begin(), hybrid_selection.end(), loc ),
+                                                                hybrid_selection.end() );
+                                    }
+                                }
+                            }
+                            ImGui::TableSetColumnIndex( 1 );
+                            const std::string name = remove_color_tags( entry.name );
+                            if( ImGui::Selectable( name.c_str(), src == p && pane.index == i ) ) {
+                                activate();
+                                pane.index = i;
+                            }
+                            if( ImGui::IsItemHovered() ) {
+                                ImGui::SetTooltip( "%s", name.c_str() );
+                            }
+                            ImGui::TableSetColumnIndex( 2 );
+                            ImGui::Text( "%d", entry.items.front()->count_by_charges() ?
+                                         entry.items.front()->charges : entry.stacks );
+                            ImGui::TableSetColumnIndex( 3 );
+                            ImGui::Text( "%.2f", units::to_milliliter( entry.volume ) / 1000.0 );
+                            ImGui::PopID();
+                        }
+                    }
+                    ImGui::EndTable();
+                }
+                w::panel_end();
+                ImGui::PopID();
             }
-            ImGui::EndChild();
-            ImGui::PopID();
         }
-        ImGui::Separator();
-        ImGui::Text( "%s", string_format( _( "%s → %s    Marked items: %d" ),
-                     pane_name( src ), pane_name( dest ),
-                     hybrid_selection.size() ).c_str() );
-        const auto button = [&]( const char *label, const char *action ) {
-            if( ImGui::Button( label ) ) {
-                queued_action = action;
+        w::body_end();
+        if( w::footer_begin( "aim_footer", footer_h ) ) {
+            // Status line: direction and marked count left, inspected item right.
+            advanced_inv_listitem *entry = panes[src].get_cur_item_ptr();
+            const item_location loc = entry && !entry->items.empty() ? entry->items.front() :
+                                      item_location::nowhere;
+            const std::string status = string_format( _( "%s → %s   ·   Marked: %d" ),
+                                       pane_name( src ), pane_name( dest ),
+                                       hybrid_selection.size() );
+            const float half = ImGui::GetContentRegionAvail().x * 0.5f;
+            ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                                w::fit_text( status, half ).c_str() );
+            if( loc ) {
+                std::string about = string_format( _( "%s   %.2f kg · %.2f L" ),
+                                                   remove_color_tags( loc->display_name() ),
+                                                   units::to_gram( loc->weight() ) / 1000.0,
+                                                   units::to_milliliter( loc->volume() ) / 1000.0 );
+                std::string warning;
+                if( loc->is_armor() && !get_avatar().is_worn( *loc ) ) {
+                    const ret_val<void> wear = get_avatar().can_wear( *loc );
+                    if( !wear.success() ) {
+                        warning = wear.str();
+                    }
+                }
+                const std::string shown = w::fit_text( about, half - tk.sm * s );
+                ImGui::SameLine( 0.f, 0.f );
+                ImGui::SetCursorPosX( ImGui::GetCursorPosX() + std::max( 0.f, half - ImGui::CalcTextSize( shown.c_str() ).x ) );
+                ImGui::TextUnformatted( shown.c_str() );
+                if( ImGui::IsItemHovered() ) {
+                    w::tooltip( warning.empty() ? about : about + "\n" + warning );
+                }
             }
-            ImGui::SameLine();
-        };
-        const bool storing = panes[src].get_area() == AIM_INVENTORY &&
-                             panes[dest].get_area() != AIM_INVENTORY;
-        const bool taking = panes[dest].get_area() == AIM_INVENTORY &&
-                            panes[src].get_area() != AIM_INVENTORY;
-        ImGui::BeginDisabled( !squares[panes[src].get_area()].canputitems( panes[src].container ) ||
-                              !squares[panes[dest].get_area()].canputitems( panes[dest].container ) );
-        button( storing ? _( "Store" ) : taking ? _( "Take" ) : _( "Move one" ), "MOVE_SINGLE_ITEM" );
-        button( _( "Quantity…" ), "MOVE_VARIABLE_ITEM" );
-        button( storing ? _( "Store stack" ) : taking ? _( "Take stack" ) : _( "Move stack" ), "MOVE_ITEM_STACK" );
-        ImGui::BeginDisabled( hybrid_selection.empty() );
-        button( _( "Move marked" ), "HYBRID_MOVE_MARKED" );
-        ImGui::EndDisabled();
-        button( _( "Move all shown" ), "MOVE_ALL_ITEMS" );
-        ImGui::EndDisabled();
-        button( _( "Close" ), "QUIT" );
-        ImGui::NewLine();
-        advanced_inv_listitem *entry = panes[src].get_cur_item_ptr();
-        const item_location loc = entry && !entry->items.empty() ? entry->items.front() : item_location::nowhere;
-        const item_context_menu::action selected = item_context_menu::draw_inspector( get_avatar(), loc,
-                &use_method );
-        if( selected != item_context_menu::action::none ) {
-            item_action = selected;
-            action_item = loc;
+            const auto button = [&]( const char *label, const char *action, w::button_kind kind,
+            bool enabled = true ) {
+                if( w::action_button( label, kind, ImVec2( 0, 0 ), enabled ) ) {
+                    queued_action = action;
+                }
+                ImGui::SameLine();
+            };
+            const bool storing = panes[src].get_area() == AIM_INVENTORY &&
+                                 panes[dest].get_area() != AIM_INVENTORY;
+            const bool taking = panes[dest].get_area() == AIM_INVENTORY &&
+                                panes[src].get_area() != AIM_INVENTORY;
+            const bool can_move = squares[panes[src].get_area()].canputitems( panes[src].container ) &&
+                                  squares[panes[dest].get_area()].canputitems( panes[dest].container );
+            button( storing ? _( "Store" ) : taking ? _( "Take" ) : _( "Move one" ), "MOVE_SINGLE_ITEM",
+                    w::button_kind::primary, can_move );
+            button( _( "Quantity…" ), "MOVE_VARIABLE_ITEM", w::button_kind::secondary, can_move );
+            button( storing ? _( "Store stack" ) : taking ? _( "Take stack" ) : _( "Move stack" ),
+                    "MOVE_ITEM_STACK", w::button_kind::secondary, can_move );
+            button( _( "Move marked" ), "HYBRID_MOVE_MARKED", w::button_kind::secondary,
+                    can_move && !hybrid_selection.empty() );
+            button( _( "Move all shown" ), "MOVE_ALL_ITEMS", w::button_kind::secondary, can_move );
+            if( loc ) {
+                if( w::action_button( _( "Details" ), w::button_kind::tertiary ) ) {
+                    item_action = item_context_menu::action::examine;
+                    action_item = loc;
+                }
+                ImGui::SameLine();
+                if( w::action_button( _( "Item actions" ), w::button_kind::tertiary ) ) {
+                    ImGui::OpenPopup( "item_actions" );
+                }
+                if( ImGui::BeginPopup( "item_actions" ) ) {
+                    const item_context_menu::action clicked = item_context_menu::draw_imgui_menu(
+                                get_avatar(), loc, get_avatar().is_worn( *loc ) || get_avatar().is_wielding( *loc ),
+                                &use_method );
+                    if( clicked != item_context_menu::action::none ) {
+                        item_action = clicked;
+                        action_item = loc;
+                    }
+                    ImGui::EndPopup();
+                }
+                ImGui::SameLine();
+            }
+            const float close_w = w::action_button_width( _( "Close" ) );
+            w::footer_align_right( close_w );
+            if( w::action_button( _( "Close" ), w::button_kind::secondary ) ) {
+                queued_action = "QUIT";
+            }
         }
+        w::footer_end();
     } );
     while( !exit && window.get_is_open() ) {
         if( get_avatar().get_moves() < 0 ) {

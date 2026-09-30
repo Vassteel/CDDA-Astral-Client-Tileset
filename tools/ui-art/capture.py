@@ -270,6 +270,23 @@ def dismiss_debug_prompts(x, limit=6):
         time.sleep(2.5)
 
 
+def set_options(profile, values):
+    """Override options in the profile's options.json (creating entries as needed)."""
+    path = os.path.join(profile, "config", "options.json")
+    with open(path) as f:
+        opts = json.load(f)
+    seen = set()
+    for entry in opts:
+        if entry.get("name") in values:
+            entry["value"] = values[entry["name"]]
+            seen.add(entry["name"])
+    for name, value in values.items():
+        if name not in seen:
+            opts.append({"info": "", "default": "", "name": name, "value": value})
+    with open(path, "w") as f:
+        json.dump(opts, f, indent=2)
+
+
 def prepare_profile(profile, font, base=None):
     os.makedirs(os.path.join(profile, "config"), exist_ok=True)
     if base and os.path.isdir(base) and not os.listdir(profile):
@@ -433,6 +450,40 @@ def run_scenario(name, x, cli, out, tag, opts):
         wait_loaded(x, opts.probe)
         ensure_hud(x, opts.probe, shot)
         shot("hud")
+    if name == "fixcheck":
+        # Targeted re-check after playtest fixes: HUD, equipment grid, body tab, AIM.
+        key("n")
+        key("o")
+        time.sleep(2)
+        wait_loaded(x, opts.probe)
+        ensure_hud(x, opts.probe, shot)
+        shot("hud")
+        key("i")
+        wait_stable(x, seconds=1, max_wait=30)
+        shot("equipment")
+        key("Escape")
+        time.sleep(1)
+        x.type_text("@")
+        wait_stable(x, seconds=1, max_wait=40)
+        body = None
+        if opts.probe:
+            opts.probe.read(0.5)
+            body = opts.probe.first("tab*", "Body", True)
+        if body:
+            x.click(*Probe.center(body))
+        else:
+            key("Tab", "Tab", "Tab")
+        time.sleep(3)  # slow renderers: give the tab switch a few frames
+        wait_stable(x, seconds=1, max_wait=20)
+        shot("character-body")
+        key("Escape")
+        time.sleep(1.2)
+        x.type_text("/")
+        wait_stable(x, seconds=1, max_wait=40)
+        shot("aim")
+        key("Escape")
+        time.sleep(1)
+        return shots
     if name in ("newgame", "load"):
         key("i")
         wait_stable(x, seconds=1, max_wait=30)
@@ -451,6 +502,14 @@ def run_scenario(name, x, cli, out, tag, opts):
             key("Escape")
             time.sleep(1.2)
         screen("@", "character", True)
+        # Body tab of the character sheet (three tabs to the right of Stats).
+        x.type_text("@")
+        wait_stable(x, seconds=1, max_wait=40)
+        key("Right", "Right", "Right")
+        wait_stable(x, seconds=1, max_wait=20)
+        shot("character-body")
+        key("Escape")
+        time.sleep(1.2)
         screen("&", "crafting", True)
         screen("*", "construction", True)
         screen("/", "aim", True)
@@ -474,6 +533,8 @@ def main():
     ap.add_argument("--binary", default=os.path.join(ROOT, "build", "src", "cataclysm-tiles"))
     ap.add_argument("--root", default=None, help="game root (cwd for data/ and gfx/); default: this repo")
     ap.add_argument("--profile", default=None)
+    ap.add_argument("--set", action="append", default=[], metavar="NAME=VALUE",
+                    help="override an option in the profile (e.g. PIXEL_MINIMAP=true), repeatable")
     ap.add_argument("--base-profile", default=None, help="copy this profile first (saves)")
     ap.add_argument("--display", default=":99")
     ap.add_argument("--scenario", default="menu")
@@ -488,6 +549,8 @@ def main():
     profile = os.path.abspath(a.profile or os.path.join(ROOT, "artifacts", "ui-art-overhaul", "profiles",
                                                          "%s-%s" % (a.scenario, a.size)))
     prepare_profile(profile, a.font, a.base_profile)
+    if a.set:
+        set_options(profile, dict(kv.split("=", 1) for kv in a.set))
     env = dict(kv.split("=", 1) for kv in a.env)
     probe_path = os.path.join(profile, "config", "ui-probe.json")
     env.setdefault("CDDA_UI_PROBE", probe_path)

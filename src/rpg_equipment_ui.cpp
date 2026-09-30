@@ -959,7 +959,7 @@ class rpg_equipment_window : public cataimgui::window
         std::string inspector_method;
         char inventory_filter[128] = "";
         int inventory_category = 0;
-        bool inventory_list = true;
+        bool inventory_list = false; // icon grid by default; the toggle switches to the list
         bool show_nearby = false;
         bool focus_inventory_search = false;
         std::set<int> expanded_slots;
@@ -1679,7 +1679,17 @@ void rpg_equipment_window::draw_survivor( const ImVec2 &min, const ImVec2 &max )
     if( !tilecontext || !get_option<bool>( "USE_TILES" ) ) {
         return;
     }
-    const std::vector<texture_draw_data> layers = tilecontext->get_character_preview( *you );
+    // Portrait pack first: a pack that defines player_male / player_female (any
+    // resolution, optionally "animated" with several fg frames for an idle
+    // loop) replaces the 32 px map doll. Overlays the pack lacks are skipped.
+    // Otherwise the map tileset's doll with its worn/mutation overlays.
+    std::vector<texture_draw_data> layers;
+    if( portrait_tilecontext && portrait_tilecontext->is_valid() ) {
+        layers = portrait_tilecontext->get_character_preview( *you );
+    }
+    if( layers.empty() ) {
+        layers = tilecontext->get_character_preview( *you );
+    }
     if( layers.empty() ) {
         return;
     }
@@ -1756,15 +1766,16 @@ void rpg_equipment_window::accept_equipment_drop( int slot, const item_location 
     if( const ImGuiPayload *payload = ImGui::AcceptDragDropPayload(
                                           "RPG_EQ_ITEM", ImGuiDragDropFlags_AcceptBeforeDelivery ) ) {
         if( payload->IsDelivery() && drag_payload && drag_payload.get_item() ) {
+            // Releasing the drag is the confirmation: the change applies now.
             selected_inv = drag_payload;
             selected_slot = slot;
             selected_worn = target ? target :
                             slot >= 0 ? item_on_slot( *you, slots[slot] ) : item_location::nowhere;
-            equip_preview = true;
-            preview_item = selected_inv;
-            preview_slot = slot;
-            status_line = string_format( _( "%s is ready. Choose Apply equipment change." ),
-                                         selected_inv->type_name() );
+            equip_preview = false;
+            preview_item = item_location::nowhere;
+            preview_slot = -1;
+            pending = pending_action::drag_equip;
+            status_line = string_format( _( "Equipping %s…" ), selected_inv->type_name() );
             ui_telemetry::record( "equipment.drop", {
                 { "type", selected_inv->typeId().str() },
                 { "target", slot >= 0 ? slots[slot].label : "survivor" }
@@ -1817,7 +1828,10 @@ void rpg_equipment_window::draw_paper_doll()
     const float other_h = tk.button * s;
     const float reserved = card_h * 2.f + other_h + tk.md * s * 2.f + tk.xs * s * 2.f +
                            ImGui::GetStyle().ItemSpacing.y * 6.f;
-    const float portrait_height = std::max( 160.f * s, ImGui::GetContentRegionAvail().y - reserved );
+    // The portrait keeps a portrait-shaped frame (about 4:5) instead of stretching
+    // to whatever the column leaves free; the hand cards follow directly below.
+    const float portrait_height = std::clamp( ImGui::GetContentRegionAvail().y - reserved,
+                                  160.f * s, left_width * 1.25f );
     const ImVec2 portrait_min = ImGui::GetCursorScreenPos();
     const ImVec2 portrait_max( portrait_min.x + left_width, portrait_min.y + portrait_height );
     ImVec2 inner_min;
@@ -2315,9 +2329,11 @@ void rpg_equipment_window::draw_inventory_grid()
     // Equipped gear on doll/slots only — no duplicate equipped-item list.
     // Soft-fork: denser inventory cells (Hybrid charcoal/amber grid).
     const float avail = ImGui::GetContentRegionAvail().x;
-    const float min_cell = 56.f;
-    const float max_cell = 72.f;
-    const float cell_gap = 6.f;
+    // Cells follow the UI scale so the grid stays legible at 4K.
+    const float grid_s = ui_hybrid_chrome::theme::scale();
+    const float min_cell = 56.f * grid_s;
+    const float max_cell = 72.f * grid_s;
+    const float cell_gap = 6.f * grid_s;
     int columns = std::max( 1, static_cast<int>( ( avail + cell_gap ) /
                             ( min_cell + cell_gap ) ) );
     columns = std::min( columns, 16 );
@@ -2478,6 +2494,12 @@ void rpg_equipment_window::draw_inventory_grid()
             } else {
                 fb = ellipsize_label( fb, label_chars );
             }
+            if( ui_hybrid_widgets::probe::enabled() ) {
+                // Grid cells and list rows are the same inventory entries to the harness.
+                ui_hybrid_widgets::probe::record( is_sel ? "inv_row_selected" : "inv_row",
+                                                  remove_color_tags( cell.loc->type_name() ),
+                                                  ImGui::GetItemRectMin(), ImGui::GetItemRectMax() );
+            }
             if( inventory_list ) {
                 const ImVec2 min = ImGui::GetItemRectMin();
                 const ImVec2 max = ImGui::GetItemRectMax();
@@ -2485,10 +2507,6 @@ void rpg_equipment_window::draw_inventory_grid()
                 ui_hybrid_widgets::row_state rs;
                 rs.selected = is_sel;
                 ui_hybrid_widgets::draw_row_background( draw, min, max, rs, hovered );
-                if( ui_hybrid_widgets::probe::enabled() ) {
-                    ui_hybrid_widgets::probe::record( is_sel ? "inv_row_selected" : "inv_row",
-                                                      remove_color_tags( cell.loc->type_name() ), min, max );
-                }
                 const float isz = ui_hybrid_chrome::theme::get().icon * ui_hybrid_chrome::theme::scale();
                 const float pad = ui_hybrid_chrome::theme::get().md * ui_hybrid_chrome::theme::scale();
                 draw_equipment_icon( *cell.loc, ImVec2( min.x + pad, min.y + ( cell_h - isz ) * 0.5f ),

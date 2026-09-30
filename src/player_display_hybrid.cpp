@@ -38,6 +38,7 @@
 #include "talker.h"
 #include "translations.h"
 #include "ui_hybrid_chrome.h"
+#include "ui_hybrid_widgets.h"
 #include "ui_manager.h"
 #include "units.h"
 #include "units_utility.h"
@@ -255,10 +256,8 @@ class player_display_hybrid_ui : public cataimgui::window
         }
 
         cataimgui::bounds get_bounds() override {
-            const ImVec2 vp = ImGui::GetMainViewport()->Size;
-            const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
-            return { -1.f, -1.f, std::min( vp.x * 0.94f, 1280.f * scale ),
-                     std::min( vp.y * 0.92f, 800.f * scale ) };
+            return { -1.f, -1.f, ui_hybrid_chrome::theme::large_window_size().x,
+                     ui_hybrid_chrome::theme::large_window_size().y };
         }
 
         void draw_controls() override {
@@ -606,6 +605,10 @@ class player_display_hybrid_ui : public cataimgui::window
                     }
                     ImGui::EndTabItem();
                 }
+                if( ui_hybrid_widgets::probe::enabled() ) {
+                    ui_hybrid_widgets::probe::record( static_cast<int>( curtab ) == i ? "tab_selected" : "tab",
+                                                      _( labels[i] ), ImGui::GetItemRectMin(), ImGui::GetItemRectMax() );
+                }
             }
             force_tab = false;
             ImGui::EndTabBar();
@@ -793,11 +796,51 @@ class player_display_hybrid_ui : public cataimgui::window
             }
         }
 
-        void draw_bodygraph() {
-            ui_hybrid_chrome::section_header( _( "BODY GRAPH" ) );
-            if( ImGui::Button( _( "Inspect body parts…" ) ) ) {
-                pending_detail = "body";
+        /** Value text for one body part in the current body-graph mode. */
+        std::string bodygraph_value( const bodypart_id &bp ) const {
+            if( !you.has_part( bp, body_part_filter::equivalent ) ) {
+                return _( "missing" );
             }
+            switch( bodygraph_mode ) {
+                case bodygraph_var::hp:
+                    return string_format( "%d / %d", you.get_part_hp_cur( bp ), you.get_part_hp_max( bp ) );
+                case bodygraph_var::temp:
+                    return display::temp_text_color( you, bp.id() ).first;
+                case bodygraph_var::encumb:
+                    return string_format( "%d", you.get_part_encumbrance( bp ) );
+                case bodygraph_var::status: {
+                    std::vector<std::string> flags;
+                    if( you.has_effect( efftype_id( "bleed" ), bp ) ) {
+                        flags.emplace_back( _( "bleeding" ) );
+                    }
+                    if( you.has_effect( efftype_id( "bite" ), bp ) ) {
+                        flags.emplace_back( _( "bitten" ) );
+                    }
+                    if( you.has_effect( efftype_id( "infected" ), bp ) ) {
+                        flags.emplace_back( _( "infected" ) );
+                    }
+                    if( you.is_limb_broken( bp ) ) {
+                        flags.emplace_back( _( "broken" ) );
+                    }
+                    if( you.worn_with_flag( flag_SPLINT, bp ) ) {
+                        flags.emplace_back( _( "splinted" ) );
+                    }
+                    return flags.empty() ? _( "fine" ) : enumerate_as_string( flags );
+                }
+                case bodygraph_var::wet:
+                    return string_format( "%d%%", static_cast<int>( you.get_part_wetness_percentage( bp ) * 100 ) );
+                case bodygraph_var::last:
+                    break;
+            }
+            return std::string();
+        }
+
+        void draw_bodygraph() {
+            namespace w = ui_hybrid_widgets;
+            namespace theme = ui_hybrid_chrome::theme;
+            const theme::tokens &tk = theme::get();
+            const float s = theme::scale();
+            ui_hybrid_chrome::section_header( _( "BODY GRAPH" ) );
             static const char *mode_labels[] = {
                 translate_marker( "HP" ),
                 translate_marker( "Temp" ),
@@ -809,25 +852,137 @@ class player_display_hybrid_ui : public cataimgui::window
                 if( i > 0 ) {
                     ImGui::SameLine();
                 }
-                const bool active = static_cast<int>( bodygraph_mode ) == i;
-                const int n = ui_hybrid_chrome::push_toolbar_button( active );
-                if( ImGui::Button( _( mode_labels[i] ) ) ) {
+                if( w::tab( _( mode_labels[i] ), static_cast<int>( bodygraph_mode ) == i ) ) {
                     bodygraph_mode = static_cast<bodygraph_var>( i );
                 }
-                ImGui::PopStyleColor( n );
+            }
+            ImGui::SameLine();
+            if( w::action_button( _( "Inspect body parts…" ), w::button_kind::tertiary ) ) {
+                pending_detail = "body";
             }
             ImGui::Spacing();
-            int height = 0;
-            const std::string graph = display::colorized_bodygraph_text(
-                                          you, "full_body", bodygraph_mode, 0, 0, height );
-            if( graph.empty() ) {
+            // The silhouette is the full-body graph's cell grid drawn as flat
+            // tinted pixels (2:1 cells keep the proportions the text art was
+            // drawn for), scaled to the panel so nothing scrolls. A region-mask
+            // image can replace the grid later without changing the callers.
+            const bodygraph_id graph( "full_body" );
+            if( graph.is_null() || !graph.is_valid() || graph->rows.empty() ) {
                 ImGui::TextDisabled( "%s", _( "Body graph unavailable." ) );
                 return;
             }
-            cataimgui::PushMonoFont();
-            // colorized_bodygraph_text already embeds color tags + newlines.
-            cataimgui::draw_colored_text( graph, c_white );
-            ImGui::PopFont();
+            const std::vector<std::vector<std::string>> &rows = graph->rows;
+            const int nrows = rows.size();
+            int ncols = 0;
+            for( const auto &row : rows ) {
+                ncols = std::max<int>( ncols, row.size() );
+            }
+            const ImVec2 avail = ImGui::GetContentRegionAvail();
+            const float legend_h = ImGui::GetTextLineHeightWithSpacing() * 2.f;
+            const float list_w = std::clamp( avail.x * 0.42f, 240.f * s, 560.f * s );
+            const float gap = tk.lg * s;
+            const float graph_w = std::max( 80.f * s, avail.x - list_w - gap );
+            const float graph_h = std::max( 80.f * s, avail.y - legend_h );
+            const float cell = std::max( 2.f, std::floor( std::min( graph_w / ncols, graph_h / ( nrows * 2.f ) ) ) );
+            const ImVec2 cell_size( cell, cell * 2.f );
+            const ImVec2 origin = ImGui::GetCursorScreenPos();
+            const ImVec2 graph_origin( origin.x + std::floor( ( graph_w - cell * ncols ) * 0.5f ),
+                                       origin.y + std::floor( ( graph_h - cell * 2.f * nrows ) * 0.5f ) );
+            ImDrawList *draw = ImGui::GetWindowDrawList();
+            const auto part_at = [&]( int y, int x ) -> const bodygraph_part * {
+                if( y < 0 || y >= nrows || x < 0 || x >= static_cast<int>( rows[y].size() ) ) {
+                    return nullptr;
+                }
+                const auto it = graph->parts.find( rows[y][x] );
+                return it == graph->parts.end() ? nullptr : &it->second;
+            };
+            const auto part_bp = [&]( const bodygraph_part * bgp ) -> bodypart_id {
+                if( !bgp ) {
+                    return bodypart_str_id::NULL_ID().id();
+                }
+                return bgp->sub_bodyparts.empty() ? bgp->bodyparts.front() : bgp->sub_bodyparts.front()->parent.id();
+            };
+            const ImU32 missing_col = IM_COL32( 0x3A, 0x36, 0x33, 255 );
+            const ImU32 edge_col = IM_COL32( 0x12, 0x10, 0x0E, 220 );
+            const ImVec2 mouse = ImGui::GetMousePos();
+            bodypart_id hovered_bp = bodypart_str_id::NULL_ID().id();
+            for( int y = 0; y < nrows; ++y ) {
+                for( int x = 0; x < static_cast<int>( rows[y].size() ); ++x ) {
+                    const bodygraph_part *bgp = part_at( y, x );
+                    if( !bgp ) {
+                        continue;
+                    }
+                    const bodypart_id bp = part_bp( bgp );
+                    const bool present = you.has_part( bp, body_part_filter::equivalent );
+                    const ImU32 col = present ? cataimgui::ImU32_from_color(
+                                          display::get_bodygraph_bp_color( you, bp, bodygraph_mode ) ) : missing_col;
+                    const ImVec2 cmin( graph_origin.x + x * cell_size.x, graph_origin.y + y * cell_size.y );
+                    const ImVec2 cmax( cmin.x + cell_size.x, cmin.y + cell_size.y );
+                    draw->AddRectFilled( cmin, cmax, col );
+                    // Outline the silhouette and the seams between parts.
+                    const bodygraph_part *nb[4] = { part_at( y - 1, x ), part_at( y + 1, x ), part_at( y, x - 1 ), part_at( y, x + 1 ) };
+                    const float t = std::max( 1.f, std::floor( cell * 0.12f ) );
+                    if( nb[0] != bgp ) {
+                        draw->AddRectFilled( cmin, ImVec2( cmax.x, cmin.y + t ), edge_col );
+                    }
+                    if( nb[1] != bgp ) {
+                        draw->AddRectFilled( ImVec2( cmin.x, cmax.y - t ), cmax, edge_col );
+                    }
+                    if( nb[2] != bgp ) {
+                        draw->AddRectFilled( cmin, ImVec2( cmin.x + t, cmax.y ), edge_col );
+                    }
+                    if( nb[3] != bgp ) {
+                        draw->AddRectFilled( ImVec2( cmax.x - t, cmin.y ), cmax, edge_col );
+                    }
+                    if( mouse.x >= cmin.x && mouse.x < cmax.x && mouse.y >= cmin.y && mouse.y < cmax.y ) {
+                        hovered_bp = bp;
+                    }
+                }
+            }
+            ImGui::InvisibleButton( "##bodygraph_canvas", ImVec2( graph_w, graph_h ) );
+            if( ImGui::IsItemHovered() && hovered_bp != bodypart_str_id::NULL_ID().id() ) {
+                w::tooltip( body_part_name_as_heading( hovered_bp, 1 ) + ": " + bodygraph_value( hovered_bp ) +
+                            "\n" + _( "Click to inspect body parts." ) );
+                if( ImGui::IsItemClicked() ) {
+                    pending_detail = "body";
+                }
+            }
+            // Legend under the silhouette.
+            ImGui::SetCursorScreenPos( ImVec2( origin.x, origin.y + graph_h + tk.xs * s ) );
+            static const char *legends[] = {
+                translate_marker( "Green: healthy · yellow: hurt · red: critical" ),
+                translate_marker( "Blue: cold · white: comfortable · red: hot" ),
+                translate_marker( "Green: light · yellow: moderate · red: heavy encumbrance" ),
+                translate_marker( "Red: bleeding · yellow: bitten · green: infected · gray: broken" ),
+                translate_marker( "Gray: dry · cyan: damp · blue: soaked" )
+            };
+            ImGui::PushTextWrapPos( origin.x + graph_w );
+            ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                                _( legends[static_cast<int>( bodygraph_mode )] ) );
+            ImGui::PopTextWrapPos();
+            // Part list beside it: swatch, part, value.
+            ImGui::SetCursorScreenPos( ImVec2( origin.x + graph_w + gap, origin.y ) );
+            if( ImGui::BeginTable( "##bodygraph_parts", 3, ImGuiTableFlags_SizingFixedFit,
+                                   ImVec2( list_w, 0.f ) ) ) {
+                ImGui::TableSetupColumn( "##swatch", ImGuiTableColumnFlags_WidthFixed, tk.icon * s );
+                ImGui::TableSetupColumn( _( "Part" ), ImGuiTableColumnFlags_WidthFixed, 130.f * s );
+                ImGui::TableSetupColumn( _( "Value" ), ImGuiTableColumnFlags_WidthStretch );
+                for( const bodypart_id &bp : you.get_all_body_parts( get_body_part_flags::only_main |
+                        get_body_part_flags::sorted ) ) {
+                    ImGui::TableNextRow();
+                    ImGui::TableSetColumnIndex( 0 );
+                    const ImVec2 p = ImGui::GetCursorScreenPos();
+                    const float sw = ImGui::GetTextLineHeight();
+                    ImGui::GetWindowDrawList()->AddRectFilled( p, ImVec2( p.x + sw, p.y + sw ),
+                            cataimgui::ImU32_from_color( display::get_bodygraph_bp_color( you, bp, bodygraph_mode ) ),
+                            2.f * s );
+                    ImGui::Dummy( ImVec2( sw, sw ) );
+                    ImGui::TableSetColumnIndex( 1 );
+                    ImGui::TextUnformatted( body_part_name_as_heading( bp, 1 ).c_str() );
+                    ImGui::TableSetColumnIndex( 2 );
+                    ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", bodygraph_value( bp ).c_str() );
+                }
+                ImGui::EndTable();
+            }
         }
 
         void draw_customize() {

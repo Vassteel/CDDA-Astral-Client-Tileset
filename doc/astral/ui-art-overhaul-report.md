@@ -94,3 +94,19 @@ results). Evidence lives under `artifacts/ui-art-overhaul/` and in the staged bu
    close limitation 1.
 6. **Fix the start-of-game debug messages** in the data (they fire on every Play Now start in
    this tree) — they are noisy for players regardless of the UI.
+
+## 5. Playtest fixes, round 1
+
+Fixed after the first Deck playtest (details and evidence in `ui-art-validation.md` §6):
+main menu as a bottom button bar with popups; uilist bottom spacing; Yes/No prompts on the
+button primitives; sidebar width option + no inner scrollbars + status/messages split by
+content; minimap fills its strip; equipment drop-on-release, grid default, portrait cap,
+portrait-pack survivor (art contract in `player-portrait-pack.md`); character-sheet body
+silhouette; AIM layout; larger hybrid windows on 4K.
+
+New options (Interface / Graphics): `HUD sidebar width (%)`, `HUD status height (%)` (now a
+cap), `Fill the pixel minimap panel`.
+
+Still open from the playtest list: more decoration levels / colour schemes (parked — themes
+are a palette file each, `base_colors-*.json` + `imgui_styles/*.json`); the gateway sprite's
+transparency (tileset, Astra).

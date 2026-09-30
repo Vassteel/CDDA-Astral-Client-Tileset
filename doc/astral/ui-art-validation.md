@@ -178,3 +178,25 @@ whole viewport, which is the one layout change a font-32 default would need.
   known kit would make the run reproducible (needs a saved template in the profile).
 - `LOCALIZE=OFF` in the container; translated string widths are unverified.
 - Deck hardware, GPU renderer, gamepad navigation, Windows: unverified.
+
+## 6. Playtest fixes, round 1 (after the first Deck playtest)
+
+Evidence in `artifacts/ui-art-overhaul/fix1` (main menu, uilist, query prompts) and
+`artifacts/ui-art-overhaul/fix5/` (`final/` full newgame pass at 3840×2160 font 24 before the
+last round of edits; `final3/` the targeted `fixcheck` scenario — HUD, equipment, character
+Body tab, AIM — on the final build). Only the targeted scenario was re-run for the last build;
+the full suite and the interaction checks were **not** re-run for this round (the user asked
+for a light pass), so the equipment interaction report still describes the Apply-button flow.
+
+| fix | what changed | evidence |
+|-----|--------------|----------|
+| main menu | bottom button bar, category popups, Escape closes the popup | `fix1/` |
+| uilist | rows sized from the table row height; no dead band under the last entry | `fix1/` |
+| query prompts | Yes/No on `action_button` (keyboard-selected = primary) | `fix1/` |
+| sidebar | `HUD sidebar width (%)` option (default 112) applied in `panel_manager::get_width_*` — the map inset and every window that avoids the sidebar follow; the strip also reserves the chrome's own cells so the 36-column layout no longer overflows; status section auto-sizes (cap = `HUD status height`, default 70), messages take the remainder, no scrollbars (wheel scroll kept) | `fix5/final*/hud*` |
+| minimap | `Fill the pixel minimap panel` option (default on): the projector picks the tile size that *covers* the strip (cropping the far edges) instead of fitting inside it; `fill` overrides scale-to-fit | inspection only — the pixel minimap crashes the software renderer in the container, on the baseline build too (`fix5/basemm`), so it cannot be captured here |
+| equipment | drop applies on release (no Apply/Cancel), icon grid default, grid cells scale with the UI, portrait frame capped to ~4:5, survivor drawn from the portrait pack when it defines `player_*` (see `player-portrait-pack.md`) | `fix5/final3/equipment` |
+| character sheet | Body tab: tinted pixel silhouette from the `full_body` graph cells, hover tooltip, part/value table, legend — fits without scrolling; tabs recorded by the probe | `fix5/final3/character-body` |
+| AIM | panes fill the body, footer on primitives, status + inspected item on one line | `fix5/final*/aim` |
+| large windows | `theme::large_window_size()`: 1280×800·scale but at least 62 % × 78 % of a large viewport, used by AIM / crafting / construction / consume / character sheet / help / creator / dialogue | `fix5/final3/*` |
+| gateway LOS | inspected only: the ortho renderer already tints oversized sprites through a per-pixel silhouette mask (batched), so shading follows the sprite, not the anchor tile; no renderer change made — the tileset side is Astra's | — |

@@ -2350,8 +2350,13 @@ void options_manager::add_options_interface()
              to_translation( "Show the extra graphical health bars above the sidebar widgets." ),
              true, COPT_CURSES_HIDE );
         add( "HYBRID_STATUS_PERCENT", page_id, to_translation( "HUD status height (%)" ),
-             to_translation( "Share of sidebar space used for status rather than messages." ),
-             20, 80, 55, COPT_CURSES_HIDE );
+             to_translation( "Largest share of the sidebar the status section may take before it scrolls; "
+                             "the message log gets whatever the status rows leave free." ),
+             20, 90, 70, COPT_CURSES_HIDE );
+        add( "HYBRID_SIDEBAR_WIDTH", page_id, to_translation( "HUD sidebar width (%)" ),
+             to_translation( "Width of the sidebar relative to the layout's own width (100 = the layout's "
+                             "columns plus the frame around them)." ),
+             100, 160, 112, COPT_CURSES_HIDE );
 
         add( "ASTRAL_UI_DECORATION", page_id, to_translation( "Astral UI decoration" ),
              to_translation( "Strength of the decorative window art in the Astral interface.  "
@@ -2781,6 +2786,14 @@ void options_manager::add_options_graphics()
            );
 
         get_option( "PIXEL_MINIMAP_RATIO" ).setPrerequisite( "PIXEL_MINIMAP" );
+
+        add( "PIXEL_MINIMAP_FILL", page_id, to_translation( "Fill the pixel minimap panel" ),
+             to_translation( "If true, the minimap covers its whole panel and the far edges of the map are "
+                             "cropped instead of leaving empty margins." ),
+             true, COPT_CURSES_HIDE
+           );
+
+        get_option( "PIXEL_MINIMAP_FILL" ).setPrerequisite( "PIXEL_MINIMAP" );
 
         add( "PIXEL_MINIMAP_BEACON_SIZE", page_id,
              to_translation( "Creature beacon size" ),
@@ -4056,7 +4069,9 @@ std::string options_manager::show( bool ingame, const bool world_options_only, b
             if( iter.first == "PIXEL_MINIMAP_HEIGHT"
                 || iter.first == "PIXEL_MINIMAP_RATIO"
                 || iter.first == "PIXEL_MINIMAP_MODE"
-                || iter.first == "PIXEL_MINIMAP_SCALE_TO_FIT" ) {
+                || iter.first == "PIXEL_MINIMAP_SCALE_TO_FIT"
+                || iter.first == "PIXEL_MINIMAP_FILL"
+                || iter.first == "HYBRID_SIDEBAR_WIDTH" ) {
                 pixel_minimap_changed = true;
 
             } else if( iter.first == "TILES" || iter.first == "USE_TILES" || iter.first == "DISTANT_TILES" ||

@@ -213,8 +213,8 @@ class consume_hybrid_window : public cataimgui::window
         cataimgui::bounds get_bounds() override {
             const ImVec2 vp = ImGui::GetMainViewport()->Size;
             const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
-            return { -1.f, -1.f, std::min( vp.x * 0.94f, 1280.f * scale ),
-                     std::min( vp.y * 0.92f, 720.f * scale ) };
+            const ImVec2 large = ui_hybrid_chrome::theme::large_window_size();
+            return { -1.f, -1.f, large.x, std::min( large.y, std::min( vp.y * 0.92f, 720.f * scale ) * 1.6f ) };
         }
 
         void draw_controls() override {

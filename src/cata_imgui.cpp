@@ -1099,9 +1099,12 @@ void cataimgui::window::draw()
     if( cached_bounds.x < 0.f || cached_bounds.y < 0.f ) {
         const ImVec2 viewport = ImGui::GetMainViewport()->Size;
         const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
+        // Centred windows never exceed the classic cap or the large-window
+        // size (which grows with a big viewport), whichever is larger.
+        const ImVec2 large = ui_hybrid_chrome::theme::large_window_size();
         ImGui::SetNextWindowSizeConstraints( ImVec2( 0.f, 0.f ),
-            ImVec2( std::min( viewport.x * 0.96f, 1440.f * scale ),
-                    std::min( viewport.y * 0.96f, 840.f * scale ) ) );
+            ImVec2( std::min( viewport.x * 0.96f, std::max( 1440.f * scale, large.x ) ),
+                    std::min( viewport.y * 0.96f, std::max( 840.f * scale, large.y ) ) ) );
     }
 #endif
     int flags = window_flags;

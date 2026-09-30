@@ -11,7 +11,7 @@ rectangle each frame). Each check records PASS/FAIL plus a screenshot; results g
 
 Scenarios:
   equipment  keyboard expand/collapse + Escape ownership, take off, equip from the inventory
-             list, drag & drop with preview + Apply change, right-click context menu, close
+             list, drag & drop applying on release, right-click context menu, close
   menu       main-menu overlay: click categories, drawer rows, hotkeys still work
   hud        toolbar buttons open the matching screens; sidebar buttons
 """
@@ -313,7 +313,7 @@ def scenario_equipment(x, probe, rep):
                                                         inv_count(probe)))
     rep.shot(x, "after-equip")
 
-    # --- drag & drop onto the slot row: preview + Apply change
+    # --- drag & drop onto the slot row: applies on release
     # The slot the item actually went to is in the status ("Equipped to Neck."); take it off
     # from that row so the drag target is the same row.
     status = probe.first("status")
@@ -357,21 +357,19 @@ def scenario_equipment(x, probe, rep):
             x.move(sx + (dx - sx) * t, sy + (dy - sy) * t, settle=step)
         time.sleep(max(0.3, 2 * probe.frame_dt))
         rep.shot(x, "drag-in-progress", settle=0.1)
+        inv_before = inv_count(probe)
         x.release()
-        probe.read()
-        apply_btn = probe.first("button", "Apply change", True)
-        rep.check("drag & drop onto a slot shows the preview with Apply change / Cancel change",
-                  apply_btn is not None and probe.first("button", "Cancel change", True) is not None)
-        rep.shot(x, "drag-preview")
-        if apply_btn:
-            inv_before = inv_count(probe)
-            x.click(*Probe.center(apply_btn)); time.sleep(1.5); dismiss_debug_prompts(x)
-            ok = wait_for(probe, lambda p: inv_count(p) < inv_before or
-                          status_text(p).lower().startswith("equipped"), 8)
-            status = probe.first("status")
-            rep.check("Apply change equips the dragged item", ok,
-                      "status: %s" % (status["label"] if status else "-"))
-            rep.shot(x, "after-apply")
+        time.sleep(1.5); dismiss_debug_prompts(x)
+        ok = wait_for(probe, lambda p: inv_count(p) < inv_before or
+                      status_text(p).lower().startswith("equipped"), 8)
+        status = probe.first("status")
+        rep.check("releasing the drag on a slot equips the item (no Apply step)", ok,
+                  "status: %s; inventory rows %d → %d" % (status["label"] if status else "-",
+                                                            inv_before, inv_count(probe)))
+        rep.check("no Apply change / Cancel change buttons remain after the drop",
+                  probe.first("button", "Apply change", True) is None and
+                  probe.first("button", "Cancel change", True) is None)
+        rep.shot(x, "after-drop")
     else:
         st = probe.first("status")
         rep.shot(x, "drag-setup-failed")

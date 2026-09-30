@@ -56,6 +56,12 @@ const tokens &get();
 float scale();
 /** token * scale() */
 float px( float logical );
+/**
+ * Size of a large (full-screen class) hybrid window: 1280×800 logical at the
+ * UI scale, but never smaller than most of a large viewport, so a 4K display
+ * with a moderate font still gets a window that uses the screen.
+ */
+ImVec2 large_window_size();
 decoration level();
 /** Re-read the decoration option (cheap; called once per frame by the client). */
 void refresh_options();

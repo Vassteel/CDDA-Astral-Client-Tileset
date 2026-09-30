@@ -337,6 +337,16 @@ void section_label( const std::string &text, const char *icon_name )
 // ---------------------------------------------------------------------------
 // buttons
 
+float action_button_width( const char *label, button_kind kind, const char *icon_name )
+{
+    const float s = S();
+    const bool has_icon = icon_name != nullptr && tex::has_icon( icon_name );
+    const float icon_w = has_icon ? T().icon * 0.75f * s + T().sm * s : 0.f;
+    const float text_w = ImGui::CalcTextSize( label ).x + icon_w;
+    return kind == button_kind::tertiary ? text_w + T().lg * s
+           : std::max( T().button_min_w * s, text_w + T().xl * 2.f * s );
+}
+
 bool action_button( const char *label, button_kind kind, const ImVec2 &size_logical, bool enabled,
                     const char *disabled_reason, const char *icon_name )
 {
@@ -346,9 +356,7 @@ bool action_button( const char *label, button_kind kind, const ImVec2 &size_logi
     const bool has_icon = icon_name != nullptr && tex::has_icon( icon_name );
     const float icon_w = has_icon ? T().icon * 0.75f * s + T().sm * s : 0.f;
     if( w <= 0.f ) {
-        const float text_w = ImGui::CalcTextSize( label ).x + icon_w;
-        w = kind == button_kind::tertiary ? text_w + T().lg * s
-            : std::max( T().button_min_w * s, text_w + T().xl * 2.f * s );
+        w = action_button_width( label, kind, icon_name );
     }
     if( !enabled ) {
         ImGui::BeginDisabled( true );
@@ -356,10 +364,11 @@ bool action_button( const char *label, button_kind kind, const ImVec2 &size_logi
     ImGui::PushStyleColor( ImGuiCol_Button, 0 );
     ImGui::PushStyleColor( ImGuiCol_ButtonHovered, 0 );
     ImGui::PushStyleColor( ImGuiCol_ButtonActive, 0 );
+    ImGui::PushStyleColor( ImGuiCol_NavCursor, 0 ); // the focus ring is drawn below
     ImGui::PushStyleVar( ImGuiStyleVar_FrameBorderSize, 0.f );
     const bool clicked = ImGui::Button( ( std::string( "##btn_" ) + label ).c_str(), ImVec2( w, h ) );
     ImGui::PopStyleVar();
-    ImGui::PopStyleColor( 3 );
+    ImGui::PopStyleColor( 4 );
     const bool hovered = ImGui::IsItemHovered();
     const bool held = ImGui::IsItemActive();
     const bool focused = ImGui::IsItemFocused() && ImGui::GetIO().NavVisible;
@@ -1130,6 +1139,27 @@ void flush_frame()
     static int frame = 0;
     ++frame;
     std::vector<entry> &e = entries();
+    // Scrollbar audit: every window/child that showed a vertical scrollbar last frame,
+    // with how much it actually overflows. A scrollbar over a few pixels of overflow
+    // ("tiny scrollbar") is a sizing bug in the screen that owns it.
+    if( ImGuiContext *g = ImGui::GetCurrentContext() ) {
+        for( ImGuiWindow *w : g->Windows ) {
+            if( !w->WasActive || w->Hidden || !w->ScrollbarY ) {
+                continue;
+            }
+            const float overflow = w->ScrollMax.y;
+            const float view = w->InnerRect.GetHeight();
+            std::string label = std::string( "scrollbar:" ) + w->Name;
+            const std::size_t hh = label.find( "##" );
+            if( hh != std::string::npos ) {
+                label.erase( hh );
+            }
+            label += " overflow=" + std::to_string( static_cast<int>( overflow ) ) + " view=" +
+                     std::to_string( static_cast<int>( view ) );
+            e.push_back( { overflow < view * 0.25f ? "scrollbar_tiny" : "scrollbar", label,
+                           w->Pos, ImVec2( w->Pos.x + w->Size.x, w->Pos.y + w->Size.y ), true } );
+        }
+    }
     // Written every frame (atomic rename) so the harness can wait for a frame that
     // follows its input; the file is small and this is a dev-only path.
     {

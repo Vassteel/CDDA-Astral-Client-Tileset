@@ -81,6 +81,7 @@
 #include "units_utility.h"
 #include "value_ptr.h"
 #include "vitamin.h"
+#include "ui_hybrid_chrome.h"
 
 static const bionic_id bio_painkiller( "bio_painkiller" );
 
@@ -2734,10 +2735,8 @@ void game_menus::inv::compare_item_menu::draw_controls()
 
 cataimgui::bounds game_menus::inv::compare_item_menu::get_bounds()
 {
-    const ImVec2 vp = ImGui::GetMainViewport()->Size;
-    const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
-    return { -1.f, -1.f, std::min( vp.x * 0.94f, 1280.f * scale ),
-             std::min( vp.y * 0.92f, 800.f * scale ) };
+    return { -1.f, -1.f, ui_hybrid_chrome::theme::large_window_size().x,
+             ui_hybrid_chrome::theme::large_window_size().y };
 }
 
 bool game_menus::inv::compare_item_menu::show()

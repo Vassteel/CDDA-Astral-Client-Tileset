@@ -69,15 +69,41 @@ bool has_text( int sel )
     return o == opt::MOTD || o == opt::CREDITS;
 }
 
+const char *category_icon( opt o )
+{
+    switch( o ) {
+        case opt::NEWCHAR:
+            return "person";
+        case opt::LOADCHAR:
+            return "save";
+        case opt::WORLD:
+            return "world";
+        case opt::TUTORIAL:
+            return "info";
+        case opt::SETTINGS:
+            return "gear";
+        case opt::MOTD:
+            return "log";
+        case opt::HELP:
+            return "info";
+        case opt::CREDITS:
+            return "star";
+        case opt::QUIT:
+            return "close";
+        default:
+            return nullptr;
+    }
+}
+
 } // namespace
 
 main_menu_overlay::main_menu_overlay( main_menu &menu_ ) :
-    cataimgui::window( _( "Astral" ), ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
-                       ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoScrollbar |
-                       ImGuiWindowFlags_NoScrollWithMouse ),
+    // Untitled: no Astral shell of its own; the bar strip and the popup draw their frames.
+    cataimgui::window( "", ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground |
+                       ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoNav |
+                       ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse ),
     menu( menu_ )
 {
-    set_shell( 1, "world" );
 }
 
 std::string main_menu_overlay::take_action()
@@ -87,114 +113,134 @@ std::string main_menu_overlay::take_action()
     return a;
 }
 
-cataimgui::bounds main_menu_overlay::get_bounds()
+bool main_menu_overlay::close_popup()
 {
-    const ImVec2 vp = ImGui::GetMainViewport()->Size;
-    const ImVec2 origin = ImGui::GetMainViewport()->Pos;
-    const float s = theme::scale();
-    float width = 440.f * s;
-    if( has_drawer( menu.sel1 ) ) {
-        width += 400.f * s;
-    } else if( has_text( menu.sel1 ) ) {
-        width += std::min( 760.f * s, vp.x * 0.5f );
+    if( !popup_open ) {
+        return false;
     }
-    width = std::min( width, vp.x - 48.f * s );
-    // Keep the title lettering in the art visible: start below the top ~28 %.
-    const float top = vp.y * 0.28f;
-    const float height = std::min( vp.y - top - 24.f * s, 560.f * s );
-    const float x = std::min( 72.f * s, vp.x * 0.05f );
-    return { origin.x + x, origin.y + top, width, height };
+    popup_open = false;
+    return true;
 }
 
-void main_menu_overlay::draw_categories( float width )
+void main_menu_overlay::category_selected()
+{
+    popup_open = has_drawer( menu.sel1 ) || has_text( menu.sel1 );
+}
+
+cataimgui::bounds main_menu_overlay::get_bounds()
+{
+    // The window covers the whole viewport (bar at the bottom, popup above it); the
+    // background is transparent so the title art stays visible.
+    const ImVec2 vp = ImGui::GetMainViewport()->Size;
+    const ImVec2 origin = ImGui::GetMainViewport()->Pos;
+    return { origin.x, origin.y, vp.x, vp.y };
+}
+
+void main_menu_overlay::draw_bar()
 {
     const float s = theme::scale();
     const ui_hybrid_chrome::theme::tokens &tk = theme::get();
-    ImGui::BeginChild( "categories", ImVec2( width, 0.f ), ImGuiChildFlags_None,
-                       ImGuiWindowFlags_NoScrollbar );
-    // Kicker: last played world / character.
-    if( !world_generator->last_world_name.empty() ) {
-        std::string last = world_generator->last_world_name;
-        if( !world_generator->last_character_name.empty() ) {
-            last = world_generator->last_character_name + " · " + last;
-        }
-        ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", _( "Last played:" ) );
-        ImGui::SameLine();
-        ImGui::TextUnformatted( w::fit_text( last, ImGui::GetContentRegionAvail().x ).c_str() );
-        ImGui::Dummy( ImVec2( 0.f, tk.xs * s ) );
-    }
+    const ImVec2 win_pos = ImGui::GetWindowPos();
+    const ImVec2 win_size = ImGui::GetWindowSize();
+    const float button_h = 40.f;
+    bar_height = ( button_h + tk.lg * 2.f ) * s;
+    const float bar_top = win_pos.y + win_size.y - bar_height;
+    ImDrawList *draw = ImGui::GetWindowDrawList();
+    // Translucent charcoal strip with a quiet bronze rule on top.
+    draw->AddRectFilled( ImVec2( win_pos.x, bar_top ), ImVec2( win_pos.x + win_size.x, win_pos.y + win_size.y ),
+                         alpha_u32( tk.surface, 0.86f ) );
+    draw->AddLine( ImVec2( win_pos.x, bar_top ), ImVec2( win_pos.x + win_size.x, bar_top ),
+                   alpha_u32( tk.edge_bronze, 0.9f ), std::max( 1.f, 1.f * s ) );
+
     const int count = static_cast<int>( menu.vMenuItems.size() );
-    const auto row = [&]( int index, bool featured ) {
+    // Order: play group, then the information/settings group, then Quit.
+    const std::vector<int> order = {
+        static_cast<int>( opt::NEWCHAR ), static_cast<int>( opt::LOADCHAR ), static_cast<int>( opt::WORLD ),
+        static_cast<int>( opt::TUTORIAL ), -1,
+        static_cast<int>( opt::SETTINGS ), static_cast<int>( opt::MOTD ), static_cast<int>( opt::HELP ),
+        static_cast<int>( opt::CREDITS ), -1,
+        static_cast<int>( opt::QUIT )
+    };
+    struct entry {
+        int index;
+        std::string label;
+        std::string key;
+        float width;
+    };
+    std::vector<entry> entries;
+    const float gap = tk.sm * s;
+    const float group_gap = tk.xl * s;
+    float total_w = 0.f;
+    for( int index : order ) {
+        if( index < 0 ) {
+            total_w += group_gap;
+            entries.push_back( { -1, "", "", group_gap } );
+            continue;
+        }
+        if( index >= count ) {
+            continue;
+        }
         const auto [label, key] = split_hotkey( menu.vMenuItems[index] );
-        w::row_state st;
-        st.selected = menu.sel1 == index;
-        st.featured = featured;
-        const std::string id = "cat" + std::to_string( index );
-        std::string detail;
-        const opt o = static_cast<opt>( index );
-        if( o == opt::LOADCHAR || o == opt::WORLD ) {
-            const size_t n = world_generator->get_all_worlds().size();
-            detail = n == 0 ? std::string() : string_format( n_gettext( "%d world", "%d worlds", n ), n );
+        const float wdt = w::toolbar_button_width( label, category_icon( static_cast<opt>( index ) ), key );
+        entries.push_back( { index, label, key, wdt } );
+        total_w += wdt + gap;
+    }
+    // Centre the row; if the viewport is too narrow the buttons simply wrap.
+    float x = win_pos.x + std::max( tk.lg * s, ( win_size.x - total_w ) * 0.5f );
+    const float y = bar_top + tk.lg * s;
+    ImGui::PushStyleVar( ImGuiStyleVar_FrameBorderSize, 0.f );
+    for( const entry &e : entries ) {
+        if( e.index < 0 ) {
+            x += e.width;
+            continue;
         }
-        // Detail (counts) sits left of the hotkey letter; both right-aligned.
-        const std::string detail_key = detail.empty() ? key : detail + "   " + key;
-        ImGui::PushStyleVar( ImGuiStyleVar_ItemSpacing, ImVec2( tk.sm * s, tk.xs * s ) );
-        const w::row_result r = w::selectable_row( id.c_str(), label, detail_key, nullptr, nullptr, st, 0.f,
-                                has_drawer( index ) || has_text( index ) ? "chevron" : nullptr );
-        ImGui::PopStyleVar();
-        // hotkey letter re-drawn in the accent color over the muted detail text
-        if( !key.empty() ) {
-            ImDrawList *draw = ImGui::GetWindowDrawList();
-            const ImVec2 ksz = ImGui::CalcTextSize( key.c_str() );
-            const float kx = r.max.x - tk.md * s - ( has_drawer( index ) || has_text( index ) ? tk.lg * s +
-                             tk.sm * s : 0.f ) - ksz.x;
-            const float ky = r.min.y + ( r.max.y - r.min.y - ksz.y ) * 0.5f;
-            draw->AddRectFilled( ImVec2( kx - 1.f, ky ), ImVec2( kx + ksz.x + 1.f, ky + ksz.y ),
-                                 st.selected ? tk.selected_bg : tk.raised );
-            draw->AddText( ImVec2( kx, ky ), st.selected ? tk.accent : tk.accent_dim, key.c_str() );
+        if( x + e.width > win_pos.x + win_size.x - tk.lg * s ) {
+            break;
         }
-        if( r.clicked ) {
-            if( menu.sel1 != index ) {
-                menu.sel1 = index;
-                menu.sel2 = index == static_cast<int>( opt::LOADCHAR ) ? static_cast<int>( menu.last_world_pos ) : 0;
+        ImGui::SetCursorScreenPos( ImVec2( x, y ) );
+        const std::string id = "##cat" + std::to_string( e.index );
+        const opt o = static_cast<opt>( e.index );
+        const bool active = menu.sel1 == e.index && ( popup_open || !( has_drawer( e.index ) || has_text( e.index ) ) );
+        if( w::toolbar_button( id.c_str(), e.label, category_icon( o ), e.key, active, button_h ) ) {
+            if( menu.sel1 != e.index ) {
+                menu.sel1 = e.index;
+                menu.sel2 = e.index == static_cast<int>( opt::LOADCHAR ) ? static_cast<int>( menu.last_world_pos ) : 0;
                 menu.sel_line = 0;
                 menu.on_move();
-                mark_resized();
+                popup_open = has_drawer( e.index ) || has_text( e.index );
+            } else if( has_drawer( e.index ) || has_text( e.index ) ) {
+                popup_open = !popup_open;
             }
             if( o == opt::HELP || o == opt::TUTORIAL || o == opt::QUIT ) {
                 queued = o == opt::QUIT ? "QUIT" : "CONFIRM";
             }
         }
-    };
-    // Featured: New Game, Load, World. Plain: Tutorial. Demoted: MOTD, Settings, Help, Credits, Quit.
-    for( int i : { static_cast<int>( opt::NEWCHAR ), static_cast<int>( opt::LOADCHAR ), static_cast<int>( opt::WORLD ) } ) {
-        if( i < count ) {
-            row( i, true );
+        x += e.width + gap;
+    }
+    ImGui::PopStyleVar();
+
+    // Version, muted, bottom-right of the strip; last played, bottom-left.
+    const std::string ver = w::fit_text( getVersionString(), win_size.x * 0.25f );
+    const ImVec2 vsz = ImGui::CalcTextSize( ver.c_str() );
+    draw->AddText( ImVec2( win_pos.x + win_size.x - vsz.x - tk.md * s,
+                           win_pos.y + win_size.y - vsz.y - tk.xs * s ),
+                   alpha_u32( tk.text_muted, 0.8f ), ver.c_str() );
+    if( !world_generator->last_world_name.empty() ) {
+        std::string last = world_generator->last_world_name;
+        if( !world_generator->last_character_name.empty() ) {
+            last = world_generator->last_character_name + " · " + last;
         }
+        const std::string line = w::fit_text( std::string( _( "Last played: " ) ) + last, win_size.x * 0.3f );
+        const ImVec2 lsz = ImGui::CalcTextSize( line.c_str() );
+        draw->AddText( ImVec2( win_pos.x + tk.md * s, win_pos.y + win_size.y - lsz.y - tk.xs * s ),
+                       alpha_u32( tk.text_muted, 0.8f ), line.c_str() );
     }
-    if( static_cast<int>( opt::TUTORIAL ) < count ) {
-        row( static_cast<int>( opt::TUTORIAL ), false );
-    }
-    ImGui::Dummy( ImVec2( 0.f, tk.sm * s ) );
-    ImGui::Separator();
-    ImGui::Dummy( ImVec2( 0.f, tk.sm * s ) );
-    for( int i : { static_cast<int>( opt::MOTD ), static_cast<int>( opt::SETTINGS ), static_cast<int>( opt::HELP ),
-                   static_cast<int>( opt::CREDITS ) } ) {
-        if( i < count ) {
-            row( i, false );
-        }
-    }
-    if( static_cast<int>( opt::QUIT ) < count ) {
-        ImGui::Dummy( ImVec2( 0.f, tk.sm * s ) );
-        row( static_cast<int>( opt::QUIT ), false );
-    }
-    ImGui::EndChild();
 }
 
-void main_menu_overlay::draw_text_panel( const std::string &text, float width )
+void main_menu_overlay::draw_text_panel( const std::string &text )
 {
     const float s = theme::scale();
-    if( w::panel_begin( "textpanel", ImVec2( width, 0.f ), true ) ) {
+    if( w::panel_begin( "textpanel", ImVec2( 0.f, 0.f ), true ) ) {
         // Keyboard scrolling from the existing UP/DOWN handling (sel_line).
         if( menu.sel_line != last_text_line ) {
             ImGui::SetScrollY( menu.sel_line * ImGui::GetTextLineHeightWithSpacing() );
@@ -207,7 +253,7 @@ void main_menu_overlay::draw_text_panel( const std::string &text, float width )
     }
 }
 
-void main_menu_overlay::draw_drawer( float width )
+void main_menu_overlay::draw_drawer()
 {
     const float s = theme::scale();
     const ui_hybrid_chrome::theme::tokens &tk = theme::get();
@@ -236,17 +282,12 @@ void main_menu_overlay::draw_drawer( float width )
                                string_format( n_gettext( "%d character", "%d characters", n ), n ) );
         }
     }
-    const char *heading = o == opt::NEWCHAR ? _( "New game" ) : o == opt::SETTINGS ? _( "Settings" ) :
-                          o == opt::LOADCHAR ? _( "Load" ) : _( "Worlds" );
-    ImGui::BeginChild( "drawer", ImVec2( width, 0.f ), ImGuiChildFlags_None, ImGuiWindowFlags_NoScrollbar );
-    w::section_label( heading );
     if( entries.empty() ) {
         w::empty_state( _( "No worlds yet" ), _( "Start a new game to create one." ) );
-        ImGui::EndChild();
         return;
     }
     if( o == opt::NEWCHAR && menu.sel2 >= 0 && static_cast<size_t>( menu.sel2 ) < menu.vNewGameHints.size() ) {
-        ImGui::PushTextWrapPos( ImGui::GetCursorPosX() + width - tk.md * s );
+        ImGui::PushTextWrapPos( ImGui::GetCursorPosX() + ImGui::GetContentRegionAvail().x - tk.md * s );
         ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", menu.vNewGameHints[menu.sel2].c_str() );
         ImGui::PopTextWrapPos();
         ImGui::Dummy( ImVec2( 0.f, tk.xs * s ) );
@@ -282,41 +323,66 @@ void main_menu_overlay::draw_drawer( float width )
     }
     ImGui::PopStyleVar();
     ImGui::EndChild();
-    ImGui::EndChild();
+}
+
+void main_menu_overlay::draw_popup()
+{
+    const float s = theme::scale();
+    const ui_hybrid_chrome::theme::tokens &tk = theme::get();
+    const ImVec2 win_pos = ImGui::GetWindowPos();
+    const ImVec2 win_size = ImGui::GetWindowSize();
+    const bool text = has_text( menu.sel1 );
+    const float width = std::min( win_size.x - 48.f * s, ( text ? 820.f : 560.f ) * s );
+    // Lists size to their entries (title bar + optional hint + rows), text panels to a page.
+    const opt sel = static_cast<opt>( menu.sel1 );
+    size_t rows = 0;
+    if( sel == opt::NEWCHAR ) {
+        rows = menu.vNewGameSubItems.size();
+    } else if( sel == opt::SETTINGS ) {
+        rows = menu.vSettingsSubItems.size();
+    } else if( sel == opt::LOADCHAR || sel == opt::WORLD ) {
+        rows = world_generator->get_all_worlds().size() + ( sel == opt::WORLD ? 1 : 0 );
+    }
+    const float list_h = ( 112.f + ( sel == opt::NEWCHAR ? 44.f : 0.f ) + std::max<size_t>( rows, 3 ) * 44.f ) * s;
+    const float height = std::min( win_size.y * 0.66f, text ? 520.f * s : list_h );
+    const ImVec2 pos( win_pos.x + ( win_size.x - width ) * 0.5f,
+                      win_pos.y + win_size.y - bar_height - tk.md * s - height );
+    const opt o = static_cast<opt>( menu.sel1 );
+    const char *heading = o == opt::NEWCHAR ? _( "New game" ) : o == opt::SETTINGS ? _( "Settings" ) :
+                          o == opt::LOADCHAR ? _( "Load game" ) : o == opt::WORLD ? _( "Worlds" ) :
+                          o == opt::MOTD ? _( "Message of the day" ) : _( "Credits" );
+    ImGui::SetNextWindowPos( pos, ImGuiCond_Always );
+    ImGui::SetNextWindowSize( ImVec2( width, height ), ImGuiCond_Always );
+    ImGui::PushStyleVar( ImGuiStyleVar_WindowPadding, ImVec2( 14.f * s, 14.f * s ) );
+    ImGui::PushStyleVar( ImGuiStyleVar_WindowBorderSize, 0.f );
+    if( ImGui::Begin( "##main_menu_popup", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground |
+                      ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoNav |
+                      ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings ) ) {
+        if( w::window_shell( heading, w::frame_kind::dialog, true, category_icon( o ), true ) ) {
+            popup_open = false;
+        }
+        if( text ) {
+            draw_text_panel( o == opt::MOTD ? menu.mmenu_motd : menu.mmenu_credits );
+        } else {
+            draw_drawer();
+        }
+    }
+    ImGui::End();
+    ImGui::PopStyleVar( 2 );
 }
 
 void main_menu_overlay::draw_controls()
 {
-    const float s = theme::scale();
-    const ui_hybrid_chrome::theme::tokens &tk = theme::get();
-    const float total = ImGui::GetContentRegionAvail().x;
-    const bool drawer = has_drawer( menu.sel1 );
-    const bool text = has_text( menu.sel1 );
-    const float cat_w = ( drawer || text ) ? std::min( 400.f * s, total * 0.42f ) : total;
-    draw_categories( cat_w );
-    if( drawer || text ) {
-        ImGui::SameLine( 0.f, tk.lg * s );
-        const float rest = ImGui::GetContentRegionAvail().x;
-        if( drawer ) {
-            draw_drawer( rest );
-        } else {
-            draw_text_panel( menu.sel1 == static_cast<int>( opt::MOTD ) ? menu.mmenu_motd : menu.mmenu_credits,
-                             rest );
-        }
-    }
-    // Version, muted, bottom-right inside the frame.
-    {
-        ImDrawList *draw = ImGui::GetWindowDrawList();
-        const std::string ver = w::fit_text( getVersionString(), total * 0.5f );
-        const ImVec2 sz = ImGui::CalcTextSize( ver.c_str() );
-        const ImVec2 wmax( ImGui::GetWindowPos().x + ImGui::GetWindowSize().x,
-                           ImGui::GetWindowPos().y + ImGui::GetWindowSize().y );
-        draw->AddText( ImVec2( wmax.x - sz.x - 18.f * s, wmax.y - sz.y - 12.f * s ),
-                       alpha_u32( tk.text_muted, 0.8f ), ver.c_str() );
-    }
     if( menu.sel1 != last_sel1 ) {
-        // Drawer/text panel presence changed: resize on the next frame.
-        mark_resized();
+        // A hotkey or arrow key changed the category: show its popup.
+        if( last_sel1 >= 0 ) {
+            popup_open = has_drawer( menu.sel1 ) || has_text( menu.sel1 );
+        }
+        last_text_line = -1;
+    }
+    draw_bar();
+    if( popup_open && ( has_drawer( menu.sel1 ) || has_text( menu.sel1 ) ) ) {
+        draw_popup();
     }
     last_sel1 = menu.sel1;
 }

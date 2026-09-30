@@ -19,6 +19,15 @@ namespace ui_hybrid_sidebar
 /** Bottom minimap height in terminal rows, respecting the selected layout. */
 int minimap_height();
 
+/**
+ * Sidebar width in terminal cells for a layout that asks for `layout_cells` of
+ * widget text: the layout width plus the cells the Astral chrome (window and
+ * panel padding, edge) consumes, scaled by the "HUD sidebar width" option.
+ * panel_manager reports this so the terrain inset and every window that
+ * avoids the sidebar agree with the drawn column.
+ */
+int width_cells( int layout_cells );
+
 /** Create / keep the Hybrid sidebar window alive (idempotent). */
 void ensure();
 
