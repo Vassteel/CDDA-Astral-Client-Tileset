@@ -1,6 +1,6 @@
 # Astral portal worlds — implementation plan
 
-Status: **S2 in progress** (branch `astral-dungeons-s2`). Written 2026-09-28 from the brainstorm thread, the existing [project-development-plan.md](project-development-plan.md), a source audit of the engine, and a scoping conversation. S2 data lives in `data/json/astral/dungeons/`, the generator in `tools/astral/`, the portal tile tooling in `tools/astral/portal_tiles/`, and tests in `tests/astral_dungeon_test.cpp`. Note that `/artifacts/` is gitignored in this repository: anything referenced there exists only on the development machine.
+Status: **S2 accepted in play (2026-09-29); S3 package 1 (instances) on branch `astral-dungeons-s2`.** Written 2026-09-28 from the brainstorm thread, the existing [project-development-plan.md](project-development-plan.md), a source audit of the engine, and a scoping conversation. S2 data lives in `data/json/astral/dungeons/`, the generator in `tools/astral/`, the portal tile tooling in `tools/astral/portal_tiles/`, and tests in `tests/astral_dungeon_test.cpp`. Note that `/artifacts/` is gitignored in this repository: anything referenced there exists only on the development machine.
 
 Decisions taken in the scoping conversation:
 
@@ -85,7 +85,7 @@ Done above.
 **Checklist:** enter, arrive on the twin platform; drop an item in the crate, break a shrub, return; save/reload outside and inside; re-enter — item and damage persist, only one `dimensions/astral_test_world/` folder; veil is solid, no stairs, digging hits rock; blocked arrival lands on the nearest free tile; cancelling at the prompt writes nothing; all three art states reviewed in place; a natural `ancient gateway` found and used.
 
 ### S3 — Independent instances
-- Pool `astral_pocket_01..NN` generated from one template; allocator variable; per-portal instance binding; per-dimension return anchors.
+- Pool `astral_pocket_01..24` generated from one template; allocator variable `astral_pocket_next`; **binding is stored in the map**: an unbound active threshold swaps itself to `t_astral_portal_active_r1c2_p<nn>` on first use (`astral_bind_p<nn>` transform), so each portal remembers its world without dynamic variable names; per-pocket return anchors and arrival points (`astral_return_p<nn>`, `astral_arrival_p<nn>`); the pocket-side return threshold dispatches on `current_dimension`. *(package 1, done)*
 - Ledger per instance (template, seed/version, allocated turn, entries, last exit, core state, rank).
 - Vehicle travel through the platform (`take_vehicle`) and arrival collision handling.
 - Migrate `astral_test_world` to slot 01.

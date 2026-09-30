@@ -7,6 +7,7 @@
 #include "dialogue.h"
 #include "effect_on_condition.h"
 #include "game.h"
+#include "global_vars.h"
 #include "item.h"
 #include "magic_ter_furn_transform.h"
 #include "map.h"
@@ -20,7 +21,8 @@
 // Project Astral — spine milestone S2 ("one portal, one persistent world").
 // See doc/astral/dungeon-implementation-plan.md.  Data lives in data/json/astral/dungeons/.
 
-static const dimension_id dimension_astral_test_world( "astral_test_world" );
+static const dimension_id dimension_astral_pocket_01( "astral_pocket_01" );
+static const dimension_id dimension_astral_pocket_02( "astral_pocket_02" );
 static const dimension_id dimension_default( "default" );
 
 static const effect_on_condition_id effect_on_condition_EOC_ASTRAL_DEBUG_SET_ACTIVE(
@@ -35,6 +37,8 @@ static const effect_on_condition_id effect_on_condition_EOC_ASTRAL_PORTAL_ENTER_
     "EOC_ASTRAL_PORTAL_ENTER_DO" );
 static const effect_on_condition_id effect_on_condition_EOC_ASTRAL_PORTAL_RETURN_DO(
     "EOC_ASTRAL_PORTAL_RETURN_DO" );
+static const effect_on_condition_id effect_on_condition_EOC_ASTRAL_ENTER_P01_DO(
+    "EOC_ASTRAL_ENTER_P01_DO" );
 static const effect_on_condition_id effect_on_condition_EOC_ASTRAL_PORTAL_THRESHOLD(
     "EOC_ASTRAL_PORTAL_THRESHOLD" );
 
@@ -116,7 +120,16 @@ TEST_CASE( "astral_portal_eocs_and_transforms_exist", "[astral][eoc]" )
     CHECK( effect_on_condition_EOC_ASTRAL_PORTAL_ENTER_DO.is_valid() );
     CHECK( effect_on_condition_EOC_ASTRAL_PORTAL_RETURN_DO.is_valid() );
     CHECK( effect_on_condition_EOC_ASTRAL_DEBUG_PLACE_PORTAL.is_valid() );
-    CHECK( dimension_astral_test_world.is_valid() );
+    CHECK( effect_on_condition_EOC_ASTRAL_ENTER_P01_DO.is_valid() );
+    CHECK( dimension_astral_pocket_01.is_valid() );
+    CHECK( dimension_astral_pocket_02.is_valid() );
+    // bound threshold variants share the threshold's role and are examinable
+    for( const std::string &state : astral_states ) {
+        const ter_str_id bound( "t_astral_portal_" + state + "_r1c2_p01" );
+        REQUIRE( bound.is_valid() );
+        CHECK( bound.obj().movecost > 0 );
+    }
+    CHECK( ter_furn_transform_id( "astral_bind_p01" ).is_valid() );
 }
 
 TEST_CASE( "astral_portal_state_transforms_cover_every_cell", "[astral][eoc]" )
@@ -161,48 +174,65 @@ TEST_CASE( "astral_debug_placer_draws_an_active_portal", "[astral][mapgen]" )
     require_portal( here, "active", center );
 }
 
-TEST_CASE( "astral_portal_travel_persists_the_pocket_world", "[astral][dimension][slow]" )
+TEST_CASE( "astral_portal_travel_binds_and_persists_pockets", "[astral][dimension][slow]" )
 {
     clear_avatar();
     clear_map_without_vision();
     map &here = get_map();
     avatar &u = get_avatar();
     REQUIRE( g->get_dimension_prefix() == dimension_default );
+    // fresh allocator for this test world
+    get_globals().set_global_value( "astral_pocket_next", 1.0 );
 
-    // Stand on the platform tile in front of the threshold, as a player would.
-    const tripoint_bub_ms center = u.pos_bub();
-    paint_portal( here, "active", center );
-    const tripoint_abs_ms overworld_anchor = u.pos_abs();
+    // Portal A: stand on r2c2 in front of an unbound active threshold.
+    const tripoint_bub_ms center_a = u.pos_bub();
+    paint_portal( here, "active", center_a );
+    const tripoint_abs_ms anchor_a = u.pos_abs();
+    const tripoint_bub_ms threshold_a = center_a + point::north;
 
-    dialogue d( get_talker_for( u ), nullptr );
-    effect_on_condition_EOC_ASTRAL_PORTAL_ENTER_DO->activate( d );
+    dialogue d1( get_talker_for( u ), nullptr );
+    effect_on_condition_EOC_ASTRAL_PORTAL_ENTER_DO->activate( d1 );
 
-    REQUIRE( g->get_dimension_prefix() == dimension_astral_test_world );
-    map &there = get_map();
-    CHECK( there.ter( u.pos_bub() ).id() == portal_ter( "active", 2, 2 ) );
-    const tripoint_abs_ms arrival = u.pos_abs();
+    REQUIRE( g->get_dimension_prefix() == dimension_astral_pocket_01 );
+    CHECK( get_map().ter( u.pos_bub() ).id() == portal_ter( "active", 2, 2 ) );
+    const tripoint_abs_ms arrival_a = u.pos_abs();
 
     // Leave something behind on the tile south of the arrival pad.
     const tripoint_bub_ms drop = u.pos_bub() + point::south;
-    REQUIRE( there.i_at( drop ).empty() );
-    there.add_item_or_charges( drop, item( itype_id( "rock" ) ) );
-    REQUIRE_FALSE( there.i_at( drop ).empty() );
+    REQUIRE( get_map().i_at( drop ).empty() );
+    get_map().add_item_or_charges( drop, item( itype_id( "rock" ) ) );
+    REQUIRE_FALSE( get_map().i_at( drop ).empty() );
 
+    // Return: the pocket-side threshold is unbound; the dispatcher picks pocket 01's anchor.
     dialogue d2( get_talker_for( u ), nullptr );
     effect_on_condition_EOC_ASTRAL_PORTAL_RETURN_DO->activate( d2 );
     REQUIRE( g->get_dimension_prefix() == dimension_default );
-    CHECK( u.pos_abs() == overworld_anchor );
-    CHECK( get_map().ter( u.pos_bub() ).id() == portal_ter( "active", 2, 2 ) );
+    CHECK( u.pos_abs() == anchor_a );
+    // The overworld threshold is now bound to pocket 01.
+    CHECK( get_map().ter( threshold_a ).id() == ter_str_id( "t_astral_portal_active_r1c2_p01" ) );
 
-    // Re-enter: same world, same landing spot, the rock is still there.
+    // Re-enter through the bound threshold: same world, same landing spot, the rock is still there.
     dialogue d3( get_talker_for( u ), nullptr );
-    effect_on_condition_EOC_ASTRAL_PORTAL_ENTER_DO->activate( d3 );
-    REQUIRE( g->get_dimension_prefix() == dimension_astral_test_world );
-    CHECK( u.pos_abs() == arrival );
+    effect_on_condition_EOC_ASTRAL_ENTER_P01_DO->activate( d3 );
+    REQUIRE( g->get_dimension_prefix() == dimension_astral_pocket_01 );
+    CHECK( u.pos_abs() == arrival_a );
     CHECK_FALSE( get_map().i_at( u.pos_bub() + point::south ).empty() );
-
-    // And back, so later tests start on Earth.
     dialogue d4( get_talker_for( u ), nullptr );
     effect_on_condition_EOC_ASTRAL_PORTAL_RETURN_DO->activate( d4 );
     REQUIRE( g->get_dimension_prefix() == dimension_default );
+
+    // Portal B, ten tiles east of A: a second unbound threshold must get its own pocket.
+    const tripoint_bub_ms center_b = center_a + point( 10, 0 );
+    paint_portal( get_map(), "active", center_b );
+    u.setpos( get_map(), center_b );
+    dialogue d5( get_talker_for( u ), nullptr );
+    effect_on_condition_EOC_ASTRAL_PORTAL_ENTER_DO->activate( d5 );
+    REQUIRE( g->get_dimension_prefix() == dimension_astral_pocket_02 );
+    // No rock here: this is a different world.
+    CHECK( get_map().i_at( u.pos_bub() + point::south ).empty() );
+    dialogue d6( get_talker_for( u ), nullptr );
+    effect_on_condition_EOC_ASTRAL_PORTAL_RETURN_DO->activate( d6 );
+    REQUIRE( g->get_dimension_prefix() == dimension_default );
+    CHECK( get_map().ter( center_b + point::north ).id() ==
+           ter_str_id( "t_astral_portal_active_r1c2_p02" ) );
 }
