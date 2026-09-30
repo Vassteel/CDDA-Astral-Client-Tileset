@@ -1,6 +1,6 @@
 {
   "name": "Astral",
-  "version": "0.1.44",
+  "version": "0.1.45",
   "fallback": "UltiCa",
   "baseline_config_sha256": "455b785c80f7dc5dd14c6c998618d156ebf6c7306d410beb8cddcb4270b3f267",
   "baseline_sprite_slots": 18572,
