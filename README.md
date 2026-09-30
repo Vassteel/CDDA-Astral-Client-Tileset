@@ -20,10 +20,10 @@ The client and artwork are **separate downloads**. You can use the client with o
 
 | Download | What you get |
 | --- | --- |
-| **[Astral Client 0.1.2](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/client-v0.1.2)** | Full clients for **Linux / SteamOS** and **Windows x64**, with launchers and updaters. |
-| **[Astral Tileset 0.1.25](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/tileset-v0.1.25)** | Standalone Astral artwork, seasonal trees and plants, shield sprites, and an included **UltiCa fallback**. |
+| **[Astral Client 0.1.5](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/client-v0.1.5)** | Full clients for **Linux / SteamOS** and **Windows x64**, with launchers and updaters. |
+| **[Astral Tileset 0.1.45](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/tileset-v0.1.45)** | Standalone Astral artwork, seasonal trees and plants, shield sprites, and an included **UltiCa fallback**. |
 
-For Client 0.1.2, download the **full client** for your platform; this release includes game-data changes. Extract into a new folder and copy your saves and settings while the game is closed. To add the tileset, extract its `gfx/Astral` folder into your game installation and select **Astral** in Graphics.
+For Client 0.1.5, download the **full client** for your platform; this release includes game-data changes. Extract into a new folder and copy your saves and settings while the game is closed. To add the tileset, extract its `gfx/Astral` folder into your game installation and select **Astral** in Graphics.
 
 [All releases and checksums](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases) · [Installation, updates and rollback](doc/hybrid/README.md#client-updates)
 
