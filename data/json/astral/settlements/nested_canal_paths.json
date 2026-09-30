@@ -1,0 +1,122 @@
+[
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_stub_north_0",
+    "object": {
+      "mapgensize": [ 4, 12 ],
+      "rows": [ " __ ", " __ ", " __ ", " __ ", " __ ", " __ ", " __ ", " __ ", " __ ", " __ ", " __ ", " __ " ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_stub_east_0",
+    "object": {
+      "mapgensize": [ 12, 4 ],
+      "rows": [ "            ", "____________", "____________", "            " ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_stub_south_0",
+    "object": {
+      "mapgensize": [ 4, 12 ],
+      "rows": [ " __ ", " __ ", " __ ", " __ ", " __ ", " __ ", " __ ", " __ ", " __ ", " __ ", " __ ", " __ " ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_stub_west_0",
+    "object": {
+      "mapgensize": [ 12, 4 ],
+      "rows": [ "            ", "____________", "____________", "            " ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_stub_north_1",
+    "object": {
+      "mapgensize": [ 4, 12 ],
+      "rows": [ " __ ", " __ ", "__  ", "__  ", "__  ", " __ ", " __ ", "  __", "  __", " __ ", " __ ", " __ " ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_stub_east_1",
+    "object": {
+      "mapgensize": [ 12, 4 ],
+      "rows": [ "       ___  ", "___  _______", "_______   __", "   __       " ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_stub_south_1",
+    "object": {
+      "mapgensize": [ 4, 12 ],
+      "rows": [ " __ ", " __ ", " __ ", "__  ", "__  ", " __ ", " __ ", "  __", "  __", "  __", " __ ", " __ " ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_stub_west_1",
+    "object": {
+      "mapgensize": [ 12, 4 ],
+      "rows": [ "       __   ", "__   _______", "_______  ___", "  ___       " ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_stub_north_2",
+    "object": {
+      "mapgensize": [ 4, 12 ],
+      "rows": [ " __ ", "  __", "  __", "  __", " __ ", " __ ", "__  ", "__  ", " __ ", " __ ", " __ ", " __ " ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_stub_east_2",
+    "object": {
+      "mapgensize": [ 12, 4 ],
+      "rows": [ "    __      ", "________   _", "____  ______", "        ___ " ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_stub_south_2",
+    "object": {
+      "mapgensize": [ 4, 12 ],
+      "rows": [ " __ ", " __ ", " __ ", " __ ", "  __", "  __", " __ ", " __ ", "__  ", "__  ", "__  ", " __ " ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_stub_west_2",
+    "object": {
+      "mapgensize": [ 12, 4 ],
+      "rows": [ " ___        ", "______  ____", "_   ________", "      __    " ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  }
+]

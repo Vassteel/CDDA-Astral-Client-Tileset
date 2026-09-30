@@ -1,0 +1,121 @@
+[
+  {
+    "type": "palette",
+    "id": "astral_cc_palette",
+    "terrain": {
+      ",": "t_region_groundcover",
+      ".": "t_dirt",
+      "_": "t_dirt",
+      "~": "t_water_moving_sh",
+      "=": "t_water_moving_dp",
+      "m": "t_mud",
+      "r": "t_region_shrub_swamp",
+      "#": "t_rock_wall",
+      "|": "t_rock_wall_half",
+      "+": "t_door_c",
+      "o": "t_window_no_curtains",
+      "B": "t_bridge",
+      "D": "t_dock",
+      "P": "t_sidewalk",
+      "T": "t_region_tree_fruit",
+      "t": "t_region_tree_shade",
+      "s": "t_region_shrub",
+      "x": "t_splitrail_fence",
+      "g": "t_splitrail_fencegate_c",
+      "h": "t_wattle_fence",
+      "c": "t_column",
+      "R": "t_carpet_red",
+      "Y": "t_carpet_yellow",
+      "d": "t_dirtmound",
+      "w": "t_water_pump",
+      "p": "t_palisade",
+      "q": "t_palisade_gate",
+      "v": "t_water_sh",
+      "j": "t_region_groundcover_swamp",
+      "M": "t_floor",
+      "l": "t_grass_long",
+      "E": "t_floor",
+      "C": "t_floor",
+      "N": "t_dirt",
+      "L": "t_floor",
+      "K": "t_floor",
+      "Z": "t_sidewalk",
+      "Q": "t_sidewalk",
+      "U": "t_dirt",
+      "A": "t_dirt",
+      "H": "t_dirt",
+      "O": "t_dirt",
+      "I": "t_dirt",
+      "J": "t_dirt",
+      "X": "t_dirt",
+      "G": "t_region_groundcover",
+      "k": "t_dirt",
+      "S": "t_floor",
+      "b": "t_floor",
+      "u": "t_floor",
+      "V": "t_floor",
+      "n": "t_dirt",
+      "y": "t_dirt",
+      "%": "t_dirtmound"
+    },
+    "furniture": {
+      "E": "f_table",
+      "C": "f_chair",
+      "N": "f_bench",
+      "L": "f_straw_bed",
+      "K": "f_fireplace",
+      "Z": "f_brazier",
+      "Q": "f_statue",
+      "U": "f_counter",
+      "A": "f_rack_wood",
+      "H": "f_hay",
+      "O": "f_wood_keg",
+      "I": "f_anvil",
+      "J": "f_forge",
+      "X": "f_crate_c",
+      "G": "f_grave_stone",
+      "k": "f_kiln_empty",
+      "S": "f_stool",
+      "b": "f_bookcase",
+      "u": "f_cupboard",
+      "V": "f_wardrobe",
+      "n": "f_bench_wooden",
+      "y": "f_planter"
+    },
+    "sealed_item": { "%": { "items": { "item": "farming_seeds", "chance": 100 }, "furniture": "f_plant_mature" } }
+  },
+  {
+    "type": "palette",
+    "id": "astral_cc_dense_palette",
+    "parameters": {
+      "cc_wall_dense": {
+        "type": "ter_str_id",
+        "default": { "distribution": [ [ "t_rock_wall", 3 ], [ "t_brick_wall", 2 ], [ "t_adobe_brick_wall", 2 ] ] }
+      },
+      "cc_floor_dense": { "type": "ter_str_id", "default": { "distribution": [ [ "t_floor", 2 ], [ "t_rock_floor", 1 ] ] } }
+    },
+    "terrain": {
+      "W": { "param": "cc_wall_dense", "fallback": "t_rock_wall" },
+      "f": { "param": "cc_floor_dense", "fallback": "t_floor" }
+    }
+  },
+  {
+    "type": "palette",
+    "id": "astral_cc_ord_palette",
+    "parameters": {
+      "cc_wall_ord": {
+        "type": "ter_str_id",
+        "default": { "distribution": [ [ "t_wall_log", 3 ], [ "t_wall_wood", 2 ], [ "t_wall_wattle", 2 ] ] }
+      }
+    },
+    "terrain": { "W": { "param": "cc_wall_ord", "fallback": "t_wall_log" }, "f": "t_floor" }
+  },
+  {
+    "type": "palette",
+    "id": "astral_cc_farm_palette",
+    "parameters": {
+      "cc_wall_farm": { "type": "ter_str_id", "default": { "distribution": [ [ "t_wall_log", 2 ], [ "t_wall_wattle", 3 ] ] } }
+    },
+    "terrain": { "W": { "param": "cc_wall_farm", "fallback": "t_wall_wattle" }, "f": "t_dirtfloor" }
+  }
+]
