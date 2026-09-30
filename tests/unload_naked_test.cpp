@@ -2,16 +2,46 @@
 #include <vector>
 
 #include "avatar.h"
+#include "activity_actor_definitions.h"
 #include "cata_catch.h"
 #include "character.h"
 #include "item.h"
 #include "item_location.h"
 #include "map_helpers.h"
+#include "map.h"
+#include "map_selector.h"
 #include "player_activity.h"
 #include "player_helpers.h"
 #include "type_id.h"
 
 static const itype_id itype_sw629( "sw629" );
+
+TEST_CASE( "unload_activity_survives_removed_target", "[unload][crash_regression]" )
+{
+    clear_avatar();
+    clear_map_without_vision();
+    avatar &you = get_avatar();
+    map &here = get_map();
+    item_location target;
+    SECTION( "missing_target" ) {
+        CHECK_FALSE( target );
+    }
+    SECTION( "target_removed_during_activity" ) {
+        item &gun = here.add_item_or_charges( you.pos_bub(), item( itype_sw629 ) );
+        target = item_location( map_cursor( you.pos_bub() ), &gun );
+        REQUIRE( target );
+        you.assign_activity( unload_activity_actor( 1, target ) );
+        target.remove_item();
+        REQUIRE_FALSE( target );
+    }
+    if( !you.activity ) {
+        you.assign_activity( unload_activity_actor( 1, target ) );
+    }
+    you.set_moves( 100 );
+    you.activity.do_turn( you );
+    CHECK_FALSE( you.activity );
+    CHECK( here.i_at( you.pos_bub() ).empty() );
+}
 
 /**
  * When a player has no open inventory to place unloaded bullets, but there is room in the gun being

@@ -316,7 +316,9 @@ void apply_region_overrides()
 
     if( region.city_spec ) {
         region_settings_city &city = const_cast<region_settings_city &>( region.city_spec->obj() );
-        if( v.city_density <= 0.f ) {
+        // Mods and pocket regions can deliberately use a city definition with
+        // size zero and empty building bins. World options must not enable it.
+        if( g_base.city_size <= 0 || v.city_density <= 0.f ) {
             city.city_size = 0; // no cities at all: size 0 is how the generator spells that
         } else {
             city.city_size = std::clamp( v.city_size, 1, 16 );

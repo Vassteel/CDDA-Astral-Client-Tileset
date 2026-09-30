@@ -6465,6 +6465,11 @@ void unload_activity_actor::finish( player_activity &act, Character &who )
 
 void unload_activity_actor::unload( Character &who, item_location &target )
 {
+    // The target can be removed or merged while this activity is pending.
+    if( !target ) {
+        who.add_msg_if_player( m_info, _( "The item to unload is no longer available." ) );
+        return;
+    }
     int qty = 0;
     item &it = *target.get_item();
     bool actually_unloaded = false;

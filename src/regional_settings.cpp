@@ -926,7 +926,8 @@ overmap_special_id building_bin::pick() const
         return null_special;
     }
 
-    return *buildings.pick();
+    const overmap_special_id *building = buildings.pick();
+    return building ? *building : overmap_special_id::NULL_ID();
 }
 
 void building_bin::clear()

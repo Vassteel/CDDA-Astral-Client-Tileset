@@ -270,6 +270,9 @@ overmap_special_id overmap::pick_random_building_to_place( int town_dist, int to
     bool existing_unique;
     do {
         ret = pick_building( city_spec );
+        if( ret.is_null() ) {
+            return ret;
+        }
         if( ret->has_flag( "CITY_UNIQUE" ) ) {
             existing_unique = placed_unique_buildings.find( ret ) != placed_unique_buildings.end();
         } else if( ret->has_flag( "GLOBALLY_UNIQUE" ) || ret->has_flag( "OVERMAP_UNIQUE" ) ) {
@@ -292,6 +295,9 @@ void overmap::place_building( const tripoint_om_omt &p, om_direction::type dir, 
     for( size_t retries = 10; retries > 0; --retries ) {
         const overmap_special_id building_tid = pick_random_building_to_place( town_dist, town.size,
                                                 placed_unique_buildings );
+        if( building_tid.is_null() ) {
+            return;
+        }
         if( can_place_special( *building_tid, building_pos, building_dir, false ) ) {
             std::vector<tripoint_om_omt> used_tripoints = place_special( *building_tid, building_pos,
                     building_dir, town, false, false );

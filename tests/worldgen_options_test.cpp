@@ -2,6 +2,7 @@
 #include <string>
 
 #include "cata_catch.h"
+#include "cata_scope_helpers.h"
 #include "json.h"
 #include "json_loader.h"
 #include "options.h"
@@ -9,6 +10,43 @@
 #include "regional_settings.h"
 #include "worldfactory.h"
 #include "worldgen_options.h"
+
+TEST_CASE( "worldgen_options_preserve_no_cities_region", "[worldgen][crash_regression]" )
+{
+    REQUIRE( DEFAULT_REGION.is_valid() );
+    const region_settings_city_id no_cities( "no_cities" );
+    REQUIRE( no_cities.is_valid() );
+    region_settings &region = const_cast<region_settings &>( DEFAULT_REGION.obj() );
+    region_settings_city &city = const_cast<region_settings_city &>( no_cities.obj() );
+    on_out_of_scope reset_overrides( []() {
+        worldgen_options::on_data_reset();
+        worldgen_options::apply_region_overrides();
+    } );
+    restore_on_out_of_scope restore_region( region.city_spec );
+    restore_on_out_of_scope restore_city( city );
+    region.city_spec = no_cities;
+    REQUIRE( city.city_size == 0 );
+    REQUIRE( city.houses.buildings.empty() );
+    worldgen_options::on_data_reset();
+    override_option density( "WG_CITY_DENSITY", "10" );
+    override_option size( "WG_CITY_SIZE", "3" );
+    override_option spacing( "WG_CITY_SPACING", "8" );
+    worldgen_options::apply_region_overrides();
+    CHECK( city.city_size == 0 );
+    CHECK( city.city_spacing == 0 );
+    worldgen_options::apply_region_overrides();
+    CHECK( city.city_size == 0 );
+}
+
+TEST_CASE( "empty_finalized_building_bin_has_no_selection", "[worldgen][crash_regression]" )
+{
+    building_bin empty;
+    empty.finalize();
+    CHECK( empty.pick().is_null() );
+    const auto &houses = DEFAULT_REGION->get_settings_city().houses;
+    REQUIRE_FALSE( houses.buildings.empty() );
+    CHECK( houses.pick().is_valid() );
+}
 
 // The map-generation options live on the world_default page, so they travel
 // with the world through worldoptions.json like every other world option.
