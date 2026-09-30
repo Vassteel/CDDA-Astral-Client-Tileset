@@ -293,19 +293,26 @@ std::pair<tripoint_abs_omt, std::unordered_map<std::string, std::string>>
     // Spiral out from the world origin scanning for a compatible starting location,
     // creating overmaps as necessary.
     const int radius = 3;
-    const omt_types_parameters chosen_target = random_target();
+    // Every listed terrain is a valid start. Do not fail an entire attempt
+    // just because one randomly selected site is absent in this world's
+    // generation settings while another allowed site is already nearby.
+    std::vector<omt_types_parameters> targets = _locations;
+    std::shuffle( targets.begin(), targets.end(), rng_get_engine() );
     for( const point_abs_om &omp : closest_points_first( origin, radius ) ) {
         overmap &omap = overmap_buffer.get( omp );
-        const tripoint_om_omt omtstart = omap.find_random_omt( std::make_pair( chosen_target.omt,
-                                         chosen_target.omt_type ) );
-        if( omtstart.raw() != tripoint::min ) {
-            return std::make_pair( project_combine( omp, omtstart ), chosen_target.parameters );
+        for( const omt_types_parameters &target : targets ) {
+            const tripoint_om_omt omtstart = omap.find_random_omt( std::make_pair( target.omt,
+                                             target.omt_type ) );
+            if( !omtstart.is_invalid() ) {
+                return std::make_pair( project_combine( omp, omtstart ), target.parameters );
+            }
         }
     }
     // Should never happen, if it does we messed up.
     popup( _( "Unable to generate a valid starting location %s [%s] in a radius of %d overmaps, please report this failure." ),
            name(), id.str(), radius );
-    return std::make_pair( tripoint_abs_omt::invalid, chosen_target.parameters );
+    return std::make_pair( tripoint_abs_omt::invalid,
+                          std::unordered_map<std::string, std::string>() );
 }
 
 std::pair<tripoint_abs_omt, std::unordered_map<std::string, std::string>>
