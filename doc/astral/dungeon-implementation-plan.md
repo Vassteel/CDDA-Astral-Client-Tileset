@@ -1,6 +1,6 @@
 # Astral portal worlds — implementation plan
 
-Status: **planning.** Written 2026-09-28 from the brainstorm thread, the existing [project-development-plan.md](project-development-plan.md), a source audit of the engine, and a scoping conversation. Nothing here is implemented; a draft of the milestone-2 data files exists as reference under `artifacts/project-astral-portal/prototype-draft/` and is **not installed**.
+Status: **S2 accepted in play (2026-09-29); S3 packages 1–2 (instances, ledger, vehicles) on branch `astral-dungeons-s2`.** Written 2026-09-28 from the brainstorm thread, the existing [project-development-plan.md](project-development-plan.md), a source audit of the engine, and a scoping conversation. S2 data lives in `data/json/astral/dungeons/`, the generator in `tools/astral/`, the portal tile tooling in `tools/astral/portal_tiles/`, and tests in `tests/astral_dungeon_test.cpp`. Note that `/artifacts/` is gitignored in this repository: anything referenced there exists only on the development machine.
 
 Decisions taken in the scoping conversation:
 
@@ -79,16 +79,16 @@ Done above.
 - One declared world `astral_test_world`: z0 default terrain is the veil (solid, opaque, indestructible), a 3×3-OMT courtyard special placed on first entry; return anchor stored; enter/return EOCs check travel succeeded before teleporting; driving refused.
 - Debug items: raise a portal here; flip its state.
 - Overworld special `astral_portal_site` (1–2 per overmap, trail-less forest) plus debug placement.
-- Art: sliced atlas + `integrate_portal_tiles.py` for the Astral tileset; `looks_like` fallbacks elsewhere.
-- Draft exists in `artifacts/project-astral-portal/prototype-draft/` (statically cross-checked against upstream ids; not loaded by the game yet).
+- Art: sliced atlas `tools/astral/portal_tiles/astral_portal_32.png`, appended to `tilesets/Astral/tile_config.json` by `tools/astral/portal_tiles/integrate_portal_tiles.py` (re-run it after any tileset rebuild that regenerates tile_config.json); `looks_like` fallbacks elsewhere. Biome art is Track T1; the test world uses vanilla terrain as placeholder.
+- Data: `data/json/astral/dungeons/` (generated files come from `tools/astral/gen_astral_portal_data.py`; edit the generator, not the output). Tests: `tests/astral_dungeon_test.cpp` (terrain roles, transforms, debug placement, enter → drop item → return → re-enter persistence).
 
 **Checklist:** enter, arrive on the twin platform; drop an item in the crate, break a shrub, return; save/reload outside and inside; re-enter — item and damage persist, only one `dimensions/astral_test_world/` folder; veil is solid, no stairs, digging hits rock; blocked arrival lands on the nearest free tile; cancelling at the prompt writes nothing; all three art states reviewed in place; a natural `ancient gateway` found and used.
 
 ### S3 — Independent instances
-- Pool `astral_pocket_01..NN` generated from one template; allocator variable; per-portal instance binding; per-dimension return anchors.
-- Ledger per instance (template, seed/version, allocated turn, entries, last exit, core state, rank).
-- Vehicle travel through the platform (`take_vehicle`) and arrival collision handling.
-- Migrate `astral_test_world` to slot 01.
+- Pool `astral_pocket_01..24` generated from one template; allocator variable `astral_pocket_next`; **binding is stored in the map**: an unbound active threshold swaps itself to `t_astral_portal_active_r1c2_p<nn>` on first use (`astral_bind_p<nn>` transform), so each portal remembers its world without dynamic variable names; per-pocket return anchors and arrival points (`astral_return_p<nn>`, `astral_arrival_p<nn>`); the pocket-side return threshold dispatches on `current_dimension`. *(package 1, done)*
+- Ledger per instance as global vars `astral_<field>_p<nn>`: template, bound turn, entries, last enter/exit, core state (`unclaimed`), rank; `gateway ledger (debug)` reads it. *(package 2, done)*
+- Vehicle travel: the vehicle under the traveller crosses (`take_vehicle`). Because the engine places it at the same coordinates, pockets are **open meadow by default** and the arrival courtyard is drawn *under* the traveller by `update_mapgen astral_courtyard_arrival` at the same OMT-relative spot the overworld sites use (rows 8–12 / cols 9–13); no teleport on entry. The veil stays available for bounded layers. *(package 2, done)*
+- `astral_test_world` retired; start new worlds.
 - **C++ trigger:** pool exhausted or templates multiply → dynamic ids (~1 day + save test).
 
 **Checklist:** two portals, two worlds, changes never cross; reload; a cart goes through and back.
@@ -211,8 +211,7 @@ Ideas with no trigger yet. Free to hold, free to ignore.
 
 ## 6. Reference material
 
-- Portal art and slices: `artifacts/project-astral-portal/` (overhead v3 states; `tiles-32/` atlas, tile_config fragment, previews, slicer, tileset integrator).
-- Prototype draft (S2 data, not installed): `artifacts/project-astral-portal/prototype-draft/`.
-- Settlement references (planned harbour town, organic river city, noise caverns): `artifacts/astral-settlement-references/`.
+- Portal tile tooling (tracked): `tools/astral/portal_tiles/` — atlas, tile_config fragment, slice manifest, `slice_portal_tiles.py`, `integrate_portal_tiles.py`, three-state preview. The overhead v3 source art and prompts are on the development machine under `artifacts/project-astral-portal/` (gitignored).
+- Settlement references (planned harbour town, organic river city, noise caverns): development machine only, `artifacts/astral-settlement-references/` (screenshots of other games; layouts are inspiration, not assets, and are not published).
 - Engine docs: `doc/JSON/DIMENSIONS.md`, `REGION_SETTINGS.md`, `REGION_LAYOUT.md`, `OVERMAP.md` (mutable specials), `MAGIC.md`, `BASECAMP.md`, `EXAMINE.md`, `EFFECT_ON_CONDITION.md`.
 - Vanilla examples: labyrinth safehouse (`nether_eocs/labyrinth_effect_on_condition.json`), portal-storm dungeon (`portal_storm_effect_on_condition.json`), string dimension (`region_settings/dimensions/`, `overmap_mutable/`).

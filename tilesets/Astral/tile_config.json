@@ -81740,6 +81740,468 @@
       "sprite_offset_x": 0,
       "sprite_offset_y": 0,
       "tiles": []
+    },
+    {
+      "file": "astral_portal_32.png",
+      "sprite_width": 32,
+      "sprite_height": 32,
+      "sprite_offset_x": 0,
+      "sprite_offset_y": 0,
+      "tiles": [
+        {
+          "id": "t_astral_portal_active_r0c0",
+          "fg": 18956,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r0c1",
+          "fg": 18957,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r0c2",
+          "fg": 18958,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r0c3",
+          "fg": 18959,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r0c4",
+          "fg": 18960,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r1c0",
+          "fg": 18961,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r1c1",
+          "fg": 18962,
+          "rotates": false
+        },
+        {
+          "id": [
+            "t_astral_portal_active_r1c2",
+            "t_astral_portal_active_r1c2_p01",
+            "t_astral_portal_active_r1c2_p02",
+            "t_astral_portal_active_r1c2_p03",
+            "t_astral_portal_active_r1c2_p04",
+            "t_astral_portal_active_r1c2_p05",
+            "t_astral_portal_active_r1c2_p06",
+            "t_astral_portal_active_r1c2_p07",
+            "t_astral_portal_active_r1c2_p08",
+            "t_astral_portal_active_r1c2_p09",
+            "t_astral_portal_active_r1c2_p10",
+            "t_astral_portal_active_r1c2_p11",
+            "t_astral_portal_active_r1c2_p12",
+            "t_astral_portal_active_r1c2_p13",
+            "t_astral_portal_active_r1c2_p14",
+            "t_astral_portal_active_r1c2_p15",
+            "t_astral_portal_active_r1c2_p16",
+            "t_astral_portal_active_r1c2_p17",
+            "t_astral_portal_active_r1c2_p18",
+            "t_astral_portal_active_r1c2_p19",
+            "t_astral_portal_active_r1c2_p20",
+            "t_astral_portal_active_r1c2_p21",
+            "t_astral_portal_active_r1c2_p22",
+            "t_astral_portal_active_r1c2_p23",
+            "t_astral_portal_active_r1c2_p24"
+          ],
+          "fg": 18963,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r1c3",
+          "fg": 18964,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r1c4",
+          "fg": 18965,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r2c0",
+          "fg": 18966,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r2c1",
+          "fg": 18967,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r2c2",
+          "fg": 18968,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r2c3",
+          "fg": 18969,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r2c4",
+          "fg": 18970,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r3c0",
+          "fg": 18971,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r3c1",
+          "fg": 18972,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r3c2",
+          "fg": 18973,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r3c3",
+          "fg": 18974,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r3c4",
+          "fg": 18975,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r4c0",
+          "fg": 18976,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r4c1",
+          "fg": 18977,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r4c2",
+          "fg": 18978,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r4c3",
+          "fg": 18979,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_active_r4c4",
+          "fg": 18980,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r0c0",
+          "fg": 18981,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r0c1",
+          "fg": 18982,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r0c2",
+          "fg": 18983,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r0c3",
+          "fg": 18984,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r0c4",
+          "fg": 18985,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r1c0",
+          "fg": 18986,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r1c1",
+          "fg": 18987,
+          "rotates": false
+        },
+        {
+          "id": [
+            "t_astral_portal_inactive_r1c2",
+            "t_astral_portal_inactive_r1c2_p01",
+            "t_astral_portal_inactive_r1c2_p02",
+            "t_astral_portal_inactive_r1c2_p03",
+            "t_astral_portal_inactive_r1c2_p04",
+            "t_astral_portal_inactive_r1c2_p05",
+            "t_astral_portal_inactive_r1c2_p06",
+            "t_astral_portal_inactive_r1c2_p07",
+            "t_astral_portal_inactive_r1c2_p08",
+            "t_astral_portal_inactive_r1c2_p09",
+            "t_astral_portal_inactive_r1c2_p10",
+            "t_astral_portal_inactive_r1c2_p11",
+            "t_astral_portal_inactive_r1c2_p12",
+            "t_astral_portal_inactive_r1c2_p13",
+            "t_astral_portal_inactive_r1c2_p14",
+            "t_astral_portal_inactive_r1c2_p15",
+            "t_astral_portal_inactive_r1c2_p16",
+            "t_astral_portal_inactive_r1c2_p17",
+            "t_astral_portal_inactive_r1c2_p18",
+            "t_astral_portal_inactive_r1c2_p19",
+            "t_astral_portal_inactive_r1c2_p20",
+            "t_astral_portal_inactive_r1c2_p21",
+            "t_astral_portal_inactive_r1c2_p22",
+            "t_astral_portal_inactive_r1c2_p23",
+            "t_astral_portal_inactive_r1c2_p24"
+          ],
+          "fg": 18988,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r1c3",
+          "fg": 18989,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r1c4",
+          "fg": 18990,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r2c0",
+          "fg": 18991,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r2c1",
+          "fg": 18992,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r2c2",
+          "fg": 18993,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r2c3",
+          "fg": 18994,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r2c4",
+          "fg": 18995,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r3c0",
+          "fg": 18996,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r3c1",
+          "fg": 18997,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r3c2",
+          "fg": 18998,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r3c3",
+          "fg": 18999,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r3c4",
+          "fg": 19000,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r4c0",
+          "fg": 19001,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r4c1",
+          "fg": 19002,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r4c2",
+          "fg": 19003,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r4c3",
+          "fg": 19004,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_inactive_r4c4",
+          "fg": 19005,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r0c0",
+          "fg": 19006,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r0c1",
+          "fg": 19007,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r0c2",
+          "fg": 19008,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r0c3",
+          "fg": 19009,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r0c4",
+          "fg": 19010,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r1c0",
+          "fg": 19011,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r1c1",
+          "fg": 19012,
+          "rotates": false
+        },
+        {
+          "id": [
+            "t_astral_portal_ruined_r1c2",
+            "t_astral_portal_ruined_r1c2_p01",
+            "t_astral_portal_ruined_r1c2_p02",
+            "t_astral_portal_ruined_r1c2_p03",
+            "t_astral_portal_ruined_r1c2_p04",
+            "t_astral_portal_ruined_r1c2_p05",
+            "t_astral_portal_ruined_r1c2_p06",
+            "t_astral_portal_ruined_r1c2_p07",
+            "t_astral_portal_ruined_r1c2_p08",
+            "t_astral_portal_ruined_r1c2_p09",
+            "t_astral_portal_ruined_r1c2_p10",
+            "t_astral_portal_ruined_r1c2_p11",
+            "t_astral_portal_ruined_r1c2_p12",
+            "t_astral_portal_ruined_r1c2_p13",
+            "t_astral_portal_ruined_r1c2_p14",
+            "t_astral_portal_ruined_r1c2_p15",
+            "t_astral_portal_ruined_r1c2_p16",
+            "t_astral_portal_ruined_r1c2_p17",
+            "t_astral_portal_ruined_r1c2_p18",
+            "t_astral_portal_ruined_r1c2_p19",
+            "t_astral_portal_ruined_r1c2_p20",
+            "t_astral_portal_ruined_r1c2_p21",
+            "t_astral_portal_ruined_r1c2_p22",
+            "t_astral_portal_ruined_r1c2_p23",
+            "t_astral_portal_ruined_r1c2_p24"
+          ],
+          "fg": 19013,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r1c3",
+          "fg": 19014,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r1c4",
+          "fg": 19015,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r2c0",
+          "fg": 19016,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r2c1",
+          "fg": 19017,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r2c2",
+          "fg": 19018,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r2c3",
+          "fg": 19019,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r2c4",
+          "fg": 19020,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r3c0",
+          "fg": 19021,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r3c1",
+          "fg": 19022,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r3c2",
+          "fg": 19023,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r3c3",
+          "fg": 19024,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r3c4",
+          "fg": 19025,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r4c0",
+          "fg": 19026,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r4c1",
+          "fg": 19027,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r4c2",
+          "fg": 19028,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r4c3",
+          "fg": 19029,
+          "rotates": false
+        },
+        {
+          "id": "t_astral_portal_ruined_r4c4",
+          "fg": 19030,
+          "rotates": false
+        }
+      ]
     }
   ]
 }

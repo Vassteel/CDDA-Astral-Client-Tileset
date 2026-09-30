@@ -1,0 +1,87 @@
+[
+  {
+    "type": "mapgen",
+    "update_mapgen_id": "astral_courtyard_arrival",
+    "//": "Drawn once on first arrival in a pocket, in the OMT the traveller arrives in.  The return portal sits at rows 8-12 / cols 9-13 exactly like astral_portal_clearing and the debug placer, so a traveller (and any vehicle) crossing from the overworld portal lands on the twin platform without a teleport.  Blank cells leave the generated meadow alone.",
+    "object": {
+      "palettes": [ "astral_wild_palette", "astral_portal_active_palette" ],
+      "terrain": { "c": "t_rock_floor" },
+      "furniture": { "c": "f_crate_o" },
+      "rows": [
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "        t       t       ",
+        "                        ",
+        "         ABCDE          ",
+        "         FGHIJ    ####  ",
+        "   ~~    KLMNO    #==#  ",
+        "  ~ww~   PQRST    #c=+  ",
+        "  ~ww~   UVWXY    ####  ",
+        "   ~~      ___          ",
+        "            __          ",
+        "            __          ",
+        "   o        __       o  ",
+        "            _           ",
+        "            __          ",
+        "             __         ",
+        "              __        ",
+        "               ___      ",
+        "                        ",
+        "                        "
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": "astral_microworld_grounds",
+    "//": "Wooded meadow ring around the courtyard.  Everything beyond the 3x3 special is t_astral_veil.",
+    "object": {
+      "fill_ter": "t_grass",
+      "terrain": {
+        "m": [
+          [ "t_grass", 30 ],
+          [ "t_grass_long", 8 ],
+          [ "t_tree", 2 ],
+          [ "t_tree_pine", 1 ],
+          [ "t_shrub", 2 ],
+          [ "t_underbrush", 2 ]
+        ]
+      },
+      "rows": [
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm"
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": "astral_veil",
+    "object": { "fill_ter": "t_astral_veil" }
+  }
+]

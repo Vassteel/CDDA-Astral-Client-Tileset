@@ -1,0 +1,87 @@
+[
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PORTAL_THRESHOLD",
+    "//": "Examine action of an UNBOUND active threshold.  In the overworld: bind to the next free pocket and enter (see EOC_ASTRAL_PORTAL_ENTER_DO in pockets_generated.json).  Inside a pocket: this is the return portal; dispatch on the current dimension.",
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": [
+          {
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_PORTAL_ENTER_DO" } ]
+          }
+        ],
+        "else": [
+          {
+            "if": { "u_query": "Return through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_PORTAL_RETURN_DO" } ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT",
+    "effect": [
+      {
+        "u_message": "The arch is empty and the runes are dark.  Whatever once opened this gateway is not answering now.",
+        "type": "neutral"
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED",
+    "effect": [
+      {
+        "u_message": "Broken stone and a fallen keystone.  Nothing here will ever open again without a great deal of work.",
+        "type": "neutral"
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_DEBUG_PLACE_PORTAL",
+    "//": "Debug tool: draws an active portal centered in the overmap tile the player is standing in.",
+    "effect": [
+      { "u_location_variable": { "context_val": "astral_here" } },
+      { "mapgen_update": "astral_place_portal_active", "target_var": { "context_val": "astral_here" } },
+      { "u_message": "A gateway of dark stone grinds up out of the ground nearby.", "type": "neutral" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_DEBUG_TUNE_PORTAL",
+    "//": "Debug tool: switch every portal tile within 4 squares of the player between the three states, for art review.",
+    "effect": [
+      {
+        "run_eoc_selector": [ "EOC_ASTRAL_DEBUG_SET_ACTIVE", "EOC_ASTRAL_DEBUG_SET_INACTIVE", "EOC_ASTRAL_DEBUG_SET_RUINED" ],
+        "names": [ "Activate", "Deactivate", "Ruin" ],
+        "descriptions": [
+          "Switch nearby gateway stonework to the active state.",
+          "Switch nearby gateway stonework to the dormant state.",
+          "Switch nearby gateway stonework to the ruined state."
+        ],
+        "title": "Tune the gateway",
+        "allow_cancel": true
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_DEBUG_SET_ACTIVE",
+    "effect": [ { "u_transform_radius": 4, "ter_furn_transform": "astral_portal_to_active" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_DEBUG_SET_INACTIVE",
+    "effect": [ { "u_transform_radius": 4, "ter_furn_transform": "astral_portal_to_inactive" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_DEBUG_SET_RUINED",
+    "effect": [ { "u_transform_radius": 4, "ter_furn_transform": "astral_portal_to_ruined" } ]
+  }
+]

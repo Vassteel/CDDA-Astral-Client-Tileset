@@ -1,0 +1,41 @@
+[
+  {
+    "type": "overmap_terrain",
+    "id": "astral_veil",
+    "name": "the veil",
+    "sym": " ",
+    "color": "black",
+    "see_cost": "opaque",
+    "travel_cost_type": "impassable",
+    "flags": [ "NO_ROTATE" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "astral_microworld_grounds",
+    "name": "quiet meadow",
+    "sym": ".",
+    "color": "green",
+    "see_cost": "low",
+    "flags": [ "NO_ROTATE" ]
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "astral_portal_clearing",
+    "name": "ancient gateway",
+    "sym": "O",
+    "color": "light_blue",
+    "see_cost": "low",
+    "flags": [ "NO_ROTATE" ]
+  },
+  {
+    "type": "overmap_special",
+    "id": "astral_portal_site",
+    "//": "Overworld side.  One or two per overmap while the prototype is being tested; tune later.",
+    "overmaps": [ { "point": [ 0, 0, 0 ], "overmap": "astral_portal_clearing" } ],
+    "locations": [ "forest_without_trail" ],
+    "city_distance": [ 6, -1 ],
+    "city_sizes": [ 0, 16 ],
+    "occurrences": [ 1, 2 ],
+    "flags": [ "ASTRAL_PORTAL" ]
+  }
+]
