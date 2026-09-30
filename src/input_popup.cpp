@@ -227,6 +227,12 @@ void string_input_popup_imgui::draw_input_control()
     // grows → field grows, a little more every frame.
     float input_width = max_input_length > 0 ? str_width_to_pixels( max_input_length + 1 )
                         : std::max<float>( str_width_to_pixels( 20 ), get_bounds().w );
+    if( get_bounds().w > 0.f ) {
+        // An explicitly sized window includes padding and an optional inline
+        // label. Overshooting its remaining content width makes focus scroll
+        // the whole popup sideways, hiding the description and action buttons.
+        input_width = std::min( input_width, std::max( 1.f, ImGui::GetContentRegionAvail().x ) );
+    }
     ImGui::SetNextItemWidth( input_width );
 
     std::string input_label = "##string_input_" + label;

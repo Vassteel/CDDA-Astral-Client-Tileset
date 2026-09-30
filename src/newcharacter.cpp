@@ -3094,12 +3094,10 @@ std::optional<std::string> query_for_template_name()
         '/'
 #endif
     };
-    std::string title = _( "Name of template:" );
     std::string desc = _( "Keep in mind you may not use special characters like / in filenames" );
 
-    string_input_popup_imgui spop( FULL_SCREEN_WIDTH - utf8_width( title ) - 8 );
-    spop.set_label( title );
-    spop.set_description( desc );
+    string_input_popup_imgui spop( 60, "", _( "Save character template" ) );
+    spop.set_description( desc, c_light_gray );
     for( int character : fname_char_blacklist ) {
         spop.add_callback( callback_input( character ), []() {
             return true;

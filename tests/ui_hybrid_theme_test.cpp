@@ -8,6 +8,8 @@
 #if defined(TILES)
 #include "cata_scope_helpers.h"
 #include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
+#include "input_popup.h"
 #include "ui_hybrid_widgets.h"
 
 TEST_CASE( "astral_auto_sized_shell_does_not_grow_or_retain_stale_width", "[ui][popup]" )
@@ -62,6 +64,57 @@ TEST_CASE( "astral_auto_sized_shell_does_not_grow_or_retain_stale_width", "[ui][
         }
         ImGui::End();
         ImGui::PopStyleVar();
+        ImGui::Render();
+    }
+}
+class measured_string_popup : public string_input_popup_imgui
+{
+    public:
+        using string_input_popup_imgui::string_input_popup_imgui;
+        float field_right = 0.f;
+        float content_right = 0.f;
+        float scroll_x = 0.f;
+
+    protected:
+        void draw_input_control() override {
+            string_input_popup_imgui::draw_input_control();
+            field_right = ImGui::GetItemRectMax().x;
+            content_right = ImGui::GetCurrentWindow()->WorkRect.Max.x;
+            scroll_x = ImGui::GetScrollX();
+        }
+};
+
+TEST_CASE( "sized_string_prompt_keeps_its_contents_visible", "[ui][popup]" )
+{
+    ImGuiContext *previous = ImGui::GetCurrentContext();
+    ImGuiContext *context = ImGui::CreateContext();
+    on_out_of_scope cleanup( [&]() {
+        ImGui::DestroyContext( context );
+        ImGui::SetCurrentContext( previous );
+    } );
+    ImGuiIO &io = ImGui::GetIO();
+    io.IniFilename = nullptr;
+    io.DisplaySize = ImVec2( 3840, 2160 );
+    io.DeltaTime = 1.f / 60.f;
+    ImFontConfig font;
+    font.SizePixels = GENERATE( 16.f, 24.f );
+    io.Fonts->AddFontDefault( &font );
+    io.Fonts->AddFontDefault( &font );
+    io.Fonts->AddFontDefault( &font );
+    io.Fonts->Build();
+    const bool inline_label = GENERATE( false, true );
+    measured_string_popup popup( 60, "", inline_label ? "" : "Save character template" );
+    if( inline_label ) {
+        popup.set_label( "Name of template:" );
+    }
+    popup.set_description( "Keep in mind you may not use special characters like / in filenames" );
+    for( int frame = 0; frame < 20; ++frame ) {
+        ImGui::NewFrame();
+        popup.draw();
+        if( frame > 8 ) {
+            CHECK( popup.field_right <= popup.content_right + 1.f );
+            CHECK( popup.scroll_x == Approx( 0.f ) );
+        }
         ImGui::Render();
     }
 }
