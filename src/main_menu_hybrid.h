@@ -13,18 +13,20 @@ class main_menu;
 /**
  * Native ImGui presentation of the main menu (Astral shell) drawn over the
  * title artwork: a row of category buttons along the bottom of the screen and,
- * when a category with sub-entries is open, one popup above the bar with its
- * list (Load / World / New Game / Settings) or text (MOTD / Credits).
+ * when a category is open, one dialog above the bar — the same size and frame
+ * for every category (New Game, Load, Worlds, Settings, MOTD, Credits).
  *
  * It is an adapter: the menu state (sel1/sel2/sel_line), the hotkeys and every
  * action handler stay in main_menu; this window only draws and queues actions
- * for the existing input loop.
+ * (the classic "CONFIRM"/"QUIT" or the hybrid ones main_menu::handle_hybrid_action
+ * runs) for the existing input loop.
  */
 class main_menu_overlay : public cataimgui::window
 {
     public:
         explicit main_menu_overlay( main_menu &menu );
-        /** Action queued by a mouse activation ("CONFIRM", "QUIT"), consumed once. */
+        ~main_menu_overlay() override;
+        /** Action queued by a mouse activation, consumed once. */
         std::string take_action();
         bool has_action() const {
             return !queued.empty();
@@ -33,9 +35,9 @@ class main_menu_overlay : public cataimgui::window
         void layout_changed() {
             mark_resized();
         }
-        /** Escape while a category popup is open closes it; returns true if it did. */
+        /** Escape while a category dialog is open closes it; returns true if it did. */
         bool close_popup();
-        /** A category hotkey / arrow key selected sel1: open its popup. */
+        /** A category hotkey / arrow key selected sel1: open its dialog. */
         void category_selected();
     protected:
         cataimgui::bounds get_bounds() override;
@@ -49,8 +51,14 @@ class main_menu_overlay : public cataimgui::window
         float bar_height = 0.f;
         void draw_bar();
         void draw_popup();
-        void draw_drawer();
         void draw_text_panel( const std::string &text );
+        void draw_new_game();
+        void draw_load();
+        void draw_worlds();
+        void draw_settings();
+        /** World list column shared by Load / Worlds / New Game; returns the selected name. */
+        void draw_world_list( const char *id, bool with_new_entry, bool empty_only );
+        void queue( const std::string &action );
 };
 
 #endif // TILES

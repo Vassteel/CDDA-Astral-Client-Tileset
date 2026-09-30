@@ -21,8 +21,11 @@ class JsonObject;
 class JsonOut;
 class cata_path;
 
+class options_hybrid_view;
+
 class options_manager
 {
+        friend class options_hybrid_view;
     public:
         // first is internal value, second is text
         using id_and_option = std::pair<std::string, translation>;
@@ -80,6 +83,7 @@ class options_manager
         class cOpt
         {
                 friend class options_manager;
+                friend class options_hybrid_view;
             public:
                 cOpt();
 

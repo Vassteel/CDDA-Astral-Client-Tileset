@@ -62,6 +62,20 @@ float px( float logical );
  * with a moderate font still gets a window that uses the screen.
  */
 ImVec2 large_window_size();
+/**
+ * Height (px) reserved along the bottom of the viewport by a persistent strip
+ * (the main menu's button bar). Centred large windows keep clear of it so the
+ * dialogs opened from the main menu all sit in the same place above the bar.
+ * The main menu sets it every frame while it is shown and clears it on exit.
+ */
+void set_reserved_bottom( float px );
+float reserved_bottom();
+/**
+ * The one dialog geometry used off the main menu: large_window_size(), centred
+ * horizontally, centred vertically in the area above the reserved strip.
+ * Returns x, y, w, h in viewport pixels.
+ */
+ImVec4 dialog_bounds();
 decoration level();
 /** Re-read the decoration option (cheap; called once per frame by the client). */
 void refresh_options();

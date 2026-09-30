@@ -256,8 +256,8 @@ class player_display_hybrid_ui : public cataimgui::window
         }
 
         cataimgui::bounds get_bounds() override {
-            return { -1.f, -1.f, ui_hybrid_chrome::theme::large_window_size().x,
-                     ui_hybrid_chrome::theme::large_window_size().y };
+            const ImVec4 b = ui_hybrid_chrome::theme::dialog_bounds();
+    return { b.x, b.y, b.z, b.w };
         }
 
         void draw_controls() override {

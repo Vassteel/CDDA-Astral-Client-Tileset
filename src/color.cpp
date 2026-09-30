@@ -27,6 +27,14 @@
 #include "translations.h"
 #include "ui_helpers.h"
 #include "ui_manager.h"
+#if defined(TILES)
+#include <cfloat>
+#include "cata_imgui.h"
+#include "imgui/imgui.h"
+#include "ui_hybrid_chrome.h"
+#include "ui_hybrid_widgets.h"
+#include "ui_hybrid_window.h"
+#endif
 #include "uilist.h"
 #include "cata_imgui.h"
 
@@ -835,6 +843,234 @@ static void draw_header( const catacurses::window &w )
 
 void color_manager::show_gui()
 {
+#if defined(TILES)
+    {
+
+    namespace w = ui_hybrid_widgets;
+    namespace theme = ui_hybrid_chrome::theme;
+    std::map<std::string, color_struct> name_color_map;
+    for( const auto &pr : name_map ) {
+        name_color_map[pr.first] = color_array[pr.second];
+    }
+    std::vector<std::string> names;
+    for( const auto &pr : name_color_map ) {
+        names.push_back( pr.first );
+    }
+    const std::vector<cata_path> templates = get_files_from_path( ".json", PATH_INFO::color_templates(), false,
+            true );
+    const std::vector<cata_path> themes = get_files_from_path( ".json", PATH_INFO::color_themes(), false, true );
+    std::vector<std::string> template_names;
+    for( const cata_path &file : templates ) {
+        template_names.push_back( file.get_relative_path().filename().generic_u8string() );
+    }
+    std::vector<std::string> theme_names;
+    for( const cata_path &file : themes ) {
+        theme_names.push_back( file.get_relative_path().filename().generic_u8string() );
+    }
+    std::string filter;
+    std::string selected;
+    std::string theme_note;
+    bool changed = false;
+    bool save = false;
+    bool close = false;
+    const auto swatch = [&]( const nc_color & col, float size ) {
+        const ImVec2 p = ImGui::GetCursorScreenPos();
+        ImGui::GetWindowDrawList()->AddRectFilled( p, ImVec2( p.x + size, p.y + size ),
+                cataimgui::ImU32_from_color( col ), 3.f );
+        ImGui::GetWindowDrawList()->AddRect( p, ImVec2( p.x + size, p.y + size ), theme::get().edge_quiet, 3.f );
+        ImGui::Dummy( ImVec2( size, size ) );
+    };
+    const auto shown_color = [&]( const color_struct & entry, bool invert ) -> nc_color {
+        const std::string &custom = invert ? entry.name_invert_custom : entry.name_custom;
+        if( !custom.empty() && name_color_map.count( custom ) ) {
+            return name_color_map[custom].color;
+        }
+        return invert ? entry.invert : entry.color;
+    };
+    hybrid_window window( _( "Colors" ), [&]() {
+        const float s = theme::scale();
+        const ui_hybrid_chrome::theme::tokens &tk = theme::get();
+        ImGui::AlignTextToFramePadding();
+        ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                            _( "Override any named colour of the text-drawn screens; templates replace the whole set." ) );
+        if( w::body_begin( "colors_body", tk.footer, ImGuiWindowFlags_NoScrollbar ) ) {
+            const float gap = tk.lg * s;
+            const float h = ImGui::GetContentRegionAvail().y;
+            const float left_w = std::floor( ( ImGui::GetContentRegionAvail().x - gap ) * 0.55f );
+            ImGui::BeginChild( "colors_list", ImVec2( left_w, h ), ImGuiChildFlags_None,
+                               ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground );
+            char buf[128];
+            std::snprintf( buf, sizeof( buf ), "%s", filter.c_str() );
+            ImGui::SetNextItemWidth( -FLT_MIN );
+            if( ImGui::InputTextWithHint( "##color_filter", _( "Search colours…" ), buf, sizeof( buf ) ) ) {
+                filter = buf;
+            }
+            if( w::panel_begin( "colors_rows", ImVec2( 0.f, 0.f ), true ) ) {
+                if( ImGui::BeginTable( "##colors", 4, ImGuiTableFlags_SizingStretchProp | ImGuiTableFlags_RowBg ) ) {
+                    ImGui::TableSetupColumn( _( "Name" ), ImGuiTableColumnFlags_WidthStretch, 0.4f );
+                    ImGui::TableSetupColumn( _( "Default" ), ImGuiTableColumnFlags_WidthStretch, 0.2f );
+                    ImGui::TableSetupColumn( _( "Custom" ), ImGuiTableColumnFlags_WidthStretch, 0.2f );
+                    ImGui::TableSetupColumn( _( "Invert" ), ImGuiTableColumnFlags_WidthStretch, 0.2f );
+                    ImGui::TableHeadersRow();
+                    for( const auto &pr : name_color_map ) {
+                        if( !filter.empty() && !lcmatch( pr.first, filter ) ) {
+                            continue;
+                        }
+                        ImGui::PushID( pr.first.c_str() );
+                        ImGui::TableNextRow();
+                        ImGui::TableSetColumnIndex( 0 );
+                        if( ImGui::Selectable( pr.first.c_str(), selected == pr.first,
+                                               ImGuiSelectableFlags_SpanAllColumns | ImGuiSelectableFlags_AllowOverlap ) ) {
+                            selected = pr.first;
+                        }
+                        ImGui::TableSetColumnIndex( 1 );
+                        swatch( pr.second.color, ImGui::GetTextLineHeight() );
+                        ImGui::TableSetColumnIndex( 2 );
+                        if( pr.second.name_custom.empty() ) {
+                            ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", _( "default" ) );
+                        } else {
+                            swatch( shown_color( pr.second, false ), ImGui::GetTextLineHeight() );
+                            ImGui::SameLine();
+                            ImGui::TextUnformatted( pr.second.name_custom.c_str() );
+                        }
+                        ImGui::TableSetColumnIndex( 3 );
+                        if( pr.second.name_invert_custom.empty() ) {
+                            ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", _( "default" ) );
+                        } else {
+                            swatch( shown_color( pr.second, true ), ImGui::GetTextLineHeight() );
+                            ImGui::SameLine();
+                            ImGui::TextUnformatted( pr.second.name_invert_custom.c_str() );
+                        }
+                        ImGui::PopID();
+                    }
+                    ImGui::EndTable();
+                }
+            }
+            w::panel_end();
+            ImGui::EndChild();
+            ImGui::SameLine( 0.f, gap );
+            ImGui::BeginChild( "colors_detail", ImVec2( 0.f, h ), ImGuiChildFlags_None,
+                               ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground );
+            w::section_label( _( "Templates" ), "list" );
+            static int tmpl_sel = -1;
+            const int chosen_tmpl = w::dropdown( "##tmpl", tmpl_sel >= 0 && tmpl_sel < static_cast<int>( template_names.size() ) ?
+                                                 template_names[tmpl_sel] : _( "Load a colour template…" ), template_names, tmpl_sel );
+            if( chosen_tmpl >= 0 ) {
+                tmpl_sel = chosen_tmpl;
+                changed = true;
+                clear();
+                load_default();
+                load_custom( templates[chosen_tmpl] );
+                name_color_map.clear();
+                for( const auto &pr : name_map ) {
+                    name_color_map[pr.first] = color_array[pr.second];
+                }
+                finalize();
+            }
+            static int theme_sel = -1;
+            const int chosen_theme = w::dropdown( "##theme", theme_sel >= 0 && theme_sel < static_cast<int>( theme_names.size() ) ?
+                                                  theme_names[theme_sel] : _( "Base colour theme (terminal palette)…" ), theme_names, theme_sel );
+            if( chosen_theme >= 0 ) {
+                theme_sel = chosen_theme;
+                copy_file( themes[chosen_theme], PATH_INFO::base_colors() );
+                theme_note = _( "Base colours copied; they apply after a restart." );
+            }
+            if( !theme_note.empty() ) {
+                ImGui::TextColored( ui_hybrid_chrome::palette::warning(), "%s", theme_note.c_str() );
+            }
+            ImGui::Dummy( ImVec2( 0.f, tk.sm * s ) );
+            if( !selected.empty() && name_color_map.count( selected ) ) {
+                color_struct &entry = name_color_map[selected];
+                w::section_label( selected, "filter" );
+                swatch( entry.color, 48.f * s );
+                ImGui::SameLine();
+                swatch( shown_color( entry, false ), 48.f * s );
+                ImGui::SameLine();
+                ImGui::AlignTextToFramePadding();
+                ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", _( "default → shown" ) );
+                int cur = -1;
+                for( int i = 0; i < static_cast<int>( names.size() ); ++i ) {
+                    if( names[i] == entry.name_custom ) {
+                        cur = i;
+                    }
+                }
+                ImGui::TextUnformatted( _( "Custom colour" ) );
+                int chosen = w::dropdown( "##custom", entry.name_custom.empty() ? _( "default" ) : entry.name_custom, names, cur );
+                if( chosen >= 0 ) {
+                    entry.name_custom = names[chosen];
+                    changed = true;
+                }
+                cur = -1;
+                for( int i = 0; i < static_cast<int>( names.size() ); ++i ) {
+                    if( names[i] == entry.name_invert_custom ) {
+                        cur = i;
+                    }
+                }
+                ImGui::TextUnformatted( _( "Custom inverted colour" ) );
+                chosen = w::dropdown( "##custom_inv", entry.name_invert_custom.empty() ? _( "default" ) : entry.name_invert_custom,
+                                      names, cur );
+                if( chosen >= 0 ) {
+                    entry.name_invert_custom = names[chosen];
+                    changed = true;
+                }
+                if( w::action_button( _( "Remove custom" ), w::button_kind::tertiary, ImVec2( 0, 30.f ),
+                                      !entry.name_custom.empty() || !entry.name_invert_custom.empty() ) ) {
+                    entry.name_custom.clear();
+                    entry.name_invert_custom.clear();
+                    changed = true;
+                }
+            } else {
+                w::empty_state( _( "Select a colour" ), _( "Choose what it should show as." ) );
+            }
+            ImGui::EndChild();
+        }
+        w::body_end();
+        if( w::footer_begin( "colors_footer" ) ) {
+            ImGui::AlignTextToFramePadding();
+            ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", _( "Changes apply when saved." ) );
+            ImGui::SameLine();
+            const float save_w = w::action_button_width( _( "Save changes" ), w::button_kind::primary );
+            const float cancel_w = w::action_button_width( _( "Cancel" ) );
+            w::footer_align_right( save_w + cancel_w + ImGui::GetStyle().ItemSpacing.x );
+            if( w::action_button( _( "Cancel" ), w::button_kind::secondary ) ) {
+                close = true;
+            }
+            ImGui::SameLine();
+            if( w::action_button( _( "Save changes" ), w::button_kind::primary, ImVec2( 0, 0 ), changed,
+                                  _( "Nothing changed yet." ) ) ) {
+                save = true;
+                close = true;
+            }
+        }
+        w::footer_end();
+    } );
+    input_context ctxt( "COLORS" );
+    ctxt.register_action( "QUIT" );
+    ctxt.register_action( "ANY_INPUT" );
+    ctxt.set_timeout( 16 );
+    while( window.get_is_open() && !close ) {
+        ui_manager::redraw_invalidated();
+        if( ctxt.handle_input() == "QUIT" && !cataimgui::client::want_text_input() ) {
+            close = true;
+        }
+    }
+    if( changed && ( save || ( !close && query_yn( _( "Save changes?" ) ) ) ) ) {
+        for( const auto &pr : name_color_map ) {
+            color_id id = name_to_id( pr.first );
+            color_array[id].name_custom = pr.second.name_custom;
+            color_array[id].name_invert_custom = pr.second.name_invert_custom;
+        }
+        finalize();
+        save_custom();
+    }
+    // Reload so a cancelled template preview does not stick.
+    clear();
+    load_default();
+    load_custom( {} );
+
+    return;
+    }
+#endif
     const int iHeaderHeight = 4;
     int iContentHeight = 0;
 

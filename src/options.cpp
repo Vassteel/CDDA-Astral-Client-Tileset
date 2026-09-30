@@ -39,6 +39,12 @@
 #include "try_parse_integer.h"
 #include "ui_manager.h"
 #include "worldfactory.h"
+#if defined(TILES)
+#include "options_hybrid.h"
+#include "ui_hybrid_window.h"
+#include "ui_hybrid_widgets.h"
+#include "cata_imgui.h"
+#endif
 
 #if defined(__ANDROID__)
 #include <jni.h>
@@ -3454,6 +3460,7 @@ static void refresh_tiles( bool, bool, bool )
 }
 #endif // TILES
 
+#if !defined(TILES)
 static void draw_borders_external(
     const catacurses::window &w, int horizontal_level, const std::set<int> &vert_lines,
     const bool world_options_only )
@@ -3482,6 +3489,7 @@ static void draw_borders_internal( const catacurses::window &w, std::set<int> &v
     wattroff( w, BORDER_COLOR );
     wnoutrefresh( w );
 }
+#endif // !TILES
 
 std::string
 options_manager::PageItem::fmt_tooltip( const std::string &group_id,
@@ -3556,6 +3564,64 @@ std::string options_manager::show( bool ingame, const bool world_options_only, b
     if( world_generator->active_world == nullptr ) {
         ingame = false;
     }
+
+    // Decision made by the native screen's buttons: true = save, false = revert,
+    // unset = ask (Escape on a changed screen), as the classic screen does.
+    std::optional<bool> hybrid_decision;
+#if defined(TILES)
+    ( void ) with_tabs;
+    ( void ) iWorldOptPage;
+    {
+        // Native Astral options screen: tabs, toggles, drop-downs, sliders.
+        options_hybrid_view view( *this, &ACTIVE_WORLD_OPTIONS, ingame, world_options_only );
+        bool close = false;
+        const std::string title = world_options_only ? _( "World options" ) :
+                                  ingame ? _( "Options" ) : _( "Settings" );
+        hybrid_window window( title, [&]() {
+            namespace w = ui_hybrid_widgets;
+            const ui_hybrid_chrome::theme::tokens &tk = ui_hybrid_chrome::theme::get();
+            view.draw( tk.footer );
+            if( w::footer_begin( "options_footer" ) ) {
+                ImGui::AlignTextToFramePadding();
+                ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                                    view.changed() ? _( "Changes apply when saved." ) : _( "No changes." ) );
+                ImGui::SameLine();
+                const float save_w = w::action_button_width( _( "Save changes" ), w::button_kind::primary );
+                const float cancel_w = w::action_button_width( _( "Cancel" ) );
+                w::footer_align_right( save_w + cancel_w + ImGui::GetStyle().ItemSpacing.x );
+                if( w::action_button( _( "Cancel" ), w::button_kind::secondary ) ) {
+                    hybrid_decision = false;
+                    close = true;
+                }
+                ImGui::SameLine();
+                if( w::action_button( _( "Save changes" ), w::button_kind::primary, ImVec2( 0, 0 ),
+                                      view.changed(), _( "Nothing changed yet." ) ) ) {
+                    hybrid_decision = true;
+                    close = true;
+                }
+            }
+            w::footer_end();
+        } );
+        input_context ctxt( "OPTIONS" );
+        ctxt.register_action( "QUIT" );
+        ctxt.register_action( "ANY_INPUT" );
+        ctxt.set_timeout( 16 );
+        while( window.get_is_open() && !close ) {
+            ui_manager::redraw_invalidated();
+            const std::string action = ctxt.handle_input();
+            if( action == "QUIT" && !cataimgui::client::want_text_input() ) {
+                close = true;
+            }
+        }
+        if( world_options_only ) {
+            // The caller owns the world's container; a cancel restores it.
+            if( hybrid_decision.has_value() && !*hybrid_decision ) {
+                ACTIVE_WORLD_OPTIONS = WOPTIONS_OLD;
+            }
+            return "QUIT";
+        }
+    }
+#else
 
     size_t sel_worldgen_tab = 1;
     std::map<size_t, inclusive_rectangle<point>> worldgen_tab_map;
@@ -4050,6 +4116,8 @@ std::string options_manager::show( bool ingame, const bool world_options_only, b
         }
     }
 
+#endif
+
     //Look for changes
     bool options_changed = false;
     bool world_options_changed = false;
@@ -4094,7 +4162,7 @@ std::string options_manager::show( bool ingame, const bool world_options_only, b
     }
 
     if( options_changed ) {
-        if( query_yn( _( "Save changes?" ) ) ) {
+        if( hybrid_decision.value_or( query_yn( _( "Save changes?" ) ) ) ) {
             static_popup popup;
             popup.message( "%s", _( "Please wait…\nApplying option changes…" ) );
             ui_manager::redraw();

@@ -25,8 +25,10 @@ class hybrid_window : public cataimgui::window
         void set_hidden( bool hidden ) { hide_ui = hidden; }
     protected:
         cataimgui::bounds get_bounds() override {
-            return { -1.f, -1.f, ui_hybrid_chrome::theme::large_window_size().x,
-                     ui_hybrid_chrome::theme::large_window_size().y };
+            // One geometry for every large window: centred, clear of the main
+            // menu's bar when that is showing.
+            const ImVec4 b = ui_hybrid_chrome::theme::dialog_bounds();
+            return { b.x, b.y, b.z, b.w };
         }
         void draw_controls() override {
             if( hide_ui ) {

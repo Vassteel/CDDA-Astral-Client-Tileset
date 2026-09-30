@@ -299,8 +299,8 @@ void help_window::draw_category()
 
 cataimgui::bounds help_window::get_bounds()
 {
-    return { -1.f, -1.f, ui_hybrid_chrome::theme::large_window_size().x,
-             ui_hybrid_chrome::theme::large_window_size().y };
+    const ImVec4 b = ui_hybrid_chrome::theme::dialog_bounds();
+    return { b.x, b.y, b.z, b.w };
 }
 
 float help_window::get_wrap_width()

@@ -162,6 +162,10 @@ class worldfactory
         int show_worldgen_tab_modselection( const catacurses::window &win, WORLD *world, bool with_tabs );
         int show_worldgen_basic( WORLD *world );
         int show_worldgen_advanced( WORLD *world );
+#if defined(TILES)
+        /** Native Astral world creator: name + sliders, mods, options in one dialog. */
+        int show_worldgen_hybrid( WORLD *world, bool copying );
+#endif
 
         void draw_modselection_borders( const catacurses::window &win, const input_context &ctxtp );
         std::map<int, inclusive_rectangle<point>> draw_mod_list( const catacurses::window &w, int &start,

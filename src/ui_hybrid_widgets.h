@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <functional>
 #include <string>
+#include <vector>
 
 #include "imgui/imgui.h"
 
@@ -67,6 +68,17 @@ bool icon_button( const char *id, const char *icon, float size_logical, bool act
                   const char *tooltip = nullptr, bool enabled = true );
 /** Close "×" control sized close_hit. */
 bool close_button( const char *id );
+/**
+ * On/off switch (pill with a knob). Returns true when toggled this frame;
+ * `value` is updated. Keyboard: Space/Enter toggles like a button.
+ */
+bool toggle( const char *id, bool &value, bool enabled = true, const char *disabled_reason = nullptr );
+/**
+ * Themed drop-down: shows `current`, opens a list of `items`; returns the index
+ * chosen this frame or -1. width_logical <= 0 → fill the available width.
+ */
+int dropdown( const char *id, const std::string &current, const std::vector<std::string> &items,
+              int selected, float width_logical = -1.f, bool enabled = true );
 /**
  * HUD toolbar button: [icon] label [key]. `active` marks an on/off state (amber
  * edge + filled dot in the label is the caller's choice). Returns the ImGui

@@ -91,6 +91,20 @@ class main_menu
 #if defined(TILES)
         /** Native ImGui presentation over the title art (see main_menu_hybrid.h). */
         std::unique_ptr<main_menu_overlay> hybrid_overlay;
+        // Selections made in the native screens, read by the actions they queue.
+        std::string hybrid_world;     // world name; empty = make a new world
+        int hybrid_save = -1;         // index into that world's saves
+        int hybrid_template = -1;     // index into templates
+        /**
+         * Run an action queued by the native screens ("NEWCHAR_START", "LOAD_START",
+         * "WORLD_DELETE", ...). Returns true when it was one of them; `start` /
+         * `load_game` are set like the classic CONFIRM handlers set them.
+         */
+        bool handle_hybrid_action( const std::string &action, bool &start, bool &load_game );
+        /** Playtime text for a save ("[hh:mm:ss]" or empty). */
+        std::string playtime_text( const WORLD *world, const save_t &save ) const;
+        /** Start a fresh character of `type` in `world` (template name for TEMPLATE). */
+        bool start_new_character( WORLD *world, character_type type, const std::string &template_name );
 #endif
         point menu_offset;
         std::vector<std::string> templates;

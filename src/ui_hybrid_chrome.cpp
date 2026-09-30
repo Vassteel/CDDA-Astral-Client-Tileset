@@ -90,6 +90,29 @@ float px( float logical )
     return logical * scale();
 }
 
+static float g_reserved_bottom = 0.f;
+
+void set_reserved_bottom( float px )
+{
+    g_reserved_bottom = std::max( 0.f, px );
+}
+
+float reserved_bottom()
+{
+    return g_reserved_bottom;
+}
+
+ImVec4 dialog_bounds()
+{
+    const ImVec2 origin = ImGui::GetMainViewport()->Pos;
+    const ImVec2 vp = ImGui::GetMainViewport()->Size;
+    ImVec2 size = large_window_size();
+    const float free_h = std::max( 1.f, vp.y - g_reserved_bottom );
+    size.y = std::min( size.y, free_h * 0.96f );
+    return ImVec4( origin.x + std::floor( ( vp.x - size.x ) * 0.5f ),
+                   origin.y + std::floor( ( free_h - size.y ) * 0.5f ), size.x, size.y );
+}
+
 ImVec2 large_window_size()
 {
     const ImVec2 vp = ImGui::GetMainViewport()->Size;

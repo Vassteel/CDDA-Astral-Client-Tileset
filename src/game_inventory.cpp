@@ -2735,8 +2735,8 @@ void game_menus::inv::compare_item_menu::draw_controls()
 
 cataimgui::bounds game_menus::inv::compare_item_menu::get_bounds()
 {
-    return { -1.f, -1.f, ui_hybrid_chrome::theme::large_window_size().x,
-             ui_hybrid_chrome::theme::large_window_size().y };
+    const ImVec4 b = ui_hybrid_chrome::theme::dialog_bounds();
+    return { b.x, b.y, b.z, b.w };
 }
 
 bool game_menus::inv::compare_item_menu::show()

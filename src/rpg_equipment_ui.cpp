@@ -2293,6 +2293,16 @@ void rpg_equipment_window::draw_inventory_grid()
         if( you->is_wielding( *loc ) ) {
             continue;
         }
+        // Liquids, gases and anything in a non-container pocket (magazine
+        // wells, ammo, mod slots) belong to their container; the container's
+        // own cell already names them ("aluminum tank > 200L clean water").
+        if( loc.has_parent() ) {
+            const item_pocket *pocket = loc.parent_pocket();
+            if( loc->made_of( phase_id::LIQUID ) || loc->made_of( phase_id::GAS ) ||
+                ( pocket != nullptr && !pocket->is_type( pocket_type::CONTAINER ) ) ) {
+                continue;
+            }
+        }
         if( inventory_filter[0] != '\0' &&
             !lcmatch( remove_color_tags( loc->display_name() ), inventory_filter ) ) {
             continue;

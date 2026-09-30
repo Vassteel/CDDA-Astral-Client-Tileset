@@ -6,6 +6,7 @@
 #include "ui_hybrid_widgets.h"
 
 #include <algorithm>
+#include <cfloat>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -431,6 +432,88 @@ bool action_button( const char *label, button_kind kind, const ImVec2 &size_logi
         }
     }
     return clicked && enabled;
+}
+
+bool toggle( const char *id, bool &value, bool enabled, const char *disabled_reason )
+{
+    const float s = S();
+    const ImVec2 sz( 44.f * s, 24.f * s );
+    if( !enabled ) {
+        ImGui::BeginDisabled( true );
+    }
+    ImGui::PushStyleColor( ImGuiCol_Button, 0 );
+    ImGui::PushStyleColor( ImGuiCol_ButtonHovered, 0 );
+    ImGui::PushStyleColor( ImGuiCol_ButtonActive, 0 );
+    ImGui::PushStyleVar( ImGuiStyleVar_FrameBorderSize, 0.f );
+    const bool clicked = ImGui::Button( id, sz );
+    ImGui::PopStyleVar();
+    ImGui::PopStyleColor( 3 );
+    if( clicked ) {
+        value = !value;
+    }
+    const bool hovered = ImGui::IsItemHovered( ImGuiHoveredFlags_AllowWhenDisabled );
+    const bool focused = ImGui::IsItemFocused() && ImGui::GetIO().NavVisible;
+    const ImVec2 min = ImGui::GetItemRectMin();
+    const ImVec2 max = ImGui::GetItemRectMax();
+    if( probe::enabled() ) {
+        probe::record( value ? "toggle_on" : "toggle_off", id, min, max );
+    }
+    ImDrawList *draw = ImGui::GetWindowDrawList();
+    const float r = sz.y * 0.5f;
+    const uint32_t track = value ? T().accent_dim : T().raised;
+    draw->AddRectFilled( min, max, C( enabled ? track : alpha( track, 0.5f ) ), r );
+    draw->AddRect( min, max, C( value ? T().accent : T().edge_quiet ), r );
+    const float knob_r = sz.y * 0.5f - 3.f * s;
+    const float kx = value ? max.x - 3.f * s - knob_r : min.x + 3.f * s + knob_r;
+    draw->AddCircleFilled( ImVec2( kx, min.y + sz.y * 0.5f ), knob_r,
+                           C( value ? T().text_on_accent : hovered ? T().text : T().text_muted ) );
+    if( focused ) {
+        draw->AddRect( min - ImVec2( 1, 1 ), max + ImVec2( 1, 1 ), C( T().accent ), r, 0, T().border_focus * s );
+    }
+    if( !enabled ) {
+        ImGui::EndDisabled();
+        if( hovered && disabled_reason ) {
+            tooltip( disabled_reason );
+        }
+    }
+    return clicked;
+}
+
+int dropdown( const char *id, const std::string &current, const std::vector<std::string> &items,
+              int selected, float width_logical, bool enabled )
+{
+    const float s = S();
+    int chosen = -1;
+    if( !enabled ) {
+        ImGui::BeginDisabled( true );
+    }
+    ImGui::SetNextItemWidth( width_logical > 0.f ? width_logical * s : -FLT_MIN );
+    ImGui::PushStyleColor( ImGuiCol_FrameBg, C( T().raised ) );
+    ImGui::PushStyleColor( ImGuiCol_FrameBgHovered, C( T().raised_hover ) );
+    ImGui::PushStyleColor( ImGuiCol_Border, C( T().edge_quiet ) );
+    ImGui::PushStyleVar( ImGuiStyleVar_FrameBorderSize, 1.f );
+    if( ImGui::BeginCombo( id, current.c_str(), ImGuiComboFlags_HeightLarge ) ) {
+        for( int i = 0; i < static_cast<int>( items.size() ); ++i ) {
+            ImGui::PushID( i );
+            if( ImGui::Selectable( items[i].c_str(), i == selected ) ) {
+                chosen = i;
+            }
+            if( i == selected ) {
+                ImGui::SetItemDefaultFocus();
+            }
+            ImGui::PopID();
+        }
+        ImGui::EndCombo();
+    }
+    ImGui::PopStyleVar();
+    ImGui::PopStyleColor( 3 );
+    if( probe::enabled() ) {
+        probe::record( "dropdown", id, ImGui::GetItemRectMin(), ImGui::GetItemRectMax() );
+    }
+    if( !enabled ) {
+        ImGui::EndDisabled();
+    }
+    return chosen;
 }
 
 bool icon_button( const char *id, const char *icon_name, float size_logical, bool active,
