@@ -4167,7 +4167,15 @@ std::string options_manager::show( bool ingame, const bool world_options_only, b
     }
 
     if( options_changed ) {
-        if( hybrid_decision.value_or( query_yn( _( "Save changes?" ) ) ) ) {
+#if defined(TILES)
+        // Closing the native editor saves; its explicit Cancel button discards.
+        // value_or evaluates its argument even when a decision is present, so
+        // passing query_yn here would also prompt after Save or Cancel.
+        const bool save_changes = hybrid_decision.value_or( true );
+#else
+        const bool save_changes = query_yn( _( "Save changes?" ) );
+#endif
+        if( save_changes ) {
             static_popup popup;
             popup.message( "%s", _( "Please wait…\nApplying option changes…" ) );
             ui_manager::redraw();
