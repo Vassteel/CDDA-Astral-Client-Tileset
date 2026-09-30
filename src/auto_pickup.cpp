@@ -2,9 +2,12 @@
 #include "auto_pickup.h"
 
 #include <algorithm>
+#include <cfloat>
 #include <cstddef>
 #include <cstdio>
 #include "ui_hybrid_window.h"
+#include "ui_hybrid_chrome.h"
+#include "ui_hybrid_widgets.h"
 #include <functional>
 #include <initializer_list>
 #include <iosfwd>
@@ -319,149 +322,184 @@ static void show_hybrid_pickup_rules( user_interface &editor )
     bool pickup_enabled = get_option<bool>( "AUTO_PICKUP" );
     const bool initial_enabled = pickup_enabled;
     hybrid_window window( editor.title, [&]() {
-        ImGui::Checkbox( _( "Enable autopickup" ), &pickup_enabled );
-        ImGui::SameLine();
-        ImGui::TextDisabled( "%s", _( "Rules are evaluated in order; character rules follow global rules." ) );
+        namespace w = ui_hybrid_widgets;
+        namespace theme = ui_hybrid_chrome::theme;
+        const float s = theme::scale();
+        const ui_hybrid_chrome::theme::tokens &tk = theme::get();
+        if( w::toggle( "##pickup_enabled", pickup_enabled ) ) {
+            // value already flipped
+        }
+        ImGui::SameLine( 0.f, tk.sm * s );
+        ImGui::AlignTextToFramePadding();
+        ImGui::TextUnformatted( _( "Enable autopickup" ) );
+        ImGui::SameLine( 0.f, tk.lg * s );
+        ImGui::AlignTextToFramePadding();
+        ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                            _( "Rules are evaluated in order; character rules follow global rules." ) );
         for( size_t i = 0; i < editor.tabs.size(); ++i ) {
             if( i != 0 ) {
-                ImGui::SameLine();
+                ImGui::SameLine( 0.f, tk.xs * s );
             }
-            if( ImGui::Selectable( editor.tabs[i].title.c_str(), tab_index == i, 0,
-                                  ImVec2( 190.f, 0.f ) ) ) {
+            if( w::tab( editor.tabs[i].title.c_str(), tab_index == i ) ) {
                 tab_index = i;
                 selected = -1;
             }
         }
         rule_list &rules = editor.tabs[tab_index].new_rules;
-        const float body_height = std::max( 260.f, ImGui::GetContentRegionAvail().y -
-                                          ImGui::GetFrameHeightWithSpacing() * 2.f );
-        const float left_width = ImGui::GetContentRegionAvail().x * 0.53f;
-        ImGui::BeginChild( "rules", ImVec2( left_width, body_height ), ImGuiChildFlags_Borders );
-        if( ImGui::Button( _( "Add rule" ) ) ) {
-            rules.emplace_back( "", true, false );
-            selected = rules.size() - 1;
-            changed = true;
-        }
-        ImGui::SameLine();
-        ImGui::BeginDisabled( selected < 0 || selected >= static_cast<int>( rules.size() ) );
-        if( ImGui::Button( _( "Copy" ) ) ) {
-            const rule copy = rules[selected];
-            rules.insert( rules.begin() + selected + 1, copy );
-            ++selected;
-            changed = true;
-        }
-        ImGui::SameLine();
-        if( ImGui::Button( _( "Delete" ) ) ) {
-            rules.erase( rules.begin() + selected );
-            selected = std::min( selected, static_cast<int>( rules.size() ) - 1 );
-            changed = true;
-        }
-        ImGui::EndDisabled();
-        if( ImGui::BeginTable( "rule_list", 3, ImGuiTableFlags_ScrollY | ImGuiTableFlags_RowBg |
-                              ImGuiTableFlags_Resizable, ImVec2( 0, 0 ) ) ) {
-            ImGui::TableSetupColumn( _( "On" ), ImGuiTableColumnFlags_WidthFixed, 35.f );
-            ImGui::TableSetupColumn( _( "Rule" ), ImGuiTableColumnFlags_WidthStretch );
-            ImGui::TableSetupColumn( _( "Action" ), ImGuiTableColumnFlags_WidthFixed, 70.f );
-            ImGui::TableSetupScrollFreeze( 0, 1 );
-            ImGui::TableHeadersRow();
-            for( size_t i = 0; i < rules.size(); ++i ) {
-                rule &r = rules[i];
-                ImGui::PushID( i );
-                ImGui::TableNextRow();
-                ImGui::TableSetColumnIndex( 0 );
-                if( ImGui::Checkbox( "##enabled", &r.bActive ) ) {
-                    changed = true;
-                }
-                ImGui::TableSetColumnIndex( 1 );
-                if( ImGui::Selectable( r.sRule.empty() ? _( "New rule" ) : r.sRule.c_str(),
-                                      selected == static_cast<int>( i ) ) ) {
-                    selected = i;
-                }
-                ImGui::TableSetColumnIndex( 2 );
-                ImGui::TextUnformatted( r.bExclude ? _( "Leave" ) : _( "Pick up" ) );
-                ImGui::PopID();
-            }
-            ImGui::EndTable();
-        }
-        ImGui::EndChild();
-        ImGui::SameLine();
-        ImGui::BeginChild( "rule_details", ImVec2( 0, body_height ), ImGuiChildFlags_Borders );
-        if( selected >= 0 && selected < static_cast<int>( rules.size() ) ) {
-            rule &r = rules[selected];
-            char pattern[512];
-            std::snprintf( pattern, sizeof( pattern ), "%s", r.sRule.c_str() );
-            ImGui::SetNextItemWidth( -1 );
-            if( ImGui::InputTextWithHint( "##pattern", _( "Item name or pattern…" ), pattern, sizeof( pattern ) ) ) {
-                r.sRule = pattern;
+        if( w::body_begin( "pickup_body", tk.footer, ImGuiWindowFlags_NoScrollbar ) ) {
+            const float gap = tk.lg * s;
+            const float h = ImGui::GetContentRegionAvail().y;
+            const float left_width = std::floor( ( ImGui::GetContentRegionAvail().x - gap ) * 0.5f );
+            ImGui::BeginChild( "rules", ImVec2( left_width, h ), ImGuiChildFlags_None,
+                               ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground );
+            const bool have = selected >= 0 && selected < static_cast<int>( rules.size() );
+            if( w::action_button( _( "Add rule" ), w::button_kind::primary, ImVec2( 0, 30.f ) ) ) {
+                rules.emplace_back( "", true, false );
+                selected = rules.size() - 1;
                 changed = true;
             }
-            if( ImGui::Checkbox( _( "Leave matching items behind" ), &r.bExclude ) ) {
+            ImGui::SameLine();
+            if( w::action_button( _( "Copy" ), w::button_kind::tertiary, ImVec2( 0, 30.f ), have ) ) {
+                const rule copy = rules[selected];
+                rules.insert( rules.begin() + selected + 1, copy );
+                ++selected;
                 changed = true;
             }
-            ImGui::TextWrapped( "%s", _( "Use * for any text. Material rules: m:steel matches any steel; M:steel matches only steel." ) );
-            ImGui::BeginDisabled( selected == 0 );
-            if( ImGui::Button( _( "Move up" ) ) ) {
+            ImGui::SameLine();
+            if( w::action_button( _( "Delete" ), w::button_kind::danger, ImVec2( 0, 30.f ), have ) ) {
+                rules.erase( rules.begin() + selected );
+                selected = std::min( selected, static_cast<int>( rules.size() ) - 1 );
+                changed = true;
+            }
+            ImGui::SameLine();
+            if( w::action_button( _( "Up" ), w::button_kind::tertiary, ImVec2( 0, 30.f ), have && selected > 0 ) ) {
                 std::swap( rules[selected], rules[selected - 1] );
                 --selected;
                 changed = true;
             }
-            ImGui::EndDisabled();
             ImGui::SameLine();
-            ImGui::BeginDisabled( selected + 1 >= static_cast<int>( rules.size() ) );
-            if( ImGui::Button( _( "Move down" ) ) ) {
+            if( w::action_button( _( "Down" ), w::button_kind::tertiary, ImVec2( 0, 30.f ),
+                                  have && selected + 1 < static_cast<int>( rules.size() ) ) ) {
                 std::swap( rules[selected], rules[selected + 1] );
                 ++selected;
                 changed = true;
             }
-            ImGui::EndDisabled();
-            if( editor.tabs.size() == 2 && ImGui::Button( _( "Move to other ruleset" ) ) ) {
-                editor.tabs[1 - tab_index].new_rules.push_back( rules[selected] );
-                rules.erase( rules.begin() + selected );
-                selected = -1;
-                changed = true;
+            if( w::panel_begin( "rule_rows", ImVec2( 0.f, 0.f ), true ) ) {
+                ImGui::PushStyleVar( ImGuiStyleVar_ItemSpacing, ImVec2( tk.sm * s, tk.xs * s ) );
+                if( rules.empty() ) {
+                    w::empty_state( _( "No rules" ), _( "Add one to start picking things up automatically." ) );
+                }
+                for( size_t i = 0; i < rules.size(); ++i ) {
+                    rule &r = rules[i];
+                    ImGui::PushID( static_cast<int>( i ) );
+                    w::row_state st;
+                    st.selected = selected == static_cast<int>( i );
+                    st.disabled = !r.bActive;
+                    const w::row_result rr = w::selectable_row( "rule", r.sRule.empty() ? _( "New rule" ) : r.sRule,
+                                             r.bExclude ? _( "Leave" ) : _( "Pick up" ), r.bActive ? "check" : nullptr,
+                                             nullptr, st );
+                    if( rr.clicked ) {
+                        selected = i;
+                    }
+                    if( rr.double_clicked ) {
+                        r.bActive = !r.bActive;
+                        changed = true;
+                    }
+                    ImGui::PopID();
+                }
+                ImGui::PopStyleVar();
             }
-            // Reacquire after reorder/erase; vector references may have changed.
-            const std::string current_pattern = selected >= 0 ? rules[selected].sRule : "";
-            if( current_pattern != preview_pattern ) {
-                preview_pattern = current_pattern;
-                matches.clear();
-                if( !current_pattern.empty() ) {
-                    for( const itype *type : item_controller->all() ) {
-                        const std::string name = type->nname( 1 );
-                        if( check_special_rule( type->materials, current_pattern ) ||
-                            wildcard_match( name, current_pattern ) ) {
-                            matches.push_back( name );
+            w::panel_end();
+            ImGui::EndChild();
+            ImGui::SameLine( 0.f, gap );
+            ImGui::BeginChild( "rule_details", ImVec2( 0, h ), ImGuiChildFlags_None,
+                               ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground );
+            if( have ) {
+                rule &r = rules[selected];
+                w::section_label( _( "Rule" ), "filter" );
+                char pattern[512];
+                std::snprintf( pattern, sizeof( pattern ), "%s", r.sRule.c_str() );
+                ImGui::SetNextItemWidth( -FLT_MIN );
+                if( ImGui::InputTextWithHint( "##pattern", _( "Item name or pattern…" ), pattern, sizeof( pattern ) ) ) {
+                    r.sRule = pattern;
+                    changed = true;
+                }
+                if( w::toggle( "##active", r.bActive ) ) {
+                    changed = true;
+                }
+                ImGui::SameLine( 0.f, tk.sm * s );
+                ImGui::AlignTextToFramePadding();
+                ImGui::TextUnformatted( _( "Rule enabled" ) );
+                if( w::toggle( "##exclude", r.bExclude ) ) {
+                    changed = true;
+                }
+                ImGui::SameLine( 0.f, tk.sm * s );
+                ImGui::AlignTextToFramePadding();
+                ImGui::TextUnformatted( _( "Leave matching items behind" ) );
+                ImGui::PushTextWrapPos( ImGui::GetCursorPosX() + ImGui::GetContentRegionAvail().x );
+                ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                                    _( "Use * for any text. Material rules: m:steel matches any steel; M:steel matches only steel." ) );
+                ImGui::PopTextWrapPos();
+                if( editor.tabs.size() == 2 && w::action_button( _( "Move to other ruleset" ), w::button_kind::tertiary,
+                        ImVec2( 0, 30.f ) ) ) {
+                    editor.tabs[1 - tab_index].new_rules.push_back( rules[selected] );
+                    rules.erase( rules.begin() + selected );
+                    selected = -1;
+                    changed = true;
+                }
+                // Reacquire after reorder/erase; vector references may have changed.
+                const std::string current_pattern = selected >= 0 ? rules[selected].sRule : "";
+                if( current_pattern != preview_pattern ) {
+                    preview_pattern = current_pattern;
+                    matches.clear();
+                    if( !current_pattern.empty() ) {
+                        for( const itype *type : item_controller->all() ) {
+                            const std::string name = type->nname( 1 );
+                            if( check_special_rule( type->materials, current_pattern ) ||
+                                wildcard_match( name, current_pattern ) ) {
+                                matches.push_back( name );
+                            }
+                        }
+                        std::sort( matches.begin(), matches.end() );
+                    }
+                }
+                ImGui::Dummy( ImVec2( 0.f, tk.xs * s ) );
+                w::section_label( string_format( _( "Matches: %d item types" ), matches.size() ), "search" );
+                ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                                    _( "Preview of this pattern; other rules and pickup limits still apply." ) );
+                if( w::panel_begin( "matches", ImVec2( 0.f, 0.f ), true ) ) {
+                    ImGuiListClipper clipper;
+                    clipper.Begin( matches.size() );
+                    while( clipper.Step() ) {
+                        for( int i = clipper.DisplayStart; i < clipper.DisplayEnd; ++i ) {
+                            ImGui::TextUnformatted( matches[i].c_str() );
                         }
                     }
-                    std::sort( matches.begin(), matches.end() );
                 }
-            }
-            ImGui::Separator();
-            ImGui::Text( "%s", string_format( _( "Pattern matches: %d item types" ), matches.size() ).c_str() );
-            ImGui::TextDisabled( "%s", _( "Preview of this pattern; other rules and pickup limits still apply." ) );
-            ImGui::BeginChild( "matches" );
-            ImGuiListClipper clipper;
-            clipper.Begin( matches.size() );
-            while( clipper.Step() ) {
-                for( int i = clipper.DisplayStart; i < clipper.DisplayEnd; ++i ) {
-                    ImGui::TextUnformatted( matches[i].c_str() );
-                }
+                w::panel_end();
+            } else {
+                w::empty_state( _( "Select a rule" ), _( "Edit its pattern and preview the items it matches." ) );
             }
             ImGui::EndChild();
-        } else {
-            ImGui::TextWrapped( "%s", _( "Select a rule to edit its pattern and see matching items." ) );
         }
-        ImGui::EndChild();
-        if( ImGui::Button( _( "Save changes" ) ) ) {
-            save = true;
-            close = true;
+        w::body_end();
+        if( w::footer_begin( "pickup_footer" ) ) {
+            ImGui::AlignTextToFramePadding();
+            ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", _( "Changes apply when saved." ) );
+            ImGui::SameLine();
+            const float save_w = w::action_button_width( _( "Save changes" ), w::button_kind::primary );
+            const float cancel_w = w::action_button_width( _( "Cancel" ) );
+            w::footer_align_right( save_w + cancel_w + ImGui::GetStyle().ItemSpacing.x );
+            if( w::action_button( _( "Cancel" ), w::button_kind::secondary ) ) {
+                close = true;
+            }
+            ImGui::SameLine();
+            if( w::action_button( _( "Save changes" ), w::button_kind::primary ) ) {
+                save = true;
+                close = true;
+            }
         }
-        ImGui::SameLine();
-        if( ImGui::Button( _( "Cancel" ) ) ) {
-            close = true;
-        }
-        ImGui::SameLine();
-        ImGui::TextDisabled( "%s", _( "Changes apply when saved." ) );
+        w::footer_end();
     } );
     input_context ctxt( "AUTO_PICKUP" );
     ctxt.register_action( "QUIT" );

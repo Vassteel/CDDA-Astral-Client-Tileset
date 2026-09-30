@@ -1,5 +1,6 @@
 #include "input_popup.h"
 
+#include <algorithm>
 #include <cstddef>
 
 #include "coordinates.h"
@@ -220,12 +221,13 @@ void string_input_popup_imgui::draw_input_control()
         flags |= ImGuiInputTextFlags_CallbackAlways;
     }
 
-    // shrink width of input field if we only allow short inputs
-    // todo: use full available width for unrestricted inputs in wider windows
-    float input_width = str_width_to_pixels( max_input_length + 1 );
-    if( max_input_length > 0 && input_width < ImGui::CalcItemWidth() ) {
-        ImGui::SetNextItemWidth( input_width );
-    }
+    // Always give the field an absolute width.  The popup is AlwaysAutoResize,
+    // and ImGui's default item width is a fraction of the window's content
+    // width, so a relative width feeds back on itself: field grows → window
+    // grows → field grows, a little more every frame.
+    float input_width = max_input_length > 0 ? str_width_to_pixels( max_input_length + 1 )
+                        : std::max<float>( str_width_to_pixels( 20 ), get_bounds().w );
+    ImGui::SetNextItemWidth( input_width );
 
     std::string input_label = "##string_input_" + label;
     ImGui::InputText( input_label.c_str(), &text, flags, input_callback, this );
@@ -411,7 +413,9 @@ number_input_popup<T>::number_input_popup( int width, T old_value, const std::st
 template<>
 void number_input_popup<int>::draw_input_control()
 {
-    // todo: maybe set width of input field, default is fairly long
+    // Absolute width: see string_input_popup_imgui::draw_input_control for
+    // why a relative width makes an AlwaysAutoResize popup creep wider.
+    ImGui::SetNextItemWidth( str_width_to_pixels( 16 ) );
     // step size default values are imgui defaults
     ImGui::InputInt( "##number_input", &value, step_size.value_or( 1 ),
                      fast_step_size.value_or( 100 ) );
@@ -420,7 +424,7 @@ void number_input_popup<int>::draw_input_control()
 template<>
 void number_input_popup<float>::draw_input_control()
 {
-    // todo: maybe set width of input field, default is fairly long
+    ImGui::SetNextItemWidth( str_width_to_pixels( 16 ) );
     // step size default values are imgui defaults
     cataimgui::InputFloat( "##number_input", &value, step_size.value_or( 0.f ),
                            fast_step_size.value_or( 0.f ) );

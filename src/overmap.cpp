@@ -14,6 +14,7 @@
 #include <vector>
 
 #include "auto_note.h"
+#include "worldgen_options.h"
 #include "avatar.h"
 #include "calendar.h"
 #include "cata_assert.h"
@@ -984,7 +985,7 @@ void overmap::generate( const std::vector<const overmap *> &neighbor_overmaps,
         // Polish rivers now so highways get the correct predecessors rather than river_center
         polish_river( neighbor_overmaps );
     }
-    if( settings->overmap_highway ) {
+    if( settings->overmap_highway && worldgen_options::get().highways ) {
         highway_paths = place_highways( neighbor_overmaps );
     }
     if( settings->city_spec ) {
@@ -1558,6 +1559,9 @@ std::vector<std::unordered_map<tripoint_abs_ms, horde_entity>*> overmap::hordes_
  */
 void overmap::move_hordes()
 {
+    if( !worldgen_options::get().wander_spawns ) {
+        return; // world option: hordes stay where they were seeded
+    }
     // TODO: throttle processing of monsters.
     // Specifically for throttling, only a process a subset of the eligible monster buckets per invocation.
     std::unordered_map<tripoint_abs_ms, horde_entity> migrating_hordes;
@@ -2164,15 +2168,18 @@ void overmap::place_swamps()
 void overmap::place_roads( const std::vector<const overmap *> &neighbor_overmaps )
 {
     int op_city_size = settings->get_settings_city().city_size;
-    if( op_city_size <= 0 ) {
+    const float road_density = worldgen_options::get().road_density;
+    if( op_city_size <= 0 || road_density <= 0.f ) {
         return;
     }
     const overmap_connection_id &overmap_connection_inter_city_road =
         settings->overmap_connection.inter_city_road_connection;
     std::vector<tripoint_om_omt> &roads_out = connections_out[overmap_connection_inter_city_road];
 
-    // At least 3 exit points, to guarantee road continuity across overmaps
-    if( roads_out.size() < 3 ) {
+    // At least 3 exit points, to guarantee road continuity across overmaps;
+    // the road density option asks for more (one extra per 100%).
+    const size_t min_exits = 3 + static_cast<size_t>( std::max( 0.f, road_density - 1.f ) * 3.f );
+    if( roads_out.size() < min_exits ) {
         for( const om_direction::type dir : om_direction::all ) {
             // only potentially add a new random connection toward ungenerated overmaps
             if( neighbor_overmaps[static_cast<int>( dir )] == nullptr ) {
@@ -2192,7 +2199,7 @@ void overmap::place_roads( const std::vector<const overmap *> &neighbor_overmaps
                         break;
                     }
                 }
-                if( roads_out.size() == 3 ) {
+                if( roads_out.size() >= min_exits ) {
                     break;
                 }
             }
@@ -2213,6 +2220,16 @@ void overmap::place_roads( const std::vector<const overmap *> &neighbor_overmaps
     } else {
         for( const city &elem : cities ) {
             road_points.emplace_back( elem.pos );
+        }
+    }
+    // Road density above 100%: extra countryside junctions the network must
+    // reach, so more roads cross the overmap between the cities.
+    const int extra_nodes = static_cast<int>( std::lround( std::max( 0.f, road_density - 1.f ) *
+                            std::max<size_t>( 2, cities.size() ) ) );
+    for( int i = 0; i < extra_nodes; ++i ) {
+        const point_om_omt p( rng( 10, OMAPX - 11 ), rng( 10, OMAPY - 11 ) );
+        if( !is_river( ter( tripoint_om_omt( p, 0 ) ) ) ) {
+            road_points.emplace_back( p );
         }
     }
 
@@ -3445,9 +3462,10 @@ void overmap::place_mongroups()
 {
     // Cities can be full of zombies
     int city_spawn_threshold = get_option<int>( "SPAWN_CITY_HORDE_THRESHOLD" );
-    if( city_spawn_threshold > -1 ) {
+    const float horde_factor = worldgen_options::get().hordes;
+    if( city_spawn_threshold > -1 && horde_factor > 0.f ) {
         int city_spawn_chance = get_option<int>( "SPAWN_CITY_HORDE_SMALL_CITY_CHANCE" );
-        float city_spawn_scalar = get_option<float>( "SPAWN_CITY_HORDE_SCALAR" );
+        float city_spawn_scalar = get_option<float>( "SPAWN_CITY_HORDE_SCALAR" ) * horde_factor;
         float city_spawn_spread = get_option<float>( "SPAWN_CITY_HORDE_SPREAD" );
         float spawn_density = get_option<float>( "SPAWN_DENSITY" );
 

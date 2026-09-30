@@ -1,4 +1,5 @@
 #include "mapgen.h"
+#include "worldgen_options.h"
 #include "mapgen_post_process.h"
 
 #include <algorithm>
@@ -307,7 +308,7 @@ void map::generate( const tripoint_abs_omt &p, const time_point &when, bool save
 
             float spawn_density = 1.0f;
             if( MonsterGroupManager::is_animal( spawns.group ) ) {
-                spawn_density = get_option< float >( "SPAWN_ANIMAL_DENSITY" );
+                spawn_density = get_option< float >( "SPAWN_ANIMAL_DENSITY" ) * worldgen_options::get().wildlife;
             } else {
                 spawn_density = get_option< float >( "SPAWN_DENSITY" );
             }
@@ -2739,7 +2740,8 @@ class jmapgen_vehicle : public jmapgen_piece_with_has_vehicle_collision
         }
         void apply( const mapgendata &dat, const jmapgen_int &x, const jmapgen_int &y, const jmapgen_int &z,
                     const std::string &/*context*/ ) const override {
-            if( !x_in_y( chance, 100 ) ) {
+            // World option: vehicle wreck density scales the placement chance.
+            if( !x_in_y( chance * worldgen_options::get().vehicles, 100 ) ) {
                 return;
             }
             vgroup_id chosen_id = type.get( dat );
@@ -6582,7 +6584,7 @@ void map::place_spawns( const mongroup_id &group, const int chance,
 
     float spawn_density = 1.0f;
     if( MonsterGroupManager::is_animal( group ) ) {
-        spawn_density = get_option< float >( "SPAWN_ANIMAL_DENSITY" );
+        spawn_density = get_option< float >( "SPAWN_ANIMAL_DENSITY" ) * worldgen_options::get().wildlife;
     } else {
         spawn_density = get_option< float >( "SPAWN_DENSITY" );
     }

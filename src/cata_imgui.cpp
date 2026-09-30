@@ -3,6 +3,7 @@
 #include "ui_hybrid_chrome.h"
 #include "ui_hybrid_widgets.h"
 
+#include <cfloat>
 #include <cmath>
 
 #define IMGUI_DEFINE_MATH_OPERATORS
@@ -320,6 +321,13 @@ void cataimgui::client::init_platform_backend()
         return;
     }
     ImGui_ImplSDL3_InitForSDLRenderer( sdl_window.get(), sdl_renderer.get() );
+    // The SDL3 backend defaults to AutoFirst: it silently opens the first
+    // gamepad it sees and feeds its sticks/d-pad into ImGui nav even when the
+    // game's own ENABLE_JOYSTICK option is off.  A controller with stick
+    // drift (or a wheel / HOTAS SDL classifies as a gamepad) then walks the
+    // highlight through every popup menu with nobody touching anything.
+    // Gamepad input reaches ImGui only through the game's own gamepad layer.
+    ImGui_ImplSDL3_SetGamepadMode( ImGui_ImplSDL3_GamepadMode_Manual, nullptr, 0 );
     platform_backend_active_ = true;
 }
 
@@ -1096,15 +1104,33 @@ void cataimgui::window::draw()
         ImGui::SetNextWindowSize( ImGui::GetMainViewport()->Size * ImVec2 { cached_bounds.w, cached_bounds.h } );
     }
 #if defined(TILES)
+    // Auto-sized shell dialogs: the shell clips its title instead of pushing
+    // the window wider, so reserve room for it up front.  Without this a short
+    // prompt like the stat editor opens narrower than its own heading.
+    float title_min_w = 0.f;
+    if( astral_shell >= 0 && astral_shell_title && ( window_flags & ImGuiWindowFlags_AlwaysAutoResize ) ) {
+        const ui_hybrid_chrome::theme::tokens &tk = ui_hybrid_chrome::theme::get();
+        const float s = ui_hybrid_chrome::theme::scale();
+        const std::string display_title = id.substr( 0, id.find( "##" ) );
+        ui_hybrid_widgets::push_font_title();
+        const float text_w = ImGui::CalcTextSize( display_title.c_str() ).x;
+        ui_hybrid_widgets::pop_font();
+        const float inset = ( astral_shell == 0 ? 20.f : astral_shell == 1 ? 14.f : 10.f ) * s;
+        const float icon_w = astral_shell_icon != nullptr ? ( tk.icon + tk.sm ) * s : 0.f;
+        title_min_w = text_w + icon_w + ( tk.close_hit + tk.lg + tk.md ) * s + 2.f * inset;
+    }
     if( cached_bounds.x < 0.f || cached_bounds.y < 0.f ) {
         const ImVec2 viewport = ImGui::GetMainViewport()->Size;
         const float scale = std::max( 1.f, ImGui::GetFontSize() / 16.f );
         // Centred windows never exceed the classic cap or the large-window
         // size (which grows with a big viewport), whichever is larger.
         const ImVec2 large = ui_hybrid_chrome::theme::large_window_size();
-        ImGui::SetNextWindowSizeConstraints( ImVec2( 0.f, 0.f ),
-            ImVec2( std::min( viewport.x * 0.96f, std::max( 1440.f * scale, large.x ) ),
+        const float max_w = std::min( viewport.x * 0.96f, std::max( 1440.f * scale, large.x ) );
+        ImGui::SetNextWindowSizeConstraints( ImVec2( std::min( title_min_w, max_w ), 0.f ),
+            ImVec2( max_w,
                     std::min( viewport.y * 0.96f, std::max( 840.f * scale, large.y ) ) ) );
+    } else if( title_min_w > 0.f ) {
+        ImGui::SetNextWindowSizeConstraints( ImVec2( title_min_w, 0.f ), ImVec2( FLT_MAX, FLT_MAX ) );
     }
 #endif
     int flags = window_flags;

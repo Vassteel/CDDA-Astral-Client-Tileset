@@ -776,6 +776,16 @@ class overmap_special
         const overmap_special_placement_constraints &get_constraints() const {
             return constraints_;
         }
+        void set_occurrences( int min, int max ) {
+            constraints_.occurrences.min = min;
+            constraints_.occurrences.max = max;
+        }
+        /** Finalize-time adjustment of the placement constraints (world options). */
+        void scale_occurrences( float factor ) {
+            constraints_.occurrences.max = std::max( 0, static_cast<int>( std::lround(
+                                               constraints_.occurrences.max * factor ) ) );
+            constraints_.occurrences.min = std::min( constraints_.occurrences.min, constraints_.occurrences.max );
+        }
         bool is_rotatable() const {
             return rotatable_;
         }

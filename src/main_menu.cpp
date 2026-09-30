@@ -1009,6 +1009,10 @@ bool main_menu::opening_screen()
                 }
                 on_move();
             }
+#if defined(TILES)
+        } else if( hybrid_overlay && handle_hybrid_action( action, start, load_game ) ) {
+            // handled by the native screens
+#endif
         } else if( action == "CONFIRM" ) {
             switch( static_cast<main_menu_opts>( sel1 ) ) {
                 case main_menu_opts::HELP: {
@@ -1364,6 +1368,190 @@ static bool archive_character_save( const WORLD &world, const save_t &save )
     popup( _( "Character removed from Load. Backup: %s" ), archive.u8string() );
     return true;
 }
+
+#if defined(TILES)
+std::string main_menu::playtime_text( const WORLD *world, const save_t &save ) const
+{
+    const std::optional<std::chrono::seconds> playtime = get_playtime_from_save( world, save );
+    if( !playtime ) {
+        return std::string();
+    }
+    const std::chrono::seconds::rep tmp_sec = playtime->count();
+    return string_format( "%02d:%02d:%02d", static_cast<int>( tmp_sec / 3600 ),
+                          static_cast<int>( tmp_sec % 3600 ) / 60, static_cast<int>( tmp_sec % 60 ) );
+}
+
+bool main_menu::start_new_character( WORLD *world, character_type type, const std::string &template_name )
+{
+    avatar &pc = get_avatar();
+    on_out_of_scope cleanup( [&pc]() {
+        pc = avatar();
+        world_generator->set_active_world( nullptr );
+    } );
+    g->gamemode = nullptr;
+    if( world == nullptr ) {
+        return false;
+    }
+    if( !world->world_saves.empty() ) {
+        if( !query_yn(
+                _( "Many game features will not work correctly with multiple characters in the same world.  Create a new character anyway?" ) ) ) {
+            return false;
+        }
+    }
+    world_generator->set_active_world( world );
+    try {
+        g->setup();
+    } catch( const std::exception &err ) {
+        debugmsg( "Error: %s", err.what() );
+        return false;
+    }
+    if( !pc.create( type, template_name ) ) {
+        load_char_templates();
+        MAPBUFFER.clear();
+        overmap_buffer.clear();
+        return false;
+    }
+    if( !g->start_game() ) {
+        return false;
+    }
+    cleanup.cancel();
+    return true;
+}
+
+bool main_menu::handle_hybrid_action( const std::string &action, bool &start, bool &load_game )
+{
+    WORLD *world = hybrid_world.empty() ? nullptr : world_generator->get_world( hybrid_world );
+    const auto clear_world = [this]( WORLD * w, bool do_delete ) {
+        const size_t index = world_generator->get_world_index( w->world_name );
+        if( do_delete && index < last_world_pos ) {
+            --last_world_pos;
+        }
+        world_generator->delete_world( w->world_name, do_delete );
+        savegames.clear();
+        MAPBUFFER.clear();
+        overmap_buffer.clear();
+        if( do_delete ) {
+            hybrid_world.clear();
+            sel2 = 0;
+        }
+    };
+    if( action == "NEWCHAR_START" ) {
+        const bool is_play_now = sel2 == 3 || sel2 == 4;
+        if( sel2 == 1 ) {
+            if( hybrid_template < 0 || static_cast<size_t>( hybrid_template ) >= templates.size() ) {
+                popup( _( "Choose a character template first." ) );
+                return true;
+            }
+        }
+        if( world == nullptr ) {
+            // "New world": create one (silently for Play Now, otherwise the creator).
+            world = is_play_now ? world_generator->pick_world( false, true ) : world_generator->make_new_world();
+            if( world == nullptr ) {
+                return true;
+            }
+        }
+        character_type type = character_type::CUSTOM;
+        switch( sel2 ) {
+            case 1:
+                type = character_type::TEMPLATE;
+                break;
+            case 2:
+                type = character_type::RANDOM;
+                break;
+            case 3:
+                type = character_type::NOW;
+                break;
+            case 4:
+                type = character_type::FULL_RANDOM;
+                break;
+            default:
+                break;
+        }
+        start = start_new_character( world, type, sel2 == 1 ? templates[hybrid_template] : std::string() );
+        return true;
+    }
+    if( action == "TEMPLATE_DELETE" ) {
+        if( hybrid_template >= 0 && static_cast<size_t>( hybrid_template ) < templates.size() &&
+            query_yn( _( "Are you sure you want to delete %s?" ), templates[hybrid_template] ) ) {
+            const auto path = PATH_INFO::templatedir() + templates[hybrid_template] + ".template";
+            if( !remove_file( path ) ) {
+                popup( _( "Sorry, something went wrong." ) );
+            } else {
+                templates.erase( templates.begin() + hybrid_template );
+                hybrid_template = -1;
+            }
+        }
+        return true;
+    }
+    if( action == "LOAD_START" || action == "LOAD_DELETE" || action == "WORLD_TEMPLATE" ) {
+        if( world == nullptr || hybrid_save < 0 ||
+            static_cast<size_t>( hybrid_save ) >= world->world_saves.size() ) {
+            popup( _( "Choose a character first." ) );
+            return true;
+        }
+        const save_t selected = world->world_saves[hybrid_save];
+        if( action == "LOAD_START" ) {
+            start = main_menu::load_game( world->world_name, selected );
+            if( start ) {
+                load_game = true;
+            }
+        } else if( action == "LOAD_DELETE" ) {
+            if( query_yn( _( "Remove %s from Load? A backup will be kept. The world and other characters will remain." ),
+                          selected.decoded_name() ) && archive_character_save( *world, selected ) ) {
+                auto &saves = world->world_saves;
+                saves.erase( std::remove( saves.begin(), saves.end(), selected ), saves.end() );
+                hybrid_save = -1;
+            }
+        } else {
+            if( main_menu::load_game( world->world_name, selected ) ) {
+                avatar &pc = get_avatar();
+                pc.setID( character_id(), true );
+                pc.reset_all_missions();
+                pc.character_to_template( pc.name );
+                pc = avatar();
+                MAPBUFFER.clear();
+                overmap_buffer.clear();
+                load_char_templates();
+                popup( _( "Saved %s as a character template." ), selected.decoded_name() );
+            }
+        }
+        return true;
+    }
+    if( action == "WORLD_CREATE" ) {
+        WORLD *created = world_generator->make_new_world();
+        if( created != nullptr ) {
+            hybrid_world = created->world_name;
+        }
+        return true;
+    }
+    if( action == "WORLD_COPY" || action == "WORLD_COMPRESSION" || action == "WORLD_DELETE" ||
+        action == "WORLD_RESET" ) {
+        if( world == nullptr ) {
+            popup( _( "Choose a world first." ) );
+            return true;
+        }
+        if( action == "WORLD_COPY" ) {
+            WORLD *created = world_generator->make_new_world( true, world->world_name );
+            if( created != nullptr ) {
+                hybrid_world = created->world_name;
+            }
+        } else if( action == "WORLD_COMPRESSION" ) {
+            const bool on = world->has_compression_enabled();
+            if( query_yn( on ? _( "Disable save compression?" ) : _( "Enable save compression?" ) ) ) {
+                world->set_compression_enabled( !on );
+            }
+        } else if( action == "WORLD_DELETE" ) {
+            if( query_yn( _( "Delete the world and all saves within?" ) ) ) {
+                clear_world( world, true );
+            }
+        } else if( query_yn( _( "Remove all saves and regenerate world?" ) ) ) {
+            clear_world( world, false );
+        }
+        return true;
+    }
+    return false;
+}
+#endif
 
 bool main_menu::load_character_tab( const std::string &worldname )
 {

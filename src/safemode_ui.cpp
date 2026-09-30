@@ -36,6 +36,14 @@
 #include "uilist.h"
 #include "ui_manager.h"
 #include "worldfactory.h"
+#if defined(TILES)
+#include <cfloat>
+#include "cata_imgui.h"
+#include "imgui/imgui.h"
+#include "ui_hybrid_chrome.h"
+#include "ui_hybrid_widgets.h"
+#include "ui_hybrid_window.h"
+#endif
 
 safemode &get_safemode()
 {
@@ -54,8 +62,319 @@ std::string safemode::npc_type_name()
     return name;
 }
 
+#if defined(TILES)
+static const char *attitude_label( Creature::Attitude a )
+{
+    switch( a ) {
+        case Creature::Attitude::HOSTILE:
+            return _( "Hostile" );
+        case Creature::Attitude::NEUTRAL:
+            return _( "Neutral" );
+        case Creature::Attitude::FRIENDLY:
+            return _( "Friendly" );
+        case Creature::Attitude::ANY:
+            return _( "Any" );
+    }
+    return "";
+}
+
+void safemode::show_hybrid( const std::string &title, bool is_safemode_in )
+{
+    namespace w = ui_hybrid_widgets;
+    namespace theme = ui_hybrid_chrome::theme;
+    auto global_rules_old = global_rules;
+    auto character_rules_old = character_rules;
+    Character &player_character = get_player_character();
+    const bool has_character = !player_character.name.empty();
+    int tab = GLOBAL_TAB;
+    int selected = -1;
+    bool changed = false;
+    bool save = false;
+    bool close = false;
+    std::string preview_pattern;
+    std::vector<std::string> matches;
+    const std::vector<std::string> attitudes = { attitude_label( Creature::Attitude::HOSTILE ),
+                                                 attitude_label( Creature::Attitude::NEUTRAL ),
+                                                 attitude_label( Creature::Attitude::FRIENDLY ),
+                                                 attitude_label( Creature::Attitude::ANY )
+                                               };
+    const std::vector<std::string> categories = { _( "Hostile spotted" ), _( "Sound" ) };
+    const std::vector<std::string> modes = { _( "Walking" ), _( "Driving" ), _( "Both" ) };
+    hybrid_window window( title, [&]() {
+        const float s = theme::scale();
+        const ui_hybrid_chrome::theme::tokens &tk = theme::get();
+        if( w::tab( _( "Global rules" ), tab == GLOBAL_TAB ) ) {
+            tab = GLOBAL_TAB;
+            selected = -1;
+        }
+        if( is_safemode_in ) {
+            ImGui::SameLine( 0.f, tk.xs * s );
+            if( w::tab( _( "Character rules" ), tab == CHARACTER_TAB ) ) {
+                tab = CHARACTER_TAB;
+                selected = -1;
+            }
+        }
+        ImGui::SameLine( 0.f, tk.lg * s );
+        ImGui::AlignTextToFramePadding();
+        ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                            tab == CHARACTER_TAB && !has_character ?
+                            _( "Character rules are only available while a game is loaded." ) :
+                            _( "Rules are checked in order; the first match decides." ) );
+        std::vector<rules_class> &rules = tab == GLOBAL_TAB ? global_rules : character_rules;
+        const bool editable = tab == GLOBAL_TAB || has_character;
+        if( w::body_begin( "safemode_body", tk.footer, ImGuiWindowFlags_NoScrollbar ) ) {
+            const float gap = tk.lg * s;
+            const float h = ImGui::GetContentRegionAvail().y;
+            const float left_w = std::floor( ( ImGui::GetContentRegionAvail().x - gap ) * 0.5f );
+            ImGui::BeginChild( "sm_rules", ImVec2( left_w, h ), ImGuiChildFlags_None,
+                               ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground );
+            const bool have = selected >= 0 && selected < static_cast<int>( rules.size() );
+            if( w::action_button( _( "Add rule" ), w::button_kind::primary, ImVec2( 0, 30.f ), editable ) ) {
+                rules.emplace_back( "", true, false, Creature::Attitude::HOSTILE,
+                                    get_option<int>( "SAFEMODEPROXIMITY" ), Categories::HOSTILE_SPOTTED, MovementModes::BOTH );
+                selected = rules.size() - 1;
+                changed = true;
+            }
+            ImGui::SameLine();
+            if( w::action_button( _( "Defaults" ), w::button_kind::secondary, ImVec2( 0, 30.f ), editable, nullptr ) ) {
+                rules.emplace_back( "*", true, false, Creature::Attitude::HOSTILE,
+                                    get_option<int>( "SAFEMODEPROXIMITY" ), Categories::HOSTILE_SPOTTED, MovementModes::BOTH );
+                rules.emplace_back( "*", true, true, Creature::Attitude::HOSTILE, 5, Categories::SOUND, MovementModes::BOTH );
+                selected = rules.size() - 1;
+                changed = true;
+            }
+            ImGui::SameLine();
+            if( w::action_button( _( "Copy" ), w::button_kind::tertiary, ImVec2( 0, 30.f ), have ) ) {
+                const rules_class copy = rules[selected];
+                rules.insert( rules.begin() + selected + 1, copy );
+                ++selected;
+                changed = true;
+            }
+            ImGui::SameLine();
+            if( w::action_button( _( "Delete" ), w::button_kind::danger, ImVec2( 0, 30.f ), have ) ) {
+                rules.erase( rules.begin() + selected );
+                selected = std::min( selected, static_cast<int>( rules.size() ) - 1 );
+                changed = true;
+            }
+            ImGui::SameLine();
+            if( w::action_button( _( "Up" ), w::button_kind::tertiary, ImVec2( 0, 30.f ), have && selected > 0 ) ) {
+                std::swap( rules[selected], rules[selected - 1] );
+                --selected;
+                changed = true;
+            }
+            ImGui::SameLine();
+            if( w::action_button( _( "Down" ), w::button_kind::tertiary, ImVec2( 0, 30.f ),
+                                  have && selected + 1 < static_cast<int>( rules.size() ) ) ) {
+                std::swap( rules[selected], rules[selected + 1] );
+                ++selected;
+                changed = true;
+            }
+            if( w::panel_begin( "sm_rows", ImVec2( 0.f, 0.f ), true ) ) {
+                ImGui::PushStyleVar( ImGuiStyleVar_ItemSpacing, ImVec2( tk.sm * s, tk.xs * s ) );
+                if( rules.empty() ) {
+                    w::empty_state( _( "No rules" ), _( "Defaults adds the usual hostile-in-sight and sound rules." ) );
+                }
+                for( size_t i = 0; i < rules.size(); ++i ) {
+                    rules_class &r = rules[i];
+                    ImGui::PushID( static_cast<int>( i ) );
+                    w::row_state st;
+                    st.selected = selected == static_cast<int>( i );
+                    st.disabled = !r.active;
+                    const std::string detail = string_format( "%s · %s · %d", r.whitelist ? _( "ignore" ) : _( "stop" ),
+                                               r.category == Categories::SOUND ? _( "sound" ) : attitude_label( r.attitude ),
+                                               r.proximity );
+                    const w::row_result rr = w::selectable_row( "rule", r.rule.empty() ? _( "New rule" ) : r.rule, detail,
+                                             r.active ? "check" : nullptr, nullptr, st );
+                    if( rr.clicked ) {
+                        selected = i;
+                    }
+                    if( rr.double_clicked ) {
+                        r.active = !r.active;
+                        changed = true;
+                    }
+                    ImGui::PopID();
+                }
+                ImGui::PopStyleVar();
+            }
+            w::panel_end();
+            ImGui::EndChild();
+            ImGui::SameLine( 0.f, gap );
+            ImGui::BeginChild( "sm_detail", ImVec2( 0, h ), ImGuiChildFlags_None,
+                               ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground );
+            if( have ) {
+                rules_class &r = rules[selected];
+                w::section_label( _( "Rule" ), "filter" );
+                char pattern[512];
+                std::snprintf( pattern, sizeof( pattern ), "%s", r.rule.c_str() );
+                ImGui::SetNextItemWidth( -FLT_MIN );
+                if( ImGui::InputTextWithHint( "##pattern", _( "Creature name or pattern (* for any)…" ), pattern,
+                                              sizeof( pattern ) ) ) {
+                    r.rule = pattern;
+                    changed = true;
+                }
+                if( w::toggle( "##active", r.active ) ) {
+                    changed = true;
+                }
+                ImGui::SameLine( 0.f, tk.sm * s );
+                ImGui::AlignTextToFramePadding();
+                ImGui::TextUnformatted( _( "Rule enabled" ) );
+                if( w::toggle( "##whitelist", r.whitelist ) ) {
+                    changed = true;
+                }
+                ImGui::SameLine( 0.f, tk.sm * s );
+                ImGui::AlignTextToFramePadding();
+                ImGui::TextUnformatted( _( "Ignore matches (whitelist) instead of stopping for them" ) );
+                if( ImGui::BeginTable( "##sm_fields", 2, ImGuiTableFlags_SizingStretchProp ) ) {
+                    ImGui::TableSetupColumn( "l", ImGuiTableColumnFlags_WidthStretch, 0.4f );
+                    ImGui::TableSetupColumn( "v", ImGuiTableColumnFlags_WidthStretch, 0.6f );
+                    ImGui::TableNextRow();
+                    ImGui::TableSetColumnIndex( 0 );
+                    ImGui::AlignTextToFramePadding();
+                    ImGui::TextUnformatted( _( "Category" ) );
+                    ImGui::TableSetColumnIndex( 1 );
+                    int cat = static_cast<int>( r.category );
+                    int chosen = w::dropdown( "##cat", categories[cat], categories, cat );
+                    if( chosen >= 0 ) {
+                        r.category = static_cast<Categories>( chosen );
+                        changed = true;
+                    }
+                    ImGui::TableNextRow();
+                    ImGui::TableSetColumnIndex( 0 );
+                    ImGui::AlignTextToFramePadding();
+                    ImGui::TextUnformatted( _( "Attitude" ) );
+                    ImGui::TableSetColumnIndex( 1 );
+                    const int att = static_cast<int>( r.attitude );
+                    chosen = w::dropdown( "##att", attitudes[att], attitudes, att, -1.f,
+                                          r.category == Categories::HOSTILE_SPOTTED );
+                    if( chosen >= 0 ) {
+                        r.attitude = static_cast<Creature::Attitude>( chosen );
+                        changed = true;
+                    }
+                    ImGui::TableNextRow();
+                    ImGui::TableSetColumnIndex( 0 );
+                    ImGui::AlignTextToFramePadding();
+                    ImGui::TextUnformatted( r.category == Categories::SOUND ? _( "Sound volume" ) : _( "Proximity (tiles)" ) );
+                    ImGui::TableSetColumnIndex( 1 );
+                    int prox = r.proximity;
+                    ImGui::SetNextItemWidth( -FLT_MIN );
+                    if( ImGui::SliderInt( "##prox", &prox, 0, r.category == Categories::SOUND ? 100 : 60, "%d",
+                                          ImGuiSliderFlags_AlwaysClamp ) ) {
+                        r.proximity = prox;
+                        changed = true;
+                    }
+                    ImGui::TableNextRow();
+                    ImGui::TableSetColumnIndex( 0 );
+                    ImGui::AlignTextToFramePadding();
+                    ImGui::TextUnformatted( _( "Applies while" ) );
+                    ImGui::TableSetColumnIndex( 1 );
+                    const int mode = static_cast<int>( r.movement_mode );
+                    chosen = w::dropdown( "##mode", modes[mode], modes, mode );
+                    if( chosen >= 0 ) {
+                        r.movement_mode = static_cast<MovementModes>( chosen );
+                        changed = true;
+                    }
+                    ImGui::EndTable();
+                }
+                if( is_safemode_in && w::action_button( tab == GLOBAL_TAB ? _( "Move to character rules" ) :
+                                                        _( "Move to global rules" ), w::button_kind::tertiary, ImVec2( 0, 30.f ),
+                                                        has_character ) ) {
+                    std::vector<rules_class> &other = tab == GLOBAL_TAB ? character_rules : global_rules;
+                    other.push_back( rules[selected] );
+                    rules.erase( rules.begin() + selected );
+                    selected = -1;
+                    changed = true;
+                }
+                const std::string current_pattern = selected >= 0 ? rules[selected].rule : "";
+                if( current_pattern != preview_pattern ) {
+                    preview_pattern = current_pattern;
+                    matches.clear();
+                    if( !current_pattern.empty() && has_character ) {
+                        for( const mtype &type : MonsterGenerator::generator().get_all_mtypes() ) {
+                            const std::string name = type.nname();
+                            if( wildcard_match( name, current_pattern ) ) {
+                                matches.push_back( name );
+                            }
+                        }
+                        std::sort( matches.begin(), matches.end() );
+                    }
+                }
+                ImGui::Dummy( ImVec2( 0.f, tk.xs * s ) );
+                w::section_label( has_character ? string_format( _( "Matches: %d creatures" ), matches.size() ) :
+                                  _( "Matches" ), "search" );
+                if( !has_character ) {
+                    ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                                        _( "Creature names are known once a game is loaded." ) );
+                }
+                if( w::panel_begin( "sm_matches", ImVec2( 0.f, 0.f ), true ) ) {
+                    ImGuiListClipper clipper;
+                    clipper.Begin( matches.size() );
+                    while( clipper.Step() ) {
+                        for( int i = clipper.DisplayStart; i < clipper.DisplayEnd; ++i ) {
+                            ImGui::TextUnformatted( matches[i].c_str() );
+                        }
+                    }
+                }
+                w::panel_end();
+            } else {
+                w::empty_state( _( "Select a rule" ), _( "Edit what it matches and when it stops you." ) );
+            }
+            ImGui::EndChild();
+        }
+        w::body_end();
+        if( w::footer_begin( "safemode_footer" ) ) {
+            ImGui::AlignTextToFramePadding();
+            ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", _( "Changes apply when saved." ) );
+            ImGui::SameLine();
+            const float save_w = w::action_button_width( _( "Save changes" ), w::button_kind::primary );
+            const float cancel_w = w::action_button_width( _( "Cancel" ) );
+            w::footer_align_right( save_w + cancel_w + ImGui::GetStyle().ItemSpacing.x );
+            if( w::action_button( _( "Cancel" ), w::button_kind::secondary ) ) {
+                close = true;
+            }
+            ImGui::SameLine();
+            if( w::action_button( _( "Save changes" ), w::button_kind::primary, ImVec2( 0, 0 ), changed,
+                                  _( "Nothing changed yet." ) ) ) {
+                save = true;
+                close = true;
+            }
+        }
+        w::footer_end();
+    } );
+    input_context ctxt( "SAFEMODE" );
+    ctxt.register_action( "QUIT" );
+    ctxt.register_action( "ANY_INPUT" );
+    ctxt.set_timeout( 16 );
+    while( window.get_is_open() && !close ) {
+        ui_manager::redraw_invalidated();
+        if( ctxt.handle_input() == "QUIT" && !cataimgui::client::want_text_input() ) {
+            close = true;
+        }
+    }
+    if( !changed ) {
+        return;
+    }
+    if( save || ( !close && query_yn( _( "Save changes?" ) ) ) ) {
+        if( is_safemode_in ) {
+            save_global();
+            if( has_character ) {
+                save_character();
+            }
+        } else {
+            create_rules();
+        }
+    } else {
+        global_rules = global_rules_old;
+        character_rules = character_rules_old;
+    }
+}
+#endif
+
 void safemode::show( const std::string &custom_name_in, bool is_safemode_in )
 {
+#if defined(TILES)
+    show_hybrid( custom_name_in, is_safemode_in );
+    return;
+#endif
     auto global_rules_old = global_rules;
     auto character_rules_old = character_rules;
 

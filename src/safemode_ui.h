@@ -114,6 +114,10 @@ class safemode
 
         void show();
         void show( const std::string &custom_name_in, bool is_safemode_in );
+#if defined(TILES)
+        /** Native Astral rules editor (used by show() under TILES). */
+        void show_hybrid( const std::string &title, bool is_safemode_in );
+#endif
 
         bool save_character();
         bool save_global();

@@ -47,3 +47,11 @@ id is looked up in the pack instead of `player_*`).
 Open `i`: the portrait frame shows the pack's sprite instead of the map doll. Nothing under
 `config/`, `save/` or the map tileset changes. If the pack lacks the entry the old doll
 appears — that is the fallback, not a failure.
+
+## NPC portraits use the same pack
+
+The dialogue window's NPC portrait (the white "Generic Female 002" box seen in play) is
+literally the art in `gfx/Test_Portrait_Pack/GENERIC_*_PORTRAIT_00N.png` — upstream's 128×128
+placeholders, not a missing image. Replacing those files (or shipping a real pack whose folder
+name contains `Portrait` and selecting it) fixes the NPC portraits; the `player_*` entries above
+are additional entries in the same pack.

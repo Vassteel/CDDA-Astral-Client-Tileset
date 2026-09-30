@@ -343,7 +343,7 @@ def run_scenario(name, x, cli, out, tag, opts):
 
     print("waiting for the main menu…")
     wait_stable(x, seconds=3, max_wait=240)
-    if name in ("menu", "showcase", "newgame", "load", "chargen", "world"):
+    if name in ("menu", "menus2", "menus3", "wgoptions", "showcase", "newgame", "load", "chargen", "world"):
         if "CDDA_UI_SHOWCASE" in cli.env:
             # the showcase opens itself at startup
             shot("showcase-components")
@@ -365,6 +365,99 @@ def run_scenario(name, x, cli, out, tag, opts):
             return shots
         key("t")  # Settings category (Escape at the top level would prompt to quit)
         shot("main-menu-settings")
+        if name == "wgoptions":
+            pr = opts.probe
+            def click_label(kind, label, exact=True, settle=3.0):
+                pr.read(0.5)
+                wdg = pr.first(kind, label, exact)
+                if wdg:
+                    hold = max(0.3, 1.5 * getattr(pr, "frame_dt", 0.1))
+                    x.click(*Probe.center(wdg), hold=hold, settle=hold)
+                    time.sleep(settle)
+                return wdg is not None
+            key("Escape"); time.sleep(1)
+            click_label("toolbar*", "World")
+            if click_label("button*", "Create world…", settle=5.0):
+                click_label("tab*", "World options")
+                wait_stable(x, seconds=1.5, max_wait=40)
+                shot("create-world-options")
+                x.scroll(3, 8) if hasattr(x, "scroll") else None
+            return shots
+        if name == "menus3":
+            # Settings → Options / Autopickup / Safemode / Colors, with slow-renderer waits.
+            pr = opts.probe
+            def click_label(kind, label, exact=True, settle=3.0):
+                pr.read(0.5)
+                wdg = pr.first(kind, label, exact)
+                print("click", kind, label, "->", "hit" if wdg else "MISS")
+                if wdg:
+                    hold = max(0.3, 1.5 * getattr(pr, "frame_dt", 0.1))
+                    x.click(*Probe.center(wdg), hold=hold, settle=hold)
+                    time.sleep(settle)
+                return wdg is not None
+            for row, title in (("Options", "Settings"), ("Autopickup", "Auto pickup manager"),
+                               ("Safemode", "Safe mode manager"), ("Colors", "Colors")):
+                if click_label("row*", row):
+                    click_label("button*", "Open", settle=6.0)
+                    wait_stable(x, seconds=1.5, max_wait=40)
+                    shot("dlg-" + row.lower())
+                    if row == "Options":
+                        for tab in ("Interface", "Graphics", "World Defaults", "Debug"):
+                            if click_label("tab*", tab, settle=2.0):
+                                shot("dlg-options-" + tab.lower().replace(" ", "-"))
+                    click_label("button*", "Cancel", settle=4.0)
+            return shots
+        if name == "menus2":
+            # Unified main-menu dialogs: New game / Load / Worlds / Settings, Options, world creator.
+            pr = opts.probe
+            def click_label(kind, label, exact=True, settle=1.0, expect=None):
+                pr.read(0.5)
+                wdg = pr.first(kind, label, exact)
+                print("click", kind, label, "->", "hit" if wdg else "MISS",
+                      "" if wdg else [w["label"] for w in pr.widgets()][:12])
+                if wdg:
+                    # Slow renderers: hold the press across at least one frame boundary,
+                    # and retry once when the expected window did not appear (the first
+                    # click after a screen closes can land before the hover is registered).
+                    hold = max(0.2, 1.5 * getattr(pr, "frame_dt", 0.1))
+                    for attempt in range(2):
+                        x.click(*Probe.center(wdg), hold=hold, settle=hold)
+                        time.sleep(max(settle, 2 * hold))
+                        if not expect:
+                            break
+                        pr.read(0.5)
+                        if pr.first("window", expect, True):
+                            break
+                return wdg is not None
+            key("Escape")  # close the Settings dialog
+            time.sleep(0.8)
+            click_label("toolbar*", "New Game", expect="New game"); shot("dlg-newgame")
+            click_label("toolbar*", "Load", expect="Load game"); shot("dlg-load")
+            click_label("toolbar*", "World", expect="Worlds"); shot("dlg-worlds")
+            if click_label("button*", "Create world…"):
+                wait_stable(x, seconds=1.5, max_wait=40); shot("dlg-create-world-basics")
+                click_label("tab*", "Mods", exact=False); shot("dlg-create-world-mods")
+                click_label("tab*", "World options"); shot("dlg-create-world-options")
+                click_label("button*", "Cancel"); time.sleep(0.8)
+                click_label("button*", "[Y]es", exact=False); time.sleep(1.0)
+            click_label("toolbar*", "Settings", expect="Settings"); shot("dlg-settings")
+            if click_label("row*", "Options"):
+                click_label("button*", "Open")
+                wait_stable(x, seconds=1.5, max_wait=40); shot("dlg-options-general")
+                for tab in ("Interface", "Graphics", "World Defaults", "Debug"):
+                    if click_label("tab*", tab):
+                        shot("dlg-options-" + tab.lower().replace(" ", "-"))
+                click_label("button*", "Cancel"); time.sleep(1.0)
+            if click_label("row*", "Autopickup", exact=False):
+                click_label("button*", "Open"); wait_stable(x, seconds=1.5, max_wait=40); shot("dlg-autopickup")
+                click_label("button*", "Cancel"); time.sleep(1.0)
+            if click_label("row*", "Safemode", exact=False):
+                click_label("button*", "Open"); wait_stable(x, seconds=1.5, max_wait=40); shot("dlg-safemode")
+                click_label("button*", "Cancel"); time.sleep(1.0)
+            if click_label("row*", "Colors", exact=False):
+                click_label("button*", "Open"); wait_stable(x, seconds=1.5, max_wait=40); shot("dlg-colors")
+                click_label("button*", "Cancel"); time.sleep(1.0)
+            return shots
         if name == "menu":
             key("a")
             shot("main-menu-load")

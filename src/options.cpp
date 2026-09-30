@@ -39,6 +39,13 @@
 #include "try_parse_integer.h"
 #include "ui_manager.h"
 #include "worldfactory.h"
+#include "worldgen_options.h"
+#if defined(TILES)
+#include "options_hybrid.h"
+#include "ui_hybrid_window.h"
+#include "ui_hybrid_widgets.h"
+#include "cata_imgui.h"
+#endif
 
 #if defined(__ANDROID__)
 #include <jni.h>
@@ -2943,38 +2950,39 @@ void options_manager::add_options_world_default()
 
     add_empty_line();
 
-    // These optiosn are purposefully and permanently hidden. It can only be modified through the sliders when creating a new world.
-    // As such there is no name or description to show, those are blanked.
-    add( "SPAWN_DENSITY", "world_default", translation(), translation(), 0.0, 50.0, 1.0, 0.1,
-         COPT_ALWAYS_HIDE
-       );
+    // Difficulty values: set by the world-creation presets, editable here too.
+    add_option_group( "world_default", Group( "difficulty_worlddef_opts", to_translation( "Difficulty" ),
+                      to_translation( "The values the difficulty presets set.  Editing one marks the preset as custom." ) ),
+    [&]( const std::string & page_id ) {
+        add( "SPAWN_DENSITY", page_id, to_translation( "Monster density" ),
+             to_translation( "Multiplier on how many monsters spawn." ), 0.0, 50.0, 1.0, 0.1 );
+        add( "ITEM_SPAWNRATE", page_id, to_translation( "Item spawn rate" ),
+             to_translation( "Multiplier on how many items spawn." ), 0.01, 10.0, 1.0, 0.01 );
+        add( "MONSTER_SPEED", page_id, to_translation( "Monster speed" ),
+             to_translation( "Monster speed as a percentage of normal." ), 1, 1000, 100, COPT_NO_HIDE, "%i%%" );
+        add( "MONSTER_RESILIENCE", page_id, to_translation( "Monster resilience" ),
+             to_translation( "Monster hit points as a percentage of normal." ), 1, 1000, 100, COPT_NO_HIDE, "%i%%" );
+        add( "EVOLUTION_INVERSE_MULTIPLIER", page_id, to_translation( "Evolution slowdown" ),
+             to_translation( "Multiplier on the time monsters take to evolve; higher is slower." ), 0.0, 100, 1.0, 0.01 );
+    } );
 
-    add( "ITEM_SPAWNRATE", "world_default", translation(), translation(), 0.01, 10.0, 1.0, 0.01,
-         COPT_ALWAYS_HIDE
-       );
+    add_option_group( "world_default", Group( "time_worlddef_opts", to_translation( "Time and seasons" ),
+                      to_translation( "Calendar settings fixed when the world is made." ) ),
+    [&]( const std::string & page_id ) {
+        add( "SEASON_LENGTH", page_id, to_translation( "Season length" ),
+             to_translation( "Length of each season in days." ), 14, 127, 91 );
+        add( "ETERNAL_SEASON", page_id, to_translation( "Eternal season" ),
+             to_translation( "The starting season never changes." ), false );
+        add( "ETERNAL_TIME_OF_DAY", page_id, to_translation( "Eternal time of day" ),
+        to_translation( "Freeze the day at a time of day." ), {
+            { "normal", to_translation( "Normal" ) }, { "day", to_translation( "Day" ) },
+            { "night", to_translation( "Night" ) }
+        }, "normal" );
+        add( "CONSTRUCTION_SCALING", page_id, to_translation( "Construction scaling" ),
+             to_translation( "Construction time as a percentage of normal." ), 0, 1000, 100, COPT_NO_HIDE, "%i%%" );
+    } );
 
-    add( "MONSTER_SPEED", "world_default", translation(), translation(), 1, 1000, 100, COPT_ALWAYS_HIDE,
-         "%i%%"
-       );
-
-    add( "MONSTER_RESILIENCE", "world_default", translation(), translation(), 1, 1000, 100,
-         COPT_ALWAYS_HIDE, "%i%%"
-       );
-
-    add( "EVOLUTION_INVERSE_MULTIPLIER", "world_default", translation(), translation(),
-         0.0, 100, 1.0, 0.01, COPT_ALWAYS_HIDE
-       );
-
-    add( "SEASON_LENGTH", "world_default", translation(), translation(), 14, 127, 91,
-         COPT_ALWAYS_HIDE );
-
-    add( "CONSTRUCTION_SCALING", "world_default", translation(), translation(), 0, 1000, 100,
-         COPT_ALWAYS_HIDE );
-
-    add( "ETERNAL_SEASON", "world_default", translation(), translation(), false, COPT_ALWAYS_HIDE );
-
-    add( "ETERNAL_TIME_OF_DAY", "world_default", translation(), translation(), "normal", 8,
-         COPT_ALWAYS_HIDE );
+    add_empty_line();
 
     add_option_group( "world_default", Group( "misc_worlddef_opts", to_translation( "Misc options" ),
                       to_translation( "Miscellaneous options." ) ),
@@ -2997,6 +3005,9 @@ void options_manager::add_options_world_default()
              "a reasonable pace." ),
          true
        );
+
+    add_empty_line();
+    worldgen_options::add_options( *this );
 }
 
 void options_manager::add_options_debug()
@@ -3454,6 +3465,7 @@ static void refresh_tiles( bool, bool, bool )
 }
 #endif // TILES
 
+#if !defined(TILES)
 static void draw_borders_external(
     const catacurses::window &w, int horizontal_level, const std::set<int> &vert_lines,
     const bool world_options_only )
@@ -3482,6 +3494,7 @@ static void draw_borders_internal( const catacurses::window &w, std::set<int> &v
     wattroff( w, BORDER_COLOR );
     wnoutrefresh( w );
 }
+#endif // !TILES
 
 std::string
 options_manager::PageItem::fmt_tooltip( const std::string &group_id,
@@ -3556,6 +3569,64 @@ std::string options_manager::show( bool ingame, const bool world_options_only, b
     if( world_generator->active_world == nullptr ) {
         ingame = false;
     }
+
+    // Decision made by the native screen's buttons: true = save, false = revert,
+    // unset = ask (Escape on a changed screen), as the classic screen does.
+    std::optional<bool> hybrid_decision;
+#if defined(TILES)
+    ( void ) with_tabs;
+    ( void ) iWorldOptPage;
+    {
+        // Native Astral options screen: tabs, toggles, drop-downs, sliders.
+        options_hybrid_view view( *this, &ACTIVE_WORLD_OPTIONS, ingame, world_options_only );
+        bool close = false;
+        const std::string title = world_options_only ? _( "World options" ) :
+                                  ingame ? _( "Options" ) : _( "Settings" );
+        hybrid_window window( title, [&]() {
+            namespace w = ui_hybrid_widgets;
+            const ui_hybrid_chrome::theme::tokens &tk = ui_hybrid_chrome::theme::get();
+            view.draw( tk.footer );
+            if( w::footer_begin( "options_footer" ) ) {
+                ImGui::AlignTextToFramePadding();
+                ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                                    view.changed() ? _( "Changes apply when saved." ) : _( "No changes." ) );
+                ImGui::SameLine();
+                const float save_w = w::action_button_width( _( "Save changes" ), w::button_kind::primary );
+                const float cancel_w = w::action_button_width( _( "Cancel" ) );
+                w::footer_align_right( save_w + cancel_w + ImGui::GetStyle().ItemSpacing.x );
+                if( w::action_button( _( "Cancel" ), w::button_kind::secondary ) ) {
+                    hybrid_decision = false;
+                    close = true;
+                }
+                ImGui::SameLine();
+                if( w::action_button( _( "Save changes" ), w::button_kind::primary, ImVec2( 0, 0 ),
+                                      view.changed(), _( "Nothing changed yet." ) ) ) {
+                    hybrid_decision = true;
+                    close = true;
+                }
+            }
+            w::footer_end();
+        } );
+        input_context ctxt( "OPTIONS" );
+        ctxt.register_action( "QUIT" );
+        ctxt.register_action( "ANY_INPUT" );
+        ctxt.set_timeout( 16 );
+        while( window.get_is_open() && !close ) {
+            ui_manager::redraw_invalidated();
+            const std::string action = ctxt.handle_input();
+            if( action == "QUIT" && !cataimgui::client::want_text_input() ) {
+                close = true;
+            }
+        }
+        if( world_options_only ) {
+            // The caller owns the world's container; a cancel restores it.
+            if( hybrid_decision.has_value() && !*hybrid_decision ) {
+                ACTIVE_WORLD_OPTIONS = WOPTIONS_OLD;
+            }
+            return "QUIT";
+        }
+    }
+#else
 
     size_t sel_worldgen_tab = 1;
     std::map<size_t, inclusive_rectangle<point>> worldgen_tab_map;
@@ -4050,6 +4121,8 @@ std::string options_manager::show( bool ingame, const bool world_options_only, b
         }
     }
 
+#endif
+
     //Look for changes
     bool options_changed = false;
     bool world_options_changed = false;
@@ -4094,7 +4167,15 @@ std::string options_manager::show( bool ingame, const bool world_options_only, b
     }
 
     if( options_changed ) {
-        if( query_yn( _( "Save changes?" ) ) ) {
+#if defined(TILES)
+        // Closing the native editor saves; its explicit Cancel button discards.
+        // value_or evaluates its argument even when a decision is present, so
+        // passing query_yn here would also prompt after Save or Cancel.
+        const bool save_changes = hybrid_decision.value_or( true );
+#else
+        const bool save_changes = query_yn( _( "Save changes?" ) );
+#endif
+        if( save_changes ) {
             static_popup popup;
             popup.message( "%s", _( "Please wait…\nApplying option changes…" ) );
             ui_manager::redraw();

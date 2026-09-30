@@ -1,4 +1,5 @@
 #include "vehicle_group.h"
+#include "worldgen_options.h"
 
 #include <cstddef>
 #include <functional>
@@ -210,6 +211,12 @@ void VehicleSpawn::reset()
 
 void VehicleSpawn::apply( map &m, const std::string &terrain_name ) const
 {
+    // World option: vehicle wreck density. Above 100% the spawn always runs
+    // (the functions place their own random counts); below it is skipped.
+    const float density = worldgen_options::get().vehicles;
+    if( density < 1.f && !x_in_y( density, 1.f ) ) {
+        return;
+    }
     const shared_ptr_fast<VehicleFunction> *func = types.pick();
     if( func == nullptr ) {
         debugmsg( "unable to find valid function for vehicle spawn" );

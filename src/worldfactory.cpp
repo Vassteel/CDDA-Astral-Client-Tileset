@@ -1,6 +1,7 @@
 #include "worldfactory.h"
 
 #include <algorithm>
+#include <functional>
 #include <array>
 #include <charconv>
 #include <ctime>
@@ -38,6 +39,14 @@
 #include "ui_manager.h"
 #include "zzip.h"
 #include "zzip_stack.h"
+#if defined(TILES)
+#include "cata_imgui.h"
+#include "imgui/imgui.h"
+#include "options_hybrid.h"
+#include "ui_hybrid_chrome.h"
+#include "ui_hybrid_widgets.h"
+#include "ui_hybrid_window.h"
+#endif
 
 // single instance of world generator
 std::unique_ptr<worldfactory> world_generator;
@@ -184,6 +193,11 @@ WORLD *worldfactory::make_new_world( bool show_prompt, const std::string &world_
     }
 
     if( show_prompt ) {
+#if defined(TILES)
+        if( show_worldgen_hybrid( retworld.get(), !world_to_copy.empty() ) < 0 ) {
+            return nullptr;
+        }
+#else
         if( world_to_copy.empty() ) {
             if( show_worldgen_basic( retworld.get() ) < 0 ) {
                 return nullptr;
@@ -191,6 +205,7 @@ WORLD *worldfactory::make_new_world( bool show_prompt, const std::string &world_
         } else if( show_worldgen_advanced( retworld.get() ) < 0 ) {
             return nullptr;
         }
+#endif
     }
 
     for( const mod_id &checked_mod : retworld->active_mod_order ) {
@@ -748,6 +763,364 @@ void worldfactory::save_last_world_info() const
         jsout.end_object();
     }, _( "last world info" ) );
 }
+
+#if defined(TILES)
+int worldfactory::show_worldgen_hybrid( WORLD *world, bool copying )
+{
+    namespace w = ui_hybrid_widgets;
+    namespace theme = ui_hybrid_chrome::theme;
+    enum class page { basics, mods, options };
+    page current = page::basics;
+    std::string worldname = world->world_name;
+    // Sliders (the WORLDGEN presets) and their current levels.
+    std::vector<option_slider_id> wg_sliders;
+    std::vector<int> wg_slevels;
+    for( const option_slider &osl : option_slider::get_all() ) {
+        if( osl.context() == "WORLDGEN" ) {
+            wg_sliders.emplace_back( osl.id );
+            wg_slevels.emplace_back( osl.default_level() );
+        }
+    }
+    const std::vector<int> wg_slvl_default = wg_slevels;
+    bool custom_opts = copying; // a copied world carries its own options
+    // Mods: available lists per tab, filter, selection.
+    mod_ui mods_ui( *mman );
+    struct mod_tab {
+        std::string id;
+        std::string name;
+        std::vector<mod_id> mods;
+    };
+    std::vector<mod_tab> tabs;
+    for( const std::pair<std::string, translation> &tab : get_mod_list_tabs() ) {
+        tabs.push_back( { tab.first, tab.second.translated(), {} } );
+    }
+    const std::map<std::string, std::string> &cat_tab_map = get_mod_list_cat_tab();
+    for( const mod_id &mod : mman->get_usable_mods() ) {
+        const int cat_idx = mod->category.first;
+        const std::string &cat_id = cat_idx >= 0 &&
+                                    cat_idx < static_cast<int>( get_mod_list_categories().size() ) ?
+                                    get_mod_list_categories()[cat_idx].first : std::string();
+        std::string dest = "tab_default";
+        const auto iter = cat_tab_map.find( cat_id );
+        if( iter != cat_tab_map.end() ) {
+            dest = iter->second;
+        }
+        for( mod_tab &tab : tabs ) {
+            if( tab.id == dest ) {
+                tab.mods.push_back( mod );
+                break;
+            }
+        }
+    }
+    int mod_tab_sel = 0;
+    std::string mod_filter;
+    mod_id inspected;
+    int active_sel = -1;
+    // Options page: the shared native view on the draft's container.
+    options_hybrid_view opt_view( get_options(), &world->WORLD_OPTIONS, false, true );
+    int result = 0;
+    bool close = false;
+    // Blocking prompts must not run inside the ImGui draw callback; they are
+    // queued here and run by the loop after the frame.
+    std::function<void()> deferred;
+    const auto reset_world = [&]() {
+        world->WORLD_OPTIONS = get_options().get_world_defaults();
+        world->world_saves.clear();
+        world->active_mod_order = mman->get_default_mods();
+        wg_slevels = wg_slvl_default;
+        custom_opts = false;
+    };
+    hybrid_window window( copying ? _( "Copy world" ) : _( "Create world" ), [&]() {
+        const float s = theme::scale();
+        const ui_hybrid_chrome::theme::tokens &tk = theme::get();
+        // Page tabs.
+        if( w::tab( _( "Basics" ), current == page::basics, "world" ) ) {
+            current = page::basics;
+        }
+        ImGui::SameLine( 0.f, tk.xs * s );
+        if( w::tab( string_format( _( "Mods (%d)" ), world->active_mod_order.size() ).c_str(),
+                    current == page::mods, "list" ) ) {
+            current = page::mods;
+        }
+        ImGui::SameLine( 0.f, tk.xs * s );
+        if( w::tab( _( "World options" ), current == page::options, "gear" ) ) {
+            current = page::options;
+        }
+        if( current == page::options ) {
+            opt_view.draw( tk.footer );
+            if( opt_view.take_edit() ) {
+                custom_opts = true;
+            }
+        } else if( w::body_begin( "worldgen_body", tk.footer, ImGuiWindowFlags_NoScrollbar ) ) {
+            if( current == page::basics ) {
+                w::section_label( _( "World name" ) );
+                char buf[128];
+                std::snprintf( buf, sizeof( buf ), "%s", worldname.c_str() );
+                const float rnd_w = w::action_button_width( _( "Random name" ) );
+                ImGui::SetNextItemWidth( std::min( 520.f * s, ImGui::GetContentRegionAvail().x - rnd_w -
+                                         ImGui::GetStyle().ItemSpacing.x ) );
+                if( ImGui::InputTextWithHint( "##worldname", _( "Name this world…" ), buf, sizeof( buf ) ) ) {
+                    worldname = buf;
+                }
+                if( w::probe::enabled() ) {
+                    w::probe::record( "input", "world_name", ImGui::GetItemRectMin(), ImGui::GetItemRectMax() );
+                }
+                ImGui::SameLine();
+                if( w::action_button( _( "Random name" ), w::button_kind::tertiary ) ) {
+                    worldname = pick_random_name();
+                }
+                ImGui::Dummy( ImVec2( 0.f, tk.sm * s ) );
+                w::section_label( _( "Presets" ) );
+                if( custom_opts ) {
+                    ImGui::PushTextWrapPos( ImGui::GetCursorPosX() + ImGui::GetContentRegionAvail().x );
+                    ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                                        _( "Custom: world options were edited on the World options tab.  Picking a preset applies its values again." ) );
+                    ImGui::PopTextWrapPos();
+                }
+                if( ImGui::BeginTable( "##presets", 3, ImGuiTableFlags_SizingStretchProp | ImGuiTableFlags_RowBg ) ) {
+                    ImGui::TableSetupColumn( "name", ImGuiTableColumnFlags_WidthStretch, 0.3f );
+                    ImGui::TableSetupColumn( "level", ImGuiTableColumnFlags_WidthStretch, 0.3f );
+                    ImGui::TableSetupColumn( "desc", ImGuiTableColumnFlags_WidthStretch, 0.4f );
+                    for( int i = 0; i < static_cast<int>( wg_sliders.size() ); ++i ) {
+                        ImGui::PushID( i );
+                        ImGui::TableNextRow();
+                        ImGui::TableSetColumnIndex( 0 );
+                        ImGui::AlignTextToFramePadding();
+                        ImGui::TextUnformatted( wg_sliders[i]->name().translated().c_str() );
+                        ImGui::TableSetColumnIndex( 1 );
+                        std::vector<std::string> names;
+                        for( int l = 0; l < wg_sliders[i]->count(); ++l ) {
+                            names.push_back( wg_sliders[i]->level_name( l ).translated() );
+                        }
+                        const std::string shown = custom_opts ?
+                                                  string_format( _( "%s (custom)" ), wg_sliders[i]->level_name( wg_slevels[i] ).translated() ) :
+                                                  wg_sliders[i]->level_name( wg_slevels[i] ).translated();
+                        const int chosen = w::dropdown( "##lvl", shown, names, wg_slevels[i] );
+                        if( chosen >= 0 ) {
+                            wg_slevels[i] = chosen;
+                            wg_sliders[i]->apply_opts( chosen, world->WORLD_OPTIONS );
+                            custom_opts = false;
+                        }
+                        ImGui::TableSetColumnIndex( 2 );
+                        ImGui::PushTextWrapPos( ImGui::GetCursorPosX() + ImGui::GetContentRegionAvail().x );
+                        ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                                            wg_sliders[i]->level_desc( wg_slevels[i] ).translated().c_str() );
+                        ImGui::PopTextWrapPos();
+                        ImGui::PopID();
+                    }
+                    ImGui::EndTable();
+                }
+                ImGui::Dummy( ImVec2( 0.f, tk.sm * s ) );
+                if( w::action_button( _( "Randomize presets" ), w::button_kind::secondary ) ) {
+                    for( int i = 0; i < static_cast<int>( wg_sliders.size() ); i++ ) {
+                        wg_slevels[i] = wg_sliders[i]->random_level();
+                        wg_sliders[i]->apply_opts( wg_slevels[i], world->WORLD_OPTIONS );
+                    }
+                    custom_opts = false;
+                }
+                ImGui::SameLine();
+                if( w::action_button( _( "Reset everything" ), w::button_kind::tertiary ) ) {
+                    deferred = [&]() {
+                        if( query_yn( _( "Are you sure you want to reset this world?" ) ) ) {
+                            reset_world();
+                        }
+                    };
+                }
+            } else {
+                // Mods: category tabs + available list on the left, active order on the right.
+                const float gap = tk.lg * s;
+                const float h = ImGui::GetContentRegionAvail().y;
+                const float left_w = std::floor( ( ImGui::GetContentRegionAvail().x - gap ) * 0.5f );
+                ImGui::BeginChild( "mods_left", ImVec2( left_w, h ), ImGuiChildFlags_None,
+                                   ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground );
+                for( int t = 0; t < static_cast<int>( tabs.size() ); ++t ) {
+                    if( t > 0 ) {
+                        ImGui::SameLine( 0.f, tk.xs * s );
+                    }
+                    if( w::tab( tabs[t].name.c_str(), mod_tab_sel == t ) ) {
+                        mod_tab_sel = t;
+                    }
+                }
+                char fbuf[128];
+                std::snprintf( fbuf, sizeof( fbuf ), "%s", mod_filter.c_str() );
+                ImGui::SetNextItemWidth( -FLT_MIN );
+                if( ImGui::InputTextWithHint( "##modfilter", _( "Filter mods…" ), fbuf, sizeof( fbuf ) ) ) {
+                    mod_filter = fbuf;
+                }
+                if( w::panel_begin( "mods_avail", ImVec2( 0.f, 0.f ), true ) ) {
+                    ImGui::PushStyleVar( ImGuiStyleVar_ItemSpacing, ImVec2( tk.sm * s, tk.xs * s ) );
+                    int shown = 0;
+                    if( mod_tab_sel >= 0 && mod_tab_sel < static_cast<int>( tabs.size() ) ) {
+                        for( const mod_id &mod : tabs[mod_tab_sel].mods ) {
+                            if( !mod_filter.empty() && !lcmatch( mod->name(), mod_filter ) ) {
+                                continue;
+                            }
+                            const bool active = std::find( world->active_mod_order.begin(), world->active_mod_order.end(),
+                                                           mod ) != world->active_mod_order.end();
+                            w::row_state st;
+                            st.selected = inspected == mod;
+                            st.disabled = mod->obsolete;
+                            const w::row_result r = w::selectable_row( mod.str().c_str(), mod->name(),
+                                                    active ? _( "active" ) : mod->version, active ? "check" : nullptr, nullptr, st );
+                            if( r.clicked ) {
+                                inspected = mod;
+                            }
+                            if( r.double_clicked && !active ) {
+                                mods_ui.try_add( mod, world->active_mod_order );
+                            }
+                            ++shown;
+                        }
+                    }
+                    if( shown == 0 ) {
+                        w::empty_state( _( "No mods here" ) );
+                    }
+                    ImGui::PopStyleVar();
+                }
+                w::panel_end();
+                ImGui::EndChild();
+                ImGui::SameLine( 0.f, gap );
+                ImGui::BeginChild( "mods_right", ImVec2( 0.f, h ), ImGuiChildFlags_None,
+                                   ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoBackground );
+                w::section_label( _( "Active mods, load order" ), "list" );
+                const float desc_h = std::floor( h * 0.35f );
+                if( w::panel_begin( "mods_active", ImVec2( 0.f, ImGui::GetContentRegionAvail().y - desc_h - tk.sm * s ), true ) ) {
+                    ImGui::PushStyleVar( ImGuiStyleVar_ItemSpacing, ImVec2( tk.sm * s, tk.xs * s ) );
+                    for( int i = 0; i < static_cast<int>( world->active_mod_order.size() ); ++i ) {
+                        const mod_id &mod = world->active_mod_order[i];
+                        w::row_state st;
+                        st.selected = active_sel == i;
+                        const std::string id = "act" + std::to_string( i );
+                        const w::row_result r = w::selectable_row( id.c_str(), mod.is_valid() ? mod->name() : mod.str(),
+                                                std::to_string( i + 1 ), nullptr, nullptr, st );
+                        if( r.clicked ) {
+                            active_sel = i;
+                            inspected = mod;
+                        }
+                    }
+                    ImGui::PopStyleVar();
+                }
+                w::panel_end();
+                const bool have_active = active_sel >= 0 && active_sel < static_cast<int>( world->active_mod_order.size() );
+                if( w::action_button( _( "Up" ), w::button_kind::tertiary, ImVec2( 0, 30.f ), have_active &&
+                                      mods_ui.can_shift_up( active_sel, world->active_mod_order ) ) ) {
+                    size_t sel = active_sel;
+                    mods_ui.try_shift( '+', sel, world->active_mod_order );
+                    active_sel = sel;
+                }
+                ImGui::SameLine();
+                if( w::action_button( _( "Down" ), w::button_kind::tertiary, ImVec2( 0, 30.f ), have_active &&
+                                      mods_ui.can_shift_down( active_sel, world->active_mod_order ) ) ) {
+                    size_t sel = active_sel;
+                    mods_ui.try_shift( '-', sel, world->active_mod_order );
+                    active_sel = sel;
+                }
+                ImGui::SameLine();
+                if( w::action_button( _( "Remove" ), w::button_kind::tertiary, ImVec2( 0, 30.f ), have_active ) ) {
+                    mods_ui.try_rem( active_sel, world->active_mod_order );
+                    active_sel = -1;
+                }
+                ImGui::SameLine();
+                const bool can_add = inspected.is_valid() &&
+                                     std::find( world->active_mod_order.begin(), world->active_mod_order.end(),
+                                                inspected ) == world->active_mod_order.end();
+                if( w::action_button( _( "Add selected" ), w::button_kind::secondary, ImVec2( 0, 30.f ), can_add,
+                                      _( "Select a mod on the left." ) ) ) {
+                    mods_ui.try_add( inspected, world->active_mod_order );
+                }
+                ImGui::SameLine();
+                if( w::action_button( _( "Save as default" ), w::button_kind::tertiary, ImVec2( 0, 30.f ) ) ) {
+                    deferred = [&]() {
+                        if( mman->set_default_mods( world->active_mod_order ) ) {
+                            popup( _( "Saved list of active mods as default" ) );
+                        } else {
+                            popup( _( "Failed to save default mods to file." ) );
+                        }
+                    };
+                }
+                if( w::panel_begin( "mods_desc", ImVec2( 0.f, 0.f ), true ) ) {
+                    if( inspected.is_valid() ) {
+                        ImGui::PushTextWrapPos( ImGui::GetCursorPosX() + ImGui::GetContentRegionAvail().x );
+                        cataimgui::draw_colored_text( mods_ui.get_information( &inspected.obj() ) );
+                        ImGui::PopTextWrapPos();
+                    } else {
+                        ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                                            _( "Select a mod to read about it." ) );
+                    }
+                }
+                w::panel_end();
+                ImGui::EndChild();
+            }
+            w::body_end();
+        } else {
+            w::body_end();
+        }
+        if( w::footer_begin( "worldgen_footer" ) ) {
+            ImGui::AlignTextToFramePadding();
+            ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s", worldname.empty() ?
+                                _( "No name yet: a random one is used." ) : _( "Finish creates the world; nothing is saved before that." ) );
+            ImGui::SameLine();
+            const float cancel_w = w::action_button_width( _( "Cancel" ) );
+            const float finish_w = w::action_button_width( _( "Finish" ), w::button_kind::primary );
+            w::footer_align_right( cancel_w + finish_w + ImGui::GetStyle().ItemSpacing.x );
+            if( w::action_button( _( "Cancel" ), w::button_kind::secondary ) ) {
+                deferred = [&]() {
+                    if( query_yn( _( "Do you want to abort World Generation?" ) ) ) {
+                        result = -999;
+                        close = true;
+                    }
+                };
+            }
+            ImGui::SameLine();
+            if( w::action_button( _( "Finish" ), w::button_kind::primary ) ) {
+                deferred = [&]() {
+                    std::string name = worldname;
+                    if( name.empty() ) {
+                        if( query_yn( _( "Are you SURE you're finished?  World name will be randomly generated." ) ) ) {
+                            name = pick_random_name();
+                        } else {
+                            return;
+                        }
+                    } else if( !query_yn( _( "Are you SURE you're finished?" ) ) ) {
+                        return;
+                    }
+                    if( valid_worldname( name ) ) {
+                        world->world_name = name;
+                        result = 1;
+                        close = true;
+                    }
+                };
+            }
+        }
+        w::footer_end();
+    } );
+    input_context ctxt( "WORLDGEN_CONFIRM_DIALOG" );
+    ctxt.register_action( "QUIT" );
+    ctxt.register_action( "ANY_INPUT" );
+    ctxt.set_timeout( 16 );
+    while( window.get_is_open() && !close ) {
+        ui_manager::redraw_invalidated();
+        if( deferred ) {
+            std::function<void()> run = std::move( deferred );
+            deferred = nullptr;
+            run();
+            continue;
+        }
+        const std::string action = ctxt.handle_input();
+        if( action == "QUIT" && !cataimgui::client::want_text_input() ) {
+            if( query_yn( _( "Do you want to abort World Generation?" ) ) ) {
+                result = -999;
+                close = true;
+            }
+        }
+    }
+    if( !close ) {
+        // Closed with the shell's × control.
+        result = -999;
+    }
+    world->world_name = worldname;
+    return result;
+}
+#endif
 
 std::string worldfactory::pick_random_name()
 {
