@@ -248,9 +248,13 @@ bool window_shell( const std::string &title, frame_kind kind, bool show_close, c
                   ImVec2( right_limit, origin.y + bar_h ), T().text, title );
     pop_font();
     if( show_close ) {
+        // Title-bar controls follow the current window width; they must not
+        // feed that width back into content measurement for auto-sized dialogs.
+        const float content_max_x = w->DC.CursorMaxPos.x;
         ImGui::SetCursorScreenPos( ImVec2( max.x - close_size - T().md * s,
                                            origin.y + ( bar_h - close_size ) * 0.5f ) );
         closed = close_button( "close" );
+        w->DC.CursorMaxPos.x = content_max_x;
     }
     // Bronze rule under the title, fading to the right.
     const float rule_y = origin.y + bar_h;

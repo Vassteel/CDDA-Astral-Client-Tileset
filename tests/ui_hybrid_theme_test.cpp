@@ -5,6 +5,68 @@
 #include "ui_hybrid_chrome.h"
 #include "ui_hybrid_textures.h"
 
+#if defined(TILES)
+#include "cata_scope_helpers.h"
+#include "imgui/imgui.h"
+#include "ui_hybrid_widgets.h"
+
+TEST_CASE( "astral_auto_sized_shell_does_not_grow_or_retain_stale_width", "[ui][popup]" )
+{
+    ImGuiContext *previous = ImGui::GetCurrentContext();
+    ImGuiContext *context = ImGui::CreateContext();
+    on_out_of_scope cleanup( [&]() {
+        ui_hybrid_chrome::theme::override_level( -1 );
+        ImGui::DestroyContext( context );
+        ImGui::SetCurrentContext( previous );
+    } );
+    ui_hybrid_chrome::theme::override_level( 2 );
+    ImGuiIO &io = ImGui::GetIO();
+    io.IniFilename = nullptr;
+    io.DisplaySize = ImVec2( 3840, 2160 );
+    io.DeltaTime = 1.f / 60.f;
+    ImFontConfig font;
+    font.SizePixels = GENERATE( 16.f, 24.f );
+    io.Fonts->AddFontDefault( &font );
+    io.Fonts->AddFontDefault( &font );
+    font.SizePixels *= 1.5f;
+    io.Fonts->AddFontDefault( &font );
+    io.Fonts->Build();
+    const auto kind = GENERATE( ui_hybrid_widgets::frame_kind::dialog,
+                               ui_hybrid_widgets::frame_kind::large,
+                               ui_hybrid_widgets::frame_kind::popup );
+    const float inset = ( kind == ui_hybrid_widgets::frame_kind::large ? 20.f :
+                          kind == ui_hybrid_widgets::frame_kind::dialog ? 14.f : 10.f ) *
+                        ( font.SizePixels / 1.5f / 16.f );
+    float settled_width = 0.f;
+    for( int frame = 0; frame < 120; ++frame ) {
+        ImGui::NewFrame();
+        ImGui::SetNextWindowSize( ImVec2( 1400.f, 200.f ), ImGuiCond_Once );
+        ImGui::SetNextWindowSizeConstraints( ImVec2( 500.f, 0.f ), ImVec2( 3500.f, 1000.f ) );
+        ImGui::PushStyleVar( ImGuiStyleVar_WindowPadding, ImVec2( inset, inset ) );
+        ImGui::Begin( "stat-popup-regression", nullptr,
+                      ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar |
+                      ImGuiWindowFlags_NoSavedSettings );
+        ui_hybrid_widgets::window_shell( "Set new strength (between 4 and 20):", kind );
+        int value = 8;
+        ImGui::SetNextItemWidth( 160.f );
+        ImGui::InputInt( "##stat", &value );
+        ImGui::Button( "Apply" );
+        ImGui::SameLine();
+        ImGui::Button( "Cancel" );
+        const float width = ImGui::GetWindowWidth();
+        if( frame == 8 ) {
+            settled_width = width;
+            CHECK( width == Approx( 500.f ) );
+        } else if( frame > 8 ) {
+            CHECK( width == Approx( settled_width ) );
+        }
+        ImGui::End();
+        ImGui::PopStyleVar();
+        ImGui::Render();
+    }
+}
+#endif
+
 // Shared Astral UI foundation: pure logic that does not need a renderer.
 
 static float srgb_to_linear( float c )
