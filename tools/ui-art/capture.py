@@ -343,7 +343,7 @@ def run_scenario(name, x, cli, out, tag, opts):
 
     print("waiting for the main menu…")
     wait_stable(x, seconds=3, max_wait=240)
-    if name in ("menu", "menus2", "menus3", "showcase", "newgame", "load", "chargen", "world"):
+    if name in ("menu", "menus2", "menus3", "wgoptions", "showcase", "newgame", "load", "chargen", "world"):
         if "CDDA_UI_SHOWCASE" in cli.env:
             # the showcase opens itself at startup
             shot("showcase-components")
@@ -365,6 +365,24 @@ def run_scenario(name, x, cli, out, tag, opts):
             return shots
         key("t")  # Settings category (Escape at the top level would prompt to quit)
         shot("main-menu-settings")
+        if name == "wgoptions":
+            pr = opts.probe
+            def click_label(kind, label, exact=True, settle=3.0):
+                pr.read(0.5)
+                wdg = pr.first(kind, label, exact)
+                if wdg:
+                    hold = max(0.3, 1.5 * getattr(pr, "frame_dt", 0.1))
+                    x.click(*Probe.center(wdg), hold=hold, settle=hold)
+                    time.sleep(settle)
+                return wdg is not None
+            key("Escape"); time.sleep(1)
+            click_label("toolbar*", "World")
+            if click_label("button*", "Create world…", settle=5.0):
+                click_label("tab*", "World options")
+                wait_stable(x, seconds=1.5, max_wait=40)
+                shot("create-world-options")
+                x.scroll(3, 8) if hasattr(x, "scroll") else None
+            return shots
         if name == "menus3":
             # Settings → Options / Autopickup / Safemode / Colors, with slow-renderer waits.
             pr = opts.probe

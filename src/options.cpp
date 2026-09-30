@@ -39,6 +39,7 @@
 #include "try_parse_integer.h"
 #include "ui_manager.h"
 #include "worldfactory.h"
+#include "worldgen_options.h"
 #if defined(TILES)
 #include "options_hybrid.h"
 #include "ui_hybrid_window.h"
@@ -2949,38 +2950,39 @@ void options_manager::add_options_world_default()
 
     add_empty_line();
 
-    // These optiosn are purposefully and permanently hidden. It can only be modified through the sliders when creating a new world.
-    // As such there is no name or description to show, those are blanked.
-    add( "SPAWN_DENSITY", "world_default", translation(), translation(), 0.0, 50.0, 1.0, 0.1,
-         COPT_ALWAYS_HIDE
-       );
+    // Difficulty values: set by the world-creation presets, editable here too.
+    add_option_group( "world_default", Group( "difficulty_worlddef_opts", to_translation( "Difficulty" ),
+                      to_translation( "The values the difficulty presets set.  Editing one marks the preset as custom." ) ),
+    [&]( const std::string & page_id ) {
+        add( "SPAWN_DENSITY", page_id, to_translation( "Monster density" ),
+             to_translation( "Multiplier on how many monsters spawn." ), 0.0, 50.0, 1.0, 0.1 );
+        add( "ITEM_SPAWNRATE", page_id, to_translation( "Item spawn rate" ),
+             to_translation( "Multiplier on how many items spawn." ), 0.01, 10.0, 1.0, 0.01 );
+        add( "MONSTER_SPEED", page_id, to_translation( "Monster speed" ),
+             to_translation( "Monster speed as a percentage of normal." ), 1, 1000, 100, COPT_NO_HIDE, "%i%%" );
+        add( "MONSTER_RESILIENCE", page_id, to_translation( "Monster resilience" ),
+             to_translation( "Monster hit points as a percentage of normal." ), 1, 1000, 100, COPT_NO_HIDE, "%i%%" );
+        add( "EVOLUTION_INVERSE_MULTIPLIER", page_id, to_translation( "Evolution slowdown" ),
+             to_translation( "Multiplier on the time monsters take to evolve; higher is slower." ), 0.0, 100, 1.0, 0.01 );
+    } );
 
-    add( "ITEM_SPAWNRATE", "world_default", translation(), translation(), 0.01, 10.0, 1.0, 0.01,
-         COPT_ALWAYS_HIDE
-       );
+    add_option_group( "world_default", Group( "time_worlddef_opts", to_translation( "Time and seasons" ),
+                      to_translation( "Calendar settings fixed when the world is made." ) ),
+    [&]( const std::string & page_id ) {
+        add( "SEASON_LENGTH", page_id, to_translation( "Season length" ),
+             to_translation( "Length of each season in days." ), 14, 127, 91 );
+        add( "ETERNAL_SEASON", page_id, to_translation( "Eternal season" ),
+             to_translation( "The starting season never changes." ), false );
+        add( "ETERNAL_TIME_OF_DAY", page_id, to_translation( "Eternal time of day" ),
+        to_translation( "Freeze the day at a time of day." ), {
+            { "normal", to_translation( "Normal" ) }, { "day", to_translation( "Day" ) },
+            { "night", to_translation( "Night" ) }
+        }, "normal" );
+        add( "CONSTRUCTION_SCALING", page_id, to_translation( "Construction scaling" ),
+             to_translation( "Construction time as a percentage of normal." ), 0, 1000, 100, COPT_NO_HIDE, "%i%%" );
+    } );
 
-    add( "MONSTER_SPEED", "world_default", translation(), translation(), 1, 1000, 100, COPT_ALWAYS_HIDE,
-         "%i%%"
-       );
-
-    add( "MONSTER_RESILIENCE", "world_default", translation(), translation(), 1, 1000, 100,
-         COPT_ALWAYS_HIDE, "%i%%"
-       );
-
-    add( "EVOLUTION_INVERSE_MULTIPLIER", "world_default", translation(), translation(),
-         0.0, 100, 1.0, 0.01, COPT_ALWAYS_HIDE
-       );
-
-    add( "SEASON_LENGTH", "world_default", translation(), translation(), 14, 127, 91,
-         COPT_ALWAYS_HIDE );
-
-    add( "CONSTRUCTION_SCALING", "world_default", translation(), translation(), 0, 1000, 100,
-         COPT_ALWAYS_HIDE );
-
-    add( "ETERNAL_SEASON", "world_default", translation(), translation(), false, COPT_ALWAYS_HIDE );
-
-    add( "ETERNAL_TIME_OF_DAY", "world_default", translation(), translation(), "normal", 8,
-         COPT_ALWAYS_HIDE );
+    add_empty_line();
 
     add_option_group( "world_default", Group( "misc_worlddef_opts", to_translation( "Misc options" ),
                       to_translation( "Miscellaneous options." ) ),
@@ -3003,6 +3005,9 @@ void options_manager::add_options_world_default()
              "a reasonable pace." ),
          true
        );
+
+    add_empty_line();
+    worldgen_options::add_options( *this );
 }
 
 void options_manager::add_options_debug()

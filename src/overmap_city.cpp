@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "city.h"
+#include "worldgen_options.h"
 #include "common_types.h"
 #include "coordinates.h"
 #include "cuboid_rectangle.h"
@@ -101,7 +102,9 @@ void overmap::place_cities()
     //     8   |     0    |   7 |   1 |   0 |   0 |   0
 
     const double omts_per_overmap = OMAPX * OMAPY;
-    const double city_map_coverage_ratio = 1.0 / std::pow( 2.0, op_city_spacing );
+    // World option: more or fewer cities for the same spacing.
+    const double city_map_coverage_ratio = worldgen_options::get().city_density /
+                                           std::pow( 2.0, op_city_spacing );
     const double omts_per_city = ( op_city_size * 2 + 1 ) * ( max_city_size * 2 + 1 ) * 3 / 4.0;
 
 

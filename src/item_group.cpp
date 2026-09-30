@@ -1,4 +1,5 @@
 #include "item_group.h"
+#include "worldgen_options.h"
 
 #include <algorithm>
 #include <functional>
@@ -293,11 +294,14 @@ std::size_t Single_item_creator::create( ItemList &list,
         }
     }
     float spawn_rate = get_option<float>( "ITEM_SPAWNRATE" );
+    // World option: food scarcity, on top of the item spawn rate.
+    const float food_factor = worldgen_options::get().food;
     for( ; cnt > 0; cnt-- ) {
         if( type == S_ITEM ) {
             item itm = create_single_without_container( birthday, rec );
+            const float rate = itm.is_comestible() ? spawn_rate * food_factor : spawn_rate;
             if( flags & spawn_flags::use_spawn_rate && !itm.has_flag( json_flag_MISSION_ITEM ) &&
-                rng_float( 0, 1 ) > spawn_rate ) {
+                rng_float( 0, 1 ) > rate ) {
                 continue;
             }
             if( !itm.is_null() ) {

@@ -20,6 +20,7 @@
 #include <utility>
 
 #include "activity_handlers.h"
+#include "worldgen_options.h"
 #include "avatar.h"
 #include "bionics.h"
 #include "bodypart.h"
@@ -361,9 +362,15 @@ void vehicle::init_state( map &placed_on, int init_veh_fuel, veh_spawn_status in
         }
         init_veh_fuel = get_option<int>( "VEHICLE_FUEL_AT_SPAWN" );
     }
+    // World option: fuel left in spawned vehicles (-1 keeps the random roll,
+    // which is then scaled where the tanks are filled).
+    const float fuel_factor = worldgen_options::get().fuel;
+    if( init_veh_fuel >= 0 && fuel_factor != 1.f ) {
+        init_veh_fuel = std::clamp( static_cast<int>( std::lround( init_veh_fuel * fuel_factor ) ), 0, 100 );
+    }
 
     std::map<itype_id, double> fuels; // lets tanks of same fuel type have even contents
-    const auto rng_fuel_amount = [&fuels, init_veh_fuel]( vehicle_part & vp,
+    const auto rng_fuel_amount = [&fuels, init_veh_fuel, fuel_factor]( vehicle_part & vp,
     const itype_id & fuel ) {
         if( !fuel ) {
             vp.ammo_unset(); // clear if no valid fuel
@@ -373,7 +380,11 @@ void vehicle::init_state( map &placed_on, int init_veh_fuel, veh_spawn_status in
         if( init_veh_fuel < 0 ) {
             // map.emplace(...).first returns iterator to the new or existing element
             const double roll = fuels.emplace( fuel, normal_roll( 0.3, 0.15 ) ).first->second;
-            vp.ammo_set( fuel, max * std::clamp( roll, 0.05, 0.95 ) );
+            if( fuel_factor <= 0.f ) {
+                vp.ammo_unset();
+            } else {
+                vp.ammo_set( fuel, max * std::clamp( roll * fuel_factor, 0.05, 1.0 ) );
+            }
         } else if( init_veh_fuel == 0 ) {
             vp.ammo_unset();
         } else if( init_veh_fuel > 0 && init_veh_fuel < 100 ) {

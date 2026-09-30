@@ -848,7 +848,7 @@ int worldfactory::show_worldgen_hybrid( WORLD *world, bool copying )
         }
         if( current == page::options ) {
             opt_view.draw( tk.footer );
-            if( opt_view.changed() ) {
+            if( opt_view.take_edit() ) {
                 custom_opts = true;
             }
         } else if( w::body_begin( "worldgen_body", tk.footer, ImGuiWindowFlags_NoScrollbar ) ) {
@@ -873,18 +873,9 @@ int worldfactory::show_worldgen_hybrid( WORLD *world, bool copying )
                 w::section_label( _( "Presets" ) );
                 if( custom_opts ) {
                     ImGui::PushTextWrapPos( ImGui::GetCursorPosX() + ImGui::GetContentRegionAvail().x );
-                    ImGui::TextColored( ui_hybrid_chrome::palette::warning(), "%s",
-                                        _( "World options were customised; the presets are locked until you reset them." ) );
+                    ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
+                                        _( "Custom: world options were edited on the World options tab.  Picking a preset applies its values again." ) );
                     ImGui::PopTextWrapPos();
-                    if( w::action_button( _( "Reset world options to defaults" ), w::button_kind::secondary ) ) {
-                        deferred = [&]() {
-                            if( query_yn( _( "Currently using customized advanced options.  Reset world options to defaults?" ) ) ) {
-                                world->WORLD_OPTIONS = get_options().get_world_defaults();
-                                wg_slevels = wg_slvl_default;
-                                custom_opts = false;
-                            }
-                        };
-                    }
                 }
                 if( ImGui::BeginTable( "##presets", 3, ImGuiTableFlags_SizingStretchProp | ImGuiTableFlags_RowBg ) ) {
                     ImGui::TableSetupColumn( "name", ImGuiTableColumnFlags_WidthStretch, 0.3f );
@@ -901,11 +892,14 @@ int worldfactory::show_worldgen_hybrid( WORLD *world, bool copying )
                         for( int l = 0; l < wg_sliders[i]->count(); ++l ) {
                             names.push_back( wg_sliders[i]->level_name( l ).translated() );
                         }
-                        const int chosen = w::dropdown( "##lvl", wg_sliders[i]->level_name( wg_slevels[i] ).translated(),
-                                                        names, wg_slevels[i], -1.f, !custom_opts );
+                        const std::string shown = custom_opts ?
+                                                  string_format( _( "%s (custom)" ), wg_sliders[i]->level_name( wg_slevels[i] ).translated() ) :
+                                                  wg_sliders[i]->level_name( wg_slevels[i] ).translated();
+                        const int chosen = w::dropdown( "##lvl", shown, names, wg_slevels[i] );
                         if( chosen >= 0 ) {
                             wg_slevels[i] = chosen;
                             wg_sliders[i]->apply_opts( chosen, world->WORLD_OPTIONS );
+                            custom_opts = false;
                         }
                         ImGui::TableSetColumnIndex( 2 );
                         ImGui::PushTextWrapPos( ImGui::GetCursorPosX() + ImGui::GetContentRegionAvail().x );
@@ -917,12 +911,12 @@ int worldfactory::show_worldgen_hybrid( WORLD *world, bool copying )
                     ImGui::EndTable();
                 }
                 ImGui::Dummy( ImVec2( 0.f, tk.sm * s ) );
-                if( w::action_button( _( "Randomize presets" ), w::button_kind::secondary, ImVec2( 0, 0 ), !custom_opts,
-                                      _( "Reset the world options first." ) ) ) {
+                if( w::action_button( _( "Randomize presets" ), w::button_kind::secondary ) ) {
                     for( int i = 0; i < static_cast<int>( wg_sliders.size() ); i++ ) {
                         wg_slevels[i] = wg_sliders[i]->random_level();
                         wg_sliders[i]->apply_opts( wg_slevels[i], world->WORLD_OPTIONS );
                     }
+                    custom_opts = false;
                 }
                 ImGui::SameLine();
                 if( w::action_button( _( "Reset everything" ), w::button_kind::tertiary ) ) {

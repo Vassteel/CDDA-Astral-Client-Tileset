@@ -51,6 +51,7 @@
 #include "help.h"
 #include "input.h"
 #include "main_menu.h"
+#include "worldgen_preview.h"
 #include "mapsharing.h"
 #include "memory_fast.h"
 #include "options.h"
@@ -293,6 +294,9 @@ struct cli_opts {
     std::vector<std::string> opts;
     std::string world; /** if set try to load first save in this world on startup */
     bool disable_ascii_art = false;
+    std::string overmap_preview; /** if set, write a map-generation preview there and exit */
+    std::vector<std::pair<std::string, std::string>> world_option_overrides;
+    int preview_radius = 0;
 };
 
 cli_opts parse_commandline( int argc, const char **argv )
@@ -337,6 +341,41 @@ cli_opts parse_commandline( int argc, const char **argv )
                     {
                         result.opts.emplace_back( params[ i ] );
                     }
+                    return 0;
+                }
+            },
+            {
+                "--astral-overmap-preview", "<file.ppm>",
+                "Generates a temporary world's overmaps with the current options and writes them as a PPM image, then exits",
+                section_default,
+                1,
+                [&result]( int, const char **params ) -> int {
+                    result.overmap_preview = params[0];
+                    return 0;
+                }
+            },
+            {
+                "--world-option", "<NAME=VALUE>",
+                "World option override for --astral-overmap-preview (repeatable)",
+                section_default,
+                1,
+                [&result]( int, const char **params ) -> int {
+                    const std::string kv = params[0];
+                    const size_t eq = kv.find( '=' );
+                    if( eq != std::string::npos )
+                    {
+                        result.world_option_overrides.emplace_back( kv.substr( 0, eq ), kv.substr( eq + 1 ) );
+                    }
+                    return 0;
+                }
+            },
+            {
+                "--preview-radius", "<n>",
+                "Overmaps around the origin to include in the preview (default 0)",
+                section_default,
+                1,
+                [&result]( int, const char **params ) -> int {
+                    result.preview_radius = std::max( 0, atoi( params[0] ) );
                     return 0;
                 }
             },
@@ -884,6 +923,12 @@ void select_initial_language()
 
 void run_game_loop( cli_opts &cli )
 {
+    if( !cli.overmap_preview.empty() ) {
+        const int code = worldgen_preview::run( cli.overmap_preview, cli.world_option_overrides,
+                         cli.preview_radius );
+        exit_handler( code == 0 ? 0 : -999 );
+        return;
+    }
     main_menu::queued_world_to_load = std::move( cli.world );
 
     while( true ) {

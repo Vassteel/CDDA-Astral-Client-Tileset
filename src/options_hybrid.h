@@ -35,6 +35,12 @@ class options_hybrid_view
         bool changed() const {
             return dirty;
         }
+        /** True if an option was edited since the last call (for "custom" markers). */
+        bool take_edit() {
+            const bool e = edited;
+            edited = false;
+            return e;
+        }
         int current_page() const {
             return page;
         }
@@ -48,6 +54,7 @@ class options_hybrid_view
         int page = 0;
         int world_page = -1;
         bool dirty = false;
+        bool edited = false;
         std::string filter;
         std::string described;      // option name shown in the description panel
         std::string described_group;

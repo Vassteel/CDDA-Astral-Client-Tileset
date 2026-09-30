@@ -2,6 +2,7 @@
 #include <algorithm>
 
 #include "overmap_noise.h"
+#include "worldgen_options.h"
 #include "simplexnoise.h"
 
 namespace om_noise
@@ -10,10 +11,13 @@ namespace om_noise
 float om_noise_layer_forest::noise_at( const point_om_omt &local_omt_pos ) const
 {
     const point_abs_omt p = global_omt_pos( local_omt_pos );
-    float r = scaled_octave_noise_3d( 4, 0.5, 0.03, 0, 1, p.x(), p.y(), get_seed() );
+    // Feature size follows the world's forest clumping option: a larger
+    // clumping factor stretches the noise, giving fewer, bigger woods.
+    const float clump = std::max( 0.05f, worldgen_options::get().forest_clumping );
+    float r = scaled_octave_noise_3d( 4, 0.5, 0.03 / clump, 0, 1, p.x(), p.y(), get_seed() );
     r = std::pow( r, 2.0f );
 
-    float d = scaled_octave_noise_3d( 6, 0.5, 0.07, 0, 1, p.x(), p.y(), get_seed() );
+    float d = scaled_octave_noise_3d( 6, 0.5, 0.07 / clump, 0, 1, p.x(), p.y(), get_seed() );
     d = std::pow( d, 3.0f );
 
     return std::max( 0.0f, r - d * 0.5f );

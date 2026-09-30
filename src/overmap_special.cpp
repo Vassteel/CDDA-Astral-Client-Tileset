@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "avatar.h"
+#include "worldgen_options.h"
 #include "coordinates.h"
 #include "debug.h"
 #include "dialogue.h"
@@ -59,6 +60,19 @@ void overmap_specials::load( const JsonObject &jo, const std::string &src )
 void overmap_specials::finalize()
 {
     specials.finalize();
+    // Map-generation options: scale how many of each special an overmap holds.
+    // Data reloads per world, so this applies exactly once per world load.
+    worldgen_options::refresh();
+    for( const overmap_special &elem : specials.get_all() ) {
+        const float factor = worldgen_options::specials_factor( elem );
+        if( elem.id.str() == "astral_portal_site" ) {
+            // TODO(astral-dungeons): the portal branch defines this special; the
+            // option sets how many sites an overmap may hold (0 = none).
+            const_cast<overmap_special &>( elem ).set_occurrences( 0, worldgen_options::get().portal_sites );
+        } else if( factor != 1.f ) {
+            const_cast<overmap_special &>( elem ).scale_occurrences( factor );
+        }
+    }
 }
 
 void overmap_specials::finalize_mapgen_parameters()

@@ -1,4 +1,5 @@
 #include "regional_settings.h"
+#include "worldgen_options.h"
 
 #include <algorithm>
 #include <map>
@@ -367,6 +368,7 @@ void map_extra_collection::reset()
 void region_settings::reset()
 {
     region_settings_factory.reset();
+    worldgen_options::on_data_reset();
 }
 
 template<typename T>
@@ -672,6 +674,9 @@ void region_settings::finalize_all()
     if( !DEFAULT_REGION.is_valid() ) {
         debugmsg( "id: `default` region settings were not loaded or failed to load" );
     }
+    // Per-world map-generation options adjust the loaded region data once per
+    // data load (the active world's options are in force here).
+    worldgen_options::apply_region_overrides();
 }
 
 void groundcover_extra::finalize()   // FIXME: return bool for failure

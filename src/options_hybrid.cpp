@@ -125,6 +125,7 @@ void options_hybrid_view::draw_option_row( options_manager::cOpt &opt, bool enab
         if( w::toggle( "##v", v, enabled, reason.empty() ? nullptr : reason.c_str() ) ) {
             opt.setValue( v ? "true" : "false" );
             dirty = true;
+            edited = true;
         }
         control_hovered = ImGui::IsItemHovered( ImGuiHoveredFlags_AllowWhenDisabled );
         ImGui::SameLine( 0.f, tk.sm * s );
@@ -146,6 +147,7 @@ void options_hybrid_view::draw_option_row( options_manager::cOpt &opt, bool enab
         if( chosen >= 0 && chosen != selected ) {
             opt.setValue( items[chosen].first );
             dirty = true;
+            edited = true;
         }
     } else if( type == "int_map" ) {
         std::vector<std::string> names;
@@ -162,6 +164,7 @@ void options_hybrid_view::draw_option_row( options_manager::cOpt &opt, bool enab
         if( chosen >= 0 && chosen != selected ) {
             opt.setValue( opt.mIntValues[chosen].first );
             dirty = true;
+            edited = true;
         }
     } else if( type == "int" ) {
         int v = opt.value_as<int>();
@@ -173,6 +176,7 @@ void options_hybrid_view::draw_option_row( options_manager::cOpt &opt, bool enab
         if( ImGui::SliderInt( "##v", &v, opt.iMin, opt.iMax, fmt.c_str(), ImGuiSliderFlags_AlwaysClamp ) ) {
             opt.setValue( v );
             dirty = true;
+            edited = true;
         }
         if( !enabled ) {
             ImGui::EndDisabled();
@@ -191,6 +195,7 @@ void options_hybrid_view::draw_option_row( options_manager::cOpt &opt, bool enab
             }
             opt.setValue( v );
             dirty = true;
+            edited = true;
         }
         if( !enabled ) {
             ImGui::EndDisabled();
@@ -214,6 +219,7 @@ void options_hybrid_view::draw_option_row( options_manager::cOpt &opt, bool enab
         if( ImGui::IsItemDeactivatedAfterEdit() ) {
             opt.setValue( edit );
             dirty = true;
+            edited = true;
         }
         if( !enabled ) {
             ImGui::EndDisabled();
