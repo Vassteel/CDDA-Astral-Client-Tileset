@@ -1,6 +1,6 @@
 # Astral portal worlds — implementation plan
 
-Status: **S2 accepted in play (2026-09-29); S3 package 1 (instances) on branch `astral-dungeons-s2`.** Written 2026-09-28 from the brainstorm thread, the existing [project-development-plan.md](project-development-plan.md), a source audit of the engine, and a scoping conversation. S2 data lives in `data/json/astral/dungeons/`, the generator in `tools/astral/`, the portal tile tooling in `tools/astral/portal_tiles/`, and tests in `tests/astral_dungeon_test.cpp`. Note that `/artifacts/` is gitignored in this repository: anything referenced there exists only on the development machine.
+Status: **S2 accepted in play (2026-09-29); S3 packages 1–2 (instances, ledger, vehicles) on branch `astral-dungeons-s2`.** Written 2026-09-28 from the brainstorm thread, the existing [project-development-plan.md](project-development-plan.md), a source audit of the engine, and a scoping conversation. S2 data lives in `data/json/astral/dungeons/`, the generator in `tools/astral/`, the portal tile tooling in `tools/astral/portal_tiles/`, and tests in `tests/astral_dungeon_test.cpp`. Note that `/artifacts/` is gitignored in this repository: anything referenced there exists only on the development machine.
 
 Decisions taken in the scoping conversation:
 
@@ -86,9 +86,9 @@ Done above.
 
 ### S3 — Independent instances
 - Pool `astral_pocket_01..24` generated from one template; allocator variable `astral_pocket_next`; **binding is stored in the map**: an unbound active threshold swaps itself to `t_astral_portal_active_r1c2_p<nn>` on first use (`astral_bind_p<nn>` transform), so each portal remembers its world without dynamic variable names; per-pocket return anchors and arrival points (`astral_return_p<nn>`, `astral_arrival_p<nn>`); the pocket-side return threshold dispatches on `current_dimension`. *(package 1, done)*
-- Ledger per instance (template, seed/version, allocated turn, entries, last exit, core state, rank).
-- Vehicle travel through the platform (`take_vehicle`) and arrival collision handling.
-- Migrate `astral_test_world` to slot 01.
+- Ledger per instance as global vars `astral_<field>_p<nn>`: template, bound turn, entries, last enter/exit, core state (`unclaimed`), rank; `gateway ledger (debug)` reads it. *(package 2, done)*
+- Vehicle travel: the vehicle under the traveller crosses (`take_vehicle`). Because the engine places it at the same coordinates, pockets are **open meadow by default** and the arrival courtyard is drawn *under* the traveller by `update_mapgen astral_courtyard_arrival` at the same OMT-relative spot the overworld sites use (rows 8–12 / cols 9–13); no teleport on entry. The veil stays available for bounded layers. *(package 2, done)*
+- `astral_test_world` retired; start new worlds.
 - **C++ trigger:** pool exhausted or templates multiply → dynamic ids (~1 day + save test).
 
 **Checklist:** two portals, two worlds, changes never cross; reload; a cart goes through and back.

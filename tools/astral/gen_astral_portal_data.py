@@ -245,44 +245,58 @@ def main():
                            "terrain": [{"result": bound_tid("active", n),
                                         "valid_terrain": [tid("active", 1, 2)]}]})
 
+    def travel(dim, success, fail):
+        # Vehicles: travel_to_dimension places the vehicle at the same coordinates on the far
+        # side, so the arrival courtyard is drawn UNDER the player (see EOC below) rather than
+        # teleporting them somewhere else.  Only the vehicle under the traveller comes along.
+        base = {"u_travel_to_dimension": dim, "npc_travel_radius": 0, "npc_travel_filter": "none",
+                "fail_message": fail, "success_message": success}
+        return {"if": "u_is_in_vehicle",
+                "then": [{**base, "take_vehicle": True}],
+                "else": [base]}
+
+    ENTER_OK = "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
+    ENTER_FAIL = "The membrane resists you and the light along the runes gutters out for a moment."
+    RETURN_OK = "Cold light closes over you, and the familiar world reassembles itself around the gateway."
+    RETURN_FAIL = "The membrane resists you."
+
     def enter_do(n):
         d, sl = pocket_dim(n), slot(n)
         return {
             "type": "effect_on_condition", "id": f"EOC_ASTRAL_ENTER_P{sl}_DO",
-            "condition": {"not": "u_driving"},
             "effect": [
                 {"u_location_variable": {"global_val": f"astral_return_p{sl}"}},
-                {"math": [f"astral_entries_p{sl}++"]},
-                {"u_travel_to_dimension": d, "npc_travel_radius": 0, "npc_travel_filter": "none",
-                 "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
-                 "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."},
+                travel(d, ENTER_OK, ENTER_FAIL),
                 {"if": {"current_dimension": d}, "then": [
+                    {"math": [f"astral_entries_p{sl}++"]},
+                    {"math": [f"astral_last_enter_p{sl} = time('now')"]},
                     {"if": {"not": {"math": [f"has_var(astral_arrival_p{sl})"]}}, "then": [
-                        {"u_location_variable": {"global_val": f"astral_arrival_p{sl}"},
-                         "target_params": {"om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld"},
-                         "terrain": tid("active", 2, 2), "target_max_radius": 40}]},
-                    {"u_teleport": {"global_val": f"astral_arrival_p{sl}"}, "force_safe": True},
-                    {"if": {"math": [f"astral_entries_p{sl} == 1"]},
-                     "then": [{"u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.", "popup": True}],
-                     "else": [{"u_message": "You are back in the quiet meadow.", "type": "good"}]}]}],
-            "false_effect": [{"u_message": "You can't do that while driving.", "type": "bad"}],
+                        # First arrival: record the pad and raise the courtyard around it.
+                        {"u_location_variable": {"global_val": f"astral_arrival_p{sl}"}},
+                        {"mapgen_update": "astral_courtyard_arrival", "target_var": {"global_val": f"astral_arrival_p{sl}"}},
+                        {"set_string_var": "astral_pocket", "target_var": {"global_val": f"astral_template_p{sl}"}},
+                        {"set_string_var": "unclaimed", "target_var": {"global_val": f"astral_core_p{sl}"}},
+                        {"math": [f"astral_rank_p{sl} = 1"]},
+                        {"u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a quiet meadow under a sky that is not yours, and no sign of anyone having stood here before.", "popup": True}]},
+                    {"if": {"math": [f"astral_entries_p{sl} > 1"]},
+                     "then": [{"u_message": "You are back in the quiet meadow.", "type": "good"}]}]}],
         }
 
     def return_do(n):
         sl = slot(n)
         return {
             "type": "effect_on_condition", "id": f"EOC_ASTRAL_RETURN_P{sl}_DO",
-            "condition": {"not": "u_driving"},
             "effect": [
                 {"if": {"not": {"math": [f"has_var(astral_return_p{sl})"]}},
                  "then": [{"u_message": "The gateway has nowhere to send you.", "type": "bad"}],
                  "else": [
-                    {"u_travel_to_dimension": "default", "npc_travel_radius": 0, "npc_travel_filter": "none",
-                     "fail_message": "The membrane resists you.",
-                     "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."},
-                    {"if": {"current_dimension": "default"},
-                     "then": [{"u_teleport": {"global_val": f"astral_return_p{sl}"}, "force_safe": True}]}]}],
-            "false_effect": [{"u_message": "You can't do that while driving.", "type": "bad"}],
+                    travel("default", RETURN_OK, RETURN_FAIL),
+                    {"if": {"current_dimension": "default"}, "then": [
+                        {"math": [f"astral_last_exit_p{sl} = time('now')"]},
+                        # Crossing at the pocket portal already puts you on the overworld portal
+                        # (same coordinates); the teleport only matters if the anchor moved.
+                        {"if": {"not": "u_is_in_vehicle"},
+                         "then": [{"u_teleport": {"global_val": f"astral_return_p{sl}"}, "force_safe": True}]}]}]}],
         }
 
     def threshold_bound(n):
@@ -304,6 +318,7 @@ def main():
             "effect": [
                 {"u_transform_radius": 1, "ter_furn_transform": f"astral_bind_p{sl}"},
                 {"math": ["astral_pocket_next++"]},
+                {"math": [f"astral_bound_turn_p{sl} = time('now')"]},
                 {"run_eocs": f"EOC_ASTRAL_ENTER_P{sl}_DO"}],
         }
 
@@ -314,7 +329,6 @@ def main():
     eocs.append({
         "type": "effect_on_condition", "id": "EOC_ASTRAL_PORTAL_ENTER_DO",
         "//": "Unbound overworld threshold: bind it to the next free pocket and enter.  Tests call this directly.",
-        "condition": {"not": "u_driving"},
         "effect": [
             {"math": ["astral_pocket_next = max(astral_pocket_next, 1)"]},
             {"if": {"math": [f"astral_pocket_next > {POOL_SIZE}"]},
@@ -322,7 +336,6 @@ def main():
              "else": [{"switch": {"math": ["astral_pocket_next"]},
                        "cases": [{"case": n, "effect": [{"run_eocs": f"EOC_ASTRAL_BIND_P{slot(n)}"}]}
                                  for n in range(1, POOL_SIZE + 1)]}]}],
-        "false_effect": [{"u_message": "You can't do that while driving.", "type": "bad"}],
     })
     # pocket-side return: dispatch on the current dimension
     eocs.append({
@@ -331,6 +344,16 @@ def main():
         "effect": [{"if": {"current_dimension": pocket_dim(n)},
                     "then": [{"run_eocs": f"EOC_ASTRAL_RETURN_P{slot(n)}_DO"}]}
                    for n in range(1, POOL_SIZE + 1)],
+    })
+
+    # ledger readout (debug item): one line per bound pocket
+    eocs.append({
+        "type": "effect_on_condition", "id": "EOC_ASTRAL_DEBUG_LEDGER",
+        "//": "Prints the per-instance ledger.  This is the data the guild records will read later, without loading any pocket.",
+        "effect": [{"u_message": "Astral ledger:", "type": "neutral"}] + [
+            {"if": {"math": [f"has_var(astral_bound_turn_p{slot(n)})"]},
+             "then": [{"u_message": f"pocket {slot(n)}: template <global_val:astral_template_p{slot(n)}>, core <global_val:astral_core_p{slot(n)}>, rank <global_val:astral_rank_p{slot(n)}>, entries <global_val:astral_entries_p{slot(n)}>", "type": "neutral"}]}
+            for n in range(1, POOL_SIZE + 1)],
     })
 
     def dump(name, data):

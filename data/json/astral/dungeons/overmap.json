@@ -11,15 +11,6 @@
   },
   {
     "type": "overmap_terrain",
-    "id": "astral_microworld_center",
-    "name": "gateway courtyard",
-    "sym": "O",
-    "color": "light_blue",
-    "see_cost": "low",
-    "flags": [ "NO_ROTATE" ]
-  },
-  {
-    "type": "overmap_terrain",
     "id": "astral_microworld_grounds",
     "name": "quiet meadow",
     "sym": ".",
@@ -35,31 +26,6 @@
     "color": "light_blue",
     "see_cost": "low",
     "flags": [ "NO_ROTATE" ]
-  },
-  {
-    "type": "overmap_location",
-    "id": "astral_veil_only",
-    "terrains": [ "astral_veil" ]
-  },
-  {
-    "type": "overmap_special",
-    "id": "astral_test_microworld",
-    "//": "Spawned by EOC_ASTRAL_PORTAL_THRESHOLD on first entry; never placed by ordinary overmap generation.",
-    "overmaps": [
-      { "point": [ -1, -1, 0 ], "overmap": "astral_microworld_grounds" },
-      { "point": [ 0, -1, 0 ], "overmap": "astral_microworld_grounds" },
-      { "point": [ 1, -1, 0 ], "overmap": "astral_microworld_grounds" },
-      { "point": [ -1, 0, 0 ], "overmap": "astral_microworld_grounds" },
-      { "point": [ 0, 0, 0 ], "overmap": "astral_microworld_center" },
-      { "point": [ 1, 0, 0 ], "overmap": "astral_microworld_grounds" },
-      { "point": [ -1, 1, 0 ], "overmap": "astral_microworld_grounds" },
-      { "point": [ 0, 1, 0 ], "overmap": "astral_microworld_grounds" },
-      { "point": [ 1, 1, 0 ], "overmap": "astral_microworld_grounds" }
-    ],
-    "locations": [ "astral_veil_only" ],
-    "city_distance": [ 0, -1 ],
-    "occurrences": [ 0, 0 ],
-    "flags": [ "ASTRAL_MICROWORLD", "GLOBALLY_UNIQUE" ]
   },
   {
     "type": "overmap_special",

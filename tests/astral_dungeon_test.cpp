@@ -174,19 +174,29 @@ TEST_CASE( "astral_debug_placer_draws_an_active_portal", "[astral][mapgen]" )
     require_portal( here, "active", center );
 }
 
+// Raise an aligned active portal in the avatar's OMT (rows 8-12 / cols 9-13, like the
+// overworld sites) and stand the avatar on its r2c2.  Returns the r2c2 position.
+static tripoint_bub_ms raise_portal_here( avatar &u )
+{
+    map &here = get_map();
+    dialogue d( get_talker_for( u ), nullptr );
+    effect_on_condition_EOC_ASTRAL_DEBUG_PLACE_PORTAL->activate( d );
+    const tripoint_abs_omt omt = project_to<coords::omt>( u.pos_abs() );
+    const tripoint_bub_ms center = here.get_bub( project_to<coords::ms>( omt ) ) + point( 11, 10 );
+    u.setpos( here, center );
+    return center;
+}
+
 TEST_CASE( "astral_portal_travel_binds_and_persists_pockets", "[astral][dimension][slow]" )
 {
     clear_avatar();
     clear_map_without_vision();
-    map &here = get_map();
     avatar &u = get_avatar();
     REQUIRE( g->get_dimension_prefix() == dimension_default );
-    // fresh allocator for this test world
     get_globals().set_global_value( "astral_pocket_next", 1.0 );
 
-    // Portal A: stand on r2c2 in front of an unbound active threshold.
-    const tripoint_bub_ms center_a = u.pos_bub();
-    paint_portal( here, "active", center_a );
+    // Portal A.
+    const tripoint_bub_ms center_a = raise_portal_here( u );
     const tripoint_abs_ms anchor_a = u.pos_abs();
     const tripoint_bub_ms threshold_a = center_a + point::north;
 
@@ -194,8 +204,10 @@ TEST_CASE( "astral_portal_travel_binds_and_persists_pockets", "[astral][dimensio
     effect_on_condition_EOC_ASTRAL_PORTAL_ENTER_DO->activate( d1 );
 
     REQUIRE( g->get_dimension_prefix() == dimension_astral_pocket_01 );
+    // Same coordinates on the far side, and the courtyard was drawn under us.
+    CHECK( u.pos_abs() == anchor_a );
     CHECK( get_map().ter( u.pos_bub() ).id() == portal_ter( "active", 2, 2 ) );
-    const tripoint_abs_ms arrival_a = u.pos_abs();
+    CHECK( get_map().ter( u.pos_bub() + point::north ).id() == portal_ter( "active", 1, 2 ) );
 
     // Leave something behind on the tile south of the arrival pad.
     const tripoint_bub_ms drop = u.pos_bub() + point::south;
@@ -211,20 +223,18 @@ TEST_CASE( "astral_portal_travel_binds_and_persists_pockets", "[astral][dimensio
     // The overworld threshold is now bound to pocket 01.
     CHECK( get_map().ter( threshold_a ).id() == ter_str_id( "t_astral_portal_active_r1c2_p01" ) );
 
-    // Re-enter through the bound threshold: same world, same landing spot, the rock is still there.
+    // Re-enter through the bound threshold: same world, the rock is still there.
     dialogue d3( get_talker_for( u ), nullptr );
     effect_on_condition_EOC_ASTRAL_ENTER_P01_DO->activate( d3 );
     REQUIRE( g->get_dimension_prefix() == dimension_astral_pocket_01 );
-    CHECK( u.pos_abs() == arrival_a );
     CHECK_FALSE( get_map().i_at( u.pos_bub() + point::south ).empty() );
     dialogue d4( get_talker_for( u ), nullptr );
     effect_on_condition_EOC_ASTRAL_PORTAL_RETURN_DO->activate( d4 );
     REQUIRE( g->get_dimension_prefix() == dimension_default );
 
-    // Portal B, ten tiles east of A: a second unbound threshold must get its own pocket.
-    const tripoint_bub_ms center_b = center_a + point( 10, 0 );
-    paint_portal( get_map(), "active", center_b );
-    u.setpos( get_map(), center_b );
+    // Portal B, one OMT east: a second unbound threshold must get its own pocket.
+    u.setpos( get_map(), center_a + point( 24, 0 ) );
+    const tripoint_bub_ms center_b = raise_portal_here( u );
     dialogue d5( get_talker_for( u ), nullptr );
     effect_on_condition_EOC_ASTRAL_PORTAL_ENTER_DO->activate( d5 );
     REQUIRE( g->get_dimension_prefix() == dimension_astral_pocket_02 );
