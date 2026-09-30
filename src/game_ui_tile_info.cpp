@@ -784,8 +784,9 @@ void game::draw_tile_info_imgui( const tripoint_bub_ms &lp, const visibility_var
                 if( !vprt.is_real_or_active_fake() ) {
                     continue;
                 }
-                ImGui::TextColored( ui_hybrid_chrome::palette::text_muted(), "%s",
-                                    vprt.name().c_str() );
+                // vehicle_part::name() carries <color_…> damage/status markup;
+                // route it through the tag-aware renderer like the item list.
+                cataimgui::draw_colored_text( vprt.name(), ImGui::GetContentRegionAvail().x );
                 ++shown;
             }
         }

@@ -2557,7 +2557,16 @@ void draw_equipment_details( const avatar &u )
             }
             ImGui::PushID( static_cast<int>( i ) );
             const bool selected = static_cast<int>( i ) == idx;
-            if( ImGui::Selectable( remove_color_tags( choices[i].it.display_name() ).c_str(), selected ) ) {
+            // A default Selectable claims the full row, so the SameLine buttons
+            // landed past the right edge (clipped and unclickable).  Reserve
+            // the buttons' width and let the label take the rest.
+            const ImGuiStyle &st = ImGui::GetStyle();
+            const float buttons_w = ImGui::CalcTextSize( _( "Replace" ) ).x +
+                                    ImGui::CalcTextSize( _( "Remove" ) ).x +
+                                    4.f * st.FramePadding.x + 2.f * st.ItemSpacing.x;
+            const float label_w = std::max( 40.f, ImGui::GetContentRegionAvail().x - buttons_w );
+            if( ImGui::Selectable( remove_color_tags( choices[i].it.display_name() ).c_str(), selected,
+                                   ImGuiSelectableFlags_None, ImVec2( label_w, 0.f ) ) ) {
                 cc_uistate.selected_equipment_index = static_cast<int>( i );
             }
             ImGui::SameLine();

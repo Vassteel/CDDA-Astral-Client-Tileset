@@ -521,8 +521,29 @@ void progress_meter( float fraction, const char *overlay_text )
     const float f = std::clamp( fraction, 0.f, 1.f );
     ImGui::PushStyleColor( ImGuiCol_PlotHistogram, palette::accent() );
     ImGui::PushStyleColor( ImGuiCol_FrameBg, v4( g_tokens.meter_track ) );
-    ImGui::ProgressBar( f, ImVec2( -1.f, 0.f ), overlay_text );
+    // Draw the bar without ImGui's overlay: that overlay uses ImGuiCol_Text,
+    // which is indistinguishable from the amber fill at full health.  Instead
+    // paint the label twice, clipped: dark ink over the filled span, light ink
+    // over the empty track, so it reads at any fraction.
+    ImGui::ProgressBar( f, ImVec2( -1.f, 0.f ), "" );
     ImGui::PopStyleColor( 2 );
+    if( overlay_text == nullptr || overlay_text[0] == '\0' ) {
+        return;
+    }
+    const ImVec2 min = ImGui::GetItemRectMin();
+    const ImVec2 max = ImGui::GetItemRectMax();
+    const ImVec2 tsz = ImGui::CalcTextSize( overlay_text );
+    const ImVec2 tp( min.x + ( max.x - min.x - tsz.x ) * 0.5f,
+                     min.y + ( max.y - min.y - tsz.y ) * 0.5f );
+    const float split = min.x + ( max.x - min.x ) * f;
+    ImDrawList *draw = ImGui::GetWindowDrawList();
+    draw->PushClipRect( ImVec2( min.x, min.y ), ImVec2( split, max.y ), true );
+    draw->AddText( tp, g_tokens.text_on_accent, overlay_text );
+    draw->PopClipRect();
+    draw->PushClipRect( ImVec2( split, min.y ), ImVec2( max.x, max.y ), true );
+    draw->AddText( ImVec2( tp.x + 1.f, tp.y + 1.f ), IM_COL32( 0, 0, 0, 200 ), overlay_text );
+    draw->AddText( tp, g_tokens.text, overlay_text );
+    draw->PopClipRect();
 }
 
 } // namespace ui_hybrid_chrome

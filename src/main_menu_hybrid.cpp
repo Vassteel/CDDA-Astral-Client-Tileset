@@ -101,9 +101,19 @@ main_menu_overlay::main_menu_overlay( main_menu &menu_ ) :
     // Untitled: no Astral shell of its own; the bar strip and the popup draw their frames.
     cataimgui::window( "", ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground |
                        ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoNav |
-                       ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse ),
+                       ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse |
+                       ImGuiWindowFlags_NoBringToFrontOnFocus ),
     menu( menu_ )
 {
+    // The overlay covers the whole viewport and the drawer popup is a
+    // separate ImGui window begun from inside draw_controls().  The base
+    // class brings the overlay to the display front after draw_controls()
+    // every frame (window::draw, is_on_top path), which put the popup
+    // *behind* a full-screen invisible window: rows highlighted on hover
+    // for a frame but never received the click.  Keep the overlay at the
+    // back so the popup created after it stays on top, and don't let a
+    // click on the bar buttons re-raise the overlay over it either.
+    force_to_back = true;
 }
 
 std::string main_menu_overlay::take_action()
@@ -351,13 +361,19 @@ void main_menu_overlay::draw_popup()
     const char *heading = o == opt::NEWCHAR ? _( "New game" ) : o == opt::SETTINGS ? _( "Settings" ) :
                           o == opt::LOADCHAR ? _( "Load game" ) : o == opt::WORLD ? _( "Worlds" ) :
                           o == opt::MOTD ? _( "Message of the day" ) : _( "Credits" );
-    ImGui::SetNextWindowPos( pos, ImGuiCond_Always );
-    ImGui::SetNextWindowSize( ImVec2( width, height ), ImGuiCond_Always );
+    // The drawer is a *child* of the overlay, not a second top-level window.
+    // A nested Begin() competed with the overlay for focus / display order
+    // every frame (the base window::draw re-raises the overlay after
+    // draw_controls), so a press could land on a row and the release on the
+    // overlay: rows highlighted on hover but never activated.  A child shares
+    // the overlay's input path, which is why the bar buttons always worked.
+    ImGui::SetCursorScreenPos( pos );
     ImGui::PushStyleVar( ImGuiStyleVar_WindowPadding, ImVec2( 14.f * s, 14.f * s ) );
-    ImGui::PushStyleVar( ImGuiStyleVar_WindowBorderSize, 0.f );
-    if( ImGui::Begin( "##main_menu_popup", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground |
-                      ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoNav |
-                      ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings ) ) {
+    ImGui::PushStyleVar( ImGuiStyleVar_ChildBorderSize, 0.f );
+    ImGui::PushStyleColor( ImGuiCol_ChildBg, 0 ); // the shell paints the frame
+    if( ImGui::BeginChild( "##main_menu_popup", ImVec2( width, height ), ImGuiChildFlags_AlwaysUseWindowPadding,
+                           ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoScrollbar |
+                           ImGuiWindowFlags_NoScrollWithMouse ) ) {
         if( w::window_shell( heading, w::frame_kind::dialog, true, category_icon( o ), true ) ) {
             popup_open = false;
         }
@@ -367,7 +383,8 @@ void main_menu_overlay::draw_popup()
             draw_drawer();
         }
     }
-    ImGui::End();
+    ImGui::EndChild();
+    ImGui::PopStyleColor();
     ImGui::PopStyleVar( 2 );
 }
 
