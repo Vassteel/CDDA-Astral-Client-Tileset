@@ -137,8 +137,9 @@ BASE_TERRAIN = {
     "q": "t_palisade_gate",
     "v": "t_water_sh",
     "j": "t_region_groundcover_swamp",
-    "M": "t_floor",                     # placeholder floor for market awnings
     "l": "t_grass_long",
+    "f": "t_floor",                     # districts override via their palette parameters
+    "W": "t_rock_wall",                 # idem
 }
 BASE_FURNITURE = {
     "E": "f_table",
@@ -717,26 +718,33 @@ QUADRANTS = {
 KIT_SIZE = 10
 
 
+DISTRICT_PALETTE = {"dense": "dense", "ord": "ord", "farm": "farm"}
+
+
 def kit_nested() -> list[dict]:
+    """One copy of each kit piece per district that uses it: nested mapgen does not inherit the
+    parent's palettes, so the district palette (wall/floor parameters) must be listed here."""
     out = []
-    for name, rows in KIT.items():
-        assert len(rows) == KIT_SIZE and all(len(r) == KIT_SIZE for r in rows), name
-        base = Grid(KIT_SIZE, KIT_SIZE, ",")
-        for y, r in enumerate(rows):
-            for x, c in enumerate(r):
-                base.set(x, y, c)
-        for rot in range(4):
-            g = base.rotated(rot)
-            out.append({
-                "type": "mapgen",
-                "method": "json",
-                "nested_mapgen_id": f"{ID}_kit_{name}_r{rot}",
-                "object": {
-                    "mapgensize": [KIT_SIZE, KIT_SIZE],
-                    "rows": g.lines(),
-                    "palettes": [f"{ID}_palette"],
-                },
-            })
+    for district, pieces in DISTRICT_KIT.items():
+        for name, _w in pieces:
+            rows = KIT[name]
+            assert len(rows) == KIT_SIZE and all(len(r) == KIT_SIZE for r in rows), name
+            base = Grid(KIT_SIZE, KIT_SIZE, ",")
+            for y, r in enumerate(rows):
+                for x, c in enumerate(r):
+                    base.set(x, y, c)
+            for rot in range(4):
+                g = base.rotated(rot)
+                out.append({
+                    "type": "mapgen",
+                    "method": "json",
+                    "nested_mapgen_id": f"{ID}_kit_{district}_{name}_r{rot}",
+                    "object": {
+                        "mapgensize": [KIT_SIZE, KIT_SIZE],
+                        "rows": g.lines(),
+                        "palettes": [f"{ID}_palette", f"{ID}_{DISTRICT_PALETTE[district]}_palette"],
+                    },
+                })
     return out
 
 
@@ -746,7 +754,7 @@ def quadrant_placements(district: str) -> list[dict]:
         chunks = []
         for name, w in DISTRICT_KIT[district]:
             for rot in rots:
-                chunks.append([f"{ID}_kit_{name}_r{rot}", w])
+                chunks.append([f"{ID}_kit_{district}_{name}_r{rot}", w])
         if EMPTY_WEIGHT[district]:
             chunks.append(["null", EMPTY_WEIGHT[district] * 4])
         out.append({"chunks": chunks, "x": x, "y": y})

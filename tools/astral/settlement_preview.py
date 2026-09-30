@@ -545,9 +545,8 @@ class Mapgen:
             x = self.int_or_range(pn.get("x", 0))
             y = self.int_or_range(pn.get("y", 0))
             nobj = nested["object"]
+            # nested mapgen resolves symbols only through its own palettes (as the engine does)
             t, f, p = self.collect(nobj)
-            t = {**base_terrain, **t}
-            f = {**base_furniture, **f}
             self.paint_rows(grid, nobj.get("rows", []), x, y, t, f, {**params, **p}, True)
             self.apply_nested(grid, nobj, pos, rot, t, f, {**params, **p})
 
