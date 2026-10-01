@@ -4,7 +4,6 @@
     "id": "astral_wild_palette",
     "terrain": {
       ".": [ [ "t_grass", 14 ], [ "t_grass_long", 4 ], [ "t_grass_tall", 1 ] ],
-      "T": [ [ "t_tree", 4 ], [ "t_tree_pine", 3 ], [ "t_tree_birch", 2 ], [ "t_tree_maple", 1 ] ],
       "t": [ [ "t_shrub", 3 ], [ "t_underbrush", 3 ], [ "t_grass_long", 1 ] ],
       "o": "t_grass",
       "_": [ [ "t_dirt", 6 ], [ "t_grass", 1 ] ],
@@ -13,9 +12,13 @@
       "=": "t_rock_floor",
       "#": "t_rock_wall",
       "+": "t_door_c",
-      "s": "t_sand"
+      "s": "t_sand",
+      "Z": [ [ "t_tree", 4 ], [ "t_tree_pine", 3 ], [ "t_tree_birch", 2 ], [ "t_tree_maple", 1 ] ]
     },
-    "furniture": { "o": [ [ "f_boulder_medium", 3 ], [ "f_boulder_small", 2 ], [ "f_boulder_large", 1 ] ] }
+    "furniture": {
+      "o": [ [ "f_boulder_medium", 3 ], [ "f_boulder_small", 2 ], [ "f_boulder_large", 1 ] ]
+    },
+    "//": "Tree symbol is Z, not T: T is a gateway piece (row 3, column 4) in astral_portal_*_palette, and the later palette won, scattering gateway pieces wherever a tree was meant."
   },
   {
     "type": "mapgen",
@@ -25,30 +28,30 @@
       "fill_ter": "t_grass",
       "palettes": [ "astral_wild_palette", "astral_portal_active_palette" ],
       "rows": [
-        "TT......T.T.......TTTT.T",
-        "T.....t......o.......TT.",
+        "ZZ......Z.Z.......ZZZZ.Z",
+        "Z.....t......o.......ZZ.",
         "..t.....................",
         "......o.................",
-        "T...........t........o.T",
-        "T.......................",
-        "TT..........o...........",
-        ".......t...........t...T",
-        "T........ABCDE..........",
+        "Z...........t........o.Z",
+        "Z.......................",
+        "ZZ..........o...........",
+        ".......t...........t...Z",
+        "Z........ABCDE..........",
         ".........FGHIJ....o.....",
         ".........KLMNO..........",
-        "T..o.....PQRST.......t..",
-        "T........UVWXY........TT",
-        "TT.........___.........T",
-        "T...t.......__.........T",
-        "TT..........__....o.....",
-        "TTT........._...t....TTT",
-        "TT..o........_........TT",
-        "T...........__.........T",
-        "TT....t.....__.......TTT",
-        "TTT..........__.....TTTT",
-        "TTTT........._.....TTTTT",
-        "TTTTT.....t..__...TTTTTT",
-        "TTTTTT.......__..TTTTTTT"
+        "Z..o.....PQRST.......t..",
+        "Z........UVWXY........ZZ",
+        "ZZ.........___.........Z",
+        "Z...t.......__.........Z",
+        "ZZ..........__....o.....",
+        "ZZZ........._...t....ZZZ",
+        "ZZ..o........_........ZZ",
+        "Z...........__.........Z",
+        "ZZ....t.....__.......ZZZ",
+        "ZZZ..........__.....ZZZZ",
+        "ZZZZ........._.....ZZZZZ",
+        "ZZZZZ.....t..__...ZZZZZZ",
+        "ZZZZZZ.......__..ZZZZZZZ"
       ]
     }
   },
