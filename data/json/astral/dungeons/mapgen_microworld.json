@@ -37,18 +37,142 @@
   },
   {
     "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_patch_longgrass_a",
+    "object": {
+      "mapgensize": [ 8, 8 ],
+      "rows": [ "  lll   ", " lLLLl  ", "lLLLLLl ", "lLLTLLll", " lLLLLl ", "  llLl  ", "   ll   ", "        " ],
+      "terrain": {
+        "l": [ [ "t_grass_long", 5 ], [ "t_grass", 1 ] ],
+        "L": "t_grass_long",
+        "T": [ [ "t_grass_tall", 4 ], [ "t_grass_long", 1 ] ]
+      }
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_patch_longgrass_b",
+    "object": {
+      "mapgensize": [ 10, 10 ],
+      "rows": [
+        "   ll     ",
+        " llLLll   ",
+        "lLLLLLLl  ",
+        " lLLLLLLll",
+        "  llLLLLl ",
+        "    llLl  ",
+        "          ",
+        "          ",
+        "          ",
+        "          "
+      ],
+      "terrain": { "l": [ [ "t_grass_long", 5 ], [ "t_grass", 1 ] ], "L": "t_grass_long" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_patch_tallgrass",
+    "object": {
+      "mapgensize": [ 6, 6 ],
+      "rows": [ " lll  ", "lTTTl ", "lTTTTl", " lTTl ", "  ll  ", "      " ],
+      "terrain": {
+        "l": [ [ "t_grass_long", 5 ], [ "t_grass", 1 ] ],
+        "T": [ [ "t_grass_tall", 4 ], [ "t_grass_long", 1 ] ]
+      }
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_patch_tallgrass_big",
+    "object": {
+      "mapgensize": [ 10, 10 ],
+      "rows": [
+        "   lll    ",
+        " llTTTll  ",
+        "lTTTTTTTl ",
+        "lTTTTTTTTl",
+        " lTTTTTTl ",
+        "  lTTTTl  ",
+        "   llTl   ",
+        "    l     ",
+        "          ",
+        "          "
+      ],
+      "terrain": {
+        "l": [ [ "t_grass_long", 3 ], [ "t_grass_tall", 2 ] ],
+        "T": [ [ "t_grass_tall", 6 ], [ "t_grass_long", 1 ] ]
+      }
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_patch_shrubs",
+    "object": {
+      "mapgensize": [ 6, 6 ],
+      "rows": [ "  ll  ", " lssl ", "lsuusl", " lssl ", "  l   ", "      " ],
+      "terrain": {
+        "l": [ [ "t_grass_long", 5 ], [ "t_grass", 1 ] ],
+        "s": [ [ "t_shrub", 2 ], [ "t_underbrush", 2 ], [ "t_grass_long", 1 ] ],
+        "u": "t_underbrush"
+      }
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_patch_mud",
+    "object": {
+      "mapgensize": [ 7, 7 ],
+      "rows": [ "  mm   ", " mmmmm ", "mmmmmm ", " mmmm  ", "  mm   ", "       ", "       " ],
+      "terrain": { "m": [ [ "t_mud", 4 ], [ "t_grass_long", 1 ] ] }
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_patch_pool",
+    "object": {
+      "mapgensize": [ 9, 9 ],
+      "rows": [
+        "   rr    ",
+        " rr~~rr  ",
+        "r~~~~~~r ",
+        "r~~~~~~~r",
+        " r~~~~~r ",
+        "  rr~rr  ",
+        "    r    ",
+        "         ",
+        "         "
+      ],
+      "terrain": { "r": [ [ "t_grass_tall", 3 ], [ "t_water_sh", 1 ] ], "~": "t_water_sh" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_patch_reeds",
+    "object": {
+      "mapgensize": [ 7, 7 ],
+      "rows": [ "  rrr  ", " rTTTr ", "rTTwTTr", " rTTTr ", "  rr   ", "       ", "       " ],
+      "terrain": {
+        "r": [ [ "t_grass_tall", 3 ], [ "t_water_sh", 1 ] ],
+        "T": [ [ "t_grass_tall", 4 ], [ "t_grass_long", 1 ] ],
+        "w": "t_tree_willow"
+      }
+    }
+  },
+  {
+    "type": "mapgen",
     "om_terrain": "astral_microworld_grounds",
-    "//": "Mostly plain grass like the vanilla field; patches (long/tall grass, shrubbery, groves, ponds, berry bushes) come from the astral_meadow map extras, not per-tile noise.",
+    "//": "Plain grass with clumps stamped from astral_patch_* nested chunks (2-5 grass patches, mostly tall grass, 0-2 shrub thickets per map square).  Groves, ponds and berry bushes may also come from the astral_meadow map extras.",
     "object": {
       "fill_ter": "t_grass",
       "terrain": {
-        "m": [
-          [ "t_grass", 200 ],
-          [ "t_grass_long", 6 ],
-          [ "t_grass_tall", 1 ],
-          [ "t_shrub", 1 ],
-          [ "t_underbrush", 1 ]
-        ]
+        "m": [ [ "t_grass", 120 ], [ "t_grass_long", 3 ], [ "t_shrub", 1 ] ]
       },
       "rows": [
         "mmmmmmmmmmmmmmmmmmmmmmmm",
@@ -75,6 +199,25 @@
         "mmmmmmmmmmmmmmmmmmmmmmmm",
         "mmmmmmmmmmmmmmmmmmmmmmmm",
         "mmmmmmmmmmmmmmmmmmmmmmmm"
+      ],
+      "place_nested": [
+        {
+          "chunks": [
+            [ "astral_patch_tallgrass_big", 3 ],
+            [ "astral_patch_tallgrass", 3 ],
+            [ "astral_patch_longgrass_a", 2 ],
+            [ "astral_patch_longgrass_b", 2 ]
+          ],
+          "x": [ 0, 14 ],
+          "y": [ 0, 14 ],
+          "repeat": [ 2, 5 ]
+        },
+        {
+          "chunks": [ [ "astral_patch_shrubs", 1 ], [ "null", 2 ] ],
+          "x": [ 0, 17 ],
+          "y": [ 0, 17 ],
+          "repeat": [ 0, 2 ]
+        }
       ]
     }
   },
@@ -85,14 +228,7 @@
     "object": {
       "fill_ter": "t_grass",
       "terrain": {
-        "m": [
-          [ "t_grass", 30 ],
-          [ "t_grass_long", 10 ],
-          [ "t_mud", 6 ],
-          [ "t_water_sh", 2 ],
-          [ "t_tree_willow", 2 ],
-          [ "t_underbrush", 2 ]
-        ]
+        "m": [ [ "t_grass", 30 ], [ "t_grass_long", 8 ], [ "t_mud", 3 ], [ "t_tree_willow", 1 ] ]
       },
       "rows": [
         "mmmmmmmmmmmmmmmmmmmmmmmm",
@@ -119,9 +255,18 @@
         "mmmmmmmmmmmmmmmmmmmmmmmm",
         "mmmmmmmmmmmmmmmmmmmmmmmm",
         "mmmmmmmmmmmmmmmmmmmmmmmm"
+      ],
+      "place_nested": [
+        { "chunks": [ [ "astral_patch_pool", 1 ] ], "x": [ 0, 14 ], "y": [ 0, 14 ], "repeat": [ 1, 3 ] },
+        {
+          "chunks": [ [ "astral_patch_reeds", 2 ], [ "astral_patch_mud", 2 ], [ "astral_patch_longgrass_b", 1 ] ],
+          "x": [ 0, 15 ],
+          "y": [ 0, 15 ],
+          "repeat": [ 2, 4 ]
+        }
       ]
     },
-    "//": "Wet grass and mud with willows; standing water comes in pools from the astral_lowland map extras (mx_pond) instead of single scattered tiles.  Fresh water only (was t_swater_sh, salt)."
+    "//": "Wet grass with willows; pools, reed beds and mud flats stamped from astral_patch_* nested chunks.  Fresh water only."
   },
   {
     "type": "mapgen",
