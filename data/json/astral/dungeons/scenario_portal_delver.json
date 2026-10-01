@@ -150,10 +150,10 @@
         "moves": 100,
         "weight_multiplier": 0.0,
         "volume_multiplier": 0.0,
-        "spoil_multiplier": 0.0,
         "watertight": true,
         "airtight": true,
-        "rigid": true
+        "rigid": true,
+        "//": "Liquid pocket keeps normal temperature: a 0 spoil multiplier also stops temperature updates, so water put in here stayed frozen."
       }
     ]
   },
