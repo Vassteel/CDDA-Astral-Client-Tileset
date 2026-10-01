@@ -2,108 +2,22 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_ASTRAL_PORTAL_THRESHOLD",
-    "//": "Examine action of the active threshold tile.  Overworld -> pocket world, or pocket world -> overworld.  Player-only travel for the prototype; followers, pets and vehicles stay behind on purpose.",
+    "//": "Examine action of an UNBOUND active threshold.  In the overworld: bind to the next free pocket and enter (see EOC_ASTRAL_PORTAL_ENTER_DO in pockets_generated.json).  Inside a pocket: this is the return portal; dispatch on the current dimension.",
     "effect": [
       {
-        "if": { "current_dimension": "astral_test_world" },
-        "then": [ { "run_eocs": "EOC_ASTRAL_PORTAL_RETURN" } ],
-        "else": [
-          {
-            "if": { "current_dimension": "default" },
-            "then": [ { "run_eocs": "EOC_ASTRAL_PORTAL_ENTER" } ],
-            "else": [ { "u_message": "The membrane shivers, but does not open here.", "type": "neutral" } ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "effect_on_condition",
-    "id": "EOC_ASTRAL_PORTAL_ENTER",
-    "//": "Confirmation wrapper; the work is in EOC_ASTRAL_PORTAL_ENTER_DO so tests and a future walk-through trap can skip the prompt.",
-    "condition": { "not": "u_driving" },
-    "effect": [
-      {
-        "if": { "u_query": "Step through the gateway?", "default": false },
-        "then": [ { "run_eocs": "EOC_ASTRAL_PORTAL_ENTER_DO" } ]
-      }
-    ],
-    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
-  },
-  {
-    "type": "effect_on_condition",
-    "id": "EOC_ASTRAL_PORTAL_ENTER_DO",
-    "effect": [
-      { "u_location_variable": { "global_val": "astral_return_loc" } },
-      { "math": [ "astral_portal_entries++" ] },
-      {
-        "u_travel_to_dimension": "astral_test_world",
-        "npc_travel_radius": 0,
-        "npc_travel_filter": "none",
-        "fail_message": "The membrane resists you and the light along the runes gutters out for a moment.",
-        "success_message": "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
-      },
-      {
-        "if": { "current_dimension": "astral_test_world" },
+        "if": { "current_dimension": "default" },
         "then": [
           {
-            "if": { "not": { "math": [ "has_var(astral_test_world_arrival)" ] } },
-            "then": [
-              {
-                "u_location_variable": { "global_val": "astral_test_world_arrival" },
-                "target_params": { "om_terrain": "astral_microworld_center", "om_special": "astral_test_microworld" },
-                "terrain": "t_astral_portal_active_r2c2",
-                "target_max_radius": 40
-              }
-            ]
-          },
-          { "u_teleport": { "global_val": "astral_test_world_arrival" }, "force_safe": true },
-          {
-            "if": { "math": [ "astral_portal_entries == 1" ] },
-            "then": [
-              {
-                "u_message": "You are standing on a platform identical to the one you just left.  Beyond it lies a small, quiet meadow.  In every direction, not far away, the world simply stops.",
-                "popup": true
-              }
-            ],
-            "else": [ { "u_message": "You are back in the quiet meadow.", "type": "good" } ]
+            "if": { "u_query": "Step through the gateway?", "default": false },
+            "then": [ { "run_eocs": "EOC_ASTRAL_PORTAL_ENTER_DO" } ]
           }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "effect_on_condition",
-    "id": "EOC_ASTRAL_PORTAL_RETURN",
-    "condition": { "not": "u_driving" },
-    "effect": [
-      {
-        "if": { "not": { "math": [ "has_var(astral_return_loc)" ] } },
-        "then": [ { "u_message": "The gateway has nowhere to send you.", "type": "bad" } ],
+        ],
         "else": [
           {
             "if": { "u_query": "Return through the gateway?", "default": false },
             "then": [ { "run_eocs": "EOC_ASTRAL_PORTAL_RETURN_DO" } ]
           }
         ]
-      }
-    ],
-    "false_effect": [ { "u_message": "You can't do that while driving.", "type": "bad" } ]
-  },
-  {
-    "type": "effect_on_condition",
-    "id": "EOC_ASTRAL_PORTAL_RETURN_DO",
-    "effect": [
-      {
-        "u_travel_to_dimension": "default",
-        "npc_travel_radius": 0,
-        "npc_travel_filter": "none",
-        "fail_message": "The membrane resists you.",
-        "success_message": "Cold light closes over you, and the familiar world reassembles itself around the gateway."
-      },
-      {
-        "if": { "current_dimension": "default" },
-        "then": [ { "u_teleport": { "global_val": "astral_return_loc" }, "force_safe": true } ]
       }
     ]
   },

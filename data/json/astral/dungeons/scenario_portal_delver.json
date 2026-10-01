@@ -1,0 +1,281 @@
+[
+  {
+    "type": "start_location",
+    "id": "sloc_astral_gateway",
+    "name": "Ancient gateway",
+    "terrain": [ "astral_portal_clearing" ],
+    "flags": [ "ALLOW_OUTSIDE" ]
+  },
+  {
+    "type": "scenario",
+    "id": "astral_portal_delver",
+    "name": "Portal Delver",
+    "points": 0,
+    "//": "Development scenario for portal testing.  Remove before release.",
+    "description": "You wake on the worn stones before an ancient gateway, dressed and armed as if you had always meant to walk through it.  Nothing you carry is quite ordinary.  (Development scenario for testing the portal worlds; it will be removed later.)",
+    "start_name": "Ancient gateway",
+    "allowed_locs": [ "sloc_astral_gateway", "sloc_field" ],
+    "professions": [ "astral_portal_delver" ],
+    "reveal_locale": false,
+    "flags": [ "LONE_START" ]
+  },
+  {
+    "type": "profession",
+    "id": "astral_portal_delver",
+    "name": "Portal Delver",
+    "description": "Brigandine over a gambeson, a sword, a shield, and two gifts that should not exist: a waterskin that is never dry for long and a pouch that bakes its own bread.  A delver's pack stuffed with tools, camp gear, light, medicine and rations.  Also a few tools for raising and reading gateways.  (Development profession.)",
+    "points": 0,
+    "skills": [
+      { "level": 3, "name": "melee" },
+      { "level": 3, "name": "cutting" },
+      { "level": 2, "name": "dodge" },
+      { "level": 2, "name": "survival" },
+      { "level": 1, "name": "fabrication" }
+    ],
+    "items": {
+      "both": {
+        "entries": [
+          { "item": "longshirt" },
+          { "item": "socks" },
+          { "item": "pants_leather" },
+          { "item": "boots_combat" },
+          { "item": "gloves_leather" },
+          { "item": "gambeson" },
+          { "item": "armor_hc_brigandine" },
+          { "item": "helmet_barbute" },
+          {
+            "item": "astral_delver_pack",
+            "contents-item": [
+              "pickaxe",
+              "shovel",
+              "hammer",
+              "saw",
+              "crowbar",
+              "multitool",
+              "knife_hunting",
+              "hand_axe",
+              "rope_30",
+              "grapnel",
+              "tent_kit",
+              "sleeping_bag",
+              "tarp",
+              "mess_kit",
+              "pot",
+              "water_purifier",
+              "binoculars",
+              "sewing_kit",
+              "duct_tape",
+              "fishing_rod_basic",
+              "whistle",
+              "signal_flare",
+              "permanent_marker",
+              "pencil",
+              "towel",
+              "socks_wool",
+              "scissors",
+              "mirror"
+            ]
+          },
+          { "item": "heavy_flashlight", "charges": 56 },
+          { "item": "arming_sword", "custom-flags": [ "auto_wield" ] },
+          { "item": "astral_shield_round" },
+          { "item": "astral_spring_water", "container-item": "astral_everfull_waterskin", "charges": 6 },
+          { "item": "astral_waybread", "container-item": "astral_provision_pouch" },
+          { "item": "ref_lighter", "charges": 50 },
+          { "item": "matches", "charges": 20 },
+          { "item": "bandages", "count": 10 },
+          { "item": "adhesive_bandages", "count": 10 },
+          { "item": "quikclot", "count": 5 },
+          { "item": "disinfectant", "charges": 10 },
+          {
+            "item": "aspirin",
+            "count": 20,
+            "container-item": "null",
+            "entry-wrapper": "bottle_plastic_pill_painkiller"
+          },
+          {
+            "item": "antibiotics",
+            "count": 10,
+            "container-item": "null",
+            "entry-wrapper": "bottle_plastic_pill_prescription"
+          },
+          { "item": "pur_tablets", "count": 20 },
+          { "item": "water_clean", "container-item": "2lcanteen" },
+          { "item": "pemmican", "count": 10 },
+          { "item": "hardtack", "count": 10 },
+          { "item": "astral_debug_portal_placer" },
+          { "item": "astral_debug_ledger" }
+        ]
+      },
+      "male": { "entries": [ { "item": "boxer_shorts" } ] },
+      "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
+    }
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "id": "astral_delver_pack",
+    "name": { "str": "delver's pack" },
+    "description": "A travel-worn pack whose inside is a good deal larger than its outside.  Whatever goes in weighs nothing, takes no room, and does not spoil; a second, oiled pocket holds liquids the same way.  (Development item: a core copy of the limitless backpack.)",
+    "weight": "0 g",
+    "volume": "250 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "leather" ],
+    "symbol": "[",
+    "looks_like": "backpack",
+    "color": "light_cyan",
+    "flags": [ "BELTED", "WATER_FRIENDLY", "NO_SALVAGE", "TARDIS", "ZERO_WEIGHT", "TRADER_AVOID" ],
+    "armor": [
+      { "encumbrance": 0, "coverage": 0, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] }
+    ],
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "unlimited": true,
+        "rigid": true,
+        "max_contains_volume": "100000 L",
+        "max_contains_weight": "100000 kg",
+        "max_item_length": "1 km",
+        "moves": 100,
+        "weight_multiplier": 0.0,
+        "volume_multiplier": 0.0,
+        "spoil_multiplier": 0.0
+      },
+      {
+        "pocket_type": "CONTAINER",
+        "unlimited": true,
+        "max_contains_volume": "100000 L",
+        "max_contains_weight": "100000 kg",
+        "moves": 100,
+        "weight_multiplier": 0.0,
+        "volume_multiplier": 0.0,
+        "spoil_multiplier": 0.0,
+        "watertight": true,
+        "airtight": true,
+        "rigid": true
+      }
+    ]
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "id": "astral_everfull_waterskin",
+    "name": { "str": "everfull waterskin" },
+    "description": "A leather waterskin stitched with a thread that catches the light wrong.  Every hour it beads a little more spring water from the inside, until it holds about a litre and a half; it never makes more than that.",
+    "looks_like": "waterskin",
+    "weight": "453 g",
+    "volume": "250 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "leather" ],
+    "symbol": ")",
+    "color": "light_blue",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "watertight": true,
+        "max_contains_volume": "1500 ml",
+        "max_item_volume": "17 ml",
+        "max_contains_weight": "3 kg"
+      }
+    ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "TRADER_AVOID" ],
+    "sided": true,
+    "armor": [
+      {
+        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 2.0 } ],
+        "encumbrance": 2,
+        "coverage": 5,
+        "covers": [ "leg_l", "leg_r" ],
+        "specifically_covers": [ "leg_hip_l", "leg_hip_r" ]
+      }
+    ]
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "id": "astral_provision_pouch",
+    "name": { "str": "provision pouch" },
+    "description": "A belt pouch of oiled cloth with a few grains of flour always in the seams.  Once a day it is found to contain a round of fresh waybread, as long as you are not already carrying two.",
+    "looks_like": "canvas_bag",
+    "weight": "120 g",
+    "volume": "150 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "cotton" ],
+    "symbol": ")",
+    "color": "yellow",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "max_contains_volume": "600 ml",
+        "max_item_volume": "300 ml",
+        "max_contains_weight": "1 kg",
+        "moves": 80,
+        "spoil_multiplier": 0.0
+      }
+    ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "TRADER_AVOID" ],
+    "armor": [ { "encumbrance": 1, "coverage": 3, "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ] } ]
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
+    "id": "astral_waybread",
+    "name": { "str_sp": "waybread" },
+    "description": "A dense, slightly sweet round of bread, still faintly warm.  One is a full day's walking food, and it never seems to go stale.",
+    "looks_like": "bread",
+    "material": [ "wheat" ],
+    "weight": "220 g",
+    "volume": "300 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "symbol": "%",
+    "color": "yellow",
+    "comestible_type": "FOOD",
+    "calories": 700,
+    "quench": 4,
+    "healthy": 2,
+    "fun": 6,
+    "flags": [ "TRADER_AVOID" ],
+    "vitamins": [ [ "calcium", 10 ], [ "iron", 15 ], [ "vitC", 10 ], [ "wheat_allergen", 1 ] ]
+  },
+  {
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE", "AMMO" ],
+    "id": "astral_spring_water",
+    "copy-from": "water_clean",
+    "name": { "str_sp": "spring water" },
+    "description": "Cold, clean water that beads inside an everfull waterskin.  It drinks like any clean water.",
+    "//": "Separate id so the hourly refill can count only what the waterskin made (cap 6 x 250 ml)."
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_EVERFULL_WATERSKIN",
+    "recurrence": "1 hours",
+    "//": "Refills the everfull waterskin one 250 ml charge per hour, stopping once 1.5 L of spring water is carried.  Replaces the old countdown transform, which replaced the skin and dumped its contents.",
+    "condition": {
+      "and": [
+        { "u_has_item": "astral_everfull_waterskin" },
+        {
+          "not": { "u_has_items": { "item": "astral_spring_water", "count": 6 } }
+        }
+      ]
+    },
+    "effect": [ { "u_spawn_item": "astral_spring_water", "count": 1, "suppress_message": true } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PROVISION_POUCH",
+    "recurrence": "1 days",
+    "//": "One waybread a day while the pouch is carried, unless two are already carried.",
+    "condition": {
+      "and": [
+        { "u_has_item": "astral_provision_pouch" },
+        { "not": { "u_has_items": { "item": "astral_waybread", "count": 2 } } }
+      ]
+    },
+    "effect": [ { "u_spawn_item": "astral_waybread", "count": 1, "suppress_message": true } ]
+  }
+]
