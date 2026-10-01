@@ -297,9 +297,30 @@ def main():
                            "terrain": [{"result": bound_tid("active", n),
                                         "valid_terrain": [tid("active", 1, 2)]}]})
 
-    def travel(dim, success, fail):
-        return {"u_travel_to_dimension": dim, "npc_travel_radius": 0, "npc_travel_filter": "none",
+    FOLLOWER_RADIUS = 6
+
+    def travel(dim, success, fail, arrival_var):
+        # Followers standing near the gateway cross with the player and arrive in a ring
+        # around the arrival point (engine: u_travel_to_dimension arrival_location).
+        # Vehicles never cross; the gateway refuses them in the calling EOC.
+        return {"u_travel_to_dimension": dim,
+                "npc_travel_radius": FOLLOWER_RADIUS, "npc_travel_filter": "follower",
+                "arrival_location": {"global_val": arrival_var},
                 "fail_message": fail, "success_message": success}
+
+    def settle_followers(target_var):
+        # After the courtyard is raised around the pad, pull every follower in range onto
+        # free tiles next to it (they may be standing where walls now are).  The target is
+        # passed through the shared global `astral_settle_target`.
+        assert target_var == "astral_settle_target"
+        return [{"u_run_npc_eocs": ["EOC_ASTRAL_SETTLE_FOLLOWER"], "local": True, "npc_range": 12}]
+
+    SETTLE_FOLLOWER_EOC = {
+        "type": "effect_on_condition", "id": "EOC_ASTRAL_SETTLE_FOLLOWER",
+        "//": "Run by each nearby NPC after a courtyard is raised: followers step onto the pad.",
+        "condition": "u_following",
+        "effect": [{"u_teleport": {"global_val": "astral_settle_target"}, "force_safe": True}],
+    }
 
     ENTER_OK = "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
     ENTER_FAIL = "The membrane resists you and the light along the runes gutters out for a moment."
@@ -310,27 +331,31 @@ def main():
         d, sl = pocket_dim(n), slot(n)
         return {
             "type": "effect_on_condition", "id": f"EOC_ASTRAL_ENTER_P{sl}_DO",
-            "//": "Vehicles are refused until u_travel_to_dimension can carry one to an arrival location (engine follow-up); the route layout needs every traveller to arrive at the canonical point.",
+            "//": "Followers within a few tiles of the gateway cross with you (NPC plan N2).  Vehicles never cross: the gateway refuses them.",
             "effect": [
                 {"if": "u_is_in_vehicle",
                  "then": [{"u_message": "The membrane will not take the vehicle with you.  Step off it first.", "type": "bad"}],
                  "else": [
                 {"u_location_variable": {"global_val": f"astral_return_p{sl}"}},
-                travel(d, ENTER_OK, ENTER_FAIL),
+                # Canonical arrival point, expressed as an offset from where we stand.  Absolute
+                # map-square coordinates mean the same thing in every dimension, so this is
+                # computed before crossing and handed to the engine as the arrival.
+                {"math": [f"astral_dx = {ARRIVAL_X} - u_val('pos_x')"]},
+                {"math": [f"astral_dy = {ARRIVAL_Y} - u_val('pos_y')"]},
+                {"u_location_variable": {"global_val": f"astral_arrival_p{sl}"},
+                 "x_adjust": {"math": ["astral_dx"]}, "y_adjust": {"math": ["astral_dy"]},
+                 "z_adjust": 0, "z_override": True},
+                travel(d, ENTER_OK, ENTER_FAIL, f"astral_arrival_p{sl}"),
                 {"if": {"current_dimension": d}, "then": [
                     {"math": [f"astral_entries_p{sl}++"]},
                     {"math": [f"astral_last_enter_p{sl} = time('now')"]},
-                    # Canonical arrival point, expressed as an offset from where we stand.
-                    {"math": [f"astral_dx = {ARRIVAL_X} - u_val('pos_x')"]},
-                    {"math": [f"astral_dy = {ARRIVAL_Y} - u_val('pos_y')"]},
-                    {"u_location_variable": {"global_val": f"astral_arrival_p{sl}"},
-                     "x_adjust": {"math": ["astral_dx"]}, "y_adjust": {"math": ["astral_dy"]},
-                     "z_adjust": 0, "z_override": True},
-                    {"u_teleport": {"global_val": f"astral_arrival_p{sl}"}, "force_safe": True},
                     {"if": {"not": {"math": [f"has_var(astral_template_p{sl})"]}}, "then": [
-                        # First arrival: raise the courtyard around the pad.
+                        # First arrival: raise the courtyard around the pad, then put the party
+                        # back on it in case the new walls landed on anyone.
                         {"mapgen_update": "astral_courtyard_arrival", "target_var": {"global_val": f"astral_arrival_p{sl}"}},
                         {"u_teleport": {"global_val": f"astral_arrival_p{sl}"}, "force_safe": True},
+                        {"set_string_var": {"global_val": f"astral_arrival_p{sl}"}, "target_var": {"global_val": "astral_settle_target"}},
+                        *settle_followers("astral_settle_target"),
                         {"set_string_var": "astral_greenwood", "target_var": {"global_val": f"astral_template_p{sl}"}},
                         {"set_string_var": "unclaimed", "target_var": {"global_val": f"astral_core_p{sl}"}},
                         {"math": [f"astral_rank_p{sl} = 1"]},
@@ -350,12 +375,10 @@ def main():
                     {"if": "u_is_in_vehicle",
                      "then": [{"u_message": "The membrane will not take the vehicle with you.  Step off it first.", "type": "bad"}],
                      "else": [
-                    travel("default", RETURN_OK, RETURN_FAIL),
+                    # Everybody arrives beside the overworld gateway you left from.
+                    travel("default", RETURN_OK, RETURN_FAIL, f"astral_return_p{sl}"),
                     {"if": {"current_dimension": "default"}, "then": [
-                        {"math": [f"astral_last_exit_p{sl} = time('now')"]},
-                        # Crossing at the pocket portal already puts you on the overworld portal
-                        # (same coordinates); the teleport only matters if the anchor moved.
-                        {"u_teleport": {"global_val": f"astral_return_p{sl}"}, "force_safe": True}]}]}]}],
+                        {"math": [f"astral_last_exit_p{sl} = time('now')"]}]}]}]}],
         }
 
     def threshold_bound(n):
@@ -381,7 +404,7 @@ def main():
                 {"run_eocs": f"EOC_ASTRAL_ENTER_P{sl}_DO"}],
         }
 
-    eocs = []
+    eocs = [SETTLE_FOLLOWER_EOC]
     for n in range(1, POOL_SIZE + 1):
         eocs += [threshold_bound(n), enter_do(n), return_do(n), bind(n)]
     # allocator: first use of an unbound overworld threshold

@@ -4778,6 +4778,7 @@ Unloads the current dimension and loads the dimension with the specific ID, opti
 | "item_travel_radius" | optional | int or [variable object](#variable-object) | default -1; if a value 0 or above is specified, the items within that radius around the player will be transported with them when dimension hopping. |
 | "target_location" | optional | [variable object](#variable-object) | default is the player's location; if present this variable will be used as the center point for items in conjunction with `item_travel_radius` |
 | "region_type" | optional | string or [variable object](#variable-object) | default `default`; The dimension is generated with the region settings of a `region_settings_new` object. |
+| "arrival_location" | optional | [variable object](#variable-object) | absolute map-square position in the destination dimension.  When present, the player arrives on the nearest passable tile to it and the travelling NPCs arrive in a ring around it (they are nudged onto free tiles when the map loads).  Without it everybody keeps their current coordinates.  Cannot be combined with `take_vehicle`. |
 
 ##### Valid talkers:
 

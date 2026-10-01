@@ -9860,15 +9860,22 @@ bool game::travel_to_dimension( dimension_id dimension_destination,
                                 const std::vector<npc *> &npc_travellers,
                                 const std::vector<item_location> &item_travellers,
                                 const std::optional<tripoint_bub_ms> item_travellers_location,
-                                vehicle *veh )
+                                vehicle *veh, const std::optional<tripoint_abs_ms> &arrival )
 {
     map &here = get_map();
     avatar &player = get_avatar();
+    if( veh != nullptr && arrival ) {
+        debugmsg( "travel_to_dimension: a vehicle cannot travel to an explicit arrival point" );
+        return false;
+    }
+    if( arrival && ( arrival->z() > OVERMAP_HEIGHT || arrival->z() < -OVERMAP_DEPTH ) ) {
+        debugmsg( "travel_to_dimension: arrival %s is too high or too deep", arrival->to_string() );
+        return false;
+    }
     std::vector<npc_ptr> moving_npcs;
     moving_npcs.reserve( npc_travellers.size() );
     if( !npc_travellers.empty() ) {
         int traveller_count = npc_travellers.size();
-        overmap &old_om = overmap_buffer.get( project_to<coords::om>( player.pos_abs().xy() ) );
         for( auto it = critter_tracker->active_npc.begin(); it != critter_tracker->active_npc.end(); ) {
             // skip unloading a traveller
             bool skip = false;
@@ -9885,8 +9892,13 @@ bool game::travel_to_dimension( dimension_id dimension_destination,
                 ( *it )->on_unload();
                 it = critter_tracker->active_npc.erase( it );
             } else {
+                // Travellers may stand on a neighbouring overmap, so erase them from the
+                // overmap that actually holds them rather than the player's.
+                overmap &old_om = overmap_buffer.get( project_to<coords::om>( ( *it )->pos_abs().xy() ) );
                 if( const npc_ptr ptr = old_om.erase_npc( ( *it++ )->getID() ) ) {
                     moving_npcs.push_back( ptr );
+                } else {
+                    debugmsg( "travel_to_dimension: could not find traveller on their overmap" );
                 }
             }
         }
@@ -9942,18 +9954,63 @@ bool game::travel_to_dimension( dimension_id dimension_destination,
 
     // load/create new overmap
     overmap_buffer.init_region_layout();
-    overmap &new_om = overmap_buffer.get( project_to<coords::om>( player.pos_abs().xy() ) );
+    const tripoint_abs_ms arrival_pos = arrival.value_or( player.pos_abs() );
+    // Generates the overmap around the arrival if it does not exist yet.
+    overmap_buffer.get( project_to<coords::om>( arrival_pos.xy() ) );
 
     // insert travelled NPCs
-    for( const npc_ptr &guy : moving_npcs ) {
-        new_om.insert_npc( guy );
+    if( arrival ) {
+        // Followers arrive in a ring around the arrival point; load_npcs() nudges them
+        // onto free tiles once the map is loaded.
+        const std::vector<tripoint_abs_ms> ring = closest_points_first( arrival_pos, 1, 3 );
+        size_t slot = 0;
+        for( const npc_ptr &guy : moving_npcs ) {
+            guy->spawn_at_precise( ring[slot % ring.size()] );
+            slot++;
+            // Any overmap goal pointed into the previous dimension.
+            guy->goal = npc::no_goal_point;
+            guy->omt_path.clear();
+            overmap_buffer.get( project_to<coords::om>( guy->pos_abs().xy() ) ).insert_npc( guy );
+        }
+    } else {
+        overmap &new_om = overmap_buffer.get( project_to<coords::om>( player.pos_abs().xy() ) );
+        for( const npc_ptr &guy : moving_npcs ) {
+            new_om.insert_npc( guy );
+        }
     }
     // clear map memory from the previous dimension
     player.clear_map_memory();
     // Load map memory in new dimension, if there is any
     player.load_map_memory();
-    // Loads submaps and invalidate related caches
-    here.load( tripoint_abs_sm( here.get_abs_sub() ), false );
+    if( arrival ) {
+        // Load the reality bubble around the arrival and put the player on the nearest
+        // passable tile, mirroring game::place_player_overmap().
+        if( player.is_mounted() ) {
+            player.remove_effect( effect_riding );
+            player.mounted_creature->remove_effect( effect_ridden );
+            player.mounted_creature = nullptr;
+        }
+        here.access_cache( here.get_abs_sub().z() ).map_memory_cache_dec.reset();
+        here.access_cache( here.get_abs_sub().z() ).map_memory_cache_ter.reset();
+        const tripoint_abs_sm map_sm_pos =
+            project_to<coords::sm>( project_to<coords::omt>( arrival_pos ) ) -
+            point( HALF_MAPSIZE, HALF_MAPSIZE );
+        here.load( map_sm_pos, false );
+        tripoint_bub_ms dest = here.get_bub( arrival_pos );
+        if( here.impassable( dest ) || get_creature_tracker().creature_at<Creature>( dest ) ) {
+            for( const tripoint_bub_ms &p : closest_points_first( dest, 1, 8 ) ) {
+                if( here.inbounds( p ) && here.passable_through( p ) &&
+                    get_creature_tracker().creature_at<Creature>( p ) == nullptr ) {
+                    dest = p;
+                    break;
+                }
+            }
+        }
+        player.setpos( here, dest );
+    } else {
+        // Loads submaps and invalidate related caches
+        here.load( tripoint_abs_sm( here.get_abs_sub() ), false );
+    }
 
     here.invalidate_visibility_cache();
     bool undo_shift = false;
@@ -9979,6 +10036,9 @@ bool game::travel_to_dimension( dimension_id dimension_destination,
     weather.weather_override = WEATHER_NULL;
     weather.set_nextweather( calendar::turn );
     update_overmap_seen();
+    if( arrival ) {
+        update_map( player );
+    }
     if( undo_shift ) {
         travel_to_dimension( previous_dimension, npc_travellers, {}, std::nullopt, veh );
         if( !place_items.empty() ) {
