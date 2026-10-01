@@ -29,6 +29,7 @@ see their info later in this document.
 | `ocean`                  | `region_settings_ocean`             | Defines parameters for generating oceans in the region. `null` to disable. |
 | `ravines`                | `region_settings_ravine`            | Defines parameters for generating ravines in the region. `null` to disable. |
 | `forests`                | `region_settings_forest`            | Defines parameters for generating forests and swamps in the region. `null` to disable forest generation. |
+| `biome_layers`           | array of `overmap_biome_layer`      | Noise-painted biomes applied in order after forests and swamps. Optional; empty by default. |
 | `forest_composition`     | `region_settings_forest_mapgen`     | Defines flora (and "stuff") that cover the `forest` terrain types.    |
 | `forest_trails`          | `region_settings_forest_trail`      | Defines the overmap and local structure of forest trails. `null` to disable. |
 | `highways`               | `region_settings_highway`           | Defines parameters for generating highways in the region. `null` to disable. |
@@ -206,6 +207,62 @@ Two noise functions with values between 0 and 1 are generated over the entire ma
     "noise_threshold_swamp_isolated": 0.6,
     "river_floodplain_buffer_distance_min": 3,
     "river_floodplain_buffer_distance_max": 15
+}
+```
+
+## Overmap Biome Layers
+
+**overmap_biome_layer** paints a noise-shaped biome onto the overmap, the same way vanilla
+paints forests and swamps over fields, but with any overmap terrain. A region lists its layers
+in `biome_layers`; they run in that order after vanilla forests and swamps (whether or not the
+region has `forests`), before ravines, highways and cities.
+
+For every overmap terrain the layer may replace, the layer samples its noise and picks the first
+band whose threshold the noise exceeds (bands are sorted highest first). With its default noise a
+layer reproduces vanilla forest noise exactly, so `[ [ 0.3, "x_thick" ], [ 0.25, "x" ] ]` gives
+the same coverage as forest / forest_thick; one band at 0.25 covers roughly a third of the map.
+
+Layers continue seamlessly across overmap borders because the noise is global, so neighbouring
+regions that share a layer get patches that flow across the border.
+
+To keep the vanilla look, give the painted terrains `"mapgen": [ { "builtin": "forest" } ]` and
+a `forest_biome_mapgen` (in the region's `forest_composition`) listing them in `terrains`:
+trees, groundcover, clutter and the soft fade into neighbouring terrain then work as for forests.
+
+### Fields
+
+| Identifier    | Type                         | Description |
+| ------------- | ---------------------------- | ----------- |
+| `type`        |                              | `"overmap_biome_layer"` |
+| `id`          |                              | Unique id, referenced from `region_settings.biome_layers`. |
+| `terrains`    | array of `[ threshold, oter ]` | Required. Noise above `threshold` becomes that overmap terrain; highest threshold wins. |
+| `replaces`    | array of overmap terrain ids | Terrain this layer may paint over. Empty or absent: the region's z0 `default_oter`. List an earlier layer's terrains to grow a biome inside another (like swamps inside forests). |
+| `seed_offset` | integer                      | 0 follows vanilla forest noise; give each layer that should form its own patches a different non-zero value. |
+| `use_forestosity` | boolean                  | Add the overmap's forest drift (`forest_threshold_increase`) to the noise. Default false. |
+| `noise`       | object                       | Optional shape. `octaves` 4, `persistence` 0.5, `scale` 0.03 (smaller = bigger patches), `power` 2.0, `detail_octaves` 6, `detail_scale` 0.07, `detail_power` 3.0, `detail_weight` 0.5 (0 = smooth blobs), `follow_forest_clumping` true (stretch with the world's forest clumping option). |
+
+### Example
+
+```jsonc
+{
+  "type": "overmap_biome_layer",
+  "id": "astral_layer_bog",
+  "seed_offset": 3,
+  "terrains": [ [ 0.32, "astral_bog_deep" ], [ 0.25, "astral_bog" ] ]
+},
+{
+  "type": "overmap_biome_layer",
+  "id": "astral_layer_bog_pools",
+  "seed_offset": 4,
+  "replaces": [ "astral_bog", "astral_bog_deep" ],
+  "noise": { "scale": 0.06, "detail_weight": 0 },
+  "terrains": [ [ 0.35, "astral_bog_pool" ] ]
+},
+{
+  "type": "region_settings",
+  "id": "astral_floor_fungal",
+  "copy-from": "astral_pocket",
+  "biome_layers": [ "astral_layer_bog", "astral_layer_bog_pools" ]
 }
 ```
 

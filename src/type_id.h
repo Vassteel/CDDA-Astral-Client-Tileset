@@ -264,6 +264,8 @@ using region_settings_ocean_id = string_id<region_settings_ocean>;
 
 struct region_settings_ravine;
 using region_settings_ravine_id = string_id<region_settings_ravine>;
+struct overmap_biome_layer;
+using overmap_biome_layer_id = string_id<overmap_biome_layer>;
 
 struct region_settings_forest;
 using region_settings_forest_id = string_id<region_settings_forest>;

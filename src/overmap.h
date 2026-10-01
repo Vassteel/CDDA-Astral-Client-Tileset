@@ -783,6 +783,8 @@ class overmap
         void place_rivers( const std::vector<const overmap *> &neighbor_overmaps );
 
         void place_swamps();
+        // Data-defined noise biomes (region_settings::biome_layers).
+        void place_biome_layers();
         void place_forest_trails();
         void place_forest_trailheads();
 

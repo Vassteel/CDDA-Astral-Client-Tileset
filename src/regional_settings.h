@@ -312,6 +312,52 @@ struct region_settings_ocean {
     region_settings_ocean() = default;
 };
 
+/**
+ * A noise-shaped biome painted onto the overmap, the way vanilla paints forests
+ * and swamps over fields.  Each layer samples its own simplex noise (vanilla
+ * forest noise by default, decorrelated by seed_offset) and, where the noise
+ * passes a band's threshold, replaces eligible overmap terrain with that band's
+ * terrain.  Layers run in the order a region lists them, after vanilla forests
+ * and swamps, so a later layer can grow inside an earlier one (like swamps in
+ * forests).  Pair the terrains with `"mapgen": [ { "builtin": "forest" } ]` and
+ * a forest_biome_mapgen to get the vanilla forest look with themed contents.
+ */
+struct overmap_biome_layer {
+    overmap_biome_layer_id id = overmap_biome_layer_id::NULL_ID();
+
+    // Decorrelates layers: 0 follows vanilla forest noise exactly; give every
+    // layer that should form its own patches a different non-zero offset.
+    int seed_offset = 0;
+    // Broad shape (defaults reproduce om_noise_layer_forest).
+    int octaves = 4;
+    float persistence = 0.5f;
+    float scale = 0.03f;
+    float power = 2.0f;
+    // Fine detail subtracted from the broad shape (breaks up blobs).
+    int detail_octaves = 6;
+    float detail_scale = 0.07f;
+    float detail_power = 3.0f;
+    float detail_weight = 0.5f;
+    // Stretch the noise with the world's forest clumping option.
+    bool follow_forest_clumping = true;
+    // Add the overmap's forestosity (forest_increase drift) to the noise.
+    bool use_forestosity = false;
+
+    // Overmap terrain this layer may replace; empty = the region's z0 default_oter.
+    std::vector<oter_str_id> replaces;
+    // Threshold bands, highest threshold first after finalize: noise above
+    // threshold -> terrain.  Like forest / forest_thick at 0.25 / 0.3.
+    std::vector<std::pair<float, oter_str_id>> terrains;
+
+    bool was_loaded = false;
+    void load( const JsonObject &jo, std::string_view );
+    void finalize();
+    void check() const;
+    static void load_overmap_biome_layer( const JsonObject &jo, const std::string &src );
+    static void reset();
+    overmap_biome_layer() = default;
+};
+
 struct region_settings_ravine {
     region_settings_ravine_id id = region_settings_ravine_id::NULL_ID();
 
@@ -492,6 +538,9 @@ struct region_settings {
 
 
     region_settings_map_extras_id region_extras;
+
+    // Noise-painted biome layers, applied in order after forests and swamps.
+    std::vector<overmap_biome_layer_id> biome_layers;
 
     region_settings() : id( "null" ) {
         default_groundcover.add( t_null, 0 );

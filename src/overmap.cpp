@@ -978,6 +978,9 @@ void overmap::generate( const std::vector<const overmap *> &neighbor_overmaps,
     if( settings->overmap_forest && settings->place_swamps ) {
         place_swamps();
     }
+    if( !settings->biome_layers.empty() ) {
+        place_biome_layers();
+    }
     if( settings->overmap_ravine ) {
         place_ravines();
     }
@@ -2069,6 +2072,55 @@ void overmap::place_forests()
                 ter_set( p, oter_forest_thick );
             } else if( n + forest_size_adjust > settings_forest.noise_threshold_forest ) {
                 ter_set( p, oter_forest );
+            }
+        }
+    }
+}
+
+void overmap::place_biome_layers()
+{
+    const oter_id default_oter_id( settings->default_oter[OVERMAP_DEPTH] );
+    for( const overmap_biome_layer_id &layer_id : settings->biome_layers ) {
+        if( !layer_id.is_valid() ) {
+            continue;
+        }
+        const overmap_biome_layer &layer = layer_id.obj();
+        if( layer.terrains.empty() ) {
+            continue;
+        }
+        std::vector<oter_id> eligible;
+        eligible.reserve( layer.replaces.size() );
+        for( const oter_str_id &ot : layer.replaces ) {
+            eligible.emplace_back( ot.id() );
+        }
+        std::vector<std::pair<float, oter_id>> bands;
+        bands.reserve( layer.terrains.size() );
+        for( const auto &band : layer.terrains ) {
+            bands.emplace_back( band.first, band.second.id() );
+        }
+        const float adjust = layer.use_forestosity ? forest_size_adjust : 0.0f;
+        // The seed is the noise's third axis, scaled like x and y: neighbouring
+        // seeds give nearly the same pattern, so each offset step jumps far.
+        const om_noise::om_noise_layer_biome noise( global_base_point(),
+                g->get_seed() + static_cast<unsigned>( layer.seed_offset ) * 997u, layer );
+
+        for( int x = 0; x < OMAPX; x++ ) {
+            for( int y = 0; y < OMAPY; y++ ) {
+                const tripoint_om_omt p( x, y, 0 );
+                const oter_id &current = ter( p );
+                const bool may_replace = eligible.empty() ? current == default_oter_id :
+                                         std::find( eligible.begin(), eligible.end(), current ) != eligible.end();
+                if( !may_replace ) {
+                    continue;
+                }
+                const float n = noise.noise_at( p.xy() ) + adjust;
+                // Bands are sorted highest threshold first.
+                for( const std::pair<float, oter_id> &band : bands ) {
+                    if( n > band.first ) {
+                        ter_set( p, band.second );
+                        break;
+                    }
+                }
             }
         }
     }

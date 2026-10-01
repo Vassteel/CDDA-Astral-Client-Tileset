@@ -38,6 +38,7 @@ generic_factory<region_settings_river> region_settings_river_factory( "region_se
 generic_factory<region_settings_lake> region_settings_lake_factory( "region_settings_lake" );
 generic_factory<region_settings_ocean> region_settings_ocean_factory( "region_settings_ocean" );
 generic_factory<region_settings_ravine> region_settings_ravine_factory( "region_settings_ravine" );
+generic_factory<overmap_biome_layer> overmap_biome_layer_factory( "overmap_biome_layer" );
 generic_factory<region_settings_forest> region_settings_forest_factory( "region_settings_forest" );
 generic_factory<region_settings_highway>
 region_settings_highway_factory( "region_settings_highway" );
@@ -78,6 +79,16 @@ template<>
 const region_settings_ravine &string_id<region_settings_ravine>::obj() const
 {
     return region_settings_ravine_factory.obj( *this );
+}
+template<>
+const overmap_biome_layer &string_id<overmap_biome_layer>::obj() const
+{
+    return overmap_biome_layer_factory.obj( *this );
+}
+template<>
+bool string_id<overmap_biome_layer>::is_valid() const
+{
+    return overmap_biome_layer_factory.is_valid( *this );
 }
 template<>
 const region_settings_forest &string_id<region_settings_forest>::obj() const
@@ -241,6 +252,15 @@ void region_settings_ravine::load_region_settings_ravine( const JsonObject &jo,
         const std::string &src )
 {
     region_settings_ravine_factory.load( jo, src );
+}
+void overmap_biome_layer::load_overmap_biome_layer( const JsonObject &jo,
+        const std::string &src )
+{
+    overmap_biome_layer_factory.load( jo, src );
+}
+void overmap_biome_layer::reset()
+{
+    overmap_biome_layer_factory.reset();
 }
 void region_settings_forest::load_region_settings_forest( const JsonObject &jo,
         const std::string &src )
@@ -454,6 +474,54 @@ void region_settings_forest::load( const JsonObject &jo, std::string_view )
     optional( jo, was_loaded, "forest_threshold_increase", forest_increase, { 0, 0, 0, 0 } );
 }
 
+void overmap_biome_layer::load( const JsonObject &jo, std::string_view )
+{
+    optional( jo, was_loaded, "seed_offset", seed_offset, 0 );
+    if( jo.has_object( "noise" ) ) {
+        const JsonObject noise = jo.get_object( "noise" );
+        optional( noise, false, "octaves", octaves, 4 );
+        optional( noise, false, "persistence", persistence, 0.5f );
+        optional( noise, false, "scale", scale, 0.03f );
+        optional( noise, false, "power", power, 2.0f );
+        optional( noise, false, "detail_octaves", detail_octaves, 6 );
+        optional( noise, false, "detail_scale", detail_scale, 0.07f );
+        optional( noise, false, "detail_power", detail_power, 3.0f );
+        optional( noise, false, "detail_weight", detail_weight, 0.5f );
+        optional( noise, false, "follow_forest_clumping", follow_forest_clumping, true );
+    }
+    optional( jo, was_loaded, "use_forestosity", use_forestosity, false );
+    optional( jo, was_loaded, "replaces", replaces );
+    if( jo.has_array( "terrains" ) ) {
+        terrains.clear();
+        for( const JsonArray band : jo.get_array( "terrains" ) ) {
+            terrains.emplace_back( band.get_float( 0 ), oter_str_id( band.get_string( 1 ) ) );
+        }
+    } else if( !was_loaded ) {
+        jo.throw_error( "overmap_biome_layer needs a \"terrains\" array of [ threshold, overmap_terrain ]" );
+    }
+}
+
+void overmap_biome_layer::finalize()
+{
+    std::stable_sort( terrains.begin(), terrains.end(), []( const auto & a, const auto & b ) {
+        return a.first > b.first;
+    } );
+}
+
+void overmap_biome_layer::check() const
+{
+    for( const auto &band : terrains ) {
+        if( !band.second.is_valid() ) {
+            debugmsg( "overmap_biome_layer %s: unknown overmap terrain %s", id.str(), band.second.str() );
+        }
+    }
+    for( const oter_str_id &ot : replaces ) {
+        if( !ot.is_valid() ) {
+            debugmsg( "overmap_biome_layer %s: unknown overmap terrain %s in replaces", id.str(), ot.str() );
+        }
+    }
+}
+
 void region_settings_ravine::load( const JsonObject &jo, std::string_view )
 {
     optional( jo, was_loaded, "num_ravines", num_ravines );
@@ -618,6 +686,7 @@ void region_settings::load( const JsonObject &jo, std::string_view )
     optional( jo, was_loaded, "forest_trails", forest_trail );
 
     optional( jo, was_loaded, "map_extras", region_extras );
+    optional( jo, was_loaded, "biome_layers", biome_layers );
     mandatory( jo, was_loaded, "cities", city_spec );
     optional( jo, was_loaded, "weather", weather );
     optional( jo, was_loaded, "feature_flag_settings", overmap_feature_flag );
@@ -661,6 +730,10 @@ void region_settings::finalize_all()
     region_settings_lake_factory.finalize();
     region_settings_ocean_factory.finalize();
     region_settings_ravine_factory.finalize();
+    overmap_biome_layer_factory.finalize();
+    for( const overmap_biome_layer &layer : overmap_biome_layer_factory.get_all() ) {
+        layer.check();
+    }
     region_settings_forest_factory.finalize();
     region_settings_highway_factory.finalize();
     region_settings_forest_trail_factory.finalize();
