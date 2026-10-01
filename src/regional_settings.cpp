@@ -652,6 +652,15 @@ void region_settings_city::load( const JsonObject &jo, std::string_view )
     optional( jo, was_loaded, "houses", houses.buildings, building_bin_reader );
     optional( jo, was_loaded, "shops", shops.buildings, building_bin_reader );
     optional( jo, was_loaded, "parks", parks.buildings, building_bin_reader );
+    optional( jo, was_loaded, "required_buildings", required_buildings );
+}
+
+void city_required_building::deserialize( const JsonObject &jo )
+{
+    optional( jo, false, "id", id );
+    mandatory( jo, false, "buildings", buildings );
+    optional( jo, false, "max_distance", max_distance, 100 );
+    optional( jo, false, "chance", chance, 100 );
 }
 
 void region_settings_map_extras::load( const JsonObject &jo, std::string_view )
@@ -890,6 +899,14 @@ void region_settings_city::finalize()
     houses.finalize();
     shops.finalize();
     parks.finalize();
+    for( const city_required_building &req : required_buildings ) {
+        for( const overmap_special_id &b : req.buildings ) {
+            if( !b.is_valid() ) {
+                debugmsg( "region_settings_city(%s) required building %s: unknown special %s",
+                          id.c_str(), req.id, b.str() );
+            }
+        }
+    }
 }
 
 //these could be defined in the future

@@ -514,6 +514,33 @@ relative placements of various classes of buildings.
 | `city_size`            | Required Setting. Size of cities. Larger number = bigger cities. 0 = no cities. Range: 0 - 16   |
 | `city_spacing`         | Space between cities. Larger number = more space between cities. Range: 0 - 8 |
 | `is_megacity`          | Special flag to trigger special map generation. Generates a megacity.         |
+| `required_buildings`   | Buildings each town gets once; see below.                                     |
+
+### Required buildings
+
+`required_buildings` lists buildings every town should have once (a guild hall, a temple, a well),
+on top of the random houses, shops and parks. Each entry:
+
+| Identifier     | Description |
+| -------------- | ----------- |
+| `id`           | Name used in error messages. |
+| `buildings`    | `city_building` / special ids. The first whose `city_sizes` contains the town's size is used, so size bands give bigger towns a bigger version. |
+| `max_distance` | Lots allowed while the streets grow, in percent of the town size from the centre (like `shop_radius`). Default 100. |
+| `chance`       | Percent of towns that get it, rolled once per town. Default 100. |
+
+While a town grows, the first free lot within `max_distance` takes a pending required building
+instead of a random one. If the town finishes without it, a final pass tries every lot along that
+town's streets, nearest the centre first. Towns with nothing listed generate exactly as before.
+
+```jsonc
+"required_buildings": [
+  {
+    "id": "astral_guild",
+    "buildings": [ "astral_guild_outpost", "astral_guild_lodge", "astral_guild_hall" ],
+    "max_distance": 60
+  }
+]
+```
 
 ### Placing shops, parks, and houses
 

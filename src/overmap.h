@@ -904,6 +904,14 @@ class overmap
         void build_cities();
         void place_building( const tripoint_om_omt &p, om_direction::type dir, const city &town,
                              std::unordered_set<overmap_special_id> &placed_unique_buildings );
+        // Try a pending required building (region_settings_city::required_buildings)
+        // on this lot; true if one was placed.
+        bool place_required_building( const tripoint_om_omt &building_pos, om_direction::type building_dir,
+                                      const city &town, int town_dist,
+                                      std::unordered_set<overmap_special_id> &placed_unique_buildings );
+        // Indices of required buildings the town being built still lacks.
+        // NOLINTNEXTLINE(cata-serialize)
+        std::vector<size_t> pending_required_buildings;
 
         void build_city_street( const overmap_connection &connection, const point_om_omt &p, int cs,
                                 om_direction::type dir, const city &town,

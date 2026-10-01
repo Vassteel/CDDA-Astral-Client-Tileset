@@ -49,6 +49,23 @@ class building_bin
         weighted_int_list<overmap_special_id> buildings;
 };
 
+/**
+ * A building every town should have once (a guild hall, a temple, a well).
+ * The first listed special whose city_sizes fit the town is used, so size
+ * bands give bigger towns a bigger version.  Placed on the first free lot
+ * within max_distance while the streets grow; if none is free, a final pass
+ * tries every lot along the town's streets.  Towns roll `chance` once.
+ */
+struct city_required_building {
+    std::string id;
+    std::vector<overmap_special_id> buildings;
+    // Lot distance from the centre in percent of the town's size, like shop_radius.
+    int max_distance = 100;
+    // Percent of towns that get it.
+    int chance = 100;
+    void deserialize( const JsonObject &jo );
+};
+
 struct region_settings_city {
     region_settings_city_id id = region_settings_city_id::NULL_ID();
 
@@ -70,6 +87,9 @@ struct region_settings_city {
     building_bin houses;
     building_bin shops;
     building_bin parks;
+
+    // Buildings each town gets once (see city_required_building).
+    std::vector<city_required_building> required_buildings;
 
     overmap_special_id pick_house() const {
         return houses.pick();
