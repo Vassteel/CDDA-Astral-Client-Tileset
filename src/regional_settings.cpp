@@ -701,6 +701,7 @@ void region_settings::load( const JsonObject &jo, std::string_view )
 
     optional( jo, was_loaded, "place_swamps", place_swamps, true );
     optional( jo, was_loaded, "place_roads", place_roads, true );
+    optional( jo, was_loaded, "roads_without_cities", roads_without_cities, false );
     optional( jo, was_loaded, "place_railroads", place_railroads, false );
     optional( jo, was_loaded, "place_railroads_before_roads", place_railroads_before_roads, false );
     optional( jo, was_loaded, "place_specials", place_specials, true );

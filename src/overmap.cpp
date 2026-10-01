@@ -2221,7 +2221,7 @@ void overmap::place_roads( const std::vector<const overmap *> &neighbor_overmaps
 {
     int op_city_size = settings->get_settings_city().city_size;
     const float road_density = worldgen_options::get().road_density;
-    if( op_city_size <= 0 || road_density <= 0.f ) {
+    if( ( op_city_size <= 0 && !settings->roads_without_cities ) || road_density <= 0.f ) {
         return;
     }
     const overmap_connection_id &overmap_connection_inter_city_road =

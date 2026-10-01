@@ -525,6 +525,9 @@ struct region_settings {
 
     bool place_swamps;
     bool place_roads;
+    // Lay the inter-city road network even when the region places no cities
+    // (edge exits and a central junction are connected instead).
+    bool roads_without_cities;
     bool place_railroads;
     bool place_railroads_before_roads;
     bool place_specials;

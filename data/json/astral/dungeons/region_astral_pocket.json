@@ -54,12 +54,27 @@
   },
   { "type": "region_settings_map_extras", "id": "astral_biomes", "extras": [ "astral_meadow", "astral_lowland" ] },
   {
+    "type": "overmap_biome_layer",
+    "id": "astral_layer_meadow_bogs",
+    "seed_offset": 1,
+    "//": "Test layer: drowned-lowland patches inside the arrival meadows.",
+    "terrains": [ [ 0.27, "astral_lowland" ] ]
+  },
+  {
+    "type": "overmap_biome_layer",
+    "id": "astral_layer_meadow_fungal",
+    "seed_offset": 2,
+    "//": "Test layer: smaller fungal-forest patches inside the arrival meadows.",
+    "noise": { "scale": 0.045 },
+    "terrains": [ [ 0.31, "astral_fungal" ] ]
+  },
+  {
     "type": "region_settings",
     "id": "astral_pocket",
     "copy-from": "default",
-    "//": "Template for every pocket dimension (astral_pocket_01..NN, see pockets_generated.json).  Unbounded by default: z0 is open meadow (astral_microworld_grounds) generated on demand like the overworld; the arrival courtyard is drawn by update_mapgen astral_courtyard_arrival on first entry.  t_astral_veil / astral_veil remain available for bounded (pocket-mode) layers.  default_oter runs top (z+10) to bottom (z-10).",
-    "rivers": null,
-    "lakes": null,
+    "//": "Template for every pocket dimension (astral_pocket_01..NN, see pockets_generated.json).  Unbounded by default: z0 is open meadow (astral_microworld_grounds) generated on demand like the overworld; the arrival courtyard is drawn by update_mapgen astral_courtyard_arrival on first entry.  t_astral_veil / astral_veil remain available for bounded (pocket-mode) layers.  default_oter runs top (z+10) to bottom (z-10).  2026-10-01: rivers, lakes and dirt-path roads (astral_path, no cities needed) on for every pocket biome; neighbour connections keep paths and rivers continuous across overmaps.",
+    "rivers": "default",
+    "lakes": "default",
     "ocean": null,
     "forests": null,
     "ravines": null,
@@ -71,8 +86,8 @@
     "terrain_furniture": "default",
     "weather": "astral_pocket",
     "npc_spawntime": 0,
-    "neighbor_connections": false,
-    "place_roads": false,
+    "neighbor_connections": true,
+    "place_roads": true,
     "place_specials": false,
     "default_oter": [
       "open_air",
@@ -98,7 +113,16 @@
       "deep_rock"
     ],
     "default_groundcover": [ [ "t_grass", 1 ] ],
-    "feature_flag_settings": { "blacklist": [  ], "whitelist": [ "ASTRAL_MICROWORLD" ] }
+    "feature_flag_settings": { "blacklist": [  ], "whitelist": [ "ASTRAL_MICROWORLD" ] },
+    "roads_without_cities": true,
+    "connections": {
+      "intra_city_road_connection": "astral_path",
+      "inter_city_road_connection": "astral_path",
+      "trail_connection": "forest_trail",
+      "sewer_connection": "sewer_tunnel",
+      "subway_connection": "subway_tunnel",
+      "rail_connection": "local_railroad"
+    }
   },
   {
     "type": "weather_generator",
@@ -138,7 +162,8 @@
     ],
     "forests": "default",
     "forest_composition": "default",
-    "forest_trails": "default"
+    "forest_trails": "default",
+    "biome_layers": [ "astral_layer_meadow_bogs", "astral_layer_meadow_fungal" ]
   },
   {
     "type": "weather_generator",

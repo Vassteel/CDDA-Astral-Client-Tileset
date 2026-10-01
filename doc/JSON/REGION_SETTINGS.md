@@ -17,6 +17,7 @@ see their info later in this document.
 | `id`                     |                                     | Unique identifier for this region.                                    |
 | `place_swamps`           | boolean                             | Controls whether or not swamps will be placed (requires forests to be placed) |
 | `place_roads`            | boolean                             | Whether or not to generate road connections |
+| `roads_without_cities`   | boolean                             | Lay the inter-city road network (`connections.inter_city_road_connection`) even when the region places no cities: edge exits and a central junction are linked instead. Default false. |
 | `place_railroads`        | boolean                             | Whether or not to generate railroad connections |
 | `place_railroads_before_roads` | boolean                       | Generates railroads before roads if true |
 | `place_specials`         | boolean                             | Controls placement of overmap specials |
