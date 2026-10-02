@@ -56,12 +56,16 @@ try {
         $image.Save((Join-Path $Output 'menu.png'), [Drawing.Imaging.ImageFormat]::Png)
     } finally { $graphics.Dispose(); $image.Dispose() }
     $blocked = $false
-    try { Assert-GameClosed $client }
+    try {
+        if ($update) { Invoke-Install $update $client $state | Out-Null }
+        else { Assert-GameClosed $client }
+    }
     catch { if ($_.Exception.Message -like 'Close Astral Client*') { $blocked = $true } else { throw } }
     if (!$blocked) { throw 'Running-game guard failed' }
 } finally {
     if (!$p.HasExited) { $p.CloseMainWindow() | Out-Null; if (!$p.WaitForExit(10000)) { $p.Kill(); $p.WaitForExit() } }
 }
+if ((Get-InstalledVersion $client $state) -ne $ReleaseTag) { throw 'Full distribution version mismatch' }
 $before = Get-FileDigest $exe
 $detected = Get-Release 'Vassteel/CDDA-Astral-Client-Tileset'
 if ($detected.version -ne $ReleaseTag) { throw "Updater selected $($detected.version), expected $ReleaseTag" }

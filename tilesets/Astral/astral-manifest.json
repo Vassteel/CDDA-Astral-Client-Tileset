@@ -4,7 +4,7 @@
   "fallback": "UltiCa",
   "baseline_config_sha256": "455b785c80f7dc5dd14c6c998618d156ebf6c7306d410beb8cddcb4270b3f267",
   "baseline_sprite_slots": 18572,
-  "total_sprite_slots": 20811,
+  "total_sprite_slots": 20831,
   "replacements": [
     {
       "id": [
@@ -6496,7 +6496,7 @@
     "RABBITS-V1-REFERENCES.json": "8a6d7be2743a44bbcab004a9a927114a04131ecf7e3e66e9d6025de9a1eb65f8",
     "RASPBERRY-PREVIEW.png": "8d73facb2185bb97af6a90d6923c70a5f459f5671f5135a15dd610bd70a66bcd",
     "RASPBERRY-REFERENCES.json": "00f5fbb251652f1e25a8350dc2ee9e56187730fdb357b01d6fd6cbb0e4291af0",
-    "README.md": "9c46b3e4c95a606b05141c9e1369329d020270063882095c12c056fbee86cd71",
+    "README.md": "68594367f6fa0590f15e0ae2d7ee23d85aa1065b02c5c0d4ec8fbf95b8ecdcb5",
     "ROSE-PREVIEW.png": "cef75f84b6fd3b1ad8a74a34b76401a3b1063394192b29571c4674b00c557e98",
     "ROSE-REFERENCES.json": "7f74f8881202ace7fc5eb74642eae0dd2cba597c07a2ad7799f91d8645b88fa7",
     "SASSAFRAS-PREVIEW.png": "c9e294823be5d081563d0aa77c75e661f5c5c8c358449fdd1861fea0806acd98",
@@ -6954,8 +6954,9 @@
     "playtest_fe8fc0d79033c89fd4fd.png": "fe8fc0d79033c89fd4fd5a2e356c0a79ee52404be1e6e6288ee153a2e16b48ad",
     "small.png": "86ad2cb257cfb2365b2c5483f1a5fe586b86a675bd6adf151e11b86d6fdcbde8",
     "tall.png": "b88038c6e47147ba91c8392eebf1639e2615a4eb9415ebe845e06f2c926f50e1",
-    "tile_config.json": "9930945ded222a4c227512c6cac5f21c153c8372852b75eb12954995a8ce91f9",
-    "tileset.txt": "f72b259228680892dbed62774de6552df91e2cdfac0ff160b2608099f9ad51db"
+    "tile_config.json": "f6bbec4befe5d50b86f2869eca1d863e40e8bb4dc59a5f2b87bc9822d5bad486",
+    "tileset.txt": "f72b259228680892dbed62774de6552df91e2cdfac0ff160b2608099f9ad51db",
+    "astral_terrain_background_scale_fix.png": "960096c19fe9e6602b3305983a8fe5223dc7e40bb9289d0e0aead74c21ef1404"
   },
   "status": "release candidate; static consistency passed; gameplay review pending",
   "runtime_smoke": "Not launched; static and offline visual validation only",
@@ -24654,9 +24655,67 @@
     "source_commit": "d822872ca3fe9e31a014e0782c7d27a66c135189"
   },
   "release_validation": {
-    "atlas_count": 381,
+    "atlas_count": 382,
     "sprite_references": 33366,
     "looks_like_fallback_ids": 123,
     "portal_collision_ids": []
+  },
+  "published_history": {
+    "astral_dungeons_s3": {
+      "package": 1,
+      "pockets": 24,
+      "bound_terrain_mappings": 72,
+      "source_commit": "514c19a4a75fe18b074f79acb3df3e1d6a990b42"
+    },
+    "terrain_background_fix": {
+      "status": "offline scale correction; client running at diagnosis, installation deferred",
+      "affected_terrain_ids": 20,
+      "affected_ids": [
+        "t_clay",
+        "t_dirt",
+        "t_forestfloor",
+        "t_ice_dp_thick",
+        "t_ice_dp_thin",
+        "t_ice_sh_thick",
+        "t_ice_sh_thin",
+        "t_moss",
+        "t_railroad_rubble",
+        "t_rock_floor",
+        "t_rock_floor_no_roof",
+        "t_sand",
+        "t_swater_dp",
+        "t_swater_sh",
+        "t_water_dp",
+        "t_water_hot",
+        "t_water_moving_dp",
+        "t_water_moving_sh",
+        "t_water_murky",
+        "t_water_sh"
+      ],
+      "affected_calendar_ids": 100,
+      "background_mapping_rewrites": 560,
+      "background_source_copies": 17,
+      "all_49_terrain_types_checked": true,
+      "rendered_combinations_checked": 7560,
+      "failing_combinations_before": 4440,
+      "failing_combinations_after": 0,
+      "all_references_valid": true,
+      "sprite_slots": 20743,
+      "sprite_references_checked": 31096,
+      "all_prior_png_bytes_preserved": true,
+      "foregrounds_and_unrelated_mappings_preserved": true,
+      "approved_flora_sprites_verified": 600,
+      "live_acceptance": "pending; offline renderer model only",
+      "client_modified": false,
+      "offline_visual_review": "passed",
+      "visual_review_notes": "Side-by-side renderer-scale reproduction matches the black-border/blob failure. Full-size backgrounds remove exposed black space. Existing rounded edge art remains abrupt; organic boundary refinement is a separate pending quality issue."
+    }
+  },
+  "terrain_background_fix": {
+    "status": "published scale correction retained with rebased indices; visual playtest pending",
+    "atlas_start": 20811,
+    "atlas_end": 20830,
+    "sprite_reference_rewrites": 2072,
+    "source_index_base": 20723
   }
 }
