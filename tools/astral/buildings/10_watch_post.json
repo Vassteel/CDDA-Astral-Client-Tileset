@@ -1,0 +1,100 @@
+{
+  "id": "watch_post",
+  "label": "Watch Post",
+  "//": "Notable building: watchroom and cells below, lookout above.",
+  "city_sizes": [
+    11,
+    55
+  ],
+  "wall": "#",
+  "footprint": [
+    1,
+    1
+  ],
+  "ground": {
+    "rooms": [
+      {
+        "kind": "watchroom",
+        "rect": [
+          7,
+          7,
+          16,
+          12
+        ]
+      },
+      {
+        "kind": "cells",
+        "rect": [
+          7,
+          13,
+          16,
+          18
+        ]
+      },
+      {
+        "kind": "armory",
+        "rect": [
+          17,
+          7,
+          20,
+          12
+        ]
+      }
+    ],
+    "porch": [
+      10,
+      5,
+      13,
+      6
+    ],
+    "hub": 0,
+    "doors": [
+      [
+        11,
+        7
+      ],
+      [
+        12,
+        7
+      ]
+    ],
+    "window_step": 4,
+    "path": [
+      11,
+      4,
+      0
+    ],
+    "training": [
+      4,
+      19,
+      2
+    ]
+  },
+  "upper": {
+    "rooms": [
+      {
+        "kind": "officers",
+        "rect": [
+          7,
+          7,
+          16,
+          12
+        ]
+      },
+      {
+        "kind": "storage",
+        "rect": [
+          17,
+          7,
+          20,
+          12
+        ]
+      }
+    ],
+    "hub": 0,
+    "stairs": [
+      8,
+      8
+    ]
+  }
+}

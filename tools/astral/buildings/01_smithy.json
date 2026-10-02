@@ -1,0 +1,102 @@
+{
+  "id": "smithy",
+  "label": "Blacksmith",
+  "//": "Town service in the guildhall design language; see tools/astral/buildings/README.md.",
+  "city_sizes": [
+    7,
+    55
+  ],
+  "wall": "#",
+  "footprint": [
+    1,
+    1
+  ],
+  "ground": {
+    "rooms": [
+      {
+        "kind": "shopfront",
+        "rect": [
+          4,
+          6,
+          19,
+          11
+        ],
+        "chamfer": 1
+      },
+      {
+        "kind": "workroom",
+        "rect": [
+          4,
+          12,
+          19,
+          19
+        ],
+        "furnish": "smithy"
+      }
+    ],
+    "porch": [
+      9,
+      4,
+      14,
+      5
+    ],
+    "hub": 0,
+    "doors": [
+      [
+        11,
+        6
+      ],
+      [
+        12,
+        6
+      ]
+    ],
+    "window_step": 3,
+    "path": [
+      12,
+      3,
+      0
+    ],
+    "trees": 0.25,
+    "yards": [
+      "forge"
+    ]
+  },
+  "upper": {
+    "rooms": [
+      {
+        "kind": "landing",
+        "rect": [
+          4,
+          6,
+          19,
+          8
+        ]
+      },
+      {
+        "kind": "quarters",
+        "rect": [
+          4,
+          9,
+          11,
+          19
+        ]
+      },
+      {
+        "kind": "quarters",
+        "rect": [
+          12,
+          9,
+          19,
+          19
+        ]
+      }
+    ],
+    "hub": 0,
+    "window_step": 3,
+    "stairs": [
+      5,
+      10
+    ]
+  }
+}
