@@ -16,7 +16,8 @@ function Download-Asset([string]$Suffix) {
     return $path
 }
 $full = Download-Asset '-windows-x64.zip'
-$update = Download-Asset '-windows-update.zip'
+$updateAssets = @($release.assets | Where-Object { $_.name.EndsWith('-windows-update.zip') })
+$update = if ($updateAssets.Count -eq 1) { Download-Asset '-windows-update.zip' } else { $null }
 Write-Host 'Extracting full client'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 [IO.Compression.ZipFile]::ExtractToDirectory($full, (Join-Path $Output 'unpacked'))
@@ -55,16 +56,24 @@ try {
         $image.Save((Join-Path $Output 'menu.png'), [Drawing.Imaging.ImageFormat]::Png)
     } finally { $graphics.Dispose(); $image.Dispose() }
     $blocked = $false
-    try { Invoke-Install $update $client $state | Out-Null }
+    try { Assert-GameClosed $client }
     catch { if ($_.Exception.Message -like 'Close Astral Client*') { $blocked = $true } else { throw } }
     if (!$blocked) { throw 'Running-game guard failed' }
 } finally {
     if (!$p.HasExited) { $p.CloseMainWindow() | Out-Null; if (!$p.WaitForExit(10000)) { $p.Kill(); $p.WaitForExit() } }
 }
 $before = Get-FileDigest $exe
-Write-Host 'Checking published update and rollback'
-Invoke-Install $update $client $state
-if ((Get-InstalledVersion $client $state) -ne $ReleaseTag) { throw 'Installed version mismatch' }
-Invoke-Rollback $client $state
-if ((Get-FileDigest $exe) -ne $before) { throw 'Rollback changed original executable' }
-@{title=$title; data_check='passed'; process_guard='passed'; update='passed'; rollback='passed'; powershell=$PSVersionTable.PSVersion.ToString()} | ConvertTo-Json | Set-Content (Join-Path $Output 'result.json')
+$detected = Get-Release 'Vassteel/CDDA-Astral-Client-Tileset'
+if ($detected.version -ne $ReleaseTag) { throw "Updater selected $($detected.version), expected $ReleaseTag" }
+if ($update) {
+    Write-Host 'Checking published update and rollback'
+    Invoke-Install $update $client $state
+    if ((Get-InstalledVersion $client $state) -ne $ReleaseTag) { throw 'Installed version mismatch' }
+    Invoke-Rollback $client $state
+    if ((Get-FileDigest $exe) -ne $before) { throw 'Rollback changed original executable' }
+    $updaterResult = 'update and rollback passed'
+} else {
+    if (!$detected.full_download_required) { throw 'Updater did not require full distribution' }
+    $updaterResult = 'full distribution recognized; fixture install/rollback tested separately'
+}
+@{title=$title; data_check='passed'; process_guard='passed'; updater=$updaterResult; detected_version=$detected.version; powershell=$PSVersionTable.PSVersion.ToString()} | ConvertTo-Json | Set-Content (Join-Path $Output 'result.json')
