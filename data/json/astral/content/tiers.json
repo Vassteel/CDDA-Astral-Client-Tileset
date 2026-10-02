@@ -1,0 +1,50 @@
+[
+  {
+    "type": "json_flag",
+    "id": "ASTRAL_TIER_1",
+    "info": "Astral rarity: <color_light_gray>tier 1, Common</color>.",
+    "//": "Items plan: eight tiers, shown as an info line until the 4K chrome colours names."
+  },
+  {
+    "type": "json_flag",
+    "id": "ASTRAL_TIER_2",
+    "info": "Astral rarity: <color_green>tier 2, Uncommon</color>.",
+    "//": "Items plan: eight tiers, shown as an info line until the 4K chrome colours names."
+  },
+  {
+    "type": "json_flag",
+    "id": "ASTRAL_TIER_3",
+    "info": "Astral rarity: <color_light_blue>tier 3, Rare</color>.",
+    "//": "Items plan: eight tiers, shown as an info line until the 4K chrome colours names."
+  },
+  {
+    "type": "json_flag",
+    "id": "ASTRAL_TIER_4",
+    "info": "Astral rarity: <color_magenta>tier 4, Epic</color>.",
+    "//": "Items plan: eight tiers, shown as an info line until the 4K chrome colours names."
+  },
+  {
+    "type": "json_flag",
+    "id": "ASTRAL_TIER_5",
+    "info": "Astral rarity: <color_yellow>tier 5, Legendary</color>.",
+    "//": "Items plan: eight tiers, shown as an info line until the 4K chrome colours names."
+  },
+  {
+    "type": "json_flag",
+    "id": "ASTRAL_TIER_6",
+    "info": "Astral rarity: <color_red>tier 6, Mythic</color>.",
+    "//": "Items plan: eight tiers, shown as an info line until the 4K chrome colours names."
+  },
+  {
+    "type": "json_flag",
+    "id": "ASTRAL_TIER_7",
+    "info": "Astral rarity: <color_cyan>tier 7, Celestial</color>.",
+    "//": "Items plan: eight tiers, shown as an info line until the 4K chrome colours names."
+  },
+  {
+    "type": "json_flag",
+    "id": "ASTRAL_TIER_8",
+    "info": "Astral rarity: <color_pink>tier 8, Astral</color>.",
+    "//": "Items plan: eight tiers, shown as an info line until the 4K chrome colours names."
+  }
+]

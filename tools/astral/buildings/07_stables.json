@@ -1,0 +1,54 @@
+{
+  "id": "stables",
+  "label": "Stables",
+  "//": "Town service; single storey with a stable yard.",
+  "city_sizes": [
+    16,
+    55
+  ],
+  "wall": "#",
+  "footprint": [
+    1,
+    1
+  ],
+  "ground": {
+    "rooms": [
+      {
+        "kind": "barn",
+        "rect": [
+          3,
+          5,
+          20,
+          12
+        ]
+      }
+    ],
+    "hub": 0,
+    "doors": [
+      [
+        11,
+        5
+      ],
+      [
+        12,
+        5
+      ],
+      [
+        11,
+        12
+      ]
+    ],
+    "window_step": 4,
+    "path": [
+      12,
+      4,
+      0
+    ],
+    "stable": [
+      2,
+      14,
+      21,
+      22
+    ]
+  }
+}

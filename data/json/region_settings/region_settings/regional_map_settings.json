@@ -375,7 +375,17 @@
         ],
         "max_distance": 60,
         "chance": 100
-      }
+      },
+      { "id": "astral_smithy", "buildings": [ "astral_town_smithy" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_butcher", "buildings": [ "astral_town_butcher" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_alchemist", "buildings": [ "astral_town_alchemist" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_healer", "buildings": [ "astral_town_healer" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_tailor", "buildings": [ "astral_town_tailor" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_enchanter", "buildings": [ "astral_town_enchanter" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_stables", "buildings": [ "astral_town_stables" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_inn", "buildings": [ "astral_town_inn" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_chapel", "buildings": [ "astral_town_chapel" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_watch_post", "buildings": [ "astral_town_watch_post" ], "max_distance": 100, "chance": 100 }
     ],
     "city_size": 8,
     "city_spacing": 4,
