@@ -57,7 +57,7 @@ Engine: today a pocket's overmaps come from `dimension_region_layout` (one `regi
 | WP-B2 Engine: per-region water bias | Claude | S | `river_scale`, `lake_scale` (already partly in `overmap_lake_settings`/`overmap_river_settings`) exposed with higher caps + a `creek` density knob (narrow 1-OMT rivers from the existing river generator) | floor-2 test region shows visibly more water in `biome-layers-preview` style PNG |
 | WP-B3 Data: floor templates 1–4 | Claude | M | `astral_floor_1..4` region settings: floor 1 meadows (overworld mix), floor 2 drowned (85 % lowlands, heavy water), floor 3 fungal, floor 4 root country; each `biome_mix` lists overworld plains/forest/swamp + the other three themes with falling weights | preview PNG per floor; data-load check |
 | WP-B4 Preview tool | Claude | S | `tools/astral/preview_overmap.py` extended to render biome_mix floors (reuses the biome-layers preview) | PNGs in `artifacts/astral-dungeons/` |
-| WP-B5 Grok: per-floor "what the 15 % should be" | Grok | S | table: floor → list of intruding biomes with a weight 1–5 and one line why (e.g. floor 2: plains 3, forest 2, ordinary swamp 4, fungal fringe 1) | Claude folds into WP-B3 |
+| WP-B5 Grok: per-floor "what the 15 % should be" — **done 2026-10-02 (patch 0024)** | Grok | S | table: floor → list of intruding biomes with a weight 1–5 and one line why (e.g. floor 2: plains 3, forest 2, ordinary swamp 4, fungal fringe 1) | Claude folds into WP-B3 |
 | WP-B6 Build + playtest | Astra (manual) / user | S | build; new world; walk floor 1→2 edge | the floor reads as "mostly X", water everywhere on floor 2 |
 
 ### Stage C — shops and notable buildings from the guildhall grammar (#4)
@@ -65,7 +65,7 @@ Engine: today a pocket's overmaps come from `dimension_region_layout` (one `regi
 | Task | Owner | Size | Deliverable | Check |
 | --- | --- | --- | --- | --- |
 | WP-C1 Grammar: building briefs schema — **done 2026-10-01 (patch 0021)**: `tools/astral/buildings/*.json` + README; 7 services byte-identical; inn, chapel, watch post added | Claude | S | `tools/astral/buildings/*.toml` (or JSON): footprint band, storeys, rooms list with sizes/adjacency, yard, signature furniture, palette, city size band, max per town; generator reads briefs instead of hard-coded shop functions | existing 7 shops re-expressed as briefs produce the same output |
-| WP-C2 Briefs: 12 notable buildings — 3 done by Claude; **8 handed to Grok (wp-c2a, wp-c2b)** | Grok | S each ×3 files | 4 per file, from the settlements plan + missions plan: records house, infirmary, chapel/shrine, inn, warehouse, watch post, market hall, bathhouse, assayer, cartographer, stable yard (large), quartermaster's store | each brief fits the schema; no new furniture ids outside the palette list Claude supplies |
+| WP-C2 Briefs: 12 notable buildings — **done 2026-10-02** (3 Claude, 8 Grok; patch 0023) | Grok | S each ×3 files | 4 per file, from the settlements plan + missions plan: records house, infirmary, chapel/shrine, inn, warehouse, watch post, market hall, bathhouse, assayer, cartographer, stable yard (large), quartermaster's store | each brief fits the schema; no new furniture ids outside the palette list Claude supplies |
 | WP-C3 Generator pass | Claude | M | generate the 12, multi-storey where the brief says, cellars where it says; `required_buildings` entries by city size; preview PNG sheet | PNG review by user; data-load check |
 | WP-C4 Signage & interior palette | Astra | S | placeholder sign terrains per shop type (`looks_like` vanilla signs); later real art | shows in game |
 | WP-C5 Build + playtest | Astra (manual) / user | S | find a town; count shops | each 11+ town has a guild building and the size-band services |
@@ -74,8 +74,8 @@ Engine: today a pocket's overmaps come from `dimension_region_layout` (one `regi
 
 | Task | Owner | Size | Deliverable | Check |
 | --- | --- | --- | --- | --- |
-| WP-D1 Landmark catalogue | Grok | S ×2 | 10 landmarks per file for floors 1–2: name, 1–3 OMT footprint, what you find, hostile/neutral variant (guardian vs riddle; riddles from `astral-puzzles-riddles-catalogue.md`), suggested density per overmap | Claude picks 8 |
-| WP-D2 Landmark specials (placeholder mapgen) | Claude | M | 8 `overmap_special`s on the Plan grammar (ruins, waystation, shrine, watchtower, cairn field, drowned pier, fungal ring, root-gate), flagged `ASTRAL_<THEME>`, placed by region | appear at ~1 per overmap along the route |
+| WP-D1 Landmark catalogue — **done 2026-10-02 (20 landmarks, in results)** | Grok | S ×2 | 10 landmarks per file for floors 1–2: name, 1–3 OMT footprint, what you find, hostile/neutral variant (guardian vs riddle; riddles from `astral-puzzles-riddles-catalogue.md`), suggested density per overmap | Claude picks 8 |
+| WP-D2 Landmark specials (placeholder mapgen) — **done 2026-10-02 as patch 0027: all 20 D1 landmarks via `tools/astral/gen_landmarks.py`; hostile variants not built** | Claude | M | 8 `overmap_special`s on the Plan grammar (ruins, waystation, shrine, watchtower, cairn field, drowned pier, fungal ring, root-gate), flagged `ASTRAL_<THEME>`, placed by region | appear at ~1 per overmap along the route |
 | WP-D3 Generated paths between landmarks | Claude | S | extend `astral_path` connections so landmark specials request a path to the nearest path/other landmark (`connections` on the special) | paths visible on the overmap between landmarks |
 | WP-D4 Small camps | Claude | S | 3 camp specials (fire ring + lean-to + cache; abandoned expedition camp with a note; stilt camp for floor 2); `place_items` from a small Astral camp item group | found within a day's walk |
 | WP-D5 Camp notes / lore snippets | Grok | S | 20 short notes left by earlier expeditions (≤ 40 words each) for the abandoned camps; no names of real people | Claude wires as snippets |
@@ -96,7 +96,7 @@ Schema (one row per thing; `|`-separated table, ids `astral_<theme>_<name>`):
 | --- | --- | --- | --- | --- |
 | WP-E0 Schema + templates + rules | Claude | S | the four templates as empty tables, id rules, the "critical" definition below, a filled example row each | handed to Grok with every list task |
 | WP-E1 **Critical core list** — **done 2026-10-01** (`astral-critical-core-list.md`, 65 items) | Claude | M | the items the loop cannot run without: Delver kit refresh, provisions/water chain, light (torch, glow lantern), spore mask, pick + shovel + mining outputs (iron/copper/tin ore, coal, salt, clay, flint, sulfur, raw crystal), camp kit (bedroll, lean-to kit, fire kit), compass, 4 slice-theme signature material chains (hearthwood; waterlogged oak / verdigris bronze / sea-silk; chitin-leather / myceloth / glowcap; heartroot resin / ironwood / cave-honey) each with raw → intermediate → one crafted item, 3 core rewards, 2 medicines, 1 fuel | every row has a source that exists in the creature/flora/mining lists |
-| WP-E2 Creatures: floor 1–2 (meadows, drowned) | Grok | S ×2 | ≤ 25 rows per theme from the biomes plan rule ("some things only move while you are in the water") | Claude review |
+| WP-E2 Creatures: floor 1–2 — **done 2026-10-02 (36 creatures, patch 0023)** | Grok | S ×2 | ≤ 25 rows per theme from the biomes plan rule ("some things only move while you are in the water") | Claude review |
 | WP-E3 Creatures: floor 3–4 (fungal, root) | Grok or subagent | S ×2 | ≤ 25 rows per theme | Claude review |
 | WP-E4 Flora: four slice themes | Grok or subagent | S ×4 | ≤ 20 rows per theme; every signature material has a plant or terrain source | Claude review |
 | WP-E5 Mineable resources | Claude | S | terrain → dig/mine yields per theme (`t_astral_*_vein` terrains with `bash`/dig results; the `dig` and `mine` actions already exist in vanilla) | each ore in E1 has a vein |
@@ -114,9 +114,24 @@ Schema (one row per thing; `|`-separated table, ids `astral_<theme>_<name>`):
 | --- | --- | --- | --- | --- |
 | WP-F1 Generator: lists → JSON — **v1 done 2026-10-01 (patch 0015)**; remaining: materials, per-tree trunk terrain (C++), furniture harvested twins | Claude | L (split by list) | `tools/astral/gen_content.py`: reads the catalogue tables → `copy-from` items, materials, harvest/butchery, monsters, flora terrain/furniture, item groups, spawn groups per biome terrain, vein terrains; emits a `looks_like` for every id | data-load check; `[astral_content]` test that every generated id loads |
 | WP-F2 Spawn tuning per floor | Claude | S | monster groups bound to the themed overmap terrain ids from Stage B | encounters per hour in playtest |
-| WP-F3 Recipes: analogue bridging | Claude | S | material analogues so vanilla recipes accept the new woods/leathers/metals; 10–20 unique recipes | craft one item per material |
+| WP-F3 Recipes: analogue bridging — **materials+36 recipes 0018–0020; vanilla requirement wiring 0026 (`gen_wiring.py`, 38 alternatives in 14 groups)** | Claude | S | material analogues so vanilla recipes accept the new woods/leathers/metals; 10–20 unique recipes | craft one item per material |
 | WP-F4 Sprites land | Astra | ongoing | approved batches into the tileset + `tile_config` | no `looks_like` placeholders for critical items |
 | WP-F5 Build + playtest | Astra (manual) / user | S | a full floor-1→2 trip with mining, camping, one craft | — |
+
+### Stage H — worlds and magic (added 2026-10-02)
+
+Planes are worlds; dungeons borrow floors from them (`astral-environments-atlas.md` v2). The Craft is the magic system (`astral-magic-system-plan.md`, `astral-magic-prime-list.md`).
+
+| Task | Owner | Size | Deliverable | Check |
+| --- | --- | --- | --- | --- |
+| WP-H1 The Craft v1 — **done 2026-10-02 as patch 0025** | Claude | L | `gen_magic.py`: 8 disciplines, 64 Prime spells, 24 proficiencies, Lore skill, tide, foci/reagents/grimoires/runes/gear, recipes, sidebar mana bar | `test_magic.py`; P12–P15 |
+| WP-G1–G9 Greenwood content packs — **G1–G8 done 2026-10-02 and merged as patches 0026–0027** (974 items, 116 creatures, 80 flora, 25 veins, 665 recipes, 58 POIs, 48 extras, 387 vanilla wiring rows); G9 equipment pending | Grok | M ×9 | items/raws/veins + vanilla wiring per biome pair, flora, creatures, enemy POIs, map extras, wiring audit, equipment | Claude merges through the generators |
+| WP-M/hearth Greenwood magic | Grok | M | ≈30 Hearth spells + magic gear | `gen_magic.py` gains aspect tables |
+| WP-P/<plane> plane briefs ×10 | Grok | S ×10 | plane facts + biome sketches (aspect, tide, reagents) | each unlocks a nine-task pack |
+| WP-H2 `gen_biome.py` biome-brief generator | Claude | M | biome brief JSON → region/biome layer, terrains, extras, groups, veins | byte-identical re-expression of the four shipped biomes |
+| WP-H3 Craft v2 | Claude | M | Astral spell-menu pass (hybrid window), rune bench + socketing (C++), cross-world recall, guild teachers, ward field | P-items |
+| WP-H4 Themed water + plane gates | Claude | M | river/lake ids per region (C++); first plane gate (Greenwood → Pale or Ember) | — |
+| WP-G10 cross-cutting item categories | Grok | M | books, ammo, containers, seeds, reagents, fuel, trade goods, deployables, traps, relics, comforts | parked until H1 lands — now unblocked |
 
 ### Stage G (later, not scheduled)
 
