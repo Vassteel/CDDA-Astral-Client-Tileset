@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate the placeholder Astral guild buildings (five preset sizes).
 
-Writes data/json/astral/settlements_guild_placeholder.json.  Run from anywhere.
+Writes data/json/mapgen/astral/settlements_guild_placeholder.json (after furniture definitions).  Run from anywhere.
 """
 import json, os, sys, random
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -118,4 +118,6 @@ for key,label,W,H,cs,rooms in SIZES:
     print(key, W,"x",H, "towns",cs, "rooms",len(rooms))
     if key in("hall",):
         print("\n".join(rows))
-open(os.path.join(HERE, '..', '..', 'data', 'json', 'astral', 'settlements_guild_placeholder.json'),'w').write(cddafmt.fmt(out,0,0)+"\n")
+output_dir = os.path.join(HERE, '..', '..', 'data', 'json', 'mapgen', 'astral')
+os.makedirs(output_dir, exist_ok=True)
+open(os.path.join(output_dir, 'settlements_guild_placeholder.json'),'w').write(cddafmt.fmt(out,0,0)+"\n")

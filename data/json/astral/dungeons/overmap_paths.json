@@ -15,7 +15,7 @@
     "see_cost": "low",
     "travel_cost_type": "trail",
     "looks_like": "forest_trail",
-    "flags": [ "LINEAR", "REQUIRES_PREDECESSOR", "NO_ROTATE" ],
+    "flags": [ "LINEAR", "REQUIRES_PREDECESSOR" ],
     "//": "Linear dirt path drawn over whatever biome it crosses (REQUIRES_PREDECESSOR), using the vanilla forest-trail chunks."
   },
   {
