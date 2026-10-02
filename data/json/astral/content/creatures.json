@@ -1,0 +1,121 @@
+[
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_meadow_hare",
+    "entries": [ { "drop": "astral_meadow_hare_meat", "type": "flesh", "mass_ratio": 0.3 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "astral_meadow_hare",
+    "copy-from": "mon_rabbit",
+    "looks_like": "mon_rabbit",
+    "name": { "str": "meadow hare" },
+    "description": "Long-eared tawny hare, pale belly.  A creature from the arrival meadows.  Flees; nothing hunts here.",
+    "//": "astral content list critical-core: rank 1, active day",
+    "harvest": "astral_harv_astral_meadow_hare"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_drowned_reed_eel",
+    "entries": [ { "drop": "astral_drowned_eel_meat", "type": "flesh", "mass_ratio": 0.3 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "astral_drowned_reed_eel",
+    "copy-from": "mon_fish_eel",
+    "looks_like": "mon_fish_eel",
+    "name": { "str": "reed eel" },
+    "description": "Dark eel, pale belly, weed-green fins.  A creature from the drowned lowlands.  Moves only while you stand in water; bites ankles.",
+    "//": "astral content list critical-core: rank 2, active day+night",
+    "harvest": "astral_harv_astral_drowned_reed_eel"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_drowned_shell_crab",
+    "entries": [ { "drop": "astral_drowned_verdigris_scrap", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "astral_drowned_shell_crab",
+    "copy-from": "mon_giant_crayfish",
+    "looks_like": "mon_giant_crayfish",
+    "name": { "str": "verdigris crab" },
+    "description": "Crab with a green-crusted bronze shell.  A creature from the drowned lowlands.  Wears sunken bronze; attacks only in water.",
+    "//": "astral content list critical-core: rank 2, active day+night",
+    "harvest": "astral_harv_astral_drowned_shell_crab"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fungal_cap_beetle",
+    "entries": [
+      { "drop": "astral_fungal_chitin_plate", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fungal_cap_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "astral_fungal_cap_beetle",
+    "copy-from": "mon_giant_cockroach",
+    "looks_like": "mon_giant_cockroach",
+    "name": { "str": "cap-beetle" },
+    "description": "Broad violet-brown beetle, cap-shaped carapace.  A creature from the fungal forest.  Grazes caps; defends when hit; haze follows it.",
+    "//": "astral content list critical-core: rank 2, active day+night",
+    "harvest": "astral_harv_astral_fungal_cap_beetle"
+  },
+  {
+    "type": "MONSTER",
+    "id": "astral_root_honey_bee",
+    "copy-from": "mon_bee",
+    "looks_like": "mon_bee",
+    "name": { "str": "root bee" },
+    "description": "Fat black bee, dull gold band.  A creature from root country.  Swarms near combs; sound draws them.",
+    "//": "astral content list critical-core: rank 1, active day"
+  },
+  {
+    "type": "MONSTER",
+    "id": "astral_root_burrow_hound",
+    "copy-from": "mon_dog",
+    "looks_like": "mon_dog",
+    "name": { "str": "burrow hound" },
+    "description": "Hairless grey hound, no eyes, wide ears.  A creature from root country.  Hunts by sound underground; ignores the quiet.",
+    "//": "astral content list critical-core: rank 3, active night"
+  },
+  {
+    "type": "monstergroup",
+    "id": "GROUP_ASTRAL_MEADOW",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [ { "monster": "astral_meadow_hare", "weight": 60, "conditions": [ "DAY" ] } ],
+    "//": "Bind to the theme's overmap terrain with `spawns` (done in overmap.json)."
+  },
+  {
+    "type": "monstergroup",
+    "id": "GROUP_ASTRAL_DROWNED",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "astral_drowned_reed_eel", "weight": 15 },
+      { "monster": "astral_drowned_shell_crab", "weight": 15 }
+    ],
+    "//": "Bind to the theme's overmap terrain with `spawns` (done in overmap.json)."
+  },
+  {
+    "type": "monstergroup",
+    "id": "GROUP_ASTRAL_FUNGAL",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [ { "monster": "astral_fungal_cap_beetle", "weight": 15 } ],
+    "//": "Bind to the theme's overmap terrain with `spawns` (done in overmap.json)."
+  },
+  {
+    "type": "monstergroup",
+    "id": "GROUP_ASTRAL_ROOT",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "astral_root_honey_bee", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "astral_root_burrow_hound", "weight": 6, "conditions": [ "NIGHT" ] }
+    ],
+    "//": "Bind to the theme's overmap terrain with `spawns` (done in overmap.json)."
+  }
+]
