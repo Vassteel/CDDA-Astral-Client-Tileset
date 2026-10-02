@@ -96,6 +96,11 @@ ImVec4 cataimgui::imvec4_from_color( const nc_color &color )
     return impalette[palette_index];
 }
 
+ImU32 cataimgui::ImU32_from_color( const nc_color &color )
+{
+    return ImGui::GetColorU32( cataimgui::imvec4_from_color( color ) );
+}
+
 namespace
 {
 std::vector<std::pair<int, ImTui::mouse_event>> imtui_events;
