@@ -1,0 +1,43 @@
+name: Astral cloud checks
+on:
+  pull_request:
+    paths:
+      - 'tools/astral/**'
+      - 'tests/astral/**'
+      - 'tests/hybrid_updater/**'
+      - 'tools/hybrid-updater/**'
+      - 'data/json/astral/**'
+      - 'data/json/mapgen/astral/**'
+      - 'data/json/region_settings/**'
+      - '.github/workflows/astral-cloud.yml'
+  push:
+    branches: ['codex/astral-client-ui-updater']
+    paths:
+      - 'tools/astral/**'
+      - 'tests/astral/**'
+      - 'tests/hybrid_updater/**'
+      - 'tools/hybrid-updater/**'
+      - 'data/json/astral/**'
+      - 'data/json/mapgen/astral/**'
+      - 'data/json/region_settings/**'
+      - '.github/workflows/astral-cloud.yml'
+permissions:
+  contents: read
+jobs:
+  data-and-tools:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
+      - name: Validate content generator
+        run: python3 tools/astral/gen_content.py --check
+      - name: Validate building layouts
+        run: python3 tests/astral/test_building_briefs.py
+      - name: Verify guild generator reproduction
+        run: |
+          python3 tools/astral/gen_guild_placeholders.py
+          git diff --exit-code -- data/json/mapgen/astral/settlements_guild_placeholder.json
+      - name: Validate updater fixtures
+        run: python3 -m unittest discover -s tests/hybrid_updater

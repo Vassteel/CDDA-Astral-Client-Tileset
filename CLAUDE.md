@@ -3,7 +3,8 @@
 Project Astral is a hobby fork of Cataclysm: Dark Days Ahead (upstream: CleverRaven/Cataclysm-DDA)
 with its own client, the Astral tileset (`tilesets/Astral`), and core-data content in `data/json/astral`.
 The owner playtests on a SteamOS PC ("the Deck") and ships Windows builds to outside testers.
-Design docs live in the claude.ai Project "CDDA Astral" (`claude/astral-*.md`), not in this repo.
+Design docs are checked in under `claude/plans/`. Start with `doc/astral/cloud-development.md`
+and `claude/plans/README.md`; the cloud-development status overrides stale historical plan status.
 
 ## Branches, PRs and releases
 
@@ -30,7 +31,7 @@ Design docs live in the claude.ai Project "CDDA Astral" (`claude/astral-*.md`), 
 3. When a test patch is staged, a short build post for Discord `#playtest-builds` (titled embed:
    "What changed", "Please test", "Known placeholders", "Updated <date>"). Post it via the Meridian
    bot only when the session is linked to the Deck; otherwise include the post text in the reply.
-4. Update the work tracker doc (`claude/astral-work-tracker.md` in the Project) when a task
+4. Update the work tracker doc (`claude/plans/astral-work-tracker.md`) when a task
    starts, pauses or ships.
 
 Never read Discord or tester messages without the owner's say-so; agent Discord use is write-only.
@@ -38,10 +39,11 @@ If a sub-task suits Astra or Grok (local art generation, local builds), write a 
 
 ## Working in a cloud session
 
-- The container is small (2 vCPU, ~7 GB RAM): do not attempt a full game build. Prefer targeted
-  checks — be cost-effective with usage.
-- JSON: `make style-json` (builds `tools/format/json_formatter.cgi` in ~10 s) formats/validates
-  changed JSON. Run it on any data change before committing.
+- Prefer the fast checks in `doc/astral/cloud-development.md`. Cloud resources vary; full tiles
+  builds need the SDL3 graphical environment and enough memory. Leave Deck builds/installations
+  to the local handoff unless the owner explicitly requests a cloud build.
+- JSON: validate changed files and run the relevant generator checks. Avoid a whole-tree
+  formatting rewrite. Generator lint is not a substitute for the game data-load check.
 - Windows packaging/updater checks run in the "Astral Windows validation" workflow, which the owner
   triggers; cloud sessions cannot dispatch Actions.
 - GitHub settings (rulesets, branch deletion) can't be changed from a cloud session — ask the owner.
