@@ -52,7 +52,20 @@
       [ "mx_point_dead_vegetation", 100 ]
     ]
   },
-  { "type": "region_settings_map_extras", "id": "astral_biomes", "extras": [ "astral_meadow", "astral_lowland" ] },
+  {
+    "type": "region_settings_map_extras",
+    "id": "astral_biomes",
+    "extras": [
+      "astral_meadow",
+      "astral_lowland",
+      "astral_mx_meadow",
+      "astral_mx_drowned",
+      "astral_mx_fallow",
+      "astral_mx_tallgrass",
+      "astral_mx_fungal",
+      "astral_mx_root"
+    ]
+  },
   {
     "type": "overmap_biome_layer",
     "id": "astral_layer_meadow_bogs",
@@ -67,6 +80,22 @@
     "//": "Test layer: smaller fungal-forest patches inside the arrival meadows.",
     "noise": { "scale": 0.045 },
     "terrains": [ [ 0.31, "astral_fungal" ] ]
+  },
+  {
+    "type": "overmap_biome_layer",
+    "id": "astral_layer_meadow_fallow",
+    "seed_offset": 3,
+    "//": "Fallow farmland patches inside the arrival meadows (Greenwood biome, 2026-10-02).",
+    "noise": { "scale": 0.05 },
+    "terrains": [ [ 0.3, "astral_fallow" ] ]
+  },
+  {
+    "type": "overmap_biome_layer",
+    "id": "astral_layer_greenwood_tallgrass",
+    "seed_offset": 4,
+    "//": "Tallgrass prairie patches in the meadows and lowlands (Greenwood biome, 2026-10-02).",
+    "noise": { "scale": 0.04 },
+    "terrains": [ [ 0.29, "astral_tallgrass" ] ]
   },
   {
     "type": "region_settings_river",
@@ -101,7 +130,7 @@
     "type": "region_settings",
     "id": "astral_pocket",
     "copy-from": "default",
-    "//": "Template for every pocket dimension (astral_pocket_01..NN, see pockets_generated.json).  Unbounded by default: z0 is open meadow (astral_microworld_grounds) generated on demand like the overworld; the arrival courtyard is drawn by update_mapgen astral_courtyard_arrival on first entry.  t_astral_veil / astral_veil remain available for bounded (pocket-mode) layers.  default_oter runs top (z+10) to bottom (z-10).  2026-10-01: rivers, lakes and dirt-path roads (astral_path, no cities needed) on for every pocket biome; neighbour connections keep paths and rivers continuous across overmaps.",
+    "//": "Template for every pocket dimension (astral_pocket_01..NN, see pockets_generated.json).  Unbounded by default: z0 is open meadow (astral_microworld_grounds) generated on demand like the overworld; the arrival courtyard is drawn by update_mapgen astral_courtyard_arrival on first entry.  t_astral_veil / astral_veil remain available for bounded (pocket-mode) layers.  default_oter runs top (z+10) to bottom (z-10).  2026-10-01: rivers, lakes and dirt-path roads (astral_path, no cities needed) on for every pocket biome; neighbour connections keep paths and rivers continuous across overmaps.  2026-10-02: specials on, whitelisted to ASTRAL_LANDMARK (Stage D landmarks, tools/astral/gen_landmarks.py).",
     "rivers": "default",
     "lakes": "default",
     "ocean": null,
@@ -117,7 +146,7 @@
     "npc_spawntime": 0,
     "neighbor_connections": true,
     "place_roads": true,
-    "place_specials": false,
+    "place_specials": true,
     "default_oter": [
       "open_air",
       "open_air",
@@ -142,7 +171,7 @@
       "deep_rock"
     ],
     "default_groundcover": [ [ "t_grass", 1 ] ],
-    "feature_flag_settings": { "blacklist": [  ], "whitelist": [ "ASTRAL_MICROWORLD" ] },
+    "feature_flag_settings": { "blacklist": [  ], "whitelist": [ "ASTRAL_MICROWORLD", "ASTRAL_LANDMARK" ] },
     "roads_without_cities": true,
     "connections": {
       "intra_city_road_connection": "astral_path",
@@ -192,7 +221,12 @@
     "forests": "default",
     "forest_composition": "default",
     "forest_trails": "default",
-    "biome_layers": [ "astral_layer_meadow_bogs", "astral_layer_meadow_fungal" ],
+    "biome_layers": [
+      "astral_layer_meadow_bogs",
+      "astral_layer_meadow_fungal",
+      "astral_layer_meadow_fallow",
+      "astral_layer_greenwood_tallgrass"
+    ],
     "biome_mix": {
       "dominant_share": 0.85,
       "seed_offset": 7,
@@ -248,7 +282,8 @@
       "//": "Weights from Grok's WP-B5 table (2026-10-02): overworld plains/forest/thick/swamp summed into `default`."
     },
     "rivers": "astral_drowned",
-    "lakes": "astral_drowned"
+    "lakes": "astral_drowned",
+    "biome_layers": [ "astral_layer_greenwood_tallgrass" ]
   },
   {
     "type": "weather_generator",
