@@ -2298,7 +2298,10 @@ void rpg_equipment_window::draw_inventory_grid()
         // own cell already names them ("aluminum tank > 200L clean water").
         if( loc.has_parent() ) {
             const item_pocket *pocket = loc.parent_pocket();
+            // Frozen liquids (ice in a canteen, water in a no-spoil pocket that never
+            // warmed up) are solid-phase but still belong to their container.
             if( loc->made_of( phase_id::LIQUID ) || loc->made_of( phase_id::GAS ) ||
+                loc->is_frozen_liquid() ||
                 ( pocket != nullptr && !pocket->is_type( pocket_type::CONTAINER ) ) ) {
                 continue;
             }

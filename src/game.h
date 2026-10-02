@@ -349,12 +349,16 @@ class game
          * @param prefix identifies the dimension and its properties.
          * @param npc_travellers vector of NPCs that should be brought along when travelling to another dimension
          * @param veh pointer to a vehicle to bring along.
+         * @param arrival optional absolute position in the destination dimension.  When set,
+         * the player and the travelling NPCs arrive next to this point instead of keeping
+         * their current coordinates.  Vehicles cannot be brought to an explicit arrival.
          */
         bool travel_to_dimension( dimension_id dimension_destination,
                                   const std::vector<npc *> &npc_travellers,
                                   const std::vector<item_location> &item_travellers,
                                   std::optional<tripoint_bub_ms> item_travellers_location,
-                                  vehicle *veh = nullptr );
+                                  vehicle *veh = nullptr,
+                                  const std::optional<tripoint_abs_ms> &arrival = std::nullopt );
         /**
          * Retrieve the identifier of the current dimension.
          */

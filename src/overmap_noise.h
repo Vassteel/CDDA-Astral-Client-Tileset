@@ -6,6 +6,8 @@
 #include "game_constants.h"
 #include "point.h"
 
+struct overmap_biome_layer;
+
 namespace om_noise
 {
 
@@ -87,6 +89,24 @@ class om_noise_layer_ocean : public om_noise_layer
         }
 
         float noise_at( const point_om_omt &local_omt_pos ) const override;
+};
+
+/**
+ * Noise for a data-defined overmap_biome_layer.  Same construction as the
+ * forest noise (broad octave noise raised to a power, minus weighted fine
+ * detail), with every parameter taken from the layer.
+ */
+class om_noise_layer_biome : public om_noise_layer
+{
+    public:
+        om_noise_layer_biome( const point_abs_omt &global_base_point, unsigned seed,
+                              const overmap_biome_layer &layer )
+            : om_noise_layer( global_base_point, seed ), layer( layer ) {
+        }
+
+        float noise_at( const point_om_omt &local_omt_pos ) const override;
+    private:
+        const overmap_biome_layer &layer;
 };
 
 } // namespace om_noise

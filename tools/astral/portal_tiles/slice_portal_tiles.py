@@ -23,6 +23,7 @@ import json
 STATES = ["active", "inactive", "ruined"]
 TILE = 32
 GRID = 5
+POOL_SIZE = 24  # keep in sync with tools/astral/gen_astral_portal_data.py
 
 # Role of each cell (row 0 = north/back of the arch, row 4 = south/approach).
 ROLES = [
@@ -91,7 +92,9 @@ def main():
                 idx = si * GRID * GRID + r * GRID + c
                 atlas.paste(cell, ((r * GRID + c) * TILE, si * TILE))
                 tid = f"t_astral_portal_{st}_r{r}c{c}"
-                tiles_json.append({"id": tid, "fg": idx, "rotates": False})
+                # The threshold has per-pocket bound variants (S3) that share its sprite.
+                ids = tid if not (r == 1 and c == 2) else [tid] + [f"{tid}_p{n:02d}" for n in range(1, POOL_SIZE + 1)]
+                tiles_json.append({"id": ids, "fg": idx, "rotates": False})
                 manifest["tiles"].append({"id": tid, "state": st, "row": r, "col": c,
                                           "role": ROLES[r][c], "passable": ROLES[r][c] in PASSABLE,
                                           "local_sprite": idx})

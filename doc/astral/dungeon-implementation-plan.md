@@ -1,6 +1,6 @@
 # Astral portal worlds — implementation plan
 
-Status: **S2 in progress** (branch `astral-dungeons-s2`). Written 2026-09-28 from the brainstorm thread, the existing [project-development-plan.md](project-development-plan.md), a source audit of the engine, and a scoping conversation. S2 data lives in `data/json/astral/dungeons/`, the generator in `tools/astral/`, the portal tile tooling in `tools/astral/portal_tiles/`, and tests in `tests/astral_dungeon_test.cpp`. Note that `/artifacts/` is gitignored in this repository: anything referenced there exists only on the development machine.
+Status: **S2 accepted in play (2026-09-29); S3 packages 1–2 and S4 package 1 (route plumbing) on branch `astral-dungeons-s2`.** Companion plan for the biome content: `astral-biomes-themes-plan.md` (project doc). Written 2026-09-28 from the brainstorm thread, the existing [project-development-plan.md](project-development-plan.md), a source audit of the engine, and a scoping conversation. S2 data lives in `data/json/astral/dungeons/`, the generator in `tools/astral/`, the portal tile tooling in `tools/astral/portal_tiles/`, and tests in `tests/astral_dungeon_test.cpp`. Note that `/artifacts/` is gitignored in this repository: anything referenced there exists only on the development machine.
 
 Decisions taken in the scoping conversation:
 
@@ -85,16 +85,17 @@ Done above.
 **Checklist:** enter, arrive on the twin platform; drop an item in the crate, break a shrub, return; save/reload outside and inside; re-enter — item and damage persist, only one `dimensions/astral_test_world/` folder; veil is solid, no stairs, digging hits rock; blocked arrival lands on the nearest free tile; cancelling at the prompt writes nothing; all three art states reviewed in place; a natural `ancient gateway` found and used.
 
 ### S3 — Independent instances
-- Pool `astral_pocket_01..NN` generated from one template; allocator variable; per-portal instance binding; per-dimension return anchors.
-- Ledger per instance (template, seed/version, allocated turn, entries, last exit, core state, rank).
-- Vehicle travel through the platform (`take_vehicle`) and arrival collision handling.
-- Migrate `astral_test_world` to slot 01.
+- Pool `astral_pocket_01..24` generated from one template; allocator variable `astral_pocket_next`; **binding is stored in the map**: an unbound active threshold swaps itself to `t_astral_portal_active_r1c2_p<nn>` on first use (`astral_bind_p<nn>` transform), so each portal remembers its world without dynamic variable names; per-pocket return anchors and arrival points (`astral_return_p<nn>`, `astral_arrival_p<nn>`); the pocket-side return threshold dispatches on `current_dimension`. *(package 1, done)*
+- Ledger per instance as global vars `astral_<field>_p<nn>`: template, bound turn, entries, last enter/exit, core state (`unclaimed`), rank; `gateway ledger (debug)` reads it. *(package 2, done)*
+- Vehicle travel: the vehicle under the traveller crosses (`take_vehicle`). Because the engine places it at the same coordinates, pockets are **open meadow by default** and the arrival courtyard is drawn *under* the traveller by `update_mapgen astral_courtyard_arrival` at the same OMT-relative spot the overworld sites use (rows 8–12 / cols 9–13); no teleport on entry. The veil stays available for bounded layers. *(package 2, done)*
+- `astral_test_world` retired; start new worlds.
 - **C++ trigger:** pool exhausted or templates multiply → dynamic ids (~1 day + save test).
 
 **Checklist:** two portals, two worlds, changes never cross; reload; a cart goes through and back.
 
 ### S4 — The first plane at week scale
-- Unbounded world; `DYNAMIC` Voronoi biomes (arrival meadows → lowlands → forest → core territory); `route_scale` region setting (test 2 overmaps, release ≈30).
+- Unbounded world; **`MANUAL_VORONOI`** layout (there is no "DYNAMIC Voronoi" mode) with band point sets along the route — arrival meadows → drowned lowlands → fungal forest → root country — and a `RANDOM` mix of the same biomes outside the bounds. The generator emits four rotated layouts (`astral_greenwood_r0..r3`) and deals pool slots across them so the core is not always in one direction. Route scale is a generator constant (test: one overmap per band, core at 5; release ≈30).
+- **Canonical arrival.** The layout is anchored on overmap (0,0), so every traveller is teleported to the centre OMT of overmap (0,0) on entry (`ARRIVAL_X/Y`, computed as an offset from `u_val('pos_x')`), where the courtyard is drawn on first visit. This replaces S3's same-coordinates arrival. **Vehicles are refused at the threshold** until `u_travel_to_dimension` can carry one to an arrival location — a small engine follow-up (move the detached vehicle with the player before `place_vehicle`). *(package 1, done: four stand-in biomes on vanilla placeholder terrain; theme bills fill them in — biomes plan B1/B5)*
 - Landmark specials along the approach (waystations, camps, ruins) at a density tuned so a day's walk finds something.
 - Forward camps: basecamp on a landmark; storage and retreat point.
 - Compass (Wayfinding item): vague bearing to the nearest passage/core; accuracy by materials.

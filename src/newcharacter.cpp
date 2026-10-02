@@ -790,8 +790,8 @@ void Character::add_profession_items()
 
     // Storage items may not be added first, so a second attempt is needed.
     attempt_add_items( prof_items, try_adding_again );
+    prof_items.clear();
     if( !try_adding_again.empty() ) {
-        prof_items.clear();
         attempt_add_items( try_adding_again, prof_items );
     }
 

@@ -542,8 +542,8 @@ def gui_update(repo, client, state, dialogs):
     new = release["version"].removeprefix("client-v")
     if release.get("full_download_required"):
         text = (f"Astral Client {new} includes new game data or libraries and must be downloaded in full.\n\n"
-                f"Extract it to a new folder, then copy your save and config folders across.\n\n{release['url']}")
-        if dialogs.question(text + "\n\nOpen the download page?", "Open page", "Close") and not open_page(release["url"]):
+                f"Extract it to a new folder. Read the release notes for new-world requirements; keep old saves backed up.\n\n{release['url']}")
+        if dialogs.question(text + "\n\nBug reports: https://discord.gg/CPRt9u3pXe — #bug-reports\n\nOpen the download page?", "Open page", "Close") and not open_page(release["url"]):
             dialogs.info(release["url"])
         return
     staged = state / f"release-{release['asset']['id']}.zip"

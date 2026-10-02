@@ -5,103 +5,346 @@
     "terrain": [
       {
         "result": "t_astral_portal_active_r0c0",
-        "valid_terrain": [ "t_astral_portal_inactive_r0c0", "t_astral_portal_ruined_r0c0" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r0c0",
+          "t_astral_portal_ruined_r0c0"
+        ]
       },
       {
         "result": "t_astral_portal_active_r0c1",
-        "valid_terrain": [ "t_astral_portal_inactive_r0c1", "t_astral_portal_ruined_r0c1" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r0c1",
+          "t_astral_portal_ruined_r0c1"
+        ]
       },
       {
         "result": "t_astral_portal_active_r0c2",
-        "valid_terrain": [ "t_astral_portal_inactive_r0c2", "t_astral_portal_ruined_r0c2" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r0c2",
+          "t_astral_portal_ruined_r0c2"
+        ]
       },
       {
         "result": "t_astral_portal_active_r0c3",
-        "valid_terrain": [ "t_astral_portal_inactive_r0c3", "t_astral_portal_ruined_r0c3" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r0c3",
+          "t_astral_portal_ruined_r0c3"
+        ]
       },
       {
         "result": "t_astral_portal_active_r0c4",
-        "valid_terrain": [ "t_astral_portal_inactive_r0c4", "t_astral_portal_ruined_r0c4" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r0c4",
+          "t_astral_portal_ruined_r0c4"
+        ]
       },
       {
         "result": "t_astral_portal_active_r1c0",
-        "valid_terrain": [ "t_astral_portal_inactive_r1c0", "t_astral_portal_ruined_r1c0" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c0",
+          "t_astral_portal_ruined_r1c0"
+        ]
       },
       {
         "result": "t_astral_portal_active_r1c1",
-        "valid_terrain": [ "t_astral_portal_inactive_r1c1", "t_astral_portal_ruined_r1c1" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c1",
+          "t_astral_portal_ruined_r1c1"
+        ]
       },
       {
         "result": "t_astral_portal_active_r1c2",
-        "valid_terrain": [ "t_astral_portal_inactive_r1c2", "t_astral_portal_ruined_r1c2" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2",
+          "t_astral_portal_ruined_r1c2"
+        ]
       },
       {
         "result": "t_astral_portal_active_r1c3",
-        "valid_terrain": [ "t_astral_portal_inactive_r1c3", "t_astral_portal_ruined_r1c3" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c3",
+          "t_astral_portal_ruined_r1c3"
+        ]
       },
       {
         "result": "t_astral_portal_active_r1c4",
-        "valid_terrain": [ "t_astral_portal_inactive_r1c4", "t_astral_portal_ruined_r1c4" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c4",
+          "t_astral_portal_ruined_r1c4"
+        ]
       },
       {
         "result": "t_astral_portal_active_r2c0",
-        "valid_terrain": [ "t_astral_portal_inactive_r2c0", "t_astral_portal_ruined_r2c0" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r2c0",
+          "t_astral_portal_ruined_r2c0"
+        ]
       },
       {
         "result": "t_astral_portal_active_r2c1",
-        "valid_terrain": [ "t_astral_portal_inactive_r2c1", "t_astral_portal_ruined_r2c1" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r2c1",
+          "t_astral_portal_ruined_r2c1"
+        ]
       },
       {
         "result": "t_astral_portal_active_r2c2",
-        "valid_terrain": [ "t_astral_portal_inactive_r2c2", "t_astral_portal_ruined_r2c2" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r2c2",
+          "t_astral_portal_ruined_r2c2"
+        ]
       },
       {
         "result": "t_astral_portal_active_r2c3",
-        "valid_terrain": [ "t_astral_portal_inactive_r2c3", "t_astral_portal_ruined_r2c3" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r2c3",
+          "t_astral_portal_ruined_r2c3"
+        ]
       },
       {
         "result": "t_astral_portal_active_r2c4",
-        "valid_terrain": [ "t_astral_portal_inactive_r2c4", "t_astral_portal_ruined_r2c4" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r2c4",
+          "t_astral_portal_ruined_r2c4"
+        ]
       },
       {
         "result": "t_astral_portal_active_r3c0",
-        "valid_terrain": [ "t_astral_portal_inactive_r3c0", "t_astral_portal_ruined_r3c0" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r3c0",
+          "t_astral_portal_ruined_r3c0"
+        ]
       },
       {
         "result": "t_astral_portal_active_r3c1",
-        "valid_terrain": [ "t_astral_portal_inactive_r3c1", "t_astral_portal_ruined_r3c1" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r3c1",
+          "t_astral_portal_ruined_r3c1"
+        ]
       },
       {
         "result": "t_astral_portal_active_r3c2",
-        "valid_terrain": [ "t_astral_portal_inactive_r3c2", "t_astral_portal_ruined_r3c2" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r3c2",
+          "t_astral_portal_ruined_r3c2"
+        ]
       },
       {
         "result": "t_astral_portal_active_r3c3",
-        "valid_terrain": [ "t_astral_portal_inactive_r3c3", "t_astral_portal_ruined_r3c3" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r3c3",
+          "t_astral_portal_ruined_r3c3"
+        ]
       },
       {
         "result": "t_astral_portal_active_r3c4",
-        "valid_terrain": [ "t_astral_portal_inactive_r3c4", "t_astral_portal_ruined_r3c4" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r3c4",
+          "t_astral_portal_ruined_r3c4"
+        ]
       },
       {
         "result": "t_astral_portal_active_r4c0",
-        "valid_terrain": [ "t_astral_portal_inactive_r4c0", "t_astral_portal_ruined_r4c0" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r4c0",
+          "t_astral_portal_ruined_r4c0"
+        ]
       },
       {
         "result": "t_astral_portal_active_r4c1",
-        "valid_terrain": [ "t_astral_portal_inactive_r4c1", "t_astral_portal_ruined_r4c1" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r4c1",
+          "t_astral_portal_ruined_r4c1"
+        ]
       },
       {
         "result": "t_astral_portal_active_r4c2",
-        "valid_terrain": [ "t_astral_portal_inactive_r4c2", "t_astral_portal_ruined_r4c2" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r4c2",
+          "t_astral_portal_ruined_r4c2"
+        ]
       },
       {
         "result": "t_astral_portal_active_r4c3",
-        "valid_terrain": [ "t_astral_portal_inactive_r4c3", "t_astral_portal_ruined_r4c3" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r4c3",
+          "t_astral_portal_ruined_r4c3"
+        ]
       },
       {
         "result": "t_astral_portal_active_r4c4",
-        "valid_terrain": [ "t_astral_portal_inactive_r4c4", "t_astral_portal_ruined_r4c4" ]
+        "valid_terrain": [
+          "t_astral_portal_inactive_r4c4",
+          "t_astral_portal_ruined_r4c4"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p01",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p01",
+          "t_astral_portal_ruined_r1c2_p01"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p02",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p02",
+          "t_astral_portal_ruined_r1c2_p02"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p03",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p03",
+          "t_astral_portal_ruined_r1c2_p03"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p04",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p04",
+          "t_astral_portal_ruined_r1c2_p04"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p05",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p05",
+          "t_astral_portal_ruined_r1c2_p05"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p06",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p06",
+          "t_astral_portal_ruined_r1c2_p06"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p07",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p07",
+          "t_astral_portal_ruined_r1c2_p07"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p08",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p08",
+          "t_astral_portal_ruined_r1c2_p08"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p09",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p09",
+          "t_astral_portal_ruined_r1c2_p09"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p10",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p10",
+          "t_astral_portal_ruined_r1c2_p10"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p11",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p11",
+          "t_astral_portal_ruined_r1c2_p11"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p12",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p12",
+          "t_astral_portal_ruined_r1c2_p12"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p13",
+          "t_astral_portal_ruined_r1c2_p13"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p14",
+          "t_astral_portal_ruined_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_active_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
       }
     ]
   },
@@ -111,103 +354,346 @@
     "terrain": [
       {
         "result": "t_astral_portal_inactive_r0c0",
-        "valid_terrain": [ "t_astral_portal_active_r0c0", "t_astral_portal_ruined_r0c0" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r0c0",
+          "t_astral_portal_ruined_r0c0"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r0c1",
-        "valid_terrain": [ "t_astral_portal_active_r0c1", "t_astral_portal_ruined_r0c1" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r0c1",
+          "t_astral_portal_ruined_r0c1"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r0c2",
-        "valid_terrain": [ "t_astral_portal_active_r0c2", "t_astral_portal_ruined_r0c2" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r0c2",
+          "t_astral_portal_ruined_r0c2"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r0c3",
-        "valid_terrain": [ "t_astral_portal_active_r0c3", "t_astral_portal_ruined_r0c3" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r0c3",
+          "t_astral_portal_ruined_r0c3"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r0c4",
-        "valid_terrain": [ "t_astral_portal_active_r0c4", "t_astral_portal_ruined_r0c4" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r0c4",
+          "t_astral_portal_ruined_r0c4"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r1c0",
-        "valid_terrain": [ "t_astral_portal_active_r1c0", "t_astral_portal_ruined_r1c0" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r1c0",
+          "t_astral_portal_ruined_r1c0"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r1c1",
-        "valid_terrain": [ "t_astral_portal_active_r1c1", "t_astral_portal_ruined_r1c1" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r1c1",
+          "t_astral_portal_ruined_r1c1"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r1c2",
-        "valid_terrain": [ "t_astral_portal_active_r1c2", "t_astral_portal_ruined_r1c2" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2",
+          "t_astral_portal_ruined_r1c2"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r1c3",
-        "valid_terrain": [ "t_astral_portal_active_r1c3", "t_astral_portal_ruined_r1c3" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r1c3",
+          "t_astral_portal_ruined_r1c3"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r1c4",
-        "valid_terrain": [ "t_astral_portal_active_r1c4", "t_astral_portal_ruined_r1c4" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r1c4",
+          "t_astral_portal_ruined_r1c4"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r2c0",
-        "valid_terrain": [ "t_astral_portal_active_r2c0", "t_astral_portal_ruined_r2c0" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r2c0",
+          "t_astral_portal_ruined_r2c0"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r2c1",
-        "valid_terrain": [ "t_astral_portal_active_r2c1", "t_astral_portal_ruined_r2c1" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r2c1",
+          "t_astral_portal_ruined_r2c1"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r2c2",
-        "valid_terrain": [ "t_astral_portal_active_r2c2", "t_astral_portal_ruined_r2c2" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r2c2",
+          "t_astral_portal_ruined_r2c2"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r2c3",
-        "valid_terrain": [ "t_astral_portal_active_r2c3", "t_astral_portal_ruined_r2c3" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r2c3",
+          "t_astral_portal_ruined_r2c3"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r2c4",
-        "valid_terrain": [ "t_astral_portal_active_r2c4", "t_astral_portal_ruined_r2c4" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r2c4",
+          "t_astral_portal_ruined_r2c4"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r3c0",
-        "valid_terrain": [ "t_astral_portal_active_r3c0", "t_astral_portal_ruined_r3c0" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r3c0",
+          "t_astral_portal_ruined_r3c0"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r3c1",
-        "valid_terrain": [ "t_astral_portal_active_r3c1", "t_astral_portal_ruined_r3c1" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r3c1",
+          "t_astral_portal_ruined_r3c1"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r3c2",
-        "valid_terrain": [ "t_astral_portal_active_r3c2", "t_astral_portal_ruined_r3c2" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r3c2",
+          "t_astral_portal_ruined_r3c2"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r3c3",
-        "valid_terrain": [ "t_astral_portal_active_r3c3", "t_astral_portal_ruined_r3c3" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r3c3",
+          "t_astral_portal_ruined_r3c3"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r3c4",
-        "valid_terrain": [ "t_astral_portal_active_r3c4", "t_astral_portal_ruined_r3c4" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r3c4",
+          "t_astral_portal_ruined_r3c4"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r4c0",
-        "valid_terrain": [ "t_astral_portal_active_r4c0", "t_astral_portal_ruined_r4c0" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r4c0",
+          "t_astral_portal_ruined_r4c0"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r4c1",
-        "valid_terrain": [ "t_astral_portal_active_r4c1", "t_astral_portal_ruined_r4c1" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r4c1",
+          "t_astral_portal_ruined_r4c1"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r4c2",
-        "valid_terrain": [ "t_astral_portal_active_r4c2", "t_astral_portal_ruined_r4c2" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r4c2",
+          "t_astral_portal_ruined_r4c2"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r4c3",
-        "valid_terrain": [ "t_astral_portal_active_r4c3", "t_astral_portal_ruined_r4c3" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r4c3",
+          "t_astral_portal_ruined_r4c3"
+        ]
       },
       {
         "result": "t_astral_portal_inactive_r4c4",
-        "valid_terrain": [ "t_astral_portal_active_r4c4", "t_astral_portal_ruined_r4c4" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r4c4",
+          "t_astral_portal_ruined_r4c4"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p01",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p01",
+          "t_astral_portal_ruined_r1c2_p01"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p02",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p02",
+          "t_astral_portal_ruined_r1c2_p02"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p03",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p03",
+          "t_astral_portal_ruined_r1c2_p03"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p04",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p04",
+          "t_astral_portal_ruined_r1c2_p04"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p05",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p05",
+          "t_astral_portal_ruined_r1c2_p05"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p06",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p06",
+          "t_astral_portal_ruined_r1c2_p06"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p07",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p07",
+          "t_astral_portal_ruined_r1c2_p07"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p08",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p08",
+          "t_astral_portal_ruined_r1c2_p08"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p09",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p09",
+          "t_astral_portal_ruined_r1c2_p09"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p10",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p10",
+          "t_astral_portal_ruined_r1c2_p10"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p11",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p11",
+          "t_astral_portal_ruined_r1c2_p11"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p12",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p12",
+          "t_astral_portal_ruined_r1c2_p12"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p13",
+          "t_astral_portal_ruined_r1c2_p13"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p14",
+          "t_astral_portal_ruined_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_inactive_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
       }
     ]
   },
@@ -217,103 +703,2842 @@
     "terrain": [
       {
         "result": "t_astral_portal_ruined_r0c0",
-        "valid_terrain": [ "t_astral_portal_active_r0c0", "t_astral_portal_inactive_r0c0" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r0c0",
+          "t_astral_portal_inactive_r0c0"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r0c1",
-        "valid_terrain": [ "t_astral_portal_active_r0c1", "t_astral_portal_inactive_r0c1" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r0c1",
+          "t_astral_portal_inactive_r0c1"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r0c2",
-        "valid_terrain": [ "t_astral_portal_active_r0c2", "t_astral_portal_inactive_r0c2" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r0c2",
+          "t_astral_portal_inactive_r0c2"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r0c3",
-        "valid_terrain": [ "t_astral_portal_active_r0c3", "t_astral_portal_inactive_r0c3" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r0c3",
+          "t_astral_portal_inactive_r0c3"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r0c4",
-        "valid_terrain": [ "t_astral_portal_active_r0c4", "t_astral_portal_inactive_r0c4" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r0c4",
+          "t_astral_portal_inactive_r0c4"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r1c0",
-        "valid_terrain": [ "t_astral_portal_active_r1c0", "t_astral_portal_inactive_r1c0" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r1c0",
+          "t_astral_portal_inactive_r1c0"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r1c1",
-        "valid_terrain": [ "t_astral_portal_active_r1c1", "t_astral_portal_inactive_r1c1" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r1c1",
+          "t_astral_portal_inactive_r1c1"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r1c2",
-        "valid_terrain": [ "t_astral_portal_active_r1c2", "t_astral_portal_inactive_r1c2" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2",
+          "t_astral_portal_inactive_r1c2"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r1c3",
-        "valid_terrain": [ "t_astral_portal_active_r1c3", "t_astral_portal_inactive_r1c3" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r1c3",
+          "t_astral_portal_inactive_r1c3"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r1c4",
-        "valid_terrain": [ "t_astral_portal_active_r1c4", "t_astral_portal_inactive_r1c4" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r1c4",
+          "t_astral_portal_inactive_r1c4"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r2c0",
-        "valid_terrain": [ "t_astral_portal_active_r2c0", "t_astral_portal_inactive_r2c0" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r2c0",
+          "t_astral_portal_inactive_r2c0"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r2c1",
-        "valid_terrain": [ "t_astral_portal_active_r2c1", "t_astral_portal_inactive_r2c1" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r2c1",
+          "t_astral_portal_inactive_r2c1"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r2c2",
-        "valid_terrain": [ "t_astral_portal_active_r2c2", "t_astral_portal_inactive_r2c2" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r2c2",
+          "t_astral_portal_inactive_r2c2"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r2c3",
-        "valid_terrain": [ "t_astral_portal_active_r2c3", "t_astral_portal_inactive_r2c3" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r2c3",
+          "t_astral_portal_inactive_r2c3"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r2c4",
-        "valid_terrain": [ "t_astral_portal_active_r2c4", "t_astral_portal_inactive_r2c4" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r2c4",
+          "t_astral_portal_inactive_r2c4"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r3c0",
-        "valid_terrain": [ "t_astral_portal_active_r3c0", "t_astral_portal_inactive_r3c0" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r3c0",
+          "t_astral_portal_inactive_r3c0"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r3c1",
-        "valid_terrain": [ "t_astral_portal_active_r3c1", "t_astral_portal_inactive_r3c1" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r3c1",
+          "t_astral_portal_inactive_r3c1"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r3c2",
-        "valid_terrain": [ "t_astral_portal_active_r3c2", "t_astral_portal_inactive_r3c2" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r3c2",
+          "t_astral_portal_inactive_r3c2"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r3c3",
-        "valid_terrain": [ "t_astral_portal_active_r3c3", "t_astral_portal_inactive_r3c3" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r3c3",
+          "t_astral_portal_inactive_r3c3"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r3c4",
-        "valid_terrain": [ "t_astral_portal_active_r3c4", "t_astral_portal_inactive_r3c4" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r3c4",
+          "t_astral_portal_inactive_r3c4"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r4c0",
-        "valid_terrain": [ "t_astral_portal_active_r4c0", "t_astral_portal_inactive_r4c0" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r4c0",
+          "t_astral_portal_inactive_r4c0"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r4c1",
-        "valid_terrain": [ "t_astral_portal_active_r4c1", "t_astral_portal_inactive_r4c1" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r4c1",
+          "t_astral_portal_inactive_r4c1"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r4c2",
-        "valid_terrain": [ "t_astral_portal_active_r4c2", "t_astral_portal_inactive_r4c2" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r4c2",
+          "t_astral_portal_inactive_r4c2"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r4c3",
-        "valid_terrain": [ "t_astral_portal_active_r4c3", "t_astral_portal_inactive_r4c3" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r4c3",
+          "t_astral_portal_inactive_r4c3"
+        ]
       },
       {
         "result": "t_astral_portal_ruined_r4c4",
-        "valid_terrain": [ "t_astral_portal_active_r4c4", "t_astral_portal_inactive_r4c4" ]
+        "valid_terrain": [
+          "t_astral_portal_active_r4c4",
+          "t_astral_portal_inactive_r4c4"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p01",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p01",
+          "t_astral_portal_inactive_r1c2_p01"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p02",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p02",
+          "t_astral_portal_inactive_r1c2_p02"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p03",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p03",
+          "t_astral_portal_inactive_r1c2_p03"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p04",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p04",
+          "t_astral_portal_inactive_r1c2_p04"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p05",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p05",
+          "t_astral_portal_inactive_r1c2_p05"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p06",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p06",
+          "t_astral_portal_inactive_r1c2_p06"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p07",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p07",
+          "t_astral_portal_inactive_r1c2_p07"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p08",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p08",
+          "t_astral_portal_inactive_r1c2_p08"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p09",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p09",
+          "t_astral_portal_inactive_r1c2_p09"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p10",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p10",
+          "t_astral_portal_inactive_r1c2_p10"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p11",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p11",
+          "t_astral_portal_inactive_r1c2_p11"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p12",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p12",
+          "t_astral_portal_inactive_r1c2_p12"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p13",
+          "t_astral_portal_inactive_r1c2_p13"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p14",
+          "t_astral_portal_inactive_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_inactive_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_ruined_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p01",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p01",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p02",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p02",
+          "t_astral_portal_inactive_r1c2_p02",
+          "t_astral_portal_ruined_r1c2_p02"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p03",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p03",
+          "t_astral_portal_inactive_r1c2_p03",
+          "t_astral_portal_ruined_r1c2_p03"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p04",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p04",
+          "t_astral_portal_inactive_r1c2_p04",
+          "t_astral_portal_ruined_r1c2_p04"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p05",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p05",
+          "t_astral_portal_inactive_r1c2_p05",
+          "t_astral_portal_ruined_r1c2_p05"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p06",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p06",
+          "t_astral_portal_inactive_r1c2_p06",
+          "t_astral_portal_ruined_r1c2_p06"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p07",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p07",
+          "t_astral_portal_inactive_r1c2_p07",
+          "t_astral_portal_ruined_r1c2_p07"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p08",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p08",
+          "t_astral_portal_inactive_r1c2_p08",
+          "t_astral_portal_ruined_r1c2_p08"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p09",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p09",
+          "t_astral_portal_inactive_r1c2_p09",
+          "t_astral_portal_ruined_r1c2_p09"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p10",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p10",
+          "t_astral_portal_inactive_r1c2_p10",
+          "t_astral_portal_ruined_r1c2_p10"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p11",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p11",
+          "t_astral_portal_inactive_r1c2_p11",
+          "t_astral_portal_ruined_r1c2_p11"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p12",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p12",
+          "t_astral_portal_inactive_r1c2_p12",
+          "t_astral_portal_ruined_r1c2_p12"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p13",
+          "t_astral_portal_inactive_r1c2_p13",
+          "t_astral_portal_ruined_r1c2_p13"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p14",
+          "t_astral_portal_inactive_r1c2_p14",
+          "t_astral_portal_ruined_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_inactive_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p01_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p02",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p02",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p03",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p03",
+          "t_astral_portal_inactive_r1c2_p03",
+          "t_astral_portal_ruined_r1c2_p03"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p04",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p04",
+          "t_astral_portal_inactive_r1c2_p04",
+          "t_astral_portal_ruined_r1c2_p04"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p05",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p05",
+          "t_astral_portal_inactive_r1c2_p05",
+          "t_astral_portal_ruined_r1c2_p05"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p06",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p06",
+          "t_astral_portal_inactive_r1c2_p06",
+          "t_astral_portal_ruined_r1c2_p06"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p07",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p07",
+          "t_astral_portal_inactive_r1c2_p07",
+          "t_astral_portal_ruined_r1c2_p07"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p08",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p08",
+          "t_astral_portal_inactive_r1c2_p08",
+          "t_astral_portal_ruined_r1c2_p08"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p09",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p09",
+          "t_astral_portal_inactive_r1c2_p09",
+          "t_astral_portal_ruined_r1c2_p09"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p10",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p10",
+          "t_astral_portal_inactive_r1c2_p10",
+          "t_astral_portal_ruined_r1c2_p10"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p11",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p11",
+          "t_astral_portal_inactive_r1c2_p11",
+          "t_astral_portal_ruined_r1c2_p11"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p12",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p12",
+          "t_astral_portal_inactive_r1c2_p12",
+          "t_astral_portal_ruined_r1c2_p12"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p13",
+          "t_astral_portal_inactive_r1c2_p13",
+          "t_astral_portal_ruined_r1c2_p13"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p14",
+          "t_astral_portal_inactive_r1c2_p14",
+          "t_astral_portal_ruined_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_inactive_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p02_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p03",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p03",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p04",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p04",
+          "t_astral_portal_inactive_r1c2_p04",
+          "t_astral_portal_ruined_r1c2_p04"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p05",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p05",
+          "t_astral_portal_inactive_r1c2_p05",
+          "t_astral_portal_ruined_r1c2_p05"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p06",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p06",
+          "t_astral_portal_inactive_r1c2_p06",
+          "t_astral_portal_ruined_r1c2_p06"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p07",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p07",
+          "t_astral_portal_inactive_r1c2_p07",
+          "t_astral_portal_ruined_r1c2_p07"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p08",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p08",
+          "t_astral_portal_inactive_r1c2_p08",
+          "t_astral_portal_ruined_r1c2_p08"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p09",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p09",
+          "t_astral_portal_inactive_r1c2_p09",
+          "t_astral_portal_ruined_r1c2_p09"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p10",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p10",
+          "t_astral_portal_inactive_r1c2_p10",
+          "t_astral_portal_ruined_r1c2_p10"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p11",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p11",
+          "t_astral_portal_inactive_r1c2_p11",
+          "t_astral_portal_ruined_r1c2_p11"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p12",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p12",
+          "t_astral_portal_inactive_r1c2_p12",
+          "t_astral_portal_ruined_r1c2_p12"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p13",
+          "t_astral_portal_inactive_r1c2_p13",
+          "t_astral_portal_ruined_r1c2_p13"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p14",
+          "t_astral_portal_inactive_r1c2_p14",
+          "t_astral_portal_ruined_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_inactive_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p03_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p04",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p04",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p05",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p05",
+          "t_astral_portal_inactive_r1c2_p05",
+          "t_astral_portal_ruined_r1c2_p05"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p06",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p06",
+          "t_astral_portal_inactive_r1c2_p06",
+          "t_astral_portal_ruined_r1c2_p06"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p07",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p07",
+          "t_astral_portal_inactive_r1c2_p07",
+          "t_astral_portal_ruined_r1c2_p07"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p08",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p08",
+          "t_astral_portal_inactive_r1c2_p08",
+          "t_astral_portal_ruined_r1c2_p08"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p09",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p09",
+          "t_astral_portal_inactive_r1c2_p09",
+          "t_astral_portal_ruined_r1c2_p09"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p10",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p10",
+          "t_astral_portal_inactive_r1c2_p10",
+          "t_astral_portal_ruined_r1c2_p10"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p11",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p11",
+          "t_astral_portal_inactive_r1c2_p11",
+          "t_astral_portal_ruined_r1c2_p11"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p12",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p12",
+          "t_astral_portal_inactive_r1c2_p12",
+          "t_astral_portal_ruined_r1c2_p12"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p13",
+          "t_astral_portal_inactive_r1c2_p13",
+          "t_astral_portal_ruined_r1c2_p13"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p14",
+          "t_astral_portal_inactive_r1c2_p14",
+          "t_astral_portal_ruined_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_inactive_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p04_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p05",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p05",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p06",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p06",
+          "t_astral_portal_inactive_r1c2_p06",
+          "t_astral_portal_ruined_r1c2_p06"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p07",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p07",
+          "t_astral_portal_inactive_r1c2_p07",
+          "t_astral_portal_ruined_r1c2_p07"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p08",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p08",
+          "t_astral_portal_inactive_r1c2_p08",
+          "t_astral_portal_ruined_r1c2_p08"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p09",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p09",
+          "t_astral_portal_inactive_r1c2_p09",
+          "t_astral_portal_ruined_r1c2_p09"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p10",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p10",
+          "t_astral_portal_inactive_r1c2_p10",
+          "t_astral_portal_ruined_r1c2_p10"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p11",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p11",
+          "t_astral_portal_inactive_r1c2_p11",
+          "t_astral_portal_ruined_r1c2_p11"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p12",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p12",
+          "t_astral_portal_inactive_r1c2_p12",
+          "t_astral_portal_ruined_r1c2_p12"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p13",
+          "t_astral_portal_inactive_r1c2_p13",
+          "t_astral_portal_ruined_r1c2_p13"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p14",
+          "t_astral_portal_inactive_r1c2_p14",
+          "t_astral_portal_ruined_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_inactive_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p05_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p06",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p06",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p07",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p07",
+          "t_astral_portal_inactive_r1c2_p07",
+          "t_astral_portal_ruined_r1c2_p07"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p08",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p08",
+          "t_astral_portal_inactive_r1c2_p08",
+          "t_astral_portal_ruined_r1c2_p08"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p09",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p09",
+          "t_astral_portal_inactive_r1c2_p09",
+          "t_astral_portal_ruined_r1c2_p09"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p10",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p10",
+          "t_astral_portal_inactive_r1c2_p10",
+          "t_astral_portal_ruined_r1c2_p10"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p11",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p11",
+          "t_astral_portal_inactive_r1c2_p11",
+          "t_astral_portal_ruined_r1c2_p11"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p12",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p12",
+          "t_astral_portal_inactive_r1c2_p12",
+          "t_astral_portal_ruined_r1c2_p12"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p13",
+          "t_astral_portal_inactive_r1c2_p13",
+          "t_astral_portal_ruined_r1c2_p13"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p14",
+          "t_astral_portal_inactive_r1c2_p14",
+          "t_astral_portal_ruined_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_inactive_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p06_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p07",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p07",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p08",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p08",
+          "t_astral_portal_inactive_r1c2_p08",
+          "t_astral_portal_ruined_r1c2_p08"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p09",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p09",
+          "t_astral_portal_inactive_r1c2_p09",
+          "t_astral_portal_ruined_r1c2_p09"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p10",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p10",
+          "t_astral_portal_inactive_r1c2_p10",
+          "t_astral_portal_ruined_r1c2_p10"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p11",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p11",
+          "t_astral_portal_inactive_r1c2_p11",
+          "t_astral_portal_ruined_r1c2_p11"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p12",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p12",
+          "t_astral_portal_inactive_r1c2_p12",
+          "t_astral_portal_ruined_r1c2_p12"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p13",
+          "t_astral_portal_inactive_r1c2_p13",
+          "t_astral_portal_ruined_r1c2_p13"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p14",
+          "t_astral_portal_inactive_r1c2_p14",
+          "t_astral_portal_ruined_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_inactive_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p07_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p08",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p08",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p09",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p09",
+          "t_astral_portal_inactive_r1c2_p09",
+          "t_astral_portal_ruined_r1c2_p09"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p10",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p10",
+          "t_astral_portal_inactive_r1c2_p10",
+          "t_astral_portal_ruined_r1c2_p10"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p11",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p11",
+          "t_astral_portal_inactive_r1c2_p11",
+          "t_astral_portal_ruined_r1c2_p11"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p12",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p12",
+          "t_astral_portal_inactive_r1c2_p12",
+          "t_astral_portal_ruined_r1c2_p12"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p13",
+          "t_astral_portal_inactive_r1c2_p13",
+          "t_astral_portal_ruined_r1c2_p13"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p14",
+          "t_astral_portal_inactive_r1c2_p14",
+          "t_astral_portal_ruined_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_inactive_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p08_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p09",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p09",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p09_r1c2_p10",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p10",
+          "t_astral_portal_inactive_r1c2_p10",
+          "t_astral_portal_ruined_r1c2_p10"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p09_r1c2_p11",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p11",
+          "t_astral_portal_inactive_r1c2_p11",
+          "t_astral_portal_ruined_r1c2_p11"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p09_r1c2_p12",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p12",
+          "t_astral_portal_inactive_r1c2_p12",
+          "t_astral_portal_ruined_r1c2_p12"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p09_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p13",
+          "t_astral_portal_inactive_r1c2_p13",
+          "t_astral_portal_ruined_r1c2_p13"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p09_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p14",
+          "t_astral_portal_inactive_r1c2_p14",
+          "t_astral_portal_ruined_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p09_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_inactive_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p09_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p09_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p09_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p09_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p09_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p09_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p09_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p09_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p09_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p10",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p10",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p10_r1c2_p11",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p11",
+          "t_astral_portal_inactive_r1c2_p11",
+          "t_astral_portal_ruined_r1c2_p11"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p10_r1c2_p12",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p12",
+          "t_astral_portal_inactive_r1c2_p12",
+          "t_astral_portal_ruined_r1c2_p12"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p10_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p13",
+          "t_astral_portal_inactive_r1c2_p13",
+          "t_astral_portal_ruined_r1c2_p13"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p10_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p14",
+          "t_astral_portal_inactive_r1c2_p14",
+          "t_astral_portal_ruined_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p10_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_inactive_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p10_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p10_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p10_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p10_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p10_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p10_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p10_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p10_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p10_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p11",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p11",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p11_r1c2_p12",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p12",
+          "t_astral_portal_inactive_r1c2_p12",
+          "t_astral_portal_ruined_r1c2_p12"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p11_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p13",
+          "t_astral_portal_inactive_r1c2_p13",
+          "t_astral_portal_ruined_r1c2_p13"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p11_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p14",
+          "t_astral_portal_inactive_r1c2_p14",
+          "t_astral_portal_ruined_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p11_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_inactive_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p11_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p11_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p11_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p11_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p11_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p11_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p11_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p11_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p11_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p12",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p12",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p12_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p13",
+          "t_astral_portal_inactive_r1c2_p13",
+          "t_astral_portal_ruined_r1c2_p13"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p12_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p14",
+          "t_astral_portal_inactive_r1c2_p14",
+          "t_astral_portal_ruined_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p12_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_inactive_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p12_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p12_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p12_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p12_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p12_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p12_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p12_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p12_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p12_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p13",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p13",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p13_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p14",
+          "t_astral_portal_inactive_r1c2_p14",
+          "t_astral_portal_ruined_r1c2_p14"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p13_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_inactive_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p13_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p13_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p13_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p13_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p13_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p13_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p13_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p13_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p13_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p14",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p14",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p14_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p15",
+          "t_astral_portal_inactive_r1c2_p15",
+          "t_astral_portal_ruined_r1c2_p15"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p14_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p14_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p14_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p14_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p14_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p14_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p14_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p14_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p14_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p15",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p15",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p15_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p16",
+          "t_astral_portal_inactive_r1c2_p16",
+          "t_astral_portal_ruined_r1c2_p16"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p15_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p15_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p15_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p15_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p15_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p15_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p15_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p15_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p16",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p16",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p16_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p17",
+          "t_astral_portal_inactive_r1c2_p17",
+          "t_astral_portal_ruined_r1c2_p17"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p16_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p16_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p16_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p16_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p16_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p16_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p16_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p17",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p17",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p17_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p18",
+          "t_astral_portal_inactive_r1c2_p18",
+          "t_astral_portal_ruined_r1c2_p18"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p17_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p17_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p17_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p17_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p17_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p17_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p18",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p18",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p18_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p19",
+          "t_astral_portal_inactive_r1c2_p19",
+          "t_astral_portal_ruined_r1c2_p19"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p18_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p18_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p18_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p18_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p18_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p19",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p19",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p19_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p20",
+          "t_astral_portal_inactive_r1c2_p20",
+          "t_astral_portal_ruined_r1c2_p20"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p19_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p19_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p19_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p19_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p20",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p20",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p20_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p21",
+          "t_astral_portal_inactive_r1c2_p21",
+          "t_astral_portal_ruined_r1c2_p21"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p20_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p20_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p20_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p21",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p21",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p21_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p22",
+          "t_astral_portal_inactive_r1c2_p22",
+          "t_astral_portal_ruined_r1c2_p22"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p21_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p21_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p22",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p22",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p22_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p23",
+          "t_astral_portal_inactive_r1c2_p23",
+          "t_astral_portal_ruined_r1c2_p23"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p22_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p23",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p23",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
+      },
+      {
+        "result": "t_astral_portal_p23_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2_p24",
+          "t_astral_portal_inactive_r1c2_p24",
+          "t_astral_portal_ruined_r1c2_p24"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_bind_p24",
+    "terrain": [
+      {
+        "result": "t_astral_portal_active_r1c2_p24",
+        "valid_terrain": [
+          "t_astral_portal_active_r1c2"
+        ]
       }
     ]
   }

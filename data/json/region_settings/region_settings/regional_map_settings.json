@@ -362,6 +362,21 @@
   {
     "type": "region_settings_city",
     "id": "default",
+    "//": "required_buildings (Astral): every town gets one guild building, sized by the town: waystation 2-3, outpost 4-6, lodge 7-10, hall 11-15, chapterhouse 16+.",
+    "required_buildings": [
+      {
+        "id": "astral_guild",
+        "buildings": [
+          "astral_guild_waystation",
+          "astral_guild_outpost",
+          "astral_guild_lodge",
+          "astral_guild_hall",
+          "astral_guild_chapterhouse"
+        ],
+        "max_distance": 60,
+        "chance": 100
+      }
+    ],
     "city_size": 8,
     "city_spacing": 4,
     "shop_radius": 30,

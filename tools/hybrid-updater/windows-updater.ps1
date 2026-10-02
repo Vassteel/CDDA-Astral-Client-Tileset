@@ -361,7 +361,7 @@ function Invoke-GuiUpdate([string]$Client, [string]$State) {
         return
     }
     if ($release.full_download_required) {
-        $answer = Show-Message "Astral Client $new includes new game data or libraries and must be downloaded in full.`n`nExtract it to a new folder, then copy your save and config folders across.`n`nOpen the download page?" 'YesNo'
+        $answer = Show-Message "Astral Client $new includes new game data or libraries and must be downloaded in full.`n`nExtract it to a new folder. Read the release notes for new-world requirements; keep old saves backed up.`n`nBug reports: https://discord.gg/CPRt9u3pXe - #bug-reports`n`nOpen the download page?" 'YesNo'
         if ($answer -eq 'Yes' -and $release.url -match '^https://github\.com/') { Start-Process $release.url }
         return
     }

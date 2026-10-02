@@ -10,7 +10,7 @@ Project Astral is an independent fork of **Cataclysm: Dark Days Ahead**, bringin
 
 Its longer-term direction is **isekai and portal fantasy**: expeditions into persistent pocket worlds, layered dungeons with cores to confront, and overworld guild settlements shaped by what adventurers discover and bring home.
 
-**The client and tileset below are available now. The portal worlds and guild systems are still concepts, not features in the current downloads.**
+**This playtest adds Portal Delver starts, persistent portal pockets, four biomes and guild buildings. New world required (region data changed). Art and placement are still work in progress.**
 
 [Download](#astral-downloads) · [Current features](#current-astral-features) · [Development previews](#in-development) · [Future direction](#the-portal-fantasy-direction) · [Controls & updater guide](doc/hybrid/README.md)
 
@@ -20,14 +20,21 @@ The client and artwork are **separate downloads**. You can use the client with o
 
 | Download | What you get |
 | --- | --- |
-| **[Astral Client 0.1.2](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/client-v0.1.2)** | Full clients for **Linux / SteamOS** and **Windows x64**, with launchers and updaters. |
-| **[Astral Tileset 0.1.25](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/tileset-v0.1.25)** | Standalone Astral artwork, seasonal trees and plants, shield sprites, and an included **UltiCa fallback**. |
+| **[Astral Client 0.1.6](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/client-v0.1.6)** | Full clients for **Linux / SteamOS** and **Windows x64**, with launchers and updaters. |
+| **[Astral Tileset 0.1.46](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases/tag/tileset-v0.1.46)** | Standalone Astral artwork, seasonal trees and plants, shield sprites, and an included **UltiCa fallback**. |
 
-For Client 0.1.2, download the **full client** for your platform; this release includes game-data changes. Extract into a new folder and copy your saves and settings while the game is closed. To add the tileset, extract its `gfx/Astral` folder into your game installation and select **Astral** in Graphics.
+For Client 0.1.6, download the **full client** for your platform; this release includes game-data changes. Extract into a new folder. Keep old saves backed up; start a new world for the changed region data. Settings can be copied while the game is closed. To add the tileset, extract its `gfx/Astral` folder into your game installation and select **Astral** in Graphics.
 
 [All releases and checksums](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases) · [Installation, updates and rollback](doc/hybrid/README.md#client-updates)
 
 ## Current Astral features
+
+### Portal and world-generation playtest
+
+Portal Delvers can explore persistent pocket worlds with meadow, drowned-lowland, fungal and root-country biomes. Biome layers and 85% dominant-biome mixing shape the routes, with rivers, lakes, dirt paths and a water-heavy second floor. Followers can travel through gateways and back. Town generation includes guild buildings and service-shop layouts; full guild services and contracts remain future work.
+
+Biome and guild artwork still use placeholder fallbacks; some gateway-related ids also fall back to existing art. Water and path placement are first-pass. Test a Delver start, take a follower through and back, find a guild building in a size-11-or-larger town, and walk for a day on floor 1. Report empty stretches and whether floor 2 has too much or too little water.
+
 
 ### Mouse-friendly controls, with familiar keyboard bindings
 
@@ -110,7 +117,7 @@ These items are **design plans**, separate from the development features above:
 
 ## The portal-fantasy direction
 
-**Concept stage — not implemented, with no release date announced.** This is the direction being explored for Project Astral, rather than a fixed feature list or development order.
+**Future direction beyond the current pocket-world and guild-building playtest.** This is the direction being explored for Project Astral, rather than a fixed feature list or development order.
 
 The ambition is to build on survival, crafting, and exploration with places worth learning about, returning to, and changing. Modern equipment, magical knowledge, unfamiliar materials, and relationships could all become ways to progress.
 
@@ -118,7 +125,7 @@ The ambition is to build on survival, crafting, and exploration with places wort
 
 Enter a portal from the overworld and discover a smaller, persistent world. A dungeon's layers could include forests, flooded settlements, caverns, ruins, or other environments, each with its own resources, hazards, inhabitants, and routes deeper inside.
 
-Expeditions would build on earlier visits: knowledge of a safe passage, supplies left at a camp, a negotiated agreement, or a newly understood threat. World sizes and the underlying travel system are still undecided.
+Expeditions would build on earlier visits: knowledge of a safe passage, supplies left at a camp, a negotiated agreement, or a newly understood threat. The current playtest establishes pocket persistence and return travel; richer expedition systems remain planned.
 
 ### A core worth making a decision about
 
@@ -148,7 +155,7 @@ Overworld guild settlements could connect exploration to five ongoing activities
   <img src="doc/astral/readme/guild-expedition-loop.svg" alt="Proposed gameplay loop: guild records and contracts lead to expedition preparation, portal exploration and discoveries, which return to improve guild facilities and relations" width="1000">
 </p>
 
-*A proposed gameplay loop. Guilds and portal expeditions are not in the current release.*
+*A proposed full guild gameplay loop. Portal travel and guild-building layouts are in the playtest; contracts, services and progression remain in development.*
 
 A scout, crafter, healer, or negotiator could make a meaningful contribution without conquering every dungeon. A recovered plant might support the infirmary; a rediscovered technique might expand the workshop; an agreement with a core might open a lasting trade route.
 
@@ -159,6 +166,8 @@ The goal is to give settlements recognizable layouts, useful facilities, and a r
 Believable NPC behavior, dependable companions, settlement generation, coherent lore, and new artwork are substantial development challenges. These systems will need to be proven in playable examples before the setting can expand broadly.
 
 ## Follow the project
+
+Join [Project Astral on Discord](https://discord.gg/CPRt9u3pXe). Report bugs in **#bug-reports** with your build hash, platform, mods and reproduction steps.
 
 - **[Releases](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases):** published clients and standalone tilesets.
 - **[Astral issues](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/issues):** report Astral-specific bugs or suggest improvements. For bugs, include your client/tileset versions, platform, mods, and steps to reproduce.
@@ -254,8 +263,8 @@ https://github.com/CleverRaven/Cataclysm-DDA
 IRC:
 `#CataclysmDDA` on [Libera Chat](https://libera.chat), https://web.libera.chat/#CataclysmDDA
 
-Official Discord:
-https://discord.gg/jFEc7Yp
+Project Astral Discord (bug reports: **#bug-reports**):
+https://discord.gg/CPRt9u3pXe
 
 ## Frequently Asked Questions
 

@@ -1,0 +1,115 @@
+[
+  {
+    "type": "overmap_location",
+    "id": "astral_open",
+    "//": "Open biome ground in pocket worlds, for paths and specials.",
+    "terrains": [ "astral_microworld_grounds", "astral_lowland", "astral_fungal", "astral_rootland" ]
+  },
+  { "type": "overmap_location", "id": "astral_path", "terrains": [ "astral_path" ] },
+  {
+    "type": "overmap_terrain",
+    "id": "astral_path",
+    "name": "dirt path",
+    "sym": ".",
+    "color": "brown",
+    "see_cost": "low",
+    "travel_cost_type": "trail",
+    "looks_like": "forest_trail",
+    "flags": [ "LINEAR", "REQUIRES_PREDECESSOR" ],
+    "//": "Linear dirt path drawn over whatever biome it crosses (REQUIRES_PREDECESSOR), using the vanilla forest-trail chunks."
+  },
+  {
+    "type": "overmap_connection",
+    "id": "astral_path",
+    "//": "Pocket-world roads: dirt paths over any biome, vanilla bridges over rivers.",
+    "subtypes": [
+      { "terrain": "astral_path", "locations": [ "astral_path" ], "basic_cost": 0, "flags": [ "ORTHOGONAL" ] },
+      { "terrain": "astral_path", "locations": [ "astral_open" ], "basic_cost": 5 },
+      { "terrain": "astral_path", "locations": [ "field" ], "basic_cost": 5 },
+      { "terrain": "astral_path", "locations": [ "forest" ], "basic_cost": 20 },
+      { "terrain": "astral_path", "locations": [ "swamp" ], "basic_cost": 40 },
+      { "terrain": "bridge", "locations": [ "water" ], "basic_cost": 120, "flags": [ "ORTHOGONAL" ] },
+      { "terrain": "bridgehead_ground", "locations": [ "water" ], "basic_cost": 120, "flags": [ "ORTHOGONAL" ] }
+    ]
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": "astral_path_straight",
+    "object": {
+      "fallback_predecessor_mapgen": "astral_microworld_grounds",
+      "place_nested": [ { "chunks": [ "24x24_forest_trail_straight_forest" ], "x": 0, "y": 0 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": "astral_path_curved",
+    "object": {
+      "fallback_predecessor_mapgen": "astral_microworld_grounds",
+      "place_nested": [
+        {
+          "chunks": [
+            [ "24x24_forest_trail_curved_basic", 1 ],
+            [ "24x24_forest_trail_curved_shrubs", 1 ],
+            [ "24x24_forest_trail_curved_diag", 2 ]
+          ],
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": "astral_path_tee",
+    "object": {
+      "fallback_predecessor_mapgen": "astral_microworld_grounds",
+      "place_nested": [
+        {
+          "chunks": [
+            [ "24x24_forest_trail_tee_basic", 2 ],
+            [ "24x24_forest_trail_tee_split", 3 ],
+            [ "24x24_forest_trail_intersection", 1 ]
+          ],
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": "astral_path_four_way",
+    "object": {
+      "fallback_predecessor_mapgen": "astral_microworld_grounds",
+      "place_nested": [
+        {
+          "chunks": [
+            [ "24x24_forest_trail_four_way_basic", 1 ],
+            [ "24x24_forest_trail_four_way_high_low", 1 ],
+            [ "24x24_forest_trail_intersection", 1 ]
+          ],
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": "astral_path_end",
+    "object": {
+      "fallback_predecessor_mapgen": "astral_microworld_grounds",
+      "place_nested": [
+        {
+          "chunks": [
+            [ "24x24_forest_trail_end_basic", 3 ],
+            [ "24x24_forest_trail_end_spread", 3 ],
+            [ "24x24_forest_trail_end_split", 3 ]
+          ],
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  }
+]

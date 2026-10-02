@@ -9,7 +9,11 @@
     "looks_like": "t_rock",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND", "NO_SCENT" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND",
+      "NO_SCENT"
+    ]
   },
   {
     "type": "terrain",
@@ -21,7 +25,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -33,7 +40,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -45,7 +55,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -57,7 +70,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -69,7 +85,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -81,7 +100,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -93,7 +115,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -104,8 +129,16 @@
     "color": "light_blue",
     "looks_like": "t_floor_blue",
     "move_cost": 2,
-    "flags": [ "FLAT", "NOITEM" ],
-    "examine_action": { "type": "effect_on_condition", "effect_on_conditions": [ "EOC_ASTRAL_PORTAL_THRESHOLD" ] }
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD"
+      ]
+    }
   },
   {
     "type": "terrain",
@@ -117,7 +150,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -129,7 +165,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -141,7 +180,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -152,7 +194,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -163,7 +209,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -174,7 +224,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -186,7 +240,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -197,7 +254,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -208,7 +269,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -219,7 +284,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -230,7 +299,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -241,7 +314,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -252,7 +329,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -263,7 +344,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -274,7 +359,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -285,7 +374,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -296,7 +389,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -308,7 +405,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -320,7 +420,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -332,7 +435,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -344,7 +450,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -356,7 +465,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -368,7 +480,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -380,7 +495,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -391,8 +509,16 @@
     "color": "dark_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT" ],
-    "examine_action": { "type": "effect_on_condition", "effect_on_conditions": [ "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT" ] }
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    }
   },
   {
     "type": "terrain",
@@ -404,7 +530,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -416,7 +545,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -428,7 +560,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -439,7 +574,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -450,7 +589,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -461,7 +604,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -473,7 +620,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -484,7 +634,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -495,7 +649,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -506,7 +664,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -517,7 +679,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -528,7 +694,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -539,7 +709,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -550,7 +724,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -561,7 +739,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -572,7 +754,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -583,7 +769,11 @@
     "color": "light_gray",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -595,7 +785,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -607,7 +800,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -619,7 +815,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -631,7 +830,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -643,7 +845,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -655,7 +860,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -667,7 +875,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -678,8 +889,16 @@
     "color": "brown",
     "looks_like": "t_pavement",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "FLAT" ],
-    "examine_action": { "type": "effect_on_condition", "effect_on_conditions": [ "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED" ] }
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    }
   },
   {
     "type": "terrain",
@@ -691,7 +910,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -703,7 +925,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -715,7 +940,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -726,7 +954,11 @@
     "color": "brown",
     "looks_like": "t_pavement",
     "move_cost": 3,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -737,7 +969,11 @@
     "color": "brown",
     "looks_like": "t_pavement",
     "move_cost": 3,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -748,7 +984,11 @@
     "color": "brown",
     "looks_like": "t_pavement",
     "move_cost": 3,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -760,7 +1000,10 @@
     "looks_like": "t_rock_wall",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "BLOCK_WIND" ]
+    "flags": [
+      "NOITEM",
+      "BLOCK_WIND"
+    ]
   },
   {
     "type": "terrain",
@@ -771,7 +1014,11 @@
     "color": "brown",
     "looks_like": "t_pavement",
     "move_cost": 3,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -782,7 +1029,11 @@
     "color": "brown",
     "looks_like": "t_pavement",
     "move_cost": 3,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -793,7 +1044,11 @@
     "color": "brown",
     "looks_like": "t_pavement",
     "move_cost": 3,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -804,7 +1059,11 @@
     "color": "brown",
     "looks_like": "t_pavement",
     "move_cost": 3,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -815,7 +1074,11 @@
     "color": "brown",
     "looks_like": "t_pavement",
     "move_cost": 3,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -826,7 +1089,11 @@
     "color": "brown",
     "looks_like": "t_pavement",
     "move_cost": 3,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -837,7 +1104,11 @@
     "color": "brown",
     "looks_like": "t_pavement",
     "move_cost": 3,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -848,7 +1119,11 @@
     "color": "brown",
     "looks_like": "t_pavement",
     "move_cost": 3,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -859,7 +1134,11 @@
     "color": "brown",
     "looks_like": "t_pavement",
     "move_cost": 3,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
   },
   {
     "type": "terrain",
@@ -870,6 +1149,1522 @@
     "color": "brown",
     "looks_like": "t_pavement",
     "move_cost": 3,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ]
+    "flags": [
+      "TRANSPARENT",
+      "FLAT",
+      "ROAD"
+    ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p01",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P01"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_01."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p01",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_01."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p01",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_01."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p02",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P02"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_02."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p02",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_02."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p02",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_02."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p03",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P03"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_03."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p03",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_03."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p03",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_03."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p04",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P04"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_04."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p04",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_04."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p04",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_04."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p05",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P05"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_05."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p05",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_05."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p05",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_05."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p06",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P06"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_06."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p06",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_06."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p06",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_06."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p07",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P07"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_07."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p07",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_07."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p07",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_07."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p08",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P08"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_08."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p08",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_08."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p08",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_08."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p09",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P09"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_09."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p09",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_09."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p09",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_09."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p10",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P10"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_10."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p10",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_10."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p10",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_10."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p11",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P11"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_11."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p11",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_11."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p11",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_11."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p12",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P12"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_12."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p12",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_12."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p12",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_12."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p13",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P13"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_13."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p13",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_13."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p13",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_13."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p14",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P14"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_14."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p14",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_14."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p14",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_14."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p15",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P15"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_15."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p15",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_15."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p15",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_15."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p16",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P16"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_16."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p16",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_16."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p16",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_16."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p17",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P17"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_17."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p17",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_17."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p17",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_17."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p18",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P18"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_18."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p18",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_18."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p18",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_18."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p19",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P19"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_19."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p19",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_19."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p19",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_19."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p20",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P20"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_20."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p20",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_20."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p20",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_20."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p21",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P21"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_21."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p21",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_21."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p21",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_21."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p22",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P22"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_22."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p22",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_22."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p22",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_22."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p23",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P23"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_23."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p23",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_23."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p23",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_23."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_active_r1c2_p24",
+    "name": "gateway threshold",
+    "description": "A continuous upright membrane of deep blue-black light hangs inside the arch, its edge a narrow seam of silver-blue.  Slow ripples cross it like disturbed water held vertically.  It gives no hint of what lies on the other side.",
+    "symbol": "0",
+    "color": "light_blue",
+    "looks_like": "t_floor_blue",
+    "move_cost": 2,
+    "flags": [
+      "FLAT",
+      "NOITEM"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_THRESHOLD_P24"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_24."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_inactive_r1c2_p24",
+    "name": "dormant gateway",
+    "description": "The arch stands empty.  You can see straight through to the far side of the platform.  The inner ring of runes is dark, and the air within the opening feels faintly cold.",
+    "symbol": "0",
+    "color": "dark_gray",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_DORMANT"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_24."
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_portal_ruined_r1c2_p24",
+    "name": "collapsed gateway",
+    "description": "Only the footing of the arch remains here, buried under fallen blocks.  A cracked keystone carved with a four-pointed star lies face up among the rubble.",
+    "symbol": "0",
+    "color": "brown",
+    "looks_like": "t_pavement",
+    "move_cost": 2,
+    "flags": [
+      "TRANSPARENT",
+      "FLAT"
+    ],
+    "examine_action": {
+      "type": "effect_on_condition",
+      "effect_on_conditions": [
+        "EOC_ASTRAL_PORTAL_THRESHOLD_RUINED"
+      ]
+    },
+    "//": "Threshold bound to astral_pocket_24."
   }
 ]

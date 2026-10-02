@@ -978,6 +978,12 @@ void overmap::generate( const std::vector<const overmap *> &neighbor_overmaps,
     if( settings->overmap_forest && settings->place_swamps ) {
         place_swamps();
     }
+    if( !settings->biome_layers.empty() ) {
+        place_biome_layers();
+    }
+    if( settings->biome_mix.enabled() ) {
+        place_biome_mix();
+    }
     if( settings->overmap_ravine ) {
         place_ravines();
     }
@@ -2074,6 +2080,193 @@ void overmap::place_forests()
     }
 }
 
+void overmap::place_biome_layers()
+{
+    const oter_id default_oter_id( settings->default_oter[OVERMAP_DEPTH] );
+    for( const overmap_biome_layer_id &layer_id : settings->biome_layers ) {
+        if( !layer_id.is_valid() ) {
+            continue;
+        }
+        const overmap_biome_layer &layer = layer_id.obj();
+        if( layer.terrains.empty() ) {
+            continue;
+        }
+        std::vector<oter_id> eligible;
+        eligible.reserve( layer.replaces.size() );
+        for( const oter_str_id &ot : layer.replaces ) {
+            eligible.emplace_back( ot.id() );
+        }
+        std::vector<std::pair<float, oter_id>> bands;
+        bands.reserve( layer.terrains.size() );
+        for( const auto &band : layer.terrains ) {
+            bands.emplace_back( band.first, band.second.id() );
+        }
+        const float adjust = layer.use_forestosity ? forest_size_adjust : 0.0f;
+        // The seed is the noise's third axis, scaled like x and y: neighbouring
+        // seeds give nearly the same pattern, so each offset step jumps far.
+        const om_noise::om_noise_layer_biome noise( global_base_point(),
+                g->get_seed() + static_cast<unsigned>( layer.seed_offset ) * 997u, layer );
+
+        for( int x = 0; x < OMAPX; x++ ) {
+            for( int y = 0; y < OMAPY; y++ ) {
+                const tripoint_om_omt p( x, y, 0 );
+                const oter_id &current = ter( p );
+                const bool may_replace = eligible.empty() ? current == default_oter_id :
+                                         std::find( eligible.begin(), eligible.end(), current ) != eligible.end();
+                if( !may_replace ) {
+                    continue;
+                }
+                const float n = noise.noise_at( p.xy() ) + adjust;
+                // Bands are sorted highest threshold first.
+                for( const std::pair<float, oter_id> &band : bands ) {
+                    if( n > band.first ) {
+                        ter_set( p, band.second );
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void overmap::place_biome_mix()
+{
+    const region_biome_mix &mix = settings->biome_mix;
+    if( !mix.enabled() ) {
+        return;
+    }
+    // One intruding region, with everything needed to say what it would have
+    // generated on a given tile.
+    struct intruder {
+        const region_settings *region = nullptr;
+        int weight = 0;
+        oter_id default_oter;
+        std::vector<std::pair<const overmap_biome_layer *, om_noise::om_noise_layer_biome>> layers;
+    };
+    std::vector<intruder> intruders;
+    int total_weight = 0;
+    for( const region_biome_mix_entry &e : mix.regions ) {
+        if( !e.region.is_valid() || e.region == settings->id || e.weight <= 0 ) {
+            continue;
+        }
+        intruder in;
+        in.region = &e.region.obj();
+        in.weight = e.weight;
+        in.default_oter = oter_id( in.region->default_oter[OVERMAP_DEPTH] );
+        for( const overmap_biome_layer_id &layer_id : in.region->biome_layers ) {
+            if( !layer_id.is_valid() || layer_id->terrains.empty() ) {
+                continue;
+            }
+            const overmap_biome_layer &layer = layer_id.obj();
+            in.layers.emplace_back( &layer, om_noise::om_noise_layer_biome( global_base_point(),
+                                    g->get_seed() + static_cast<unsigned>( layer.seed_offset ) * 997u, layer ) );
+        }
+        total_weight += in.weight;
+        intruders.push_back( std::move( in ) );
+    }
+    if( intruders.empty() || total_weight <= 0 ) {
+        return;
+    }
+
+    // Smooth, broad noise: one layer decides *where* the intrusions are, a second
+    // (independent) one decides *which* region each patch belongs to.
+    overmap_biome_layer shape;
+    shape.scale = mix.scale;
+    shape.power = 1.0f;
+    shape.detail_weight = 0.0f;
+    shape.follow_forest_clumping = false;
+    const unsigned seed = g->get_seed() + static_cast<unsigned>( mix.seed_offset ) * 997u;
+    const om_noise::om_noise_layer_biome where( global_base_point(), seed, shape );
+    const om_noise::om_noise_layer_biome which( global_base_point(), seed + 7919u * 997u, shape );
+
+    struct cell {
+        point_om_omt p;
+        float where_v;
+        float which_v;
+    };
+    std::vector<cell> land;
+    land.reserve( OMAPX * OMAPY );
+    for( int x = 0; x < OMAPX; x++ ) {
+        for( int y = 0; y < OMAPY; y++ ) {
+            const tripoint_om_omt p( x, y, 0 );
+            if( is_water_body( ter( p ) ) ) {
+                continue;
+            }
+            land.push_back( { p.xy(), where.noise_at( p.xy() ), which.noise_at( p.xy() ) } );
+        }
+    }
+    const size_t n_mix = static_cast<size_t>( std::lround( land.size() * ( 1.0 - mix.dominant_share ) ) );
+    if( n_mix == 0 || land.empty() ) {
+        return;
+    }
+    // The threshold is the quantile, so the mixed share is exact whatever the
+    // noise distribution looks like on this overmap.
+    std::nth_element( land.begin(), land.begin() + std::min( n_mix, land.size() - 1 ), land.end(),
+    []( const cell & a, const cell & b ) {
+        return a.where_v > b.where_v;
+    } );
+    land.resize( std::min( n_mix, land.size() ) );
+    // Deal the mixed tiles to the intruding regions by weight along the second
+    // noise axis: contiguous bands of noise become contiguous patches on the map.
+    std::sort( land.begin(), land.end(), []( const cell & a, const cell & b ) {
+        return a.which_v < b.which_v;
+    } );
+
+    const om_noise::om_noise_layer_forest forest_noise( global_base_point(), g->get_seed() );
+    const om_noise::om_noise_layer_floodplain swamp_noise( global_base_point(), g->get_seed() );
+
+    const auto paint = [&]( const point_om_omt & p, const intruder & in ) {
+        oter_id result = in.default_oter;
+        if( in.region->overmap_forest.has_value() ) {
+            const region_settings_forest &f = in.region->get_settings_forest();
+            const float n = forest_noise.noise_at( p ) + forest_size_adjust;
+            if( n > f.noise_threshold_forest_thick ) {
+                result = oter_forest_thick.id();
+            } else if( n > f.noise_threshold_forest ) {
+                result = oter_forest.id();
+            }
+            if( result != in.default_oter && in.region->place_swamps &&
+                swamp_noise.noise_at( p ) > f.noise_threshold_swamp_isolated ) {
+                result = oter_forest_water.id();
+            }
+        }
+        for( const auto &entry : in.layers ) {
+            const overmap_biome_layer &layer = *entry.first;
+            bool may_replace;
+            if( layer.replaces.empty() ) {
+                may_replace = result == in.default_oter;
+            } else {
+                may_replace = std::any_of( layer.replaces.begin(), layer.replaces.end(),
+                [&]( const oter_str_id & ot ) {
+                    return ot.id() == result;
+                } );
+            }
+            if( !may_replace ) {
+                continue;
+            }
+            const float n = entry.second.noise_at( p ) + ( layer.use_forestosity ? forest_size_adjust : 0.0f );
+            for( const auto &band : layer.terrains ) {
+                if( n > band.first ) {
+                    result = band.second.id();
+                    break;
+                }
+            }
+        }
+        ter_set( tripoint_om_omt( p, 0 ), result );
+    };
+
+    size_t start = 0;
+    for( size_t i = 0; i < intruders.size(); i++ ) {
+        const intruder &in = intruders[i];
+        const size_t count = i + 1 == intruders.size() ? land.size() - start :
+                             land.size() * in.weight / total_weight;
+        for( size_t j = start; j < start + count && j < land.size(); j++ ) {
+            paint( land[j].p, in );
+        }
+        start += count;
+    }
+}
+
 bool overmap::omt_lake_noise_threshold( const point_abs_omt &origin, const point_om_omt &offset,
                                         const double noise_threshold )
 {
@@ -2169,7 +2362,7 @@ void overmap::place_roads( const std::vector<const overmap *> &neighbor_overmaps
 {
     int op_city_size = settings->get_settings_city().city_size;
     const float road_density = worldgen_options::get().road_density;
-    if( op_city_size <= 0 || road_density <= 0.f ) {
+    if( ( op_city_size <= 0 && !settings->roads_without_cities ) || road_density <= 0.f ) {
         return;
     }
     const overmap_connection_id &overmap_connection_inter_city_road =

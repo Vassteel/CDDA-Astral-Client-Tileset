@@ -49,6 +49,23 @@ class building_bin
         weighted_int_list<overmap_special_id> buildings;
 };
 
+/**
+ * A building every town should have once (a guild hall, a temple, a well).
+ * The first listed special whose city_sizes fit the town is used, so size
+ * bands give bigger towns a bigger version.  Placed on the first free lot
+ * within max_distance while the streets grow; if none is free, a final pass
+ * tries every lot along the town's streets.  Towns roll `chance` once.
+ */
+struct city_required_building {
+    std::string id;
+    std::vector<overmap_special_id> buildings;
+    // Lot distance from the centre in percent of the town's size, like shop_radius.
+    int max_distance = 100;
+    // Percent of towns that get it.
+    int chance = 100;
+    void deserialize( const JsonObject &jo );
+};
+
 struct region_settings_city {
     region_settings_city_id id = region_settings_city_id::NULL_ID();
 
@@ -70,6 +87,9 @@ struct region_settings_city {
     building_bin houses;
     building_bin shops;
     building_bin parks;
+
+    // Buildings each town gets once (see city_required_building).
+    std::vector<city_required_building> required_buildings;
 
     overmap_special_id pick_house() const {
         return houses.pick();
@@ -312,6 +332,52 @@ struct region_settings_ocean {
     region_settings_ocean() = default;
 };
 
+/**
+ * A noise-shaped biome painted onto the overmap, the way vanilla paints forests
+ * and swamps over fields.  Each layer samples its own simplex noise (vanilla
+ * forest noise by default, decorrelated by seed_offset) and, where the noise
+ * passes a band's threshold, replaces eligible overmap terrain with that band's
+ * terrain.  Layers run in the order a region lists them, after vanilla forests
+ * and swamps, so a later layer can grow inside an earlier one (like swamps in
+ * forests).  Pair the terrains with `"mapgen": [ { "builtin": "forest" } ]` and
+ * a forest_biome_mapgen to get the vanilla forest look with themed contents.
+ */
+struct overmap_biome_layer {
+    overmap_biome_layer_id id = overmap_biome_layer_id::NULL_ID();
+
+    // Decorrelates layers: 0 follows vanilla forest noise exactly; give every
+    // layer that should form its own patches a different non-zero offset.
+    int seed_offset = 0;
+    // Broad shape (defaults reproduce om_noise_layer_forest).
+    int octaves = 4;
+    float persistence = 0.5f;
+    float scale = 0.03f;
+    float power = 2.0f;
+    // Fine detail subtracted from the broad shape (breaks up blobs).
+    int detail_octaves = 6;
+    float detail_scale = 0.07f;
+    float detail_power = 3.0f;
+    float detail_weight = 0.5f;
+    // Stretch the noise with the world's forest clumping option.
+    bool follow_forest_clumping = true;
+    // Add the overmap's forestosity (forest_increase drift) to the noise.
+    bool use_forestosity = false;
+
+    // Overmap terrain this layer may replace; empty = the region's z0 default_oter.
+    std::vector<oter_str_id> replaces;
+    // Threshold bands, highest threshold first after finalize: noise above
+    // threshold -> terrain.  Like forest / forest_thick at 0.25 / 0.3.
+    std::vector<std::pair<float, oter_str_id>> terrains;
+
+    bool was_loaded = false;
+    void load( const JsonObject &jo, std::string_view );
+    void finalize();
+    void check() const;
+    static void load_overmap_biome_layer( const JsonObject &jo, const std::string &src );
+    static void reset();
+    overmap_biome_layer() = default;
+};
+
 struct region_settings_ravine {
     region_settings_ravine_id id = region_settings_ravine_id::NULL_ID();
 
@@ -453,6 +519,34 @@ struct region_terrain_furniture {
     static void reset();
 };
 
+/**
+ * Dominant-biome mixing.  A region whose land should read as "mostly this
+ * biome": a noise mask selects (1 - dominant_share) of the overmap's land
+ * tiles, and on those tiles the terrain is what another region (weighted pick,
+ * contiguous patches) would have generated there: its default terrain, its
+ * forest / swamp thresholds and its biome layers.  Water bodies are left alone.
+ */
+struct region_biome_mix_entry {
+    region_settings_id region;
+    int weight = 1;
+};
+
+struct region_biome_mix {
+    // Share of land kept by the region itself; 1.0 (the default) turns mixing off.
+    float dominant_share = 1.0f;
+    // Decorrelates the mask from forests and biome layers.
+    int seed_offset = 7;
+    // Broad scale of the mask noise: smaller = larger patches.
+    float scale = 0.02f;
+    std::vector<region_biome_mix_entry> regions;
+
+    bool enabled() const {
+        return dominant_share < 1.0f && !regions.empty();
+    }
+    void load( const JsonObject &jo );
+    void check( const region_settings_id &owner ) const;
+};
+
 /*
  * Spatially relevant overmap and mapgen variables grouped into a set of suggested defaults;
  * eventually region mapping will modify as required and allow for transitions of biomes / demographics in a smooth fashion
@@ -479,6 +573,9 @@ struct region_settings {
 
     bool place_swamps;
     bool place_roads;
+    // Lay the inter-city road network even when the region places no cities
+    // (edge exits and a central junction are connected instead).
+    bool roads_without_cities;
     bool place_railroads;
     bool place_railroads_before_roads;
     bool place_specials;
@@ -492,6 +589,11 @@ struct region_settings {
 
 
     region_settings_map_extras_id region_extras;
+
+    // Noise-painted biome layers, applied in order after forests and swamps.
+    std::vector<overmap_biome_layer_id> biome_layers;
+    // Other regions' land painted over (1 - dominant_share) of this one.
+    region_biome_mix biome_mix;
 
     region_settings() : id( "null" ) {
         default_groundcover.add( t_null, 0 );

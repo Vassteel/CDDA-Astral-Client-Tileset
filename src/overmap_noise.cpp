@@ -2,6 +2,7 @@
 #include <algorithm>
 
 #include "overmap_noise.h"
+#include "regional_settings.h"
 #include "worldgen_options.h"
 #include "simplexnoise.h"
 
@@ -21,6 +22,23 @@ float om_noise_layer_forest::noise_at( const point_om_omt &local_omt_pos ) const
     d = std::pow( d, 3.0f );
 
     return std::max( 0.0f, r - d * 0.5f );
+}
+
+float om_noise_layer_biome::noise_at( const point_om_omt &local_omt_pos ) const
+{
+    const point_abs_omt p = global_omt_pos( local_omt_pos );
+    const float clump = layer.follow_forest_clumping ?
+                        std::max( 0.05f, worldgen_options::get().forest_clumping ) : 1.0f;
+    float r = scaled_octave_noise_3d( layer.octaves, layer.persistence, layer.scale / clump, 0, 1,
+                                      p.x(), p.y(), get_seed() );
+    r = std::pow( r, layer.power );
+    if( layer.detail_weight == 0.0f || layer.detail_octaves <= 0 ) {
+        return std::max( 0.0f, r );
+    }
+    float d = scaled_octave_noise_3d( layer.detail_octaves, layer.persistence,
+                                      layer.detail_scale / clump, 0, 1, p.x(), p.y(), get_seed() );
+    d = std::pow( d, layer.detail_power );
+    return std::max( 0.0f, r - d * layer.detail_weight );
 }
 
 float om_noise_layer_floodplain::noise_at( const point_om_omt &local_omt_pos ) const

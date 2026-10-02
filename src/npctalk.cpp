@@ -8353,9 +8353,18 @@ talk_effect_fun_t::func f_travel_to_dimension( const JsonObject &jo, std::string
     std::optional<var_info> target_location;
     optional( jo, false, "target_location", target_location );
 
+    // Absolute position in the destination dimension where the player and the travelling
+    // NPCs arrive.  Without it everybody keeps their coordinates, as before.
+    std::optional<var_info> arrival_location;
+    optional( jo, false, "arrival_location", arrival_location );
+    if( arrival_location && take_vehicle ) {
+        jo.throw_error_at( "arrival_location",
+                           "arrival_location cannot be combined with take_vehicle" );
+    }
 
     return [fail_message, success_message, dimension_prefix, npc_travel_filter, target_location,
-                  npc_travel_radius, item_travel_radius, take_vehicle]( dialogue const & d ) {
+                  npc_travel_radius, item_travel_radius, take_vehicle,
+                  arrival_location]( dialogue const & d ) {
         Creature *teleporter = d.actor( false )->get_creature();
         if( teleporter ) {
             dimension_id prefix( dimension_prefix.evaluate( d ) );
@@ -8407,8 +8416,12 @@ talk_effect_fun_t::func f_travel_to_dimension( const JsonObject &jo, std::string
                     }
                     veh = &vp_here->vehicle();
                 }
+                std::optional<tripoint_abs_ms> arrival;
+                if( arrival_location ) {
+                    arrival = read_var_value( *arrival_location, d ).tripoint();
+                }
                 // returns False if fail
-                if( g->travel_to_dimension( prefix, travellers, items, center, veh ) ) {
+                if( g->travel_to_dimension( prefix, travellers, items, center, veh, arrival ) ) {
                     teleporter->add_msg_if_player( success_message.evaluate( d ) );
                 } else {
                     teleporter->add_msg_if_player( fail_message.evaluate( d ) );

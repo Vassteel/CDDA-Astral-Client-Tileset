@@ -17,6 +17,7 @@ see their info later in this document.
 | `id`                     |                                     | Unique identifier for this region.                                    |
 | `place_swamps`           | boolean                             | Controls whether or not swamps will be placed (requires forests to be placed) |
 | `place_roads`            | boolean                             | Whether or not to generate road connections |
+| `roads_without_cities`   | boolean                             | Lay the inter-city road network (`connections.inter_city_road_connection`) even when the region places no cities: edge exits and a central junction are linked instead. Default false. |
 | `place_railroads`        | boolean                             | Whether or not to generate railroad connections |
 | `place_railroads_before_roads` | boolean                       | Generates railroads before roads if true |
 | `place_specials`         | boolean                             | Controls placement of overmap specials |
@@ -29,6 +30,7 @@ see their info later in this document.
 | `ocean`                  | `region_settings_ocean`             | Defines parameters for generating oceans in the region. `null` to disable. |
 | `ravines`                | `region_settings_ravine`            | Defines parameters for generating ravines in the region. `null` to disable. |
 | `forests`                | `region_settings_forest`            | Defines parameters for generating forests and swamps in the region. `null` to disable forest generation. |
+| `biome_layers`           | array of `overmap_biome_layer`      | Noise-painted biomes applied in order after forests and swamps. Optional; empty by default. |
 | `forest_composition`     | `region_settings_forest_mapgen`     | Defines flora (and "stuff") that cover the `forest` terrain types.    |
 | `forest_trails`          | `region_settings_forest_trail`      | Defines the overmap and local structure of forest trails. `null` to disable. |
 | `highways`               | `region_settings_highway`           | Defines parameters for generating highways in the region. `null` to disable. |
@@ -206,6 +208,95 @@ Two noise functions with values between 0 and 1 are generated over the entire ma
     "noise_threshold_swamp_isolated": 0.6,
     "river_floodplain_buffer_distance_min": 3,
     "river_floodplain_buffer_distance_max": 15
+}
+```
+
+## Overmap Biome Layers
+
+**overmap_biome_layer** paints a noise-shaped biome onto the overmap, the same way vanilla
+paints forests and swamps over fields, but with any overmap terrain. A region lists its layers
+in `biome_layers`; they run in that order after vanilla forests and swamps (whether or not the
+region has `forests`), before ravines, highways and cities.
+
+For every overmap terrain the layer may replace, the layer samples its noise and picks the first
+band whose threshold the noise exceeds (bands are sorted highest first). With its default noise a
+layer reproduces vanilla forest noise exactly, so `[ [ 0.3, "x_thick" ], [ 0.25, "x" ] ]` gives
+the same coverage as forest / forest_thick; one band at 0.25 covers roughly a third of the map.
+
+Layers continue seamlessly across overmap borders because the noise is global, so neighbouring
+regions that share a layer get patches that flow across the border.
+
+To keep the vanilla look, give the painted terrains `"mapgen": [ { "builtin": "forest" } ]` and
+a `forest_biome_mapgen` (in the region's `forest_composition`) listing them in `terrains`:
+trees, groundcover, clutter and the soft fade into neighbouring terrain then work as for forests.
+
+### Fields
+
+| Identifier    | Type                         | Description |
+| ------------- | ---------------------------- | ----------- |
+| `type`        |                              | `"overmap_biome_layer"` |
+| `id`          |                              | Unique id, referenced from `region_settings.biome_layers`. |
+| `terrains`    | array of `[ threshold, oter ]` | Required. Noise above `threshold` becomes that overmap terrain; highest threshold wins. |
+| `replaces`    | array of overmap terrain ids | Terrain this layer may paint over. Empty or absent: the region's z0 `default_oter`. List an earlier layer's terrains to grow a biome inside another (like swamps inside forests). |
+| `seed_offset` | integer                      | 0 follows vanilla forest noise; give each layer that should form its own patches a different non-zero value. |
+| `use_forestosity` | boolean                  | Add the overmap's forest drift (`forest_threshold_increase`) to the noise. Default false. |
+| `noise`       | object                       | Optional shape. `octaves` 4, `persistence` 0.5, `scale` 0.03 (smaller = bigger patches), `power` 2.0, `detail_octaves` 6, `detail_scale` 0.07, `detail_power` 3.0, `detail_weight` 0.5 (0 = smooth blobs), `follow_forest_clumping` true (stretch with the world's forest clumping option). |
+
+### Example
+
+```jsonc
+{
+  "type": "overmap_biome_layer",
+  "id": "astral_layer_bog",
+  "seed_offset": 3,
+  "terrains": [ [ 0.32, "astral_bog_deep" ], [ 0.25, "astral_bog" ] ]
+},
+{
+  "type": "overmap_biome_layer",
+  "id": "astral_layer_bog_pools",
+  "seed_offset": 4,
+  "replaces": [ "astral_bog", "astral_bog_deep" ],
+  "noise": { "scale": 0.06, "detail_weight": 0 },
+  "terrains": [ [ 0.35, "astral_bog_pool" ] ]
+},
+{
+  "type": "region_settings",
+  "id": "astral_floor_fungal",
+  "copy-from": "astral_pocket",
+  "biome_layers": [ "astral_layer_bog", "astral_layer_bog_pools" ]
+}
+```
+
+## Dominant-Biome Mixing
+
+`biome_mix` on a `region_settings` makes the region's land read as "mostly this biome": a share
+of its land tiles is painted with what *other* regions would have generated there.  It runs after
+forests, swamps and biome layers and leaves rivers, lakes and oceans alone.  Two smooth noise
+fields drive it: one picks *where* the intrusions are (thresholded at the exact quantile, so the
+share is met on every overmap), the other picks *which* region each patch belongs to, dealt by
+weight, so each intruding biome forms contiguous patches rather than speckle.  On an intruded
+tile the result is the other region's z0 `default_oter`, then its forest / thick-forest / isolated
+swamp thresholds against the shared forest noise, then its own `biome_layers`.
+
+| Identifier       | Description                                                                         |
+| ---------------- | ----------------------------------------------------------------------------------- |
+| `dominant_share` | Share of land kept by the region itself, 0–1.  `1.0` (default) turns mixing off.    |
+| `regions`        | Array of `[ "<region_settings id>", weight ]`; weight defaults to 1.                 |
+| `seed_offset`    | Decorrelates the mask from forests and biome layers (default 7).                     |
+| `scale`          | Broad noise scale of the mask; smaller means larger patches (default 0.02).          |
+
+A region may list `default` to mix in ordinary overworld plains, forest and swamp.  Listing the
+region itself or an unknown region is reported at load.
+
+```jsonc
+{
+  "type": "region_settings",
+  "id": "astral_biome_lowlands",
+  "copy-from": "astral_pocket",
+  "biome_mix": {
+    "dominant_share": 0.85,
+    "regions": [ [ "default", 3 ], [ "astral_biome_meadows", 2 ], [ "astral_biome_fungal", 1 ] ]
+  }
 }
 ```
 
@@ -456,6 +547,33 @@ relative placements of various classes of buildings.
 | `city_size`            | Required Setting. Size of cities. Larger number = bigger cities. 0 = no cities. Range: 0 - 16   |
 | `city_spacing`         | Space between cities. Larger number = more space between cities. Range: 0 - 8 |
 | `is_megacity`          | Special flag to trigger special map generation. Generates a megacity.         |
+| `required_buildings`   | Buildings each town gets once; see below.                                     |
+
+### Required buildings
+
+`required_buildings` lists buildings every town should have once (a guild hall, a temple, a well),
+on top of the random houses, shops and parks. Each entry:
+
+| Identifier     | Description |
+| -------------- | ----------- |
+| `id`           | Name used in error messages. |
+| `buildings`    | `city_building` / special ids. The first whose `city_sizes` contains the town's size is used, so size bands give bigger towns a bigger version. |
+| `max_distance` | Lots allowed while the streets grow, in percent of the town size from the centre (like `shop_radius`). Default 100. |
+| `chance`       | Percent of towns that get it, rolled once per town. Default 100. |
+
+While a town grows, the first free lot within `max_distance` takes a pending required building
+instead of a random one. If the town finishes without it, a final pass tries every lot along that
+town's streets, nearest the centre first. Towns with nothing listed generate exactly as before.
+
+```jsonc
+"required_buildings": [
+  {
+    "id": "astral_guild",
+    "buildings": [ "astral_guild_outpost", "astral_guild_lodge", "astral_guild_hall" ],
+    "max_distance": 60
+  }
+]
+```
 
 ### Placing shops, parks, and houses
 

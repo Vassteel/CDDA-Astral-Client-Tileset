@@ -7,6 +7,12 @@ Two independent downloads, maintained in one public Cataclysm: Dark Days Ahead f
 
 [Downloads](https://github.com/Vassteel/CDDA-Astral-Client-Tileset/releases)
 
+## Community
+
+[Project Astral Discord](https://discord.gg/CPRt9u3pXe) — bugs go in **#bug-reports**. Include your build hash, platform, mods and steps to reproduce.
+
+Client 0.1.6: **new world required (region data changed)**. Use the full platform download; keep old saves backed up.
+
 ## Client updates
 
 On Linux and SteamOS, run `Update Astral Client.sh` from an extracted client distribution; `Rollback Astral Client.sh` restores the version you had before the last update. They need Python 3 and Zenity or kdialog (SteamOS desktop mode includes both); without either, run them from a terminal for text prompts. Public downloads work without signing in. An authenticated `gh` installation is used only as a fallback, for example when GitHub's anonymous rate limit is reached.

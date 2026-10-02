@@ -227,12 +227,100 @@ void overmap::build_cities()
 
         // Track placed CITY_UNIQUE buildings
         std::unordered_set<overmap_special_id> placed_unique_buildings;
+
+        // Required buildings this town should get (rolled once per town).
+        const region_settings_city &city_spec = settings->get_settings_city();
+        pending_required_buildings.clear();
+        for( size_t i = 0; i < city_spec.required_buildings.size(); ++i ) {
+            const city_required_building &req = city_spec.required_buildings[i];
+            const bool fits = std::any_of( req.buildings.begin(), req.buildings.end(),
+            [&c]( const overmap_special_id & b ) {
+                return b.is_valid() && b->get_constraints().city_size.contains( c.size );
+            } );
+            if( fits && x_in_y( req.chance, 100 ) ) {
+                pending_required_buildings.push_back( i );
+            }
+        }
+
         // place streets in all cardinal directions from central intersection
         do {
             build_city_street( local_road, c.pos, c.size, cur_dir, c, placed_unique_buildings );
         } while( ( cur_dir = om_direction::turn_right( cur_dir ) ) != start_dir );
+
+        // Anything still missing: try every lot along this town's streets,
+        // nearest the centre first, ignoring the distance band.
+        if( !pending_required_buildings.empty() ) {
+            std::vector<tripoint_om_omt> streets;
+            for( const point_om_omt &t : city_tiles ) {
+                const tripoint_om_omt tp( t, 0 );
+                if( trig_dist( t, c.pos ) <= c.size + 1 && local_road.has( ter( tp ) ) ) {
+                    streets.push_back( tp );
+                }
+            }
+            std::sort( streets.begin(), streets.end(), [&c]( const tripoint_om_omt & a,
+            const tripoint_om_omt & b ) {
+                return trig_dist( a.xy(), c.pos ) < trig_dist( b.xy(), c.pos );
+            } );
+            for( const tripoint_om_omt &s : streets ) {
+                if( pending_required_buildings.empty() ) {
+                    break;
+                }
+                for( const om_direction::type dir : om_direction::all ) {
+                    const tripoint_om_omt lot = s + om_direction::displace( dir );
+                    if( !inbounds( lot, 1 ) ) {
+                        continue;
+                    }
+                    if( place_required_building( lot, om_direction::opposite( dir ), c, 0,
+                                                 placed_unique_buildings ) ) {
+                        break;
+                    }
+                }
+            }
+        }
+        pending_required_buildings.clear();
     }
     flood_fill_city_tiles();
+}
+
+bool overmap::place_required_building( const tripoint_om_omt &building_pos,
+                                       om_direction::type building_dir, const city &town, int town_dist,
+                                       std::unordered_set<overmap_special_id> &placed_unique_buildings )
+{
+    const region_settings_city &city_spec = settings->get_settings_city();
+    for( auto it = pending_required_buildings.begin(); it != pending_required_buildings.end(); ++it ) {
+        const city_required_building &req = city_spec.required_buildings[*it];
+        if( town_dist > req.max_distance ) {
+            continue;
+        }
+        for( const overmap_special_id &building_tid : req.buildings ) {
+            if( !building_tid.is_valid() ||
+                !building_tid->get_constraints().city_size.contains( town.size ) ) {
+                continue;
+            }
+            if( building_tid->has_flag( "CITY_UNIQUE" ) &&
+                placed_unique_buildings.count( building_tid ) ) {
+                continue;
+            }
+            if( ( building_tid->has_flag( "GLOBALLY_UNIQUE" ) || building_tid->has_flag( "OVERMAP_UNIQUE" ) ) &&
+                overmap_buffer.contains_unique_special( building_tid ) ) {
+                continue;
+            }
+            if( !can_place_special( *building_tid, building_pos, building_dir, false ) ) {
+                continue;
+            }
+            std::vector<tripoint_om_omt> used_tripoints = place_special( *building_tid, building_pos,
+                    building_dir, town, false, false );
+            for( const tripoint_om_omt &p : used_tripoints ) {
+                city_tiles.insert( p.xy() );
+            }
+            if( building_tid->has_flag( "CITY_UNIQUE" ) ) {
+                placed_unique_buildings.emplace( building_tid );
+            }
+            pending_required_buildings.erase( it );
+            return true;
+        }
+    }
+    return false;
 }
 
 overmap_special_id overmap::pick_random_building_to_place( int town_dist, int town_size,
@@ -291,6 +379,11 @@ void overmap::place_building( const tripoint_om_omt &p, om_direction::type dir, 
     const om_direction::type building_dir = om_direction::opposite( dir );
 
     const int town_dist = ( trig_dist( building_pos.xy(), town.pos ) * 100 ) / std::max( town.size, 1 );
+
+    if( !pending_required_buildings.empty() &&
+        place_required_building( building_pos, building_dir, town, town_dist, placed_unique_buildings ) ) {
+        return;
+    }
 
     for( size_t retries = 10; retries > 0; --retries ) {
         const overmap_special_id building_tid = pick_random_building_to_place( town_dist, town.size,
