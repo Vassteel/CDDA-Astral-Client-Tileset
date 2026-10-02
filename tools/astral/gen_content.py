@@ -170,6 +170,8 @@ MASS_NOUNS = ("glass", "oil", "cloth", "honey", "salt", "resin", "glue", "meat",
 def name_obj(name, kind=None):
     """Spell out a plural only where the engine cannot autogenerate one (name + "s");
     an explicit plural the engine could have guessed is reported as an error."""
+    if name.rstrip().endswith(")"):
+        return {"str_sp": name}
     last = name.split()[-1].lower()
     if any(last.endswith(m) for m in MASS_NOUNS) and kind in (None, "raw", "intermediate", "consumable"):
         return {"str_sp": name}
@@ -285,7 +287,12 @@ def gen_materials():
 PROCESS_WORDS = {
     "seasoned": ("time", "4 h"), "boiled": ("heat", 10), "press": ("quality", "CUT", 1),
     "loom": ("quality", "SEW", 1), "tanning tub": ("quality", "CUT", 1), "saw": ("quality", "SAW_W", 1),
-    "charcoal pit": ("heat", 50), "smelt": ("forge", 2),
+    "charcoal pit": ("heat", 50), "smelt": ("forge", 2), "fire-harden": ("heat", 10), "fire-hardened": ("heat", 10),
+    "tanning": ("quality", "CUT", 1), "smoked": ("heat", 10), "dried": ("time", "2 h"), "cured": ("time", "4 h"),
+    "baked": ("heat", 10), "roasted": ("heat", 10), "brewed": ("heat", 10), "steeped": ("heat", 5),
+    "ground": ("quality", "HAMMER", 1), "woven": ("quality", "SEW", 1), "sewn": ("quality", "SEW", 1),
+    "forge": ("forge", 2), "kiln": ("heat", 50), "fermented": ("time", "4 h"), "rendered": ("heat", 10),
+    "carved": ("quality", "CUT", 1), "spun": ("quality", "SEW", 1), "knapped": ("quality", "HAMMER", 1),
 }
 # vanilla-side names used in sources
 NAME_MAP = {
@@ -294,30 +301,105 @@ NAME_MAP = {
     "flint": ("item", "astral_meadow_starflint", 1),
     "any theme staple": ("alts", ["astral_drowned_eel_meat", "astral_fungal_cap_meat", "astral_meadow_hare_meat", "meat"], 2),
     "leather/hide of any theme": ("alts", ["leather", "astral_fungal_chitin_leather"], 2),
+    "rope": ("req", "cordage", 1), "twine": ("req", "cordage_short", 1), "sinew": ("item", "sinew", 10),
+}
+# last-resort vanilla items for short generic names Grok uses inside a biome
+VANILLA_FALLBACK = {
+    "plank": "2x4", "board": "2x4", "straw": "straw_pile", "thatch": "straw_pile", "pole": "stick_long", "stake": "stick",
+    "dowel": "stick", "stick": "stick", "honey": "honey_bottled", "bone": "bone", "pitch": "pine_resin", "resin": "pine_resin",
+    "willow": "willowbark", "willow bark": "willowbark", "willowbark": "willowbark", "stone": "rock", "stones": "rock",
+    "quarry stone": "rock", "wire": "wire", "oil": "cooking_oil", "flour": "flour", "tinder": "tinder", "torch": "torch",
+    "pemmican": "pemmican", "potato": "potato", "wax": "wax", "tallow": "tallow", "clay pot": "clay_pot",
+    "mud": "material_soil", "nail": "nail", "nail stock": "nail", "pebble": "pebble", "charcoal": "charcoal",
+    "tanbark": "tanbark", "feather": "feather", "feathers": "feather", "salt": "salt", "fibre": "plant_fibre",
+    "fiber": "plant_fibre", "glass": "glass_shard", "scrap": "scrap", "duct tape": "duct_tape", "glue": "glue_weak",
+    "broth": "broth", "broth stock": "broth", "dried fruit": "dry_fruit", "dried berry": "dry_fruit", "apple": "apple",
+    "onion": "onion", "tea": "tea_raw", "acorn": "acorns", "acorns": "acorns", "fat": "fat", "meat": "meat", "fish": "fish",
+    "string": "string_6", "batting": "plant_fibre", "fence post": "stick_long", "haft": "stick", "driftwood": "stick",
+    "flint flake": "sharp_rock", "stalk": "straw_pile", "reed": "straw_pile", "venison": "meat", "sheep": "fat",
 }
 ALIASES = {"verdigris ingot": "verdigris bronze ingot", "glowcap raw": "glowcap", "chitin plate": "cap-beetle chitin",
            "ironwood haft": "ironwood pick haft", "mire-iron": "mire-iron", "glowcap": "glowcap"}
 
 
-def parse_craft(source, name_to_id, errors, rid):
+def _norm(t):
+    return re.sub(r"[^a-z0-9 ]+", " ", t.lower().replace("-", " ")).split()
+
+
+def resolve_ingredient(alt, rid, rows_by_id, name_to_id):
+    """Ingredient text -> list of item ids (alternatives), using the recipe's own biome first.
+    Grok writes short names ('plank', 'sinew', 'any meadow feathers'); match them against
+    item names/ids in the same theme, then all Astral items, then a vanilla fallback."""
+    alt = alt.strip().rstrip("?").strip()
+    if not alt:
+        return []
+    if alt in rows_by_id:
+        return [alt]
+    if alt in name_to_id:
+        return [name_to_id[alt]]
+    if alt.endswith("s") and alt[:-1] in name_to_id:
+        return [name_to_id[alt[:-1]]]
+    any_ = alt.startswith("any ")
+    words = _norm(alt[4:] if any_ else alt)
+    theme = rid.split("_")[1] if rid.count("_") >= 2 else ""
+    if words and words[0] in ("meadow", "fallow", "drowned", "tallgrass", "fungal", "root", "shared"):
+        theme, words = words[0], words[1:]
+    if not words:
+        return []
+    sing = [w[:-1] if w.endswith("s") and len(w) > 3 else w for w in words]
+
+    def match(row):
+        nm = [w[:-1] if w.endswith("s") and len(w) > 3 else w for w in _norm(row["name"])]
+        idw = row["id"].split("_")
+        tail = nm[-len(sing):] == sing or idw[-len(sing):] == sing
+        return tail
+
+    for scope in (lambda r: r["id"].startswith(f"astral_{theme}_"), lambda r: True):
+        cands = [r for r in rows_by_id.values() if scope(r) and match(r) and r["id"] != rid]
+        if cands:
+            cands.sort(key=lambda r: (len(r["name"]), r["id"]))
+            return [c["id"] for c in (cands[:6] if any_ else cands[:1])]
+    key = " ".join(words)
+    if key in VANILLA_FALLBACK and has(VANILLA_FALLBACK[key], "ITEM"):
+        return [VANILLA_FALLBACK[key]]
+    if words[-1] in VANILLA_FALLBACK and has(VANILLA_FALLBACK[words[-1]], "ITEM"):
+        return [VANILLA_FALLBACK[words[-1]]]
+    if has(key.replace(" ", "_"), "ITEM"):
+        return [key.replace(" ", "_")]
+    return []
+
+
+WARNINGS = []
+# Grok's plausible-but-missing vanilla monster ids -> the nearest real one
+BASE_ALIASES = {"mon_centipede": "mon_centipede_small", "mon_vole": "mon_shrew", "mon_mouse": "mon_shrew",
+                "mon_toad": "mon_fowler_toad", "mon_lizard_small": "mon_skink_fivelined", "mon_slug_large": "mon_slug_small",
+                "mon_rat": "mon_black_rat", "mon_cricket": "mon_mole_cricket", "mon_grasshopper": "mon_grasshopper_small",
+                "mon_snake_rattler": "mon_rattlesnake", "mon_fire": "mon_firefly"}
+
+
+def parse_craft(source, name_to_id, errors, rid, rows_by_id=None):
     """'craft: duskiron ore or mire-iron ×2 + emberstone, boiled' ->
     (components [[ [id, n], ... ], ...], processes [...])"""
+    rows_by_id = rows_by_id or {}
     text = source.split("craft:", 1)[1]
     text = text.split("/")[0] if text.strip().startswith("start kit") else text
-    parts = [p.strip() for p in re.split(r"[,+]", text) if p.strip()]
+    text = re.split(r"\s+at\s+|\s+station\s*:", text)[0] if " at " in text else text
+    parts = [p.strip() for p in re.split(r"[,+;]", text) if p.strip()]
     components, processes = [], []
     for part in parts:
-        low = part.lower().strip()
-        key = re.sub(r"\s*×\s*\d+(\s*[–-]\s*\d+)?", "", low).strip()
+        low = part.lower().strip().rstrip(".")
+        key = re.sub(r"\s*[×x]\s*\d+(\s*[–-]\s*\d+)?$", "", low).strip()
+        key = re.sub(r"\s*×\s*\d+(\s*[–-]\s*\d+)?", "", key).strip()
         if key in PROCESS_WORDS:
             processes.append(PROCESS_WORDS[key])
             continue
-        m = re.search(r"×\s*(\d+)", low)
+        m = re.search(r"[×x]\s*(\d+)\s*$", low) or re.search(r"×\s*(\d+)", low)
         count = int(m.group(1)) if m else 1
         alts = []
-        for alt in re.split(r"\s+or\s+", key):
-            alt = alt.strip()
-            alt = ALIASES.get(alt, alt)
+        for alt in ([key] if key in NAME_MAP else re.split(r"\s+or\s+|/", key)):
+            alt = ALIASES.get(alt.strip(), alt.strip())
+            if not alt:
+                continue
             if alt in NAME_MAP:
                 kind, val, n = NAME_MAP[alt]
                 if kind == "alts":
@@ -325,13 +407,15 @@ def parse_craft(source, name_to_id, errors, rid):
                 elif kind == "req":
                     alts.append([val, n, "LIST"])
                 else:
-                    alts.append([val, n])
-            elif alt in name_to_id:
-                alts.append([name_to_id[alt], count])
-            elif alt.endswith("s") and alt[:-1] in name_to_id:
-                alts.append([name_to_id[alt[:-1]], count])
+                    alts.append([val, n * count if kind == "item" and n == 1 else n])
+                continue
+            found = resolve_ingredient(alt, rid, rows_by_id, name_to_id)
+            if found:
+                alts += [[f, count] for f in found if [f, count] not in alts]
+            elif alt in PROCESS_WORDS:
+                processes.append(PROCESS_WORDS[alt])
             else:
-                errors.append(f"recipe {rid}: unknown ingredient {alt!r}")
+                WARNINGS.append(f"recipe {rid}: ingredient {alt!r} not found, dropped")
         if alts:
             components.append(alts)
     return components, processes
@@ -347,7 +431,10 @@ MEDICAL = ("salve", "tincture", "tea")
 
 
 def gen_recipes(rows, errors):
-    name_to_id = {clean_name(r).lower(): r["id"] for r in rows}
+    name_to_id = {}
+    for r in rows:  # first list wins for a shared name (the critical core keeps its meaning)
+        name_to_id.setdefault(clean_name(r).lower(), r["id"])
+    rows_by_id = {r["id"]: r for r in rows}
     out = []
     for r in rows:
         src = r.get("source", "")
@@ -355,9 +442,9 @@ def gen_recipes(rows, errors):
             continue
         rid = r["id"]
         kind = r.get("kind", "raw")
-        components, processes = parse_craft(src, name_to_id, errors, rid)
+        components, processes = parse_craft(src, name_to_id, errors, rid, rows_by_id)
         if not components:
-            errors.append(f"recipe {rid}: no components parsed from {src!r}")
+            WARNINGS.append(f"recipe {rid}: no components parsed from {src!r}; no recipe")
             continue
         tier = tier_of(r)
         is_metal = "duskiron" in rid or "ingot" in rid or "verdigris" in rid and kind != "raw"
@@ -500,9 +587,10 @@ def gen_creatures(rows, errors):
         mid = r["id"] if r["id"].startswith("mon_") else "mon_" + r["id"]
         base = r.get("base (vanilla copy-from)", "").replace("?", "").split()[0] if r.get("base (vanilla copy-from)") else ""
         base = base.strip("()")
+        base = BASE_ALIASES.get(base, base)
         if not has(base, "MONSTER"):
             fb = SIZE_FALLBACK.get(r.get("size", "small").strip(), "mon_dog")
-            errors.append(f"creature {mid}: base {base!r} unknown, using {fb}")
+            WARNINGS.append(f"creature {mid}: base {base!r} unknown, using {fb}")
             base = fb
         drops = [i for i in IDRE.findall(r.get("drops (item ids)", "")) if i.startswith("astral_")]
         entries = []
@@ -623,6 +711,49 @@ def gen_tiers():
     return out
 
 
+# --------------------------------------------------------------------------- scatter
+
+def gen_scatter(data, generated):
+    """Put the flora and veins on the map: one nested chunk per plant/vein and one
+    `astral_scatter_<theme>` chunk that picks among them by weight.  The biome mapgens
+    (data/json/astral/dungeons/mapgen_microworld.json) place the theme chunk a few times
+    per map square.  Trees and plants go down singly or in a small clump; veins as a
+    short seam of 3-6 tiles."""
+    terrain_ids = {e["id"] for e in generated["flora"] + generated["veins"] if e["type"] == "terrain"}
+    furniture_ids = {e["id"] for e in generated["flora"] if e["type"] == "furniture"}
+    out, per_theme = [], {}
+    for r in data["flora"]:
+        fid = r["id"]
+        theme = r.get("theme", "").strip()
+        tid, furn = f"t_{fid}", f"f_{fid}"
+        if tid in terrain_ids:
+            obj = {"mapgensize": [3, 3], "rows": ["   ", " T ", "   "], "terrain": {"T": tid}}
+            weight = 6
+        elif furn in furniture_ids:
+            obj = {"mapgensize": [3, 3], "rows": [" F ", "FF ", " F "], "furniture": {"F": furn}}
+            weight = 8
+        else:
+            continue
+        nid = f"astral_nest_{fid}"
+        out.append({"type": "mapgen", "nested_mapgen_id": nid, "object": obj})
+        per_theme.setdefault(theme, []).append([nid, weight])
+    for r in data["veins"]:
+        vid = r["id"]
+        tid = vid if vid.startswith("t_") else f"t_{vid}"
+        if tid not in terrain_ids:
+            continue
+        theme = r.get("theme", "").strip()
+        nid = f"astral_nest_{tid[2:]}"
+        out.append({"type": "mapgen", "nested_mapgen_id": nid,
+                    "object": {"mapgensize": [4, 4], "rows": [" VV ", "VVV ", " VV ", "    "], "terrain": {"V": tid}}})
+        per_theme.setdefault(theme, []).append([nid, 3])
+    for theme, chunks in sorted(per_theme.items()):
+        out.append({"type": "mapgen", "nested_mapgen_id": f"astral_scatter_{theme}",
+                    "//": "Weighted pick of this theme's flora and veins (tools/astral/gen_content.py gen_scatter).",
+                    "object": {"mapgensize": [4, 4], "place_nested": [{"chunks": chunks, "x": 0, "y": 0}]}})
+    return out
+
+
 # --------------------------------------------------------------------------- lint
 
 def lint(data, generated, errors):
@@ -640,7 +771,7 @@ def lint(data, generated, errors):
     for r in data["items"]:
         for s in ids_in(r.get("source", "")):
             if s.startswith(("astral_", "t_astral_")) and not known(s):
-                errors.append(f"item {r['id']}: source {s} does not exist in any list")
+                WARNINGS.append(f"item {r['id']}: source {s} does not exist in any list (loot only)")
     for r in data["creatures"]:
         for d in IDRE.findall(r.get("drops (item ids)", "")):
             if d.startswith("astral_") and not known(d):
@@ -692,12 +823,16 @@ def main():
         "materials": gen_materials(),
         "recipes": gen_recipes(data["items"], errors),
     }
+    generated["scatter"] = gen_scatter(data, generated)
     lint(data, generated, errors)
     for e in errors:
         print("LINT:", e)
+    if "--warnings" in sys.argv:
+        for w in WARNINGS:
+            print("WARN:", w)
     counts = {k: len(v) for k, v in generated.items()}
     print(json.dumps({"rows": {k: len(v) for k, v in data.items()}, "generated": counts,
-                      "lint": len(errors)}))
+                      "lint": len(errors), "warnings": len(WARNINGS)}))
     if check_only:
         return 1 if errors else 0
     os.makedirs(OUT, exist_ok=True)

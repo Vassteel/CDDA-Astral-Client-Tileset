@@ -1,0 +1,525 @@
+[
+  {
+    "type": "requirement",
+    "id": "adhesive",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_meadow_resin_lump", 1 ],
+          [ "astral_meadow_bone_glue", 1 ],
+          [ "astral_meadow_resin_glue", 1 ],
+          [ "astral_drowned_snail_slime", 1 ],
+          [ "astral_drowned_fish_glue", 1 ],
+          [ "astral_fungal_mycel_glue_raw", 1 ],
+          [ "astral_fungal_resin_bead", 1 ],
+          [ "astral_fungal_mycel_glue", 1 ],
+          [ "astral_root_heartroot_resin", 1 ],
+          [ "astral_root_resin_glue", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "any_butter_or_oil",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [ [ "astral_fallow_sunflower", 1 ], [ "astral_fallow_seed_oil", 1 ], [ "astral_fungal_truffle_oil", 1 ] ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "armor_chitin",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_drowned_turtle_plate", 1 ],
+          [ "astral_drowned_crab_chitin", 1 ],
+          [ "astral_drowned_lobster_chitin", 1 ],
+          [ "astral_drowned_chitin_plate_work", 1 ],
+          [ "astral_fungal_spore_beetle_chitin", 1 ],
+          [ "astral_fungal_hunter_chitin", 1 ],
+          [ "astral_fungal_chitin_mail_link", 1 ],
+          [ "astral_fungal_hunter_chitin_work", 1 ],
+          [ "astral_root_sound_hunter_chitin", 1 ],
+          [ "astral_root_sound_chitin_work", 1 ],
+          [ "astral_root_grub_chitin", 1 ],
+          [ "astral_root_leader_plate", 1 ],
+          [ "astral_fungal_chitin_plate", 1 ],
+          [ "astral_drowned_beetle_chitin", 1 ],
+          [ "astral_drowned_claw_chitin", 1 ],
+          [ "astral_drowned_cray_shell", 1 ],
+          [ "astral_drowned_snail_shell", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "bone_any",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_meadow_hare_bone", 1 ],
+          [ "astral_meadow_grouse_bone", 1 ],
+          [ "astral_meadow_goat_horn", 1 ],
+          [ "astral_drowned_eel_bone", 1 ],
+          [ "astral_tallgrass_antelope_horn", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "bone_sturdy",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_meadow_deer_bone", 1 ],
+          [ "astral_meadow_cow_bone", 1 ],
+          [ "astral_meadow_deer_antler", 1 ],
+          [ "astral_drowned_pike_bone", 1 ],
+          [ "astral_tallgrass_bison_horn", 1 ],
+          [ "astral_tallgrass_bison_bone", 1 ],
+          [ "astral_meadow_antler_haft", 1 ],
+          [ "astral_tallgrass_horn_haft", 1 ],
+          [ "astral_tallgrass_bone_plate", 1 ],
+          [ "astral_tallgrass_bull_horn", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "bronze_tiny",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_drowned_verdigris_fitting", 1 ],
+          [ "astral_root_verdigris_alloy", 1 ],
+          [ "astral_drowned_verdigris_ingot", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "clay_refractory",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_meadow_clay_shard", 1 ],
+          [ "astral_meadow_bluemarl_brick", 1 ],
+          [ "astral_fallow_marl", 1 ],
+          [ "astral_fallow_marl_brick", 1 ],
+          [ "astral_drowned_bluemarl_bank", 1 ],
+          [ "astral_drowned_mud_clump", 1 ],
+          [ "astral_drowned_bluemarl_brick", 1 ],
+          [ "astral_fungal_soft_mud", 1 ],
+          [ "astral_fungal_bluemarl", 1 ],
+          [ "astral_meadow_bluemarl", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "copper_scrap_equivalent",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_drowned_sunvein_nugget", 1 ],
+          [ "astral_drowned_salvage_bronze", 1 ],
+          [ "astral_drowned_verdigris_wire", 1 ],
+          [ "astral_drowned_sunvein_ingot", 1 ],
+          [ "astral_root_sunvein_ingot", 1 ],
+          [ "astral_root_sunvein_wire", 1 ],
+          [ "astral_drowned_verdigris_scrap", 1 ],
+          [ "astral_root_sunvein_ore", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "cordage",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_fallow_fibre_hemp", 1 ],
+          [ "astral_fallow_hemp_cord", 1 ],
+          [ "astral_drowned_reed_cord", 1 ],
+          [ "astral_drowned_kelp_cord", 1 ],
+          [ "astral_tallgrass_fibre", 1 ],
+          [ "astral_tallgrass_fibre_cord", 1 ],
+          [ "astral_fungal_stalk_cord", 1 ],
+          [ "astral_root_climb_root", 1 ],
+          [ "astral_fallow_rope", 1 ],
+          [ "astral_root_climb_rope", 1 ],
+          [ "astral_root_silk_cord", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "cordage_short",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_meadow_cord", 1 ],
+          [ "astral_meadow_deer_sinew", 1 ],
+          [ "astral_meadow_sinew_cord", 1 ],
+          [ "astral_drowned_beaver_sinew", 1 ],
+          [ "astral_drowned_sinew_cord", 1 ],
+          [ "astral_tallgrass_bison_sinew", 1 ],
+          [ "astral_tallgrass_sinew_cord", 1 ],
+          [ "astral_meadow_hare_sinew", 1 ],
+          [ "astral_meadow_sheep_sinew", 1 ],
+          [ "astral_drowned_otter_sinew", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "fabric_leather_hide",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_meadow_hide_leather", 1 ],
+          [ "astral_fallow_leather", 1 ],
+          [ "astral_drowned_otter_leather", 1 ],
+          [ "astral_drowned_beaver_leather", 1 ],
+          [ "astral_drowned_eel_leather", 1 ],
+          [ "astral_tallgrass_bison_hide", 1 ],
+          [ "astral_tallgrass_antelope_hide", 1 ],
+          [ "astral_tallgrass_bison_leather", 1 ],
+          [ "astral_tallgrass_antelope_leather", 1 ],
+          [ "astral_tallgrass_grasscat_leather", 1 ],
+          [ "astral_tallgrass_bull_leather", 1 ],
+          [ "astral_fungal_grazer_hide", 1 ],
+          [ "astral_fungal_leather_alt", 1 ],
+          [ "astral_fungal_grazer_leather", 1 ],
+          [ "astral_root_burrow_hide", 1 ],
+          [ "astral_root_burrow_leather", 1 ],
+          [ "astral_tallgrass_wolf_hide", 1 ],
+          [ "astral_tallgrass_serpent_skin", 1 ],
+          [ "astral_tallgrass_grasscat_hide", 1 ],
+          [ "astral_tallgrass_bull_hide", 1 ],
+          [ "astral_tallgrass_burrow_hide", 1 ],
+          [ "astral_root_bat_wing", 1 ],
+          [ "astral_fungal_chitin_leather", 2 ],
+          [ "astral_meadow_deer_hide", 8 ],
+          [ "astral_meadow_cow_hide", 8 ],
+          [ "astral_meadow_goat_hide", 8 ],
+          [ "astral_meadow_horse_hide", 8 ],
+          [ "astral_meadow_sheep_hide", 8 ],
+          [ "astral_drowned_beaver_hide", 8 ],
+          [ "astral_drowned_otter_hide", 8 ],
+          [ "astral_drowned_eel_skin", 1 ],
+          [ "astral_drowned_muskie_skin", 1 ],
+          [ "astral_meadow_hare_hide", 1 ],
+          [ "astral_meadow_squirrel_hide", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "fabric_standard",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_meadow_nettle_cloth", 1 ],
+          [ "astral_meadow_wool_cloth", 1 ],
+          [ "astral_fallow_scarecrow_scrap", 1 ],
+          [ "astral_fallow_flax_cloth", 1 ],
+          [ "astral_fallow_hemp_cloth", 1 ],
+          [ "astral_drowned_rush_cloth", 1 ],
+          [ "astral_drowned_reed_cloth", 1 ],
+          [ "astral_tallgrass_fibre_cloth", 1 ],
+          [ "astral_fungal_stalk_cloth", 1 ],
+          [ "astral_fungal_veil_cloth", 1 ],
+          [ "astral_fungal_myceloth", 1 ],
+          [ "astral_drowned_sea_silk_cloth", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "flour_any",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_meadow_travel_grain", 1 ],
+          [ "astral_meadow_flour", 1 ],
+          [ "astral_fallow_grain_head", 1 ],
+          [ "astral_fallow_cutting_grain", 1 ],
+          [ "astral_fallow_barley", 1 ],
+          [ "astral_fallow_oat", 1 ],
+          [ "astral_fallow_corn", 1 ],
+          [ "astral_fallow_flour", 1 ],
+          [ "astral_fallow_barley_flour", 1 ],
+          [ "astral_fallow_oat_meal", 1 ],
+          [ "astral_fallow_cornmeal", 1 ],
+          [ "astral_tallgrass_seed_grass", 1 ],
+          [ "astral_tallgrass_seed_flour", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "fuel_liquid",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_drowned_eel_fat", 1 ],
+          [ "astral_meadow_tallow_oil", 1 ],
+          [ "astral_drowned_muskie_fat", 1 ],
+          [ "astral_drowned_cormorant_oil", 1 ],
+          [ "astral_drowned_eel_oil", 1 ],
+          [ "astral_tallgrass_tallow_oil", 1 ],
+          [ "astral_fungal_glowcap_oil", 1 ],
+          [ "astral_drowned_muskie_oil", 1 ],
+          [ "astral_fungal_lantern_refill", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "mc_steel_standard",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": { "components": [ [ [ "astral_root_duskiron_bar_local", 1 ] ] ] }
+  },
+  {
+    "type": "requirement",
+    "id": "meat_nofish",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_meadow_smoked_grouse", 1 ],
+          [ "astral_drowned_mussel_meat", 1 ],
+          [ "astral_drowned_salted_eel", 1 ],
+          [ "astral_drowned_salted_pike", 1 ],
+          [ "astral_drowned_salted_carp", 1 ],
+          [ "astral_drowned_smoked_eel", 1 ],
+          [ "astral_fallow_chicken_meat", 1 ],
+          [ "astral_root_grub_meat", 1 ],
+          [ "astral_tallgrass_firebird_meat", 1 ],
+          [ "astral_drowned_carp_meat", 1 ],
+          [ "astral_drowned_claw_meat", 1 ],
+          [ "astral_drowned_crab_meat", 1 ],
+          [ "astral_drowned_cray_meat", 1 ],
+          [ "astral_drowned_lobster_meat", 1 ],
+          [ "astral_drowned_muskie_meat", 1 ],
+          [ "astral_drowned_pike_meat", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "meat_red",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_meadow_cured_hare", 1 ],
+          [ "astral_meadow_cured_venison", 1 ],
+          [ "astral_tallgrass_bison_meat", 1 ],
+          [ "astral_tallgrass_antelope_meat", 1 ],
+          [ "astral_tallgrass_smoked_bison", 1 ],
+          [ "astral_tallgrass_smoked_antelope", 1 ],
+          [ "astral_tallgrass_jerky", 1 ],
+          [ "astral_tallgrass_pemmican_base", 1 ],
+          [ "astral_fungal_grazer_meat", 1 ],
+          [ "astral_root_burrow_meat", 1 ],
+          [ "astral_fallow_pig_meat", 1 ],
+          [ "astral_tallgrass_wolf_meat", 1 ],
+          [ "astral_fungal_hunter_meat", 1 ],
+          [ "astral_tallgrass_grasscat_meat", 1 ],
+          [ "astral_tallgrass_bull_meat", 1 ],
+          [ "astral_tallgrass_burrow_meat", 1 ],
+          [ "astral_drowned_beaver_meat", 1 ],
+          [ "astral_drowned_coot_meat", 1 ],
+          [ "astral_drowned_cormorant_meat", 1 ],
+          [ "astral_drowned_frog_meat", 1 ],
+          [ "astral_drowned_grebe_meat", 1 ],
+          [ "astral_drowned_moorhen_meat", 1 ],
+          [ "astral_drowned_otter_meat", 1 ],
+          [ "astral_drowned_slug_meat", 1 ],
+          [ "astral_drowned_snail_meat", 1 ],
+          [ "astral_drowned_turtle_meat", 1 ],
+          [ "astral_meadow_chipmunk_meat", 1 ],
+          [ "astral_meadow_grouse_meat", 1 ],
+          [ "astral_meadow_pheasant_meat", 1 ],
+          [ "astral_meadow_pigeon_meat", 1 ],
+          [ "astral_meadow_robin_meat", 1 ],
+          [ "astral_meadow_sparrow_meat", 1 ],
+          [ "astral_meadow_squirrel_meat", 1 ],
+          [ "astral_meadow_turkey_meat", 1 ],
+          [ "astral_meadow_woodpecker_meat", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "meat_red_raw",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_meadow_beef", 1 ],
+          [ "astral_meadow_deer_meat", 1 ],
+          [ "astral_meadow_goat_meat", 1 ],
+          [ "astral_meadow_horse_meat", 1 ],
+          [ "astral_meadow_mutton", 1 ],
+          [ "astral_meadow_hare_meat", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "mushroom_soup_ingredients",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_meadow_mushroom_safe", 1 ],
+          [ "astral_fungal_edible_cap", 1 ],
+          [ "astral_fungal_broth_cap", 1 ],
+          [ "astral_fungal_broth_stock", 1 ],
+          [ "astral_fungal_glowcap_raw", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "plant_cordage",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_meadow_cordgrass", 1 ],
+          [ "astral_meadow_nettle", 1 ],
+          [ "astral_fallow_fibre_flax", 1 ],
+          [ "astral_fallow_thatch_reed", 1 ],
+          [ "astral_drowned_reed_fibre", 1 ],
+          [ "astral_drowned_rush_fibre", 1 ],
+          [ "astral_drowned_kelp_frond", 1 ],
+          [ "astral_tallgrass_cutting_grass", 1 ],
+          [ "astral_fungal_stalk_fibre", 1 ],
+          [ "astral_fungal_mycel_fibre", 2 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "salt_preservation",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [ [ "astral_tallgrass_ghostsalt", 1 ], [ "astral_root_ghostsalt_crust", 1 ], [ "astral_drowned_ghostsalt", 1 ] ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "steel_chunk_any",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [ [ "astral_fallow_rust_nail", 1 ], [ "astral_fallow_nail_stock", 1 ], [ "astral_drowned_salvage_nail", 1 ] ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "steel_lump_any",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_fallow_bog_iron", 2 ],
+          [ "astral_fallow_duskiron_bar", 1 ],
+          [ "astral_root_vein_eater_ore", 1 ],
+          [ "astral_root_vein_bar", 1 ],
+          [ "astral_duskiron_bar", 1 ],
+          [ "astral_drowned_mire_iron", 2 ],
+          [ "astral_root_duskiron_ore", 2 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "steel_standard",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": { "components": [ [ [ "astral_root_duskiron_wire", 1 ] ] ] }
+  },
+  {
+    "type": "requirement",
+    "id": "sugar_standard",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": { "components": [ [ [ "astral_fallow_honey_jar", 1 ] ] ] }
+  },
+  {
+    "type": "requirement",
+    "id": "wax_any",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [
+          [ "astral_meadow_clover_honey", 1 ],
+          [ "astral_meadow_clover_wax", 1 ],
+          [ "astral_meadow_sheep_tallow", 1 ],
+          [ "astral_meadow_cow_tallow", 1 ],
+          [ "astral_meadow_wax_cake", 1 ],
+          [ "astral_fallow_honeycomb", 1 ],
+          [ "astral_fallow_beeswax", 1 ],
+          [ "astral_fallow_wax_cake", 1 ],
+          [ "astral_tallgrass_bison_tallow", 1 ],
+          [ "astral_tallgrass_tallow_cake", 1 ],
+          [ "astral_root_honey_wax", 1 ],
+          [ "astral_root_honey_bee_wax", 1 ],
+          [ "astral_meadow_bee_wax", 1 ],
+          [ "astral_root_cave_honey", 1 ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "requirement",
+    "id": "wood_sealant_any",
+    "//": "Astral vanilla wiring (tools/astral/gen_wiring.py)",
+    "extend": {
+      "components": [
+        [ [ "astral_drowned_pitch", 1 ], [ "astral_drowned_pitch_seal", 1 ], [ "astral_root_resin_varnish", 1 ] ]
+      ]
+    }
+  }
+]

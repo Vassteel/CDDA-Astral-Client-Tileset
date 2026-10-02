@@ -672,6 +672,1312 @@
     "harvest": "astral_harv_mon_astral_drowned_harbour_claw"
   },
   {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_cap_grazer",
+    "entries": [
+      { "drop": "astral_fungal_grazer_hide", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fungal_grazer_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_cap_grazer",
+    "copy-from": "mon_deer",
+    "looks_like": "mon_deer",
+    "name": { "str": "cap-grazer" },
+    "description": "Mottled soft grazer, cap scraps on muzzle.  A creature from the fungal forest.  Browses caps; flees unless cornered.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_fungal_cap_grazer"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_spore_mite",
+    "entries": [ { "drop": "astral_fungal_spore_dust", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_spore_mite",
+    "copy-from": "mon_centipede_small",
+    "looks_like": "mon_centipede_small",
+    "name": { "str": "spore mite" },
+    "description": "Pale mite dusted with spores.  A creature from the fungal forest.  Harmless until haze thickens; then bites.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day+night",
+    "harvest": "astral_harv_mon_astral_fungal_spore_mite"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_button_snail",
+    "entries": [ { "drop": "astral_fungal_slime", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_button_snail",
+    "copy-from": "mon_snail_forest",
+    "looks_like": "mon_snail_forest",
+    "name": { "str": "button snail" },
+    "description": "Snail with button-cap shell.  A creature from the fungal forest.  Harmless until haze thickens; grazes buttons.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_fungal_button_snail"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_glow_moth",
+    "entries": [ { "drop": "astral_fungal_glow_moss", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_glow_moth",
+    "copy-from": "mon_butterfly",
+    "looks_like": "mon_butterfly",
+    "name": { "str": "glow moth" },
+    "description": "Moth with luminous blue wings.  A creature from the fungal forest.  Harmless; drifts in blue glow.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active night",
+    "harvest": "astral_harv_mon_astral_fungal_glow_moth"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_carpet_vole",
+    "entries": [ { "drop": "astral_fungal_grazer_meat", "type": "flesh", "mass_ratio": 0.3 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_carpet_vole",
+    "copy-from": "mon_shrew",
+    "looks_like": "mon_shrew",
+    "name": { "str": "carpet vole" },
+    "description": "Vole half-fused with mycel carpet.  A creature from the fungal forest.  Harmless until haze thickens; tunnels carpet.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_fungal_carpet_vole"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_shelf_bat",
+    "entries": [ { "drop": "astral_fungal_stalk_fibre", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_shelf_bat",
+    "copy-from": "mon_bat",
+    "looks_like": "mon_bat",
+    "name": { "str": "shelf bat" },
+    "description": "Bat with spore-dusted wings.  A creature from the fungal forest.  Roosts under shelf fungus; shy.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active night",
+    "harvest": "astral_harv_mon_astral_fungal_shelf_bat"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_puff_toad",
+    "entries": [ { "drop": "astral_fungal_puffball", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_puff_toad",
+    "copy-from": "mon_fowler_toad",
+    "looks_like": "mon_fowler_toad",
+    "name": { "str": "puff toad" },
+    "description": "Toad resembling a puffball.  A creature from the fungal forest.  Inflates; harmless until haze thickens.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active day+night",
+    "harvest": "astral_harv_mon_astral_fungal_puff_toad"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_ink_skink",
+    "entries": [ { "drop": "astral_fungal_ink_cap", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_ink_skink",
+    "copy-from": "mon_skink_fivelined",
+    "looks_like": "mon_skink_fivelined",
+    "name": { "str": "ink skink" },
+    "description": "Skink dripping black ink.  A creature from the fungal forest.  Flees; squirts ink when grabbed.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active day",
+    "harvest": "astral_harv_mon_astral_fungal_ink_skink"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_spore_carrier",
+    "entries": [
+      { "drop": "astral_fungal_spore_beetle_chitin", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fungal_spore_sac", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_spore_carrier",
+    "copy-from": "mon_giant_cockroach",
+    "looks_like": "mon_giant_cockroach",
+    "name": { "str": "spore-carrier beetle" },
+    "description": "Beetle with swollen spore sacs.  A creature from the fungal forest.  Spreads haze; attacks when spore sac struck.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active day+night",
+    "harvest": "astral_harv_mon_astral_fungal_spore_carrier"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_corded",
+    "entries": [
+      { "drop": "astral_fungal_cordy_strand", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fungal_stalk_fibre", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_corded",
+    "copy-from": "mon_zombie_fungus",
+    "looks_like": "mon_zombie_fungus",
+    "name": { "str": "corded husk" },
+    "description": "Humanoid husk laced with cords.  A creature from the fungal forest.  Part plant; lunges when haze thick.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active day+night",
+    "harvest": "astral_harv_mon_astral_fungal_corded"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_mycel_wolf",
+    "entries": [
+      { "drop": "astral_fungal_grazer_hide", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fungal_hunter_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_mycel_wolf",
+    "copy-from": "mon_wolf",
+    "looks_like": "mon_wolf",
+    "name": { "str": "mycel wolf" },
+    "description": "Wolf-shape of woven mycel.  A creature from the fungal forest.  Hunts in haze; ignores clear air.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active night",
+    "harvest": "astral_harv_mon_astral_fungal_mycel_wolf"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_haze_hunter",
+    "entries": [
+      { "drop": "astral_fungal_hunter_chitin", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fungal_hunter_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_haze_hunter",
+    "copy-from": "mon_cougar",
+    "looks_like": "mon_cougar",
+    "name": { "str": "haze hunter" },
+    "description": "Violet-chitin predator, haze veil.  A creature from the fungal forest.  Ambushes in thick haze only.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active night",
+    "harvest": "astral_harv_mon_astral_fungal_haze_hunter"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_acid_slug",
+    "entries": [
+      { "drop": "astral_fungal_acid_cap", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fungal_slime", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_acid_slug",
+    "copy-from": "mon_slug_small",
+    "looks_like": "mon_slug_small",
+    "name": { "str": "acid slug" },
+    "description": "Large yellow acid-dripping slug.  A creature from the fungal forest.  Leaves acid trail; attacks when touched.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active day+night",
+    "harvest": "astral_harv_mon_astral_fungal_acid_slug"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_veil_wraith",
+    "entries": [ { "drop": "astral_fungal_veil", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_veil_wraith",
+    "copy-from": "mon_dog",
+    "looks_like": "mon_dog",
+    "name": { "str": "veil wraith" },
+    "description": "Translucent fungal sheet-wraith.  A creature from the fungal forest.  Forms from veil curtains; drains warmth.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active night",
+    "harvest": "astral_harv_mon_astral_fungal_veil_wraith"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_softground",
+    "entries": [
+      { "drop": "astral_fungal_soft_mud", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fungal_black_water", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_softground",
+    "copy-from": "mon_dog",
+    "looks_like": "mon_dog",
+    "name": { "str": "soft-ground maw" },
+    "description": "Maw of soft pale ground.  A creature from the fungal forest.  Ground softens into a bite underfoot.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active day+night",
+    "harvest": "astral_harv_mon_astral_fungal_softground"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_spore_venter",
+    "entries": [
+      { "drop": "astral_fungal_spore_sac", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fungal_haze_sample", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_spore_venter",
+    "copy-from": "mon_fungaloid",
+    "looks_like": "mon_fungaloid",
+    "name": { "str": "spore venter" },
+    "description": "Stalk that pulses out haze.  A creature from the fungal forest.  Vents haze clouds; embodies spore rule.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active day+night",
+    "harvest": "astral_harv_mon_astral_fungal_spore_venter"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_blackwater",
+    "entries": [
+      { "drop": "astral_fungal_black_water", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fungal_soft_mud", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_blackwater",
+    "copy-from": "mon_dog",
+    "looks_like": "mon_dog",
+    "name": { "str": "black-water creeper" },
+    "description": "Creeper half-dissolved in black water.  A creature from the fungal forest.  Moves only in slow black water.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active night",
+    "harvest": "astral_harv_mon_astral_fungal_blackwater"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_cap_colossus",
+    "entries": [
+      { "drop": "astral_fungal_chitin_plate", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fungal_spore_sac", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fungal_cap_wood", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_cap_colossus",
+    "copy-from": "mon_fungaloid_queen",
+    "looks_like": "mon_fungaloid_queen",
+    "name": { "str": "cap colossus", "str_pl": "cap colossuses" },
+    "description": "Towering cap-bodied colossus.  A creature from the fungal forest.  Elite; shakes spores with every step.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 4, active day+night",
+    "harvest": "astral_harv_mon_astral_fungal_cap_colossus"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fungal_sporemind",
+    "entries": [
+      { "drop": "astral_fungal_mind_fragment", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fungal_amber_spore", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fungal_hunter_chitin", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fungal_sporemind",
+    "copy-from": "mon_fungaloid_tower",
+    "looks_like": "mon_fungaloid_tower",
+    "name": { "str": "the Sporemind" },
+    "description": "Vast pulsing violet mind-cap.  A creature from the fungal forest.  Named leader at spore-vent seat; hungering core.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 5, active day+night",
+    "harvest": "astral_harv_mon_astral_fungal_sporemind"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_grub",
+    "entries": [
+      { "drop": "astral_root_grub_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_root_grub_chitin", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_grub",
+    "copy-from": "mon_graboid",
+    "looks_like": "mon_graboid",
+    "name": { "str": "root grub" },
+    "description": "Fat pale grub in soil cracks.  A creature from root country.  Bores soft earth; flees vibration.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_root_grub"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_cave_bat",
+    "entries": [
+      { "drop": "astral_root_bat_wing", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_root_bat_guano", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_cave_bat",
+    "copy-from": "mon_bat",
+    "looks_like": "mon_bat",
+    "name": { "str": "cave bat" },
+    "description": "Thin dark bat, wide ears.  A creature from root country.  Roosts in sinkholes; startled by sound.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active night",
+    "harvest": "astral_harv_mon_astral_root_cave_bat"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_lichen_mite",
+    "entries": [ { "drop": "astral_root_lichen", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_lichen_mite",
+    "copy-from": "mon_centipede_small",
+    "looks_like": "mon_centipede_small",
+    "name": { "str": "lichen mite" },
+    "description": "Mite the colour of lichen.  A creature from root country.  Grazes lichen; ignores quiet travelers.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_root_lichen_mite"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_root_rat",
+    "entries": [ { "drop": "astral_root_burrow_meat", "type": "flesh", "mass_ratio": 0.3 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_root_rat",
+    "copy-from": "mon_black_rat",
+    "looks_like": "mon_black_rat",
+    "name": { "str": "root rat" },
+    "description": "Rat with resin-sticky fur.  A creature from root country.  Scavenges resin beads; flees sound.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day+night",
+    "harvest": "astral_harv_mon_astral_root_root_rat"
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_cave_cricket",
+    "copy-from": "mon_mole_cricket",
+    "looks_like": "mon_mole_cricket",
+    "name": { "str": "cave cricket" },
+    "description": "Pale cricket, over-loud chirp.  A creature from root country.  Chirps; sound draws hunters to it.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active night"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_moss_hare",
+    "entries": [
+      { "drop": "astral_root_cave_moss", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_root_burrow_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_moss_hare",
+    "copy-from": "mon_rabbit",
+    "looks_like": "mon_rabbit",
+    "name": { "str": "moss hare" },
+    "description": "Hare with mossy flanks.  A creature from root country.  Silent browser at sinkhole mouths.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_root_moss_hare"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_fruit_thief",
+    "entries": [
+      { "drop": "astral_root_root_fruit", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_root_vine_thorn", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_fruit_thief",
+    "copy-from": "mon_triffid",
+    "looks_like": "mon_triffid",
+    "name": { "str": "fruit thief" },
+    "description": "Plantling with fruit-sack belly.  A creature from root country.  Steals root fruit; lashes if chased.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active day",
+    "harvest": "astral_harv_mon_astral_root_fruit_thief"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_amber_bee",
+    "entries": [ { "drop": "astral_root_amber_sap", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_amber_bee",
+    "copy-from": "mon_bee",
+    "looks_like": "mon_bee",
+    "name": { "str": "amber sap bee" },
+    "description": "Bee dripping amber sap.  A creature from root country.  Tends amber weeps; quiet unless nest struck.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_root_amber_bee"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_sound_hunter",
+    "entries": [
+      { "drop": "astral_root_sound_hunter_chitin", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_root_burrow_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_sound_hunter",
+    "copy-from": "mon_cougar",
+    "looks_like": "mon_cougar",
+    "name": { "str": "sound hunter" },
+    "description": "Ear-plated hunter, blind eyes.  A creature from root country.  Strikes at sound; ignores the silent.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active night",
+    "harvest": "astral_harv_mon_astral_root_sound_hunter"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_sinkhole_lurker",
+    "entries": [
+      { "drop": "astral_root_sinkhole_silk", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_root_grub_chitin", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_sinkhole_lurker",
+    "copy-from": "mon_spider_web",
+    "looks_like": "mon_spider_web",
+    "name": { "str": "sinkhole lurker" },
+    "description": "Silk-draped sinkhole spider.  A creature from root country.  Waits under sinkhole silk; drops on noise.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active day+night",
+    "harvest": "astral_harv_mon_astral_root_sinkhole_lurker"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_vein_eater",
+    "entries": [
+      { "drop": "astral_root_vein_eater_ore", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_root_duskiron_nugget", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_vein_eater",
+    "copy-from": "mon_zombie_brute",
+    "looks_like": "mon_zombie_brute",
+    "name": { "str": "vein eater" },
+    "description": "Ore-crusted brute, grinding jaws.  A creature from root country.  Chews ore veins; drops ore scrap.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active day+night",
+    "harvest": "astral_harv_mon_astral_root_vein_eater"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_ambush_root",
+    "entries": [
+      { "drop": "astral_root_climb_root", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_root_vine_thorn", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_ambush_root",
+    "copy-from": "mon_triffid",
+    "looks_like": "mon_triffid",
+    "name": { "str": "ambush root" },
+    "description": "Root that lashes like a whip.  A creature from root country.  Strikes from split ground at footsteps.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active day+night",
+    "harvest": "astral_harv_mon_astral_root_ambush_root"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_echo_shade",
+    "entries": [ { "drop": "astral_root_echo_crystal", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_echo_shade",
+    "copy-from": "mon_shadow",
+    "looks_like": "mon_shadow",
+    "name": { "str": "echo shade" },
+    "description": "Shadow shaped like a shout.  A creature from root country.  Forms where sound echoes; drains stamina.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active night",
+    "harvest": "astral_harv_mon_astral_root_echo_shade"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_stone_mite",
+    "entries": [
+      { "drop": "astral_root_stone_chip", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_root_grub_chitin", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_stone_mite",
+    "copy-from": "mon_centipede_giant",
+    "looks_like": "mon_centipede_giant",
+    "name": { "str": "stone mite swarm" },
+    "description": "Swarm of rock-boring mites.  A creature from root country.  Burrows stone; irritated by pick noise.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active day+night",
+    "harvest": "astral_harv_mon_astral_root_stone_mite"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_silence_warden",
+    "entries": [
+      { "drop": "astral_root_mute_moss", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_root_burrow_hide", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_silence_warden",
+    "copy-from": "mon_dog",
+    "looks_like": "mon_dog",
+    "name": { "str": "silence warden" },
+    "description": "Hound with moss-stuffed ears.  A creature from root country.  Attacks noisy targets only; embodies sound rule.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active day+night",
+    "harvest": "astral_harv_mon_astral_root_silence_warden"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_geode_crab",
+    "entries": [
+      { "drop": "astral_root_heartglass", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_root_grub_chitin", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_geode_crab",
+    "copy-from": "mon_giant_crayfish",
+    "looks_like": "mon_giant_crayfish",
+    "name": { "str": "geode crab" },
+    "description": "Crab with heartglass shell plates.  A creature from root country.  Guards heartglass geodes; shelled in crystal.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active day",
+    "harvest": "astral_harv_mon_astral_root_geode_crab"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_taproot_tendril",
+    "entries": [
+      { "drop": "astral_root_heartroot_resin", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_root_taproot_bark", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_taproot_tendril",
+    "copy-from": "mon_triffid",
+    "looks_like": "mon_triffid",
+    "name": { "str": "taproot tendril" },
+    "description": "Massive resinous root tendril.  A creature from root country.  Feeler of the dormant taproot core.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active day+night",
+    "harvest": "astral_harv_mon_astral_root_taproot_tendril"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_ore_tyrant",
+    "entries": [
+      { "drop": "astral_root_vein_eater_ore", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_root_duskiron_nugget", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_root_emberstone_seam", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_ore_tyrant",
+    "copy-from": "mon_dog",
+    "looks_like": "mon_dog",
+    "name": { "str": "ore tyrant" },
+    "description": "Huge ore-plated tyrant.  A creature from root country.  Elite vein-eater lord; shakes ground.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 4, active day+night",
+    "harvest": "astral_harv_mon_astral_root_ore_tyrant"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_root_taproot_warden",
+    "entries": [
+      { "drop": "astral_root_leader_plate", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_root_leader_resin", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_root_taproot_bark", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_root_taproot_warden",
+    "copy-from": "mon_triffid_queen",
+    "looks_like": "mon_triffid_queen",
+    "name": { "str": "Taproot Warden" },
+    "description": "Colossal bark-plated root guardian.  A creature from root country.  Named leader at taproot seat; dormant core.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 5, active day+night",
+    "harvest": "astral_harv_mon_astral_root_taproot_warden"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_feral_cow",
+    "entries": [
+      { "drop": "astral_meadow_beef", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_meadow_cow_hide", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_feral_cow",
+    "copy-from": "mon_cow",
+    "looks_like": "mon_cow",
+    "name": { "str": "feral field cow" },
+    "description": "Lean feral cow, grain in hide.  A creature from the Astral planes.  Wanders grain; startles into a charge if cornered.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_fallow_feral_cow"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_feral_pig",
+    "entries": [
+      { "drop": "astral_fallow_pig_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_sheep_hide", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_feral_pig",
+    "copy-from": "mon_pig",
+    "looks_like": "mon_pig",
+    "name": { "str": "feral hedgerow pig" },
+    "description": "Scruffy pig with hedge burs.  A creature from the Astral planes.  Roots turnip rows; bites if food stolen.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_fallow_feral_pig"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_feral_chicken",
+    "entries": [
+      { "drop": "astral_fallow_chicken_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_egg", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_feral_chicken",
+    "copy-from": "mon_chicken",
+    "looks_like": "mon_chicken",
+    "name": { "str": "feral orchard chicken" },
+    "description": "Lean chicken, orchard dust.  A creature from the Astral planes.  Scratches under feral apples; flocks.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_fallow_feral_chicken"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_feral_goat",
+    "entries": [
+      { "drop": "astral_meadow_goat_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_goat_hide", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_feral_goat",
+    "copy-from": "mon_goat",
+    "looks_like": "mon_goat",
+    "name": { "str": "feral flax goat" },
+    "description": "Goat with flax stuck in beard.  A creature from the Astral planes.  Strips flax rows; shy unless herded.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_fallow_feral_goat"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_feral_sheep",
+    "entries": [
+      { "drop": "astral_meadow_mutton", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_meadow_sheep_hide", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_feral_sheep",
+    "copy-from": "mon_sheep",
+    "looks_like": "mon_sheep",
+    "name": { "str": "feral straw sheep" },
+    "description": "Wool full of straw seeds.  A creature from the Astral planes.  Sleeps in straw; something still herds it.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_fallow_feral_sheep"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_orchard_swarm",
+    "entries": [ { "drop": "astral_fallow_beeswax", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_orchard_swarm",
+    "copy-from": "mon_wasp",
+    "looks_like": "mon_wasp",
+    "name": { "str": "orchard wasp swarm" },
+    "description": "Wasps thick around windfall.  A creature from the Astral planes.  Swarms feral fruit; aggressive near hives.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active day",
+    "harvest": "astral_harv_mon_astral_fallow_orchard_swarm"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_hedgerow_rat",
+    "entries": [ { "drop": "astral_fallow_scarecrow_scrap", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_hedgerow_rat",
+    "copy-from": "mon_black_rat",
+    "looks_like": "mon_black_rat",
+    "name": { "str": "hedgerow rat" },
+    "description": "Rat in patched cloth nest.  A creature from the Astral planes.  Nests in scarecrow coats.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active night",
+    "harvest": "astral_harv_mon_astral_fallow_hedgerow_rat"
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_grain_mouse",
+    "copy-from": "mon_shrew",
+    "looks_like": "mon_shrew",
+    "name": { "str": "grain mouse" },
+    "description": "Mouse with razor-seed scars.  A creature from the Astral planes.  Lives in cutting grain; flees reaper.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_scarecrow",
+    "entries": [
+      { "drop": "astral_fallow_scarecrow_scrap", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fallow_straw", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_scarecrow",
+    "copy-from": "mon_dog",
+    "looks_like": "mon_dog",
+    "name": { "str": "walking scarecrow" },
+    "description": "Scarecrow that steps off its pole.  A creature from the Astral planes.  Animates at dusk; guards grain rows.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active night",
+    "harvest": "astral_harv_mon_astral_fallow_scarecrow"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_reaper",
+    "entries": [
+      { "drop": "astral_fallow_cutting_grain", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fallow_duskiron_bar", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_reaper",
+    "copy-from": "mon_zombie_scissorlimbs",
+    "looks_like": "mon_zombie_scissorlimbs",
+    "name": { "str": "grain reaper" },
+    "description": "Scythe-armed figure in straw veil.  A creature from the Astral planes.  Walks the grain; harvests living and dead.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active day+night",
+    "harvest": "astral_harv_mon_astral_fallow_reaper"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_orchard_husk",
+    "entries": [
+      { "drop": "astral_fallow_orchard_apple", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fallow_scarecrow_scrap", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_orchard_husk",
+    "copy-from": "mon_zombie",
+    "looks_like": "mon_zombie",
+    "name": { "str": "orchard husk" },
+    "description": "Husk tangled in apple boughs.  A creature from the Astral planes.  Rakes anyone climbing feral trees.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active day",
+    "harvest": "astral_harv_mon_astral_fallow_orchard_husk"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_barn_lurker",
+    "entries": [
+      { "drop": "astral_fallow_rust_nail", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fallow_fence_post", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_barn_lurker",
+    "copy-from": "mon_zombie_brainless",
+    "looks_like": "mon_zombie_brainless",
+    "name": { "str": "barn lurker" },
+    "description": "Dust-caked lurker in loft.  A creature from the Astral planes.  Nests in barn ruins; drops from rafters.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active night",
+    "harvest": "astral_harv_mon_astral_fallow_barn_lurker"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_hedge_beast",
+    "entries": [
+      { "drop": "astral_fallow_hedgerow_berry", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fallow_fibre_hemp", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_hedge_beast",
+    "copy-from": "mon_triffid",
+    "looks_like": "mon_triffid",
+    "name": { "str": "hedge beast" },
+    "description": "Beast woven from living hedge.  A creature from the Astral planes.  Thorny; blocks hedgerow gates.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active day+night",
+    "harvest": "astral_harv_mon_astral_fallow_hedge_beast"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_silo_echo",
+    "entries": [ { "drop": "astral_fallow_seed_bag", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_silo_echo",
+    "copy-from": "mon_shadow",
+    "looks_like": "mon_shadow",
+    "name": { "str": "silo echo" },
+    "description": "Echo shaped like spilled grain.  A creature from the Astral planes.  Whispers from empty silos; drains morale.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active night",
+    "harvest": "astral_harv_mon_astral_fallow_silo_echo"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_herdsman",
+    "entries": [
+      { "drop": "astral_fallow_straw", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fallow_hemp_cord", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_herdsman",
+    "copy-from": "mon_zombie_grappler",
+    "looks_like": "mon_zombie_grappler",
+    "name": { "str": "straw herdsman" },
+    "description": "Figure with straw crook and flock.  A creature from the Astral planes.  Still herds feral flocks at dusk.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active dusk",
+    "harvest": "astral_harv_mon_astral_fallow_herdsman"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_mill_grind",
+    "entries": [
+      { "drop": "astral_fallow_flour", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fallow_quarry_stone", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_mill_grind",
+    "copy-from": "mon_dog",
+    "looks_like": "mon_dog",
+    "name": { "str": "mill grind spirit" },
+    "description": "Grinding wind without sails.  A creature from the Astral planes.  Turns invisible millstones; crushes loot-takers.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active night",
+    "harvest": "astral_harv_mon_astral_fallow_mill_grind"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_cutting_field",
+    "entries": [ { "drop": "astral_fallow_cutting_grain", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_cutting_field",
+    "copy-from": "mon_dog",
+    "looks_like": "mon_dog",
+    "name": { "str": "cutting field" },
+    "description": "Field of razor grain that moves.  A creature from the Astral planes.  Grain field that harvests you back.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active day",
+    "harvest": "astral_harv_mon_astral_fallow_cutting_field"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_barn_king",
+    "entries": [
+      { "drop": "astral_fallow_duskiron_bar", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fallow_rust_nail", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fallow_plank", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_barn_king",
+    "copy-from": "mon_zombie_brute",
+    "looks_like": "mon_zombie_brute",
+    "name": { "str": "barn king" },
+    "description": "Huge lurker crowned in rafters.  A creature from the Astral planes.  Elite loft tyrant of the barn ruin.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 4, active night",
+    "harvest": "astral_harv_mon_astral_fallow_barn_king"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_fallow_harvest_lord",
+    "entries": [
+      { "drop": "astral_fallow_cutting_grain", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fallow_duskiron_bar", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_fallow_scythe", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_fallow_harvest_lord",
+    "copy-from": "mon_zombie_master",
+    "looks_like": "mon_zombie_master",
+    "name": { "str": "Harvest Lord" },
+    "description": "Crowned reaper with living grain cloak.  A creature from the Astral planes.  Named leader at reaper circle; still tends fields.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 5, active day+night",
+    "harvest": "astral_harv_mon_astral_fallow_harvest_lord"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_bison",
+    "entries": [
+      { "drop": "astral_tallgrass_bison_hide", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_bison_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_tallgrass_bison_horn", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_bison_sinew", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_bison_tallow", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_bison_bone", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_bison",
+    "copy-from": "mon_cow",
+    "looks_like": "mon_cow",
+    "name": { "str": "herd bison" },
+    "description": "Shaggy prairie bison.  A creature from the Astral planes.  Grazes in herds; stampedes if panicked.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active day",
+    "harvest": "astral_harv_mon_astral_tallgrass_bison"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_antelope",
+    "entries": [
+      { "drop": "astral_tallgrass_antelope_hide", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_antelope_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_tallgrass_antelope_horn", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_antelope",
+    "copy-from": "mon_deer",
+    "looks_like": "mon_deer",
+    "name": { "str": "prairie antelope" },
+    "description": "Tan antelope, spiraled horns.  A creature from the Astral planes.  Fast herds; flees to open grass.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_tallgrass_antelope"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_pronghorn",
+    "entries": [
+      { "drop": "astral_tallgrass_pronghorn_hide", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_pronghorn_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_pronghorn",
+    "copy-from": "mon_deer",
+    "looks_like": "mon_deer",
+    "name": { "str": "pronghorn" },
+    "description": "Spotted pronghorn, alert ears.  A creature from the Astral planes.  Fastest herd; white rump flash.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_tallgrass_pronghorn"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_burrower",
+    "entries": [
+      { "drop": "astral_tallgrass_burrow_hide", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_burrow_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_burrower",
+    "copy-from": "mon_groundhog",
+    "looks_like": "mon_groundhog",
+    "name": { "str": "burrow colony beast" },
+    "description": "Fat burrower at mound rim.  A creature from the Astral planes.  Colony digger; alarms with chirps.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_tallgrass_burrower"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_prairie_dog",
+    "entries": [ { "drop": "astral_tallgrass_burrow_meat", "type": "flesh", "mass_ratio": 0.3 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_prairie_dog",
+    "copy-from": "mon_groundhog",
+    "looks_like": "mon_groundhog",
+    "name": { "str": "prairie dog" },
+    "description": "Small prairie dog sentry.  A creature from the Astral planes.  Colony sentry; yips at predators.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_tallgrass_prairie_dog"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_grasshopper",
+    "entries": [ { "drop": "astral_tallgrass_cutting_grass", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_grasshopper",
+    "copy-from": "mon_grasshopper_small",
+    "looks_like": "mon_grasshopper_small",
+    "name": { "str": "razor hopper" },
+    "description": "Hopper the colour of blades.  A creature from the Astral planes.  Harmless; cutting-grass camouflage.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_tallgrass_grasshopper"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_quail",
+    "entries": [
+      { "drop": "astral_meadow_grouse_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_grouse_feathers", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_quail",
+    "copy-from": "mon_grouse",
+    "looks_like": "mon_grouse",
+    "name": { "str": "prairie quail" },
+    "description": "Mottled prairie quail.  A creature from the Astral planes.  Bursts from grass; flocks.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_tallgrass_quail"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_hare",
+    "entries": [
+      { "drop": "astral_meadow_hare_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_hare_hide", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_hare",
+    "copy-from": "mon_rabbit",
+    "looks_like": "mon_rabbit",
+    "name": { "str": "prairie hare" },
+    "description": "Long-legged prairie hare.  A creature from the Astral planes.  Outruns most threats in open grass.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_tallgrass_hare"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_grasscat",
+    "entries": [
+      { "drop": "astral_tallgrass_grasscat_hide", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_grasscat_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_grasscat",
+    "copy-from": "mon_cougar",
+    "looks_like": "mon_cougar",
+    "name": { "str": "grasscat" },
+    "description": "Striped cat, grass-camouflaged.  A creature from the Astral planes.  Hunts in grass; striped camouflage.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active day+night",
+    "harvest": "astral_harv_mon_astral_tallgrass_grasscat"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_firebird",
+    "entries": [
+      { "drop": "astral_tallgrass_firebird_feather", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_firebird_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_firebird",
+    "copy-from": "mon_crow",
+    "looks_like": "mon_crow",
+    "name": { "str": "firebird" },
+    "description": "Bird with ash-edged glowing feathers.  A creature from the Astral planes.  Spreads grassfire; nests in burn scars.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active day",
+    "harvest": "astral_harv_mon_astral_tallgrass_firebird"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_wolf",
+    "entries": [
+      { "drop": "astral_tallgrass_wolf_hide", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_wolf_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_wolf",
+    "copy-from": "mon_wolf",
+    "looks_like": "mon_wolf",
+    "name": { "str": "prairie wolf" },
+    "description": "Lean prairie wolf.  A creature from the Astral planes.  Packs hunt herd edges.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active day+night",
+    "harvest": "astral_harv_mon_astral_tallgrass_wolf"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_serpent",
+    "entries": [
+      { "drop": "astral_tallgrass_serpent_skin", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_cutting_grass", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_serpent",
+    "copy-from": "mon_rattlesnake",
+    "looks_like": "mon_rattlesnake",
+    "name": { "str": "grass serpent" },
+    "description": "Long serpent, blade-pattern scales.  A creature from the Astral planes.  Ambushes in cutting grass.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active day",
+    "harvest": "astral_harv_mon_astral_tallgrass_serpent"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_buzzard",
+    "entries": [ { "drop": "astral_tallgrass_firebird_feather", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_buzzard",
+    "copy-from": "mon_dog",
+    "looks_like": "mon_dog",
+    "name": { "str": "ash buzzard" },
+    "description": "Buzzard with scorched wingtips.  A creature from the Astral planes.  Circles burn scars; dives on wounded.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 2, active day",
+    "harvest": "astral_harv_mon_astral_tallgrass_buzzard"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_stalker",
+    "entries": [
+      { "drop": "astral_tallgrass_grasscat_hide", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_bison_sinew", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_stalker",
+    "copy-from": "mon_cougar",
+    "looks_like": "mon_cougar",
+    "name": { "str": "grass stalker" },
+    "description": "Predator visible only in tall grass.  A creature from the Astral planes.  Hunts only while grass is taller than you.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active day+night",
+    "harvest": "astral_harv_mon_astral_tallgrass_stalker"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_burn_wisp",
+    "entries": [
+      { "drop": "astral_tallgrass_ash", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_char_stump", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_burn_wisp",
+    "copy-from": "mon_firefly",
+    "looks_like": "mon_firefly",
+    "name": { "str": "burn wisp" },
+    "description": "Wisp of living grassfire.  A creature from the Astral planes.  Embodies fire hazard; ignites dry thatch.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active day",
+    "harvest": "astral_harv_mon_astral_tallgrass_burn_wisp"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_colony_queen",
+    "entries": [
+      { "drop": "astral_tallgrass_burrow_hide", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_ghostsalt", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_colony_queen",
+    "copy-from": "mon_groundhog",
+    "looks_like": "mon_groundhog",
+    "name": { "str": "burrow queen" },
+    "description": "Huge burrower with salt-crusted claws.  A creature from the Astral planes.  Directs colony alarms; digs collapse traps.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active day",
+    "harvest": "astral_harv_mon_astral_tallgrass_colony_queen"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_herd_guardian",
+    "entries": [
+      { "drop": "astral_tallgrass_bison_horn", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_bison_hide", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_herd_guardian",
+    "copy-from": "mon_cow",
+    "looks_like": "mon_cow",
+    "name": { "str": "herd guardian bull" },
+    "description": "Scarred bull at herd edge.  A creature from the Astral planes.  Guards bison calves; charges threats.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 3, active day",
+    "harvest": "astral_harv_mon_astral_tallgrass_herd_guardian"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_horn_bull",
+    "entries": [
+      { "drop": "astral_tallgrass_bull_horn", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_bull_hide", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_bull_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_horn_bull",
+    "copy-from": "mon_cow",
+    "looks_like": "mon_cow",
+    "name": { "str": "horn-crowned bull" },
+    "description": "Massive bull with metallic horn crown.  A creature from the Astral planes.  Elite; horn crown gleams like duskiron.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 4, active day",
+    "harvest": "astral_harv_mon_astral_tallgrass_horn_bull"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_tallgrass_prairie_khan",
+    "entries": [
+      { "drop": "astral_tallgrass_bull_horn", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_bull_hide", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_tallgrass_bison_tallow", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_tallgrass_prairie_khan",
+    "copy-from": "mon_zombie_master",
+    "looks_like": "mon_zombie_master",
+    "name": { "str": "Prairie Khan" },
+    "description": "Khan draped in herd hides and horns.  A creature from the Astral planes.  Named leader at herd wallow seat.",
+    "//": "astral content list 24-creatures-fungal-root-fallow-tallgrass: rank 5, active day+night",
+    "harvest": "astral_harv_mon_astral_tallgrass_prairie_khan"
+  },
+  {
     "type": "monstergroup",
     "id": "GROUP_ASTRAL_MEADOW",
     "default": "mon_null",
@@ -731,7 +2037,28 @@
     "id": "GROUP_ASTRAL_FUNGAL",
     "default": "mon_null",
     "is_animal": true,
-    "monsters": [ { "monster": "mon_astral_fungal_cap_beetle", "weight": 15 } ],
+    "monsters": [
+      { "monster": "mon_astral_fungal_cap_beetle", "weight": 15 },
+      { "monster": "mon_astral_fungal_cap_grazer", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_fungal_spore_mite", "weight": 60 },
+      { "monster": "mon_astral_fungal_button_snail", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_fungal_glow_moth", "weight": 60, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_fungal_carpet_vole", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_fungal_shelf_bat", "weight": 60, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_fungal_puff_toad", "weight": 15 },
+      { "monster": "mon_astral_fungal_ink_skink", "weight": 15, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_fungal_spore_carrier", "weight": 15 },
+      { "monster": "mon_astral_fungal_corded", "weight": 15 },
+      { "monster": "mon_astral_fungal_mycel_wolf", "weight": 6, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_fungal_haze_hunter", "weight": 6, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_fungal_acid_slug", "weight": 15 },
+      { "monster": "mon_astral_fungal_veil_wraith", "weight": 6, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_fungal_softground", "weight": 6 },
+      { "monster": "mon_astral_fungal_spore_venter", "weight": 6 },
+      { "monster": "mon_astral_fungal_blackwater", "weight": 6, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_fungal_cap_colossus", "weight": 3 },
+      { "monster": "mon_astral_fungal_sporemind", "weight": 2 }
+    ],
     "//": "Bind to the theme's overmap terrain with `spawns` (done in overmap.json)."
   },
   {
@@ -741,7 +2068,82 @@
     "is_animal": true,
     "monsters": [
       { "monster": "mon_astral_root_honey_bee", "weight": 60, "conditions": [ "DAY" ] },
-      { "monster": "mon_astral_root_burrow_hound", "weight": 6, "conditions": [ "NIGHT" ] }
+      { "monster": "mon_astral_root_burrow_hound", "weight": 6, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_root_grub", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_root_cave_bat", "weight": 60, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_root_lichen_mite", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_root_root_rat", "weight": 60 },
+      { "monster": "mon_astral_root_cave_cricket", "weight": 60, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_root_moss_hare", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_root_fruit_thief", "weight": 15, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_root_amber_bee", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_root_sound_hunter", "weight": 6, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_root_sinkhole_lurker", "weight": 6 },
+      { "monster": "mon_astral_root_vein_eater", "weight": 6 },
+      { "monster": "mon_astral_root_ambush_root", "weight": 15 },
+      { "monster": "mon_astral_root_echo_shade", "weight": 6, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_root_stone_mite", "weight": 15 },
+      { "monster": "mon_astral_root_silence_warden", "weight": 6 },
+      { "monster": "mon_astral_root_geode_crab", "weight": 6, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_root_taproot_tendril", "weight": 6 },
+      { "monster": "mon_astral_root_ore_tyrant", "weight": 3 },
+      { "monster": "mon_astral_root_taproot_warden", "weight": 2 }
+    ],
+    "//": "Bind to the theme's overmap terrain with `spawns` (done in overmap.json)."
+  },
+  {
+    "type": "monstergroup",
+    "id": "GROUP_ASTRAL_FALLOW",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_astral_fallow_feral_cow", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_fallow_feral_pig", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_fallow_feral_chicken", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_fallow_feral_goat", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_fallow_feral_sheep", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_fallow_orchard_swarm", "weight": 15, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_fallow_hedgerow_rat", "weight": 60, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_fallow_grain_mouse", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_fallow_scarecrow", "weight": 15, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_fallow_reaper", "weight": 6 },
+      { "monster": "mon_astral_fallow_orchard_husk", "weight": 15, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_fallow_barn_lurker", "weight": 15, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_fallow_hedge_beast", "weight": 6 },
+      { "monster": "mon_astral_fallow_silo_echo", "weight": 6, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_fallow_herdsman", "weight": 6 },
+      { "monster": "mon_astral_fallow_mill_grind", "weight": 6, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_fallow_cutting_field", "weight": 6, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_fallow_barn_king", "weight": 3, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_fallow_harvest_lord", "weight": 2 }
+    ],
+    "//": "Bind to the theme's overmap terrain with `spawns` (done in overmap.json)."
+  },
+  {
+    "type": "monstergroup",
+    "id": "GROUP_ASTRAL_TALLGRASS",
+    "default": "mon_null",
+    "is_animal": true,
+    "monsters": [
+      { "monster": "mon_astral_tallgrass_bison", "weight": 15, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_tallgrass_antelope", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_tallgrass_pronghorn", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_tallgrass_burrower", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_tallgrass_prairie_dog", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_tallgrass_grasshopper", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_tallgrass_quail", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_tallgrass_hare", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_tallgrass_grasscat", "weight": 15 },
+      { "monster": "mon_astral_tallgrass_firebird", "weight": 6, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_tallgrass_wolf", "weight": 15 },
+      { "monster": "mon_astral_tallgrass_serpent", "weight": 15, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_tallgrass_buzzard", "weight": 15, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_tallgrass_stalker", "weight": 6 },
+      { "monster": "mon_astral_tallgrass_burn_wisp", "weight": 6, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_tallgrass_colony_queen", "weight": 6, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_tallgrass_herd_guardian", "weight": 6, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_tallgrass_horn_bull", "weight": 3, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_tallgrass_prairie_khan", "weight": 2 }
     ],
     "//": "Bind to the theme's overmap terrain with `spawns` (done in overmap.json)."
   }
