@@ -267,6 +267,39 @@ trees, groundcover, clutter and the soft fade into neighbouring terrain then wor
 }
 ```
 
+## Dominant-Biome Mixing
+
+`biome_mix` on a `region_settings` makes the region's land read as "mostly this biome": a share
+of its land tiles is painted with what *other* regions would have generated there.  It runs after
+forests, swamps and biome layers and leaves rivers, lakes and oceans alone.  Two smooth noise
+fields drive it: one picks *where* the intrusions are (thresholded at the exact quantile, so the
+share is met on every overmap), the other picks *which* region each patch belongs to, dealt by
+weight, so each intruding biome forms contiguous patches rather than speckle.  On an intruded
+tile the result is the other region's z0 `default_oter`, then its forest / thick-forest / isolated
+swamp thresholds against the shared forest noise, then its own `biome_layers`.
+
+| Identifier       | Description                                                                         |
+| ---------------- | ----------------------------------------------------------------------------------- |
+| `dominant_share` | Share of land kept by the region itself, 0–1.  `1.0` (default) turns mixing off.    |
+| `regions`        | Array of `[ "<region_settings id>", weight ]`; weight defaults to 1.                 |
+| `seed_offset`    | Decorrelates the mask from forests and biome layers (default 7).                     |
+| `scale`          | Broad noise scale of the mask; smaller means larger patches (default 0.02).          |
+
+A region may list `default` to mix in ordinary overworld plains, forest and swamp.  Listing the
+region itself or an unknown region is reported at load.
+
+```jsonc
+{
+  "type": "region_settings",
+  "id": "astral_biome_lowlands",
+  "copy-from": "astral_pocket",
+  "biome_mix": {
+    "dominant_share": 0.85,
+    "regions": [ [ "default", 3 ], [ "astral_biome_meadows", 2 ], [ "astral_biome_fungal", 1 ] ]
+  }
+}
+```
+
 ## Region Forest Map Generation Settings
 
 **region_settings_forest_mapgen** defines the attributes used in generating forest terrains, 

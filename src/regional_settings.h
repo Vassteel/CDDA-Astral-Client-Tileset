@@ -519,6 +519,34 @@ struct region_terrain_furniture {
     static void reset();
 };
 
+/**
+ * Dominant-biome mixing.  A region whose land should read as "mostly this
+ * biome": a noise mask selects (1 - dominant_share) of the overmap's land
+ * tiles, and on those tiles the terrain is what another region (weighted pick,
+ * contiguous patches) would have generated there: its default terrain, its
+ * forest / swamp thresholds and its biome layers.  Water bodies are left alone.
+ */
+struct region_biome_mix_entry {
+    region_settings_id region;
+    int weight = 1;
+};
+
+struct region_biome_mix {
+    // Share of land kept by the region itself; 1.0 (the default) turns mixing off.
+    float dominant_share = 1.0f;
+    // Decorrelates the mask from forests and biome layers.
+    int seed_offset = 7;
+    // Broad scale of the mask noise: smaller = larger patches.
+    float scale = 0.02f;
+    std::vector<region_biome_mix_entry> regions;
+
+    bool enabled() const {
+        return dominant_share < 1.0f && !regions.empty();
+    }
+    void load( const JsonObject &jo );
+    void check( const region_settings_id &owner ) const;
+};
+
 /*
  * Spatially relevant overmap and mapgen variables grouped into a set of suggested defaults;
  * eventually region mapping will modify as required and allow for transitions of biomes / demographics in a smooth fashion
@@ -564,6 +592,8 @@ struct region_settings {
 
     // Noise-painted biome layers, applied in order after forests and swamps.
     std::vector<overmap_biome_layer_id> biome_layers;
+    // Other regions' land painted over (1 - dominant_share) of this one.
+    region_biome_mix biome_mix;
 
     region_settings() : id( "null" ) {
         default_groundcover.add( t_null, 0 );

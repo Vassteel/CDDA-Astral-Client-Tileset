@@ -12,6 +12,11 @@
 #include "magic_ter_furn_transform.h"
 #include "map.h"
 #include "map_helpers.h"
+#include "npc.h"
+#include "npctalk.h"
+#include "overmapbuffer.h"
+#include "creature_tracker.h"
+#include "line.h"
 #include "mapdata.h"
 #include "player_helpers.h"
 #include "point.h"
@@ -200,14 +205,36 @@ TEST_CASE( "astral_portal_travel_binds_and_persists_pockets", "[astral][dimensio
     const tripoint_abs_ms anchor_a = u.pos_abs();
     const tripoint_bub_ms threshold_a = center_a + point::north;
 
+    // A follower standing next to the gateway crosses with us (NPC plan N2).
+    shared_ptr_fast<npc> buddy = make_shared_fast<npc>();
+    buddy->normalize();
+    buddy->randomize();
+    buddy->spawn_at_precise( get_map().get_abs( center_a + point( 3, 0 ) ) );
+    overmap_buffer.insert_npc( buddy );
+    g->load_npcs();
+    talk_function::follow( *buddy );
+    REQUIRE( buddy->is_following() );
+    const character_id buddy_id = buddy->getID();
+    const auto buddy_near_player = [&]() {
+        for( npc &guy : g->all_npcs() ) {
+            if( guy.getID() == buddy_id ) {
+                return rl_dist( guy.pos_abs(), u.pos_abs() ) <= 6;
+            }
+        }
+        return false;
+    };
+
     dialogue d1( get_talker_for( u ), nullptr );
     effect_on_condition_EOC_ASTRAL_PORTAL_ENTER_DO->activate( d1 );
 
     REQUIRE( g->get_dimension_prefix() == dimension_astral_pocket_01 );
-    // Same coordinates on the far side, and the courtyard was drawn under us.
-    CHECK( u.pos_abs() == anchor_a );
+    // Canonical arrival (gen_astral_portal_data.py ARRIVAL_X/Y) on the pad's standing tile,
+    // and the courtyard was drawn around us.
+    const tripoint_abs_ms canonical_arrival( 90 * 24 + 11, 90 * 24 + 10, 0 );
+    CHECK( u.pos_abs() == canonical_arrival );
     CHECK( get_map().ter( u.pos_bub() ).id() == portal_ter( "active", 2, 2 ) );
     CHECK( get_map().ter( u.pos_bub() + point::north ).id() == portal_ter( "active", 1, 2 ) );
+    CHECK( buddy_near_player() );
 
     // Leave something behind on the tile south of the arrival pad.
     const tripoint_bub_ms drop = u.pos_bub() + point::south;
@@ -220,6 +247,7 @@ TEST_CASE( "astral_portal_travel_binds_and_persists_pockets", "[astral][dimensio
     effect_on_condition_EOC_ASTRAL_PORTAL_RETURN_DO->activate( d2 );
     REQUIRE( g->get_dimension_prefix() == dimension_default );
     CHECK( u.pos_abs() == anchor_a );
+    CHECK( buddy_near_player() );
     // The overworld threshold is now bound to pocket 01.
     CHECK( get_map().ter( threshold_a ).id() == ter_str_id( "t_astral_portal_active_r1c2_p01" ) );
 

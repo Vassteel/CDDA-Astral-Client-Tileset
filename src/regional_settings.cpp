@@ -696,6 +696,9 @@ void region_settings::load( const JsonObject &jo, std::string_view )
 
     optional( jo, was_loaded, "map_extras", region_extras );
     optional( jo, was_loaded, "biome_layers", biome_layers );
+    if( jo.has_object( "biome_mix" ) ) {
+        biome_mix.load( jo.get_object( "biome_mix" ) );
+    }
     mandatory( jo, was_loaded, "cities", city_spec );
     optional( jo, was_loaded, "weather", weather );
     optional( jo, was_loaded, "feature_flag_settings", overmap_feature_flag );
@@ -720,6 +723,39 @@ void region_settings::load( const JsonObject &jo, std::string_view )
 
     optional( jo, was_loaded, "max_urbanity", max_urban, 8 );
     optional( jo, was_loaded, "urbanity_increase", urban_increase, { 0, 0, 0, 0 } );
+}
+
+void region_biome_mix::load( const JsonObject &jo )
+{
+    optional( jo, false, "dominant_share", dominant_share, 1.0f );
+    optional( jo, false, "seed_offset", seed_offset, 7 );
+    optional( jo, false, "scale", scale, 0.02f );
+    if( jo.has_array( "regions" ) ) {
+        regions.clear();
+        for( const JsonArray entry : jo.get_array( "regions" ) ) {
+            region_biome_mix_entry e;
+            e.region = region_settings_id( entry.get_string( 0 ) );
+            e.weight = entry.size() > 1 ? entry.get_int( 1 ) : 1;
+            if( e.weight > 0 ) {
+                regions.push_back( e );
+            }
+        }
+    }
+    if( dominant_share < 0.0f || dominant_share > 1.0f ) {
+        jo.throw_error_at( "dominant_share", "dominant_share must be between 0 and 1" );
+    }
+}
+
+void region_biome_mix::check( const region_settings_id &owner ) const
+{
+    for( const region_biome_mix_entry &e : regions ) {
+        if( !e.region.is_valid() ) {
+            debugmsg( "region_settings %s: biome_mix names unknown region %s", owner.str(),
+                      e.region.str() );
+        } else if( e.region == owner ) {
+            debugmsg( "region_settings %s: biome_mix lists the region itself", owner.str() );
+        }
+    }
 }
 
 void region_settings::finalize()
@@ -753,6 +789,9 @@ void region_settings::finalize_all()
     region_settings_terrain_furniture_factory.finalize();
 
     region_settings_factory.finalize();
+    for( const region_settings &rs : region_settings_factory.get_all() ) {
+        rs.biome_mix.check( rs.id );
+    }
 
     if( !DEFAULT_REGION.is_valid() ) {
         debugmsg( "id: `default` region settings were not loaded or failed to load" );

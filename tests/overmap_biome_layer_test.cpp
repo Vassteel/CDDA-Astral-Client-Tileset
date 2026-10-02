@@ -1,4 +1,5 @@
 #include <cmath>
+#include <string>
 
 #include "cata_catch.h"
 #include "coordinates.h"
@@ -60,4 +61,27 @@ TEST_CASE( "overmap_biome_layer_bands_sort_highest_first", "[overmap][biome_laye
     CHECK( layer.terrains[0].first == Approx( 0.4f ) );
     CHECK( layer.terrains[1].first == Approx( 0.3f ) );
     CHECK( layer.terrains[2].first == Approx( 0.25f ) );
+}
+
+// The pocket biome regions declare dominant-biome mixing and every region they
+// name exists, so the 15 % intrusions can be painted.
+TEST_CASE( "astral_biome_regions_declare_biome_mix", "[overmap][biome_layer][biome_mix]" )
+{
+    for( const std::string &rid : { "astral_biome_meadows", "astral_biome_lowlands",
+                                    "astral_biome_fungal", "astral_biome_rootland" } ) {
+        const region_settings_id id( rid );
+        REQUIRE( id.is_valid() );
+        const region_biome_mix &mix = id->biome_mix;
+        INFO( rid );
+        CHECK( mix.enabled() );
+        CHECK( mix.dominant_share == Approx( 0.85f ) );
+        REQUIRE( !mix.regions.empty() );
+        for( const region_biome_mix_entry &e : mix.regions ) {
+            CHECK( e.region.is_valid() );
+            CHECK( e.region != id );
+            CHECK( e.weight > 0 );
+        }
+    }
+    // A region without the field has mixing off.
+    CHECK_FALSE( region_settings_id( "default" )->biome_mix.enabled() );
 }
