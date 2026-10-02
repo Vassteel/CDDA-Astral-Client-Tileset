@@ -23,8 +23,8 @@ TEST_CASE( "astral_generated_content_loads", "[astral][astral_content]" )
     CHECK( ter_str_id( "t_astral_meadow_hearthwood_tree" ).is_valid() );
     CHECK( ter_str_id( "t_astral_meadow_hearthwood_tree_harvested" ).is_valid() );
     CHECK( furn_str_id( "f_astral_fungal_glowcap_cluster" ).is_valid() );
-    CHECK( mtype_id( "astral_drowned_reed_eel" ).is_valid() );
-    CHECK( mtype_id( "astral_fungal_cap_beetle" ).is_valid() );
+    CHECK( mtype_id( "mon_astral_drowned_reed_eel" ).is_valid() );
+    CHECK( mtype_id( "mon_astral_fungal_cap_beetle" ).is_valid() );
     CHECK( flag_id( "ASTRAL_TIER_7" ).is_valid() );
 
     // A mined vein breaks into its ore, and a tier flag rides on every item.

@@ -30,7 +30,12 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 SRC = os.path.join(ROOT, "tools", "astral", "content")
 OUT = os.path.join(ROOT, "data", "json", "astral", "content")
 sys.path.insert(0, os.path.join(ROOT, "tools", "astral"))
-from cddafmt import fmt  # noqa: E402
+# Older copies of cddafmt.py run their CLI on import; hide our argv while importing.
+_argv, sys.argv = sys.argv, sys.argv[:1]
+try:
+    from cddafmt import fmt  # noqa: E402
+finally:
+    sys.argv = _argv
 
 TIER_NAMES = {1: "Common", 2: "Uncommon", 3: "Rare", 4: "Epic", 5: "Legendary", 6: "Mythic",
               7: "Celestial", 8: "Astral"}
@@ -138,6 +143,28 @@ def clean_name(row):
     return row["name"].lstrip("?").strip()
 
 
+MASS_NOUNS = ("glass", "oil", "cloth", "honey", "salt", "resin", "glue", "meat", "tea", "thread",
+              "tinder", "leather", "myceloth", "fibre", "chitin", "iron", "ore", "coal", "marl",
+              "flint", "dust", "silk", "scrap", "clay", "chalk", "charcoal", "hearthcoal",
+              "bogcake", "salve", "tincture", "ration")
+
+
+def name_obj(name, kind=None):
+    """Explicit plural: the engine refuses to guess for names it finds odd."""
+    last = name.split()[-1].lower()
+    if any(last.endswith(m) for m in MASS_NOUNS) and kind in (None, "raw", "intermediate", "consumable"):
+        return {"str_sp": name}
+    if "'" in name and not last.endswith(("s", "x", "z", "sh", "ch", "y")):
+        return {"str": name, "str_pl": name + "s"}
+    if last.endswith(("s", "x", "z", "sh", "ch")):
+        return {"str": name, "str_pl": name + "es"}
+    if last.endswith("fe"):
+        return {"str": name, "str_pl": name[:-2] + "ves"}
+    if last.endswith("y") and last[-2:-1] not in "aeiou":
+        return {"str": name, "str_pl": name[:-1] + "ies"}
+    return {"str": name, "str_pl": name + "s"}
+
+
 def description(row, what):
     look = row.get("look (≤ 12 words)", "").strip().rstrip(".")
     theme = THEME_WORDS.get(row.get("theme", "shared"), "the Astral planes")
@@ -178,7 +205,7 @@ def gen_items(rows, errors):
             e["subtypes"] = ["TOOL"] if kind == "tool" else ["ARMOR"] if kind == "armor" else []
             if not e["subtypes"]:
                 del e["subtypes"]
-        e["name"] = {"str": clean_name(r)}
+        e["name"] = name_obj(clean_name(r), kind)
         e["description"] = description(r, what)
         e["//"] = f"astral content list {r['_list']}: {kind}, tier {tier}, source: {r.get('source','')}"
         e["extend"] = {"flags": [f"ASTRAL_TIER_{tier}"]} if base else None
@@ -260,7 +287,7 @@ def gen_creatures(rows, errors):
     out = []
     by_theme = {}
     for r in rows:
-        mid = r["id"]
+        mid = r["id"] if r["id"].startswith("mon_") else "mon_" + r["id"]
         base = r.get("base (vanilla copy-from)", "").replace("?", "").split()[0] if r.get("base (vanilla copy-from)") else ""
         base = base.strip("()")
         if not has(base, "MONSTER"):
@@ -276,7 +303,7 @@ def gen_creatures(rows, errors):
                 entries.append({"drop": d, "type": "skin", "mass_ratio": 0.1})
         e = {
             "type": "MONSTER", "id": mid, "copy-from": base, "looks_like": base,
-            "name": {"str": clean_name(r)},
+            "name": name_obj(clean_name(r)),
             "description": description(r, "a creature") + "  " + r.get("behaviour (≤ 15 words)", "").strip().capitalize() + ".",
             "//": f"astral content list {r['_list']}: rank {tier_of(r)}, active {r.get('active','')}",
         }

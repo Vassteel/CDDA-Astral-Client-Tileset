@@ -66,7 +66,7 @@ Materials carry fantasy names; the *vanilla analogue* column says what each one 
 | astral_drowned_bog_oak_log | waterlogged oak log | raw | drowned | 2 | astral_drowned_sunken_oak | harvest (chop) | `log` | Y | 32 | near-black log, water-dark grain |
 | astral_drowned_bog_oak_plank | bog-oak plank | intermediate | drowned | 2 | craft: waterlogged oak log, seasoned | craft | `2x4` | Y | 32 | black plank, hard and dense |
 | astral_drowned_bog_oak_buckler | bog-oak buckler | armor | drowned | 2 | craft: bog-oak plank ×2 + verdigris ingot | craft | `shield` | Y | 32 | round black shield, green boss |
-| astral_drowned_verdigris_scrap | verdigris scrap | raw | drowned | 2 | loot: astral_lm_drowned_sunken_pier; astral_drowned_shell_crab | loot / butcher | `scrap_copper` | Y | 32 | green-crusted bronze fragments |
+| astral_drowned_verdigris_scrap | verdigris scrap | raw | drowned | 2 | loot: astral_lm_drowned_sunken_pier; mon_astral_drowned_shell_crab | loot / butcher | `scrap_copper` | Y | 32 | green-crusted bronze fragments |
 | astral_drowned_verdigris_ingot | verdigris bronze ingot | intermediate | drowned | 2 | craft: verdigris scrap ×3 + silvermire ore | craft | `scrap_copper` (bronze) | Y | 32 | green-gold ingot, mottled |
 | astral_drowned_verdigris_knife | verdigris knife | weapon | drowned | 2 | craft: verdigris ingot + bog-oak plank | craft | `knife_combat` | Y | 32 | green-bronze blade, black handle |
 | astral_drowned_sea_silk_tuft | sea-silk tuft | raw | drowned | 2 | astral_drowned_reed_mussel | harvest | `cotton_ball` | Y | 32 | gold-brown fine fibres, damp |
@@ -78,7 +78,7 @@ Materials carry fantasy names; the *vanilla analogue* column says what each one 
 
 | id | name | kind | theme | tier | source | obtained by | vanilla analogue | critical | cell | look (≤ 12 words) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| astral_fungal_chitin_plate | cap-beetle chitin | raw | fungal | 2 | astral_fungal_cap_beetle | butcher | `chitin_piece` | Y | 32 | curved brown-violet shell plate |
+| astral_fungal_chitin_plate | cap-beetle chitin | raw | fungal | 2 | mon_astral_fungal_cap_beetle | butcher | `chitin_piece` | Y | 32 | curved brown-violet shell plate |
 | astral_fungal_chitin_leather | chitin-leather | intermediate | fungal | 2 | craft: chitin plate ×2, tanning tub | craft | `leather` | Y | 32 | supple dark sheet, iridescent edge |
 | astral_fungal_chitin_jerkin | chitin-leather jerkin | armor | fungal | 2 | craft: chitin-leather ×4 + thread | craft | `jacket_leather` | Y | 32 | sleeveless dark jerkin, violet sheen |
 | astral_fungal_mycel_fibre | mycel fibre | raw | fungal | 1 | astral_fungal_carpet | harvest | `plant_fibre` | Y | 32 | handful of pale grey strands |
@@ -105,9 +105,9 @@ Materials carry fantasy names; the *vanilla analogue* column says what each one 
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | astral_fungal_glowcap_tincture | glowcap tincture | consumable | fungal | 2 | craft: glowcap + ghostsalt + water | craft | `antifungal` | Y | 32 | stoppered vial, faint blue |
 | astral_meadow_hearth_tea | hearthwood tea | consumable | meadow | 1 | craft: hearthwood tinder + water | craft | `tea` | Y | 32 | steaming cup, amber |
-| astral_drowned_eel_meat | reed eel meat | consumable | drowned | 1 | astral_drowned_reed_eel | butcher | `fish` | Y | 32 | dark fillet |
-| astral_fungal_cap_meat | cap-beetle meat | consumable | fungal | 2 | astral_fungal_cap_beetle | butcher | `meat` | Y | 32 | pale segmented meat |
-| astral_meadow_hare_meat | meadow hare meat | consumable | meadow | 1 | astral_meadow_hare | butcher | `meat` | Y | 32 | small red cut |
+| astral_drowned_eel_meat | reed eel meat | consumable | drowned | 1 | mon_astral_drowned_reed_eel | butcher | `fish` | Y | 32 | dark fillet |
+| astral_fungal_cap_meat | cap-beetle meat | consumable | fungal | 2 | mon_astral_fungal_cap_beetle | butcher | `meat` | Y | 32 | pale segmented meat |
+| astral_meadow_hare_meat | meadow hare meat | consumable | meadow | 1 | mon_astral_meadow_hare | butcher | `meat` | Y | 32 | small red cut |
 
 ## E. First core (tier 7, one per outcome; portal plan S6)
 
@@ -125,12 +125,12 @@ Materials carry fantasy names; the *vanilla analogue* column says what each one 
 
 | id | name | theme | rank | base (vanilla copy-from) | size | behaviour (≤ 15 words) | drops (item ids) | active | cell | look (≤ 12 words) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| astral_meadow_hare | meadow hare | meadow | 1 | mon_rabbit | tiny | flees; nothing hunts here | astral_meadow_hare_meat | day | 32 | long-eared tawny hare, pale belly |
-| astral_drowned_reed_eel | reed eel | drowned | 2 | mon_fish_eel | small | moves only while you stand in water; bites ankles | astral_drowned_eel_meat | day+night | 32 | dark eel, pale belly, weed-green fins |
-| astral_drowned_shell_crab | verdigris crab | drowned | 2 | mon_giant_crayfish | small | wears sunken bronze; attacks only in water | astral_drowned_verdigris_scrap | day+night | 32 | crab with a green-crusted bronze shell |
-| astral_fungal_cap_beetle | cap-beetle | fungal | 2 | mon_giant_cockroach | medium | grazes caps; defends when hit; haze follows it | astral_fungal_chitin_plate, astral_fungal_cap_meat | day+night | 64 | broad violet-brown beetle, cap-shaped carapace |
-| astral_root_honey_bee | root bee | root | 1 | mon_bee | tiny | swarms near combs; sound draws them | — | day | 32 | fat black bee, dull gold band |
-| astral_root_burrow_hound | burrow hound | root | 3 | mon_dog | medium | hunts by sound underground; ignores the quiet | — | night | 64 | hairless grey hound, no eyes, wide ears |
+| mon_astral_meadow_hare | meadow hare | meadow | 1 | mon_rabbit | tiny | flees; nothing hunts here | astral_meadow_hare_meat | day | 32 | long-eared tawny hare, pale belly |
+| mon_astral_drowned_reed_eel | reed eel | drowned | 2 | mon_fish_eel | small | moves only while you stand in water; bites ankles | astral_drowned_eel_meat | day+night | 32 | dark eel, pale belly, weed-green fins |
+| mon_astral_drowned_shell_crab | verdigris crab | drowned | 2 | mon_giant_crayfish | small | wears sunken bronze; attacks only in water | astral_drowned_verdigris_scrap | day+night | 32 | crab with a green-crusted bronze shell |
+| mon_astral_fungal_cap_beetle | cap-beetle | fungal | 2 | mon_giant_cockroach | medium | grazes caps; defends when hit; haze follows it | astral_fungal_chitin_plate, astral_fungal_cap_meat | day+night | 64 | broad violet-brown beetle, cap-shaped carapace |
+| mon_astral_root_honey_bee | root bee | root | 1 | mon_bee | tiny | swarms near combs; sound draws them | — | day | 32 | fat black bee, dull gold band |
+| mon_astral_root_burrow_hound | burrow hound | root | 3 | mon_dog | medium | hunts by sound underground; ignores the quiet | — | night | 64 | hairless grey hound, no eyes, wide ears |
 
 Bases confirmed against vanilla ids by `tools/astral/gen_content.py --check`.
 
