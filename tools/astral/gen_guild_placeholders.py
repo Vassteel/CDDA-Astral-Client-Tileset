@@ -6,7 +6,12 @@ Writes data/json/mapgen/astral/settlements_guild_placeholder.json (after furnitu
 import json, os, sys, random
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import cddafmt
+_args = sys.argv
+sys.argv = sys.argv[:1]
+try:
+    import cddafmt
+finally:
+    sys.argv = _args
 random.seed(7)
 # size key: (label, W, H in OMT, city_sizes, rooms in the back wing, front-hall extras)
 SIZES=[
@@ -118,6 +123,13 @@ for key,label,W,H,cs,rooms in SIZES:
     print(key, W,"x",H, "towns",cs, "rooms",len(rooms))
     if key in("hall",):
         print("\n".join(rows))
+from building_briefs import emit_buildings
+out.extend(emit_buildings())
+
 output_dir = os.path.join(HERE, '..', '..', 'data', 'json', 'mapgen', 'astral')
 os.makedirs(output_dir, exist_ok=True)
 open(os.path.join(output_dir, 'settlements_guild_placeholder.json'),'w').write(cddafmt.fmt(out,0,0)+"\n")
+
+if "--preview" in sys.argv:
+    from building_briefs import preview
+    preview(sys.argv[sys.argv.index("--preview") + 1])

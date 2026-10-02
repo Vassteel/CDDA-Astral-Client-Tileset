@@ -1,0 +1,71 @@
+{
+  "id": "chapel",
+  "label": "Wayfarers' Chapel",
+  "//": "Notable building: a single nave with a small vestry; stained glass.",
+  "city_sizes": [
+    11,
+    55
+  ],
+  "wall": "#",
+  "footprint": [
+    1,
+    1
+  ],
+  "ground": {
+    "rooms": [
+      {
+        "kind": "chapel",
+        "rect": [
+          6,
+          6,
+          17,
+          17
+        ]
+      },
+      {
+        "kind": "records",
+        "rect": [
+          6,
+          18,
+          17,
+          20
+        ]
+      }
+    ],
+    "porch": [
+      10,
+      4,
+      13,
+      5
+    ],
+    "hub": 0,
+    "doors": [
+      [
+        11,
+        6
+      ],
+      [
+        12,
+        6
+      ]
+    ],
+    "window_step": 3,
+    "stained": [
+      "chapel"
+    ],
+    "path": [
+      11,
+      3,
+      0
+    ],
+    "gardens": [
+      [
+        2,
+        8,
+        4,
+        16
+      ]
+    ],
+    "trees": 0.3
+  }
+}

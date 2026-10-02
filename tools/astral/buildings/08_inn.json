@@ -1,0 +1,155 @@
+{
+  "id": "inn",
+  "label": "Inn",
+  "//": "Notable building: taproom and kitchen below, rooms above, cellar for stock.",
+  "city_sizes": [
+    7,
+    55
+  ],
+  "wall": "&",
+  "footprint": [
+    1,
+    1
+  ],
+  "ground": {
+    "rooms": [
+      {
+        "kind": "taproom",
+        "rect": [
+          3,
+          6,
+          15,
+          13
+        ]
+      },
+      {
+        "kind": "kitchen",
+        "rect": [
+          16,
+          6,
+          20,
+          13
+        ]
+      },
+      {
+        "kind": "dining",
+        "rect": [
+          3,
+          14,
+          20,
+          19
+        ]
+      }
+    ],
+    "porch": [
+      7,
+      4,
+      11,
+      5
+    ],
+    "hub": 0,
+    "doors": [
+      [
+        8,
+        6
+      ],
+      [
+        9,
+        6
+      ]
+    ],
+    "window_step": 3,
+    "path": [
+      9,
+      3,
+      0
+    ],
+    "wells": [
+      [
+        21,
+        16
+      ]
+    ],
+    "trees": 0.2
+  },
+  "upper": {
+    "rooms": [
+      {
+        "kind": "landing",
+        "rect": [
+          3,
+          6,
+          20,
+          8
+        ]
+      },
+      {
+        "kind": "quarters",
+        "rect": [
+          3,
+          9,
+          8,
+          13
+        ]
+      },
+      {
+        "kind": "quarters",
+        "rect": [
+          9,
+          9,
+          14,
+          13
+        ]
+      },
+      {
+        "kind": "quarters",
+        "rect": [
+          15,
+          9,
+          20,
+          13
+        ]
+      },
+      {
+        "kind": "quarters",
+        "rect": [
+          3,
+          14,
+          11,
+          19
+        ]
+      },
+      {
+        "kind": "quarters",
+        "rect": [
+          12,
+          14,
+          20,
+          19
+        ]
+      }
+    ],
+    "hub": 0,
+    "stairs": [
+      4,
+      8
+    ]
+  },
+  "cellar": {
+    "rooms": [
+      {
+        "kind": "cellar",
+        "rect": [
+          3,
+          6,
+          20,
+          13
+        ]
+      }
+    ],
+    "stairs": [
+      5,
+      7
+    ]
+  }
+}
