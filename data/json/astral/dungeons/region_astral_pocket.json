@@ -196,7 +196,8 @@
     "biome_mix": {
       "dominant_share": 0.85,
       "seed_offset": 7,
-      "regions": [ [ "default", 4 ], [ "astral_biome_lowlands", 2 ], [ "astral_biome_fungal", 1 ] ]
+      "regions": [ [ "default", 12 ], [ "astral_biome_lowlands", 3 ], [ "astral_biome_fungal", 1 ] ],
+      "//": "Weights from Grok's WP-B5 table (2026-10-02): overworld plains/forest/thick/swamp summed into `default`."
     }
   },
   {
@@ -238,7 +239,13 @@
     "biome_mix": {
       "dominant_share": 0.85,
       "seed_offset": 8,
-      "regions": [ [ "default", 3 ], [ "astral_biome_meadows", 2 ], [ "astral_biome_fungal", 1 ] ]
+      "regions": [
+        [ "default", 10 ],
+        [ "astral_biome_meadows", 3 ],
+        [ "astral_biome_fungal", 3 ],
+        [ "astral_biome_rootland", 1 ]
+      ],
+      "//": "Weights from Grok's WP-B5 table (2026-10-02): overworld plains/forest/thick/swamp summed into `default`."
     },
     "rivers": "astral_drowned",
     "lakes": "astral_drowned"
@@ -283,11 +290,12 @@
       "dominant_share": 0.85,
       "seed_offset": 9,
       "regions": [
-        [ "astral_biome_lowlands", 2 ],
-        [ "astral_biome_rootland", 2 ],
-        [ "default", 1 ],
+        [ "astral_biome_lowlands", 4 ],
+        [ "astral_biome_rootland", 4 ],
+        [ "default", 7 ],
         [ "astral_biome_meadows", 1 ]
-      ]
+      ],
+      "//": "Weights from Grok's WP-B5 table (2026-10-02): overworld plains/forest/thick/swamp summed into `default`."
     }
   },
   {
@@ -329,7 +337,13 @@
     "biome_mix": {
       "dominant_share": 0.85,
       "seed_offset": 10,
-      "regions": [ [ "astral_biome_fungal", 3 ], [ "default", 1 ] ]
+      "regions": [
+        [ "astral_biome_fungal", 5 ],
+        [ "astral_biome_lowlands", 3 ],
+        [ "default", 6 ],
+        [ "astral_biome_meadows", 1 ]
+      ],
+      "//": "Weights from Grok's WP-B5 table (2026-10-02): overworld plains/forest/thick/swamp summed into `default`."
     }
   }
 ]
