@@ -50,6 +50,9 @@ User authorization to update GitHub is the exception to the handoff no-push rule
 
 ## Status
 
-partial — source and cloud checks published in PR #5; default-branch merge follows.
+done — PR #5 merged as 47f3350774b394a827173afd5952364413d57702; remote default and local main checkout fast-forwarded.
+24 overlapping untracked local instruction/plan/result files were preserved under
+artifacts/archive/cloud-sync-before-20261002 before the fast-forward. Other local
+handoffs remain untouched and untracked. No release, tag or live-client changes.
 Cloud access must still be granted in the user's cloud provider. Full cloud builds
 and gameplay have not been tested; whole-tree formatting checks remain failing.
