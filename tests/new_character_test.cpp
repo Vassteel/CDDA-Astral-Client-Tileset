@@ -237,3 +237,26 @@ TEST_CASE( "cannibal_not_randomly_selected", " [character] [traits] [random]" )
         REQUIRE( random_trait != trait_CANNIBAL );
     }
 }
+
+TEST_CASE( "portal_delver_starting_kit_granted_once", "[starting_kit][astral]" )
+{
+    clear_avatar();
+    avatar &you = get_avatar();
+    const profession_id delver( "astral_portal_delver" );
+    REQUIRE( delver.is_valid() );
+    you.prof = &delver.obj();
+    you.add_profession_items();
+
+    std::map<std::string, int> counts;
+    you.visit_items( [&]( const item * it, const item * ) {
+        counts[it->typeId().str()] += it->count();
+        return VisitResponse::NEXT;
+    } );
+    for( const std::string id : { "arming_sword", "astral_delver_pack",
+                                 "astral_debug_portal_placer", "astral_debug_ledger",
+                                 "pickaxe", "shovel" } ) {
+        CAPTURE( id );
+        CHECK( counts[id] == 1 );
+    }
+    clear_avatar();
+}
