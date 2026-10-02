@@ -67,3 +67,10 @@ Project plans are in `claude/plans/`; the tracker is `claude/plans/astral-work-t
 Record work in `claude/handoffs/results/`, including checks, source hash, limitations and
 local build instructions. Do not assume local `artifacts/` files exist in the cloud:
 that directory is ignored and contains builds, profiles and staging files on the Deck.
+
+## Current CI caveat
+
+The lightweight Astral cloud checks pass on GitHub. The inherited whole-tree
+JSON/astyle/style-code checks currently fail on formatting in UI code and generated
+data (PR #5). Do not disable them or mistake them for game-load failures. Keep
+formatting cleanup separate from functional edits and preserve generator reproduction.

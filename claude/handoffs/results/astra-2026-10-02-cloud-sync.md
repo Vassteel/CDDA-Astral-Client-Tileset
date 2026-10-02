@@ -37,6 +37,19 @@ Cloud-app credentials/access are separate and cannot be inferred from this local
 - Plan documents scanned for common secret/token/webhook patterns; none found.
 - Prior full local S4 test/data results preserved; no new game build or gameplay acceptance.
 
+## Hosted verification and publication
+
+PR #5: https://github.com/Vassteel/CDDA-Astral-Client-Tileset/pull/5
+Source/docs commit: 3b95e2d89d. Astral cloud checks passed in run 37005593951
+(16 seconds). Existing whole-tree formatting checks failed: JSON run 37005593772,
+astyle run 37005593932, style-code run 37005593888. Logs report formatting in
+many existing UI files and generated JSON, including newly synced content. These
+are formatting failures, not a compiler/data-loader result. No checks were disabled.
+Formatting cleanup remains pending; broad reformatting is outside this source sync.
+User authorization to update GitHub is the exception to the handoff no-push rule.
+
 ## Status
 
-partial — local sync and checks complete; GitHub publication/hosted CI verification pending.
+partial — source and cloud checks published in PR #5; default-branch merge follows.
+Cloud access must still be granted in the user's cloud provider. Full cloud builds
+and gameplay have not been tested; whole-tree formatting checks remain failing.
