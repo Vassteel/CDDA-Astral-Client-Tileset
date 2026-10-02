@@ -49,6 +49,9 @@ SEASONS = ["spring", "summer", "autumn", "winter"]
 
 # --------------------------------------------------------------------------- vanilla index
 
+ITEM_DEFS = {}
+
+
 def index_vanilla():
     types = {}
     for f in glob.glob(os.path.join(ROOT, "data", "json", "**", "*.json"), recursive=True):
@@ -60,6 +63,8 @@ def index_vanilla():
             continue
         for x in d if isinstance(d, list) else [d]:
             if isinstance(x, dict):
+                if x.get("type") == "ITEM" and isinstance(x.get("id"), str):
+                    ITEM_DEFS[x["id"]] = x
                 for key in ("id", "abstract"):
                     if isinstance(x.get(key), str):
                         types.setdefault(x[key], set()).add(x.get("type"))
@@ -350,7 +355,7 @@ def gen_recipes(rows, errors):
         cat, sub = CATEGORY.get(kind, CATEGORY["raw"])
         if any(w in rid for w in MEDICAL):
             cat, sub = "CC_OTHER", "CSC_OTHER_MEDICAL"
-        skill = "tailoring" if is_cloth else "cooking" if kind == "consumable" else "fabrication"
+        skill = "tailor" if is_cloth else "cooking" if kind == "consumable" else "fabrication"
         e = {"type": "recipe", "result": rid, "category": cat, "subcategory": sub,
              "activity_level": "NO_EXERCISE" if kind == "consumable" else "MODERATE_EXERCISE",
              "skill_used": skill, "difficulty": max(0, min(5, tier - 1 + (1 if is_metal else 0))),
@@ -397,6 +402,14 @@ def gen_recipes(rows, errors):
             e["tools"] = tools
         if using:
             e["using"] = using
+        # A result that copies a charged vanilla item (thread, oil, coal) needs a charge count.
+        base = first_vanilla_item(r.get("vanilla analogue", ""))
+        base_def = ITEM_DEFS.get(base, {})
+        if "AMMO" in base_def.get("subtypes", []) or "count" in base_def:
+            e["charges"] = int(base_def.get("count", 1))
+            e.pop("result_mult", None)
+        elif base_def.get("phase") == "liquid" or "charges" in base_def:
+            e["charges"] = int(base_def.get("charges", 1))
         e["components"] = components
         out.append(e)
     return out
@@ -633,6 +646,8 @@ def lint(data, generated, errors):
         for key in ("activity_level", "skill_used", "difficulty", "time", "category", "subcategory"):
             if key not in e:
                 errors.append(f"recipe {e['result']}: missing {key}")
+        if not has(e["skill_used"], "skill"):
+            errors.append(f"recipe {e['result']}: unknown skill {e['skill_used']}")
         for group in e["components"]:
             for alt in group:
                 if len(alt) == 3:
