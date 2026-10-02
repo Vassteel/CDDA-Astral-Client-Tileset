@@ -4,6 +4,8 @@
 #include "flag.h"
 #include "item.h"
 #include "itype.h"
+#include "material.h"
+#include "recipe.h"
 #include "mapdata.h"
 #include "monstergenerator.h"
 #include "mtype.h"
@@ -34,4 +36,16 @@ TEST_CASE( "astral_generated_content_loads", "[astral][astral_content]" )
     CHECK( vein.bash->ter_set == ter_str_id( "t_dirt" ) );
     CHECK( item( itype_id( "astral_ration" ) ).has_flag( flag_id( "ASTRAL_TIER_1" ) ) );
     CHECK( item( itype_id( "astral_core_heart_fragment" ) ).has_flag( flag_id( "ASTRAL_TIER_7" ) ) );
+}
+
+TEST_CASE( "astral_generated_materials_and_recipes_load", "[astral][astral_content]" )
+{
+    CHECK( material_id( "astral_duskiron" ).is_valid() );
+    CHECK( material_id( "astral_hearthwood" ).is_valid() );
+    CHECK( item( itype_id( "astral_duskiron_bar" ) ).made_of( material_id( "astral_duskiron" ) ) );
+    for( const std::string &id : { "astral_duskiron_bar", "astral_meadow_hearthwood_plank",
+                                   "astral_fungal_glowcap_oil", "astral_spore_mask", "astral_root_delver_pick" } ) {
+        INFO( id );
+        CHECK( recipe_id( id ).is_valid() );
+    }
 }

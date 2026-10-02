@@ -9,6 +9,8 @@ from tools/astral/content/*.md and writes game data to data/json/astral/content/
   creatures_<list>.json    monsters (copy-from base), their harvest tables, per-theme monstergroups
   flora_<list>.json        trees / plants (terrain or furniture) with harvests and harvested twins
   tiers.json               ASTRAL_TIER_n json_flags (tier shows as an item-info line, items plan G1)
+  materials.json           Astral materials (copy-from vanilla steel/wood/bronze/cotton/chitin/crystal)
+  recipes.json             one recipe per item whose source reads "craft: a + b ×2, process"
 
 Everything ships on `looks_like`; sprites come later from the T4 list.
 
@@ -206,11 +208,194 @@ def gen_items(rows, errors):
                 del e["subtypes"]
         e["name"] = name_obj(clean_name(r), kind)
         e["description"] = description(r, what)
+        mat = material_for(idv)
+        if mat:
+            e["material"] = [mat]
         e["//"] = f"astral content list {r['_list']}: {kind}, tier {tier}, source: {r.get('source','')}"
         e["extend"] = {"flags": [f"ASTRAL_TIER_{tier}"]} if base else None
         if e["extend"] is None:
             del e["extend"]
             e["flags"] = [f"ASTRAL_TIER_{tier}"]
+        out.append(e)
+    return out
+
+
+
+# --------------------------------------------------------------------------- materials
+
+# Astral material -> (vanilla copy-from, display name, resist tweak, repaired_with item)
+MATERIALS = {
+    "astral_duskiron": ("steel", "Duskiron", {"bash": 6, "cut": 7, "acid": 6, "heat": 4, "bullet": 3}, "astral_duskiron_bar"),
+    "astral_verdigris_bronze": ("bronze", "Verdigris bronze", {"bash": 4, "cut": 5, "acid": 3, "heat": 2, "bullet": 2}, "astral_drowned_verdigris_ingot"),
+    "astral_hearthwood": ("wood", "Hearthwood", None, "astral_meadow_hearthwood_plank"),
+    "astral_bog_oak": ("wood", "Bog oak", {"bash": 3, "cut": 3, "acid": 2, "heat": 2, "bullet": 2}, "astral_drowned_bog_oak_plank"),
+    "astral_ironwood": ("wood", "Ironwood", {"bash": 4, "cut": 4, "acid": 2, "heat": 2, "bullet": 2}, "astral_root_ironwood_plank"),
+    "astral_sea_silk": ("cotton", "Sea-silk", {"bash": 1, "cut": 2, "acid": 1, "heat": 1, "bullet": 1}, "astral_drowned_sea_silk_cloth"),
+    "astral_myceloth": ("cotton", "Myceloth", None, "astral_fungal_myceloth"),
+    "astral_chitin_leather": ("chitin", "Chitin-leather", {"bash": 2, "cut": 4, "acid": 2, "heat": 1, "bullet": 2}, "astral_fungal_chitin_leather"),
+    "astral_heartglass": ("crystal", "Heartglass", None, "astral_root_heartglass"),
+}
+# keyword in item id -> material
+MATERIAL_BY_KEY = [
+    ("duskiron", "astral_duskiron"), ("verdigris", "astral_verdigris_bronze"),
+    ("hearthwood", "astral_hearthwood"), ("bog_oak", "astral_bog_oak"), ("ironwood", "astral_ironwood"),
+    ("sea_silk", "astral_sea_silk"), ("myceloth", "astral_myceloth"), ("chitin", "astral_chitin_leather"),
+    ("heartglass", "astral_heartglass"),
+]
+
+
+def material_for(item_id):
+    for key, mat in MATERIAL_BY_KEY:
+        if key in item_id:
+            return mat
+    return None
+
+
+def gen_materials():
+    out = []
+    for mid, (base, name, resist, repaired) in MATERIALS.items():
+        e = {"type": "material", "id": mid, "copy-from": base, "name": name,
+             "repaired_with": repaired,
+             "//": f"Astral material; behaves like vanilla {base} with its own repair stock."}
+        if resist:
+            e["resist"] = resist
+        out.append(e)
+    return out
+
+
+# --------------------------------------------------------------------------- recipes
+
+# words in a "craft:" source that are processes, not ingredients
+PROCESS_WORDS = {
+    "seasoned": ("time", "4 h"), "boiled": ("heat", 10), "press": ("quality", "CUT", 1),
+    "loom": ("quality", "SEW", 1), "tanning tub": ("quality", "CUT", 1), "saw": ("quality", "SAW_W", 1),
+    "charcoal pit": ("heat", 50), "smelt": ("forge", 2),
+}
+# vanilla-side names used in sources
+NAME_MAP = {
+    "cord": ("req", "cordage_short", 1), "thread": ("item", "thread", 10), "water": ("item", "water_clean", 1),
+    "hide": ("item", "leather", 2), "leather": ("item", "leather", 2), "paper": ("item", "paper", 5),
+    "flint": ("item", "astral_meadow_starflint", 1),
+    "any theme staple": ("alts", ["astral_drowned_eel_meat", "astral_fungal_cap_meat", "astral_meadow_hare_meat", "meat"], 2),
+    "leather/hide of any theme": ("alts", ["leather", "astral_fungal_chitin_leather"], 2),
+}
+ALIASES = {"verdigris ingot": "verdigris bronze ingot", "glowcap raw": "glowcap", "chitin plate": "cap-beetle chitin",
+           "ironwood haft": "ironwood pick haft", "mire-iron": "mire-iron", "glowcap": "glowcap"}
+
+
+def parse_craft(source, name_to_id, errors, rid):
+    """'craft: duskiron ore or mire-iron ×2 + emberstone, boiled' ->
+    (components [[ [id, n], ... ], ...], processes [...])"""
+    text = source.split("craft:", 1)[1]
+    text = text.split("/")[0] if text.strip().startswith("start kit") else text
+    parts = [p.strip() for p in re.split(r"[,+]", text) if p.strip()]
+    components, processes = [], []
+    for part in parts:
+        low = part.lower().strip()
+        key = re.sub(r"\s*×\s*\d+(\s*[–-]\s*\d+)?", "", low).strip()
+        if key in PROCESS_WORDS:
+            processes.append(PROCESS_WORDS[key])
+            continue
+        m = re.search(r"×\s*(\d+)", low)
+        count = int(m.group(1)) if m else 1
+        alts = []
+        for alt in re.split(r"\s+or\s+", key):
+            alt = alt.strip()
+            alt = ALIASES.get(alt, alt)
+            if alt in NAME_MAP:
+                kind, val, n = NAME_MAP[alt]
+                if kind == "alts":
+                    alts += [[v, n] for v in val]
+                elif kind == "req":
+                    alts.append([val, n, "LIST"])
+                else:
+                    alts.append([val, n])
+            elif alt in name_to_id:
+                alts.append([name_to_id[alt], count])
+            elif alt.endswith("s") and alt[:-1] in name_to_id:
+                alts.append([name_to_id[alt[:-1]], count])
+            else:
+                errors.append(f"recipe {rid}: unknown ingredient {alt!r}")
+        if alts:
+            components.append(alts)
+    return components, processes
+
+
+CATEGORY = {
+    "raw": ("CC_OTHER", "CSC_OTHER_MATERIALS"), "intermediate": ("CC_OTHER", "CSC_OTHER_MATERIALS"),
+    "crafted": ("CC_OTHER", "CSC_OTHER_OTHER"), "tool": ("CC_OTHER", "CSC_OTHER_TOOLS"),
+    "armor": ("CC_ARMOR", "CSC_ARMOR_OTHER"), "weapon": ("CC_WEAPON", "CSC_WEAPON_OTHER"),
+    "consumable": ("CC_FOOD", "CSC_FOOD_OTHER"), "reward": ("CC_OTHER", "CSC_OTHER_OTHER"),
+}
+MEDICAL = ("salve", "tincture", "tea")
+
+
+def gen_recipes(rows, errors):
+    name_to_id = {clean_name(r).lower(): r["id"] for r in rows}
+    out = []
+    for r in rows:
+        src = r.get("source", "")
+        if "craft:" not in src:
+            continue
+        rid = r["id"]
+        kind = r.get("kind", "raw")
+        components, processes = parse_craft(src, name_to_id, errors, rid)
+        if not components:
+            errors.append(f"recipe {rid}: no components parsed from {src!r}")
+            continue
+        tier = tier_of(r)
+        is_metal = "duskiron" in rid or "ingot" in rid or "verdigris" in rid and kind != "raw"
+        is_wood = any(w in rid for w in ("plank", "staff", "haft", "torch", "leanto", "kit", "case"))
+        is_cloth = any(w in rid for w in ("cloth", "thread", "wrap", "mask", "myceloth", "leather", "jerkin"))
+        cat, sub = CATEGORY.get(kind, CATEGORY["raw"])
+        if any(w in rid for w in MEDICAL):
+            cat, sub = "CC_OTHER", "CSC_OTHER_MEDICAL"
+        skill = "tailoring" if is_cloth else "cooking" if kind == "consumable" else "fabrication"
+        e = {"type": "recipe", "result": rid, "category": cat, "subcategory": sub,
+             "skill_used": skill, "difficulty": max(0, min(5, tier - 1 + (1 if is_metal else 0))),
+             "time": "30 m", "autolearn": True,
+             "//": f"astral content list {r['_list']}: {src}"}
+        qualities, tools, using = [], [], []
+        for proc in processes:
+            if proc[0] == "time":
+                e["time"] = proc[1]
+            elif proc[0] == "heat":
+                tools.append([["surface_heat", proc[1], "LIST"]])
+            elif proc[0] == "quality":
+                qualities.append({"id": proc[1], "level": proc[2]})
+            elif proc[0] == "forge":
+                using.append(["forging_standard", proc[1]])
+        if is_metal and not using:
+            using.append(["forging_standard", 2])
+            qualities.append({"id": "HAMMER", "level": 2})
+            e["time"] = "60 m"
+        elif is_wood and not any(q["id"] == "SAW_W" for q in qualities):
+            qualities.append({"id": "CUT", "level": 1})
+        elif is_cloth:
+            qualities.append({"id": "SEW", "level": 1})
+        if "plank" in rid and "log" in src:
+            e["result_mult"] = 4
+            qualities = [{"id": "SAW_W", "level": 1}]
+        if "bar" in rid and "ore" in src:
+            e["result_mult"] = 1
+        metal_parts = any(alt[0] in ("astral_duskiron_bar", "astral_drowned_verdigris_ingot")
+                          for group in components for alt in group)
+        if metal_parts and not using:
+            using.append(["forging_standard", 1])
+            qualities.append({"id": "HAMMER", "level": 2})
+            e["time"] = "60 m"
+        # dedupe qualities, keeping the highest level per id
+        best = {}
+        for q in qualities:
+            best[q["id"]] = max(best.get(q["id"], 0), q["level"])
+        qualities = [{"id": k, "level": v} for k, v in best.items()]
+        if qualities:
+            e["qualities"] = qualities
+        if tools:
+            e["tools"] = tools
+        if using:
+            e["using"] = using
+        e["components"] = components
         out.append(e)
     return out
 
@@ -442,6 +627,14 @@ def lint(data, generated, errors):
         for i, _, _, _ in parse_yields(r["yields"]):
             if not known(i):
                 errors.append(f"vein {r['id']}: yield {i} is not an item row")
+    for e in generated["recipes"]:
+        for group in e["components"]:
+            for alt in group:
+                if len(alt) == 3:
+                    if not has(alt[0], "requirement"):
+                        errors.append(f"recipe {e['result']}: requirement {alt[0]} unknown")
+                elif not known(alt[0], ["ITEM"]):
+                    errors.append(f"recipe {e['result']}: component {alt[0]} unknown")
     seen = {}
     for lst in generated.values():
         for e in lst:
@@ -465,6 +658,8 @@ def main():
         "creatures": gen_creatures(data["creatures"], errors),
         "flora": gen_flora(data["flora"], errors),
         "tiers": gen_tiers(),
+        "materials": gen_materials(),
+        "recipes": gen_recipes(data["items"], errors),
     }
     lint(data, generated, errors)
     for e in errors:
