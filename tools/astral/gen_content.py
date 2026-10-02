@@ -352,6 +352,7 @@ def gen_recipes(rows, errors):
             cat, sub = "CC_OTHER", "CSC_OTHER_MEDICAL"
         skill = "tailoring" if is_cloth else "cooking" if kind == "consumable" else "fabrication"
         e = {"type": "recipe", "result": rid, "category": cat, "subcategory": sub,
+             "activity_level": "NO_EXERCISE" if kind == "consumable" else "MODERATE_EXERCISE",
              "skill_used": skill, "difficulty": max(0, min(5, tier - 1 + (1 if is_metal else 0))),
              "time": "30 m", "autolearn": True,
              "//": f"astral content list {r['_list']}: {src}"}
@@ -366,6 +367,7 @@ def gen_recipes(rows, errors):
             elif proc[0] == "forge":
                 using.append(["forging_standard", proc[1]])
         if is_metal and not using:
+            e["activity_level"] = "BRISK_EXERCISE"
             using.append(["forging_standard", 2])
             qualities.append({"id": "HAMMER", "level": 2})
             e["time"] = "60 m"
@@ -628,6 +630,9 @@ def lint(data, generated, errors):
             if not known(i):
                 errors.append(f"vein {r['id']}: yield {i} is not an item row")
     for e in generated["recipes"]:
+        for key in ("activity_level", "skill_used", "difficulty", "time", "category", "subcategory"):
+            if key not in e:
+                errors.append(f"recipe {e['result']}: missing {key}")
         for group in e["components"]:
             for alt in group:
                 if len(alt) == 3:
