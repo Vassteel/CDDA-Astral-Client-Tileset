@@ -9,7 +9,17 @@
     "category": "total_conversion",
     "conflicts": [ "aftershock_exoplanet", "backrooms", "desertpack", "tropicata", "classic_zombies", "Isolation_Protocol", "no_hope" ],
     "dependencies": [ "dda" ],
-    "loading_images": [ "innawoods1.png" ],
+    "loading_images": [
+      "innawoods1.png",
+      "loading_img_astral_01-fallen-companion.png",
+      "loading_img_astral_02-triffid-rescue.png",
+      "loading_img_astral_03-makeshift-lab.png",
+      "loading_img_astral_04-blacksmith-forge.png",
+      "loading_img_astral_05-makeshift-kitchen.png",
+      "loading_img_astral_06-rainstorm-lean-to.png",
+      "loading_img_astral_07-bionic-repairs.png",
+      "loading_img_astral_08-dungeon-defense.png"
+    ],
     "disable_other_loading_screens": true,
     "obsolete": false
   }

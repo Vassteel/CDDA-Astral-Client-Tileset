@@ -72,6 +72,8 @@ struct tile_type {
     bool multitile = false;
     bool rotates = false;
     bool animated = false;
+    // Share a frame clock across a multi-tile effect instead of randomizing its phase.
+    bool animation_synchronized = false;
     int height_3d = 0;
     point offset = point::zero;
     point offset_retracted = point::zero;
@@ -1110,6 +1112,7 @@ class cata_tiles
         bool nv_goggles_activated = false;
         // Set during draw() when any tile with animated=true is rendered.
         bool has_animated_tiles_ = false;
+        uint64_t animation_tick_ = 0;
 
         pimpl<pixel_minimap> minimap;
 

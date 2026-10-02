@@ -908,6 +908,7 @@ void tileset_cache::loader::parse_mappings( const JsonObject &config )
                     curr_subtile.rotates = true;
                     curr_subtile.height_3d = t_h3d;
                     curr_subtile.animated = subentry.get_bool( "animated", false );
+                    curr_subtile.animation_synchronized = subentry.get_bool( "animation_synchronized", false );
                     curr_tile.available_subtiles.push_back( s_id );
                 }
             } else if( entry.has_array( "additional_tiles" ) ) {
@@ -922,6 +923,7 @@ void tileset_cache::loader::parse_mappings( const JsonObject &config )
             curr_tile.rotates = t_rota;
             curr_tile.height_3d = t_h3d;
             curr_tile.animated = entry.get_bool( "animated", false );
+            curr_tile.animation_synchronized = entry.get_bool( "animation_synchronized", false );
         }
     }
     dbg( D_INFO ) << "Tile Width: " << ts.tile_width << " Tile Height: " << ts.tile_height <<

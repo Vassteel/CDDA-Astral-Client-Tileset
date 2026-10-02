@@ -4,6 +4,21 @@
 #include "cata_catch.h"
 #include "ui_hybrid_chrome.h"
 #include "ui_hybrid_textures.h"
+#include "tile_animation.h"
+
+TEST_CASE( "multi_tile_animation_stays_in_phase_at_frame_and_clock_boundaries", "[tiles][animation]" )
+{
+    // Six portal fragments at different map positions must select the same one
+    // of fourteen frames, including near the old signed 32-bit timer overflow.
+    for( uint64_t tick : { 0ULL, 5ULL, 6ULL, 83ULL, 84ULL, 2147483647ULL, 4294967295ULL } ) {
+        for( unsigned int position : { 0U, 1U, 19U, 600U, 2147483647U, 4294967295U } ) {
+            CHECK( tile_animation_index( tick, position, 84, true ) / 6 == tick % 84 / 6 );
+        }
+    }
+    CHECK( tile_animation_index( 0, 6, 84, false ) == 6 );
+    CHECK( tile_animation_index( 0, 83, 84, false ) == 83 );
+    CHECK( tile_animation_index( 10, 1, 0, true ) == 0 );
+}
 
 #if defined(TILES)
 #include "cata_scope_helpers.h"

@@ -1,0 +1,33 @@
+{
+  "cells": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      2
+    ],
+    [
+      2,
+      3
+    ]
+  ],
+  "frames": 14,
+  "frame_ticks": 6,
+  "tick_ms": 17,
+  "period_ms": 1428,
+  "unchanged_outside_mask": true
+}

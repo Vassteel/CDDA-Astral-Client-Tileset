@@ -1,5 +1,6 @@
 #if defined(TILES)
 #include "cata_tiles.h"
+#include "tile_animation.h"
 #include "tileset_loader.h"
 
 #include <algorithm>
@@ -604,6 +605,9 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
 #endif
 
     has_animated_tiles_ = false;
+    // Sample once per map render, so an animation boundary cannot split an effect.
+    animation_tick_ = std::chrono::duration_cast<std::chrono::milliseconds>(
+                          std::chrono::steady_clock::now().time_since_epoch() ).count() / 17;
 
     {
         //set clipping to prevent drawing over stuff we shouldn't
@@ -2327,16 +2331,16 @@ unsigned int cata_tiles::get_variant_seed( const tile_type &display_tile, TILE_C
         auto now_ms = std::chrono::time_point_cast<std::chrono::milliseconds>( now );
         std::chrono::milliseconds value = now_ms.time_since_epoch();
         // aiming roughly at the standard 60 frames per second:
-        int animation_frame = value.count() / 17;
-        // offset by log_rand so that everything does not blink at the same time:
-        animation_frame += loc_rand;
+        uint64_t animation_frame = display_tile.animation_synchronized ?
+                                   animation_tick_ : static_cast<uint64_t>( value.count() / 17 );
         int frames_in_loop = display_tile.fg.get_weight();
         if( frames_in_loop == 1 ) {
             frames_in_loop = display_tile.bg.get_weight();
         }
         // loc_rand is actually the weighed index of the selected tile, and
         // for animations the "weight" is the number of frames to show the tile for:
-        loc_rand = animation_frame % frames_in_loop;
+        loc_rand = tile_animation_index( animation_frame, loc_rand, frames_in_loop,
+                                         display_tile.animation_synchronized );
 
     }
 
