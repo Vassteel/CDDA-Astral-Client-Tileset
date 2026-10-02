@@ -11,7 +11,7 @@
     "looks_like": "mon_rabbit",
     "name": { "str": "meadow hare" },
     "description": "Long-eared tawny hare, pale belly.  A creature from the arrival meadows.  Flees; nothing hunts here.",
-    "//": "astral content list critical-core: rank 1, active day",
+    "//": "astral content list 00-critical-core: rank 1, active day",
     "harvest": "astral_harv_mon_astral_meadow_hare"
   },
   {
@@ -26,7 +26,7 @@
     "looks_like": "mon_fish_eel",
     "name": { "str": "reed eel" },
     "description": "Dark eel, pale belly, weed-green fins.  A creature from the drowned lowlands.  Moves only while you stand in water; bites ankles.",
-    "//": "astral content list critical-core: rank 2, active day+night",
+    "//": "astral content list 00-critical-core: rank 2, active day+night",
     "harvest": "astral_harv_mon_astral_drowned_reed_eel"
   },
   {
@@ -41,7 +41,7 @@
     "looks_like": "mon_giant_crayfish",
     "name": { "str": "verdigris crab" },
     "description": "Crab with a green-crusted bronze shell.  A creature from the drowned lowlands.  Wears sunken bronze; attacks only in water.",
-    "//": "astral content list critical-core: rank 2, active day+night",
+    "//": "astral content list 00-critical-core: rank 2, active day+night",
     "harvest": "astral_harv_mon_astral_drowned_shell_crab"
   },
   {
@@ -59,7 +59,7 @@
     "looks_like": "mon_giant_cockroach",
     "name": { "str": "cap-beetle" },
     "description": "Broad violet-brown beetle, cap-shaped carapace.  A creature from the fungal forest.  Grazes caps; defends when hit; haze follows it.",
-    "//": "astral content list critical-core: rank 2, active day+night",
+    "//": "astral content list 00-critical-core: rank 2, active day+night",
     "harvest": "astral_harv_mon_astral_fungal_cap_beetle"
   },
   {
@@ -69,7 +69,7 @@
     "looks_like": "mon_bee",
     "name": { "str": "root bee" },
     "description": "Fat black bee, dull gold band.  A creature from root country.  Swarms near combs; sound draws them.",
-    "//": "astral content list critical-core: rank 1, active day"
+    "//": "astral content list 00-critical-core: rank 1, active day"
   },
   {
     "type": "MONSTER",
@@ -78,14 +78,624 @@
     "looks_like": "mon_dog",
     "name": { "str": "burrow hound" },
     "description": "Hairless grey hound, no eyes, wide ears.  A creature from root country.  Hunts by sound underground; ignores the quiet.",
-    "//": "astral content list critical-core: rank 3, active night"
+    "//": "astral content list 00-critical-core: rank 3, active night"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_deer",
+    "entries": [
+      { "drop": "astral_meadow_deer_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_deer_hide", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_deer",
+    "copy-from": "mon_deer",
+    "looks_like": "mon_deer",
+    "name": { "str": "gate-road deer" },
+    "description": "Soft brown deer, hearthwood-leaf scraps in antlers.  A creature from the arrival meadows.  Shy browser; bolts from noise and motion.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 2, active day",
+    "harvest": "astral_harv_mon_astral_meadow_deer"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_squirrel",
+    "entries": [
+      { "drop": "astral_meadow_squirrel_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_squirrel_hide", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_squirrel",
+    "copy-from": "mon_squirrel",
+    "looks_like": "mon_squirrel",
+    "name": { "str": "hearthwood squirrel" },
+    "description": "Red-brown squirrel with amber bark dust.  A creature from the arrival meadows.  Gathers bark curls; flees up trunks.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_meadow_squirrel"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_chipmunk",
+    "entries": [ { "drop": "astral_meadow_chipmunk_meat", "type": "flesh", "mass_ratio": 0.3 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_chipmunk",
+    "copy-from": "mon_chipmunk",
+    "looks_like": "mon_chipmunk",
+    "name": { "str": "meadow chipmunk" },
+    "description": "Striped chipmunk, cheek pouches of seed.  A creature from the arrival meadows.  Striped forager; darts into burrows.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_meadow_chipmunk"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_sheep",
+    "entries": [
+      { "drop": "astral_meadow_mutton", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_meadow_sheep_hide", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_sheep",
+    "copy-from": "mon_sheep",
+    "looks_like": "mon_sheep",
+    "name": { "str": "remnant flock-sheep" },
+    "description": "Woolly sheep with pale clover stains.  A creature from the arrival meadows.  Grazes quietly; startles into a huddle.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_meadow_sheep"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_goat",
+    "entries": [
+      { "drop": "astral_meadow_goat_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_goat_hide", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_goat",
+    "copy-from": "mon_goat",
+    "looks_like": "mon_goat",
+    "name": { "str": "roadside goat" },
+    "description": "Lean goat, soft beard, no aggression.  A creature from the arrival meadows.  Browses shrubs; shy unless cornered.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_meadow_goat"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_cow",
+    "entries": [
+      { "drop": "astral_meadow_beef", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_meadow_cow_hide", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_cow",
+    "copy-from": "mon_cow",
+    "looks_like": "mon_cow",
+    "name": { "str": "pasture cow" },
+    "description": "Calm brown cow, warm dust on flanks.  A creature from the arrival meadows.  Slow grazer; walks off if approached.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 2, active day",
+    "harvest": "astral_harv_mon_astral_meadow_cow"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_horse",
+    "entries": [
+      { "drop": "astral_meadow_horse_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_horse_hide", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_horse",
+    "copy-from": "mon_horse",
+    "looks_like": "mon_horse",
+    "name": { "str": "stray road-horse" },
+    "description": "Bay horse with a frayed rope remnant.  A creature from the arrival meadows.  Wary stray; flees rather than kick.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 2, active day",
+    "harvest": "astral_harv_mon_astral_meadow_horse"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_sparrow",
+    "entries": [
+      { "drop": "astral_meadow_sparrow_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_sparrow_feathers", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_sparrow",
+    "copy-from": "mon_sparrow",
+    "looks_like": "mon_sparrow",
+    "name": { "str": "meadow sparrow" },
+    "description": "Small brown sparrow, pale wing bars.  A creature from the arrival meadows.  Flocks in grass; flushes at footsteps.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_meadow_sparrow"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_robin",
+    "entries": [
+      { "drop": "astral_meadow_robin_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_robin_feathers", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_robin",
+    "copy-from": "mon_robin",
+    "looks_like": "mon_robin",
+    "name": { "str": "gatehouse robin" },
+    "description": "Red-breasted robin, soft grey back.  A creature from the arrival meadows.  Hops the road verge; flies when near.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_meadow_robin"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_grouse",
+    "entries": [
+      { "drop": "astral_meadow_grouse_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_grouse_feathers", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_grouse",
+    "copy-from": "mon_grouse",
+    "looks_like": "mon_grouse",
+    "name": { "str": "grass grouse" },
+    "description": "Mottled grouse, grass-seed in feathers.  A creature from the arrival meadows.  Freezes then bursts from cover.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_meadow_grouse"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_pheasant",
+    "entries": [
+      { "drop": "astral_meadow_pheasant_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_pheasant_feathers", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_pheasant",
+    "copy-from": "mon_pheasant",
+    "looks_like": "mon_pheasant",
+    "name": { "str": "orchard pheasant" },
+    "description": "Long-tailed pheasant, coppery barred flanks.  A creature from the arrival meadows.  Shy runner under orchard walls.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 2, active day",
+    "harvest": "astral_harv_mon_astral_meadow_pheasant"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_turkey",
+    "entries": [
+      { "drop": "astral_meadow_turkey_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_turkey_feathers", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_turkey",
+    "copy-from": "mon_turkey",
+    "looks_like": "mon_turkey",
+    "name": { "str": "field turkey" },
+    "description": "Dark turkey, bronze sheen on wings.  A creature from the arrival meadows.  Flocks in clearings; bolts into timber.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 2, active day",
+    "harvest": "astral_harv_mon_astral_meadow_turkey"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_woodpecker",
+    "entries": [
+      { "drop": "astral_meadow_woodpecker_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_woodpecker_feathers", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_woodpecker",
+    "copy-from": "mon_woodpecker",
+    "looks_like": "mon_woodpecker",
+    "name": { "str": "hearthwood pecker" },
+    "description": "Black-white woodpecker, red nape.  A creature from the arrival meadows.  Taps pale trunks; flies when watched.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_meadow_woodpecker"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_pigeon",
+    "entries": [
+      { "drop": "astral_meadow_pigeon_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_meadow_pigeon_feathers", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_pigeon",
+    "copy-from": "mon_pigeon",
+    "looks_like": "mon_pigeon",
+    "name": { "str": "road pigeon" },
+    "description": "Soft grey pigeon, iridescent neck.  A creature from the arrival meadows.  Roosts on gatehouse stone; flaps off.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_meadow_pigeon"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_bee",
+    "entries": [ { "drop": "astral_meadow_bee_wax", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_bee",
+    "copy-from": "mon_bee",
+    "looks_like": "mon_bee",
+    "name": { "str": "clover bee" },
+    "description": "Fat black bee, dull gold band.  A creature from the arrival meadows.  Pollinates; ignores travelers who stay calm.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_meadow_bee"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_butterfly",
+    "entries": [ { "drop": "astral_meadow_butterfly_wing", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_butterfly",
+    "copy-from": "mon_butterfly",
+    "looks_like": "mon_butterfly",
+    "name": { "str": "meadow glasswing" },
+    "description": "Pale glass-wing butterfly, soft gold veins.  A creature from the arrival meadows.  Drifts over clover; never hostile.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_meadow_butterfly"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_meadow_firefly",
+    "entries": [ { "drop": "astral_meadow_firefly_glow", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_meadow_firefly",
+    "copy-from": "mon_firefly",
+    "looks_like": "mon_firefly",
+    "name": { "str": "dusk firefly", "str_pl": "dusk fireflies" },
+    "description": "Soft yellow firefly, slow lazy arc.  A creature from the arrival meadows.  Glows at dusk along the road.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active night",
+    "harvest": "astral_harv_mon_astral_meadow_firefly"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_canal_pike",
+    "entries": [
+      { "drop": "astral_drowned_pike_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_drowned_pike_scale", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_canal_pike",
+    "copy-from": "mon_fish_pike",
+    "looks_like": "mon_fish_pike",
+    "name": { "str": "canal pike" },
+    "description": "Long green pike, needle teeth.  A creature from the drowned lowlands.  Strikes only while you stand in water.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 2, active day+night",
+    "harvest": "astral_harv_mon_astral_drowned_canal_pike"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_mire_carp",
+    "entries": [ { "drop": "astral_drowned_carp_meat", "type": "flesh", "mass_ratio": 0.3 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_mire_carp",
+    "copy-from": "mon_fish_carp",
+    "looks_like": "mon_fish_carp",
+    "name": { "str": "mire carp" },
+    "description": "Heavy bronze-scaled carp, mud-clouded.  A creature from the drowned lowlands.  Mills in silt; bites only in water.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_drowned_mire_carp"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_tide_cray",
+    "entries": [
+      { "drop": "astral_drowned_cray_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_drowned_cray_shell", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_tide_cray",
+    "copy-from": "mon_crayfish_small",
+    "looks_like": "mon_crayfish_small",
+    "name": { "str": "tide cray" },
+    "description": "Small crayfish, mottled green-brown.  A creature from the drowned lowlands.  Pinches toes only while you wade.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day+night",
+    "harvest": "astral_harv_mon_astral_drowned_tide_cray"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_diving_beetle",
+    "entries": [ { "drop": "astral_drowned_beetle_chitin", "type": "skin", "mass_ratio": 0.1 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_diving_beetle",
+    "copy-from": "mon_diving_beetle_small",
+    "looks_like": "mon_diving_beetle_small",
+    "name": { "str": "canal diver" },
+    "description": "Shiny black diving beetle, silver air film.  A creature from the drowned lowlands.  Attacks only while you are in water.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 2, active day+night",
+    "harvest": "astral_harv_mon_astral_drowned_diving_beetle"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_river_snail",
+    "entries": [
+      { "drop": "astral_drowned_snail_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_drowned_snail_shell", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_river_snail",
+    "copy-from": "mon_snail_river",
+    "looks_like": "mon_snail_river",
+    "name": { "str": "canal snail" },
+    "description": "Mottled river snail, green algae trail.  A creature from the drowned lowlands.  Creeps submerged; harmless unless crushed.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_drowned_river_snail"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_muskie",
+    "entries": [
+      { "drop": "astral_drowned_muskie_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_drowned_muskie_skin", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_muskie",
+    "copy-from": "mon_fish_muskellunge",
+    "looks_like": "mon_fish_muskellunge",
+    "name": { "str": "lock muskie" },
+    "description": "Long spotted muskie, scarred jaw.  A creature from the drowned lowlands.  Ambushes only while you stand in water.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 3, active day+night",
+    "harvest": "astral_harv_mon_astral_drowned_muskie"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_lock_lobster",
+    "entries": [
+      { "drop": "astral_drowned_sea_silk_tuft", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_drowned_lobster_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_lock_lobster",
+    "copy-from": "mon_fish_lobster",
+    "looks_like": "mon_fish_lobster",
+    "name": { "str": "lock lobster" },
+    "description": "Dark lobster with gold fibre at joints.  A creature from the drowned lowlands.  Claws only in water; silk-gland tufts on joints.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 3, active night",
+    "harvest": "astral_harv_mon_astral_drowned_lock_lobster"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_oak_beaver",
+    "entries": [
+      { "drop": "astral_drowned_bog_oak_scrap", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_drowned_beaver_hide", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_drowned_beaver_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_oak_beaver",
+    "copy-from": "mon_beaver",
+    "looks_like": "mon_beaver",
+    "name": { "str": "bog-oak beaver" },
+    "description": "Dark beaver carrying black oak sticks.  A creature from the drowned lowlands.  Builds with waterlogged oak; shy on dry ground.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 2, active day",
+    "harvest": "astral_harv_mon_astral_drowned_oak_beaver"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_canal_otter",
+    "entries": [
+      { "drop": "astral_drowned_otter_hide", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_drowned_otter_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_canal_otter",
+    "copy-from": "mon_otter",
+    "looks_like": "mon_otter",
+    "name": { "str": "canal otter" },
+    "description": "Sleek otter, wet whiskers, green sheen.  A creature from the drowned lowlands.  Playful on banks; bites hard only in water.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 2, active day",
+    "harvest": "astral_harv_mon_astral_drowned_canal_otter"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_painted_turtle",
+    "entries": [
+      { "drop": "astral_drowned_turtle_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_drowned_turtle_shell", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_painted_turtle",
+    "copy-from": "mon_turtle_painted",
+    "looks_like": "mon_turtle_painted",
+    "name": { "str": "stilt-pond turtle" },
+    "description": "Painted shell turtle, yellow cheek streaks.  A creature from the drowned lowlands.  Suns on posts; snaps only while you wade.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_drowned_painted_turtle"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_green_frog",
+    "entries": [ { "drop": "astral_drowned_frog_meat", "type": "flesh", "mass_ratio": 0.3 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_green_frog",
+    "copy-from": "mon_green_frog",
+    "looks_like": "mon_green_frog",
+    "name": { "str": "reed frog" },
+    "description": "Bright green frog, damp throat pouch.  A creature from the drowned lowlands.  Croaks from reeds; leaps away if dry.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day+night",
+    "harvest": "astral_harv_mon_astral_drowned_green_frog"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_moorhen",
+    "entries": [
+      { "drop": "astral_drowned_moorhen_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_drowned_moorhen_feathers", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_moorhen",
+    "copy-from": "mon_moorhen",
+    "looks_like": "mon_moorhen",
+    "name": { "str": "stilt moorhen" },
+    "description": "Dark moorhen, red bill, white undertail.  A creature from the drowned lowlands.  Picks along walkways; flees into water.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_drowned_moorhen"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_cormorant",
+    "entries": [
+      { "drop": "astral_drowned_cormorant_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_drowned_cormorant_feathers", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_cormorant",
+    "copy-from": "mon_cormorant",
+    "looks_like": "mon_cormorant",
+    "name": { "str": "canal cormorant" },
+    "description": "Black cormorant, hooked bill, wet sheen.  A creature from the drowned lowlands.  Dries wings on posts; dives when pressed.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 2, active day",
+    "harvest": "astral_harv_mon_astral_drowned_cormorant"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_grebe",
+    "entries": [
+      { "drop": "astral_drowned_grebe_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_drowned_grebe_feathers", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_grebe",
+    "copy-from": "mon_grebe",
+    "looks_like": "mon_grebe",
+    "name": { "str": "flood grebe" },
+    "description": "Small grebe, pointed bill, soft mottling.  A creature from the drowned lowlands.  Rides open water; dives from boats.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_drowned_grebe"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_coot",
+    "entries": [
+      { "drop": "astral_drowned_coot_meat", "type": "flesh", "mass_ratio": 0.3 },
+      { "drop": "astral_drowned_coot_feathers", "type": "skin", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_coot",
+    "copy-from": "mon_coot",
+    "looks_like": "mon_coot",
+    "name": { "str": "market coot" },
+    "description": "Slate coot, white bill shield.  A creature from the drowned lowlands.  Paddles under stilts; shy of dry docks.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active day",
+    "harvest": "astral_harv_mon_astral_drowned_coot"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_mire_slug",
+    "entries": [ { "drop": "astral_drowned_slug_meat", "type": "flesh", "mass_ratio": 0.3 } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_mire_slug",
+    "copy-from": "mon_slug_small",
+    "looks_like": "mon_slug_small",
+    "name": { "str": "mire slug" },
+    "description": "Fat grey slug, water-slick trail.  A creature from the drowned lowlands.  Crawls wet mud; no attack on dry ground.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 1, active night",
+    "harvest": "astral_harv_mon_astral_drowned_mire_slug"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_mon_astral_drowned_harbour_claw",
+    "entries": [
+      { "drop": "astral_drowned_verdigris_scrap", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_drowned_sea_silk_tuft", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_drowned_claw_chitin", "type": "skin", "mass_ratio": 0.1 },
+      { "drop": "astral_drowned_claw_meat", "type": "flesh", "mass_ratio": 0.3 }
+    ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_drowned_harbour_claw",
+    "copy-from": "mon_crayfish_mega",
+    "looks_like": "mon_crayfish_mega",
+    "name": { "str": "harbour claw" },
+    "description": "Huge bronze-crusted clawbeast, silk-bearded joints.  A creature from the drowned lowlands.  Elite; moves and attacks only in water.",
+    "//": "astral content list 10-creatures-meadow-drowned: rank 4, active day+night",
+    "harvest": "astral_harv_mon_astral_drowned_harbour_claw"
   },
   {
     "type": "monstergroup",
     "id": "GROUP_ASTRAL_MEADOW",
     "default": "mon_null",
     "is_animal": true,
-    "monsters": [ { "monster": "mon_astral_meadow_hare", "weight": 60, "conditions": [ "DAY" ] } ],
+    "monsters": [
+      { "monster": "mon_astral_meadow_hare", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_deer", "weight": 15, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_squirrel", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_chipmunk", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_sheep", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_goat", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_cow", "weight": 15, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_horse", "weight": 15, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_sparrow", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_robin", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_grouse", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_pheasant", "weight": 15, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_turkey", "weight": 15, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_woodpecker", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_pigeon", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_bee", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_butterfly", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_meadow_firefly", "weight": 60, "conditions": [ "NIGHT" ] }
+    ],
     "//": "Bind to the theme's overmap terrain with `spawns` (done in overmap.json)."
   },
   {
@@ -95,7 +705,24 @@
     "is_animal": true,
     "monsters": [
       { "monster": "mon_astral_drowned_reed_eel", "weight": 15 },
-      { "monster": "mon_astral_drowned_shell_crab", "weight": 15 }
+      { "monster": "mon_astral_drowned_shell_crab", "weight": 15 },
+      { "monster": "mon_astral_drowned_canal_pike", "weight": 15 },
+      { "monster": "mon_astral_drowned_mire_carp", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_drowned_tide_cray", "weight": 60 },
+      { "monster": "mon_astral_drowned_diving_beetle", "weight": 15 },
+      { "monster": "mon_astral_drowned_river_snail", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_drowned_muskie", "weight": 6 },
+      { "monster": "mon_astral_drowned_lock_lobster", "weight": 6, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_drowned_oak_beaver", "weight": 15, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_drowned_canal_otter", "weight": 15, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_drowned_painted_turtle", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_drowned_green_frog", "weight": 60 },
+      { "monster": "mon_astral_drowned_moorhen", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_drowned_cormorant", "weight": 15, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_drowned_grebe", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_drowned_coot", "weight": 60, "conditions": [ "DAY" ] },
+      { "monster": "mon_astral_drowned_mire_slug", "weight": 60, "conditions": [ "NIGHT" ] },
+      { "monster": "mon_astral_drowned_harbour_claw", "weight": 3 }
     ],
     "//": "Bind to the theme's overmap terrain with `spawns` (done in overmap.json)."
   },

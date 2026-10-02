@@ -1,0 +1,86 @@
+{
+  "id": "quartermaster_store",
+  "label": "Quartermaster's Store",
+  "//": "Stone quartermaster hub with storage and armory; cellar storage below.",
+  "city_sizes": [
+    7,
+    55
+  ],
+  "wall": "#",
+  "footprint": [
+    1,
+    1
+  ],
+  "ground": {
+    "rooms": [
+      {
+        "kind": "quartermaster",
+        "rect": [
+          4,
+          6,
+          14,
+          14
+        ]
+      },
+      {
+        "kind": "storage",
+        "rect": [
+          15,
+          6,
+          20,
+          14
+        ]
+      },
+      {
+        "kind": "armory",
+        "rect": [
+          4,
+          15,
+          20,
+          20
+        ]
+      }
+    ],
+    "hub": 0,
+    "porch": [
+      7,
+      4,
+      11,
+      5
+    ],
+    "doors": [
+      [
+        8,
+        6
+      ],
+      [
+        9,
+        6
+      ]
+    ],
+    "window_step": 4,
+    "path": [
+      9,
+      3,
+      0
+    ],
+    "trees": 0.1
+  },
+  "cellar": {
+    "rooms": [
+      {
+        "kind": "storage",
+        "rect": [
+          4,
+          6,
+          20,
+          14
+        ]
+      }
+    ],
+    "stairs": [
+      5,
+      7
+    ]
+  }
+}

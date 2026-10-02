@@ -9,7 +9,7 @@
     "difficulty": 0,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: any theme staple",
+    "//": "astral content list 00-critical-core: craft: any theme staple",
     "components": [
       [
         [ "astral_drowned_eel_meat", 2 ],
@@ -29,7 +29,7 @@
     "difficulty": 0,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: leather/hide of any theme",
+    "//": "astral content list 00-critical-core: craft: leather/hide of any theme",
     "components": [ [ [ "leather", 2 ], [ "astral_fungal_chitin_leather", 2 ] ] ]
   },
   {
@@ -42,7 +42,7 @@
     "difficulty": 1,
     "time": "60 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: glowcap oil + verdigris ingot",
+    "//": "astral content list 00-critical-core: craft: glowcap oil + verdigris ingot",
     "qualities": [ { "id": "HAMMER", "level": 2 } ],
     "using": [ [ "forging_standard", 1 ] ],
     "components": [ [ [ "astral_fungal_glowcap_oil", 1 ] ], [ [ "astral_drowned_verdigris_ingot", 1 ] ] ]
@@ -57,7 +57,7 @@
     "difficulty": 0,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: ghostsalt + bluemarl",
+    "//": "astral content list 00-critical-core: craft: ghostsalt + bluemarl",
     "components": [ [ [ "astral_drowned_ghostsalt", 1 ] ], [ [ "astral_meadow_bluemarl", 1 ] ] ]
   },
   {
@@ -70,7 +70,7 @@
     "difficulty": 0,
     "time": "60 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: verdigris ingot",
+    "//": "astral content list 00-critical-core: craft: verdigris ingot",
     "qualities": [ { "id": "HAMMER", "level": 2 } ],
     "using": [ [ "forging_standard", 1 ] ],
     "components": [ [ [ "astral_drowned_verdigris_ingot", 1 ] ] ]
@@ -85,7 +85,7 @@
     "difficulty": 1,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: compass body + truestone needle",
+    "//": "astral content list 00-critical-core: craft: compass body + truestone needle",
     "components": [ [ [ "astral_compass_body", 1 ] ], [ [ "astral_truestone_needle", 1 ] ] ]
   },
   {
@@ -98,7 +98,7 @@
     "difficulty": 0,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: hearthwood plank ×4 + cord",
+    "//": "astral content list 00-critical-core: craft: hearthwood plank ×4 + cord",
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "components": [ [ [ "astral_meadow_hearthwood_plank", 4 ] ], [ [ "cordage_short", 1, "LIST" ] ] ]
   },
@@ -112,7 +112,7 @@
     "difficulty": 0,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: hearthwood tinder + flint",
+    "//": "astral content list 00-critical-core: craft: hearthwood tinder + flint",
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "components": [ [ [ "astral_hearthwood_tinder", 1 ] ], [ [ "astral_meadow_starflint", 1 ] ] ]
   },
@@ -126,7 +126,7 @@
     "difficulty": 0,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: start kit / craft: paper + leather",
+    "//": "astral content list 00-critical-core: start kit / craft: paper + leather",
     "components": [ [ [ "paper", 5 ] ], [ [ "leather", 2 ] ] ]
   },
   {
@@ -139,7 +139,7 @@
     "difficulty": 0,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: hearthwood plank + hide",
+    "//": "astral content list 00-critical-core: craft: hearthwood plank + hide",
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "components": [ [ [ "astral_meadow_hearthwood_plank", 1 ] ], [ [ "leather", 2 ] ] ]
   },
@@ -153,7 +153,7 @@
     "difficulty": 1,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: myceloth + glowcap filter",
+    "//": "astral content list 00-critical-core: craft: myceloth + glowcap filter",
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "astral_fungal_myceloth", 1 ] ], [ [ "astral_glowcap_filter", 1 ] ] ]
   },
@@ -167,7 +167,7 @@
     "difficulty": 1,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: glowcap raw + mycel fibre",
+    "//": "astral content list 00-critical-core: craft: glowcap raw + mycel fibre",
     "components": [ [ [ "astral_fungal_glowcap_raw", 1 ] ], [ [ "astral_fungal_mycel_fibre", 1 ] ] ]
   },
   {
@@ -180,7 +180,7 @@
     "difficulty": 1,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: glowcap oil + hearthwood plank",
+    "//": "astral content list 00-critical-core: craft: glowcap oil + hearthwood plank",
     "components": [ [ [ "astral_fungal_glowcap_oil", 1 ] ], [ [ "astral_meadow_hearthwood_plank", 1 ] ] ]
   },
   {
@@ -193,7 +193,7 @@
     "difficulty": 0,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: hearthwood log + resin glue",
+    "//": "astral content list 00-critical-core: craft: hearthwood log + resin glue",
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "components": [ [ [ "astral_meadow_hearthwood_log", 1 ] ], [ [ "astral_root_resin_glue", 1 ] ] ]
   },
@@ -207,7 +207,7 @@
     "difficulty": 2,
     "time": "60 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: duskiron ore or mire-iron ×2 + emberstone",
+    "//": "astral content list 00-critical-core: craft: duskiron ore or mire-iron ×2 + emberstone",
     "result_mult": 1,
     "qualities": [ { "id": "HAMMER", "level": 2 } ],
     "using": [ [ "forging_standard", 2 ] ],
@@ -226,7 +226,7 @@
     "difficulty": 0,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: hearthwood log, charcoal pit",
+    "//": "astral content list 00-critical-core: craft: hearthwood log, charcoal pit",
     "tools": [ [ [ "surface_heat", 50, "LIST" ] ] ],
     "charges": 1,
     "components": [ [ [ "astral_meadow_hearthwood_log", 1 ] ] ]
@@ -241,7 +241,7 @@
     "difficulty": 0,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: hearthwood log",
+    "//": "astral content list 00-critical-core: craft: hearthwood log",
     "result_mult": 4,
     "qualities": [ { "id": "SAW_W", "level": 1 } ],
     "components": [ [ [ "astral_meadow_hearthwood_log", 1 ] ] ]
@@ -256,7 +256,7 @@
     "difficulty": 0,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: hearthwood plank ×2 + cord",
+    "//": "astral content list 00-critical-core: craft: hearthwood plank ×2 + cord",
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "components": [ [ [ "astral_meadow_hearthwood_plank", 2 ] ], [ [ "cordage_short", 1, "LIST" ] ] ]
   },
@@ -270,7 +270,7 @@
     "difficulty": 1,
     "time": "4 h",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: waterlogged oak log, seasoned",
+    "//": "astral content list 00-critical-core: craft: waterlogged oak log, seasoned",
     "result_mult": 4,
     "qualities": [ { "id": "SAW_W", "level": 1 } ],
     "components": [ [ [ "astral_drowned_bog_oak_log", 1 ] ] ]
@@ -285,7 +285,7 @@
     "difficulty": 1,
     "time": "60 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: bog-oak plank ×2 + verdigris ingot",
+    "//": "astral content list 00-critical-core: craft: bog-oak plank ×2 + verdigris ingot",
     "qualities": [ { "id": "HAMMER", "level": 2 } ],
     "using": [ [ "forging_standard", 1 ] ],
     "components": [ [ [ "astral_drowned_bog_oak_plank", 2 ] ], [ [ "astral_drowned_verdigris_ingot", 1 ] ] ]
@@ -300,7 +300,7 @@
     "difficulty": 2,
     "time": "60 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: verdigris scrap ×3 + silvermire ore",
+    "//": "astral content list 00-critical-core: craft: verdigris scrap ×3 + silvermire ore",
     "qualities": [ { "id": "HAMMER", "level": 2 } ],
     "using": [ [ "forging_standard", 2 ] ],
     "components": [ [ [ "astral_drowned_verdigris_scrap", 3 ] ], [ [ "astral_drowned_silvermire_ore", 1 ] ] ]
@@ -315,7 +315,7 @@
     "difficulty": 2,
     "time": "60 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: verdigris ingot + bog-oak plank",
+    "//": "astral content list 00-critical-core: craft: verdigris ingot + bog-oak plank",
     "qualities": [ { "id": "HAMMER", "level": 2 } ],
     "using": [ [ "forging_standard", 2 ] ],
     "components": [ [ [ "astral_drowned_verdigris_ingot", 1 ] ], [ [ "astral_drowned_bog_oak_plank", 1 ] ] ]
@@ -330,7 +330,7 @@
     "difficulty": 1,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: sea-silk tuft ×4",
+    "//": "astral content list 00-critical-core: craft: sea-silk tuft ×4",
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "charges": 50,
     "components": [ [ [ "astral_drowned_sea_silk_tuft", 4 ] ] ]
@@ -345,7 +345,7 @@
     "difficulty": 1,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: sea-silk thread ×6, loom",
+    "//": "astral content list 00-critical-core: craft: sea-silk thread ×6, loom",
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "astral_drowned_sea_silk_thread", 6 ] ] ]
   },
@@ -359,7 +359,7 @@
     "difficulty": 1,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: sea-silk cloth ×2",
+    "//": "astral content list 00-critical-core: craft: sea-silk cloth ×2",
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "astral_drowned_sea_silk_cloth", 2 ] ] ]
   },
@@ -373,7 +373,7 @@
     "difficulty": 1,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: chitin plate ×2, tanning tub",
+    "//": "astral content list 00-critical-core: craft: chitin plate ×2, tanning tub",
     "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "astral_fungal_chitin_plate", 2 ] ] ]
   },
@@ -387,7 +387,7 @@
     "difficulty": 1,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: chitin-leather ×4 + thread",
+    "//": "astral content list 00-critical-core: craft: chitin-leather ×4 + thread",
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "astral_fungal_chitin_leather", 4 ] ], [ [ "thread", 10 ] ] ]
   },
@@ -401,7 +401,7 @@
     "difficulty": 1,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: mycel fibre ×6, loom",
+    "//": "astral content list 00-critical-core: craft: mycel fibre ×6, loom",
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "astral_fungal_mycel_fibre", 6 ] ] ]
   },
@@ -415,7 +415,7 @@
     "difficulty": 1,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: glowcap ×3, press",
+    "//": "astral content list 00-critical-core: craft: glowcap ×3, press",
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "charges": 250,
     "components": [ [ [ "astral_fungal_glowcap_raw", 3 ] ] ]
@@ -430,7 +430,7 @@
     "difficulty": 1,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: heartroot resin ×2, boiled",
+    "//": "astral content list 00-critical-core: craft: heartroot resin ×2, boiled",
     "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ],
     "components": [ [ [ "astral_root_heartroot_resin", 2 ] ] ]
   },
@@ -444,7 +444,7 @@
     "difficulty": 2,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: ironwood log, saw",
+    "//": "astral content list 00-critical-core: craft: ironwood log, saw",
     "result_mult": 4,
     "qualities": [ { "id": "SAW_W", "level": 1 } ],
     "components": [ [ [ "astral_root_ironwood_log", 1 ] ] ]
@@ -459,7 +459,7 @@
     "difficulty": 2,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: ironwood plank",
+    "//": "astral content list 00-critical-core: craft: ironwood plank",
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "components": [ [ [ "astral_root_ironwood_plank", 1 ] ] ]
   },
@@ -473,7 +473,7 @@
     "difficulty": 2,
     "time": "60 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: ironwood haft + duskiron bar ×2",
+    "//": "astral content list 00-critical-core: craft: ironwood haft + duskiron bar ×2",
     "qualities": [ { "id": "HAMMER", "level": 2 } ],
     "using": [ [ "forging_standard", 1 ] ],
     "components": [ [ [ "astral_root_ironwood_haft", 1 ] ], [ [ "astral_duskiron_bar", 2 ] ] ]
@@ -488,7 +488,7 @@
     "difficulty": 1,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: cave-honey + resin glue",
+    "//": "astral content list 00-critical-core: craft: cave-honey + resin glue",
     "components": [ [ [ "astral_root_cave_honey", 1 ] ], [ [ "astral_root_resin_glue", 1 ] ] ]
   },
   {
@@ -501,7 +501,7 @@
     "difficulty": 1,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: glowcap + ghostsalt + water",
+    "//": "astral content list 00-critical-core: craft: glowcap + ghostsalt + water",
     "components": [
       [ [ "astral_fungal_glowcap_raw", 1 ] ],
       [ [ "astral_drowned_ghostsalt", 1 ] ],
@@ -518,7 +518,7 @@
     "difficulty": 0,
     "time": "30 m",
     "autolearn": true,
-    "//": "astral content list critical-core: craft: hearthwood tinder + water",
+    "//": "astral content list 00-critical-core: craft: hearthwood tinder + water",
     "charges": 1,
     "components": [ [ [ "astral_hearthwood_tinder", 1 ] ], [ [ "water_clean", 1 ] ] ]
   }

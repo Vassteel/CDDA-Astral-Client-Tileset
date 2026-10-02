@@ -6,7 +6,7 @@
     "looks_like": "dry_meat",
     "name": { "str_sp": "expedition ration" },
     "description": "Waxed cloth bundle tied with cord.  Provisions from the Astral planes.",
-    "//": "astral content list critical-core: consumable, tier 1, source: craft: any theme staple",
+    "//": "astral content list 00-critical-core: consumable, tier 1, source: craft: any theme staple",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -16,7 +16,7 @@
     "looks_like": "waterskin",
     "name": { "str": "delver's waterskin" },
     "description": "Fat dark skin with a bone stopper.  A tool from the Astral planes.",
-    "//": "astral content list critical-core: tool, tier 1, source: craft: leather/hide of any theme",
+    "//": "astral content list 00-critical-core: tool, tier 1, source: craft: leather/hide of any theme",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -30,7 +30,7 @@
     "subtypes": [ "TOOL" ],
     "name": { "str": "waymark lantern" },
     "description": "Squat brass lantern, green glass, hanging ring.  A tool from the Astral planes.",
-    "//": "astral content list critical-core: tool, tier 2, source: craft: glowcap oil + verdigris ingot",
+    "//": "astral content list 00-critical-core: tool, tier 2, source: craft: glowcap oil + verdigris ingot",
     "flags": [ "ASTRAL_TIER_2" ]
   },
   {
@@ -44,7 +44,7 @@
     "subtypes": [ "TOOL" ],
     "name": { "str": "trail chalk" },
     "description": "White stick worn to a wedge.  A tool from the Astral planes.",
-    "//": "astral content list critical-core: tool, tier 1, source: craft: ghostsalt + bluemarl",
+    "//": "astral content list 00-critical-core: tool, tier 1, source: craft: ghostsalt + bluemarl",
     "flags": [ "ASTRAL_TIER_1" ]
   },
   {
@@ -58,7 +58,7 @@
     "subtypes": [ "TOOL" ],
     "name": { "str": "compass body", "str_pl": "compass bodies" },
     "description": "Brass disc case, empty needle well.  A tool from the Astral planes.",
-    "//": "astral content list critical-core: tool, tier 1, source: craft: verdigris ingot",
+    "//": "astral content list 00-critical-core: tool, tier 1, source: craft: verdigris ingot",
     "flags": [ "ASTRAL_TIER_1" ]
   },
   {
@@ -71,7 +71,7 @@
     "color": "brown",
     "name": { "str": "truestone needle" },
     "description": "Black needle on a bone pivot.  Worked stock from the Astral planes.",
-    "//": "astral content list critical-core: intermediate, tier 2, source: t_astral_root_duskiron_vein (rare drop)",
+    "//": "astral content list 00-critical-core: intermediate, tier 2, source: t_astral_root_duskiron_vein (rare drop)",
     "flags": [ "ASTRAL_TIER_2" ]
   },
   {
@@ -85,7 +85,7 @@
     "subtypes": [ "TOOL" ],
     "name": { "str": "wayfinder's compass", "str_pl": "wayfinder's compasses" },
     "description": "Brass compass, needle glowing faintly blue.  A tool from the Astral planes.",
-    "//": "astral content list critical-core: tool, tier 2, source: craft: compass body + truestone needle",
+    "//": "astral content list 00-critical-core: tool, tier 2, source: craft: compass body + truestone needle",
     "flags": [ "ASTRAL_TIER_2" ]
   },
   {
@@ -95,7 +95,7 @@
     "looks_like": "tent_kit",
     "name": { "str": "lean-to kit" },
     "description": "Bundle of poles and oiled cloth.  A tool from the Astral planes.",
-    "//": "astral content list critical-core: tool, tier 1, source: craft: hearthwood plank ×4 + cord",
+    "//": "astral content list 00-critical-core: tool, tier 1, source: craft: hearthwood plank ×4 + cord",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -105,7 +105,7 @@
     "looks_like": "fire_drill",
     "name": { "str": "hearth kit" },
     "description": "Flint, striker and a twist of bark in a pouch.  A tool from the Astral planes.",
-    "//": "astral content list critical-core: tool, tier 1, source: craft: hearthwood tinder + flint",
+    "//": "astral content list 00-critical-core: tool, tier 1, source: craft: hearthwood tinder + flint",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -116,7 +116,7 @@
     "name": { "str_sp": "hearthwood tinder" },
     "description": "Curls of pale resinous bark.  A raw material from the arrival meadows.",
     "material": [ "astral_hearthwood" ],
-    "//": "astral content list critical-core: raw, tier 1, source: astral_meadow_hearthwood_tree",
+    "//": "astral content list 00-critical-core: raw, tier 1, source: astral_meadow_hearthwood_tree",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -130,7 +130,7 @@
     "subtypes": [ "TOOL" ],
     "name": { "str": "field journal" },
     "description": "Leather-bound book with a cord loop.  A tool from the Astral planes.",
-    "//": "astral content list critical-core: tool, tier 1, source: start kit / craft: paper + leather",
+    "//": "astral content list 00-critical-core: tool, tier 1, source: start kit / craft: paper + leather",
     "flags": [ "ASTRAL_TIER_1" ]
   },
   {
@@ -144,7 +144,7 @@
     "subtypes": [ "TOOL" ],
     "name": { "str": "sample case" },
     "description": "Small wooden case with felt lining.  A tool from the Astral planes.",
-    "//": "astral content list critical-core: tool, tier 1, source: craft: hearthwood plank + hide",
+    "//": "astral content list 00-critical-core: tool, tier 1, source: craft: hearthwood plank + hide",
     "flags": [ "ASTRAL_TIER_1" ]
   },
   {
@@ -154,7 +154,7 @@
     "looks_like": "mask_dust",
     "name": { "str": "spore mask" },
     "description": "Cloth half-mask, pale, with a glowing disc filter.  A piece of gear from the fungal forest.",
-    "//": "astral content list critical-core: armor, tier 2, source: craft: myceloth + glowcap filter",
+    "//": "astral content list 00-critical-core: armor, tier 2, source: craft: myceloth + glowcap filter",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -167,7 +167,7 @@
     "color": "brown",
     "name": { "str": "glowcap filter" },
     "description": "Dried cap disc stitched into a cloth ring.  Worked stock from the fungal forest.",
-    "//": "astral content list critical-core: intermediate, tier 2, source: craft: glowcap raw + mycel fibre",
+    "//": "astral content list 00-critical-core: intermediate, tier 2, source: craft: glowcap raw + mycel fibre",
     "flags": [ "ASTRAL_TIER_2" ]
   },
   {
@@ -177,7 +177,7 @@
     "looks_like": "oil_lamp",
     "name": { "str": "glowcap lantern" },
     "description": "Wooden box lantern leaking blue light.  A tool from the fungal forest.",
-    "//": "astral content list critical-core: tool, tier 2, source: craft: glowcap oil + hearthwood plank",
+    "//": "astral content list 00-critical-core: tool, tier 2, source: craft: glowcap oil + hearthwood plank",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -188,7 +188,7 @@
     "name": { "str": "hearthwood torch", "str_pl": "hearthwood torches" },
     "description": "Pale stick, resin-soaked head.  A tool from the arrival meadows.",
     "material": [ "astral_hearthwood" ],
-    "//": "astral content list critical-core: tool, tier 1, source: craft: hearthwood log + resin glue",
+    "//": "astral content list 00-critical-core: tool, tier 1, source: craft: hearthwood log + resin glue",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -199,7 +199,7 @@
     "name": { "str_sp": "duskiron ore" },
     "description": "Purple-black lump, rust bloom at the breaks.  A raw material from root country.",
     "material": [ "astral_duskiron" ],
-    "//": "astral content list critical-core: raw, tier 2, source: t_astral_root_duskiron_vein",
+    "//": "astral content list 00-critical-core: raw, tier 2, source: t_astral_root_duskiron_vein",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -209,7 +209,7 @@
     "looks_like": "scrap",
     "name": { "str_sp": "mire-iron" },
     "description": "Orange crumbly nodule, wet.  A raw material from the drowned lowlands.",
-    "//": "astral content list critical-core: raw, tier 1, source: t_astral_drowned_mire_iron_vein",
+    "//": "astral content list 00-critical-core: raw, tier 1, source: t_astral_drowned_mire_iron_vein",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -219,7 +219,7 @@
     "looks_like": "scrap_copper",
     "name": { "str_sp": "sunvein ore" },
     "description": "Grey rock veined with warm gold.  A raw material from root country.",
-    "//": "astral content list critical-core: raw, tier 2, source: t_astral_root_sunvein_vein",
+    "//": "astral content list 00-critical-core: raw, tier 2, source: t_astral_root_sunvein_vein",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -232,7 +232,7 @@
     "color": "brown",
     "name": { "str_sp": "silvermire ore" },
     "description": "Pale pebbles with a moon-grey shine.  A raw material from the drowned lowlands.",
-    "//": "astral content list critical-core: raw, tier 2, source: t_astral_drowned_silvermire_vein",
+    "//": "astral content list 00-critical-core: raw, tier 2, source: t_astral_drowned_silvermire_vein",
     "flags": [ "ASTRAL_TIER_2" ]
   },
   {
@@ -242,7 +242,7 @@
     "looks_like": "coal_lump",
     "name": { "str": "emberstone" },
     "description": "Black lump, red glints deep inside.  A raw material from root country.",
-    "//": "astral content list critical-core: raw, tier 1, source: t_astral_root_emberstone_vein",
+    "//": "astral content list 00-critical-core: raw, tier 1, source: t_astral_root_emberstone_vein",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -252,7 +252,7 @@
     "looks_like": "salt",
     "name": { "str_sp": "ghostsalt" },
     "description": "White crust flakes that catch no light.  A raw material from the drowned lowlands.",
-    "//": "astral content list critical-core: raw, tier 1, source: t_astral_drowned_ghostsalt_pan",
+    "//": "astral content list 00-critical-core: raw, tier 1, source: t_astral_drowned_ghostsalt_pan",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -262,7 +262,7 @@
     "looks_like": "clay_lump",
     "name": { "str_sp": "bluemarl" },
     "description": "Blue-grey wet lump.  A raw material from the arrival meadows.",
-    "//": "astral content list critical-core: raw, tier 1, source: t_astral_meadow_bluemarl_bank",
+    "//": "astral content list 00-critical-core: raw, tier 1, source: t_astral_meadow_bluemarl_bank",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -272,7 +272,7 @@
     "looks_like": "rock",
     "name": { "str_sp": "starflint" },
     "description": "Dark glassy stone, white speckled rind.  A raw material from the arrival meadows.",
-    "//": "astral content list critical-core: raw, tier 1, source: t_astral_meadow_starflint_outcrop",
+    "//": "astral content list 00-critical-core: raw, tier 1, source: t_astral_meadow_starflint_outcrop",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -282,7 +282,7 @@
     "looks_like": "chem_sulphur",
     "name": { "str_sp": "brimdust" },
     "description": "Yellow powdery crust chunk.  A raw material from the fungal forest.",
-    "//": "astral content list critical-core: raw, tier 2, source: t_astral_fungal_brimdust_crust",
+    "//": "astral content list 00-critical-core: raw, tier 2, source: t_astral_fungal_brimdust_crust",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -293,7 +293,7 @@
     "name": { "str_sp": "heartglass" },
     "description": "Cloudy white crystal cluster, pink core.  A raw material from root country.",
     "material": [ "astral_heartglass" ],
-    "//": "astral content list critical-core: raw, tier 3, source: t_astral_root_heartglass_vein",
+    "//": "astral content list 00-critical-core: raw, tier 3, source: t_astral_root_heartglass_vein",
     "extend": { "flags": [ "ASTRAL_TIER_3" ] }
   },
   {
@@ -306,7 +306,7 @@
     "color": "brown",
     "name": { "str": "duskiron bar" },
     "description": "Dark bar with a violet sheen, hammer marks.  Worked stock from the Astral planes.",
-    "//": "astral content list critical-core: intermediate, tier 2, source: craft: duskiron ore or mire-iron ×2 + emberstone",
+    "//": "astral content list 00-critical-core: intermediate, tier 2, source: craft: duskiron ore or mire-iron ×2 + emberstone",
     "flags": [ "ASTRAL_TIER_2" ]
   },
   {
@@ -316,7 +316,7 @@
     "looks_like": "charcoal",
     "name": { "str_sp": "hearthcoal" },
     "description": "Pale-grey charcoal sticks.  Worked stock from the arrival meadows.",
-    "//": "astral content list critical-core: intermediate, tier 1, source: craft: hearthwood log, charcoal pit",
+    "//": "astral content list 00-critical-core: intermediate, tier 1, source: craft: hearthwood log, charcoal pit",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -326,7 +326,7 @@
     "looks_like": "charcoal",
     "name": { "str_sp": "bogcake" },
     "description": "Dark fibrous brick.  A raw material from the drowned lowlands.",
-    "//": "astral content list critical-core: raw, tier 1, source: t_astral_drowned_bogcake_cut",
+    "//": "astral content list 00-critical-core: raw, tier 1, source: t_astral_drowned_bogcake_cut",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -337,7 +337,7 @@
     "name": { "str": "hearthwood log" },
     "description": "Pale honey-coloured log, warm sheen.  A raw material from the arrival meadows.",
     "material": [ "astral_hearthwood" ],
-    "//": "astral content list critical-core: raw, tier 1, source: astral_meadow_hearthwood_tree",
+    "//": "astral content list 00-critical-core: raw, tier 1, source: astral_meadow_hearthwood_tree",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -350,7 +350,7 @@
     "color": "brown",
     "name": { "str": "hearthwood plank" },
     "description": "Pale plank with amber grain.  Worked stock from the arrival meadows.",
-    "//": "astral content list critical-core: intermediate, tier 1, source: craft: hearthwood log",
+    "//": "astral content list 00-critical-core: intermediate, tier 1, source: craft: hearthwood log",
     "flags": [ "ASTRAL_TIER_1" ]
   },
   {
@@ -363,7 +363,7 @@
     "color": "brown",
     "name": { "str": "hearthwood staff" },
     "description": "Long pale staff, leather grip.  A weapon from the arrival meadows.",
-    "//": "astral content list critical-core: weapon, tier 1, source: craft: hearthwood plank ×2 + cord",
+    "//": "astral content list 00-critical-core: weapon, tier 1, source: craft: hearthwood plank ×2 + cord",
     "flags": [ "ASTRAL_TIER_1" ]
   },
   {
@@ -374,7 +374,7 @@
     "name": { "str": "waterlogged oak log" },
     "description": "Near-black log, water-dark grain.  A raw material from the drowned lowlands.",
     "material": [ "astral_bog_oak" ],
-    "//": "astral content list critical-core: raw, tier 2, source: astral_drowned_sunken_oak",
+    "//": "astral content list 00-critical-core: raw, tier 2, source: astral_drowned_sunken_oak",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -387,7 +387,7 @@
     "color": "brown",
     "name": { "str": "bog-oak plank" },
     "description": "Black plank, hard and dense.  Worked stock from the drowned lowlands.",
-    "//": "astral content list critical-core: intermediate, tier 2, source: craft: waterlogged oak log, seasoned",
+    "//": "astral content list 00-critical-core: intermediate, tier 2, source: craft: waterlogged oak log, seasoned",
     "flags": [ "ASTRAL_TIER_2" ]
   },
   {
@@ -401,7 +401,7 @@
     "subtypes": [ "ARMOR" ],
     "name": { "str": "bog-oak buckler" },
     "description": "Round black shield, green boss.  A piece of gear from the drowned lowlands.",
-    "//": "astral content list critical-core: armor, tier 2, source: craft: bog-oak plank ×2 + verdigris ingot",
+    "//": "astral content list 00-critical-core: armor, tier 2, source: craft: bog-oak plank ×2 + verdigris ingot",
     "flags": [ "ASTRAL_TIER_2" ]
   },
   {
@@ -412,7 +412,7 @@
     "name": { "str_sp": "verdigris scrap" },
     "description": "Green-crusted bronze fragments.  A raw material from the drowned lowlands.",
     "material": [ "astral_verdigris_bronze" ],
-    "//": "astral content list critical-core: raw, tier 2, source: loot: astral_lm_drowned_sunken_pier; mon_astral_drowned_shell_crab",
+    "//": "astral content list 00-critical-core: raw, tier 2, source: loot: astral_lm_drowned_sunken_pier; mon_astral_drowned_shell_crab",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -423,7 +423,7 @@
     "name": { "str": "verdigris bronze ingot" },
     "description": "Green-gold ingot, mottled.  Worked stock from the drowned lowlands.",
     "material": [ "astral_verdigris_bronze" ],
-    "//": "astral content list critical-core: intermediate, tier 2, source: craft: verdigris scrap ×3 + silvermire ore",
+    "//": "astral content list 00-critical-core: intermediate, tier 2, source: craft: verdigris scrap ×3 + silvermire ore",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -434,7 +434,7 @@
     "name": { "str": "verdigris knife", "str_pl": "verdigris knives" },
     "description": "Green-bronze blade, black handle.  A weapon from the drowned lowlands.",
     "material": [ "astral_verdigris_bronze" ],
-    "//": "astral content list critical-core: weapon, tier 2, source: craft: verdigris ingot + bog-oak plank",
+    "//": "astral content list 00-critical-core: weapon, tier 2, source: craft: verdigris ingot + bog-oak plank",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -445,7 +445,7 @@
     "name": { "str": "sea-silk tuft" },
     "description": "Gold-brown fine fibres, damp.  A raw material from the drowned lowlands.",
     "material": [ "astral_sea_silk" ],
-    "//": "astral content list critical-core: raw, tier 2, source: astral_drowned_reed_mussel",
+    "//": "astral content list 00-critical-core: raw, tier 2, source: astral_drowned_reed_mussel",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -456,7 +456,7 @@
     "name": { "str_sp": "sea-silk thread" },
     "description": "Spool of gold thread.  Worked stock from the drowned lowlands.",
     "material": [ "astral_sea_silk" ],
-    "//": "astral content list critical-core: intermediate, tier 2, source: craft: sea-silk tuft ×4",
+    "//": "astral content list 00-critical-core: intermediate, tier 2, source: craft: sea-silk tuft ×4",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -469,7 +469,7 @@
     "color": "brown",
     "name": { "str_sp": "sea-silk cloth" },
     "description": "Folded shimmering gold cloth.  Worked stock from the drowned lowlands.",
-    "//": "astral content list critical-core: intermediate, tier 2, source: craft: sea-silk thread ×6, loom",
+    "//": "astral content list 00-critical-core: intermediate, tier 2, source: craft: sea-silk thread ×6, loom",
     "flags": [ "ASTRAL_TIER_2" ]
   },
   {
@@ -480,7 +480,7 @@
     "name": { "str": "sea-silk wrap" },
     "description": "Gold shawl, water beads off it.  A piece of gear from the drowned lowlands.",
     "material": [ "astral_sea_silk" ],
-    "//": "astral content list critical-core: armor, tier 2, source: craft: sea-silk cloth ×2",
+    "//": "astral content list 00-critical-core: armor, tier 2, source: craft: sea-silk cloth ×2",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -491,7 +491,7 @@
     "name": { "str_sp": "cap-beetle chitin" },
     "description": "Curved brown-violet shell plate.  A raw material from the fungal forest.",
     "material": [ "astral_chitin_leather" ],
-    "//": "astral content list critical-core: raw, tier 2, source: mon_astral_fungal_cap_beetle",
+    "//": "astral content list 00-critical-core: raw, tier 2, source: mon_astral_fungal_cap_beetle",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -502,7 +502,7 @@
     "name": { "str_sp": "chitin-leather" },
     "description": "Supple dark sheet, iridescent edge.  Worked stock from the fungal forest.",
     "material": [ "astral_chitin_leather" ],
-    "//": "astral content list critical-core: intermediate, tier 2, source: craft: chitin plate ×2, tanning tub",
+    "//": "astral content list 00-critical-core: intermediate, tier 2, source: craft: chitin plate ×2, tanning tub",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -513,7 +513,7 @@
     "name": { "str": "chitin-leather jerkin" },
     "description": "Sleeveless dark jerkin, violet sheen.  A piece of gear from the fungal forest.",
     "material": [ "astral_chitin_leather" ],
-    "//": "astral content list critical-core: armor, tier 2, source: craft: chitin-leather ×4 + thread",
+    "//": "astral content list 00-critical-core: armor, tier 2, source: craft: chitin-leather ×4 + thread",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -523,7 +523,7 @@
     "looks_like": "plant_fibre",
     "name": { "str_sp": "mycel fibre" },
     "description": "Handful of pale grey strands.  A raw material from the fungal forest.",
-    "//": "astral content list critical-core: raw, tier 1, source: astral_fungal_carpet",
+    "//": "astral content list 00-critical-core: raw, tier 1, source: astral_fungal_carpet",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -536,7 +536,7 @@
     "color": "brown",
     "name": { "str_sp": "myceloth" },
     "description": "Grey-white felted cloth.  Worked stock from the fungal forest.",
-    "//": "astral content list critical-core: intermediate, tier 2, source: craft: mycel fibre ×6, loom",
+    "//": "astral content list 00-critical-core: intermediate, tier 2, source: craft: mycel fibre ×6, loom",
     "flags": [ "ASTRAL_TIER_2" ]
   },
   {
@@ -549,7 +549,7 @@
     "color": "brown",
     "name": { "str": "glowcap" },
     "description": "Fist-sized pale cap, faint blue glow.  A raw material from the fungal forest.",
-    "//": "astral content list critical-core: raw, tier 2, source: astral_fungal_glowcap_cluster",
+    "//": "astral content list 00-critical-core: raw, tier 2, source: astral_fungal_glowcap_cluster",
     "flags": [ "ASTRAL_TIER_2" ]
   },
   {
@@ -559,7 +559,7 @@
     "looks_like": "lamp_oil",
     "name": { "str_sp": "glowcap oil" },
     "description": "Bottle of luminous blue oil.  Worked stock from the fungal forest.",
-    "//": "astral content list critical-core: intermediate, tier 2, source: craft: glowcap ×3, press",
+    "//": "astral content list 00-critical-core: intermediate, tier 2, source: craft: glowcap ×3, press",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -569,7 +569,7 @@
     "looks_like": "pine_bough",
     "name": { "str_sp": "heartroot resin" },
     "description": "Amber-red lump, sticky.  A raw material from root country.",
-    "//": "astral content list critical-core: raw, tier 2, source: astral_root_heartroot",
+    "//": "astral content list 00-critical-core: raw, tier 2, source: astral_root_heartroot",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -582,7 +582,7 @@
     "color": "brown",
     "name": { "str_sp": "resin glue" },
     "description": "Small pot of dark amber glue.  Worked stock from root country.",
-    "//": "astral content list critical-core: intermediate, tier 2, source: craft: heartroot resin ×2, boiled",
+    "//": "astral content list 00-critical-core: intermediate, tier 2, source: craft: heartroot resin ×2, boiled",
     "flags": [ "ASTRAL_TIER_2" ]
   },
   {
@@ -593,7 +593,7 @@
     "name": { "str": "ironwood log" },
     "description": "Grey-black log, metallic grain.  A raw material from root country.",
     "material": [ "astral_ironwood" ],
-    "//": "astral content list critical-core: raw, tier 3, source: astral_root_ironwood_tree",
+    "//": "astral content list 00-critical-core: raw, tier 3, source: astral_root_ironwood_tree",
     "extend": { "flags": [ "ASTRAL_TIER_3" ] }
   },
   {
@@ -606,7 +606,7 @@
     "color": "brown",
     "name": { "str": "ironwood plank" },
     "description": "Dark grey plank, dull shine.  Worked stock from root country.",
-    "//": "astral content list critical-core: intermediate, tier 3, source: craft: ironwood log, saw",
+    "//": "astral content list 00-critical-core: intermediate, tier 3, source: craft: ironwood log, saw",
     "flags": [ "ASTRAL_TIER_3" ]
   },
   {
@@ -617,7 +617,7 @@
     "name": { "str": "ironwood pick haft" },
     "description": "Long dark haft, bound end.  Worked stock from root country.",
     "material": [ "astral_ironwood" ],
-    "//": "astral content list critical-core: intermediate, tier 3, source: craft: ironwood plank",
+    "//": "astral content list 00-critical-core: intermediate, tier 3, source: craft: ironwood plank",
     "extend": { "flags": [ "ASTRAL_TIER_3" ] }
   },
   {
@@ -627,7 +627,7 @@
     "looks_like": "pickaxe",
     "name": { "str": "delver's pick" },
     "description": "Heavy pick, dark haft, grey head.  A tool from root country.",
-    "//": "astral content list critical-core: tool, tier 3, source: craft: ironwood haft + duskiron bar ×2",
+    "//": "astral content list 00-critical-core: tool, tier 3, source: craft: ironwood haft + duskiron bar ×2",
     "extend": { "flags": [ "ASTRAL_TIER_3" ] }
   },
   {
@@ -637,7 +637,7 @@
     "looks_like": "honeycomb",
     "name": { "str_sp": "cave-honey" },
     "description": "Dark comb dripping black-gold.  A raw material from root country.",
-    "//": "astral content list critical-core: raw, tier 2, source: astral_root_honey_comb",
+    "//": "astral content list 00-critical-core: raw, tier 2, source: astral_root_honey_comb",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -647,7 +647,7 @@
     "looks_like": "bandages",
     "name": { "str_sp": "cave-honey salve" },
     "description": "Small clay pot, dark gold paste.  Provisions from root country.",
-    "//": "astral content list critical-core: consumable, tier 2, source: craft: cave-honey + resin glue",
+    "//": "astral content list 00-critical-core: consumable, tier 2, source: craft: cave-honey + resin glue",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -657,7 +657,7 @@
     "looks_like": "antifungal",
     "name": { "str_sp": "glowcap tincture" },
     "description": "Stoppered vial, faint blue.  Provisions from the fungal forest.",
-    "//": "astral content list critical-core: consumable, tier 2, source: craft: glowcap + ghostsalt + water",
+    "//": "astral content list 00-critical-core: consumable, tier 2, source: craft: glowcap + ghostsalt + water",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -667,7 +667,7 @@
     "looks_like": "tea",
     "name": { "str_sp": "hearthwood tea" },
     "description": "Steaming cup, amber.  Provisions from the arrival meadows.",
-    "//": "astral content list critical-core: consumable, tier 1, source: craft: hearthwood tinder + water",
+    "//": "astral content list 00-critical-core: consumable, tier 1, source: craft: hearthwood tinder + water",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -677,7 +677,7 @@
     "looks_like": "fish",
     "name": { "str_sp": "reed eel meat" },
     "description": "Dark fillet.  Provisions from the drowned lowlands.",
-    "//": "astral content list critical-core: consumable, tier 1, source: mon_astral_drowned_reed_eel",
+    "//": "astral content list 00-critical-core: consumable, tier 1, source: mon_astral_drowned_reed_eel",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -687,7 +687,7 @@
     "looks_like": "meat",
     "name": { "str_sp": "cap-beetle meat" },
     "description": "Pale segmented meat.  Provisions from the fungal forest.",
-    "//": "astral content list critical-core: consumable, tier 2, source: mon_astral_fungal_cap_beetle",
+    "//": "astral content list 00-critical-core: consumable, tier 2, source: mon_astral_fungal_cap_beetle",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
   },
   {
@@ -697,7 +697,7 @@
     "looks_like": "meat",
     "name": { "str_sp": "meadow hare meat" },
     "description": "Small red cut.  Provisions from the arrival meadows.",
-    "//": "astral content list critical-core: consumable, tier 1, source: mon_astral_meadow_hare",
+    "//": "astral content list 00-critical-core: consumable, tier 1, source: mon_astral_meadow_hare",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
   },
   {
@@ -710,7 +710,7 @@
     "color": "pink",
     "name": { "str": "heart fragment" },
     "description": "Cracked crystal shard, slow inner pulse.  A core relic from the Astral planes.",
-    "//": "astral content list critical-core: reward, tier 7, source: core outcome: destroy",
+    "//": "astral content list 00-critical-core: reward, tier 7, source: core outcome: destroy",
     "flags": [ "ASTRAL_TIER_7" ]
   },
   {
@@ -723,7 +723,7 @@
     "color": "pink",
     "name": { "str": "bargain mark" },
     "description": "Brand-like token on a cord.  A core relic from the Astral planes.",
-    "//": "astral content list critical-core: reward, tier 7, source: core outcome: bargain",
+    "//": "astral content list 00-critical-core: reward, tier 7, source: core outcome: bargain",
     "flags": [ "ASTRAL_TIER_7" ]
   },
   {
@@ -736,7 +736,658 @@
     "color": "pink",
     "name": { "str": "claim seal" },
     "description": "Heavy wax-and-root seal, guild stamp.  A core relic from the Astral planes.",
-    "//": "astral content list critical-core: reward, tier 7, source: core outcome: claim",
+    "//": "astral content list 00-critical-core: reward, tier 7, source: core outcome: claim",
     "flags": [ "ASTRAL_TIER_7" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_hare_hide",
+    "copy-from": "leather",
+    "looks_like": "leather",
+    "name": { "str": "meadow hare hide" },
+    "description": "Soft tawny pelt.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_hare",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_deer_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "gate-road deer meat" },
+    "description": "Lean venison cut.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_meadow_deer",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_deer_hide",
+    "copy-from": "leather",
+    "looks_like": "leather",
+    "name": { "str": "gate-road deer hide" },
+    "description": "Brown hide with leaf flecks.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_meadow_deer",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_squirrel_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "hearthwood squirrel meat" },
+    "description": "Tiny red scrap.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_squirrel",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_squirrel_hide",
+    "copy-from": "leather",
+    "looks_like": "leather",
+    "name": { "str": "hearthwood squirrel hide" },
+    "description": "Small red-brown pelt.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_squirrel",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_chipmunk_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "meadow chipmunk meat" },
+    "description": "Tiny striped scrap.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_chipmunk",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_mutton",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str": "remnant mutton" },
+    "description": "Woolly-edged red cut.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_sheep",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_sheep_hide",
+    "copy-from": "leather",
+    "looks_like": "leather",
+    "name": { "str": "remnant sheep hide" },
+    "description": "Thick woolly hide.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_sheep",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_goat_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "roadside goat meat" },
+    "description": "Lean dark cut.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_goat",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_goat_hide",
+    "copy-from": "leather",
+    "looks_like": "leather",
+    "name": { "str": "roadside goat hide" },
+    "description": "Thin scruffy hide.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_goat",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_beef",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str": "pasture beef" },
+    "description": "Thick red cut.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_meadow_cow",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_cow_hide",
+    "copy-from": "leather",
+    "looks_like": "leather",
+    "name": { "str": "pasture cow hide" },
+    "description": "Heavy brown hide.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_meadow_cow",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_horse_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "stray horse meat" },
+    "description": "Tough dark cut.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_meadow_horse",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_horse_hide",
+    "copy-from": "leather",
+    "looks_like": "leather",
+    "name": { "str": "stray horse hide" },
+    "description": "Large bay hide.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_meadow_horse",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_sparrow_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "meadow sparrow meat" },
+    "description": "Tiny bird scrap.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_sparrow",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_sparrow_feathers",
+    "copy-from": "feather",
+    "looks_like": "feather",
+    "name": { "str": "meadow sparrow feathers", "str_pl": "meadow sparrow featherses" },
+    "description": "Soft brown feathers.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_sparrow",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_robin_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "gatehouse robin meat" },
+    "description": "Tiny red scrap.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_robin",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_robin_feathers",
+    "copy-from": "feather",
+    "looks_like": "feather",
+    "name": { "str": "gatehouse robin feathers", "str_pl": "gatehouse robin featherses" },
+    "description": "Red-breast feathers.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_robin",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_grouse_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "grass grouse meat" },
+    "description": "Mottled bird cut.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_grouse",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_grouse_feathers",
+    "copy-from": "feather",
+    "looks_like": "feather",
+    "name": { "str": "grass grouse feathers", "str_pl": "grass grouse featherses" },
+    "description": "Barred brown feathers.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_grouse",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_pheasant_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "orchard pheasant meat" },
+    "description": "Coppery bird cut.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_meadow_pheasant",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_pheasant_feathers",
+    "copy-from": "feather",
+    "looks_like": "feather",
+    "name": { "str": "orchard pheasant feathers", "str_pl": "orchard pheasant featherses" },
+    "description": "Long coppery feathers.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_meadow_pheasant",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_turkey_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "field turkey meat" },
+    "description": "Dark turkey cut.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_meadow_turkey",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_turkey_feathers",
+    "copy-from": "feather",
+    "looks_like": "feather",
+    "name": { "str": "field turkey feathers", "str_pl": "field turkey featherses" },
+    "description": "Bronze-sheen feathers.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_meadow_turkey",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_woodpecker_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "hearthwood pecker meat" },
+    "description": "Tiny dark scrap.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_woodpecker",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_woodpecker_feathers",
+    "copy-from": "feather",
+    "looks_like": "feather",
+    "name": { "str": "hearthwood pecker feathers", "str_pl": "hearthwood pecker featherses" },
+    "description": "Black-white feathers.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_woodpecker",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_pigeon_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "road pigeon meat" },
+    "description": "Small grey scrap.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_pigeon",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_pigeon_feathers",
+    "copy-from": "feather",
+    "looks_like": "feather",
+    "name": { "str": "road pigeon feathers", "str_pl": "road pigeon featherses" },
+    "description": "Soft grey feathers.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_pigeon",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_bee_wax",
+    "copy-from": "wax",
+    "looks_like": "wax",
+    "name": { "str": "clover bee wax", "str_pl": "clover bee waxes" },
+    "description": "Soft gold wax crumb.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_bee",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_butterfly_wing",
+    "material": [ "stone" ],
+    "weight": "500 g",
+    "volume": "250 ml",
+    "symbol": "*",
+    "color": "brown",
+    "name": { "str": "glasswing flake" },
+    "description": "Pale translucent wing flake.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_butterfly",
+    "flags": [ "ASTRAL_TIER_1" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_meadow_firefly_glow",
+    "material": [ "stone" ],
+    "weight": "500 g",
+    "volume": "250 ml",
+    "symbol": "*",
+    "color": "brown",
+    "name": { "str": "dusk glow mote" },
+    "description": "Faint yellow glowing mote.  A raw material from the arrival meadows.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_meadow_firefly",
+    "flags": [ "ASTRAL_TIER_1" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_eel_skin",
+    "copy-from": "leather",
+    "looks_like": "leather",
+    "name": { "str": "reed eel skin" },
+    "description": "Slick dark skin strip.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_drowned_reed_eel",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_crab_meat",
+    "copy-from": "fish",
+    "looks_like": "fish",
+    "name": { "str_sp": "verdigris crab meat" },
+    "description": "Pale crab meat.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_drowned_shell_crab",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_pike_meat",
+    "copy-from": "fish",
+    "looks_like": "fish",
+    "name": { "str_sp": "canal pike meat" },
+    "description": "Firm greenish fillet.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_drowned_canal_pike",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_pike_scale",
+    "material": [ "stone" ],
+    "weight": "500 g",
+    "volume": "250 ml",
+    "symbol": "*",
+    "color": "brown",
+    "name": { "str": "canal pike scale" },
+    "description": "Hard green scale.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_drowned_canal_pike",
+    "flags": [ "ASTRAL_TIER_2" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_carp_meat",
+    "copy-from": "fish",
+    "looks_like": "fish",
+    "name": { "str_sp": "mire carp meat" },
+    "description": "Muddy bronze fillet.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_drowned_mire_carp",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_cray_meat",
+    "copy-from": "fish",
+    "looks_like": "fish",
+    "name": { "str_sp": "tide cray meat" },
+    "description": "Tiny sweet scrap.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_drowned_tide_cray",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_cray_shell",
+    "material": [ "stone" ],
+    "weight": "500 g",
+    "volume": "250 ml",
+    "symbol": "*",
+    "color": "brown",
+    "name": { "str": "tide cray shell" },
+    "description": "Small mottled shell.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_drowned_tide_cray",
+    "flags": [ "ASTRAL_TIER_1" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_beetle_chitin",
+    "copy-from": "chitin_piece",
+    "looks_like": "chitin_piece",
+    "name": { "str_sp": "canal diver chitin" },
+    "description": "Shiny black chitin flake.  A raw material from the drowned lowlands.",
+    "material": [ "astral_chitin_leather" ],
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_drowned_diving_beetle",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_snail_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "canal snail meat" },
+    "description": "Soft grey scrap.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_drowned_river_snail",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_snail_shell",
+    "material": [ "stone" ],
+    "weight": "500 g",
+    "volume": "250 ml",
+    "symbol": "*",
+    "color": "brown",
+    "name": { "str": "canal snail shell" },
+    "description": "Mottled spiral shell.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_drowned_river_snail",
+    "flags": [ "ASTRAL_TIER_1" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_muskie_meat",
+    "copy-from": "fish",
+    "looks_like": "fish",
+    "name": { "str_sp": "lock muskie meat" },
+    "description": "Long spotted fillet.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 3, source: mon_astral_drowned_muskie",
+    "extend": { "flags": [ "ASTRAL_TIER_3" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_muskie_skin",
+    "copy-from": "leather",
+    "looks_like": "leather",
+    "name": { "str": "lock muskie skin" },
+    "description": "Tough spotted skin.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 3, source: mon_astral_drowned_muskie",
+    "extend": { "flags": [ "ASTRAL_TIER_3" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_lobster_meat",
+    "copy-from": "fish",
+    "looks_like": "fish",
+    "name": { "str_sp": "lock lobster meat" },
+    "description": "Firm claw meat.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 3, source: mon_astral_drowned_lock_lobster",
+    "extend": { "flags": [ "ASTRAL_TIER_3" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_bog_oak_scrap",
+    "copy-from": "log",
+    "looks_like": "log",
+    "name": { "str_sp": "bog-oak nest scrap" },
+    "description": "Black oak stick from a lodge.  A raw material from the drowned lowlands.",
+    "material": [ "astral_bog_oak" ],
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_drowned_oak_beaver",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_beaver_hide",
+    "copy-from": "leather",
+    "looks_like": "leather",
+    "name": { "str": "bog-oak beaver hide" },
+    "description": "Dark waterproof pelt.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_drowned_oak_beaver",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_beaver_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "bog-oak beaver meat" },
+    "description": "Rich dark cut.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_drowned_oak_beaver",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_otter_hide",
+    "copy-from": "leather",
+    "looks_like": "leather",
+    "name": { "str": "canal otter hide" },
+    "description": "Sleek wet pelt.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_drowned_canal_otter",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_otter_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "canal otter meat" },
+    "description": "Dark oily cut.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_drowned_canal_otter",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_turtle_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "stilt-pond turtle meat" },
+    "description": "Firm pale cut.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_drowned_painted_turtle",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_turtle_shell",
+    "material": [ "stone" ],
+    "weight": "500 g",
+    "volume": "250 ml",
+    "symbol": "*",
+    "color": "brown",
+    "name": { "str": "stilt-pond turtle shell" },
+    "description": "Painted shell plate.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_drowned_painted_turtle",
+    "flags": [ "ASTRAL_TIER_1" ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_frog_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "reed frog meat" },
+    "description": "Tiny green scrap.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_drowned_green_frog",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_moorhen_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "stilt moorhen meat" },
+    "description": "Dark bird cut.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_drowned_moorhen",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_moorhen_feathers",
+    "copy-from": "feather",
+    "looks_like": "feather",
+    "name": { "str": "stilt moorhen feathers", "str_pl": "stilt moorhen featherses" },
+    "description": "Dark feathers, white tip.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_drowned_moorhen",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_cormorant_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "canal cormorant meat" },
+    "description": "Oily dark bird cut.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_drowned_cormorant",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_cormorant_feathers",
+    "copy-from": "feather",
+    "looks_like": "feather",
+    "name": { "str": "canal cormorant feathers", "str_pl": "canal cormorant featherses" },
+    "description": "Black slick feathers.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 2, source: mon_astral_drowned_cormorant",
+    "extend": { "flags": [ "ASTRAL_TIER_2" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_grebe_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "flood grebe meat" },
+    "description": "Small bird scrap.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_drowned_grebe",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_grebe_feathers",
+    "copy-from": "feather",
+    "looks_like": "feather",
+    "name": { "str": "flood grebe feathers", "str_pl": "flood grebe featherses" },
+    "description": "Soft mottled feathers.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_drowned_grebe",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_coot_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "market coot meat" },
+    "description": "Slate bird scrap.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_drowned_coot",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_coot_feathers",
+    "copy-from": "feather",
+    "looks_like": "feather",
+    "name": { "str": "market coot feathers", "str_pl": "market coot featherses" },
+    "description": "Slate feathers.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_drowned_coot",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_slug_meat",
+    "copy-from": "meat",
+    "looks_like": "meat",
+    "name": { "str_sp": "mire slug meat" },
+    "description": "Soft grey pulp.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 1, source: mon_astral_drowned_mire_slug",
+    "extend": { "flags": [ "ASTRAL_TIER_1" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_claw_chitin",
+    "copy-from": "chitin_piece",
+    "looks_like": "chitin_piece",
+    "name": { "str_sp": "harbour claw chitin" },
+    "description": "Thick bronze-crusted chitin plate.  A raw material from the drowned lowlands.",
+    "material": [ "astral_chitin_leather" ],
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 4, source: mon_astral_drowned_harbour_claw",
+    "extend": { "flags": [ "ASTRAL_TIER_4" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_drowned_claw_meat",
+    "copy-from": "fish",
+    "looks_like": "fish",
+    "name": { "str_sp": "harbour claw meat" },
+    "description": "Dense elite claw meat.  A raw material from the drowned lowlands.",
+    "//": "astral content list 10-creatures-meadow-drowned: raw, tier 4, source: mon_astral_drowned_harbour_claw",
+    "extend": { "flags": [ "ASTRAL_TIER_4" ] }
   }
 ]

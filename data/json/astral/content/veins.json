@@ -17,7 +17,7 @@
     "name": "root duskiron vein",
     "color": "light_gray",
     "description": "An outcrop of root duskiron breaking the ground of root country.  A pickaxe would have it out in an hour.  Found: root country bare ground, sinkhole rims.",
-    "//": "astral content list critical-core: mine with a pickaxe; items from astral_vein_root_duskiron_vein",
+    "//": "astral content list 00-critical-core: mine with a pickaxe; items from astral_vein_root_duskiron_vein",
     "delete": { "flags": [ "NATURAL_UNDERGROUND" ] },
     "roof": "t_open_air",
     "bash": {
@@ -43,7 +43,7 @@
     "name": "drowned mire iron vein",
     "color": "brown",
     "description": "A patch of drowned mire iron vein in the drowned lowlands.  Dig here with a shovel.  Found: lowland cutbanks beside water.",
-    "//": "astral content list critical-core: dig with a shovel (construction constr_astral_dig_drowned_mire_iron_vein)"
+    "//": "astral content list 00-critical-core: dig with a shovel (construction constr_astral_dig_drowned_mire_iron_vein)"
   },
   {
     "type": "construction",
@@ -76,7 +76,7 @@
     "name": "root sunvein vein",
     "color": "light_gray",
     "description": "An outcrop of root sunvein breaking the ground of root country.  A pickaxe would have it out in an hour.  Found: root country.",
-    "//": "astral content list critical-core: mine with a pickaxe; items from astral_vein_root_sunvein_vein",
+    "//": "astral content list 00-critical-core: mine with a pickaxe; items from astral_vein_root_sunvein_vein",
     "delete": { "flags": [ "NATURAL_UNDERGROUND" ] },
     "roof": "t_open_air",
     "bash": {
@@ -102,7 +102,7 @@
     "name": "drowned silvermire vein",
     "color": "brown",
     "description": "A patch of drowned silvermire vein in the drowned lowlands.  Dig here with a shovel.  Found: gravel bars.",
-    "//": "astral content list critical-core: dig with a shovel (construction constr_astral_dig_drowned_silvermire_vein)"
+    "//": "astral content list 00-critical-core: dig with a shovel (construction constr_astral_dig_drowned_silvermire_vein)"
   },
   {
     "type": "construction",
@@ -135,7 +135,7 @@
     "name": "root emberstone vein",
     "color": "light_gray",
     "description": "An outcrop of root emberstone breaking the ground of root country.  A pickaxe would have it out in an hour.  Found: root country, cave mouths.",
-    "//": "astral content list critical-core: mine with a pickaxe; items from astral_vein_root_emberstone_vein",
+    "//": "astral content list 00-critical-core: mine with a pickaxe; items from astral_vein_root_emberstone_vein",
     "delete": { "flags": [ "NATURAL_UNDERGROUND" ] },
     "roof": "t_open_air",
     "bash": {
@@ -161,7 +161,7 @@
     "name": "drowned ghostsalt pan",
     "color": "brown",
     "description": "A patch of drowned ghostsalt in the drowned lowlands.  Dig here with a shovel.  Found: dried pool beds.",
-    "//": "astral content list critical-core: dig with a shovel (construction constr_astral_dig_drowned_ghostsalt_pan)"
+    "//": "astral content list 00-critical-core: dig with a shovel (construction constr_astral_dig_drowned_ghostsalt_pan)"
   },
   {
     "type": "construction",
@@ -194,7 +194,7 @@
     "name": "meadow bluemarl bank",
     "color": "brown",
     "description": "A patch of meadow bluemarl in the arrival meadows.  Dig here with a shovel.  Found: stream banks.",
-    "//": "astral content list critical-core: dig with a shovel (construction constr_astral_dig_meadow_bluemarl_bank)"
+    "//": "astral content list 00-critical-core: dig with a shovel (construction constr_astral_dig_meadow_bluemarl_bank)"
   },
   {
     "type": "construction",
@@ -227,7 +227,7 @@
     "name": "meadow starflint outcrop",
     "color": "light_gray",
     "description": "An outcrop of meadow starflint breaking the ground of the arrival meadows.  A pickaxe would have it out in an hour.  Found: meadow rises.",
-    "//": "astral content list critical-core: mine with a pickaxe; items from astral_vein_meadow_starflint_outcrop",
+    "//": "astral content list 00-critical-core: mine with a pickaxe; items from astral_vein_meadow_starflint_outcrop",
     "delete": { "flags": [ "NATURAL_UNDERGROUND" ] },
     "roof": "t_open_air",
     "bash": {
@@ -253,7 +253,7 @@
     "name": "fungal brimdust crust",
     "color": "brown",
     "description": "A patch of fungal brimdust crust in the fungal forest.  Dig here with a shovel.  Found: around cap-tree roots.",
-    "//": "astral content list critical-core: dig with a shovel (construction constr_astral_dig_fungal_brimdust_crust)"
+    "//": "astral content list 00-critical-core: dig with a shovel (construction constr_astral_dig_fungal_brimdust_crust)"
   },
   {
     "type": "construction",
@@ -286,7 +286,7 @@
     "name": "root heartglass vein",
     "color": "light_gray",
     "description": "An outcrop of root heartglass breaking the ground of root country.  A pickaxe would have it out in an hour.  Found: deep root country, cavern walls.",
-    "//": "astral content list critical-core: mine with a pickaxe; items from astral_vein_root_heartglass_vein",
+    "//": "astral content list 00-critical-core: mine with a pickaxe; items from astral_vein_root_heartglass_vein",
     "delete": { "flags": [ "NATURAL_UNDERGROUND" ] },
     "roof": "t_open_air",
     "bash": {
@@ -312,7 +312,7 @@
     "name": "drowned bogcake cut",
     "color": "brown",
     "description": "A patch of drowned bogcake in the drowned lowlands.  Dig here with a shovel.  Found: drained bog edges.",
-    "//": "astral content list critical-core: dig with a shovel (construction constr_astral_dig_drowned_bogcake_cut)"
+    "//": "astral content list 00-critical-core: dig with a shovel (construction constr_astral_dig_drowned_bogcake_cut)"
   },
   {
     "type": "construction",

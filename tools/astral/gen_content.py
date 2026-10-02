@@ -124,6 +124,17 @@ def load_lists():
             for r in rows:
                 r["_list"] = name
                 data[kind].append(r)
+    # First list wins for a duplicated id (the critical core is 'critical-core'; long-tail
+    # lists may restate a core row for context).
+    for kind, rows in data.items():
+        seen = {}
+        kept = []
+        for r in rows:
+            if r["id"] in seen:
+                continue
+            seen[r["id"]] = r["_list"]
+            kept.append(r)
+        data[kind] = kept
     return data
 
 

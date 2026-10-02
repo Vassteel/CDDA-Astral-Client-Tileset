@@ -14,7 +14,7 @@
     "looks_like": "t_tree",
     "name": "hearthwood tree",
     "description": "Broad pale-barked tree, amber leaves.  Flora from the arrival meadows.",
-    "//": "astral content list critical-core; harvest: chop: astral_meadow_hearthwood_log ×3; bark: astral_hearthwood_tinder ×2; all",
+    "//": "astral content list 00-critical-core; harvest: chop: astral_meadow_hearthwood_log ×3; bark: astral_hearthwood_tinder ×2; all",
     "examine_action": "harvest_ter",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_meadow_hearthwood_tree" }
@@ -43,7 +43,7 @@
     "looks_like": "t_tree",
     "name": "sunken oak",
     "description": "Leaning black trunk half in water.  Flora from the drowned lowlands.",
-    "//": "astral content list critical-core; harvest: chop: astral_drowned_bog_oak_log ×2; all",
+    "//": "astral content list 00-critical-core; harvest: chop: astral_drowned_bog_oak_log ×2; all",
     "examine_action": "harvest_ter",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_drowned_sunken_oak" }
@@ -72,7 +72,7 @@
     "required_str": -1,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
-    "//": "astral content list critical-core; harvest: cut: cordage reeds (vanilla)"
+    "//": "astral content list 00-critical-core; harvest: cut: cordage reeds (vanilla)"
   },
   {
     "type": "harvest",
@@ -91,7 +91,7 @@
     "required_str": -1,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
-    "//": "astral content list critical-core; harvest: astral_drowned_sea_silk_tuft ×1–2; all",
+    "//": "astral content list 00-critical-core; harvest: astral_drowned_sea_silk_tuft ×1–2; all",
     "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_drowned_reed_mussel" }
@@ -109,7 +109,7 @@
     "looks_like": "t_grass_long",
     "name": "fungal carpet",
     "description": "Fleshy pale ground, thread veins.  Flora from the fungal forest.",
-    "//": "astral content list critical-core; harvest: gather: astral_fungal_mycel_fibre ×2; all",
+    "//": "astral content list 00-critical-core; harvest: gather: astral_fungal_mycel_fibre ×2; all",
     "examine_action": "harvest_ter",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_carpet" }
@@ -143,7 +143,7 @@
     "required_str": -1,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
-    "//": "astral content list critical-core; harvest: astral_fungal_glowcap_raw ×2–4; all",
+    "//": "astral content list 00-critical-core; harvest: astral_fungal_glowcap_raw ×2–4; all",
     "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_glowcap_cluster" }
@@ -156,7 +156,7 @@
     "looks_like": "t_tree",
     "name": "cap tree",
     "description": "Towering stalk with a wide fleshy cap.  Flora from the fungal forest.",
-    "//": "astral content list critical-core; harvest: chop: fungal wood (long tail)"
+    "//": "astral content list 00-critical-core; harvest: chop: fungal wood (long tail)"
   },
   {
     "type": "harvest",
@@ -175,7 +175,7 @@
     "required_str": -1,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
-    "//": "astral content list critical-core; harvest: tap: astral_root_heartroot_resin ×1–2; all",
+    "//": "astral content list 00-critical-core; harvest: tap: astral_root_heartroot_resin ×1–2; all",
     "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_heartroot" }
@@ -193,7 +193,7 @@
     "looks_like": "t_tree",
     "name": "ironwood tree",
     "description": "Squat grey tree, metallic bark.  Flora from root country.",
-    "//": "astral content list critical-core; harvest: chop: astral_root_ironwood_log ×2; all",
+    "//": "astral content list 00-critical-core; harvest: chop: astral_root_ironwood_log ×2; all",
     "examine_action": "harvest_ter",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_ironwood_tree" }
@@ -227,7 +227,7 @@
     "required_str": -1,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
-    "//": "astral content list critical-core; harvest: astral_root_cave_honey ×2; all",
+    "//": "astral content list 00-critical-core; harvest: astral_root_cave_honey ×2; all",
     "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_honey_comb" }
@@ -240,7 +240,7 @@
     "looks_like": "t_grass_long",
     "name": "tall meadow grass",
     "description": "Waist-high green-gold grass.  Flora from the arrival meadows.",
-    "//": "astral content list critical-core; harvest: cut: plant fibre"
+    "//": "astral content list 00-critical-core; harvest: cut: plant fibre"
   },
   {
     "type": "terrain",
@@ -249,6 +249,6 @@
     "looks_like": "t_tree",
     "name": "drowned willow",
     "description": "Weeping willow standing in a pool.  Flora from the drowned lowlands.",
-    "//": "astral content list critical-core; harvest: chop: willow log (vanilla)"
+    "//": "astral content list 00-critical-core; harvest: chop: willow log (vanilla)"
   }
 ]
