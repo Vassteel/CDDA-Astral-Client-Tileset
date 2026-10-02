@@ -203,7 +203,7 @@ TEST_CASE( "astral_portal_travel_binds_and_persists_pockets", "[astral][dimensio
     // Portal A.
     const tripoint_bub_ms center_a = raise_portal_here( u );
     const tripoint_abs_ms anchor_a = u.pos_abs();
-    const tripoint_bub_ms threshold_a = center_a + point::north;
+    const tripoint_abs_ms threshold_a = get_map().get_abs( center_a + point::north );
 
     // A follower standing next to the gateway crosses with us (NPC plan N2).
     shared_ptr_fast<npc> buddy = make_shared_fast<npc>();
@@ -249,7 +249,7 @@ TEST_CASE( "astral_portal_travel_binds_and_persists_pockets", "[astral][dimensio
     CHECK( u.pos_abs() == anchor_a );
     CHECK( buddy_near_player() );
     // The overworld threshold is now bound to pocket 01.
-    CHECK( get_map().ter( threshold_a ).id() == ter_str_id( "t_astral_portal_active_r1c2_p01" ) );
+    CHECK( get_map().ter( get_map().get_bub( threshold_a ) ).id() == ter_str_id( "t_astral_portal_active_r1c2_p01" ) );
 
     // Re-enter through the bound threshold: same world, the rock is still there.
     dialogue d3( get_talker_for( u ), nullptr );
@@ -261,8 +261,9 @@ TEST_CASE( "astral_portal_travel_binds_and_persists_pockets", "[astral][dimensio
     REQUIRE( g->get_dimension_prefix() == dimension_default );
 
     // Portal B, one OMT east: a second unbound threshold must get its own pocket.
-    u.setpos( get_map(), center_a + point( 24, 0 ) );
+    u.setpos( get_map(), get_map().get_bub( anchor_a + point( 24, 0 ) ) );
     const tripoint_bub_ms center_b = raise_portal_here( u );
+    const tripoint_abs_ms threshold_b = get_map().get_abs( center_b + point::north );
     dialogue d5( get_talker_for( u ), nullptr );
     effect_on_condition_EOC_ASTRAL_PORTAL_ENTER_DO->activate( d5 );
     REQUIRE( g->get_dimension_prefix() == dimension_astral_pocket_02 );
@@ -271,6 +272,6 @@ TEST_CASE( "astral_portal_travel_binds_and_persists_pockets", "[astral][dimensio
     dialogue d6( get_talker_for( u ), nullptr );
     effect_on_condition_EOC_ASTRAL_PORTAL_RETURN_DO->activate( d6 );
     REQUIRE( g->get_dimension_prefix() == dimension_default );
-    CHECK( get_map().ter( center_b + point::north ).id() ==
+    CHECK( get_map().ter( get_map().get_bub( threshold_b ) ).id() ==
            ter_str_id( "t_astral_portal_active_r1c2_p02" ) );
 }
