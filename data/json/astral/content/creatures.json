@@ -9,7 +9,7 @@
     "id": "mon_astral_meadow_hare",
     "copy-from": "mon_rabbit",
     "looks_like": "mon_rabbit",
-    "name": { "str": "meadow hare", "str_pl": "meadow hares" },
+    "name": { "str": "meadow hare" },
     "description": "Long-eared tawny hare, pale belly.  A creature from the arrival meadows.  Flees; nothing hunts here.",
     "//": "astral content list critical-core: rank 1, active day",
     "harvest": "astral_harv_mon_astral_meadow_hare"
@@ -24,7 +24,7 @@
     "id": "mon_astral_drowned_reed_eel",
     "copy-from": "mon_fish_eel",
     "looks_like": "mon_fish_eel",
-    "name": { "str": "reed eel", "str_pl": "reed eels" },
+    "name": { "str": "reed eel" },
     "description": "Dark eel, pale belly, weed-green fins.  A creature from the drowned lowlands.  Moves only while you stand in water; bites ankles.",
     "//": "astral content list critical-core: rank 2, active day+night",
     "harvest": "astral_harv_mon_astral_drowned_reed_eel"
@@ -39,7 +39,7 @@
     "id": "mon_astral_drowned_shell_crab",
     "copy-from": "mon_giant_crayfish",
     "looks_like": "mon_giant_crayfish",
-    "name": { "str": "verdigris crab", "str_pl": "verdigris crabs" },
+    "name": { "str": "verdigris crab" },
     "description": "Crab with a green-crusted bronze shell.  A creature from the drowned lowlands.  Wears sunken bronze; attacks only in water.",
     "//": "astral content list critical-core: rank 2, active day+night",
     "harvest": "astral_harv_mon_astral_drowned_shell_crab"
@@ -57,7 +57,7 @@
     "id": "mon_astral_fungal_cap_beetle",
     "copy-from": "mon_giant_cockroach",
     "looks_like": "mon_giant_cockroach",
-    "name": { "str": "cap-beetle", "str_pl": "cap-beetles" },
+    "name": { "str": "cap-beetle" },
     "description": "Broad violet-brown beetle, cap-shaped carapace.  A creature from the fungal forest.  Grazes caps; defends when hit; haze follows it.",
     "//": "astral content list critical-core: rank 2, active day+night",
     "harvest": "astral_harv_mon_astral_fungal_cap_beetle"
@@ -67,7 +67,7 @@
     "id": "mon_astral_root_honey_bee",
     "copy-from": "mon_bee",
     "looks_like": "mon_bee",
-    "name": { "str": "root bee", "str_pl": "root bees" },
+    "name": { "str": "root bee" },
     "description": "Fat black bee, dull gold band.  A creature from root country.  Swarms near combs; sound draws them.",
     "//": "astral content list critical-core: rank 1, active day"
   },
@@ -76,7 +76,7 @@
     "id": "mon_astral_root_burrow_hound",
     "copy-from": "mon_dog",
     "looks_like": "mon_dog",
-    "name": { "str": "burrow hound", "str_pl": "burrow hounds" },
+    "name": { "str": "burrow hound" },
     "description": "Hairless grey hound, no eyes, wide ears.  A creature from root country.  Hunts by sound underground; ignores the quiet.",
     "//": "astral content list critical-core: rank 3, active night"
   },

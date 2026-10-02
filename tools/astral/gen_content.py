@@ -150,19 +150,18 @@ MASS_NOUNS = ("glass", "oil", "cloth", "honey", "salt", "resin", "glue", "meat",
 
 
 def name_obj(name, kind=None):
-    """Explicit plural: the engine refuses to guess for names it finds odd."""
+    """Spell out a plural only where the engine cannot autogenerate one (name + "s");
+    an explicit plural the engine could have guessed is reported as an error."""
     last = name.split()[-1].lower()
     if any(last.endswith(m) for m in MASS_NOUNS) and kind in (None, "raw", "intermediate", "consumable"):
         return {"str_sp": name}
-    if "'" in name and not last.endswith(("s", "x", "z", "sh", "ch", "y")):
-        return {"str": name, "str_pl": name + "s"}
     if last.endswith(("s", "x", "z", "sh", "ch")):
         return {"str": name, "str_pl": name + "es"}
     if last.endswith("fe"):
         return {"str": name, "str_pl": name[:-2] + "ves"}
     if last.endswith("y") and last[-2:-1] not in "aeiou":
         return {"str": name, "str_pl": name[:-1] + "ies"}
-    return {"str": name, "str_pl": name + "s"}
+    return {"str": name}
 
 
 def description(row, what):

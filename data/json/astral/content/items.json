@@ -14,7 +14,7 @@
     "id": "astral_water_skin",
     "copy-from": "waterskin",
     "looks_like": "waterskin",
-    "name": { "str": "delver's waterskin", "str_pl": "delver's waterskins" },
+    "name": { "str": "delver's waterskin" },
     "description": "Fat dark skin with a bone stopper.  A tool from the Astral planes.",
     "//": "astral content list critical-core: tool, tier 1, source: craft: leather/hide of any theme",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
@@ -28,7 +28,7 @@
     "symbol": ";",
     "color": "brown",
     "subtypes": [ "TOOL" ],
-    "name": { "str": "waymark lantern", "str_pl": "waymark lanterns" },
+    "name": { "str": "waymark lantern" },
     "description": "Squat brass lantern, green glass, hanging ring.  A tool from the Astral planes.",
     "//": "astral content list critical-core: tool, tier 2, source: craft: glowcap oil + verdigris ingot",
     "flags": [ "ASTRAL_TIER_2" ]
@@ -42,7 +42,7 @@
     "symbol": ";",
     "color": "brown",
     "subtypes": [ "TOOL" ],
-    "name": { "str": "trail chalk", "str_pl": "trail chalks" },
+    "name": { "str": "trail chalk" },
     "description": "White stick worn to a wedge.  A tool from the Astral planes.",
     "//": "astral content list critical-core: tool, tier 1, source: craft: ghostsalt + bluemarl",
     "flags": [ "ASTRAL_TIER_1" ]
@@ -69,7 +69,7 @@
     "volume": "300 ml",
     "symbol": "/",
     "color": "brown",
-    "name": { "str": "truestone needle", "str_pl": "truestone needles" },
+    "name": { "str": "truestone needle" },
     "description": "Black needle on a bone pivot.  Worked stock from the Astral planes.",
     "//": "astral content list critical-core: intermediate, tier 2, source: t_astral_root_duskiron_vein (rare drop)",
     "flags": [ "ASTRAL_TIER_2" ]
@@ -93,7 +93,7 @@
     "id": "astral_camp_leanto_kit",
     "copy-from": "tent_kit",
     "looks_like": "tent_kit",
-    "name": { "str": "lean-to kit", "str_pl": "lean-to kits" },
+    "name": { "str": "lean-to kit" },
     "description": "Bundle of poles and oiled cloth.  A tool from the Astral planes.",
     "//": "astral content list critical-core: tool, tier 1, source: craft: hearthwood plank ×4 + cord",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
@@ -103,7 +103,7 @@
     "id": "astral_camp_fire_kit",
     "copy-from": "fire_drill",
     "looks_like": "fire_drill",
-    "name": { "str": "hearth kit", "str_pl": "hearth kits" },
+    "name": { "str": "hearth kit" },
     "description": "Flint, striker and a twist of bark in a pouch.  A tool from the Astral planes.",
     "//": "astral content list critical-core: tool, tier 1, source: craft: hearthwood tinder + flint",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
@@ -127,7 +127,7 @@
     "symbol": ";",
     "color": "brown",
     "subtypes": [ "TOOL" ],
-    "name": { "str": "field journal", "str_pl": "field journals" },
+    "name": { "str": "field journal" },
     "description": "Leather-bound book with a cord loop.  A tool from the Astral planes.",
     "//": "astral content list critical-core: tool, tier 1, source: start kit / craft: paper + leather",
     "flags": [ "ASTRAL_TIER_1" ]
@@ -141,7 +141,7 @@
     "symbol": ";",
     "color": "brown",
     "subtypes": [ "TOOL" ],
-    "name": { "str": "sample case", "str_pl": "sample cases" },
+    "name": { "str": "sample case" },
     "description": "Small wooden case with felt lining.  A tool from the Astral planes.",
     "//": "astral content list critical-core: tool, tier 1, source: craft: hearthwood plank + hide",
     "flags": [ "ASTRAL_TIER_1" ]
@@ -151,7 +151,7 @@
     "id": "astral_spore_mask",
     "copy-from": "mask_dust",
     "looks_like": "mask_dust",
-    "name": { "str": "spore mask", "str_pl": "spore masks" },
+    "name": { "str": "spore mask" },
     "description": "Cloth half-mask, pale, with a glowing disc filter.  A piece of gear from the fungal forest.",
     "//": "astral content list critical-core: armor, tier 2, source: craft: myceloth + glowcap filter",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
@@ -164,7 +164,7 @@
     "volume": "300 ml",
     "symbol": "/",
     "color": "brown",
-    "name": { "str": "glowcap filter", "str_pl": "glowcap filters" },
+    "name": { "str": "glowcap filter" },
     "description": "Dried cap disc stitched into a cloth ring.  Worked stock from the fungal forest.",
     "//": "astral content list critical-core: intermediate, tier 2, source: craft: glowcap raw + mycel fibre",
     "flags": [ "ASTRAL_TIER_2" ]
@@ -174,7 +174,7 @@
     "id": "astral_glow_lantern",
     "copy-from": "oil_lamp",
     "looks_like": "oil_lamp",
-    "name": { "str": "glowcap lantern", "str_pl": "glowcap lanterns" },
+    "name": { "str": "glowcap lantern" },
     "description": "Wooden box lantern leaking blue light.  A tool from the fungal forest.",
     "//": "astral content list critical-core: tool, tier 2, source: craft: glowcap oil + hearthwood plank",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
@@ -237,7 +237,7 @@
     "id": "astral_root_emberstone",
     "copy-from": "coal_lump",
     "looks_like": "coal_lump",
-    "name": { "str": "emberstone", "str_pl": "emberstones" },
+    "name": { "str": "emberstone" },
     "description": "Black lump, red glints deep inside.  A raw material from root country.",
     "//": "astral content list critical-core: raw, tier 1, source: t_astral_root_emberstone_vein",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
@@ -300,7 +300,7 @@
     "volume": "300 ml",
     "symbol": "/",
     "color": "brown",
-    "name": { "str": "duskiron bar", "str_pl": "duskiron bars" },
+    "name": { "str": "duskiron bar" },
     "description": "Dark bar with a violet sheen, hammer marks.  Worked stock from the Astral planes.",
     "//": "astral content list critical-core: intermediate, tier 2, source: craft: duskiron ore or mire-iron ×2 + emberstone",
     "flags": [ "ASTRAL_TIER_2" ]
@@ -330,7 +330,7 @@
     "id": "astral_meadow_hearthwood_log",
     "copy-from": "log",
     "looks_like": "log",
-    "name": { "str": "hearthwood log", "str_pl": "hearthwood logs" },
+    "name": { "str": "hearthwood log" },
     "description": "Pale honey-coloured log, warm sheen.  A raw material from the arrival meadows.",
     "//": "astral content list critical-core: raw, tier 1, source: astral_meadow_hearthwood_tree",
     "extend": { "flags": [ "ASTRAL_TIER_1" ] }
@@ -343,7 +343,7 @@
     "volume": "300 ml",
     "symbol": "/",
     "color": "brown",
-    "name": { "str": "hearthwood plank", "str_pl": "hearthwood planks" },
+    "name": { "str": "hearthwood plank" },
     "description": "Pale plank with amber grain.  Worked stock from the arrival meadows.",
     "//": "astral content list critical-core: intermediate, tier 1, source: craft: hearthwood log",
     "flags": [ "ASTRAL_TIER_1" ]
@@ -356,7 +356,7 @@
     "volume": "1 L",
     "symbol": "/",
     "color": "brown",
-    "name": { "str": "hearthwood staff", "str_pl": "hearthwood staffs" },
+    "name": { "str": "hearthwood staff" },
     "description": "Long pale staff, leather grip.  A weapon from the arrival meadows.",
     "//": "astral content list critical-core: weapon, tier 1, source: craft: hearthwood plank ×2 + cord",
     "flags": [ "ASTRAL_TIER_1" ]
@@ -366,7 +366,7 @@
     "id": "astral_drowned_bog_oak_log",
     "copy-from": "log",
     "looks_like": "log",
-    "name": { "str": "waterlogged oak log", "str_pl": "waterlogged oak logs" },
+    "name": { "str": "waterlogged oak log" },
     "description": "Near-black log, water-dark grain.  A raw material from the drowned lowlands.",
     "//": "astral content list critical-core: raw, tier 2, source: astral_drowned_sunken_oak",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
@@ -379,7 +379,7 @@
     "volume": "300 ml",
     "symbol": "/",
     "color": "brown",
-    "name": { "str": "bog-oak plank", "str_pl": "bog-oak planks" },
+    "name": { "str": "bog-oak plank" },
     "description": "Black plank, hard and dense.  Worked stock from the drowned lowlands.",
     "//": "astral content list critical-core: intermediate, tier 2, source: craft: waterlogged oak log, seasoned",
     "flags": [ "ASTRAL_TIER_2" ]
@@ -393,7 +393,7 @@
     "symbol": "[",
     "color": "brown",
     "subtypes": [ "ARMOR" ],
-    "name": { "str": "bog-oak buckler", "str_pl": "bog-oak bucklers" },
+    "name": { "str": "bog-oak buckler" },
     "description": "Round black shield, green boss.  A piece of gear from the drowned lowlands.",
     "//": "astral content list critical-core: armor, tier 2, source: craft: bog-oak plank ×2 + verdigris ingot",
     "flags": [ "ASTRAL_TIER_2" ]
@@ -413,7 +413,7 @@
     "id": "astral_drowned_verdigris_ingot",
     "copy-from": "scrap_copper",
     "looks_like": "scrap_copper",
-    "name": { "str": "verdigris bronze ingot", "str_pl": "verdigris bronze ingots" },
+    "name": { "str": "verdigris bronze ingot" },
     "description": "Green-gold ingot, mottled.  Worked stock from the drowned lowlands.",
     "//": "astral content list critical-core: intermediate, tier 2, source: craft: verdigris scrap ×3 + silvermire ore",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
@@ -433,7 +433,7 @@
     "id": "astral_drowned_sea_silk_tuft",
     "copy-from": "cotton_ball",
     "looks_like": "cotton_ball",
-    "name": { "str": "sea-silk tuft", "str_pl": "sea-silk tufts" },
+    "name": { "str": "sea-silk tuft" },
     "description": "Gold-brown fine fibres, damp.  A raw material from the drowned lowlands.",
     "//": "astral content list critical-core: raw, tier 2, source: astral_drowned_reed_mussel",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
@@ -466,7 +466,7 @@
     "id": "astral_drowned_sea_silk_wrap",
     "copy-from": "scarf",
     "looks_like": "scarf",
-    "name": { "str": "sea-silk wrap", "str_pl": "sea-silk wraps" },
+    "name": { "str": "sea-silk wrap" },
     "description": "Gold shawl, water beads off it.  A piece of gear from the drowned lowlands.",
     "//": "astral content list critical-core: armor, tier 2, source: craft: sea-silk cloth ×2",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
@@ -496,7 +496,7 @@
     "id": "astral_fungal_chitin_jerkin",
     "copy-from": "jacket_leather",
     "looks_like": "jacket_leather",
-    "name": { "str": "chitin-leather jerkin", "str_pl": "chitin-leather jerkins" },
+    "name": { "str": "chitin-leather jerkin" },
     "description": "Sleeveless dark jerkin, violet sheen.  A piece of gear from the fungal forest.",
     "//": "astral content list critical-core: armor, tier 2, source: craft: chitin-leather ×4 + thread",
     "extend": { "flags": [ "ASTRAL_TIER_2" ] }
@@ -532,7 +532,7 @@
     "volume": "250 ml",
     "symbol": "*",
     "color": "brown",
-    "name": { "str": "glowcap", "str_pl": "glowcaps" },
+    "name": { "str": "glowcap" },
     "description": "Fist-sized pale cap, faint blue glow.  A raw material from the fungal forest.",
     "//": "astral content list critical-core: raw, tier 2, source: astral_fungal_glowcap_cluster",
     "flags": [ "ASTRAL_TIER_2" ]
@@ -575,7 +575,7 @@
     "id": "astral_root_ironwood_log",
     "copy-from": "log",
     "looks_like": "log",
-    "name": { "str": "ironwood log", "str_pl": "ironwood logs" },
+    "name": { "str": "ironwood log" },
     "description": "Grey-black log, metallic grain.  A raw material from root country.",
     "//": "astral content list critical-core: raw, tier 3, source: astral_root_ironwood_tree",
     "extend": { "flags": [ "ASTRAL_TIER_3" ] }
@@ -588,7 +588,7 @@
     "volume": "300 ml",
     "symbol": "/",
     "color": "brown",
-    "name": { "str": "ironwood plank", "str_pl": "ironwood planks" },
+    "name": { "str": "ironwood plank" },
     "description": "Dark grey plank, dull shine.  Worked stock from root country.",
     "//": "astral content list critical-core: intermediate, tier 3, source: craft: ironwood log, saw",
     "flags": [ "ASTRAL_TIER_3" ]
@@ -598,7 +598,7 @@
     "id": "astral_root_ironwood_haft",
     "copy-from": "stick_long",
     "looks_like": "stick_long",
-    "name": { "str": "ironwood pick haft", "str_pl": "ironwood pick hafts" },
+    "name": { "str": "ironwood pick haft" },
     "description": "Long dark haft, bound end.  Worked stock from root country.",
     "//": "astral content list critical-core: intermediate, tier 3, source: craft: ironwood plank",
     "extend": { "flags": [ "ASTRAL_TIER_3" ] }
@@ -608,7 +608,7 @@
     "id": "astral_root_delver_pick",
     "copy-from": "pickaxe",
     "looks_like": "pickaxe",
-    "name": { "str": "delver's pick", "str_pl": "delver's picks" },
+    "name": { "str": "delver's pick" },
     "description": "Heavy pick, dark haft, grey head.  A tool from root country.",
     "//": "astral content list critical-core: tool, tier 3, source: craft: ironwood haft + duskiron bar ×2",
     "extend": { "flags": [ "ASTRAL_TIER_3" ] }
@@ -691,7 +691,7 @@
     "volume": "100 ml",
     "symbol": "*",
     "color": "pink",
-    "name": { "str": "heart fragment", "str_pl": "heart fragments" },
+    "name": { "str": "heart fragment" },
     "description": "Cracked crystal shard, slow inner pulse.  A core relic from the Astral planes.",
     "//": "astral content list critical-core: reward, tier 7, source: core outcome: destroy",
     "flags": [ "ASTRAL_TIER_7" ]
@@ -704,7 +704,7 @@
     "volume": "100 ml",
     "symbol": "*",
     "color": "pink",
-    "name": { "str": "bargain mark", "str_pl": "bargain marks" },
+    "name": { "str": "bargain mark" },
     "description": "Brand-like token on a cord.  A core relic from the Astral planes.",
     "//": "astral content list critical-core: reward, tier 7, source: core outcome: bargain",
     "flags": [ "ASTRAL_TIER_7" ]
@@ -717,7 +717,7 @@
     "volume": "100 ml",
     "symbol": "*",
     "color": "pink",
-    "name": { "str": "claim seal", "str_pl": "claim seals" },
+    "name": { "str": "claim seal" },
     "description": "Heavy wax-and-root seal, guild stamp.  A core relic from the Astral planes.",
     "//": "astral content list critical-core: reward, tier 7, source: core outcome: claim",
     "flags": [ "ASTRAL_TIER_7" ]
