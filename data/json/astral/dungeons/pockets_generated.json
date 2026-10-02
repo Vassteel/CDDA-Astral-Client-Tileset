@@ -288,13 +288,6 @@
   { "type": "dimension", "id": "astral_pocket_24", "region_layout": "astral_greenwood_r3" },
   {
     "type": "effect_on_condition",
-    "id": "EOC_ASTRAL_SETTLE_FOLLOWER",
-    "//": "Run by each nearby NPC after a courtyard is raised: followers step onto the pad.",
-    "condition": "u_following",
-    "effect": [ { "u_teleport": { "global_val": "astral_settle_target" }, "force_safe": true } ]
-  },
-  {
-    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P01",
     "//": "Examine action of the overworld threshold bound to astral_pocket_01.",
     "effect": [
@@ -349,11 +342,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p01" } },
                   { "u_teleport": { "global_val": "astral_arrival_p01" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p01" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P01" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p01" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p01" } },
                   { "math": [ "astral_rank_p01 = 1" ] },
@@ -417,6 +406,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P01",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p01" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P02",
     "//": "Examine action of the overworld threshold bound to astral_pocket_02.",
     "effect": [
@@ -471,11 +467,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p02" } },
                   { "u_teleport": { "global_val": "astral_arrival_p02" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p02" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P02" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p02" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p02" } },
                   { "math": [ "astral_rank_p02 = 1" ] },
@@ -539,6 +531,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P02",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p02" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P03",
     "//": "Examine action of the overworld threshold bound to astral_pocket_03.",
     "effect": [
@@ -593,11 +592,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p03" } },
                   { "u_teleport": { "global_val": "astral_arrival_p03" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p03" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P03" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p03" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p03" } },
                   { "math": [ "astral_rank_p03 = 1" ] },
@@ -661,6 +656,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P03",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p03" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P04",
     "//": "Examine action of the overworld threshold bound to astral_pocket_04.",
     "effect": [
@@ -715,11 +717,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p04" } },
                   { "u_teleport": { "global_val": "astral_arrival_p04" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p04" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P04" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p04" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p04" } },
                   { "math": [ "astral_rank_p04 = 1" ] },
@@ -783,6 +781,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P04",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p04" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P05",
     "//": "Examine action of the overworld threshold bound to astral_pocket_05.",
     "effect": [
@@ -837,11 +842,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p05" } },
                   { "u_teleport": { "global_val": "astral_arrival_p05" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p05" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P05" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p05" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p05" } },
                   { "math": [ "astral_rank_p05 = 1" ] },
@@ -905,6 +906,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P05",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p05" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P06",
     "//": "Examine action of the overworld threshold bound to astral_pocket_06.",
     "effect": [
@@ -959,11 +967,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p06" } },
                   { "u_teleport": { "global_val": "astral_arrival_p06" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p06" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P06" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p06" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p06" } },
                   { "math": [ "astral_rank_p06 = 1" ] },
@@ -1027,6 +1031,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P06",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p06" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P07",
     "//": "Examine action of the overworld threshold bound to astral_pocket_07.",
     "effect": [
@@ -1081,11 +1092,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p07" } },
                   { "u_teleport": { "global_val": "astral_arrival_p07" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p07" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P07" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p07" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p07" } },
                   { "math": [ "astral_rank_p07 = 1" ] },
@@ -1149,6 +1156,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P07",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p07" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P08",
     "//": "Examine action of the overworld threshold bound to astral_pocket_08.",
     "effect": [
@@ -1203,11 +1217,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p08" } },
                   { "u_teleport": { "global_val": "astral_arrival_p08" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p08" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P08" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p08" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p08" } },
                   { "math": [ "astral_rank_p08 = 1" ] },
@@ -1271,6 +1281,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P08",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p08" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P09",
     "//": "Examine action of the overworld threshold bound to astral_pocket_09.",
     "effect": [
@@ -1325,11 +1342,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p09" } },
                   { "u_teleport": { "global_val": "astral_arrival_p09" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p09" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P09" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p09" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p09" } },
                   { "math": [ "astral_rank_p09 = 1" ] },
@@ -1393,6 +1406,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P09",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p09" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P10",
     "//": "Examine action of the overworld threshold bound to astral_pocket_10.",
     "effect": [
@@ -1447,11 +1467,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p10" } },
                   { "u_teleport": { "global_val": "astral_arrival_p10" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p10" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P10" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p10" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p10" } },
                   { "math": [ "astral_rank_p10 = 1" ] },
@@ -1515,6 +1531,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P10",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p10" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P11",
     "//": "Examine action of the overworld threshold bound to astral_pocket_11.",
     "effect": [
@@ -1569,11 +1592,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p11" } },
                   { "u_teleport": { "global_val": "astral_arrival_p11" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p11" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P11" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p11" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p11" } },
                   { "math": [ "astral_rank_p11 = 1" ] },
@@ -1637,6 +1656,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P11",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p11" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P12",
     "//": "Examine action of the overworld threshold bound to astral_pocket_12.",
     "effect": [
@@ -1691,11 +1717,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p12" } },
                   { "u_teleport": { "global_val": "astral_arrival_p12" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p12" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P12" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p12" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p12" } },
                   { "math": [ "astral_rank_p12 = 1" ] },
@@ -1759,6 +1781,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P12",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p12" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P13",
     "//": "Examine action of the overworld threshold bound to astral_pocket_13.",
     "effect": [
@@ -1813,11 +1842,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p13" } },
                   { "u_teleport": { "global_val": "astral_arrival_p13" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p13" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P13" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p13" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p13" } },
                   { "math": [ "astral_rank_p13 = 1" ] },
@@ -1881,6 +1906,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P13",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p13" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P14",
     "//": "Examine action of the overworld threshold bound to astral_pocket_14.",
     "effect": [
@@ -1935,11 +1967,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p14" } },
                   { "u_teleport": { "global_val": "astral_arrival_p14" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p14" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P14" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p14" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p14" } },
                   { "math": [ "astral_rank_p14 = 1" ] },
@@ -2003,6 +2031,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P14",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p14" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P15",
     "//": "Examine action of the overworld threshold bound to astral_pocket_15.",
     "effect": [
@@ -2057,11 +2092,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p15" } },
                   { "u_teleport": { "global_val": "astral_arrival_p15" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p15" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P15" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p15" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p15" } },
                   { "math": [ "astral_rank_p15 = 1" ] },
@@ -2125,6 +2156,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P15",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p15" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P16",
     "//": "Examine action of the overworld threshold bound to astral_pocket_16.",
     "effect": [
@@ -2179,11 +2217,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p16" } },
                   { "u_teleport": { "global_val": "astral_arrival_p16" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p16" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P16" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p16" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p16" } },
                   { "math": [ "astral_rank_p16 = 1" ] },
@@ -2247,6 +2281,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P16",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p16" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P17",
     "//": "Examine action of the overworld threshold bound to astral_pocket_17.",
     "effect": [
@@ -2301,11 +2342,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p17" } },
                   { "u_teleport": { "global_val": "astral_arrival_p17" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p17" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P17" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p17" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p17" } },
                   { "math": [ "astral_rank_p17 = 1" ] },
@@ -2369,6 +2406,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P17",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p17" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P18",
     "//": "Examine action of the overworld threshold bound to astral_pocket_18.",
     "effect": [
@@ -2423,11 +2467,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p18" } },
                   { "u_teleport": { "global_val": "astral_arrival_p18" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p18" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P18" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p18" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p18" } },
                   { "math": [ "astral_rank_p18 = 1" ] },
@@ -2491,6 +2531,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P18",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p18" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P19",
     "//": "Examine action of the overworld threshold bound to astral_pocket_19.",
     "effect": [
@@ -2545,11 +2592,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p19" } },
                   { "u_teleport": { "global_val": "astral_arrival_p19" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p19" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P19" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p19" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p19" } },
                   { "math": [ "astral_rank_p19 = 1" ] },
@@ -2613,6 +2656,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P19",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p19" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P20",
     "//": "Examine action of the overworld threshold bound to astral_pocket_20.",
     "effect": [
@@ -2667,11 +2717,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p20" } },
                   { "u_teleport": { "global_val": "astral_arrival_p20" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p20" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P20" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p20" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p20" } },
                   { "math": [ "astral_rank_p20 = 1" ] },
@@ -2735,6 +2781,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P20",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p20" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P21",
     "//": "Examine action of the overworld threshold bound to astral_pocket_21.",
     "effect": [
@@ -2789,11 +2842,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p21" } },
                   { "u_teleport": { "global_val": "astral_arrival_p21" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p21" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P21" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p21" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p21" } },
                   { "math": [ "astral_rank_p21 = 1" ] },
@@ -2857,6 +2906,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P21",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p21" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P22",
     "//": "Examine action of the overworld threshold bound to astral_pocket_22.",
     "effect": [
@@ -2911,11 +2967,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p22" } },
                   { "u_teleport": { "global_val": "astral_arrival_p22" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p22" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P22" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p22" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p22" } },
                   { "math": [ "astral_rank_p22 = 1" ] },
@@ -2979,6 +3031,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P22",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p22" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P23",
     "//": "Examine action of the overworld threshold bound to astral_pocket_23.",
     "effect": [
@@ -3033,11 +3092,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p23" } },
                   { "u_teleport": { "global_val": "astral_arrival_p23" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p23" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P23" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p23" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p23" } },
                   { "math": [ "astral_rank_p23 = 1" ] },
@@ -3101,6 +3156,13 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P23",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p23" }, "force_safe": true } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_ASTRAL_THRESHOLD_P24",
     "//": "Examine action of the overworld threshold bound to astral_pocket_24.",
     "effect": [
@@ -3155,11 +3217,7 @@
                 "then": [
                   { "mapgen_update": "astral_courtyard_arrival", "target_var": { "global_val": "astral_arrival_p24" } },
                   { "u_teleport": { "global_val": "astral_arrival_p24" }, "force_safe": true },
-                  {
-                    "set_string_var": { "global_val": "astral_arrival_p24" },
-                    "target_var": { "global_val": "astral_settle_target" }
-                  },
-                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER" ], "local": true, "npc_range": 12 },
+                  { "u_run_npc_eocs": [ "EOC_ASTRAL_SETTLE_FOLLOWER_P24" ], "local": true, "npc_range": 12 },
                   { "set_string_var": "astral_greenwood", "target_var": { "global_val": "astral_template_p24" } },
                   { "set_string_var": "unclaimed", "target_var": { "global_val": "astral_core_p24" } },
                   { "math": [ "astral_rank_p24 = 1" ] },
@@ -3220,6 +3278,13 @@
       { "math": [ "astral_bound_turn_p24 = time('now')" ] },
       { "run_eocs": "EOC_ASTRAL_ENTER_P24_DO" }
     ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SETTLE_FOLLOWER_P24",
+    "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+    "condition": "u_following",
+    "effect": [ { "u_teleport": { "global_val": "astral_arrival_p24" }, "force_safe": true } ]
   },
   {
     "type": "effect_on_condition",

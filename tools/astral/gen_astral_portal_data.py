@@ -308,19 +308,20 @@ def main():
                 "arrival_location": {"global_val": arrival_var},
                 "fail_message": fail, "success_message": success}
 
-    def settle_followers(target_var):
+    def settle_followers(sl):
         # After the courtyard is raised around the pad, pull every follower in range onto
-        # free tiles next to it (they may be standing where walls now are).  The target is
-        # passed through the shared global `astral_settle_target`.
-        assert target_var == "astral_settle_target"
-        return [{"u_run_npc_eocs": ["EOC_ASTRAL_SETTLE_FOLLOWER"], "local": True, "npc_range": 12}]
+        # free tiles next to it (they may be standing where walls now are).  One EOC per
+        # pocket slot: location variables cannot be copied through set_string_var.
+        return [{"u_run_npc_eocs": [f"EOC_ASTRAL_SETTLE_FOLLOWER_P{sl}"], "local": True, "npc_range": 12}]
 
-    SETTLE_FOLLOWER_EOC = {
-        "type": "effect_on_condition", "id": "EOC_ASTRAL_SETTLE_FOLLOWER",
-        "//": "Run by each nearby NPC after a courtyard is raised: followers step onto the pad.",
-        "condition": "u_following",
-        "effect": [{"u_teleport": {"global_val": "astral_settle_target"}, "force_safe": True}],
-    }
+    def settle_follower_eoc(n):
+        sl = slot(n)
+        return {
+            "type": "effect_on_condition", "id": f"EOC_ASTRAL_SETTLE_FOLLOWER_P{sl}",
+            "//": "Run by each nearby NPC after the courtyard is raised: followers step onto the pad.",
+            "condition": "u_following",
+            "effect": [{"u_teleport": {"global_val": f"astral_arrival_p{sl}"}, "force_safe": True}],
+        }
 
     ENTER_OK = "Cold light closes over you.  For a heartbeat there is no ground, no air and no sound; then grass, and a sky that is not yours."
     ENTER_FAIL = "The membrane resists you and the light along the runes gutters out for a moment."
@@ -354,8 +355,7 @@ def main():
                         # back on it in case the new walls landed on anyone.
                         {"mapgen_update": "astral_courtyard_arrival", "target_var": {"global_val": f"astral_arrival_p{sl}"}},
                         {"u_teleport": {"global_val": f"astral_arrival_p{sl}"}, "force_safe": True},
-                        {"set_string_var": {"global_val": f"astral_arrival_p{sl}"}, "target_var": {"global_val": "astral_settle_target"}},
-                        *settle_followers("astral_settle_target"),
+                        *settle_followers(sl),
                         {"set_string_var": "astral_greenwood", "target_var": {"global_val": f"astral_template_p{sl}"}},
                         {"set_string_var": "unclaimed", "target_var": {"global_val": f"astral_core_p{sl}"}},
                         {"math": [f"astral_rank_p{sl} = 1"]},
@@ -404,9 +404,9 @@ def main():
                 {"run_eocs": f"EOC_ASTRAL_ENTER_P{sl}_DO"}],
         }
 
-    eocs = [SETTLE_FOLLOWER_EOC]
+    eocs = []
     for n in range(1, POOL_SIZE + 1):
-        eocs += [threshold_bound(n), enter_do(n), return_do(n), bind(n)]
+        eocs += [threshold_bound(n), enter_do(n), return_do(n), bind(n), settle_follower_eoc(n)]
     # allocator: first use of an unbound overworld threshold
     eocs.append({
         "type": "effect_on_condition", "id": "EOC_ASTRAL_PORTAL_ENTER_DO",
