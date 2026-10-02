@@ -23,7 +23,7 @@
     "type": "profession",
     "id": "astral_portal_delver",
     "name": "Portal Delver",
-    "description": "Brigandine over a gambeson, a sword, a shield, and two gifts that should not exist: a waterskin that is never dry for long and a pouch that bakes its own bread.  A delver's pack stuffed with tools, camp gear, light, medicine and rations.  Also a few tools for raising and reading gateways.  (Development profession.)",
+    "description": "Brigandine over a gambeson, a sword, a shield, and two gifts that should not exist: a waterskin that is never dry for long and a pouch that bakes its own bread.  A delver's pack stuffed with tools, camp gear, light, medicine and rations.  Also a few tools for raising and reading gateways, a hedge almanac and three guild primers of the Craft with their foci.  (Development profession.)",
     "points": 0,
     "skills": [
       { "level": 3, "name": "melee" },
@@ -104,7 +104,16 @@
           { "item": "pemmican", "count": 10 },
           { "item": "hardtack", "count": 10 },
           { "item": "astral_debug_portal_placer" },
-          { "item": "astral_debug_ledger" }
+          { "item": "astral_debug_ledger" },
+          { "item": "astral_prime_hedge_almanac" },
+          { "item": "astral_prime_primer_warding" },
+          { "item": "astral_prime_primer_mending" },
+          { "item": "astral_prime_primer_wayfinding" },
+          { "item": "astral_prime_ward_disc_1" },
+          { "item": "astral_prime_mending_sprig_1" },
+          { "item": "astral_prime_wayfinder_needle_1" },
+          { "item": "astral_prime_tide_dust", "count": 4 },
+          { "item": "astral_debug_craft_satchel" }
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },

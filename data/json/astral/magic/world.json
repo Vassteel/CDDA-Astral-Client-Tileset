@@ -1,0 +1,552 @@
+[
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_TIDE_UPDATE",
+    "recurrence": "5 m",
+    "//": "Earth is tide 1 (Prime, slow); pocket worlds tide 2; their fungal and root country tide 3.",
+    "effect": [
+      { "u_lose_effect": "astral_fx_tide_1" },
+      { "u_lose_effect": "astral_fx_tide_3" },
+      {
+        "if": { "current_dimension": "default" },
+        "then": [ { "math": [ "u_astral_tide = 1" ] }, { "u_add_effect": "astral_fx_tide_1", "duration": "PERMANENT" } ],
+        "else": {
+          "if": {
+            "or": [
+              { "u_near_om_location": "astral_fungal", "range": 0 },
+              { "u_near_om_location": "astral_rootland", "range": 0 }
+            ]
+          },
+          "then": [
+            { "math": [ "u_astral_tide = 3" ] },
+            { "u_add_effect": "astral_fx_tide_3", "duration": "PERMANENT" }
+          ],
+          "else": [ { "math": [ "u_astral_tide = 2" ] } ]
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SENSE_TIDE",
+    "effect": [
+      {
+        "switch": { "math": [ "u_astral_tide" ] },
+        "cases": [
+          {
+            "case": 1,
+            "effect": {
+              "u_message": "The tide here is thin and plain: Prime mana, tide 1.  Your pool fills slowly.",
+              "type": "neutral"
+            }
+          },
+          {
+            "case": 2,
+            "effect": {
+              "u_message": "The tide runs steady here: tide 2, touched with Hearth.  Mending, Warding and Wayfinding come easily in this world.",
+              "type": "good"
+            }
+          },
+          {
+            "case": 3,
+            "effect": { "u_message": "The tide runs deep here: tide 3.  Your pool fills fast.", "type": "good" }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_SET_MARK",
+    "effect": [
+      { "u_location_variable": { "u_val": "astral_mark" } },
+      { "dimension_name": { "u_val": "astral_mark_dimension" } },
+      { "u_message": "You fix this place in your memory.  Your mark is set.", "type": "good" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_RECALL",
+    "effect": [
+      { "dimension_name": { "context_val": "here_dimension" } },
+      {
+        "if": { "not": { "math": [ "has_var(u_astral_mark)" ] } },
+        "then": [
+          { "u_message": "You have no mark to return to.  The spell finds nothing to pull on.", "type": "bad" }
+        ],
+        "else": [
+          {
+            "if": {
+              "compare_string": [ { "context_val": "here_dimension" }, { "u_val": "astral_mark_dimension" } ]
+            },
+            "then": [
+              {
+                "u_teleport": { "u_val": "astral_mark" },
+                "success_message": "The world folds, and you stand at your mark.",
+                "fail_message": "Something stands on your mark; the fold slips.",
+                "force_safe": true
+              }
+            ],
+            "else": [
+              {
+                "if": { "compare_string": [ "", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "default",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "default", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "default",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_01", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_01",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_02", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_02",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_03", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_03",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_04", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_04",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_05", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_05",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_06", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_06",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_07", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_07",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_08", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_08",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_09", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_09",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_10", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_10",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_11", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_11",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_12", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_12",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_13", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_13",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_14", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_14",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_15", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_15",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_16", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_16",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_17", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_17",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_18", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_18",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_19", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_19",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_20", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_20",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_21", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_21",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_22", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_22",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_23", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_23",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              },
+              {
+                "if": { "compare_string": [ "astral_pocket_24", { "u_val": "astral_mark_dimension" } ] },
+                "then": [
+                  {
+                    "u_travel_to_dimension": "astral_pocket_24",
+                    "npc_travel_radius": 6,
+                    "npc_travel_filter": "follower",
+                    "arrival_location": { "u_val": "astral_mark" },
+                    "success_message": "The worlds fold together, and you step out at your mark.",
+                    "fail_message": "The fold between worlds will not open."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BEARING",
+    "effect": [
+      {
+        "u_location_variable": { "context_val": "gate" },
+        "target_params": { "om_terrain": "astral_portal_clearing", "z": 0 },
+        "false_eocs": [ "EOC_ASTRAL_BEARING_NONE" ]
+      },
+      { "u_location_variable": { "context_val": "here" } },
+      { "reveal_route": { "context_val": "here" }, "target_var": { "context_val": "gate" }, "radius": 1 },
+      { "u_message": "You feel the pull of the nearest gateway; the way there settles onto your map.", "type": "good" }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_BEARING_NONE",
+    "effect": [ { "u_message": "You feel for a gateway and find nothing within reach.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_GRAVE_VOICE",
+    "effect": [ { "u_message": "astral_grave_voice", "snippet": true, "popup": true } ]
+  },
+  {
+    "type": "snippet",
+    "category": "astral_grave_voice",
+    "text": [
+      "A dry voice, very far away: \"We walked in from the meadow side.  The gate was warm then.\"",
+      "\"Don't drink the black water.  Don't.\"  Then nothing.",
+      "\"The guild paid in marks.  The marks are under the third stone from the well.\"",
+      "\"It hums at night, the heart of it.  It hummed when we came close.\"",
+      "\"We were nine.  Ask the others; I stopped counting.\"",
+      "A long breath, then: \"Salt keeps them back.  Not long.  Long enough.\""
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_tft_soften",
+    "terrain": [ { "result": "t_rock_floor", "valid_terrain": [ "t_rock" ] } ],
+    "//": "There is no bare stone there to soften."
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_tft_quickgrow",
+    "terrain": [
+      {
+        "result": [ "t_grass", "t_grass", "t_grass_long", "t_shrub" ],
+        "valid_terrain": [ "t_dirt", "t_grass_dead", "t_mud" ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_tft_restore",
+    "terrain": [ { "result": [ "t_grass", "t_grass_long" ], "valid_terrain": [ "t_dirt", "t_grass_dead", "t_mud" ] } ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_tft_delve",
+    "terrain": [
+      {
+        "result": "t_pit_shallow",
+        "valid_terrain": [ "t_dirt", "t_grass", "t_grass_long", "t_grass_dead", "t_mud" ]
+      }
+    ],
+    "//": "The ground there is too hard to open."
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_tft_stonewright",
+    "terrain": [
+      {
+        "result": "t_rock",
+        "valid_terrain": [ "t_dirt", "t_grass", "t_grass_long", "t_grass_dead", "t_rock_floor", "t_mud" ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_tft_melt",
+    "terrain": [ { "result": "t_rock_floor", "valid_terrain": [ "t_sand", "t_dirt", "t_mud" ] } ],
+    "furniture": [ { "result": "f_null", "valid_furniture": [ "f_rubble_rock", "f_rubble" ] } ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_tft_reshape",
+    "terrain": [ { "result": "t_dirt", "valid_terrain": [ "t_pit_shallow", "t_dirtmound", "t_grass_dead", "t_mud" ] } ],
+    "furniture": [ { "result": "f_null", "valid_furniture": [ "f_rubble_rock", "f_rubble" ] } ]
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_prime_wisp",
+    "copy-from": "mon_firefly",
+    "name": { "str": "tide-wisp" },
+    "description": "A small drifting light, called out of the tide.  It follows its caller and wants nothing.",
+    "looks_like": "mon_firefly",
+    "extend": { "flags": [ "NO_BREATHE" ] }
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_prime_tide_hound",
+    "copy-from": "mon_wolf",
+    "name": { "str": "tide-hound" },
+    "description": "A lean grey hound with no smell and no breath.  It is made of mana and hunts beside whoever called it.",
+    "looks_like": "mon_wolf",
+    "extend": { "flags": [ "NO_BREATHE" ] }
+  },
+  {
+    "type": "MONSTER",
+    "id": "mon_astral_prime_warden",
+    "copy-from": "mon_bear",
+    "name": { "str": "tide-warden" },
+    "description": "A tall plated shape of grey mana that stands where it was set and guards.",
+    "looks_like": "mon_bear",
+    "extend": { "flags": [ "NO_BREATHE" ] }
+  }
+]

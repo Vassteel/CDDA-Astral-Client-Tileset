@@ -1,0 +1,189 @@
+[
+  {
+    "type": "item_group",
+    "id": "astral_magic_grimoires_common",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "astral_prime_hedge_almanac", "prob": 30 },
+      { "item": "astral_prime_primer_striking", "prob": 10 },
+      { "item": "astral_prime_primer_warding", "prob": 10 },
+      { "item": "astral_prime_primer_calling", "prob": 10 },
+      { "item": "astral_prime_primer_tempering", "prob": 10 },
+      { "item": "astral_prime_primer_wayfinding", "prob": 10 },
+      { "item": "astral_prime_primer_mending", "prob": 10 },
+      { "item": "astral_prime_primer_shaping", "prob": 10 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "astral_magic_grimoires_rare",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "astral_prime_treatise_striking", "prob": 10 },
+      { "item": "astral_prime_treatise_warding", "prob": 10 },
+      { "item": "astral_prime_treatise_calling", "prob": 10 },
+      { "item": "astral_prime_treatise_tempering", "prob": 10 },
+      { "item": "astral_prime_treatise_wayfinding", "prob": 10 },
+      { "item": "astral_prime_treatise_mending", "prob": 10 },
+      { "item": "astral_prime_treatise_shaping", "prob": 10 },
+      { "item": "astral_prime_black_primer", "prob": 8 },
+      { "item": "astral_prime_codex_striking", "prob": 3 },
+      { "item": "astral_prime_codex_warding", "prob": 3 },
+      { "item": "astral_prime_codex_calling", "prob": 3 },
+      { "item": "astral_prime_codex_tempering", "prob": 3 },
+      { "item": "astral_prime_codex_hexing", "prob": 3 },
+      { "item": "astral_prime_codex_wayfinding", "prob": 3 },
+      { "item": "astral_prime_codex_mending", "prob": 3 },
+      { "item": "astral_prime_codex_shaping", "prob": 3 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "astral_magic_reagents",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "astral_prime_tide_dust", "prob": 40, "count": [ 1, 4 ] },
+      { "item": "astral_prime_crystallised_tide", "prob": 20 },
+      { "item": "astral_prime_grave_dust", "prob": 15 },
+      { "item": "astral_prime_tide_draught", "prob": 10 },
+      { "item": "astral_prime_rune_blank", "prob": 10 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "astral_magic_foci",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "astral_prime_striking_rod_1", "prob": 10 },
+      { "item": "astral_prime_ward_disc_1", "prob": 10 },
+      { "item": "astral_prime_calling_bell_1", "prob": 10 },
+      { "item": "astral_prime_temper_nail_1", "prob": 10 },
+      { "item": "astral_prime_bone_fetish_1", "prob": 10 },
+      { "item": "astral_prime_wayfinder_needle_1", "prob": 10 },
+      { "item": "astral_prime_mending_sprig_1", "prob": 10 },
+      { "item": "astral_prime_shaper_chisel_1", "prob": 10 },
+      { "item": "astral_prime_wayfarer_staff", "prob": 5 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "astral_magic_debug_all",
+    "subtype": "collection",
+    "entries": [
+      { "item": "astral_prime_hedge_almanac" },
+      { "item": "astral_prime_primer_striking" },
+      { "item": "astral_prime_treatise_striking" },
+      { "item": "astral_prime_primer_warding" },
+      { "item": "astral_prime_treatise_warding" },
+      { "item": "astral_prime_primer_calling" },
+      { "item": "astral_prime_treatise_calling" },
+      { "item": "astral_prime_primer_tempering" },
+      { "item": "astral_prime_treatise_tempering" },
+      { "item": "astral_prime_primer_wayfinding" },
+      { "item": "astral_prime_treatise_wayfinding" },
+      { "item": "astral_prime_primer_mending" },
+      { "item": "astral_prime_treatise_mending" },
+      { "item": "astral_prime_primer_shaping" },
+      { "item": "astral_prime_treatise_shaping" },
+      { "item": "astral_prime_black_primer" },
+      { "item": "astral_prime_codex_striking" },
+      { "item": "astral_prime_codex_warding" },
+      { "item": "astral_prime_codex_calling" },
+      { "item": "astral_prime_codex_tempering" },
+      { "item": "astral_prime_codex_hexing" },
+      { "item": "astral_prime_codex_wayfinding" },
+      { "item": "astral_prime_codex_mending" },
+      { "item": "astral_prime_codex_shaping" },
+      { "item": "astral_prime_striking_rod_1" },
+      { "item": "astral_prime_striking_rod_2" },
+      { "item": "astral_prime_striking_rod_3" },
+      { "item": "astral_prime_ward_disc_1" },
+      { "item": "astral_prime_ward_disc_2" },
+      { "item": "astral_prime_ward_disc_3" },
+      { "item": "astral_prime_calling_bell_1" },
+      { "item": "astral_prime_calling_bell_2" },
+      { "item": "astral_prime_calling_bell_3" },
+      { "item": "astral_prime_temper_nail_1" },
+      { "item": "astral_prime_temper_nail_2" },
+      { "item": "astral_prime_temper_nail_3" },
+      { "item": "astral_prime_bone_fetish_1" },
+      { "item": "astral_prime_bone_fetish_2" },
+      { "item": "astral_prime_bone_fetish_3" },
+      { "item": "astral_prime_wayfinder_needle_1" },
+      { "item": "astral_prime_wayfinder_needle_2" },
+      { "item": "astral_prime_wayfinder_needle_3" },
+      { "item": "astral_prime_mending_sprig_1" },
+      { "item": "astral_prime_mending_sprig_2" },
+      { "item": "astral_prime_mending_sprig_3" },
+      { "item": "astral_prime_shaper_chisel_1" },
+      { "item": "astral_prime_shaper_chisel_2" },
+      { "item": "astral_prime_shaper_chisel_3" },
+      { "item": "astral_prime_wayfarer_staff" },
+      { "item": "astral_prime_tide_dust", "count": 20 },
+      { "item": "astral_prime_crystallised_tide", "count": 10 },
+      { "item": "astral_prime_grave_dust", "count": 5 },
+      { "item": "astral_prime_tide_draught", "count": 3 },
+      { "item": "astral_prime_rune_striking" },
+      { "item": "astral_prime_rune_warding" },
+      { "item": "astral_prime_rune_calling" },
+      { "item": "astral_prime_rune_tempering" },
+      { "item": "astral_prime_rune_hexing" },
+      { "item": "astral_prime_rune_wayfinding" },
+      { "item": "astral_prime_rune_mending" },
+      { "item": "astral_prime_rune_shaping" }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "astral_guild_bookcase",
+    "subtype": "distribution",
+    "entries": [
+      { "group": "astral_magic_grimoires_common", "prob": 60 },
+      { "group": "astral_magic_grimoires_rare", "prob": 10 },
+      { "item": "astral_field_journal", "prob": 30 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "astral_guild_displaycase",
+    "subtype": "distribution",
+    "entries": [
+      { "group": "astral_magic_foci", "prob": 40 },
+      { "group": "astral_magic_reagents", "prob": 40 },
+      { "item": "astral_prime_rune_striking", "prob": 2 },
+      { "item": "astral_prime_rune_warding", "prob": 2 },
+      { "item": "astral_prime_rune_calling", "prob": 2 },
+      { "item": "astral_prime_rune_tempering", "prob": 2 },
+      { "item": "astral_prime_rune_hexing", "prob": 2 },
+      { "item": "astral_prime_rune_wayfinding", "prob": 2 },
+      { "item": "astral_prime_rune_mending", "prob": 2 },
+      { "item": "astral_prime_rune_shaping", "prob": 2 },
+      { "item": "astral_prime_tide_ring", "prob": 4 }
+    ]
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_debug_craft_satchel",
+    "name": { "str_sp": "Craft satchel (debug)" },
+    "description": "Development tool.  Activate it to receive every Prime grimoire, focus, rune and a stock of reagents, for testing the Craft.  Spawn it from the debug menu.",
+    "weight": "10 g",
+    "volume": "1 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "leather" ],
+    "symbol": ";",
+    "color": "light_blue",
+    "flags": [ "TRADER_AVOID", "ZERO_WEIGHT" ],
+    "use_action": {
+      "type": "effect_on_conditions",
+      "description": "Empty the satchel",
+      "menu_text": "Empty satchel",
+      "effect_on_conditions": [ "EOC_ASTRAL_DEBUG_CRAFT_SATCHEL" ]
+    }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_DEBUG_CRAFT_SATCHEL",
+    "effect": [ { "u_spawn_item": "astral_magic_debug_all", "use_item_group": true, "suppress_message": false } ]
+  }
+]

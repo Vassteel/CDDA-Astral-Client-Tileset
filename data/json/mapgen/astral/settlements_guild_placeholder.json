@@ -107,6 +107,10 @@
       "s": "f_sofa",
       "i": "f_chest",
       "H": "f_bed_down"
+    },
+    "items": {
+      "k": { "item": "astral_guild_bookcase", "chance": 30 },
+      "P": { "item": "astral_guild_displaycase", "chance": 45 }
     }
   },
   {
