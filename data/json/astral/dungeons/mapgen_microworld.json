@@ -232,53 +232,25 @@
     "type": "mapgen",
     "om_terrain": "astral_lowland",
     "object": {
-      "fill_ter": "t_grass",
-      "terrain": {
-        "m": [ [ "t_grass", 30 ], [ "t_grass_long", 8 ], [ "t_mud", 3 ], [ "t_tree_willow", 1 ] ]
-      },
-      "rows": [
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm",
-        "mmmmmmmmmmmmmmmmmmmmmmmm"
-      ],
+      "fill_ter": "t_water_sh",
       "place_nested": [
-        { "chunks": [ [ "astral_patch_pool", 1 ] ], "x": [ 0, 14 ], "y": [ 0, 14 ], "repeat": [ 1, 3 ] },
         {
-          "chunks": [ [ "astral_patch_reeds", 2 ], [ "astral_patch_mud", 2 ], [ "astral_patch_longgrass_b", 1 ] ],
-          "x": [ 0, 14 ],
-          "y": [ 0, 14 ],
-          "repeat": [ 2, 4 ]
-        },
-        {
-          "chunks": [ [ "astral_scatter_drowned", 1 ], [ "null", 1 ] ],
-          "x": [ 0, 20 ],
-          "y": [ 0, 20 ],
-          "repeat": [ 2, 5 ]
+          "chunks": [
+            [ "astral_depth_lowland_0", 1 ],
+            [ "astral_depth_lowland_1", 1 ],
+            [ "astral_depth_lowland_2", 1 ],
+            [ "astral_depth_lowland_3", 1 ],
+            [ "astral_depth_lowland_4", 1 ],
+            [ "astral_depth_lowland_5", 1 ],
+            [ "astral_depth_lowland_6", 1 ],
+            [ "astral_depth_lowland_7", 1 ]
+          ],
+          "x": 0,
+          "y": 0
         }
       ]
     },
-    "//": "Wet grass with willows; pools, reed beds and mud flats stamped from astral_patch_* nested chunks.  Fresh water only.  2026-10-02: Astral flora and veins of this theme scattered by astral_scatter_drowned (gen_content.py)."
+    "//": "Mostly shallow freshwater with small land hummocks and inset deep interiors. Generated from tools/astral/biomes/lowlands.json. Arrival clearing is stamped afterward."
   },
   {
     "type": "mapgen",

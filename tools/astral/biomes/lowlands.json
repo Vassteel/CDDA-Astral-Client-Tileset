@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "region": {
+    "type": "region_settings",
+    "id": "astral_biome_lowlands",
+    "copy-from": "astral_pocket",
+    "//": "Stand-in lowlands biome for the first plane (S4 plumbing).  Vanilla terrain as placeholder until the T1 theme bill lands.  2026-10-01 dominant-biome floors: ~85 % of the land is this biome; the rest is painted from the listed regions (`default` = overworld plains, forest and ordinary swamp) in contiguous patches, weights falling with distance in the route.  Floor 2 is heavily watered: astral_drowned river and lake settings.",
+    "weather": "astral_biome_lowlands",
+    "default_oter": [
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "astral_lowland",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock"
+    ],
+    "biome_mix": {
+      "dominant_share": 0.85,
+      "seed_offset": 8,
+      "regions": [
+        [ "default", 10 ],
+        [ "astral_biome_meadows", 3 ],
+        [ "astral_biome_fungal", 3 ],
+        [ "astral_biome_rootland", 1 ]
+      ],
+      "//": "Weights from Grok's WP-B5 table (2026-10-02): overworld plains/forest/thick/swamp summed into `default`."
+    },
+    "rivers": "astral_drowned",
+    "lakes": "astral_drowned",
+    "biome_layers": [ "astral_layer_greenwood_tallgrass" ]
+  },
+  "overmap": {
+    "type": "overmap_terrain",
+    "id": "astral_lowland",
+    "name": "drowned lowland",
+    "sym": "~",
+    "color": "light_blue",
+    "see_cost": "low",
+    "flags": [ "NO_ROTATE" ],
+    "looks_like": "forest_water",
+    "extras": "astral_mx_drowned",
+    "spawns": { "group": "GROUP_ASTRAL_DROWNED", "population": [ 1, 3 ], "chance": 35 },
+    "//": "Static spawns from the generated theme monstergroup (tools/astral/gen_content.py)."
+  },
+  "mapgen": {
+    "type": "mapgen",
+    "om_terrain": "astral_lowland",
+    "object": {
+      "fill_ter": "t_water_sh",
+      "place_nested": [
+        {
+          "chunks": [
+            [ "astral_depth_lowland_0", 1 ],
+            [ "astral_depth_lowland_1", 1 ],
+            [ "astral_depth_lowland_2", 1 ],
+            [ "astral_depth_lowland_3", 1 ],
+            [ "astral_depth_lowland_4", 1 ],
+            [ "astral_depth_lowland_5", 1 ],
+            [ "astral_depth_lowland_6", 1 ],
+            [ "astral_depth_lowland_7", 1 ]
+          ],
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    "//": "Mostly shallow freshwater with small land hummocks and inset deep interiors. Generated from tools/astral/biomes/lowlands.json. Arrival clearing is stamped afterward."
+  },
+  "wetland_variants": 8
+}

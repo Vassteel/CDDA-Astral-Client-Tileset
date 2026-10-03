@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "region": {
+    "type": "region_settings",
+    "id": "astral_biome_fungal",
+    "copy-from": "astral_pocket",
+    "//": "Stand-in fungal biome for the first plane (S4 plumbing).  Vanilla terrain as placeholder until the T1 theme bill lands.  2026-10-01 dominant-biome floors: ~85 % of the land is this biome; the rest is painted from the listed regions (`default` = overworld plains, forest and ordinary swamp) in contiguous patches, weights falling with distance in the route.",
+    "weather": "astral_biome_fungal",
+    "default_oter": [
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "astral_fungal",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock"
+    ],
+    "biome_mix": {
+      "dominant_share": 0.85,
+      "seed_offset": 9,
+      "regions": [
+        [ "astral_biome_lowlands", 4 ],
+        [ "astral_biome_rootland", 4 ],
+        [ "default", 7 ],
+        [ "astral_biome_meadows", 1 ]
+      ],
+      "//": "Weights from Grok's WP-B5 table (2026-10-02): overworld plains/forest/thick/swamp summed into `default`."
+    }
+  },
+  "overmap": {
+    "type": "overmap_terrain",
+    "id": "astral_fungal",
+    "name": "fungal forest",
+    "sym": "F",
+    "color": "magenta",
+    "see_cost": "low",
+    "flags": [ "NO_ROTATE" ],
+    "looks_like": "fungal_bloom",
+    "spawns": { "group": "GROUP_ASTRAL_FUNGAL", "population": [ 1, 3 ], "chance": 40 },
+    "//": "Static spawns from the generated theme monstergroup (tools/astral/gen_content.py).",
+    "extras": "astral_mx_fungal"
+  },
+  "mapgen": {
+    "type": "mapgen",
+    "om_terrain": "astral_fungal",
+    "object": {
+      "fill_ter": "t_grass",
+      "terrain": {
+        "m": [
+          [ "t_fungus", 14 ],
+          [ "t_fungus_floor_out", 8 ],
+          [ "t_tree_fungal", 3 ],
+          [ "t_tree_fungal_young", 2 ],
+          [ "t_shrub_fungal", 3 ],
+          [ "t_marloss", 1 ]
+        ]
+      },
+      "rows": [
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm"
+      ],
+      "place_nested": [
+        {
+          "chunks": [ [ "astral_scatter_fungal", 1 ], [ "null", 1 ] ],
+          "x": [ 0, 20 ],
+          "y": [ 0, 20 ],
+          "repeat": [ 2, 5 ]
+        }
+      ]
+    },
+    "//": "2026-10-02: Astral flora and veins of this theme scattered by astral_scatter_fungal (gen_content.py)."
+  }
+}

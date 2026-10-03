@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "region": {
+    "type": "region_settings",
+    "id": "astral_biome_meadows",
+    "copy-from": "astral_pocket",
+    "//": "Stand-in meadows biome for the first plane (S4 plumbing).  Uses the overworld's forest generator: noise-shaped woods (vanilla forest / forest_thick / forest_water) over open plains, like Earth.  Vanilla terrain as placeholder until the T1 theme bill lands.  2026-10-01 dominant-biome floors: ~85 % of the land is this biome; the rest is painted from the listed regions (`default` = overworld plains, forest and ordinary swamp) in contiguous patches, weights falling with distance in the route.",
+    "weather": "astral_biome_meadows",
+    "default_oter": [
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "astral_microworld_grounds",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock"
+    ],
+    "forests": "default",
+    "forest_composition": "default",
+    "forest_trails": "default",
+    "biome_layers": [
+      "astral_layer_meadow_bogs",
+      "astral_layer_meadow_fungal",
+      "astral_layer_meadow_fallow",
+      "astral_layer_greenwood_tallgrass"
+    ],
+    "biome_mix": {
+      "dominant_share": 0.85,
+      "seed_offset": 7,
+      "regions": [ [ "default", 12 ], [ "astral_biome_lowlands", 3 ], [ "astral_biome_fungal", 1 ] ],
+      "//": "Weights from Grok's WP-B5 table (2026-10-02): overworld plains/forest/thick/swamp summed into `default`."
+    }
+  },
+  "overmap": {
+    "type": "overmap_terrain",
+    "id": "astral_microworld_grounds",
+    "name": "open plain",
+    "sym": ".",
+    "color": "green",
+    "see_cost": "low",
+    "flags": [ "NO_ROTATE" ],
+    "looks_like": "field",
+    "extras": "astral_mx_meadow",
+    "spawns": { "group": "GROUP_ASTRAL_MEADOW", "population": [ 0, 2 ], "chance": 20 },
+    "//": "Static spawns from the generated theme monstergroup (tools/astral/gen_content.py)."
+  },
+  "mapgen": {
+    "type": "mapgen",
+    "om_terrain": "astral_microworld_grounds",
+    "//": "Plain grass with clumps stamped from astral_patch_* nested chunks (2-5 grass patches, mostly tall grass, 0-2 shrub thickets per map square).  Groves, ponds and berry bushes may also come from the astral_meadow map extras.  2026-10-02: Astral flora and veins of this theme scattered by astral_scatter_meadow (gen_content.py).",
+    "object": {
+      "fill_ter": "t_grass",
+      "terrain": {
+        "m": [ [ "t_grass", 120 ], [ "t_grass_long", 3 ], [ "t_shrub", 1 ] ]
+      },
+      "rows": [
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm"
+      ],
+      "place_nested": [
+        {
+          "chunks": [
+            [ "astral_patch_tallgrass_big", 3 ],
+            [ "astral_patch_tallgrass", 3 ],
+            [ "astral_patch_longgrass_a", 2 ],
+            [ "astral_patch_longgrass_b", 2 ]
+          ],
+          "x": [ 0, 14 ],
+          "y": [ 0, 14 ],
+          "repeat": [ 2, 5 ]
+        },
+        {
+          "chunks": [ [ "astral_patch_shrubs", 1 ], [ "null", 2 ] ],
+          "x": [ 0, 17 ],
+          "y": [ 0, 17 ],
+          "repeat": [ 0, 2 ]
+        },
+        {
+          "chunks": [ [ "astral_scatter_meadow", 1 ], [ "null", 1 ] ],
+          "x": [ 0, 20 ],
+          "y": [ 0, 20 ],
+          "repeat": [ 2, 5 ]
+        }
+      ]
+    }
+  }
+}

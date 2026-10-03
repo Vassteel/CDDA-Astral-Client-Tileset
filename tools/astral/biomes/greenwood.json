@@ -1,0 +1,561 @@
+{
+  "schema_version": 1,
+  "regions": [
+    {
+      "type": "dimension_region_layout",
+      "id": "astral_pocket",
+      "generation_mode": "UNIFORM",
+      "uniform_region": "astral_pocket"
+    },
+    {
+      "type": "weather_generator",
+      "id": "astral_pocket",
+      "copy-from": "default",
+      "base_temperature": 14.0,
+      "base_humidity": 65.0,
+      "base_pressure": 1015.0,
+      "base_wind": 2.0,
+      "base_wind_distrib_peaks": 80,
+      "base_wind_season_variation": 0,
+      "weather_black_list": [ "early_portal_storm", "portal_storm" ]
+    },
+    { "type": "region_settings_map_extras", "id": "astral_none", "extras": [  ] },
+    {
+      "type": "map_extra_collection",
+      "id": "astral_meadow",
+      "chance": 2,
+      "//": "Natural field patches only (no Earth wreckage, corpses or portals).  chance is 1 in N map tiles.",
+      "extras": [
+        [ "mx_grass", 3500 ],
+        [ "mx_grass2", 3500 ],
+        [ "mx_shrubbery", 1500 ],
+        [ "mx_trees2", 800 ],
+        [ "mx_trees", 500 ],
+        [ "mx_grove", 400 ],
+        [ "mx_point_dead_vegetation", 400 ],
+        [ "mx_knotweed_patch", 250 ],
+        [ "mx_sand_patch", 150 ],
+        [ "mx_pond", 300 ],
+        [ "mx_blackberry_patch", 200 ],
+        [ "mx_strawberry_patch", 120 ],
+        [ "mx_raspberry_patch", 120 ]
+      ]
+    },
+    {
+      "type": "map_extra_collection",
+      "id": "astral_lowland",
+      "chance": 1,
+      "//": "Pools, reed-like grass and knotweed for the drowned lowlands stand-in.",
+      "extras": [
+        [ "mx_pond", 900 ],
+        [ "mx_grass", 400 ],
+        [ "mx_grass2", 400 ],
+        [ "mx_knotweed_patch", 200 ],
+        [ "mx_point_dead_vegetation", 100 ]
+      ]
+    },
+    {
+      "type": "region_settings_map_extras",
+      "id": "astral_biomes",
+      "extras": [
+        "astral_meadow",
+        "astral_lowland",
+        "astral_mx_meadow",
+        "astral_mx_drowned",
+        "astral_mx_fallow",
+        "astral_mx_tallgrass",
+        "astral_mx_fungal",
+        "astral_mx_root"
+      ]
+    },
+    {
+      "type": "overmap_biome_layer",
+      "id": "astral_layer_meadow_bogs",
+      "seed_offset": 1,
+      "//": "Test layer: drowned-lowland patches inside the arrival meadows.",
+      "terrains": [ [ 0.27, "astral_lowland" ] ]
+    },
+    {
+      "type": "overmap_biome_layer",
+      "id": "astral_layer_meadow_fungal",
+      "seed_offset": 2,
+      "//": "Test layer: smaller fungal-forest patches inside the arrival meadows.",
+      "noise": { "scale": 0.045 },
+      "terrains": [ [ 0.31, "astral_fungal" ] ]
+    },
+    {
+      "type": "overmap_biome_layer",
+      "id": "astral_layer_meadow_fallow",
+      "seed_offset": 3,
+      "//": "Fallow farmland patches inside the arrival meadows (Greenwood biome, 2026-10-02).",
+      "noise": { "scale": 0.05 },
+      "terrains": [ [ 0.3, "astral_fallow" ] ]
+    },
+    {
+      "type": "overmap_biome_layer",
+      "id": "astral_layer_greenwood_tallgrass",
+      "seed_offset": 4,
+      "//": "Tallgrass prairie patches in the meadows and lowlands (Greenwood biome, 2026-10-02).",
+      "noise": { "scale": 0.04 },
+      "terrains": [ [ 0.29, "astral_tallgrass" ] ]
+    },
+    {
+      "type": "region_settings_river",
+      "id": "astral_drowned",
+      "copy-from": "default",
+      "//": "Drowned lowlands (floor 2): nearly every overmap has rivers, they branch a lot and the branches stay wide, so the country reads as creeks and channels between fields.",
+      "river_scale": 2,
+      "river_frequency": 1.05,
+      "river_branch_chance": 10.0,
+      "river_branch_remerge_chance": 3.0,
+      "river_branch_scale_decrease": 1.0
+    },
+    {
+      "type": "region_settings_lake",
+      "id": "astral_drowned",
+      "copy-from": "default",
+      "//": "Drowned lowlands: lakes at a much lower noise threshold and smaller minimum size, so pools and meres are everywhere.",
+      "noise_threshold_lake": 0.16,
+      "lake_size_min": 6,
+      "shore_extendable_overmap_terrain": [
+        "forest",
+        "forest_thick",
+        "forest_water",
+        "field",
+        "astral_lowland",
+        "astral_microworld_grounds",
+        "astral_fungal",
+        "astral_rootland"
+      ]
+    },
+    {
+      "type": "region_settings",
+      "id": "astral_pocket",
+      "copy-from": "default",
+      "//": "Template for every pocket dimension (astral_pocket_01..NN, see pockets_generated.json).  Unbounded by default: z0 is open meadow (astral_microworld_grounds) generated on demand like the overworld; the arrival courtyard is drawn by update_mapgen astral_courtyard_arrival on first entry.  t_astral_veil / astral_veil remain available for bounded (pocket-mode) layers.  default_oter runs top (z+10) to bottom (z-10).  2026-10-01: rivers, lakes and dirt-path roads (astral_path, no cities needed) on for every pocket biome; neighbour connections keep paths and rivers continuous across overmaps.  2026-10-02: specials on, whitelisted to ASTRAL_LANDMARK (Stage D landmarks, tools/astral/gen_landmarks.py).",
+      "rivers": "default",
+      "lakes": "default",
+      "ocean": null,
+      "forests": null,
+      "ravines": null,
+      "forest_trails": null,
+      "forest_composition": "no_forests",
+      "highways": null,
+      "cities": "no_cities",
+      "map_extras": "astral_biomes",
+      "terrain_furniture": "default",
+      "weather": "astral_pocket",
+      "npc_spawntime": 0,
+      "neighbor_connections": true,
+      "place_roads": true,
+      "place_specials": true,
+      "default_oter": [
+        "open_air",
+        "open_air",
+        "open_air",
+        "open_air",
+        "open_air",
+        "open_air",
+        "open_air",
+        "open_air",
+        "open_air",
+        "open_air",
+        "astral_microworld_grounds",
+        "deep_rock",
+        "deep_rock",
+        "deep_rock",
+        "deep_rock",
+        "deep_rock",
+        "deep_rock",
+        "deep_rock",
+        "deep_rock",
+        "deep_rock",
+        "deep_rock"
+      ],
+      "default_groundcover": [ [ "t_grass", 1 ] ],
+      "feature_flag_settings": { "blacklist": [  ], "whitelist": [ "ASTRAL_MICROWORLD", "ASTRAL_LANDMARK" ] },
+      "roads_without_cities": true,
+      "connections": {
+        "intra_city_road_connection": "astral_path",
+        "inter_city_road_connection": "astral_path",
+        "trail_connection": "forest_trail",
+        "sewer_connection": "sewer_tunnel",
+        "subway_connection": "subway_tunnel",
+        "rail_connection": "local_railroad"
+      }
+    },
+    {
+      "type": "weather_generator",
+      "id": "astral_biome_meadows",
+      "copy-from": "astral_pocket",
+      "base_temperature": 14.0,
+      "base_humidity": 65.0
+    },
+    { "brief": "meadows" },
+    {
+      "type": "weather_generator",
+      "id": "astral_biome_lowlands",
+      "copy-from": "astral_pocket",
+      "base_temperature": 12.0,
+      "base_humidity": 95.0
+    },
+    { "brief": "lowlands" },
+    {
+      "type": "weather_generator",
+      "id": "astral_biome_fungal",
+      "copy-from": "astral_pocket",
+      "base_temperature": 16.0,
+      "base_humidity": 90.0
+    },
+    { "brief": "fungal" },
+    {
+      "type": "weather_generator",
+      "id": "astral_biome_rootland",
+      "copy-from": "astral_pocket",
+      "base_temperature": 9.0,
+      "base_humidity": 55.0
+    },
+    { "brief": "rootland" }
+  ],
+  "overmap": [
+    {
+      "type": "overmap_terrain",
+      "id": "astral_veil",
+      "name": "the veil",
+      "sym": " ",
+      "color": "black",
+      "see_cost": "opaque",
+      "travel_cost_type": "impassable",
+      "flags": [ "NO_ROTATE" ],
+      "looks_like": "open_air"
+    },
+    { "brief": "meadows" },
+    {
+      "type": "overmap_terrain",
+      "id": "astral_portal_clearing",
+      "name": "ancient gateway",
+      "sym": "O",
+      "color": "light_blue",
+      "see_cost": "low",
+      "flags": [ "NO_ROTATE" ],
+      "looks_like": "campsite",
+      "//": "looks_like campsite until an Astral gateway overmap icon exists."
+    },
+    {
+      "type": "overmap_special",
+      "id": "astral_portal_site",
+      "//": "Overworld side.  One or two per overmap while the prototype is being tested; tune later.",
+      "overmaps": [ { "point": [ 0, 0, 0 ], "overmap": "astral_portal_clearing" } ],
+      "locations": [ "forest_without_trail" ],
+      "city_distance": [ 6, -1 ],
+      "city_sizes": [ 0, 16 ],
+      "occurrences": [ 1, 2 ],
+      "flags": [ "ASTRAL_PORTAL" ]
+    },
+    { "brief": "lowlands" },
+    { "brief": "fungal" },
+    { "brief": "rootland" },
+    {
+      "type": "overmap_terrain",
+      "id": "astral_fallow",
+      "name": "fallow farmland",
+      "sym": "#",
+      "color": "brown",
+      "see_cost": "low",
+      "flags": [ "NO_ROTATE" ],
+      "looks_like": "field",
+      "spawns": { "group": "GROUP_ASTRAL_FALLOW", "population": [ 1, 2 ], "chance": 25 },
+      "//": "Greenwood biome (environments atlas v2): feral farmland painted as patches inside the meadows.",
+      "extras": "astral_mx_fallow"
+    },
+    {
+      "type": "overmap_terrain",
+      "id": "astral_tallgrass",
+      "name": "tallgrass",
+      "sym": "\"",
+      "color": "yellow",
+      "see_cost": "low",
+      "flags": [ "NO_ROTATE" ],
+      "looks_like": "field",
+      "spawns": { "group": "GROUP_ASTRAL_TALLGRASS", "population": [ 1, 3 ], "chance": 30 },
+      "//": "Greenwood biome (environments atlas v2): prairie painted as patches inside the meadows and lowlands.",
+      "extras": "astral_mx_tallgrass"
+    }
+  ],
+  "mapgen": [
+    {
+      "type": "mapgen",
+      "update_mapgen_id": "astral_courtyard_arrival",
+      "//": "Drawn once on first arrival in a pocket, in the OMT the traveller arrives in.  The return portal sits at rows 8-12 / cols 9-13 exactly like astral_portal_clearing and the debug placer.  The player and any followers arrive next to the pad (u_travel_to_dimension arrival_location), so the pad is wrapped in a 3-tile grass clearing: whatever the biome put there (trees, brush, water) is cleared so nobody arrives inside a trunk.  Other blank cells leave the generated terrain alone.",
+      "object": {
+        "palettes": [ "astral_wild_palette", "astral_portal_active_palette" ],
+        "terrain": { "c": "t_rock_floor" },
+        "furniture": { "c": "f_crate_o" },
+        "rows": [
+          "                        ",
+          "                        ",
+          "                        ",
+          "                        ",
+          "                        ",
+          "      ...........       ",
+          "      ..t.......t       ",
+          "      ...........       ",
+          "      ...ABCDE...       ",
+          "      ...FGHIJ... ####  ",
+          "   ~~ ...KLMNO... #==#  ",
+          "  ~ww~...PQRST... #c=+  ",
+          "  ~ww~...UVWXY... ####  ",
+          "   ~~ .....___...       ",
+          "      ......__...       ",
+          "      ......__...       ",
+          "   o        __       o  ",
+          "            _           ",
+          "            __          ",
+          "             __         ",
+          "              __        ",
+          "               ___      ",
+          "                        ",
+          "                        "
+        ]
+      }
+    },
+    {
+      "type": "mapgen",
+      "nested_mapgen_id": "astral_patch_longgrass_a",
+      "object": {
+        "mapgensize": [ 8, 8 ],
+        "rows": [ "  lll   ", " lLLLl  ", "lLLLLLl ", "lLLTLLll", " lLLLLl ", "  llLl  ", "   ll   ", "        " ],
+        "terrain": {
+          "l": [ [ "t_grass_long", 5 ], [ "t_grass", 1 ] ],
+          "L": "t_grass_long",
+          "T": [ [ "t_grass_tall", 4 ], [ "t_grass_long", 1 ] ]
+        },
+        "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ]
+      }
+    },
+    {
+      "type": "mapgen",
+      "nested_mapgen_id": "astral_patch_longgrass_b",
+      "object": {
+        "mapgensize": [ 10, 10 ],
+        "rows": [
+          "   ll     ",
+          " llLLll   ",
+          "lLLLLLLl  ",
+          " lLLLLLLll",
+          "  llLLLLl ",
+          "    llLl  ",
+          "          ",
+          "          ",
+          "          ",
+          "          "
+        ],
+        "terrain": { "l": [ [ "t_grass_long", 5 ], [ "t_grass", 1 ] ], "L": "t_grass_long" },
+        "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ]
+      }
+    },
+    {
+      "type": "mapgen",
+      "nested_mapgen_id": "astral_patch_tallgrass",
+      "object": {
+        "mapgensize": [ 6, 6 ],
+        "rows": [ " lll  ", "lTTTl ", "lTTTTl", " lTTl ", "  ll  ", "      " ],
+        "terrain": {
+          "l": [ [ "t_grass_long", 5 ], [ "t_grass", 1 ] ],
+          "T": [ [ "t_grass_tall", 4 ], [ "t_grass_long", 1 ] ]
+        },
+        "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ]
+      }
+    },
+    {
+      "type": "mapgen",
+      "nested_mapgen_id": "astral_patch_tallgrass_big",
+      "object": {
+        "mapgensize": [ 10, 10 ],
+        "rows": [
+          "   lll    ",
+          " llTTTll  ",
+          "lTTTTTTTl ",
+          "lTTTTTTTTl",
+          " lTTTTTTl ",
+          "  lTTTTl  ",
+          "   llTl   ",
+          "    l     ",
+          "          ",
+          "          "
+        ],
+        "terrain": {
+          "l": [ [ "t_grass_long", 3 ], [ "t_grass_tall", 2 ] ],
+          "T": [ [ "t_grass_tall", 6 ], [ "t_grass_long", 1 ] ]
+        },
+        "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ]
+      }
+    },
+    {
+      "type": "mapgen",
+      "nested_mapgen_id": "astral_patch_shrubs",
+      "object": {
+        "mapgensize": [ 6, 6 ],
+        "rows": [ "  ll  ", " lssl ", "lsuusl", " lssl ", "  l   ", "      " ],
+        "terrain": {
+          "l": [ [ "t_grass_long", 5 ], [ "t_grass", 1 ] ],
+          "s": [ [ "t_shrub", 2 ], [ "t_underbrush", 2 ], [ "t_grass_long", 1 ] ],
+          "u": "t_underbrush"
+        },
+        "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ]
+      }
+    },
+    {
+      "type": "mapgen",
+      "nested_mapgen_id": "astral_patch_mud",
+      "object": {
+        "mapgensize": [ 7, 7 ],
+        "rows": [ "  mm   ", " mmmmm ", "mmmmmm ", " mmmm  ", "  mm   ", "       ", "       " ],
+        "terrain": { "m": [ [ "t_mud", 4 ], [ "t_grass_long", 1 ] ] },
+        "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ]
+      }
+    },
+    {
+      "type": "mapgen",
+      "nested_mapgen_id": "astral_patch_pool",
+      "object": {
+        "mapgensize": [ 9, 9 ],
+        "rows": [
+          "   rr    ",
+          " rr~~rr  ",
+          "r~~~~~~r ",
+          "r~~~~~~~r",
+          " r~~~~~r ",
+          "  rr~rr  ",
+          "    r    ",
+          "         ",
+          "         "
+        ],
+        "terrain": { "r": [ [ "t_grass_tall", 3 ], [ "t_water_sh", 1 ] ], "~": "t_water_sh" },
+        "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ]
+      }
+    },
+    {
+      "type": "mapgen",
+      "nested_mapgen_id": "astral_patch_reeds",
+      "object": {
+        "mapgensize": [ 7, 7 ],
+        "rows": [ "  rrr  ", " rTTTr ", "rTTwTTr", " rTTTr ", "  rr   ", "       ", "       " ],
+        "terrain": {
+          "r": [ [ "t_grass_tall", 3 ], [ "t_water_sh", 1 ] ],
+          "T": [ [ "t_grass_tall", 4 ], [ "t_grass_long", 1 ] ],
+          "w": "t_tree_willow"
+        },
+        "flags": [ "ALLOW_TERRAIN_UNDER_OTHER_DATA" ]
+      }
+    },
+    { "brief": "meadows" },
+    { "type": "mapgen", "om_terrain": "astral_veil", "object": { "fill_ter": "t_astral_veil" } },
+    { "brief": "lowlands" },
+    { "brief": "fungal" },
+    { "brief": "rootland" },
+    {
+      "type": "mapgen",
+      "om_terrain": "astral_fallow",
+      "//": "Fallow farmland (Greenwood): overgrown furrows, hedgerow brush and feral crops; flora and veins from astral_scatter_fallow.",
+      "object": {
+        "fill_ter": "t_dirt",
+        "terrain": {
+          "m": [ [ "t_dirt", 10 ], [ "t_grass_long", 8 ], [ "t_grass", 6 ], [ "t_shrub", 1 ] ],
+          "h": [ [ "t_underbrush", 3 ], [ "t_shrub", 2 ], [ "t_grass_long", 2 ] ]
+        },
+        "rows": [
+          "hhhhhhhhhhhhhhhhhhhhhhhh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hmmmmmmmmmmmmmmmmmmmmmmh",
+          "hhhhhhhhhhhhhhhhhhhhhhhh"
+        ],
+        "place_nested": [
+          {
+            "chunks": [ [ "astral_patch_longgrass_a", 2 ], [ "astral_patch_mud", 1 ] ],
+            "x": [ 1, 14 ],
+            "y": [ 1, 14 ],
+            "repeat": [ 1, 3 ]
+          },
+          {
+            "chunks": [ [ "astral_scatter_fallow", 3 ], [ "null", 1 ] ],
+            "x": [ 1, 19 ],
+            "y": [ 1, 19 ],
+            "repeat": [ 3, 6 ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "mapgen",
+      "om_terrain": "astral_tallgrass",
+      "//": "Tallgrass (Greenwood): prairie of tall and long grass with lone trees; flora and veins from astral_scatter_tallgrass.",
+      "object": {
+        "fill_ter": "t_grass_tall",
+        "terrain": {
+          "m": [ [ "t_grass_tall", 14 ], [ "t_grass_long", 8 ], [ "t_grass", 2 ], [ "t_tree", 1 ] ]
+        },
+        "rows": [
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm",
+          "mmmmmmmmmmmmmmmmmmmmmmmm"
+        ],
+        "place_nested": [
+          {
+            "chunks": [ [ "astral_patch_tallgrass_big", 3 ], [ "astral_patch_longgrass_b", 1 ] ],
+            "x": [ 0, 14 ],
+            "y": [ 0, 14 ],
+            "repeat": [ 2, 4 ]
+          },
+          {
+            "chunks": [ [ "astral_scatter_tallgrass", 3 ], [ "null", 1 ] ],
+            "x": [ 0, 20 ],
+            "y": [ 0, 20 ],
+            "repeat": [ 2, 5 ]
+          }
+        ]
+      }
+    }
+  ]
+}
