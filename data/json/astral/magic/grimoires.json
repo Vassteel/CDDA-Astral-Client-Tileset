@@ -48,7 +48,11 @@
     "//": "Lore 1+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
     "use_action": {
       "type": "learn_spell",
-      "spells": [ "astral_spell_striking_force_dart", "astral_spell_striking_shove" ]
+      "spells": [
+        "astral_spell_striking_force_dart",
+        "astral_spell_striking_shove",
+        "astral_spell_striking_banked_spark"
+      ]
     }
   },
   {
@@ -70,7 +74,7 @@
     "//": "Lore 3+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
     "use_action": {
       "type": "learn_spell",
-      "spells": [ "astral_spell_striking_crackle", "astral_spell_striking_burst" ]
+      "spells": [ "astral_spell_striking_crackle", "astral_spell_striking_burst", "astral_spell_striking_scare_clap" ]
     }
   },
   {
@@ -92,7 +96,12 @@
     "//": "Lore 1+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
     "use_action": {
       "type": "learn_spell",
-      "spells": [ "astral_spell_warding_ward_skin", "astral_spell_warding_sense_tide" ]
+      "spells": [
+        "astral_spell_warding_ward_skin",
+        "astral_spell_warding_sense_tide",
+        "astral_spell_warding_hearth_skin",
+        "astral_spell_warding_taste_hearth"
+      ]
     }
   },
   {
@@ -112,7 +121,10 @@
     "color": "light_blue",
     "flags": [ "ASTRAL_TIER_3" ],
     "//": "Lore 3+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
-    "use_action": { "type": "learn_spell", "spells": [ "astral_spell_warding_unweave" ] }
+    "use_action": {
+      "type": "learn_spell",
+      "spells": [ "astral_spell_warding_unweave", "astral_spell_warding_haze_ward" ]
+    }
   },
   {
     "type": "ITEM",
@@ -155,7 +167,11 @@
     "//": "Lore 3+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
     "use_action": {
       "type": "learn_spell",
-      "spells": [ "astral_spell_calling_conjure_tool", "astral_spell_calling_hound" ]
+      "spells": [
+        "astral_spell_calling_conjure_tool",
+        "astral_spell_calling_hound",
+        "astral_spell_calling_stand_scarecrow"
+      ]
     }
   },
   {
@@ -177,7 +193,11 @@
     "//": "Lore 1+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
     "use_action": {
       "type": "learn_spell",
-      "spells": [ "astral_spell_tempering_sure_foot", "astral_spell_tempering_hawk_eye" ]
+      "spells": [
+        "astral_spell_tempering_sure_foot",
+        "astral_spell_tempering_hawk_eye",
+        "astral_spell_tempering_quiet_foot"
+      ]
     }
   },
   {
@@ -221,7 +241,12 @@
     "//": "Lore 1+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
     "use_action": {
       "type": "learn_spell",
-      "spells": [ "astral_spell_wayfinding_bearing", "astral_spell_wayfinding_blink" ]
+      "spells": [
+        "astral_spell_wayfinding_bearing",
+        "astral_spell_wayfinding_blink",
+        "astral_spell_wayfinding_way_home",
+        "astral_spell_wayfinding_dry_path"
+      ]
     }
   },
   {
@@ -241,7 +266,14 @@
     "color": "light_blue",
     "flags": [ "ASTRAL_TIER_3" ],
     "//": "Lore 3+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
-    "use_action": { "type": "learn_spell", "spells": [ "astral_spell_wayfinding_survey" ] }
+    "use_action": {
+      "type": "learn_spell",
+      "spells": [
+        "astral_spell_wayfinding_survey",
+        "astral_spell_wayfinding_haze_sight",
+        "astral_spell_wayfinding_sink_sense"
+      ]
+    }
   },
   {
     "type": "ITEM",
@@ -262,7 +294,12 @@
     "//": "Lore 1+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
     "use_action": {
       "type": "learn_spell",
-      "spells": [ "astral_spell_mending_mend", "astral_spell_mending_soothe" ]
+      "spells": [
+        "astral_spell_mending_mend",
+        "astral_spell_mending_soothe",
+        "astral_spell_mending_close_cut",
+        "astral_spell_mending_ease_ache"
+      ]
     }
   },
   {
@@ -282,7 +319,14 @@
     "color": "light_blue",
     "flags": [ "ASTRAL_TIER_3" ],
     "//": "Lore 3+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
-    "use_action": { "type": "learn_spell", "spells": [ "astral_spell_mending_cleanse" ] }
+    "use_action": {
+      "type": "learn_spell",
+      "spells": [
+        "astral_spell_mending_cleanse",
+        "astral_spell_mending_spore_wash",
+        "astral_spell_mending_held_breath"
+      ]
+    }
   },
   {
     "type": "ITEM",
@@ -303,7 +347,7 @@
     "//": "Lore 1+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
     "use_action": {
       "type": "learn_spell",
-      "spells": [ "astral_spell_shaping_soften", "astral_spell_shaping_quickgrow" ]
+      "spells": [ "astral_spell_shaping_soften", "astral_spell_shaping_quickgrow", "astral_spell_shaping_cut_fire" ]
     }
   },
   {
@@ -325,7 +369,7 @@
     "//": "Lore 3+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
     "use_action": {
       "type": "learn_spell",
-      "spells": [ "astral_spell_shaping_delve", "astral_spell_shaping_melt" ]
+      "spells": [ "astral_spell_shaping_delve", "astral_spell_shaping_melt", "astral_spell_shaping_cut_fire" ]
     }
   },
   {
@@ -395,7 +439,11 @@
         "astral_spell_warding_crystallise",
         "astral_spell_warding_ward_circle",
         "astral_spell_warding_tap",
-        "astral_spell_warding_sanctum"
+        "astral_spell_warding_sanctum",
+        "astral_spell_warding_firebreak",
+        "astral_spell_warding_quiet_circle",
+        "astral_spell_warding_dry_camp",
+        "astral_spell_warding_night_hearth"
       ]
     }
   },
@@ -443,7 +491,8 @@
       "spells": [
         "astral_spell_tempering_quicken",
         "astral_spell_tempering_ox_strength",
-        "astral_spell_tempering_tidebody"
+        "astral_spell_tempering_tidebody",
+        "astral_spell_tempering_ash_skin"
       ]
     }
   },
@@ -471,7 +520,8 @@
         "astral_spell_hexing_wither",
         "astral_spell_hexing_grave_voice",
         "astral_spell_hexing_leech",
-        "astral_spell_hexing_unmaking"
+        "astral_spell_hexing_unmaking",
+        "astral_spell_hexing_steal_sound"
       ]
     }
   },
@@ -498,7 +548,10 @@
         "astral_spell_wayfinding_mark",
         "astral_spell_wayfinding_recall",
         "astral_spell_wayfinding_steady",
-        "astral_spell_wayfinding_shortcut"
+        "astral_spell_wayfinding_shortcut",
+        "astral_spell_wayfinding_water_step",
+        "astral_spell_wayfinding_soft_step",
+        "astral_spell_wayfinding_step_home"
       ]
     }
   },
@@ -525,7 +578,10 @@
         "astral_spell_mending_rest_deep",
         "astral_spell_mending_restore",
         "astral_spell_mending_knit",
-        "astral_spell_mending_second_breath"
+        "astral_spell_mending_second_breath",
+        "astral_spell_mending_bless_row",
+        "astral_spell_mending_home_knit",
+        "astral_spell_mending_hearth_breath"
       ]
     }
   },
@@ -548,7 +604,156 @@
     "//": "Lore 4+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
     "use_action": {
       "type": "learn_spell",
-      "spells": [ "astral_spell_shaping_stonewright", "astral_spell_shaping_graft", "astral_spell_shaping_reshape" ]
+      "spells": [
+        "astral_spell_shaping_stonewright",
+        "astral_spell_shaping_graft",
+        "astral_spell_shaping_reshape",
+        "astral_spell_shaping_raise_path"
+      ]
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_hearth_primer",
+    "subtypes": [ "BOOK" ],
+    "category": "manuals",
+    "name": { "str": "Hearth primer", "str_pl": "copies of Hearth primer" },
+    "description": "A hedge-witch's primer of Hearth work: the first spells of the aspect, written plain.",
+    "weight": "500 g",
+    "volume": "300 ml",
+    "price": "30 USD",
+    "price_postapoc": "30 USD",
+    "material": [ "paper" ],
+    "looks_like": "cookbook",
+    "symbol": "?",
+    "color": "light_blue",
+    "flags": [ "ASTRAL_TIER_1" ],
+    "//": "Lore 3+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
+    "use_action": {
+      "type": "learn_spell",
+      "spells": [
+        "astral_spell_mending_hearth_poultice",
+        "astral_spell_mending_close_cut",
+        "astral_spell_mending_ease_ache",
+        "astral_spell_warding_peace_line",
+        "astral_spell_warding_hearth_skin",
+        "astral_spell_warding_taste_hearth",
+        "astral_spell_wayfinding_hearth_chalk",
+        "astral_spell_wayfinding_way_home",
+        "astral_spell_wayfinding_dry_path",
+        "astral_spell_striking_banked_spark",
+        "astral_spell_calling_herd_whistle",
+        "astral_spell_tempering_quiet_foot"
+      ]
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_hearth_treatise",
+    "subtypes": [ "BOOK" ],
+    "category": "manuals",
+    "name": { "str": "Hearth treatise", "str_pl": "copies of Hearth treatise" },
+    "description": "A guild treatise on the Hearth aspect, dense with marginal notes.",
+    "weight": "500 g",
+    "volume": "300 ml",
+    "price": "80 USD",
+    "price_postapoc": "80 USD",
+    "material": [ "paper" ],
+    "looks_like": "cookbook",
+    "symbol": "?",
+    "color": "light_blue",
+    "flags": [ "ASTRAL_TIER_2" ],
+    "//": "Lore 4+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
+    "use_action": {
+      "type": "learn_spell",
+      "spells": [
+        "astral_spell_mending_spore_wash",
+        "astral_spell_mending_held_breath",
+        "astral_spell_warding_haze_ward",
+        "astral_spell_wayfinding_haze_sight",
+        "astral_spell_wayfinding_sink_sense",
+        "astral_spell_striking_scare_clap",
+        "astral_spell_calling_stand_scarecrow",
+        "astral_spell_hexing_damp_weed",
+        "astral_spell_shaping_cut_fire"
+      ]
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_hearth_hall_book",
+    "subtypes": [ "BOOK" ],
+    "category": "manuals",
+    "name": { "str": "Hearth hall book", "str_pl": "copies of Hearth hall book" },
+    "description": "The hall's own book of Hearth rites; copies do not leave the hall willingly.",
+    "weight": "500 g",
+    "volume": "300 ml",
+    "price": "150 USD",
+    "price_postapoc": "150 USD",
+    "material": [ "paper" ],
+    "looks_like": "cookbook",
+    "symbol": "?",
+    "color": "light_blue",
+    "flags": [ "ASTRAL_TIER_3" ],
+    "//": "Lore 5+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
+    "use_action": { "type": "learn_spell", "spells": [ "astral_spell_mending_bless_row" ] }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_hearth_wall_rubbing",
+    "subtypes": [ "BOOK" ],
+    "category": "manuals",
+    "name": { "str": "Hearth wall rubbing", "str_pl": "copies of Hearth wall rubbing" },
+    "description": "A charcoal rubbing of spells cut into a shrine wall, Hearth aspect.",
+    "weight": "500 g",
+    "volume": "300 ml",
+    "price": "150 USD",
+    "price_postapoc": "150 USD",
+    "material": [ "paper" ],
+    "looks_like": "cookbook",
+    "symbol": "?",
+    "color": "light_blue",
+    "flags": [ "ASTRAL_TIER_3" ],
+    "//": "Lore 5+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
+    "use_action": {
+      "type": "learn_spell",
+      "spells": [
+        "astral_spell_mending_home_knit",
+        "astral_spell_warding_firebreak",
+        "astral_spell_warding_quiet_circle",
+        "astral_spell_warding_dry_camp",
+        "astral_spell_wayfinding_water_step",
+        "astral_spell_wayfinding_soft_step",
+        "astral_spell_tempering_ash_skin",
+        "astral_spell_hexing_steal_sound",
+        "astral_spell_shaping_raise_path"
+      ]
+    }
+  },
+  {
+    "type": "ITEM",
+    "id": "astral_hearth_adept_leaf",
+    "subtypes": [ "BOOK" ],
+    "category": "manuals",
+    "name": { "str": "Hearth adept's leaf", "str_pl": "copies of Hearth adept's leaf" },
+    "description": "A single leaf of vellum: the Adept-only spells of the Hearth aspect.",
+    "weight": "500 g",
+    "volume": "300 ml",
+    "price": "300 USD",
+    "price_postapoc": "300 USD",
+    "material": [ "paper" ],
+    "looks_like": "cookbook",
+    "symbol": "?",
+    "color": "light_blue",
+    "flags": [ "ASTRAL_TIER_4" ],
+    "//": "Lore 6+ recommended (deciphering is a later pass; v1 reads like a Magiclysm spellbook).",
+    "use_action": {
+      "type": "learn_spell",
+      "spells": [
+        "astral_spell_mending_hearth_breath",
+        "astral_spell_warding_night_hearth",
+        "astral_spell_wayfinding_step_home"
+      ]
     }
   }
 ]

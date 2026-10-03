@@ -2634,6 +2634,70 @@ void draw_hobby_details()
     draw_profession_missions( drawn_anything, _( "Background missions:" ), selected_hobby );
 }
 
+// Astral: the Craft on the Summary tab.  Attunements (traits flagged ATTUNEMENT), spells and
+// Craft proficiencies granted by the profession and backgrounds, and the tide affinity.
+void draw_character_craft( const avatar &u )
+{
+    static const json_character_flag flag_ATTUNEMENT( "ATTUNEMENT" );
+    static const proficiency_category_id prof_cat_astral_craft( "prof_astral_craft" );
+
+    std::vector<std::string> attuned;
+    std::vector<trait_and_var> traits = u.prof->get_locked_traits();
+    for( const profession *hobby : u.hobbies ) {
+        const std::vector<trait_and_var> ht = hobby->get_locked_traits();
+        traits.insert( traits.end(), ht.begin(), ht.end() );
+    }
+    for( const trait_and_var &tv : u.get_mutations_variants( false ) ) {
+        traits.push_back( tv );
+    }
+    for( const trait_and_var &tv : traits ) {
+        if( tv.trait.is_valid() && tv.trait->flags.count( flag_ATTUNEMENT ) &&
+            std::find( attuned.begin(), attuned.end(), tv.name() ) == attuned.end() ) {
+            attuned.push_back( tv.name() );
+        }
+    }
+
+    std::vector<std::string> spells;
+    auto add_spells = [&spells]( const std::map<spell_id, int> &sp ) {
+        for( const std::pair<const spell_id, int> &pr : sp ) {
+            if( pr.first.is_valid() &&
+                std::find( spells.begin(), spells.end(), pr.first->name.translated() ) == spells.end() ) {
+                spells.push_back( pr.first->name.translated() );
+            }
+        }
+    };
+    add_spells( u.prof->spells() );
+    for( const profession *hobby : u.hobbies ) {
+        add_spells( hobby->spells() );
+    }
+
+    std::vector<std::string> craft_profs;
+    std::vector<proficiency_id> profs = u.prof->proficiencies();
+    for( const profession *hobby : u.hobbies ) {
+        const std::vector<proficiency_id> hp = hobby->proficiencies();
+        profs.insert( profs.end(), hp.begin(), hp.end() );
+    }
+    for( const proficiency_id &pid : profs ) {
+        if( pid.is_valid() && pid->prof_category() == prof_cat_astral_craft &&
+            std::find( craft_profs.begin(), craft_profs.end(), pid->name() ) == craft_profs.end() ) {
+            craft_profs.push_back( pid->name() );
+        }
+    }
+
+    if( attuned.empty() && spells.empty() && craft_profs.empty() ) {
+        return;
+    }
+    cataimgui::draw_colored_text( _( "The Craft:" ), COL_HEADER );
+    const auto join = []( const std::vector<std::string> &v ) {
+        return v.empty() ? std::string( _( "none" ) ) : enumerate_as_string( v, enumeration_conjunction::none );
+    };
+    draw_colored_text_wrap( string_format( _( "Attuned to: %s" ), join( attuned ) ), c_light_gray );
+    draw_colored_text_wrap( string_format( _( "Spells known: %s" ), join( spells ) ), c_light_gray );
+    draw_colored_text_wrap( string_format( _( "Craft proficiencies: %s" ), join( craft_profs ) ), c_light_gray );
+    draw_colored_text_wrap( string_format( _( "Tide affinity: %s" ),
+                                           attuned.empty() ? _( "none" ) : _( "Prime" ) ), c_light_gray );
+}
+
 void draw_hobby_selected( const avatar &u )
 {
     cataimgui::draw_colored_text( _( "Backgrounds Selected:" ), COL_HEADER );
@@ -4082,6 +4146,8 @@ void character_creator_ui_impl::draw_summary()
         char_creation::draw_character_traits( who );
         draw_spacer();
         char_creation::draw_character_proficiencies( who );
+        draw_spacer();
+        char_creation::draw_character_craft( u );
         draw_spacer();
         char_creation::draw_hobby_selected( u );
 

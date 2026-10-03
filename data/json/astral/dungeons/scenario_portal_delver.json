@@ -15,9 +15,30 @@
     "description": "You wake on the worn stones before an ancient gateway, dressed and armed as if you had always meant to walk through it.  Nothing you carry is quite ordinary.  (Development scenario for testing the portal worlds; it will be removed later.)",
     "start_name": "Ancient gateway",
     "allowed_locs": [ "sloc_astral_gateway", "sloc_field" ],
-    "professions": [ "astral_portal_delver" ],
+    "professions": [
+      "astral_portal_delver",
+      "astral_prof_ward_apprentice",
+      "astral_prof_ward_journeyman",
+      "astral_prof_way_apprentice",
+      "astral_prof_way_journeyman",
+      "astral_prof_mend_apprentice",
+      "astral_prof_mend_journeyman",
+      "astral_prof_meadow_herder",
+      "astral_prof_drowned_fisher",
+      "astral_prof_fungal_warden",
+      "astral_prof_root_delver",
+      "astral_prof_fallow_reaper",
+      "astral_prof_tallgrass_rider",
+      "astral_prof_ember_smith",
+      "astral_prof_pale_keeper",
+      "astral_prof_tidal_keeper",
+      "astral_prof_canopy_tapper",
+      "astral_prof_hollow_lamp"
+    ],
     "reveal_locale": false,
-    "flags": [ "LONE_START" ]
+    "flags": [ "LONE_START" ],
+    "hobbies": [ "boating_license", "computer_literate", "high_school_graduate", "hobby_heli_pilot", "car_rebuilding" ],
+    "whitelist_hobbies": false
   },
   {
     "type": "profession",
@@ -30,7 +51,8 @@
       { "level": 3, "name": "cutting" },
       { "level": 2, "name": "dodge" },
       { "level": 2, "name": "survival" },
-      { "level": 1, "name": "fabrication" }
+      { "level": 1, "name": "fabrication" },
+      { "level": 1, "name": "astral_lore" }
     ],
     "items": {
       "both": {
@@ -118,7 +140,13 @@
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
       "female": { "entries": [ { "item": "bra" }, { "item": "panties" } ] }
-    }
+    },
+    "traits": [ "ASTRAL_DISC_WARDING" ],
+    "spells": [
+      { "id": "astral_spell_warding_ward_skin", "level": 1 },
+      { "id": "astral_spell_warding_sense_tide", "level": 1 }
+    ],
+    "//": "Starts attuned to Warding with two spells so the Craft (Mana bar, cast menu) is visible from turn one; user decision 2026-10-02."
   },
   {
     "type": "ITEM",

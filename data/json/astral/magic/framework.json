@@ -3,7 +3,7 @@
     "type": "skill",
     "id": "astral_lore",
     "name": { "str": "Lore" },
-    "description": "Your grasp of the Craft: reading grimoires, holding a spell's shape, and knowing what the tide will and won't do.  Higher Lore makes every spell less likely to fail.",
+    "description": "You are learning how the Craft is written down.  Lore is the skill of reading a grimoire, telling a real diagram from a doodle, and knowing which plane stained the tide in front of you.  It does not attune you.  It makes the reading less of a waste.",
     "display_category": "display_interaction",
     "sort_rank": 28000
   },
@@ -34,9 +34,9 @@
     "type": "mutation",
     "id": "ASTRAL_DISC_STRIKING",
     "name": { "str": "Striking" },
-    "points": 0,
-    "description": "You are attuned to Striking, one of the eight disciplines of the Craft.  Direct force: bolts, bursts, lightning.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Striking is native goes twice as fast.",
-    "starting_trait": false,
+    "points": 3,
+    "description": "You have done the Striking rite.  Force answers when you have the rod and the diagram.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Striking is native goes twice as fast.",
+    "starting_trait": true,
     "purifiable": false,
     "valid": false,
     "flags": [ "ATTUNEMENT" ]
@@ -89,9 +89,9 @@
     "type": "mutation",
     "id": "ASTRAL_DISC_WARDING",
     "name": { "str": "Warding" },
-    "points": 0,
-    "description": "You are attuned to Warding, one of the eight disciplines of the Craft.  The tide itself and protection from it: wards, unweaving, crystallising mana.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Warding is native goes twice as fast.",
-    "starting_trait": false,
+    "points": 1,
+    "description": "You have done the Warding rite.  The tide will thicken for you, and you can taste it.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Warding is native goes twice as fast.",
+    "starting_trait": true,
     "purifiable": false,
     "valid": false,
     "flags": [ "ATTUNEMENT" ]
@@ -144,9 +144,9 @@
     "type": "mutation",
     "id": "ASTRAL_DISC_CALLING",
     "name": { "str": "Calling" },
-    "points": 0,
-    "description": "You are attuned to Calling, one of the eight disciplines of the Craft.  Summoning creatures and things, and binding them.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Calling is native goes twice as fast.",
-    "starting_trait": false,
+    "points": 3,
+    "description": "You have done the Calling rite.  What you call still wants its fee.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Calling is native goes twice as fast.",
+    "starting_trait": true,
     "purifiable": false,
     "valid": false,
     "flags": [ "ATTUNEMENT" ]
@@ -199,9 +199,9 @@
     "type": "mutation",
     "id": "ASTRAL_DISC_TEMPERING",
     "name": { "str": "Tempering" },
-    "points": 0,
-    "description": "You are attuned to Tempering, one of the eight disciplines of the Craft.  Strengthening yourself and your gear for a while.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Tempering is native goes twice as fast.",
-    "starting_trait": false,
+    "points": 3,
+    "description": "You have done the Tempering rite.  You can set a blessing into flesh or gear for a while.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Tempering is native goes twice as fast.",
+    "starting_trait": true,
     "purifiable": false,
     "valid": false,
     "flags": [ "ATTUNEMENT" ]
@@ -254,9 +254,9 @@
     "type": "mutation",
     "id": "ASTRAL_DISC_HEXING",
     "name": { "str": "Hexing" },
-    "points": 0,
-    "description": "You are attuned to Hexing, one of the eight disciplines of the Craft.  Weakening, cursing, draining; speaking with the dead.  Paid in blood as well as mana.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Hexing is native goes twice as fast.",
-    "starting_trait": false,
+    "points": 6,
+    "description": "You have done the Hexing rite, outside the hall.  Every curse asks for blood as well as tide.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Hexing is native goes twice as fast.",
+    "starting_trait": true,
     "purifiable": false,
     "valid": false,
     "flags": [ "ATTUNEMENT" ]
@@ -309,9 +309,9 @@
     "type": "mutation",
     "id": "ASTRAL_DISC_WAYFINDING",
     "name": { "str": "Wayfinding" },
-    "points": 0,
-    "description": "You are attuned to Wayfinding, one of the eight disciplines of the Craft.  Movement and finding: bearing, blinking, marking and recalling.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Wayfinding is native goes twice as fast.",
-    "starting_trait": false,
+    "points": 1,
+    "description": "You have done the Wayfinding rite.  Bearings, marks, and short steps are open to you.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Wayfinding is native goes twice as fast.",
+    "starting_trait": true,
     "purifiable": false,
     "valid": false,
     "flags": [ "ATTUNEMENT" ]
@@ -364,9 +364,9 @@
     "type": "mutation",
     "id": "ASTRAL_DISC_MENDING",
     "name": { "str": "Mending" },
-    "points": 0,
-    "description": "You are attuned to Mending, one of the eight disciplines of the Craft.  Healing, cleansing ailments, restoring land.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Mending is native goes twice as fast.",
-    "starting_trait": false,
+    "points": 1,
+    "description": "You have done the Mending rite.  You can close what is torn, if you have the time.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Mending is native goes twice as fast.",
+    "starting_trait": true,
     "purifiable": false,
     "valid": false,
     "flags": [ "ATTUNEMENT" ]
@@ -419,9 +419,9 @@
     "type": "mutation",
     "id": "ASTRAL_DISC_SHAPING",
     "name": { "str": "Shaping" },
-    "points": 0,
-    "description": "You are attuned to Shaping, one of the eight disciplines of the Craft.  Changing matter and form: stone, soil, plants, flesh.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Shaping is native goes twice as fast.",
-    "starting_trait": false,
+    "points": 3,
+    "description": "You have done the Shaping rite.  Stone, soil, and rooted things will take a new shape from you.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Shaping is native goes twice as fast.",
+    "starting_trait": true,
     "purifiable": false,
     "valid": false,
     "flags": [ "ATTUNEMENT" ]
@@ -938,6 +938,12 @@
     "condition": { "compare_string": [ "ASTRAL_DISC_HEXING", { "context_val": "school" } ] },
     "effect": [
       {
+        "if": {
+          "compare_string": [ "astral_spell_hexing_damp_weed", { "context_val": "spell" } ]
+        },
+        "then": [ { "u_deal_damage": "pure", "amount": 3, "bodypart": "torso" } ]
+      },
+      {
         "if": { "compare_string": [ "astral_spell_hexing_dim", { "context_val": "spell" } ] },
         "then": [ { "u_deal_damage": "pure", "amount": 3, "bodypart": "torso" } ]
       },
@@ -960,6 +966,12 @@
       {
         "if": { "compare_string": [ "astral_spell_hexing_slow", { "context_val": "spell" } ] },
         "then": [ { "u_deal_damage": "pure", "amount": 5, "bodypart": "torso" } ]
+      },
+      {
+        "if": {
+          "compare_string": [ "astral_spell_hexing_steal_sound", { "context_val": "spell" } ]
+        },
+        "then": [ { "u_deal_damage": "pure", "amount": 6, "bodypart": "torso" } ]
       },
       {
         "if": {

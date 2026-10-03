@@ -18,6 +18,10 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 OUT = os.path.join(ROOT, "data", "json", "astral", "magic")
 sys.path.insert(0, os.path.join(ROOT, "tools", "astral"))
 import cddafmt  # noqa: E402
+import gen_magic_packs  # noqa: E402
+
+_OV = os.path.join(ROOT, "tools", "astral", "content", "40-chargen-overrides.json")
+CHARGEN_OVERRIDES = json.load(open(_OV)) if os.path.exists(_OV) else {}
 
 SKILL = "astral_lore"
 POCKETS = 24  # astral_pocket_01..24 (data/json/astral/dungeons/pockets_generated.json)
@@ -387,6 +391,11 @@ def helper_spells():
     return out
 
 
+# Aspect packs (Grok T9 tables) append to S here, after the Prime list.
+PACKS = gen_magic_packs.load_packs(sp, FOCUS)
+PACK_FOCUS = gen_magic_packs.pack_focus_overrides(PACKS)
+
+
 def spell_id(s):
     return f"astral_spell_{s['d']}_{s['key']}"
 
@@ -434,8 +443,11 @@ def gen_requirements():
             continue
         req = {"type": "requirement", "id": "astral_req_" + sid[len("astral_spell_"):]}
         ft = focus_tier(s["tier"])
+        fbase = FOCUS[s["d"]]
+        if (s["d"], s["key"]) in PACK_FOCUS:
+            fbase, ft = PACK_FOCUS[(s["d"], s["key"])]
         if ft:
-            alts = [[f"{FOCUS[s['d']]}_{t}", -1] for t in range(ft, 4)]
+            alts = [[f"{fbase}_{t}", -1] for t in range(ft, 4)]
             if ft == 1:
                 alts.append([STAFF, -1])
             req["tools"] = [alts]
@@ -449,7 +461,7 @@ def gen_requirements():
 def gen_framework():
     out = [{
         "type": "skill", "id": SKILL, "name": {"str": "Lore"},
-        "description": "Your grasp of the Craft: reading grimoires, holding a spell's shape, and knowing what the tide will and won't do.  Higher Lore makes every spell less likely to fail.",
+        "description": CHARGEN_OVERRIDES.get("lore_description") or "Your grasp of the Craft: reading grimoires, holding a spell's shape, and knowing what the tide will and won't do.  Higher Lore makes every spell less likely to fail.",
         "display_category": "display_interaction", "sort_rank": 28000,
     }, {
         "type": "proficiency_category", "id": "prof_astral_craft", "name": "The Craft",
@@ -462,9 +474,12 @@ def gen_framework():
         out.append({"type": "magic_type", "id": mtype(d), "energy_source": "MANA",
                     "cannot_cast_flags": ["NO_SPELLCASTING"], "cannot_cast_message": "You can't cast that spell right now!",
                     "failure_cost_percent": 0.2, "//": f"{name} = the {school} school."})
-        out.append({"type": "mutation", "id": trait(d), "name": {"str": name}, "points": 0,
+        ov = CHARGEN_OVERRIDES.get("disc_traits", {}).get(trait(d), {})
+        out.append({"type": "mutation", "id": trait(d), "name": {"str": name}, "points": ov.get("points", 0),
                     "description": f"You are attuned to {name}, one of the eight disciplines of the Craft.  {desc}  Practice raises you through Touched, Attuned and Adept; practice in a plane where {name} is native goes twice as fast.",
-                    "starting_trait": False, "purifiable": False, "valid": False, "flags": ["ATTUNEMENT"]})
+                    "starting_trait": bool(ov), "purifiable": False, "valid": False, "flags": ["ATTUNEMENT"]})
+        if ov.get("description"):
+            out[-1]["description"] = ov["description"] + f"  Practice raises you through Touched, Attuned and Adept; practice in a plane where {name} is native goes twice as fast."
         ranks = [("Touched", "5 h"), ("Attuned", "20 h"), ("Adept", "60 h")]
         for r, (rname, t) in enumerate(ranks, 1):
             p = {"type": "proficiency", "id": prof(d, r), "category": "prof_astral_craft",
@@ -582,7 +597,7 @@ def gen_effects():
     def armour(n):
         return {"incoming_damage_mod": [{"type": t, "add": -n} for t in ("bash", "cut", "stab")]}
 
-    out = [
+    out = gen_magic_packs.pack_effects(PACKS, fx) + [
         fx("astral_fx_tide_1", "Thin tide", "The mana here is Prime and thin; your pool refills at half speed.",
            {"values": [{"value": "REGEN_MANA", "multiply": -0.5}]}, rating="neutral", max_duration="1 d"),
         fx("astral_fx_tide_3", "Deep tide", "The tide runs deep here; your pool refills half again as fast.",
@@ -788,6 +803,9 @@ for d, (name, *_r) in DISCIPLINES.items():
                       [s["key"] for s in S if s["d"] == d and s["learned"] in ("hall", "wall", "core", "use")], 4, 4))
 
 
+GRIMOIRES.extend(gen_magic_packs.pack_grimoires(PACKS))
+
+
 def gen_grimoires():
     out = []
     key_to_id = {(s["d"], s["key"]): spell_id(s) for s in S}
@@ -962,10 +980,10 @@ def gen_loot():
 
 FILES = {
     "framework.json": lambda: gen_framework() + gen_training_eocs(),
-    "spells.json": lambda: gen_spells() + helper_spells(),
+    "spells.json": lambda: gen_spells() + helper_spells() + gen_magic_packs.pack_helpers(PACKS),
     "requirements.json": gen_requirements,
     "effects.json": gen_effects,
-    "world.json": lambda: gen_world_eocs() + gen_transforms() + gen_monsters(),
+    "world.json": lambda: gen_world_eocs() + gen_transforms() + gen_magic_packs.pack_transforms(PACKS) + gen_magic_packs.pack_placeholder_eocs(PACKS) + gen_monsters(),
     "items.json": lambda: gen_items() + gen_runes_and_gear() + gen_item_eocs(),
     "grimoires.json": gen_grimoires,
     "recipes.json": gen_recipes,

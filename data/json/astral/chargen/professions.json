@@ -1,0 +1,598 @@
+[
+  {
+    "type": "profession",
+    "id": "astral_prof_ward_apprentice",
+    "name": "Warding apprentice",
+    "description": "You are new to Warding.  The guild gave you the first focus, the primer, and one working.  You are not ready for the hall's harder rooms.",
+    "points": 2,
+    "flags": [ "SCEN_ONLY" ],
+    "skills": [ { "name": "survival", "level": 1 }, { "name": "astral_lore", "level": 1 } ],
+    "proficiencies": [ "astral_prof_warding_1" ],
+    "traits": [ "ASTRAL_DISC_WARDING" ],
+    "spells": [ { "id": "astral_spell_warding_ward_skin", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "robe",
+          "gloves_light",
+          "astral_prime_ward_disc_1",
+          "astral_prime_primer_warding",
+          "astral_drowned_ghostsalt",
+          "astral_trail_chalk"
+        ],
+        "entries": [ { "item": "astral_prime_tide_dust", "count": 2 } ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Warding"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_ward_journeyman",
+    "name": "Warding journeyman",
+    "description": "You finished the early years of Warding.  Two workings answer you, and the rank-two practice has started to stick.",
+    "points": 5,
+    "skills": [ { "name": "survival", "level": 2 }, { "name": "astral_lore", "level": 3 } ],
+    "proficiencies": [ "astral_prof_warding_2" ],
+    "traits": [ "ASTRAL_DISC_WARDING" ],
+    "spells": [
+      { "id": "astral_spell_warding_ward_skin", "level": 1 },
+      { "id": "astral_spell_warding_sense_tide", "level": 1 }
+    ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "robe",
+          "gloves_light",
+          "astral_prime_ward_disc_1",
+          "astral_prime_primer_warding",
+          "astral_drowned_ghostsalt",
+          "astral_trail_chalk",
+          "astral_prime_rune_blank"
+        ],
+        "entries": [ { "item": "astral_prime_tide_dust", "count": 2 } ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Warding"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_way_apprentice",
+    "name": "Wayfinding apprentice",
+    "description": "You are new to Wayfinding.  The guild gave you the first focus, the primer, and one working.  You are not ready for the hall's harder rooms.",
+    "points": 2,
+    "flags": [ "SCEN_ONLY" ],
+    "skills": [ { "name": "survival", "level": 1 }, { "name": "astral_lore", "level": 1 } ],
+    "proficiencies": [ "astral_prof_wayfinding_1" ],
+    "traits": [ "ASTRAL_DISC_WAYFINDING" ],
+    "spells": [ { "id": "astral_spell_wayfinding_bearing", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "robe",
+          "gloves_light",
+          "astral_prime_wayfinder_needle_1",
+          "astral_prime_primer_wayfinding",
+          "astral_trail_chalk",
+          "astral_truestone_needle"
+        ],
+        "entries": [ { "item": "astral_prime_tide_dust", "count": 2 } ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Wayfinding"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_way_journeyman",
+    "name": "Wayfinding journeyman",
+    "description": "You finished the early years of Wayfinding.  Two workings answer you, and the rank-two practice has started to stick.",
+    "points": 5,
+    "skills": [ { "name": "survival", "level": 2 }, { "name": "astral_lore", "level": 3 } ],
+    "proficiencies": [ "astral_prof_wayfinding_2" ],
+    "traits": [ "ASTRAL_DISC_WAYFINDING" ],
+    "spells": [
+      { "id": "astral_spell_wayfinding_bearing", "level": 1 },
+      { "id": "astral_spell_wayfinding_blink", "level": 1 }
+    ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "robe",
+          "gloves_light",
+          "astral_prime_wayfinder_needle_1",
+          "astral_prime_primer_wayfinding",
+          "astral_trail_chalk",
+          "astral_truestone_needle",
+          "astral_prime_rune_blank"
+        ],
+        "entries": [ { "item": "astral_prime_tide_dust", "count": 2 } ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Wayfinding"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_mend_apprentice",
+    "name": "Mending apprentice",
+    "description": "You are new to Mending.  The guild gave you the first focus, the primer, and one working.  You are not ready for the hall's harder rooms.",
+    "points": 2,
+    "flags": [ "SCEN_ONLY" ],
+    "skills": [ { "name": "survival", "level": 1 }, { "name": "astral_lore", "level": 1 } ],
+    "proficiencies": [ "astral_prof_mending_1" ],
+    "traits": [ "ASTRAL_DISC_MENDING" ],
+    "spells": [ { "id": "astral_spell_mending_mend", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "robe",
+          "gloves_light",
+          "astral_prime_mending_sprig_1",
+          "astral_prime_primer_mending",
+          "astral_meadow_hearth_tea",
+          "astral_root_honey_salve"
+        ],
+        "entries": [ { "item": "astral_prime_tide_dust", "count": 2 } ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Mending"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_mend_journeyman",
+    "name": "Mending journeyman",
+    "description": "You finished the early years of Mending.  Two workings answer you, and the rank-two practice has started to stick.",
+    "points": 5,
+    "skills": [ { "name": "survival", "level": 2 }, { "name": "astral_lore", "level": 3 } ],
+    "proficiencies": [ "astral_prof_mending_2" ],
+    "traits": [ "ASTRAL_DISC_MENDING" ],
+    "spells": [ { "id": "astral_spell_mending_mend", "level": 1 }, { "id": "astral_spell_mending_soothe", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "robe",
+          "gloves_light",
+          "astral_prime_mending_sprig_1",
+          "astral_prime_primer_mending",
+          "astral_meadow_hearth_tea",
+          "astral_root_honey_salve",
+          "astral_prime_rune_blank"
+        ],
+        "entries": [ { "item": "astral_prime_tide_dust", "count": 2 } ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Mending"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_hedge_witch",
+    "name": "Hedge witch",
+    "description": "You kept a kitchen practice on Earth: tea, chalk, and an almanac full of slow rites.  No hall has attuned you.  You carry no focus.",
+    "points": 0,
+    "skills": [
+      { "name": "survival", "level": 2 },
+      { "name": "cooking", "level": 1 },
+      { "name": "firstaid", "level": 1 },
+      { "name": "astral_lore", "level": 1 }
+    ],
+    "traits": [ "ASTRAL_TRAIT_HEDGE_BORN" ],
+    "spells": [ { "id": "astral_spell_mending_poultice_rite", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "cloak",
+          "astral_prime_hedge_almanac",
+          "astral_meadow_hearth_tea",
+          "astral_trail_chalk",
+          "astral_drowned_verdigris_knife"
+        ],
+        "entries": [ { "item": "astral_ration", "count": 2 } ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: none"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_meadow_herder",
+    "name": "Meadow herder",
+    "description": "You walked the arrival meadows and kept the beasts from the gate-stones.  You can take a bearing, and you know which grass hides a ditch.",
+    "points": 3,
+    "flags": [ "SCEN_ONLY" ],
+    "skills": [
+      { "name": "survival", "level": 2 },
+      { "name": "melee", "level": 1 },
+      { "name": "astral_lore", "level": 1 }
+    ],
+    "proficiencies": [ "astral_prof_wayfinding_1" ],
+    "traits": [ "ASTRAL_DISC_WAYFINDING" ],
+    "spells": [ { "id": "astral_spell_wayfinding_bearing", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "cloak",
+          "astral_meadow_hearthwood_staff",
+          "astral_prime_wayfinder_needle_1",
+          "astral_prime_primer_wayfinding",
+          "astral_trail_chalk",
+          "astral_meadow_starflint",
+          "astral_meadow_hearth_tea"
+        ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Wayfinding"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_drowned_fisher",
+    "name": "Drowned stilt-fisher",
+    "description": "You fished the drowned lowlands from stilts and leaky boats.  You can close a cut, and you can swim when the road goes under.",
+    "points": 3,
+    "flags": [ "SCEN_ONLY" ],
+    "skills": [
+      { "name": "swimming", "level": 2 },
+      { "name": "survival", "level": 1 },
+      { "name": "astral_lore", "level": 1 }
+    ],
+    "proficiencies": [ "astral_prof_mending_1" ],
+    "traits": [ "ASTRAL_DISC_MENDING" ],
+    "spells": [ { "id": "astral_spell_mending_mend", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "cloak",
+          "cloak",
+          "astral_prime_mending_sprig_1",
+          "astral_prime_primer_mending",
+          "fishing_rod_basic",
+          "astral_water_skin",
+          "astral_prime_tide_dust"
+        ],
+        "entries": [ { "item": "astral_drowned_eel_meat", "count": 2 } ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Mending"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_fungal_warden",
+    "name": "Fungal spore-warden",
+    "description": "You kept a watch in the fungal wood, mask on, lamp low.  You can shove a thing off your skin, and you know the smell of bad spores.",
+    "points": 3,
+    "flags": [ "SCEN_ONLY" ],
+    "skills": [
+      { "name": "survival", "level": 2 },
+      { "name": "firstaid", "level": 1 },
+      { "name": "astral_lore", "level": 1 }
+    ],
+    "proficiencies": [ "astral_prof_warding_1" ],
+    "traits": [ "ASTRAL_DISC_WARDING" ],
+    "spells": [ { "id": "astral_spell_warding_ward_skin", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "cloak",
+          "astral_fungal_chitin_jerkin",
+          "astral_prime_ward_disc_1",
+          "astral_prime_primer_warding",
+          "astral_spore_mask",
+          "astral_glow_lantern",
+          "astral_fungal_glowcap_tincture",
+          "astral_prime_tide_dust"
+        ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Warding"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_root_delver",
+    "name": "Root delver",
+    "description": "You worked the root country with a pick and a short step through the cracks.  Blink is the working you were trusted with.  You are not a hall journeyman.",
+    "points": 4,
+    "flags": [ "SCEN_ONLY" ],
+    "skills": [
+      { "name": "survival", "level": 2 },
+      { "name": "fabrication", "level": 1 },
+      { "name": "astral_lore", "level": 1 }
+    ],
+    "proficiencies": [ "astral_prof_wayfinding_1" ],
+    "traits": [ "ASTRAL_DISC_WAYFINDING" ],
+    "spells": [ { "id": "astral_spell_wayfinding_blink", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "cloak",
+          "astral_prime_wayfinder_needle_1",
+          "astral_prime_primer_wayfinding",
+          "astral_root_delver_pick",
+          "astral_torch_hearthwood",
+          "astral_root_honey_salve",
+          "astral_prime_tide_dust"
+        ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Wayfinding"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_fallow_reaper",
+    "name": "Fallow reaper",
+    "description": "You cut the fallow fields and bound what the scythe opened.  You can quiet pain, and you know a camp fire from a wild one.",
+    "points": 3,
+    "flags": [ "SCEN_ONLY" ],
+    "skills": [
+      { "name": "survival", "level": 1 },
+      { "name": "melee", "level": 2 },
+      { "name": "astral_lore", "level": 1 }
+    ],
+    "proficiencies": [ "astral_prof_mending_1" ],
+    "traits": [ "ASTRAL_DISC_MENDING" ],
+    "spells": [ { "id": "astral_spell_mending_soothe", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "cloak",
+          "astral_prime_mending_sprig_1",
+          "astral_prime_primer_mending",
+          "spear_wood",
+          "astral_camp_fire_kit",
+          "astral_prime_tide_dust"
+        ],
+        "entries": [ { "item": "astral_ration", "count": 2 } ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Mending"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_tallgrass_rider",
+    "name": "Tallgrass rider",
+    "description": "You rode the tallgrass and read the tide in it the way others read weather.  You can taste a working nearby.  You have no horse left.",
+    "points": 3,
+    "flags": [ "SCEN_ONLY" ],
+    "skills": [
+      { "name": "survival", "level": 2 },
+      { "name": "dodge", "level": 1 },
+      { "name": "throw", "level": 1 },
+      { "name": "astral_lore", "level": 1 }
+    ],
+    "proficiencies": [ "astral_prof_warding_1" ],
+    "traits": [ "ASTRAL_DISC_WARDING" ],
+    "spells": [ { "id": "astral_spell_warding_sense_tide", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "cloak",
+          "cloak",
+          "astral_prime_ward_disc_1",
+          "astral_prime_primer_warding",
+          "sling",
+          "astral_trail_chalk",
+          "astral_prime_tide_dust"
+        ],
+        "entries": [ { "item": "astral_ration", "count": 2 } ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Warding"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_ember_smith",
+    "name": "Ember cinder-smith",
+    "description": "You smith where the ash falls and the stone stays warm.  Striking was the hall you were lent.  The rod is tipped with a dull coal-light.",
+    "points": 4,
+    "flags": [ "SCEN_ONLY" ],
+    "skills": [
+      { "name": "fabrication", "level": 2 },
+      { "name": "melee", "level": 1 },
+      { "name": "astral_lore", "level": 2 }
+    ],
+    "proficiencies": [ "astral_prof_striking_1" ],
+    "traits": [ "ASTRAL_DISC_STRIKING" ],
+    "spells": [ { "id": "astral_spell_striking_force_dart", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants_leather",
+          "boots",
+          "gambeson",
+          "gloves_light",
+          "astral_prime_striking_rod_1",
+          "astral_prime_primer_striking",
+          "astral_root_emberstone",
+          "astral_hearthcoal",
+          "astral_duskiron_bar"
+        ],
+        "entries": [ { "item": "astral_prime_tide_dust", "count": 2 } ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Striking"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_pale_keeper",
+    "name": "Pale barrow-keeper",
+    "description": "You kept a barrow in the Pale and learned Hexing where the hall will not teach it.  The fetish is bone.  The working costs you blood.",
+    "points": 6,
+    "flags": [ "SCEN_ONLY" ],
+    "skills": [
+      { "name": "survival", "level": 1 },
+      { "name": "speech", "level": 1 },
+      { "name": "astral_lore", "level": 2 }
+    ],
+    "proficiencies": [ "astral_prof_hexing_1" ],
+    "traits": [ "ASTRAL_DISC_HEXING" ],
+    "spells": [ { "id": "astral_spell_hexing_sap", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "cloak",
+          "astral_prime_bone_fetish_1",
+          "astral_prime_black_primer",
+          "astral_drowned_ghostsalt",
+          "astral_prime_tide_dust"
+        ],
+        "entries": [ { "item": "astral_prime_grave_dust", "count": 2 } ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Hexing"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_tidal_keeper",
+    "name": "Tidal keeper",
+    "description": "You kept a light where the tide covers the road twice a day.  Calling gave you a rope when the real one was underwater.",
+    "points": 4,
+    "flags": [ "SCEN_ONLY" ],
+    "skills": [
+      { "name": "swimming", "level": 2 },
+      { "name": "survival", "level": 1 },
+      { "name": "astral_lore", "level": 2 }
+    ],
+    "proficiencies": [ "astral_prof_calling_1" ],
+    "traits": [ "ASTRAL_DISC_CALLING" ],
+    "spells": [ { "id": "astral_spell_calling_conjure_rope", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "cloak",
+          "astral_prime_calling_bell_1",
+          "astral_prime_primer_calling",
+          "astral_water_skin",
+          "astral_drowned_sea_silk_tuft",
+          "astral_drowned_ghostsalt",
+          "astral_prime_tide_dust"
+        ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Calling"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_canopy_tapper",
+    "name": "Canopy sap-tapper",
+    "description": "You tapped the living boughs and learned not to fall.  Tempering keeps your feet when the branch rolls.  You are a long way from the canopy now.",
+    "points": 4,
+    "flags": [ "SCEN_ONLY" ],
+    "skills": [
+      { "name": "survival", "level": 2 },
+      { "name": "fabrication", "level": 1 },
+      { "name": "astral_lore", "level": 2 }
+    ],
+    "proficiencies": [ "astral_prof_tempering_1" ],
+    "traits": [ "ASTRAL_DISC_TEMPERING" ],
+    "spells": [ { "id": "astral_spell_tempering_sure_foot", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "cloak",
+          "astral_prime_temper_nail_1",
+          "astral_prime_primer_tempering",
+          "astral_meadow_hearthwood_staff",
+          "astral_root_heartroot_resin",
+          "astral_meadow_hearthwood_plank",
+          "astral_prime_tide_dust"
+        ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Tempering"
+  },
+  {
+    "type": "profession",
+    "id": "astral_prof_hollow_lamp",
+    "name": "Hollow lamp-bearer",
+    "description": "You carried a lamp through the Hollow's dark halls and learned to worry stone aside.  Shaping is the working.  The lamp is not a focus.",
+    "points": 4,
+    "flags": [ "SCEN_ONLY" ],
+    "skills": [
+      { "name": "survival", "level": 2 },
+      { "name": "traps", "level": 1 },
+      { "name": "astral_lore", "level": 2 }
+    ],
+    "proficiencies": [ "astral_prof_shaping_1" ],
+    "traits": [ "ASTRAL_DISC_SHAPING" ],
+    "spells": [ { "id": "astral_spell_shaping_soften", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [
+          "longshirt",
+          "socks",
+          "pants",
+          "boots",
+          "cloak",
+          "astral_prime_shaper_chisel_1",
+          "astral_prime_primer_shaping",
+          "astral_glow_lantern",
+          "astral_torch_hearthwood",
+          "astral_root_heartglass",
+          "astral_prime_tide_dust"
+        ]
+      }
+    },
+    "//": "Grok WP-C1; attunement + discipline: Shaping"
+  }
+]

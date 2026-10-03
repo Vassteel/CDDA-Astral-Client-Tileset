@@ -1,6 +1,78 @@
 [
   {
     "type": "effect_type",
+    "id": "astral_fx_hearth_poultice",
+    "name": [ "Hearth Poultice" ],
+    "desc": [ "Bind healleaf in nettle at a fire; the cut closes by morning." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [ { "values": [ { "value": "REGEN_HP", "multiply": 0.5 } ] } ],
+    "max_duration": "1 d"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_hearth_skin",
+    "name": [ "Hearth-Skin" ],
+    "desc": [ "The air on your skin thickens like a warm coat." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [
+      {
+        "incoming_damage_mod": [
+          { "type": "bash", "add": -4 },
+          { "type": "cut", "add": -4 },
+          { "type": "stab", "add": -4 }
+        ]
+      }
+    ],
+    "max_duration": "1 d"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_soft_step",
+    "name": [ "Soft Step" ],
+    "desc": [ "Your steps stop carrying, and sound-hunters lose you." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [
+      {
+        "values": [
+          { "value": "STEALTH_MODIFIER", "add": 20 },
+          { "value": "MOVECOST_OBSTACLE_MOD", "multiply": -0.25 }
+        ]
+      }
+    ],
+    "max_duration": "1 d"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_quiet_foot",
+    "name": [ "Quiet Foot" ],
+    "desc": [ "Your feet find the quiet place on root and stone." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [
+      {
+        "values": [
+          { "value": "STEALTH_MODIFIER", "add": 20 },
+          { "value": "MOVECOST_OBSTACLE_MOD", "multiply": -0.25 }
+        ]
+      }
+    ],
+    "max_duration": "1 d"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_ash_skin",
+    "name": [ "Ash Skin" ],
+    "desc": [ "Your skin takes grassfire the way ash does, for a while." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [ { "incoming_damage_mod": [ { "type": "heat", "add": -15 } ] } ],
+    "max_duration": "1 d"
+  },
+  {
+    "type": "effect_type",
     "id": "astral_fx_tide_1",
     "name": [ "Thin tide" ],
     "desc": [ "The mana here is Prime and thin; your pool refills at half speed." ],

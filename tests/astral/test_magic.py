@@ -21,9 +21,20 @@ class MagicTests(unittest.TestCase):
         files = {fn: f() for fn, f in gen.FILES.items()}
         self.assertEqual(gen.lint(files), [])
 
-    def test_eight_disciplines_eight_spells_each(self):
+    def test_eight_disciplines_eight_prime_spells_each(self):
+        pack_keys = {(d, k) for p in gen.PACKS for k, d, *_ in p['spells']}
         for d in gen.DISCIPLINES:
-            self.assertEqual(sum(1 for s in gen.S if s['d'] == d), 8, d)
+            self.assertEqual(sum(1 for s in gen.S if s['d'] == d and (d, s['key']) not in pack_keys), 8, d)
+
+    def test_aspect_packs_load(self):
+        self.assertTrue(gen.PACKS, 'no aspect packs found')
+        for p in gen.PACKS:
+            self.assertTrue(p['spells'], p['name'])
+            self.assertTrue(p['aspect'], p['name'])
+            # every pack spell is taught by a pack grimoire
+            taught = {k for g in gen.GRIMOIRES for k in g[3]}
+            for k, d, *_ in p['spells']:
+                self.assertIn(k, taught, k)
 
 
 if __name__ == '__main__':

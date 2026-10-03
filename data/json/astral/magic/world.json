@@ -523,6 +523,147 @@
     "furniture": [ { "result": "f_null", "valid_furniture": [ "f_rubble_rock", "f_rubble" ] } ]
   },
   {
+    "type": "ter_furn_transform",
+    "id": "astral_tft_grass_to_dirt",
+    "terrain": [
+      {
+        "result": "t_dirt",
+        "valid_terrain": [ "t_grass", "t_grass_long", "t_grass_tall", "t_grass_dead", "t_grass_golf", "t_grass_white" ]
+      }
+    ]
+  },
+  {
+    "type": "ter_furn_transform",
+    "id": "astral_tft_shallow_to_dirt",
+    "terrain": [
+      {
+        "result": "t_dirt",
+        "valid_terrain": [ "t_water_sh", "t_swater_sh", "t_water_moving_sh", "t_mud" ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PLACEHOLDER_SPORE_WASH",
+    "//": "PLACEHOLDER for spore-wash: cleansing an ailment the engine does not model yet.  Replace when the engine effect lands.",
+    "effect": [
+      {
+        "u_message": "You cast spore-wash.  The Craft takes, but this working is not yet finished in this build.",
+        "type": "neutral"
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PLACEHOLDER_HELD_BREATH",
+    "//": "PLACEHOLDER for held breath: an effect the engine does not model yet.  Replace when the engine effect lands.",
+    "effect": [
+      {
+        "u_message": "You cast held breath.  The Craft takes, but this working is not yet finished in this build.",
+        "type": "neutral"
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PLACEHOLDER_BLESS_ROW",
+    "//": "PLACEHOLDER for bless the row: an effect the engine does not model yet.  Replace when the engine effect lands.",
+    "effect": [
+      {
+        "u_message": "You cast bless the row.  The Craft takes, but this working is not yet finished in this build.",
+        "type": "neutral"
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PLACEHOLDER_HAZE_WARD",
+    "//": "PLACEHOLDER for haze ward: an effect the engine does not model yet.  Replace when the engine effect lands.",
+    "effect": [
+      {
+        "u_message": "You cast haze ward.  The Craft takes, but this working is not yet finished in this build.",
+        "type": "neutral"
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PLACEHOLDER_QUIET_CIRCLE",
+    "//": "PLACEHOLDER for quiet circle: an effect the engine does not model yet.  Replace when the engine effect lands.",
+    "effect": [
+      {
+        "u_message": "You cast quiet circle.  The Craft takes, but this working is not yet finished in this build.",
+        "type": "neutral"
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PLACEHOLDER_DRY_CAMP",
+    "//": "PLACEHOLDER for dry camp: an effect the engine does not model yet.  Replace when the engine effect lands.",
+    "effect": [
+      {
+        "u_message": "You cast dry camp.  The Craft takes, but this working is not yet finished in this build.",
+        "type": "neutral"
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PLACEHOLDER_NIGHT_HEARTH",
+    "//": "PLACEHOLDER for night hearth: an effect the engine does not model yet.  Replace when the engine effect lands.",
+    "effect": [
+      {
+        "u_message": "You cast night hearth.  The Craft takes, but this working is not yet finished in this build.",
+        "type": "neutral"
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PLACEHOLDER_HAZE_SIGHT",
+    "//": "PLACEHOLDER for haze sight: an effect the engine does not model yet.  Replace when the engine effect lands.",
+    "effect": [
+      {
+        "u_message": "You cast haze sight.  The Craft takes, but this working is not yet finished in this build.",
+        "type": "neutral"
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PLACEHOLDER_SINK_SENSE",
+    "//": "PLACEHOLDER for sink sense: an effect the engine does not model yet.  Replace when the engine effect lands.",
+    "effect": [
+      {
+        "u_message": "You cast sink sense.  The Craft takes, but this working is not yet finished in this build.",
+        "type": "neutral"
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PLACEHOLDER_WATER_STEP",
+    "//": "PLACEHOLDER for water step: an effect the engine does not model yet.  Replace when the engine effect lands.",
+    "effect": [
+      {
+        "u_message": "You cast water step.  The Craft takes, but this working is not yet finished in this build.",
+        "type": "neutral"
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PLACEHOLDER_STEAL_SOUND",
+    "//": "PLACEHOLDER for steal the sound: an effect the engine does not model yet.  Replace when the engine effect lands.",
+    "effect": [
+      {
+        "u_message": "You cast steal the sound.  The Craft takes, but this working is not yet finished in this build.",
+        "type": "neutral"
+      }
+    ]
+  },
+  {
     "type": "MONSTER",
     "id": "mon_astral_prime_wisp",
     "copy-from": "mon_firefly",
