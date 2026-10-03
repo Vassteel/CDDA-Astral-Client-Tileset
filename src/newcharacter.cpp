@@ -3183,9 +3183,20 @@ void avatar::character_to_template( const std::string &name )
 
 void Character::add_default_background()
 {
+    // Astral: a scenario's hobby white/blacklist also governs the default backgrounds, so a
+    // scenario that hides Driving License (etc.) does not get them handed out anyway.
+    const scenario *scen = get_scenario();
+    std::vector<profession_id> permitted;
+    if( scen != nullptr ) {
+        permitted = scen->permitted_hobbies( is_npc() );
+    }
     for( const profession_group &prof_grp : profession_group::get_all() ) {
         if( prof_grp.get_id() == profession_group_adult_basic_background ) {
             for( const profession_id &hobb : prof_grp.get_professions() ) {
+                if( scen != nullptr &&
+                    std::find( permitted.begin(), permitted.end(), hobb ) == permitted.end() ) {
+                    continue;
+                }
                 hobbies.insert( &hobb.obj() );
             }
         }

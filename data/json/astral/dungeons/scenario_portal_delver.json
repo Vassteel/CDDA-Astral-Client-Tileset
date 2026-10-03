@@ -37,7 +37,7 @@
     ],
     "reveal_locale": false,
     "flags": [ "LONE_START" ],
-    "hobbies": [ "boating_license", "computer_literate", "high_school_graduate", "hobby_heli_pilot", "car_rebuilding" ],
+    "hobbies": [ "boating_license", "hobby_heli_pilot", "car_rebuilding" ],
     "whitelist_hobbies": false
   },
   {

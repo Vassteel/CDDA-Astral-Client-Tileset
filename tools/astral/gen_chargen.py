@@ -29,6 +29,8 @@ sys.path.insert(0, HERE)
 import cddafmt  # noqa: E402
 
 WARN = []
+DEFAULT_BACKGROUNDS = {"driving_license", "simple_home_cooking", "computer_literate", "social_skills",
+                       "high_school_graduate", "mundane_survival"}
 
 
 def parse_tables(text):
@@ -193,7 +195,9 @@ def gen_hobbies(ids, disc_traits):
             out.append(e)
     m = re.search(r"should hide.*?\n\n`([^\n]+)`", text, re.S)
     hide = re.findall(r"`([a-z0-9_]+)`", m.group(1)) if m else []
-    hide = [h for h in hide if h in ids["profession"]]
+    # User decision 2026-10-03: it's still CDDA, the vanilla defaults (Driving License, Computer
+    # Literate...) stay selectable. Grok's hide list minus anything in adult_basic_background.
+    hide = [h for h in hide if h in ids["profession"] and h not in DEFAULT_BACKGROUNDS]
     return out, hide
 
 
