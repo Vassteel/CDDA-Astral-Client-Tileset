@@ -2160,7 +2160,10 @@
     "id": "t_grass_dead",
     "copy-from": "t_dirt",
     "name": "dead grass",
-    "description": "An area of long, shaggy grass that hasn't been cut recently."
+    "description": "An area of long, shaggy grass that hasn't been cut recently.",
+    "//": "Astral: not part of the DIRT connect group inherited from t_dirt, so dirt and dead grass each draw their own edge instead of a flush seam.",
+    "connect_groups": [  ],
+    "connects_to": [  ]
   },
   {
     "type": "terrain",
