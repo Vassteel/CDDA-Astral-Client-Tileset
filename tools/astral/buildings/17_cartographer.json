@@ -1,0 +1,105 @@
+{
+  "id": "cartographer",
+  "label": "Cartographer",
+  "//": "Whitewashed shopfront with cartography and records; library and quarters above.",
+  "city_sizes": [
+    16,
+    55
+  ],
+  "wall": "&",
+  "footprint": [
+    1,
+    1
+  ],
+  "ground": {
+    "rooms": [
+      {
+        "kind": "shopfront",
+        "rect": [
+          4,
+          6,
+          13,
+          12
+        ]
+      },
+      {
+        "kind": "cartography",
+        "rect": [
+          14,
+          6,
+          20,
+          12
+        ]
+      },
+      {
+        "kind": "records",
+        "rect": [
+          4,
+          13,
+          20,
+          20
+        ]
+      }
+    ],
+    "hub": 0,
+    "porch": [
+      7,
+      4,
+      11,
+      5
+    ],
+    "doors": [
+      [
+        8,
+        6
+      ],
+      [
+        9,
+        6
+      ]
+    ],
+    "window_step": 3,
+    "path": [
+      9,
+      3,
+      0
+    ],
+    "trees": 0.2
+  },
+  "upper": {
+    "rooms": [
+      {
+        "kind": "landing",
+        "rect": [
+          4,
+          6,
+          20,
+          8
+        ]
+      },
+      {
+        "kind": "library",
+        "rect": [
+          4,
+          9,
+          13,
+          20
+        ]
+      },
+      {
+        "kind": "quarters",
+        "rect": [
+          14,
+          9,
+          20,
+          20
+        ]
+      }
+    ],
+    "hub": 0,
+    "stairs": [
+      5,
+      8
+    ]
+  }
+}

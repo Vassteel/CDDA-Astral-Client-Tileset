@@ -1,0 +1,328 @@
+[
+  {
+    "type": "effect_type",
+    "id": "astral_fx_hearth_poultice",
+    "name": [ "Hearth Poultice" ],
+    "desc": [ "Bind healleaf in nettle at a fire; the cut closes by morning." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [ { "values": [ { "value": "REGEN_HP", "multiply": 0.5 } ] } ],
+    "max_duration": "1 d"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_hearth_skin",
+    "name": [ "Hearth-Skin" ],
+    "desc": [ "The air on your skin thickens like a warm coat." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [
+      {
+        "incoming_damage_mod": [
+          { "type": "bash", "add": -4 },
+          { "type": "cut", "add": -4 },
+          { "type": "stab", "add": -4 }
+        ]
+      }
+    ],
+    "max_duration": "1 d"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_soft_step",
+    "name": [ "Soft Step" ],
+    "desc": [ "Your steps stop carrying, and sound-hunters lose you." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [
+      {
+        "values": [
+          { "value": "STEALTH_MODIFIER", "add": 20 },
+          { "value": "MOVECOST_OBSTACLE_MOD", "multiply": -0.25 }
+        ]
+      }
+    ],
+    "max_duration": "1 d"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_quiet_foot",
+    "name": [ "Quiet Foot" ],
+    "desc": [ "Your feet find the quiet place on root and stone." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [
+      {
+        "values": [
+          { "value": "STEALTH_MODIFIER", "add": 20 },
+          { "value": "MOVECOST_OBSTACLE_MOD", "multiply": -0.25 }
+        ]
+      }
+    ],
+    "max_duration": "1 d"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_ash_skin",
+    "name": [ "Ash Skin" ],
+    "desc": [ "Your skin takes grassfire the way ash does, for a while." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [ { "incoming_damage_mod": [ { "type": "heat", "add": -15 } ] } ],
+    "max_duration": "1 d"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_tide_1",
+    "name": [ "Thin tide" ],
+    "desc": [ "The mana here is Prime and thin; your pool refills at half speed." ],
+    "rating": "neutral",
+    "show_intensity": false,
+    "enchantments": [ { "values": [ { "value": "REGEN_MANA", "multiply": -0.5 } ] } ],
+    "max_duration": "1 d"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_tide_3",
+    "name": [ "Deep tide" ],
+    "desc": [ "The tide runs deep here; your pool refills half again as fast." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [ { "values": [ { "value": "REGEN_MANA", "multiply": 0.5 } ] } ],
+    "max_duration": "1 d"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_ward_skin",
+    "name": [ "Ward-skin" ],
+    "desc": [ "The air on your skin is thick as a coat." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [
+      {
+        "incoming_damage_mod": [
+          { "type": "bash", "add": -4 },
+          { "type": "cut", "add": -4 },
+          { "type": "stab", "add": -4 }
+        ]
+      }
+    ],
+    "max_duration": "2 h"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_salted",
+    "name": [ "Salt ward" ],
+    "desc": [ "A ring of salt and words keeps harm a little further off." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [
+      {
+        "incoming_damage_mod": [
+          { "type": "bash", "add": -2 },
+          { "type": "cut", "add": -2 },
+          { "type": "stab", "add": -2 }
+        ]
+      }
+    ],
+    "max_duration": "2 h"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_ward_circle",
+    "name": [ "Ward circle" ],
+    "desc": [ "You stand inside a ring of warding." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [
+      {
+        "incoming_damage_mod": [
+          { "type": "bash", "add": -6 },
+          { "type": "cut", "add": -6 },
+          { "type": "stab", "add": -6 }
+        ]
+      }
+    ],
+    "max_duration": "3 h"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_sanctum",
+    "name": [ "Sanctum" ],
+    "desc": [ "This place is warded deep around you." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [
+      {
+        "incoming_damage_mod": [
+          { "type": "bash", "add": -10 },
+          { "type": "cut", "add": -10 },
+          { "type": "stab", "add": -10 }
+        ],
+        "values": [ { "value": "REGEN_HP", "multiply": 0.5 } ]
+      }
+    ],
+    "max_duration": "13 h"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_whetted",
+    "name": [ "Whetted edge" ],
+    "desc": [ "Your blade was sharpened with words as well as stone." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [ { "melee_damage_bonus": [ { "type": "cut", "add": 2 } ] } ],
+    "max_duration": "5 h"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_sure_foot",
+    "name": [ "Sure-foot" ],
+    "desc": [ "Your feet find the right place every time." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [
+      {
+        "values": [ { "value": "SPEED", "add": 5 }, { "value": "MOVECOST_OBSTACLE_MOD", "multiply": -0.25 } ]
+      }
+    ],
+    "max_duration": "2 h"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_hawk_eye",
+    "name": [ "Hawk-eye" ],
+    "desc": [ "You see farther, and better in poor light." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [ { "values": [ { "value": "PERCEPTION", "add": 2 }, { "value": "NIGHT_VIS", "add": 3 } ] } ],
+    "max_duration": "2 h"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_tempered",
+    "name": [ "Tempered skin" ],
+    "desc": [ "Your skin is hard as boiled leather." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [
+      {
+        "incoming_damage_mod": [
+          { "type": "bash", "add": -6 },
+          { "type": "cut", "add": -6 },
+          { "type": "stab", "add": -6 }
+        ]
+      }
+    ],
+    "max_duration": "1 h"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_kindled",
+    "name": [ "Kindled edge" ],
+    "desc": [ "Your weapon glows and bites hot." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [ { "melee_damage_bonus": [ { "type": "heat", "add": 6 } ] } ],
+    "max_duration": "40 m"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_quicken",
+    "name": [ "Quickened" ],
+    "desc": [ "Everything else is slow." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [ { "values": [ { "value": "SPEED", "add": 20 } ] } ],
+    "max_duration": "20 m"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_ox",
+    "name": [ "Ox-strength" ],
+    "desc": [ "You lift and strike like someone twice your size." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [ { "values": [ { "value": "STRENGTH", "add": 4 }, { "value": "CARRY_WEIGHT", "add": 20000 } ] } ],
+    "max_duration": "4 h"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_tidebody",
+    "name": [ "Tidebody" ],
+    "desc": [ "The tide fills you; you are more than yourself." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [
+      {
+        "incoming_damage_mod": [
+          { "type": "bash", "add": -8 },
+          { "type": "cut", "add": -8 },
+          { "type": "stab", "add": -8 }
+        ],
+        "values": [
+          { "value": "STRENGTH", "add": 2 },
+          { "value": "DEXTERITY", "add": 2 },
+          { "value": "INTELLIGENCE", "add": 2 },
+          { "value": "PERCEPTION", "add": 2 },
+          { "value": "REGEN_HP", "multiply": 0.5 }
+        ]
+      }
+    ],
+    "max_duration": "40 m"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_steady",
+    "name": [ "Steady" ],
+    "desc": [ "Nothing knocks you down or back." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [
+      {
+        "values": [ { "value": "KNOCKBACK_RESIST", "add": 100 }, { "value": "KNOCKDOWN_RESIST", "add": 100 } ]
+      }
+    ],
+    "max_duration": "3 h"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_poultice",
+    "name": [ "Poultice" ],
+    "desc": [ "A hedge poultice draws your wounds closed." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [ { "values": [ { "value": "REGEN_HP", "multiply": 0.5 } ] } ],
+    "max_duration": "7 h"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_rest_deep",
+    "name": [ "Rest-deep" ],
+    "desc": [ "Your body heals as if three times over." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [ { "values": [ { "value": "REGEN_HP", "multiply": 2 } ] } ],
+    "max_duration": "9 h"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_graft",
+    "name": [ "Graft" ],
+    "desc": [ "You wear a creature's gifts: gills, claws and a thick hide." ],
+    "rating": "good",
+    "show_intensity": false,
+    "enchantments": [ { "mutations": [ "GILLS", "CLAWS", "THICKSKIN" ] } ],
+    "max_duration": "1 d"
+  },
+  {
+    "type": "effect_type",
+    "id": "astral_fx_hexed",
+    "name": [ "Hexed" ],
+    "desc": [ "Something has cursed you." ],
+    "rating": "bad",
+    "show_intensity": false,
+    "enchantments": [ { "values": [ { "value": "SPEED", "add": -10 } ] } ],
+    "max_duration": "1 h"
+  }
+]

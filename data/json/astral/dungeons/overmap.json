@@ -19,7 +19,7 @@
     "see_cost": "low",
     "flags": [ "NO_ROTATE" ],
     "looks_like": "field",
-    "extras": "astral_meadow",
+    "extras": "astral_mx_meadow",
     "spawns": { "group": "GROUP_ASTRAL_MEADOW", "population": [ 0, 2 ], "chance": 20 },
     "//": "Static spawns from the generated theme monstergroup (tools/astral/gen_content.py)."
   },
@@ -54,7 +54,7 @@
     "see_cost": "low",
     "flags": [ "NO_ROTATE" ],
     "looks_like": "forest_water",
-    "extras": "astral_lowland",
+    "extras": "astral_mx_drowned",
     "spawns": { "group": "GROUP_ASTRAL_DROWNED", "population": [ 1, 3 ], "chance": 35 },
     "//": "Static spawns from the generated theme monstergroup (tools/astral/gen_content.py)."
   },
@@ -68,7 +68,8 @@
     "flags": [ "NO_ROTATE" ],
     "looks_like": "fungal_bloom",
     "spawns": { "group": "GROUP_ASTRAL_FUNGAL", "population": [ 1, 3 ], "chance": 40 },
-    "//": "Static spawns from the generated theme monstergroup (tools/astral/gen_content.py)."
+    "//": "Static spawns from the generated theme monstergroup (tools/astral/gen_content.py).",
+    "extras": "astral_mx_fungal"
   },
   {
     "type": "overmap_terrain",
@@ -80,6 +81,33 @@
     "flags": [ "NO_ROTATE" ],
     "looks_like": "ravine",
     "spawns": { "group": "GROUP_ASTRAL_ROOT", "population": [ 1, 2 ], "chance": 35 },
-    "//": "Static spawns from the generated theme monstergroup (tools/astral/gen_content.py)."
+    "//": "Static spawns from the generated theme monstergroup (tools/astral/gen_content.py).",
+    "extras": "astral_mx_root"
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "astral_fallow",
+    "name": "fallow farmland",
+    "sym": "#",
+    "color": "brown",
+    "see_cost": "low",
+    "flags": [ "NO_ROTATE" ],
+    "looks_like": "field",
+    "spawns": { "group": "GROUP_ASTRAL_FALLOW", "population": [ 1, 2 ], "chance": 25 },
+    "//": "Greenwood biome (environments atlas v2): feral farmland painted as patches inside the meadows.",
+    "extras": "astral_mx_fallow"
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "astral_tallgrass",
+    "name": "tallgrass",
+    "sym": "\"",
+    "color": "yellow",
+    "see_cost": "low",
+    "flags": [ "NO_ROTATE" ],
+    "looks_like": "field",
+    "spawns": { "group": "GROUP_ASTRAL_TALLGRASS", "population": [ 1, 3 ], "chance": 30 },
+    "//": "Greenwood biome (environments atlas v2): prairie painted as patches inside the meadows and lowlands.",
+    "extras": "astral_mx_tallgrass"
   }
 ]

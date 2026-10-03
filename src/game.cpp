@@ -549,10 +549,16 @@ void game_ui::init_ui()
     get_options().get_option( "TERMINAL_Y" ).setValue( TERMY * get_scaling_factor() );
     get_options().save();
 #else
-    TERMY = getmaxy( catacurses::stdscr );
-    TERMX = getmaxx( catacurses::stdscr );
-
-    ensure_term_size();
+    if( test_mode ) {
+        // Headless checks (--check-mods) never initialise curses: there is no
+        // terminal to measure, so use the minimum size instead of waiting forever.
+        TERMY = EVEN_MINIMUM_TERM_HEIGHT;
+        TERMX = EVEN_MINIMUM_TERM_WIDTH;
+    } else {
+        TERMY = getmaxy( catacurses::stdscr );
+        TERMX = getmaxx( catacurses::stdscr );
+        ensure_term_size();
+    }
 
     // try to make FULL_SCREEN_HEIGHT symmetric according to TERMY
     if( TERMY % 2 ) {

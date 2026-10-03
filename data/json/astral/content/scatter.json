@@ -1,0 +1,1136 @@
+[
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_hearthwood_tree",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_meadow_hearthwood_tree" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_sunken_oak",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_drowned_sunken_oak" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_reed_bed",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_drowned_reed_bed" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_reed_mussel",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_drowned_reed_mussel" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_carpet",
+    "object": { "mapgensize": [ 3, 3 ], "rows": [ "   ", " T ", "   " ], "terrain": { "T": "t_astral_fungal_carpet" } }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_glowcap_cluster",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fungal_glowcap_cluster" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_cap_tree",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_fungal_cap_tree" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_heartroot",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_root_heartroot" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_ironwood_tree",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_root_ironwood_tree" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_honey_comb",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_root_honey_comb" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_tall_grass_patch",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_meadow_tall_grass_patch" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_willow",
+    "object": { "mapgensize": [ 3, 3 ], "rows": [ "   ", " T ", "   " ], "terrain": { "T": "t_astral_drowned_willow" } }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_gateberry_bush",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_meadow_gateberry_bush" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_clover_patch",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_meadow_clover_patch" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_healleaf_plant",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_meadow_healleaf_plant" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_feverfew_plant",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_meadow_feverfew_plant" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_cordgrass_patch",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_meadow_cordgrass_patch" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_willow_shrub",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_meadow_willow_shrub" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_grain_patch",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_meadow_grain_patch" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_nettle_patch",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_meadow_nettle_patch" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_button_mushroom",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_meadow_button_mushroom" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_lavender_bush",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_meadow_lavender_bush" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_sweetroot_plant",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_meadow_sweetroot_plant" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_mint_patch",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_meadow_mint_patch" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fallow_grain_field",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_fallow_grain_field" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fallow_cutting_grain_plant",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_fallow_cutting_grain_plant" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fallow_feral_apple",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_fallow_feral_apple" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fallow_feral_pear",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_fallow_feral_pear" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fallow_feral_plum",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_fallow_feral_plum" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fallow_flax_row",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fallow_flax_row" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fallow_hemp_patch",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fallow_hemp_patch" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fallow_turnip_row",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fallow_turnip_row" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fallow_carrot_row",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fallow_carrot_row" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fallow_potato_hill",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fallow_potato_hill" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fallow_orchard_hive",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fallow_orchard_hive" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fallow_hedgerow",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_fallow_hedgerow" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_rush_bed",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_drowned_rush_bed" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_kelp_bed",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_drowned_kelp_bed" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_lily_pad",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_drowned_lily_pad" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_bog_berry_bush",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_drowned_bog_berry_bush" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_weed_mat",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_drowned_weed_mat" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_algae_mat",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_drowned_algae_mat" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_cranberry_bog",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_drowned_cranberry_bog" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_reed_seed_stand",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_drowned_reed_seed_stand" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_willow_young",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_drowned_willow_young" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_moss_bank",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_drowned_moss_bank" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_tallgrass_thatch_stand",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_tallgrass_thatch_stand" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_tallgrass_seed_stand",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_tallgrass_seed_stand" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_tallgrass_cutting_stand",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_tallgrass_cutting_stand" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_tallgrass_fibre_stand",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_tallgrass_fibre_stand" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_tallgrass_lone_tree",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_tallgrass_lone_tree" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_tallgrass_fire_shrub",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_tallgrass_fire_shrub" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_tallgrass_sage_patch",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_tallgrass_sage_patch" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_tallgrass_coneflower",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_tallgrass_coneflower" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_tallgrass_berry_bush",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_tallgrass_berry_bush" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_tallgrass_onion_patch",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_tallgrass_onion_patch" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_tallgrass_tuber_plant",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_tallgrass_tuber_plant" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_edible_cluster",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fungal_edible_cluster" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_poison_cluster",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fungal_poison_cluster" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_dye_cluster",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fungal_dye_cluster" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_tea_cluster",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fungal_tea_cluster" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_broth_cluster",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fungal_broth_cluster" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_spore_vent_plant",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fungal_spore_vent_plant" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_shelf_cluster",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fungal_shelf_cluster" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_puffball_plant",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fungal_puffball_plant" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_ink_cluster",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fungal_ink_cluster" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_glow_moss_bank",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fungal_glow_moss_bank" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_veil_curtain",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_fungal_veil_curtain" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_acid_cluster",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_fungal_acid_cluster" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_arch_vine",
+    "object": { "mapgensize": [ 3, 3 ], "rows": [ "   ", " T ", "   " ], "terrain": { "T": "t_astral_root_arch_vine" } }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_lichen_mat",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_root_lichen_mat" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_cave_moss_bank",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_root_cave_moss_bank" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_fruit_cluster",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_root_fruit_cluster" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_mute_moss_bank",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_root_mute_moss_bank" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_sinkhole_fern",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_root_sinkhole_fern" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_bone_lichen",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_root_bone_lichen" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_amber_weep",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_root_amber_weep" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_deep_mushroom",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_root_deep_mushroom" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_ironwood_sapling",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ "   ", " T ", "   " ],
+      "terrain": { "T": "t_astral_root_ironwood_sapling" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_heartroot_young",
+    "object": {
+      "mapgensize": [ 3, 3 ],
+      "rows": [ " F ", "FF ", " F " ],
+      "furniture": { "F": "f_astral_root_heartroot_young" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_duskiron_vein",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_root_duskiron_vein" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_mire_iron_vein",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_drowned_mire_iron_vein" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_sunvein_vein",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_root_sunvein_vein" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_silvermire_vein",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_drowned_silvermire_vein" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_emberstone_vein",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_root_emberstone_vein" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_ghostsalt_pan",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_drowned_ghostsalt_pan" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_bluemarl_bank",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_meadow_bluemarl_bank" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_starflint_outcrop",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_meadow_starflint_outcrop" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_brimdust_crust",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_fungal_brimdust_crust" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_heartglass_vein",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_root_heartglass_vein" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_bogcake_cut",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_drowned_bogcake_cut" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_meadow_resin_seep",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_meadow_resin_seep" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fallow_marl_pit",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_fallow_marl_pit" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fallow_old_quarry",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_fallow_old_quarry" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fallow_bog_iron_ditch",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_fallow_bog_iron_ditch" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_bluemarl_bank",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_drowned_bluemarl_bank" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_drowned_sunvein_cutbank",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_drowned_sunvein_cutbank" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_tallgrass_starflint_scatter",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_tallgrass_starflint_scatter" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_tallgrass_ghostsalt_lick",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_tallgrass_ghostsalt_lick" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_bluemarl_seam",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_fungal_bluemarl_seam" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_fungal_brimdust_pocket",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_fungal_brimdust_pocket" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_emberstone_seam",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_root_emberstone_seam" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_heartglass_geode",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_root_heartglass_geode" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_ghostsalt_crust",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_root_ghostsalt_crust" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_nest_astral_root_silvermire_vein",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "rows": [ " VV ", "VVV ", " VV ", "    " ],
+      "terrain": { "V": "t_astral_root_silvermire_vein" }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_scatter_drowned",
+    "//": "Weighted pick of this theme's flora and veins (tools/astral/gen_content.py gen_scatter).",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "place_nested": [
+        {
+          "chunks": [
+            [ "astral_nest_astral_drowned_sunken_oak", 6 ],
+            [ "astral_nest_astral_drowned_reed_bed", 8 ],
+            [ "astral_nest_astral_drowned_reed_mussel", 8 ],
+            [ "astral_nest_astral_drowned_willow", 6 ],
+            [ "astral_nest_astral_drowned_rush_bed", 8 ],
+            [ "astral_nest_astral_drowned_kelp_bed", 6 ],
+            [ "astral_nest_astral_drowned_lily_pad", 8 ],
+            [ "astral_nest_astral_drowned_bog_berry_bush", 8 ],
+            [ "astral_nest_astral_drowned_weed_mat", 6 ],
+            [ "astral_nest_astral_drowned_algae_mat", 8 ],
+            [ "astral_nest_astral_drowned_cranberry_bog", 8 ],
+            [ "astral_nest_astral_drowned_reed_seed_stand", 8 ],
+            [ "astral_nest_astral_drowned_willow_young", 6 ],
+            [ "astral_nest_astral_drowned_moss_bank", 8 ],
+            [ "astral_nest_astral_drowned_mire_iron_vein", 3 ],
+            [ "astral_nest_astral_drowned_silvermire_vein", 3 ],
+            [ "astral_nest_astral_drowned_ghostsalt_pan", 3 ],
+            [ "astral_nest_astral_drowned_bogcake_cut", 3 ],
+            [ "astral_nest_astral_drowned_bluemarl_bank", 3 ],
+            [ "astral_nest_astral_drowned_sunvein_cutbank", 3 ]
+          ],
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_scatter_fallow",
+    "//": "Weighted pick of this theme's flora and veins (tools/astral/gen_content.py gen_scatter).",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "place_nested": [
+        {
+          "chunks": [
+            [ "astral_nest_astral_fallow_grain_field", 6 ],
+            [ "astral_nest_astral_fallow_cutting_grain_plant", 6 ],
+            [ "astral_nest_astral_fallow_feral_apple", 6 ],
+            [ "astral_nest_astral_fallow_feral_pear", 6 ],
+            [ "astral_nest_astral_fallow_feral_plum", 6 ],
+            [ "astral_nest_astral_fallow_flax_row", 8 ],
+            [ "astral_nest_astral_fallow_hemp_patch", 8 ],
+            [ "astral_nest_astral_fallow_turnip_row", 8 ],
+            [ "astral_nest_astral_fallow_carrot_row", 8 ],
+            [ "astral_nest_astral_fallow_potato_hill", 8 ],
+            [ "astral_nest_astral_fallow_orchard_hive", 8 ],
+            [ "astral_nest_astral_fallow_hedgerow", 6 ],
+            [ "astral_nest_astral_fallow_marl_pit", 3 ],
+            [ "astral_nest_astral_fallow_old_quarry", 3 ],
+            [ "astral_nest_astral_fallow_bog_iron_ditch", 3 ]
+          ],
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_scatter_fungal",
+    "//": "Weighted pick of this theme's flora and veins (tools/astral/gen_content.py gen_scatter).",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "place_nested": [
+        {
+          "chunks": [
+            [ "astral_nest_astral_fungal_carpet", 6 ],
+            [ "astral_nest_astral_fungal_glowcap_cluster", 8 ],
+            [ "astral_nest_astral_fungal_cap_tree", 6 ],
+            [ "astral_nest_astral_fungal_edible_cluster", 8 ],
+            [ "astral_nest_astral_fungal_poison_cluster", 8 ],
+            [ "astral_nest_astral_fungal_dye_cluster", 8 ],
+            [ "astral_nest_astral_fungal_tea_cluster", 8 ],
+            [ "astral_nest_astral_fungal_broth_cluster", 8 ],
+            [ "astral_nest_astral_fungal_spore_vent_plant", 8 ],
+            [ "astral_nest_astral_fungal_shelf_cluster", 8 ],
+            [ "astral_nest_astral_fungal_puffball_plant", 8 ],
+            [ "astral_nest_astral_fungal_ink_cluster", 8 ],
+            [ "astral_nest_astral_fungal_glow_moss_bank", 8 ],
+            [ "astral_nest_astral_fungal_veil_curtain", 6 ],
+            [ "astral_nest_astral_fungal_acid_cluster", 8 ],
+            [ "astral_nest_astral_fungal_brimdust_crust", 3 ],
+            [ "astral_nest_astral_fungal_bluemarl_seam", 3 ],
+            [ "astral_nest_astral_fungal_brimdust_pocket", 3 ]
+          ],
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_scatter_meadow",
+    "//": "Weighted pick of this theme's flora and veins (tools/astral/gen_content.py gen_scatter).",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "place_nested": [
+        {
+          "chunks": [
+            [ "astral_nest_astral_meadow_hearthwood_tree", 6 ],
+            [ "astral_nest_astral_meadow_tall_grass_patch", 6 ],
+            [ "astral_nest_astral_meadow_gateberry_bush", 8 ],
+            [ "astral_nest_astral_meadow_clover_patch", 8 ],
+            [ "astral_nest_astral_meadow_healleaf_plant", 8 ],
+            [ "astral_nest_astral_meadow_feverfew_plant", 8 ],
+            [ "astral_nest_astral_meadow_cordgrass_patch", 6 ],
+            [ "astral_nest_astral_meadow_willow_shrub", 8 ],
+            [ "astral_nest_astral_meadow_grain_patch", 6 ],
+            [ "astral_nest_astral_meadow_nettle_patch", 8 ],
+            [ "astral_nest_astral_meadow_button_mushroom", 8 ],
+            [ "astral_nest_astral_meadow_lavender_bush", 8 ],
+            [ "astral_nest_astral_meadow_sweetroot_plant", 8 ],
+            [ "astral_nest_astral_meadow_mint_patch", 8 ],
+            [ "astral_nest_astral_meadow_bluemarl_bank", 3 ],
+            [ "astral_nest_astral_meadow_starflint_outcrop", 3 ],
+            [ "astral_nest_astral_meadow_resin_seep", 3 ]
+          ],
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_scatter_root",
+    "//": "Weighted pick of this theme's flora and veins (tools/astral/gen_content.py gen_scatter).",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "place_nested": [
+        {
+          "chunks": [
+            [ "astral_nest_astral_root_heartroot", 8 ],
+            [ "astral_nest_astral_root_ironwood_tree", 6 ],
+            [ "astral_nest_astral_root_honey_comb", 8 ],
+            [ "astral_nest_astral_root_arch_vine", 6 ],
+            [ "astral_nest_astral_root_lichen_mat", 8 ],
+            [ "astral_nest_astral_root_cave_moss_bank", 8 ],
+            [ "astral_nest_astral_root_fruit_cluster", 8 ],
+            [ "astral_nest_astral_root_mute_moss_bank", 8 ],
+            [ "astral_nest_astral_root_sinkhole_fern", 8 ],
+            [ "astral_nest_astral_root_bone_lichen", 8 ],
+            [ "astral_nest_astral_root_amber_weep", 8 ],
+            [ "astral_nest_astral_root_deep_mushroom", 8 ],
+            [ "astral_nest_astral_root_ironwood_sapling", 6 ],
+            [ "astral_nest_astral_root_heartroot_young", 8 ],
+            [ "astral_nest_astral_root_duskiron_vein", 3 ],
+            [ "astral_nest_astral_root_sunvein_vein", 3 ],
+            [ "astral_nest_astral_root_emberstone_vein", 3 ],
+            [ "astral_nest_astral_root_heartglass_vein", 3 ],
+            [ "astral_nest_astral_root_emberstone_seam", 3 ],
+            [ "astral_nest_astral_root_heartglass_geode", 3 ],
+            [ "astral_nest_astral_root_ghostsalt_crust", 3 ],
+            [ "astral_nest_astral_root_silvermire_vein", 3 ]
+          ],
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "astral_scatter_tallgrass",
+    "//": "Weighted pick of this theme's flora and veins (tools/astral/gen_content.py gen_scatter).",
+    "object": {
+      "mapgensize": [ 4, 4 ],
+      "place_nested": [
+        {
+          "chunks": [
+            [ "astral_nest_astral_tallgrass_thatch_stand", 6 ],
+            [ "astral_nest_astral_tallgrass_seed_stand", 6 ],
+            [ "astral_nest_astral_tallgrass_cutting_stand", 6 ],
+            [ "astral_nest_astral_tallgrass_fibre_stand", 6 ],
+            [ "astral_nest_astral_tallgrass_lone_tree", 6 ],
+            [ "astral_nest_astral_tallgrass_fire_shrub", 8 ],
+            [ "astral_nest_astral_tallgrass_sage_patch", 8 ],
+            [ "astral_nest_astral_tallgrass_coneflower", 8 ],
+            [ "astral_nest_astral_tallgrass_berry_bush", 8 ],
+            [ "astral_nest_astral_tallgrass_onion_patch", 8 ],
+            [ "astral_nest_astral_tallgrass_tuber_plant", 8 ],
+            [ "astral_nest_astral_tallgrass_starflint_scatter", 3 ],
+            [ "astral_nest_astral_tallgrass_ghostsalt_lick", 3 ]
+          ],
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  }
+]

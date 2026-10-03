@@ -1,0 +1,116 @@
+{
+  "id": "infirmary",
+  "label": "Infirmary",
+  "//": "Whitewashed ward hub with alchemy and kitchen; two quarters upstairs; herb garden behind.",
+  "city_sizes": [
+    7,
+    55
+  ],
+  "wall": "&",
+  "footprint": [
+    1,
+    1
+  ],
+  "ground": {
+    "rooms": [
+      {
+        "kind": "infirmary",
+        "rect": [
+          4,
+          6,
+          13,
+          14
+        ]
+      },
+      {
+        "kind": "alchemy",
+        "rect": [
+          14,
+          6,
+          20,
+          14
+        ]
+      },
+      {
+        "kind": "kitchen",
+        "rect": [
+          4,
+          15,
+          20,
+          20
+        ]
+      }
+    ],
+    "hub": 0,
+    "porch": [
+      7,
+      4,
+      11,
+      5
+    ],
+    "doors": [
+      [
+        8,
+        6
+      ],
+      [
+        9,
+        6
+      ]
+    ],
+    "window_step": 3,
+    "path": [
+      9,
+      3,
+      0
+    ],
+    "yards": [
+      "herbs"
+    ],
+    "gardens": [
+      [
+        2,
+        8,
+        3,
+        14
+      ]
+    ],
+    "trees": 0.2
+  },
+  "upper": {
+    "rooms": [
+      {
+        "kind": "landing",
+        "rect": [
+          4,
+          6,
+          20,
+          8
+        ]
+      },
+      {
+        "kind": "quarters",
+        "rect": [
+          4,
+          9,
+          11,
+          20
+        ]
+      },
+      {
+        "kind": "quarters",
+        "rect": [
+          12,
+          9,
+          20,
+          20
+        ]
+      }
+    ],
+    "hub": 0,
+    "stairs": [
+      5,
+      8
+    ]
+  }
+}

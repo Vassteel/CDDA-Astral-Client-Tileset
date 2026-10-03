@@ -1,0 +1,988 @@
+[
+  {
+    "type": "skill",
+    "id": "astral_lore",
+    "name": { "str": "Lore" },
+    "description": "You are learning how the Craft is written down.  Lore is the skill of reading a grimoire, telling a real diagram from a doodle, and knowing which plane stained the tide in front of you.  It does not attune you.  It makes the reading less of a waste.",
+    "display_category": "display_interaction",
+    "sort_rank": 28000
+  },
+  {
+    "type": "proficiency_category",
+    "id": "prof_astral_craft",
+    "name": "The Craft",
+    "description": "The eight disciplines of Astral magic, each in three ranks: Touched, Attuned and Adept."
+  },
+  {
+    "type": "magic_type",
+    "id": "astral_magic_hedge",
+    "energy_source": "NONE",
+    "cannot_cast_flags": [ "NO_SPELLCASTING" ],
+    "cannot_cast_message": "You can't work the hedge-craft right now."
+  },
+  { "type": "magic_type", "id": "astral_magic_helper", "energy_source": "NONE" },
+  {
+    "type": "magic_type",
+    "id": "astral_magic_striking",
+    "energy_source": "MANA",
+    "cannot_cast_flags": [ "NO_SPELLCASTING" ],
+    "cannot_cast_message": "You can't cast that spell right now!",
+    "failure_cost_percent": 0.2,
+    "//": "Striking = the evocation school."
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_DISC_STRIKING",
+    "name": { "str": "Striking" },
+    "points": 3,
+    "description": "You have done the Striking rite.  Force answers when you have the rod and the diagram.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Striking is native goes twice as fast.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "flags": [ "ATTUNEMENT" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_striking_1",
+    "category": "prof_astral_craft",
+    "name": { "str": "Striking: Touched" },
+    "description": "You know the first shapes of Striking.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "5 h"
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_striking_2",
+    "category": "prof_astral_craft",
+    "name": { "str": "Striking: Attuned" },
+    "description": "Striking comes easily now: its spells cost a tenth less mana.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "20 h",
+    "required_proficiencies": [ "astral_prof_striking_1" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_striking_3",
+    "category": "prof_astral_craft",
+    "name": { "str": "Striking: Adept" },
+    "description": "You are an Adept of Striking: its spells cost a fifth less mana and its deepest spells answer you.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "60 h",
+    "required_proficiencies": [ "astral_prof_striking_2" ]
+  },
+  {
+    "type": "magic_type",
+    "id": "astral_magic_warding",
+    "energy_source": "MANA",
+    "cannot_cast_flags": [ "NO_SPELLCASTING" ],
+    "cannot_cast_message": "You can't cast that spell right now!",
+    "failure_cost_percent": 0.2,
+    "//": "Warding = the channeling school."
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_DISC_WARDING",
+    "name": { "str": "Warding" },
+    "points": 1,
+    "description": "You have done the Warding rite.  The tide will thicken for you, and you can taste it.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Warding is native goes twice as fast.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "flags": [ "ATTUNEMENT" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_warding_1",
+    "category": "prof_astral_craft",
+    "name": { "str": "Warding: Touched" },
+    "description": "You know the first shapes of Warding.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "5 h"
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_warding_2",
+    "category": "prof_astral_craft",
+    "name": { "str": "Warding: Attuned" },
+    "description": "Warding comes easily now: its spells cost a tenth less mana.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "20 h",
+    "required_proficiencies": [ "astral_prof_warding_1" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_warding_3",
+    "category": "prof_astral_craft",
+    "name": { "str": "Warding: Adept" },
+    "description": "You are an Adept of Warding: its spells cost a fifth less mana and its deepest spells answer you.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "60 h",
+    "required_proficiencies": [ "astral_prof_warding_2" ]
+  },
+  {
+    "type": "magic_type",
+    "id": "astral_magic_calling",
+    "energy_source": "MANA",
+    "cannot_cast_flags": [ "NO_SPELLCASTING" ],
+    "cannot_cast_message": "You can't cast that spell right now!",
+    "failure_cost_percent": 0.2,
+    "//": "Calling = the conjuration school."
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_DISC_CALLING",
+    "name": { "str": "Calling" },
+    "points": 3,
+    "description": "You have done the Calling rite.  What you call still wants its fee.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Calling is native goes twice as fast.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "flags": [ "ATTUNEMENT" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_calling_1",
+    "category": "prof_astral_craft",
+    "name": { "str": "Calling: Touched" },
+    "description": "You know the first shapes of Calling.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "5 h"
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_calling_2",
+    "category": "prof_astral_craft",
+    "name": { "str": "Calling: Attuned" },
+    "description": "Calling comes easily now: its spells cost a tenth less mana.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "20 h",
+    "required_proficiencies": [ "astral_prof_calling_1" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_calling_3",
+    "category": "prof_astral_craft",
+    "name": { "str": "Calling: Adept" },
+    "description": "You are an Adept of Calling: its spells cost a fifth less mana and its deepest spells answer you.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "60 h",
+    "required_proficiencies": [ "astral_prof_calling_2" ]
+  },
+  {
+    "type": "magic_type",
+    "id": "astral_magic_tempering",
+    "energy_source": "MANA",
+    "cannot_cast_flags": [ "NO_SPELLCASTING" ],
+    "cannot_cast_message": "You can't cast that spell right now!",
+    "failure_cost_percent": 0.2,
+    "//": "Tempering = the enhancement school."
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_DISC_TEMPERING",
+    "name": { "str": "Tempering" },
+    "points": 3,
+    "description": "You have done the Tempering rite.  You can set a blessing into flesh or gear for a while.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Tempering is native goes twice as fast.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "flags": [ "ATTUNEMENT" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_tempering_1",
+    "category": "prof_astral_craft",
+    "name": { "str": "Tempering: Touched" },
+    "description": "You know the first shapes of Tempering.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "5 h"
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_tempering_2",
+    "category": "prof_astral_craft",
+    "name": { "str": "Tempering: Attuned" },
+    "description": "Tempering comes easily now: its spells cost a tenth less mana.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "20 h",
+    "required_proficiencies": [ "astral_prof_tempering_1" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_tempering_3",
+    "category": "prof_astral_craft",
+    "name": { "str": "Tempering: Adept" },
+    "description": "You are an Adept of Tempering: its spells cost a fifth less mana and its deepest spells answer you.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "60 h",
+    "required_proficiencies": [ "astral_prof_tempering_2" ]
+  },
+  {
+    "type": "magic_type",
+    "id": "astral_magic_hexing",
+    "energy_source": "MANA",
+    "cannot_cast_flags": [ "NO_SPELLCASTING" ],
+    "cannot_cast_message": "You can't cast that spell right now!",
+    "failure_cost_percent": 0.2,
+    "//": "Hexing = the enervation school."
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_DISC_HEXING",
+    "name": { "str": "Hexing" },
+    "points": 6,
+    "description": "You have done the Hexing rite, outside the hall.  Every curse asks for blood as well as tide.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Hexing is native goes twice as fast.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "flags": [ "ATTUNEMENT" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_hexing_1",
+    "category": "prof_astral_craft",
+    "name": { "str": "Hexing: Touched" },
+    "description": "You know the first shapes of Hexing.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "5 h"
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_hexing_2",
+    "category": "prof_astral_craft",
+    "name": { "str": "Hexing: Attuned" },
+    "description": "Hexing comes easily now: its spells cost a tenth less mana.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "20 h",
+    "required_proficiencies": [ "astral_prof_hexing_1" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_hexing_3",
+    "category": "prof_astral_craft",
+    "name": { "str": "Hexing: Adept" },
+    "description": "You are an Adept of Hexing: its spells cost a fifth less mana and its deepest spells answer you.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "60 h",
+    "required_proficiencies": [ "astral_prof_hexing_2" ]
+  },
+  {
+    "type": "magic_type",
+    "id": "astral_magic_wayfinding",
+    "energy_source": "MANA",
+    "cannot_cast_flags": [ "NO_SPELLCASTING" ],
+    "cannot_cast_message": "You can't cast that spell right now!",
+    "failure_cost_percent": 0.2,
+    "//": "Wayfinding = the conveyance school."
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_DISC_WAYFINDING",
+    "name": { "str": "Wayfinding" },
+    "points": 1,
+    "description": "You have done the Wayfinding rite.  Bearings, marks, and short steps are open to you.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Wayfinding is native goes twice as fast.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "flags": [ "ATTUNEMENT" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_wayfinding_1",
+    "category": "prof_astral_craft",
+    "name": { "str": "Wayfinding: Touched" },
+    "description": "You know the first shapes of Wayfinding.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "5 h"
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_wayfinding_2",
+    "category": "prof_astral_craft",
+    "name": { "str": "Wayfinding: Attuned" },
+    "description": "Wayfinding comes easily now: its spells cost a tenth less mana.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "20 h",
+    "required_proficiencies": [ "astral_prof_wayfinding_1" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_wayfinding_3",
+    "category": "prof_astral_craft",
+    "name": { "str": "Wayfinding: Adept" },
+    "description": "You are an Adept of Wayfinding: its spells cost a fifth less mana and its deepest spells answer you.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "60 h",
+    "required_proficiencies": [ "astral_prof_wayfinding_2" ]
+  },
+  {
+    "type": "magic_type",
+    "id": "astral_magic_mending",
+    "energy_source": "MANA",
+    "cannot_cast_flags": [ "NO_SPELLCASTING" ],
+    "cannot_cast_message": "You can't cast that spell right now!",
+    "failure_cost_percent": 0.2,
+    "//": "Mending = the restoration school."
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_DISC_MENDING",
+    "name": { "str": "Mending" },
+    "points": 1,
+    "description": "You have done the Mending rite.  You can close what is torn, if you have the time.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Mending is native goes twice as fast.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "flags": [ "ATTUNEMENT" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_mending_1",
+    "category": "prof_astral_craft",
+    "name": { "str": "Mending: Touched" },
+    "description": "You know the first shapes of Mending.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "5 h"
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_mending_2",
+    "category": "prof_astral_craft",
+    "name": { "str": "Mending: Attuned" },
+    "description": "Mending comes easily now: its spells cost a tenth less mana.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "20 h",
+    "required_proficiencies": [ "astral_prof_mending_1" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_mending_3",
+    "category": "prof_astral_craft",
+    "name": { "str": "Mending: Adept" },
+    "description": "You are an Adept of Mending: its spells cost a fifth less mana and its deepest spells answer you.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "60 h",
+    "required_proficiencies": [ "astral_prof_mending_2" ]
+  },
+  {
+    "type": "magic_type",
+    "id": "astral_magic_shaping",
+    "energy_source": "MANA",
+    "cannot_cast_flags": [ "NO_SPELLCASTING" ],
+    "cannot_cast_message": "You can't cast that spell right now!",
+    "failure_cost_percent": 0.2,
+    "//": "Shaping = the transformation school."
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_DISC_SHAPING",
+    "name": { "str": "Shaping" },
+    "points": 3,
+    "description": "You have done the Shaping rite.  Stone, soil, and rooted things will take a new shape from you.  Practice raises you through Touched, Attuned and Adept; practice in a plane where Shaping is native goes twice as fast.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "flags": [ "ATTUNEMENT" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_shaping_1",
+    "category": "prof_astral_craft",
+    "name": { "str": "Shaping: Touched" },
+    "description": "You know the first shapes of Shaping.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "5 h"
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_shaping_2",
+    "category": "prof_astral_craft",
+    "name": { "str": "Shaping: Attuned" },
+    "description": "Shaping comes easily now: its spells cost a tenth less mana.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "20 h",
+    "required_proficiencies": [ "astral_prof_shaping_1" ]
+  },
+  {
+    "type": "proficiency",
+    "id": "astral_prof_shaping_3",
+    "category": "prof_astral_craft",
+    "name": { "str": "Shaping: Adept" },
+    "description": "You are an Adept of Shaping: its spells cost a fifth less mana and its deepest spells answer you.",
+    "can_learn": true,
+    "default_time_multiplier": 1,
+    "default_skill_penalty": 0,
+    "time_to_learn": "60 h",
+    "required_proficiencies": [ "astral_prof_shaping_2" ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PRACTISE_STRIKING",
+    "eoc_type": "EVENT",
+    "required_event": "character_casts_spell",
+    "condition": { "compare_string": [ "ASTRAL_DISC_STRIKING", { "context_val": "school" } ] },
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": {
+          "if": {
+            "not": { "math": [ "u_has_proficiency('astral_prof_striking_1')" ] }
+          },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_striking_1', 'format': 'time_spent') += time('10 m')" ]
+          },
+          "else": {
+            "if": {
+              "not": { "math": [ "u_has_proficiency('astral_prof_striking_2')" ] }
+            },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_striking_2', 'format': 'time_spent') += time('10 m')" ]
+            },
+            "else": {
+              "if": {
+                "not": { "math": [ "u_has_proficiency('astral_prof_striking_3')" ] }
+              },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_striking_3', 'format': 'time_spent') += time('10 m')" ]
+              }
+            }
+          }
+        },
+        "else": {
+          "if": {
+            "not": { "math": [ "u_has_proficiency('astral_prof_striking_1')" ] }
+          },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_striking_1', 'format': 'time_spent') += time('10 m')" ]
+          },
+          "else": {
+            "if": {
+              "not": { "math": [ "u_has_proficiency('astral_prof_striking_2')" ] }
+            },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_striking_2', 'format': 'time_spent') += time('10 m')" ]
+            },
+            "else": {
+              "if": {
+                "not": { "math": [ "u_has_proficiency('astral_prof_striking_3')" ] }
+              },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_striking_3', 'format': 'time_spent') += time('10 m')" ]
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PRACTISE_WARDING",
+    "eoc_type": "EVENT",
+    "required_event": "character_casts_spell",
+    "condition": { "compare_string": [ "ASTRAL_DISC_WARDING", { "context_val": "school" } ] },
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": {
+          "if": { "not": { "math": [ "u_has_proficiency('astral_prof_warding_1')" ] } },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_warding_1', 'format': 'time_spent') += time('10 m')" ]
+          },
+          "else": {
+            "if": { "not": { "math": [ "u_has_proficiency('astral_prof_warding_2')" ] } },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_warding_2', 'format': 'time_spent') += time('10 m')" ]
+            },
+            "else": {
+              "if": { "not": { "math": [ "u_has_proficiency('astral_prof_warding_3')" ] } },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_warding_3', 'format': 'time_spent') += time('10 m')" ]
+              }
+            }
+          }
+        },
+        "else": {
+          "if": { "not": { "math": [ "u_has_proficiency('astral_prof_warding_1')" ] } },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_warding_1', 'format': 'time_spent') += time('20 m')" ]
+          },
+          "else": {
+            "if": { "not": { "math": [ "u_has_proficiency('astral_prof_warding_2')" ] } },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_warding_2', 'format': 'time_spent') += time('20 m')" ]
+            },
+            "else": {
+              "if": { "not": { "math": [ "u_has_proficiency('astral_prof_warding_3')" ] } },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_warding_3', 'format': 'time_spent') += time('20 m')" ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": { "not": { "current_dimension": "default" } },
+        "then": {
+          "math": [
+            "u_spell_exp(_spell) += (spell_exp_for_level(_spell, u_spell_level(_spell) + 1) - spell_exp_for_level(_spell, u_spell_level(_spell))) / 30"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PRACTISE_CALLING",
+    "eoc_type": "EVENT",
+    "required_event": "character_casts_spell",
+    "condition": { "compare_string": [ "ASTRAL_DISC_CALLING", { "context_val": "school" } ] },
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": {
+          "if": { "not": { "math": [ "u_has_proficiency('astral_prof_calling_1')" ] } },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_calling_1', 'format': 'time_spent') += time('10 m')" ]
+          },
+          "else": {
+            "if": { "not": { "math": [ "u_has_proficiency('astral_prof_calling_2')" ] } },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_calling_2', 'format': 'time_spent') += time('10 m')" ]
+            },
+            "else": {
+              "if": { "not": { "math": [ "u_has_proficiency('astral_prof_calling_3')" ] } },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_calling_3', 'format': 'time_spent') += time('10 m')" ]
+              }
+            }
+          }
+        },
+        "else": {
+          "if": { "not": { "math": [ "u_has_proficiency('astral_prof_calling_1')" ] } },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_calling_1', 'format': 'time_spent') += time('10 m')" ]
+          },
+          "else": {
+            "if": { "not": { "math": [ "u_has_proficiency('astral_prof_calling_2')" ] } },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_calling_2', 'format': 'time_spent') += time('10 m')" ]
+            },
+            "else": {
+              "if": { "not": { "math": [ "u_has_proficiency('astral_prof_calling_3')" ] } },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_calling_3', 'format': 'time_spent') += time('10 m')" ]
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PRACTISE_TEMPERING",
+    "eoc_type": "EVENT",
+    "required_event": "character_casts_spell",
+    "condition": { "compare_string": [ "ASTRAL_DISC_TEMPERING", { "context_val": "school" } ] },
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": {
+          "if": {
+            "not": { "math": [ "u_has_proficiency('astral_prof_tempering_1')" ] }
+          },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_tempering_1', 'format': 'time_spent') += time('10 m')" ]
+          },
+          "else": {
+            "if": {
+              "not": { "math": [ "u_has_proficiency('astral_prof_tempering_2')" ] }
+            },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_tempering_2', 'format': 'time_spent') += time('10 m')" ]
+            },
+            "else": {
+              "if": {
+                "not": { "math": [ "u_has_proficiency('astral_prof_tempering_3')" ] }
+              },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_tempering_3', 'format': 'time_spent') += time('10 m')" ]
+              }
+            }
+          }
+        },
+        "else": {
+          "if": {
+            "not": { "math": [ "u_has_proficiency('astral_prof_tempering_1')" ] }
+          },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_tempering_1', 'format': 'time_spent') += time('10 m')" ]
+          },
+          "else": {
+            "if": {
+              "not": { "math": [ "u_has_proficiency('astral_prof_tempering_2')" ] }
+            },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_tempering_2', 'format': 'time_spent') += time('10 m')" ]
+            },
+            "else": {
+              "if": {
+                "not": { "math": [ "u_has_proficiency('astral_prof_tempering_3')" ] }
+              },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_tempering_3', 'format': 'time_spent') += time('10 m')" ]
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PRACTISE_HEXING",
+    "eoc_type": "EVENT",
+    "required_event": "character_casts_spell",
+    "condition": { "compare_string": [ "ASTRAL_DISC_HEXING", { "context_val": "school" } ] },
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": {
+          "if": { "not": { "math": [ "u_has_proficiency('astral_prof_hexing_1')" ] } },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_hexing_1', 'format': 'time_spent') += time('10 m')" ]
+          },
+          "else": {
+            "if": { "not": { "math": [ "u_has_proficiency('astral_prof_hexing_2')" ] } },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_hexing_2', 'format': 'time_spent') += time('10 m')" ]
+            },
+            "else": {
+              "if": { "not": { "math": [ "u_has_proficiency('astral_prof_hexing_3')" ] } },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_hexing_3', 'format': 'time_spent') += time('10 m')" ]
+              }
+            }
+          }
+        },
+        "else": {
+          "if": { "not": { "math": [ "u_has_proficiency('astral_prof_hexing_1')" ] } },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_hexing_1', 'format': 'time_spent') += time('10 m')" ]
+          },
+          "else": {
+            "if": { "not": { "math": [ "u_has_proficiency('astral_prof_hexing_2')" ] } },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_hexing_2', 'format': 'time_spent') += time('10 m')" ]
+            },
+            "else": {
+              "if": { "not": { "math": [ "u_has_proficiency('astral_prof_hexing_3')" ] } },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_hexing_3', 'format': 'time_spent') += time('10 m')" ]
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PRACTISE_WAYFINDING",
+    "eoc_type": "EVENT",
+    "required_event": "character_casts_spell",
+    "condition": { "compare_string": [ "ASTRAL_DISC_WAYFINDING", { "context_val": "school" } ] },
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": {
+          "if": {
+            "not": { "math": [ "u_has_proficiency('astral_prof_wayfinding_1')" ] }
+          },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_wayfinding_1', 'format': 'time_spent') += time('10 m')" ]
+          },
+          "else": {
+            "if": {
+              "not": { "math": [ "u_has_proficiency('astral_prof_wayfinding_2')" ] }
+            },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_wayfinding_2', 'format': 'time_spent') += time('10 m')" ]
+            },
+            "else": {
+              "if": {
+                "not": { "math": [ "u_has_proficiency('astral_prof_wayfinding_3')" ] }
+              },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_wayfinding_3', 'format': 'time_spent') += time('10 m')" ]
+              }
+            }
+          }
+        },
+        "else": {
+          "if": {
+            "not": { "math": [ "u_has_proficiency('astral_prof_wayfinding_1')" ] }
+          },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_wayfinding_1', 'format': 'time_spent') += time('20 m')" ]
+          },
+          "else": {
+            "if": {
+              "not": { "math": [ "u_has_proficiency('astral_prof_wayfinding_2')" ] }
+            },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_wayfinding_2', 'format': 'time_spent') += time('20 m')" ]
+            },
+            "else": {
+              "if": {
+                "not": { "math": [ "u_has_proficiency('astral_prof_wayfinding_3')" ] }
+              },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_wayfinding_3', 'format': 'time_spent') += time('20 m')" ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": { "not": { "current_dimension": "default" } },
+        "then": {
+          "math": [
+            "u_spell_exp(_spell) += (spell_exp_for_level(_spell, u_spell_level(_spell) + 1) - spell_exp_for_level(_spell, u_spell_level(_spell))) / 30"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PRACTISE_MENDING",
+    "eoc_type": "EVENT",
+    "required_event": "character_casts_spell",
+    "condition": { "compare_string": [ "ASTRAL_DISC_MENDING", { "context_val": "school" } ] },
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": {
+          "if": { "not": { "math": [ "u_has_proficiency('astral_prof_mending_1')" ] } },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_mending_1', 'format': 'time_spent') += time('10 m')" ]
+          },
+          "else": {
+            "if": { "not": { "math": [ "u_has_proficiency('astral_prof_mending_2')" ] } },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_mending_2', 'format': 'time_spent') += time('10 m')" ]
+            },
+            "else": {
+              "if": { "not": { "math": [ "u_has_proficiency('astral_prof_mending_3')" ] } },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_mending_3', 'format': 'time_spent') += time('10 m')" ]
+              }
+            }
+          }
+        },
+        "else": {
+          "if": { "not": { "math": [ "u_has_proficiency('astral_prof_mending_1')" ] } },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_mending_1', 'format': 'time_spent') += time('20 m')" ]
+          },
+          "else": {
+            "if": { "not": { "math": [ "u_has_proficiency('astral_prof_mending_2')" ] } },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_mending_2', 'format': 'time_spent') += time('20 m')" ]
+            },
+            "else": {
+              "if": { "not": { "math": [ "u_has_proficiency('astral_prof_mending_3')" ] } },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_mending_3', 'format': 'time_spent') += time('20 m')" ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "if": { "not": { "current_dimension": "default" } },
+        "then": {
+          "math": [
+            "u_spell_exp(_spell) += (spell_exp_for_level(_spell, u_spell_level(_spell) + 1) - spell_exp_for_level(_spell, u_spell_level(_spell))) / 30"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_PRACTISE_SHAPING",
+    "eoc_type": "EVENT",
+    "required_event": "character_casts_spell",
+    "condition": { "compare_string": [ "ASTRAL_DISC_SHAPING", { "context_val": "school" } ] },
+    "effect": [
+      {
+        "if": { "current_dimension": "default" },
+        "then": {
+          "if": { "not": { "math": [ "u_has_proficiency('astral_prof_shaping_1')" ] } },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_shaping_1', 'format': 'time_spent') += time('10 m')" ]
+          },
+          "else": {
+            "if": { "not": { "math": [ "u_has_proficiency('astral_prof_shaping_2')" ] } },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_shaping_2', 'format': 'time_spent') += time('10 m')" ]
+            },
+            "else": {
+              "if": { "not": { "math": [ "u_has_proficiency('astral_prof_shaping_3')" ] } },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_shaping_3', 'format': 'time_spent') += time('10 m')" ]
+              }
+            }
+          }
+        },
+        "else": {
+          "if": { "not": { "math": [ "u_has_proficiency('astral_prof_shaping_1')" ] } },
+          "then": {
+            "math": [ "u_proficiency('astral_prof_shaping_1', 'format': 'time_spent') += time('10 m')" ]
+          },
+          "else": {
+            "if": { "not": { "math": [ "u_has_proficiency('astral_prof_shaping_2')" ] } },
+            "then": {
+              "math": [ "u_proficiency('astral_prof_shaping_2', 'format': 'time_spent') += time('10 m')" ]
+            },
+            "else": {
+              "if": { "not": { "math": [ "u_has_proficiency('astral_prof_shaping_3')" ] } },
+              "then": {
+                "math": [ "u_proficiency('astral_prof_shaping_3', 'format': 'time_spent') += time('10 m')" ]
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_CRAFT_LEARN_BOOST",
+    "eoc_type": "EVENT",
+    "required_event": "character_casts_spell",
+    "condition": {
+      "or": [
+        { "compare_string": [ "ASTRAL_DISC_STRIKING", { "context_val": "school" } ] },
+        { "compare_string": [ "ASTRAL_DISC_WARDING", { "context_val": "school" } ] },
+        { "compare_string": [ "ASTRAL_DISC_CALLING", { "context_val": "school" } ] },
+        { "compare_string": [ "ASTRAL_DISC_TEMPERING", { "context_val": "school" } ] },
+        { "compare_string": [ "ASTRAL_DISC_HEXING", { "context_val": "school" } ] },
+        { "compare_string": [ "ASTRAL_DISC_WAYFINDING", { "context_val": "school" } ] },
+        { "compare_string": [ "ASTRAL_DISC_MENDING", { "context_val": "school" } ] },
+        { "compare_string": [ "ASTRAL_DISC_SHAPING", { "context_val": "school" } ] }
+      ]
+    },
+    "effect": [
+      {
+        "math": [
+          "u_spell_exp(_spell) += (spell_exp_for_level(_spell, u_spell_level(_spell) + 1) - spell_exp_for_level(_spell, u_spell_level(_spell))) / 30"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ASTRAL_HEX_BLOOD_PRICE",
+    "eoc_type": "EVENT",
+    "required_event": "character_casts_spell",
+    "condition": { "compare_string": [ "ASTRAL_DISC_HEXING", { "context_val": "school" } ] },
+    "effect": [
+      {
+        "if": {
+          "compare_string": [ "astral_spell_hexing_damp_weed", { "context_val": "spell" } ]
+        },
+        "then": [ { "u_deal_damage": "pure", "amount": 3, "bodypart": "torso" } ]
+      },
+      {
+        "if": { "compare_string": [ "astral_spell_hexing_dim", { "context_val": "spell" } ] },
+        "then": [ { "u_deal_damage": "pure", "amount": 3, "bodypart": "torso" } ]
+      },
+      {
+        "if": {
+          "compare_string": [ "astral_spell_hexing_grave_voice", { "context_val": "spell" } ]
+        },
+        "then": [ { "u_deal_damage": "pure", "amount": 8, "bodypart": "torso" } ]
+      },
+      {
+        "if": {
+          "compare_string": [ "astral_spell_hexing_ill_wish", { "context_val": "spell" } ]
+        },
+        "then": [ { "u_deal_damage": "pure", "amount": 2, "bodypart": "torso" } ]
+      },
+      {
+        "if": { "compare_string": [ "astral_spell_hexing_sap", { "context_val": "spell" } ] },
+        "then": [ { "u_deal_damage": "pure", "amount": 3, "bodypart": "torso" } ]
+      },
+      {
+        "if": { "compare_string": [ "astral_spell_hexing_slow", { "context_val": "spell" } ] },
+        "then": [ { "u_deal_damage": "pure", "amount": 5, "bodypart": "torso" } ]
+      },
+      {
+        "if": {
+          "compare_string": [ "astral_spell_hexing_steal_sound", { "context_val": "spell" } ]
+        },
+        "then": [ { "u_deal_damage": "pure", "amount": 6, "bodypart": "torso" } ]
+      },
+      {
+        "if": {
+          "compare_string": [ "astral_spell_hexing_unmaking", { "context_val": "spell" } ]
+        },
+        "then": [ { "u_deal_damage": "pure", "amount": 15, "bodypart": "torso" } ]
+      },
+      {
+        "if": { "compare_string": [ "astral_spell_hexing_wither", { "context_val": "spell" } ] },
+        "then": [ { "u_deal_damage": "pure", "amount": 6, "bodypart": "torso" } ]
+      }
+    ]
+  }
+]

@@ -421,8 +421,8 @@ void unload( const tripoint_bub_ms &where )
     g->pickup( where );
 }
 
-std::optional<drop_locations> select_materials( const tripoint_bub_ms &where,
-        const std::function<int( const item & )> &limit, int radius )
+std::optional<drop_locations> select_materials( [[maybe_unused]] const tripoint_bub_ms &where,
+        [[maybe_unused]] const std::function<int( const item & )> &limit, [[maybe_unused]] int radius )
 {
 #if defined(TILES)
     if( active_station && *active_station == get_map().get_abs( where ) &&
@@ -456,7 +456,7 @@ bool can_manage( const tripoint_bub_ms &where )
            here.ter( where ).obj().has_examine( iexamine::fireplace );
 }
 
-void query( uilist &menu, const tripoint_bub_ms &where )
+void query( uilist &menu, [[maybe_unused]] const tripoint_bub_ms &where )
 {
     ++menus_shown;
 #if defined(TILES)

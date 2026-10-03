@@ -17,7 +17,7 @@
     "name": "root duskiron vein",
     "color": "light_gray",
     "description": "An outcrop of root duskiron breaking the ground of root country.  A pickaxe would have it out in an hour.  Found: root country bare ground, sinkhole rims.",
-    "//": "astral content list critical-core: mine with a pickaxe; items from astral_vein_root_duskiron_vein",
+    "//": "astral content list 00-critical-core: mine with a pickaxe; items from astral_vein_root_duskiron_vein",
     "delete": { "flags": [ "NATURAL_UNDERGROUND" ] },
     "roof": "t_open_air",
     "bash": {
@@ -43,7 +43,7 @@
     "name": "drowned mire iron vein",
     "color": "brown",
     "description": "A patch of drowned mire iron vein in the drowned lowlands.  Dig here with a shovel.  Found: lowland cutbanks beside water.",
-    "//": "astral content list critical-core: dig with a shovel (construction constr_astral_dig_drowned_mire_iron_vein)"
+    "//": "astral content list 00-critical-core: dig with a shovel (construction constr_astral_dig_drowned_mire_iron_vein)"
   },
   {
     "type": "construction",
@@ -76,7 +76,7 @@
     "name": "root sunvein vein",
     "color": "light_gray",
     "description": "An outcrop of root sunvein breaking the ground of root country.  A pickaxe would have it out in an hour.  Found: root country.",
-    "//": "astral content list critical-core: mine with a pickaxe; items from astral_vein_root_sunvein_vein",
+    "//": "astral content list 00-critical-core: mine with a pickaxe; items from astral_vein_root_sunvein_vein",
     "delete": { "flags": [ "NATURAL_UNDERGROUND" ] },
     "roof": "t_open_air",
     "bash": {
@@ -102,7 +102,7 @@
     "name": "drowned silvermire vein",
     "color": "brown",
     "description": "A patch of drowned silvermire vein in the drowned lowlands.  Dig here with a shovel.  Found: gravel bars.",
-    "//": "astral content list critical-core: dig with a shovel (construction constr_astral_dig_drowned_silvermire_vein)"
+    "//": "astral content list 00-critical-core: dig with a shovel (construction constr_astral_dig_drowned_silvermire_vein)"
   },
   {
     "type": "construction",
@@ -135,7 +135,7 @@
     "name": "root emberstone vein",
     "color": "light_gray",
     "description": "An outcrop of root emberstone breaking the ground of root country.  A pickaxe would have it out in an hour.  Found: root country, cave mouths.",
-    "//": "astral content list critical-core: mine with a pickaxe; items from astral_vein_root_emberstone_vein",
+    "//": "astral content list 00-critical-core: mine with a pickaxe; items from astral_vein_root_emberstone_vein",
     "delete": { "flags": [ "NATURAL_UNDERGROUND" ] },
     "roof": "t_open_air",
     "bash": {
@@ -161,7 +161,7 @@
     "name": "drowned ghostsalt pan",
     "color": "brown",
     "description": "A patch of drowned ghostsalt in the drowned lowlands.  Dig here with a shovel.  Found: dried pool beds.",
-    "//": "astral content list critical-core: dig with a shovel (construction constr_astral_dig_drowned_ghostsalt_pan)"
+    "//": "astral content list 00-critical-core: dig with a shovel (construction constr_astral_dig_drowned_ghostsalt_pan)"
   },
   {
     "type": "construction",
@@ -194,7 +194,7 @@
     "name": "meadow bluemarl bank",
     "color": "brown",
     "description": "A patch of meadow bluemarl in the arrival meadows.  Dig here with a shovel.  Found: stream banks.",
-    "//": "astral content list critical-core: dig with a shovel (construction constr_astral_dig_meadow_bluemarl_bank)"
+    "//": "astral content list 00-critical-core: dig with a shovel (construction constr_astral_dig_meadow_bluemarl_bank)"
   },
   {
     "type": "construction",
@@ -227,7 +227,7 @@
     "name": "meadow starflint outcrop",
     "color": "light_gray",
     "description": "An outcrop of meadow starflint breaking the ground of the arrival meadows.  A pickaxe would have it out in an hour.  Found: meadow rises.",
-    "//": "astral content list critical-core: mine with a pickaxe; items from astral_vein_meadow_starflint_outcrop",
+    "//": "astral content list 00-critical-core: mine with a pickaxe; items from astral_vein_meadow_starflint_outcrop",
     "delete": { "flags": [ "NATURAL_UNDERGROUND" ] },
     "roof": "t_open_air",
     "bash": {
@@ -253,7 +253,7 @@
     "name": "fungal brimdust crust",
     "color": "brown",
     "description": "A patch of fungal brimdust crust in the fungal forest.  Dig here with a shovel.  Found: around cap-tree roots.",
-    "//": "astral content list critical-core: dig with a shovel (construction constr_astral_dig_fungal_brimdust_crust)"
+    "//": "astral content list 00-critical-core: dig with a shovel (construction constr_astral_dig_fungal_brimdust_crust)"
   },
   {
     "type": "construction",
@@ -286,7 +286,7 @@
     "name": "root heartglass vein",
     "color": "light_gray",
     "description": "An outcrop of root heartglass breaking the ground of root country.  A pickaxe would have it out in an hour.  Found: deep root country, cavern walls.",
-    "//": "astral content list critical-core: mine with a pickaxe; items from astral_vein_root_heartglass_vein",
+    "//": "astral content list 00-critical-core: mine with a pickaxe; items from astral_vein_root_heartglass_vein",
     "delete": { "flags": [ "NATURAL_UNDERGROUND" ] },
     "roof": "t_open_air",
     "bash": {
@@ -312,7 +312,7 @@
     "name": "drowned bogcake cut",
     "color": "brown",
     "description": "A patch of drowned bogcake in the drowned lowlands.  Dig here with a shovel.  Found: drained bog edges.",
-    "//": "astral content list critical-core: dig with a shovel (construction constr_astral_dig_drowned_bogcake_cut)"
+    "//": "astral content list 00-critical-core: dig with a shovel (construction constr_astral_dig_drowned_bogcake_cut)"
   },
   {
     "type": "construction",
@@ -330,5 +330,435 @@
     "byproducts": [ { "group": "astral_vein_drowned_bogcake_cut", "count": 1 } ],
     "activity_level": "EXTRA_EXERCISE",
     "do_turn_special": "do_turn_shovel"
+  },
+  {
+    "type": "item_group",
+    "id": "astral_vein_meadow_resin_seep",
+    "subtype": "collection",
+    "entries": [ { "item": "astral_meadow_resin_lump", "count": [ 2, 4 ], "prob": 100 } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_meadow_resin_seep",
+    "copy-from": "t_dirt",
+    "looks_like": "t_clay",
+    "name": "meadow resin seep",
+    "color": "brown",
+    "description": "A patch of meadow resin seep in the arrival meadows.  Dig here with a shovel.  Found: hearthwood root flares.",
+    "//": "astral content list 20-items-meadow-fallow: dig with a shovel (construction constr_astral_dig_meadow_resin_seep)"
+  },
+  {
+    "type": "construction",
+    "id": "constr_astral_dig_meadow_resin_seep",
+    "group": "astral_dig_vein",
+    "category": "DIG",
+    "skill": "survival",
+    "difficulty": 0,
+    "time": "30 m",
+    "on_display": true,
+    "qualities": [ { "id": "DIG", "level": 1 } ],
+    "pre_terrain": "t_astral_meadow_resin_seep",
+    "pre_special": "check_empty",
+    "post_terrain": "t_dirt",
+    "byproducts": [ { "group": "astral_vein_meadow_resin_seep", "count": 1 } ],
+    "activity_level": "EXTRA_EXERCISE",
+    "do_turn_special": "do_turn_shovel"
+  },
+  {
+    "type": "item_group",
+    "id": "astral_vein_fallow_marl_pit",
+    "subtype": "collection",
+    "entries": [ { "item": "astral_fallow_marl", "count": [ 3, 5 ], "prob": 100 } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fallow_marl_pit",
+    "copy-from": "t_dirt",
+    "looks_like": "t_clay",
+    "name": "fallow marl pit",
+    "color": "brown",
+    "description": "A patch of fallow marl pit in the planes.  Dig here with a shovel.  Found: old marl pits beside fields.",
+    "//": "astral content list 20-items-meadow-fallow: dig with a shovel (construction constr_astral_dig_fallow_marl_pit)"
+  },
+  {
+    "type": "construction",
+    "id": "constr_astral_dig_fallow_marl_pit",
+    "group": "astral_dig_vein",
+    "category": "DIG",
+    "skill": "survival",
+    "difficulty": 0,
+    "time": "30 m",
+    "on_display": true,
+    "qualities": [ { "id": "DIG", "level": 1 } ],
+    "pre_terrain": "t_astral_fallow_marl_pit",
+    "pre_special": "check_empty",
+    "post_terrain": "t_dirt",
+    "byproducts": [ { "group": "astral_vein_fallow_marl_pit", "count": 1 } ],
+    "activity_level": "EXTRA_EXERCISE",
+    "do_turn_special": "do_turn_shovel"
+  },
+  {
+    "type": "item_group",
+    "id": "astral_vein_fallow_old_quarry",
+    "subtype": "collection",
+    "entries": [ { "item": "astral_fallow_quarry_stone", "count": [ 2, 4 ], "prob": 100 } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fallow_old_quarry",
+    "copy-from": "t_rock",
+    "looks_like": "t_rock",
+    "name": "fallow old quarry",
+    "color": "light_gray",
+    "description": "An outcrop of fallow old quarry breaking the ground of the planes.  A pickaxe would have it out in an hour.  Found: abandoned fieldstone quarry face.",
+    "//": "astral content list 20-items-meadow-fallow: mine with a pickaxe; items from astral_vein_fallow_old_quarry",
+    "delete": { "flags": [ "NATURAL_UNDERGROUND" ] },
+    "roof": "t_open_air",
+    "bash": {
+      "str_min": 60,
+      "str_max": 240,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_dirt",
+      "items": [ { "group": "astral_vein_fallow_old_quarry", "count": 1 } ]
+    }
+  },
+  {
+    "type": "item_group",
+    "id": "astral_vein_fallow_bog_iron_ditch",
+    "subtype": "collection",
+    "entries": [ { "item": "astral_fallow_bog_iron", "count": [ 2, 3 ], "prob": 100 } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fallow_bog_iron_ditch",
+    "copy-from": "t_dirt",
+    "looks_like": "t_clay",
+    "name": "fallow bog iron ditch",
+    "color": "brown",
+    "description": "A patch of fallow bog iron ditch in the planes.  Dig here with a shovel.  Found: wet ditch cuts through fallow.",
+    "//": "astral content list 20-items-meadow-fallow: dig with a shovel (construction constr_astral_dig_fallow_bog_iron_ditch)"
+  },
+  {
+    "type": "construction",
+    "id": "constr_astral_dig_fallow_bog_iron_ditch",
+    "group": "astral_dig_vein",
+    "category": "DIG",
+    "skill": "survival",
+    "difficulty": 0,
+    "time": "30 m",
+    "on_display": true,
+    "qualities": [ { "id": "DIG", "level": 1 } ],
+    "pre_terrain": "t_astral_fallow_bog_iron_ditch",
+    "pre_special": "check_empty",
+    "post_terrain": "t_dirt",
+    "byproducts": [ { "group": "astral_vein_fallow_bog_iron_ditch", "count": 1 } ],
+    "activity_level": "EXTRA_EXERCISE",
+    "do_turn_special": "do_turn_shovel"
+  },
+  {
+    "type": "item_group",
+    "id": "astral_vein_drowned_bluemarl_bank",
+    "subtype": "collection",
+    "entries": [ { "item": "astral_drowned_bluemarl_bank", "count": [ 3, 4 ], "prob": 100 } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_drowned_bluemarl_bank",
+    "copy-from": "t_dirt",
+    "looks_like": "t_clay",
+    "name": "drowned bluemarl bank",
+    "color": "brown",
+    "description": "A patch of drowned bluemarl in the drowned lowlands.  Dig here with a shovel.  Found: cutbanks beside canals.",
+    "//": "astral content list 21-items-drowned-tallgrass: dig with a shovel (construction constr_astral_dig_drowned_bluemarl_bank)"
+  },
+  {
+    "type": "construction",
+    "id": "constr_astral_dig_drowned_bluemarl_bank",
+    "group": "astral_dig_vein",
+    "category": "DIG",
+    "skill": "survival",
+    "difficulty": 0,
+    "time": "30 m",
+    "on_display": true,
+    "qualities": [ { "id": "DIG", "level": 1 } ],
+    "pre_terrain": "t_astral_drowned_bluemarl_bank",
+    "pre_special": "check_empty",
+    "post_terrain": "t_dirt",
+    "byproducts": [ { "group": "astral_vein_drowned_bluemarl_bank", "count": 1 } ],
+    "activity_level": "EXTRA_EXERCISE",
+    "do_turn_special": "do_turn_shovel"
+  },
+  {
+    "type": "item_group",
+    "id": "astral_vein_drowned_sunvein_cutbank",
+    "subtype": "collection",
+    "entries": [ { "item": "astral_drowned_sunvein_nugget", "count": [ 1, 3 ], "prob": 100 } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_drowned_sunvein_cutbank",
+    "copy-from": "t_dirt",
+    "looks_like": "t_clay",
+    "name": "drowned sunvein cutbank",
+    "color": "brown",
+    "description": "A patch of drowned sunveinbank in the drowned lowlands.  Dig here with a shovel.  Found: gravel cutbanks (mire-iron exists in core).",
+    "//": "astral content list 21-items-drowned-tallgrass: dig with a shovel (construction constr_astral_dig_drowned_sunvein_cutbank)"
+  },
+  {
+    "type": "construction",
+    "id": "constr_astral_dig_drowned_sunvein_cutbank",
+    "group": "astral_dig_vein",
+    "category": "DIG",
+    "skill": "survival",
+    "difficulty": 0,
+    "time": "30 m",
+    "on_display": true,
+    "qualities": [ { "id": "DIG", "level": 1 } ],
+    "pre_terrain": "t_astral_drowned_sunvein_cutbank",
+    "pre_special": "check_empty",
+    "post_terrain": "t_dirt",
+    "byproducts": [ { "group": "astral_vein_drowned_sunvein_cutbank", "count": 1 } ],
+    "activity_level": "EXTRA_EXERCISE",
+    "do_turn_special": "do_turn_shovel"
+  },
+  {
+    "type": "item_group",
+    "id": "astral_vein_tallgrass_starflint_scatter",
+    "subtype": "collection",
+    "entries": [ { "item": "astral_tallgrass_starflint", "count": [ 2, 4 ], "prob": 100 } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_tallgrass_starflint_scatter",
+    "copy-from": "t_rock",
+    "looks_like": "t_rock",
+    "name": "tallgrass starflint scatter",
+    "color": "light_gray",
+    "description": "An outcrop of tallgrass starflint scatter breaking the ground of the planes.  A pickaxe would have it out in an hour.  Found: prairie rises and burn scars.",
+    "//": "astral content list 21-items-drowned-tallgrass: mine with a pickaxe; items from astral_vein_tallgrass_starflint_scatter",
+    "delete": { "flags": [ "NATURAL_UNDERGROUND" ] },
+    "roof": "t_open_air",
+    "bash": {
+      "str_min": 60,
+      "str_max": 240,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_dirt",
+      "items": [ { "group": "astral_vein_tallgrass_starflint_scatter", "count": 1 } ]
+    }
+  },
+  {
+    "type": "item_group",
+    "id": "astral_vein_tallgrass_ghostsalt_lick",
+    "subtype": "collection",
+    "entries": [ { "item": "astral_tallgrass_ghostsalt", "count": [ 3, 5 ], "prob": 100 } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_tallgrass_ghostsalt_lick",
+    "copy-from": "t_dirt",
+    "looks_like": "t_clay",
+    "name": "tallgrass ghostsalt lick",
+    "color": "brown",
+    "description": "A patch of tallgrass ghostsalt lick in the planes.  Dig here with a shovel.  Found: herd salt-lick crusts.",
+    "//": "astral content list 21-items-drowned-tallgrass: dig with a shovel (construction constr_astral_dig_tallgrass_ghostsalt_lick)"
+  },
+  {
+    "type": "construction",
+    "id": "constr_astral_dig_tallgrass_ghostsalt_lick",
+    "group": "astral_dig_vein",
+    "category": "DIG",
+    "skill": "survival",
+    "difficulty": 0,
+    "time": "30 m",
+    "on_display": true,
+    "qualities": [ { "id": "DIG", "level": 1 } ],
+    "pre_terrain": "t_astral_tallgrass_ghostsalt_lick",
+    "pre_special": "check_empty",
+    "post_terrain": "t_dirt",
+    "byproducts": [ { "group": "astral_vein_tallgrass_ghostsalt_lick", "count": 1 } ],
+    "activity_level": "EXTRA_EXERCISE",
+    "do_turn_special": "do_turn_shovel"
+  },
+  {
+    "type": "item_group",
+    "id": "astral_vein_fungal_bluemarl_seam",
+    "subtype": "collection",
+    "entries": [ { "item": "astral_fungal_bluemarl", "count": [ 3, 4 ], "prob": 100 } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fungal_bluemarl_seam",
+    "copy-from": "t_dirt",
+    "looks_like": "t_clay",
+    "name": "fungal bluemarl seam",
+    "color": "brown",
+    "description": "A patch of fungal bluemarl seam in the fungal forest.  Dig here with a shovel.  Found: under fungal carpet.",
+    "//": "astral content list 22-items-fungal-root: dig with a shovel (construction constr_astral_dig_fungal_bluemarl_seam)"
+  },
+  {
+    "type": "construction",
+    "id": "constr_astral_dig_fungal_bluemarl_seam",
+    "group": "astral_dig_vein",
+    "category": "DIG",
+    "skill": "survival",
+    "difficulty": 0,
+    "time": "30 m",
+    "on_display": true,
+    "qualities": [ { "id": "DIG", "level": 1 } ],
+    "pre_terrain": "t_astral_fungal_bluemarl_seam",
+    "pre_special": "check_empty",
+    "post_terrain": "t_dirt",
+    "byproducts": [ { "group": "astral_vein_fungal_bluemarl_seam", "count": 1 } ],
+    "activity_level": "EXTRA_EXERCISE",
+    "do_turn_special": "do_turn_shovel"
+  },
+  {
+    "type": "item_group",
+    "id": "astral_vein_fungal_brimdust_pocket",
+    "subtype": "collection",
+    "entries": [ { "item": "astral_fungal_brimdust", "count": [ 2, 4 ], "prob": 100 } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fungal_brimdust_pocket",
+    "copy-from": "t_dirt",
+    "looks_like": "t_clay",
+    "name": "fungal brimdust pocket",
+    "color": "brown",
+    "description": "A patch of fungal brimdust pocket in the fungal forest.  Dig here with a shovel.  Found: brimdust pockets (extends core crust).",
+    "//": "astral content list 22-items-fungal-root: dig with a shovel (construction constr_astral_dig_fungal_brimdust_pocket)"
+  },
+  {
+    "type": "construction",
+    "id": "constr_astral_dig_fungal_brimdust_pocket",
+    "group": "astral_dig_vein",
+    "category": "DIG",
+    "skill": "survival",
+    "difficulty": 0,
+    "time": "30 m",
+    "on_display": true,
+    "qualities": [ { "id": "DIG", "level": 1 } ],
+    "pre_terrain": "t_astral_fungal_brimdust_pocket",
+    "pre_special": "check_empty",
+    "post_terrain": "t_dirt",
+    "byproducts": [ { "group": "astral_vein_fungal_brimdust_pocket", "count": 1 } ],
+    "activity_level": "EXTRA_EXERCISE",
+    "do_turn_special": "do_turn_shovel"
+  },
+  {
+    "type": "item_group",
+    "id": "astral_vein_root_emberstone_seam",
+    "subtype": "collection",
+    "entries": [
+      { "item": "astral_root_emberstone_seam", "count": [ 3, 5 ], "prob": 100 },
+      { "item": "astral_root_deep_ember", "count": [ 1, 1 ], "prob": 100 }
+    ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_root_emberstone_seam",
+    "copy-from": "t_rock",
+    "looks_like": "t_rock",
+    "name": "root emberstone seam",
+    "color": "light_gray",
+    "description": "An outcrop of root emberstone seam breaking the ground of root country.  A pickaxe would have it out in an hour.  Found: deep root country (extends core vein).",
+    "//": "astral content list 22-items-fungal-root: mine with a pickaxe; items from astral_vein_root_emberstone_seam",
+    "delete": { "flags": [ "NATURAL_UNDERGROUND" ] },
+    "roof": "t_open_air",
+    "bash": {
+      "str_min": 60,
+      "str_max": 240,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_dirt",
+      "items": [ { "group": "astral_vein_root_emberstone_seam", "count": 1 } ]
+    }
+  },
+  {
+    "type": "item_group",
+    "id": "astral_vein_root_heartglass_geode",
+    "subtype": "collection",
+    "entries": [ { "item": "astral_root_heartglass_geode", "count": [ 1, 2 ], "prob": 100 } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_root_heartglass_geode",
+    "copy-from": "t_rock",
+    "looks_like": "t_rock",
+    "name": "root heartglass geode",
+    "color": "light_gray",
+    "description": "An outcrop of root heartglass geode breaking the ground of root country.  A pickaxe would have it out in an hour.  Found: deep geode pockets.",
+    "//": "astral content list 22-items-fungal-root: mine with a pickaxe; items from astral_vein_root_heartglass_geode",
+    "delete": { "flags": [ "NATURAL_UNDERGROUND" ] },
+    "roof": "t_open_air",
+    "bash": {
+      "str_min": 60,
+      "str_max": 240,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_dirt",
+      "items": [ { "group": "astral_vein_root_heartglass_geode", "count": 1 } ]
+    }
+  },
+  {
+    "type": "item_group",
+    "id": "astral_vein_root_ghostsalt_crust",
+    "subtype": "collection",
+    "entries": [ { "item": "astral_root_ghostsalt_crust", "count": [ 3, 5 ], "prob": 100 } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_root_ghostsalt_crust",
+    "copy-from": "t_dirt",
+    "looks_like": "t_clay",
+    "name": "root ghostsalt crust",
+    "color": "brown",
+    "description": "A patch of root ghostsalt crust in root country.  Dig here with a shovel.  Found: deep dry crusts.",
+    "//": "astral content list 22-items-fungal-root: dig with a shovel (construction constr_astral_dig_root_ghostsalt_crust)"
+  },
+  {
+    "type": "construction",
+    "id": "constr_astral_dig_root_ghostsalt_crust",
+    "group": "astral_dig_vein",
+    "category": "DIG",
+    "skill": "survival",
+    "difficulty": 0,
+    "time": "30 m",
+    "on_display": true,
+    "qualities": [ { "id": "DIG", "level": 1 } ],
+    "pre_terrain": "t_astral_root_ghostsalt_crust",
+    "pre_special": "check_empty",
+    "post_terrain": "t_dirt",
+    "byproducts": [ { "group": "astral_vein_root_ghostsalt_crust", "count": 1 } ],
+    "activity_level": "EXTRA_EXERCISE",
+    "do_turn_special": "do_turn_shovel"
+  },
+  {
+    "type": "item_group",
+    "id": "astral_vein_root_silvermire_vein",
+    "subtype": "collection",
+    "entries": [ { "item": "astral_root_silvermire_ore", "count": [ 1, 3 ], "prob": 100 } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_root_silvermire_vein",
+    "copy-from": "t_rock",
+    "looks_like": "t_rock",
+    "name": "root silvermire vein",
+    "color": "light_gray",
+    "description": "An outcrop of root silvermire breaking the ground of root country.  A pickaxe would have it out in an hour.  Found: root country (moves silvermire onto root).",
+    "//": "astral content list 22-items-fungal-root: mine with a pickaxe; items from astral_vein_root_silvermire_vein",
+    "delete": { "flags": [ "NATURAL_UNDERGROUND" ] },
+    "roof": "t_open_air",
+    "bash": {
+      "str_min": 60,
+      "str_max": 240,
+      "sound": "crash!",
+      "sound_fail": "whump!",
+      "ter_set": "t_dirt",
+      "items": [ { "group": "astral_vein_root_silvermire_vein", "count": 1 } ]
+    }
   }
 ]

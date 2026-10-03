@@ -35,6 +35,12 @@ jobs:
         run: python3 tools/astral/gen_content.py --check
       - name: Validate building layouts
         run: python3 tests/astral/test_building_briefs.py
+      - name: Validate vanilla wiring
+        run: python3 tools/astral/gen_wiring.py --check
+      - name: Validate Stage D landmarks
+        run: python3 tests/astral/test_landmarks.py
+      - name: Validate the Craft (magic generator)
+        run: python3 tests/astral/test_magic.py
       - name: Verify guild generator reproduction
         run: |
           python3 tools/astral/gen_guild_placeholders.py

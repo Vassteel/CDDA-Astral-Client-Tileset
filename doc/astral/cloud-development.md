@@ -14,8 +14,11 @@ The source is newer than the downloadable client: this sync does not publish a n
 - Ten town briefs: smithy, butcher, alchemist, healer, tailor, enchanter, stables, inn,
   chapel and watch post. Existing guild layouts preserved. These are building layouts,
   not staffed service or quest systems.
-- 0021 originally depended on an unavailable newer generator. The local adapter is
-  `tools/astral/building_briefs.py`; do not reapply the original patch or restore its stale paths.
+- Town and guild buildings come from `tools/astral/gen_guild_placeholders.py` (the shaped-room
+  "Plan" grammar: wings, rotundas, porches, upper floors, cellars) reading the briefs in
+  `tools/astral/buildings/`. The interim adapter `building_briefs.py` was retired on 2026-10-02.
+  `tests/astral/test_building_briefs.py` checks reachability, stairs, roofs and that the JSON
+  matches the generator.
 - Guild output belongs in `data/json/mapgen/astral/settlements_guild_placeholder.json`.
   Moving it back to `data/json/astral/` breaks furniture-definition load ordering.
 - Historical plans may describe future or unshipped features as done. Read the recent

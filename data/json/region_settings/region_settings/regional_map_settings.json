@@ -385,7 +385,15 @@
       { "id": "astral_stables", "buildings": [ "astral_town_stables" ], "max_distance": 100, "chance": 100 },
       { "id": "astral_inn", "buildings": [ "astral_town_inn" ], "max_distance": 100, "chance": 100 },
       { "id": "astral_chapel", "buildings": [ "astral_town_chapel" ], "max_distance": 100, "chance": 100 },
-      { "id": "astral_watch_post", "buildings": [ "astral_town_watch_post" ], "max_distance": 100, "chance": 100 }
+      { "id": "astral_watch_post", "buildings": [ "astral_town_watch_post" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_records_house", "buildings": [ "astral_town_records_house" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_infirmary", "buildings": [ "astral_town_infirmary" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_warehouse", "buildings": [ "astral_town_warehouse" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_bathhouse", "buildings": [ "astral_town_bathhouse" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_market_hall", "buildings": [ "astral_town_market_hall" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_assayer", "buildings": [ "astral_town_assayer" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_cartographer", "buildings": [ "astral_town_cartographer" ], "max_distance": 100, "chance": 100 },
+      { "id": "astral_quartermaster_store", "buildings": [ "astral_town_quartermaster_store" ], "max_distance": 100, "chance": 100 }
     ],
     "city_size": 8,
     "city_spacing": 4,

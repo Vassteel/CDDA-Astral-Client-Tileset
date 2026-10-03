@@ -1,0 +1,87 @@
+{
+  "id": "records_house",
+  "label": "Records House",
+  "//": "Stone archive: records hub with cartography and vault below, full-footprint library above.",
+  "city_sizes": [
+    11,
+    55
+  ],
+  "wall": "#",
+  "footprint": [
+    1,
+    1
+  ],
+  "ground": {
+    "rooms": [
+      {
+        "kind": "records",
+        "rect": [
+          4,
+          6,
+          14,
+          14
+        ]
+      },
+      {
+        "kind": "cartography",
+        "rect": [
+          15,
+          6,
+          20,
+          14
+        ]
+      },
+      {
+        "kind": "vault",
+        "rect": [
+          4,
+          15,
+          20,
+          20
+        ]
+      }
+    ],
+    "hub": 0,
+    "porch": [
+      7,
+      4,
+      11,
+      5
+    ],
+    "doors": [
+      [
+        8,
+        6
+      ],
+      [
+        9,
+        6
+      ]
+    ],
+    "window_step": 4,
+    "path": [
+      9,
+      3,
+      0
+    ],
+    "trees": 0.15
+  },
+  "upper": {
+    "rooms": [
+      {
+        "kind": "library",
+        "rect": [
+          4,
+          6,
+          20,
+          20
+        ]
+      }
+    ],
+    "hub": 0,
+    "stairs": [
+      5,
+      7
+    ]
+  }
+}
