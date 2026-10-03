@@ -616,7 +616,7 @@ void open( const tripoint_bub_ms &where )
                 menu.addentry( unload_items, !here.i_at( where ).empty(), 'u', _( "Unload contents" ) );
             }
             if( f.workbench ) {
-                menu.addentry( craft, true, 'c', _( "Craft" ) );
+                menu.addentry( craft, true, 'c', _( "Craft items" ) );
             }
             query( menu, where );
             if( menu.ret == operate ) {

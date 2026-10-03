@@ -1864,7 +1864,11 @@ static void cast_spell( bool recast_spell = false )
     std::map<magic_type_id, bool> success_tracker = {};
     if( !player_character.magic->can_cast_any_spell( player_character, success_tracker ) ) {
         for( auto const& [m_type, any_success] : success_tracker ) {
-            if( !any_success && m_type->cannot_cast_message.has_value() ) {
+            const bool school_blocked = std::any_of( m_type->cannot_cast_flags.begin(),
+            m_type->cannot_cast_flags.end(), [&]( const std::string &flag ) {
+                return player_character.has_flag( json_character_flag( flag ) );
+            } );
+            if( !any_success && school_blocked && m_type->cannot_cast_message.has_value() ) {
                 add_msg( game_message_params{ m_bad, gmf_bypass_cooldown },
                          m_type->cannot_cast_message.value() );
             }
@@ -1913,7 +1917,7 @@ bool Character::cast_spell( spell &sp, bool fake_spell,
     if( !sp.no_hands() && !has_flag( json_flag_SUBTLE_SPELL ) &&
         has_effect( effect_stunned ) ) {
         add_msg( game_message_params{ m_bad, gmf_bypass_cooldown },
-                 _( "You can't focus enough to cast spell." ) );
+                 _( "You are too stunned to cast this spell." ) );
         return false;
     }
 

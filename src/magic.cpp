@@ -3243,6 +3243,11 @@ void spellcasting_callback::display_spell_info( size_t index )
 
     if( sp.has_components() ) {
         ImGui::NewLine();
+        if( !sp.components().can_make_with_inventory( &pc,
+                pc.crafting_inventory( pc.pos_bub(), 0, false ), return_true<item> ) ) {
+            ImGui::TextColored( c_light_red, "%s",
+                                _( "Missing casting materials or tools.  Requirements are listed below." ) );
+        }
         if( !sp.components().get_components().empty() ) {
             for( const std::string &line : sp.components().get_folded_components_list(
                      &pc, 0, c_light_gray, pc.crafting_inventory( pc.pos_bub(), 0, false ), return_true<item> ) ) {
@@ -3458,8 +3463,14 @@ spell &known_magic::select_spell( Character &guy )
     }
 
     for( size_t i = 0; i < known_spells_sorted.size(); i++ ) {
-        spell_menu.addentry( static_cast<int>( i ), known_spells_sorted[i]->can_cast( guy ),
-                             get_invlet( known_spells_sorted[i]->id() ), known_spells_sorted[i]->name() );
+        const spell &sp = *known_spells_sorted[i];
+        const std::string cost = sp.energy_source() == magic_energy_type::none ?
+                                 _( "No energy cost" ) :
+                                 string_format( "%s %s", remove_color_tags( sp.energy_cost_string( guy ) ),
+                                         sp.energy_string() );
+        spell_menu.addentry( static_cast<int>( i ), sp.can_cast( guy ), get_invlet( sp.id() ),
+                             string_format( "%s — %s — %s", sp.name(), cost,
+                                            moves_to_string( sp.casting_time( guy ) ) ) );
     }
     refresh_favorite( &spell_menu, known_spells_sorted );
 
