@@ -248,6 +248,7 @@ void draw_profession_inventory( const avatar &u );
 void draw_equipment_details( const avatar &u );
 void draw_hobby_header( const avatar &u );
 void draw_hobby_details();
+void draw_character_craft( const avatar &u );
 void draw_hobby_selected( const avatar &u );
 void draw_skill_details( const avatar &u,
                          const std::map<skill_id, int> &prof_skills, skill_id currentSkill );

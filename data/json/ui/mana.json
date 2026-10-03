@@ -4,11 +4,10 @@
     "type": "widget",
     "style": "layout",
     "label": "Mana",
-    "description": "Shows <color_yellow>mana</color> and max mana, as well as a graph.\n\nOnly useful with <color_yellow>Magiclysm</color> mod.",
+    "description": "Shows <color_yellow>mana</color> and max mana, as well as a graph.  Astral: on by default for the Craft.",
     "arrange": "rows",
     "widgets": [ "custom_mana_graph_layout", "custom_mana_total_num_layout" ],
-    "pad_labels": true,
-    "flags": [ "W_DISABLED_BY_DEFAULT" ]
+    "pad_labels": true
   },
   {
     "id": "custom_mana_graph_widget",

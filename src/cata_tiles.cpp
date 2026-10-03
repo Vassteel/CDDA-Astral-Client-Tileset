@@ -2734,8 +2734,11 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
 
     //draw it!
     const tile_render_params rp{ ll, nv_color_active };
-    draw_tile_at( display_tile, screen_pos, loc_rand, rota, rp,
-                  retract, height_3d, offset );
+    const tripoint_abs_ms absolute = here.get_abs( pos );
+    const int macro_sprite = category == TILE_CATEGORY::TERRAIN ?
+                             display_tile.macro.sprite_at( absolute.x(), absolute.y(), absolute.z() ) : -1;
+    draw_tile_at( display_tile, screen_pos, loc_rand, macro_sprite >= 0 ? 0 : rota, rp,
+                  retract, height_3d, offset, macro_sprite );
 
     return true;
 }
@@ -2743,9 +2746,11 @@ bool cata_tiles::draw_from_id_string_internal( const std::string &id, TILE_CATEG
 bool cata_tiles::draw_sprite_at(
     const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
     const point &p, unsigned int loc_rand, bool rota_fg, int rota,
-    const tile_render_params &rp, int retract, int &height_3d, const point &offset )
+    const tile_render_params &rp, int retract, int &height_3d, const point &offset,
+    int sprite_override )
 {
-    const std::vector<int> *picked = svlist.pick( loc_rand );
+    static const std::vector<int> override_list{ 0 };
+    const std::vector<int> *picked = sprite_override >= 0 ? &override_list : svlist.pick( loc_rand );
     if( !picked ) {
         return true;
     }
@@ -2775,7 +2780,10 @@ bool cata_tiles::draw_sprite_at(
         sprite_num = rota % spritelist.size();
     }
 
-    const int sprite_index = spritelist[sprite_num];
+    const int sprite_index = sprite_override >= 0 ? sprite_override : spritelist[sprite_num];
+    if( sprite_override >= 0 ) {
+        rotate_sprite = false;
+    }
     const texture *sprite_tex = tileset_ptr->get_tile( sprite_index );
 
     const cata_shader::variant_kind variant =
@@ -3002,13 +3010,13 @@ bool cata_tiles::draw_sprite_at(
 bool cata_tiles::draw_tile_at(
     const tile_type &tile, const point &p, unsigned int loc_rand, int rota,
     const tile_render_params &rp, int retract, int &height_3d,
-    const point &offset )
+    const point &offset, int sprite_override )
 {
     int fake_int = height_3d;
     draw_sprite_at( tile, tile.bg, p, loc_rand, /*fg:*/ false, rota, rp,
                     retract, fake_int, offset );
     draw_sprite_at( tile, tile.fg, p, loc_rand, /*fg:*/ true, rota, rp,
-                    retract, height_3d, offset );
+                    retract, height_3d, offset, sprite_override );
     return true;
 }
 

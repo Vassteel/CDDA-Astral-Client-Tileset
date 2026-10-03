@@ -65,8 +65,11 @@ enum class lit_level : uint8_t;
 enum class visibility_type : int;
 
 
+#include "terrain_macro.h"
+
 /** Structures */
 struct tile_type {
+    terrain_macro macro;
     // fg and bg are both a weighted list of lists of sprite IDs
     weighted_int_list<std::vector<int>> fg, bg;
     bool multitile = false;
@@ -746,10 +749,11 @@ class cata_tiles
         bool draw_sprite_at(
             const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
             const point &, unsigned int loc_rand, bool rota_fg, int rota,
-            const tile_render_params &rp, int retract, int &height_3d, const point &offset );
+            const tile_render_params &rp, int retract, int &height_3d, const point &offset,
+            int sprite_override = -1 );
         bool draw_tile_at( const tile_type &tile, const point &, unsigned int loc_rand, int rota,
                            const tile_render_params &rp, int retract, int &height_3d,
-                           const point &offset );
+                           const point &offset, int sprite_override = -1 );
 
         /* Tile Picking */
         void get_tile_values( int t, const std::array<int, 4> &tn, int &subtile, int &rotation,

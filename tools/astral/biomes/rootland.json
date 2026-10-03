@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "region": {
+    "type": "region_settings",
+    "id": "astral_biome_rootland",
+    "copy-from": "astral_pocket",
+    "//": "Stand-in rootland biome for the first plane (S4 plumbing).  Vanilla terrain as placeholder until the T1 theme bill lands.  2026-10-01 dominant-biome floors: ~85 % of the land is this biome; the rest is painted from the listed regions (`default` = overworld plains, forest and ordinary swamp) in contiguous patches, weights falling with distance in the route.",
+    "weather": "astral_biome_rootland",
+    "default_oter": [
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "open_air",
+      "astral_rootland",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock",
+      "deep_rock"
+    ],
+    "biome_mix": {
+      "dominant_share": 0.85,
+      "seed_offset": 10,
+      "regions": [
+        [ "astral_biome_fungal", 5 ],
+        [ "astral_biome_lowlands", 3 ],
+        [ "default", 6 ],
+        [ "astral_biome_meadows", 1 ]
+      ],
+      "//": "Weights from Grok's WP-B5 table (2026-10-02): overworld plains/forest/thick/swamp summed into `default`."
+    }
+  },
+  "overmap": {
+    "type": "overmap_terrain",
+    "id": "astral_rootland",
+    "name": "root country",
+    "sym": "R",
+    "color": "brown",
+    "see_cost": "low",
+    "flags": [ "NO_ROTATE" ],
+    "looks_like": "ravine",
+    "spawns": { "group": "GROUP_ASTRAL_ROOT", "population": [ 1, 2 ], "chance": 35 },
+    "//": "Static spawns from the generated theme monstergroup (tools/astral/gen_content.py).",
+    "extras": "astral_mx_root"
+  },
+  "mapgen": {
+    "type": "mapgen",
+    "om_terrain": "astral_rootland",
+    "object": {
+      "fill_ter": "t_grass",
+      "terrain": {
+        "m": [
+          [ "t_dirt", 16 ],
+          [ "t_grass_dead", 6 ],
+          [ "t_dirtmound", 2 ],
+          [ "t_tree_dead", 3 ],
+          [ "t_root_wall", 2 ],
+          [ "t_rock_floor", 1 ]
+        ]
+      },
+      "rows": [
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm",
+        "mmmmmmmmmmmmmmmmmmmmmmmm"
+      ],
+      "place_nested": [
+        {
+          "chunks": [ [ "astral_scatter_root", 1 ], [ "null", 1 ] ],
+          "x": [ 0, 20 ],
+          "y": [ 0, 20 ],
+          "repeat": [ 2, 5 ]
+        }
+      ]
+    },
+    "//": "2026-10-02: Astral flora and veins of this theme scattered by astral_scatter_root (gen_content.py)."
+  }
+}

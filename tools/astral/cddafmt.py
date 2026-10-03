@@ -20,6 +20,7 @@ def fmt(v,ind,prefix_len):
         pad=" "*(ind+2)
         return "[\n"+",\n".join(pad+fmt(x,ind+2,0) for x in v)+"\n"+" "*ind+"]"
     return s
-for p in sys.argv[1:]:
+if __name__ == '__main__':
+  for p in sys.argv[1:]:
     d=json.load(open(p))
     open(p,'w').write(fmt(d,0,0)+"\n")

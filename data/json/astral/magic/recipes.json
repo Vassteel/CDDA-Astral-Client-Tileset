@@ -1,0 +1,706 @@
+[
+  {
+    "type": "recipe",
+    "result": "astral_prime_striking_rod_1",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 1,
+    "time": "30 m",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_meadow_hearthwood_plank", 1 ] ], [ [ "astral_root_emberstone", 1 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_striking_rod_2",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_striking_rod_1", 1 ] ],
+      [ [ "astral_root_heartglass", 1 ] ],
+      [ [ "astral_drowned_silvermire_ore", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_striking_rod_3",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 5,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_prime_striking_rod_2", 1 ] ], [ [ "astral_core_heart_fragment", 1 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_rune_striking",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_MATERIALS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_rune_blank", 1 ] ],
+      [ [ "astral_root_emberstone", 1 ] ],
+      [ [ "astral_prime_tide_dust", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_ward_disc_1",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 1,
+    "time": "30 m",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_meadow_bluemarl", 2 ] ], [ [ "astral_trail_chalk", 1 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_ward_disc_2",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_ward_disc_1", 1 ] ],
+      [ [ "astral_root_heartglass", 1 ] ],
+      [ [ "astral_drowned_silvermire_ore", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_ward_disc_3",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 5,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_prime_ward_disc_2", 1 ] ], [ [ "astral_core_heart_fragment", 1 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_rune_warding",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_MATERIALS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_rune_blank", 1 ] ],
+      [ [ "astral_drowned_ghostsalt", 1 ] ],
+      [ [ "astral_prime_tide_dust", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_calling_bell_1",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 1,
+    "time": "30 m",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_drowned_verdigris_ingot", 1 ] ], [ [ "cordage_short", 1, "LIST" ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_calling_bell_2",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_calling_bell_1", 1 ] ],
+      [ [ "astral_root_heartglass", 1 ] ],
+      [ [ "astral_drowned_silvermire_ore", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_calling_bell_3",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 5,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_prime_calling_bell_2", 1 ] ], [ [ "astral_core_heart_fragment", 1 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_rune_calling",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_MATERIALS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_rune_blank", 1 ] ],
+      [ [ "astral_drowned_verdigris_scrap", 1 ] ],
+      [ [ "astral_prime_tide_dust", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_temper_nail_1",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 1,
+    "time": "30 m",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_duskiron_bar", 1 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_temper_nail_2",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_temper_nail_1", 1 ] ],
+      [ [ "astral_root_heartglass", 1 ] ],
+      [ [ "astral_drowned_silvermire_ore", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_temper_nail_3",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 5,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_prime_temper_nail_2", 1 ] ], [ [ "astral_core_heart_fragment", 1 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_rune_tempering",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_MATERIALS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_rune_blank", 1 ] ],
+      [ [ "astral_duskiron_bar", 1 ] ],
+      [ [ "astral_prime_tide_dust", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_bone_fetish_1",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 1,
+    "time": "30 m",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "bone", 2 ] ], [ [ "cordage_short", 1, "LIST" ] ], [ [ "astral_prime_grave_dust", 1 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_bone_fetish_2",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_bone_fetish_1", 1 ] ],
+      [ [ "astral_root_heartglass", 1 ] ],
+      [ [ "astral_drowned_silvermire_ore", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_bone_fetish_3",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 5,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_prime_bone_fetish_2", 1 ] ], [ [ "astral_core_heart_fragment", 1 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_rune_hexing",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_MATERIALS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_rune_blank", 1 ] ],
+      [ [ "astral_prime_grave_dust", 1 ] ],
+      [ [ "astral_prime_tide_dust", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_wayfinder_needle_1",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 1,
+    "time": "30 m",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_truestone_needle", 1 ] ], [ [ "astral_drowned_verdigris_ingot", 1 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_wayfinder_needle_2",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_wayfinder_needle_1", 1 ] ],
+      [ [ "astral_root_heartglass", 1 ] ],
+      [ [ "astral_drowned_silvermire_ore", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_wayfinder_needle_3",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 5,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_prime_wayfinder_needle_2", 1 ] ], [ [ "astral_core_heart_fragment", 1 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_rune_wayfinding",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_MATERIALS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_rune_blank", 1 ] ],
+      [ [ "astral_truestone_needle", 1 ] ],
+      [ [ "astral_prime_tide_dust", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_mending_sprig_1",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 1,
+    "time": "30 m",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_hearthwood_tinder", 2 ] ],
+      [ [ "astral_meadow_bee_wax", 1 ] ],
+      [ [ "cordage_short", 1, "LIST" ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_mending_sprig_2",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_mending_sprig_1", 1 ] ],
+      [ [ "astral_root_heartglass", 1 ] ],
+      [ [ "astral_drowned_silvermire_ore", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_mending_sprig_3",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 5,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_prime_mending_sprig_2", 1 ] ], [ [ "astral_core_heart_fragment", 1 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_rune_mending",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_MATERIALS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_rune_blank", 1 ] ],
+      [ [ "astral_meadow_hearth_tea", 1 ] ],
+      [ [ "astral_prime_tide_dust", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_shaper_chisel_1",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 1,
+    "time": "30 m",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_duskiron_bar", 1 ] ], [ [ "astral_root_ironwood_haft", 1 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_shaper_chisel_2",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_shaper_chisel_1", 1 ] ],
+      [ [ "astral_root_heartglass", 1 ] ],
+      [ [ "astral_drowned_silvermire_ore", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_shaper_chisel_3",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_TOOLS",
+    "skill_used": "astral_lore",
+    "difficulty": 5,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_prime_shaper_chisel_2", 1 ] ], [ [ "astral_core_heart_fragment", 1 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_rune_shaping",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_MATERIALS",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "1 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_prime_rune_blank", 1 ] ],
+      [ [ "astral_meadow_bluemarl", 1 ] ],
+      [ [ "astral_prime_tide_dust", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_wayfarer_staff",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "skill_used": "astral_lore",
+    "difficulty": 2,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_root_ironwood_plank", 2 ] ],
+      [ [ "astral_root_heartglass", 1 ] ],
+      [ [ "astral_drowned_verdigris_ingot", 1 ] ]
+    ],
+    "qualities": [ { "id": "CUT", "level": 1 }, { "id": "SAW_W", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_tide_dust",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_MATERIALS",
+    "skill_used": "astral_lore",
+    "difficulty": 0,
+    "time": "5 m",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_prime_crystallised_tide", 1 ] ] ],
+    "qualities": [ { "id": "HAMMER", "level": 1 } ],
+    "result_mult": 4
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_grave_dust",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_MATERIALS",
+    "skill_used": "astral_lore",
+    "difficulty": 0,
+    "time": "20 m",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "bone", 2 ] ], [ [ "astral_hearthcoal", 1 ], [ "charcoal", 1 ] ] ],
+    "qualities": [ { "id": "HAMMER", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_rune_blank",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_MATERIALS",
+    "skill_used": "astral_lore",
+    "difficulty": 2,
+    "time": "40 m",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_root_heartglass", 1 ] ] ],
+    "qualities": [ { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_tide_draught",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "skill_used": "astral_lore",
+    "difficulty": 2,
+    "time": "15 m",
+    "autolearn": true,
+    "activity_level": "NO_EXERCISE",
+    "components": [
+      [ [ "astral_prime_crystallised_tide", 1 ] ],
+      [ [ "water_clean", 1 ] ],
+      [ [ "astral_fungal_glowcap_oil", 1 ] ]
+    ],
+    "tools": [ [ [ "surface_heat", 5, "LIST" ] ] ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_delver_robe",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_fungal_myceloth", 4 ] ], [ [ "thread", 20 ] ] ],
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_tideweave_cloak",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_drowned_sea_silk_cloth", 3 ] ],
+      [ [ "astral_prime_tide_dust", 2 ] ],
+      [ [ "thread", 20 ] ]
+    ],
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_casting_gloves",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_fungal_chitin_leather", 1 ] ], [ [ "astral_drowned_sea_silk_thread", 1 ] ] ],
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_tide_ring",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_drowned_silvermire_ore", 1 ] ], [ [ "astral_prime_crystallised_tide", 1 ] ] ],
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_circlet",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_drowned_silvermire_ore", 2 ] ], [ [ "astral_prime_crystallised_tide", 2 ] ] ],
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_hearth_charm",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_hearthwood_tinder", 1 ] ],
+      [ [ "astral_drowned_ghostsalt", 1 ] ],
+      [ [ "cordage_short", 1, "LIST" ] ]
+    ],
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_wayfarer_boots",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "leather", 6 ] ], [ [ "astral_prime_rune_wayfinding", 1 ] ] ],
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_healer_apron",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [ [ [ "astral_drowned_sea_silk_cloth", 2 ] ], [ [ "astral_prime_rune_mending", 1 ] ] ],
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_hexer_veil",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_drowned_sea_silk_cloth", 1 ] ],
+      [ [ "astral_prime_grave_dust", 1 ] ],
+      [ [ "astral_prime_rune_hexing", 1 ] ]
+    ],
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 1 } ]
+  },
+  {
+    "type": "recipe",
+    "result": "astral_prime_shaper_gauntlets",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "skill_used": "astral_lore",
+    "difficulty": 3,
+    "time": "2 h",
+    "autolearn": true,
+    "activity_level": "LIGHT_EXERCISE",
+    "components": [
+      [ [ "astral_fungal_chitin_leather", 2 ] ],
+      [ [ "astral_duskiron_bar", 1 ] ],
+      [ [ "astral_prime_rune_shaping", 1 ] ]
+    ],
+    "qualities": [ { "id": "SEW", "level": 1 }, { "id": "CUT", "level": 1 } ]
+  }
+]

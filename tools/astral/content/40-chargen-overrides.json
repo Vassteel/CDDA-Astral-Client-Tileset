@@ -1,0 +1,37 @@
+{
+ "disc_traits": {
+  "ASTRAL_DISC_STRIKING": {
+   "points": 3,
+   "description": "You have done the Striking rite.  Force answers when you have the rod and the diagram."
+  },
+  "ASTRAL_DISC_WARDING": {
+   "points": 1,
+   "description": "You have done the Warding rite.  The tide will thicken for you, and you can taste it."
+  },
+  "ASTRAL_DISC_CALLING": {
+   "points": 3,
+   "description": "You have done the Calling rite.  What you call still wants its fee."
+  },
+  "ASTRAL_DISC_TEMPERING": {
+   "points": 3,
+   "description": "You have done the Tempering rite.  You can set a blessing into flesh or gear for a while."
+  },
+  "ASTRAL_DISC_HEXING": {
+   "points": 6,
+   "description": "You have done the Hexing rite, outside the hall.  Every curse asks for blood as well as tide."
+  },
+  "ASTRAL_DISC_WAYFINDING": {
+   "points": 1,
+   "description": "You have done the Wayfinding rite.  Bearings, marks, and short steps are open to you."
+  },
+  "ASTRAL_DISC_MENDING": {
+   "points": 1,
+   "description": "You have done the Mending rite.  You can close what is torn, if you have the time."
+  },
+  "ASTRAL_DISC_SHAPING": {
+   "points": 3,
+   "description": "You have done the Shaping rite.  Stone, soil, and rooted things will take a new shape from you."
+  }
+ },
+ "lore_description": "You are learning how the Craft is written down.  Lore is the skill of reading a grimoire, telling a real diagram from a doodle, and knowing which plane stained the tide in front of you.  It does not attune you.  It makes the reading less of a waste."
+}

@@ -1,5 +1,7 @@
 #include "construction_hybrid_ui.h"
 
+#if defined(TILES)
+
 #include <algorithm>
 #include <cstdio>
 #include <map>
@@ -810,3 +812,5 @@ construction_id construction_menu_hybrid( const bool blueprint )
 {
     return construction_menu_hybrid_impl( blueprint );
 }
+
+#endif // TILES

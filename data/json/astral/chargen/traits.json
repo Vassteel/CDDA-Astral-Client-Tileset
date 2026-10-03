@@ -1,0 +1,306 @@
+[
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_TIDE_SENSITIVE",
+    "name": { "str": "Tide-sensitive" },
+    "points": 2,
+    "description": "You feel the tide the way other people feel weather.  Your eye for it is sharper, and so is the ache when it turns.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (tide and Craft); effects: PERCEPTION add 1",
+    "enchantments": [ { "values": [ { "value": "PERCEPTION", "add": 1 } ] } ],
+    "cancels": [ "ASTRAL_TRAIT_TIDE_BLIND" ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_THIN_BLOODED",
+    "name": { "str": "Thin-blooded" },
+    "points": -2,
+    "description": "The tide does not stay in you.  Your pool is shallow, and long workings run dry early.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (tide and Craft); effects: MAX_MANA add -200",
+    "enchantments": [ { "values": [ { "value": "MAX_MANA", "add": -200 } ] } ],
+    "cancels": [ "ASTRAL_TRAIT_DEEP_WELL" ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_DEEP_WELL",
+    "name": { "str": "Deep Well" },
+    "points": 2,
+    "description": "You hold a deep pool of tide and spend it slowly.  It refills like a cistern, not a stream.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (tide and Craft); effects: MAX_MANA add 400; REGEN_MANA multiply -0.4",
+    "enchantments": [
+      {
+        "values": [ { "value": "MAX_MANA", "add": 400 }, { "value": "REGEN_MANA", "multiply": -0.4 } ]
+      }
+    ],
+    "cancels": [ "ASTRAL_TRAIT_THIN_BLOODED", "ASTRAL_TRAIT_QUICK_TIDE" ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_QUICK_TONGUE",
+    "name": { "str": "Quick Tongue" },
+    "points": 2,
+    "description": "Spoken workings leave you faster than they should.  Every spell you cast is a little quicker for it.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (tide and Craft); effects: CASTING_TIME_MULTIPLIER multiply -0.15",
+    "enchantments": [ { "values": [ { "value": "CASTING_TIME_MULTIPLIER", "multiply": -0.15 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_STEADY_HANDS",
+    "name": { "str": "Steady Hands" },
+    "points": 2,
+    "description": "Your gestures are small and sure, and your hands do not wander.  Workings come off you a little faster.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (tide and Craft); effects: CASTING_TIME_MULTIPLIER multiply -0.1; DEXTERITY add 1",
+    "enchantments": [
+      {
+        "values": [ { "value": "CASTING_TIME_MULTIPLIER", "multiply": -0.1 }, { "value": "DEXTERITY", "add": 1 } ]
+      }
+    ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_GATE_SICK",
+    "name": { "str": "Gate-sick" },
+    "points": -3,
+    "description": "Crossing a gate leaves you wrong for a while, and some days the wrongness never quite leaves.  You are slower on your feet.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (tide and Craft); effects: SPEED add -15",
+    "enchantments": [ { "values": [ { "value": "SPEED", "add": -15 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_GUILD_MARKED",
+    "name": { "str": "Guild-marked" },
+    "points": 1,
+    "description": "The guild's mark is on you, ink or scar.  People who know the Craft take you for one of theirs.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (tide and Craft); effects: SOCIAL_PERSUADE multiply 0.15",
+    "enchantments": [ { "values": [ { "value": "SOCIAL_PERSUADE", "multiply": 0.15 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_RUNE_BLIND",
+    "name": { "str": "Rune-blind" },
+    "points": -3,
+    "description": "Written tide means nothing to you.  A rune is a smudge.  You cannot use them, and the points come back for it.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (tide and Craft); effects: no engine flag yet; text only"
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_LOUD_CASTER",
+    "name": { "str": "Loud Caster" },
+    "points": -1,
+    "description": "Your workings announce themselves.  They take a little longer, and anything nearby knows a spell just happened.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (tide and Craft); effects: CASTING_TIME_MULTIPLIER multiply 0.1",
+    "enchantments": [ { "values": [ { "value": "CASTING_TIME_MULTIPLIER", "multiply": 0.1 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_HEDGE_BORN",
+    "name": { "str": "Hedge-born" },
+    "points": 1,
+    "description": "You learned rites at a kitchen table, not in a hall.  Your pool is modest.  Small hurts close a little faster.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (tide and Craft); effects: MAX_MANA add -100; REGEN_HP multiply 0.1",
+    "enchantments": [ { "values": [ { "value": "MAX_MANA", "add": -100 }, { "value": "REGEN_HP", "multiply": 0.1 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_QUICK_TIDE",
+    "name": { "str": "Quick Tide" },
+    "points": 2,
+    "description": "Your pool is ordinary and it comes back fast, like a cup left in the rain.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (tide and Craft); effects: REGEN_MANA multiply 0.25",
+    "enchantments": [ { "values": [ { "value": "REGEN_MANA", "multiply": 0.25 } ] } ],
+    "cancels": [ "ASTRAL_TRAIT_DEEP_WELL" ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_TIDE_BLIND",
+    "name": { "str": "Tide-blind" },
+    "points": -2,
+    "description": "You do not taste the tide.  Bearings that other delvers feel, you have to measure.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (tide and Craft); effects: PERCEPTION add -2",
+    "enchantments": [ { "values": [ { "value": "PERCEPTION", "add": -2 } ] } ],
+    "cancels": [ "ASTRAL_TRAIT_TIDE_SENSITIVE" ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_BLOOD_PRICE",
+    "name": { "str": "Blood Price" },
+    "points": -2,
+    "description": "Hexing bites you harder than it bites them.  You heal a little slower all the time, not only after a curse.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (tide and Craft); effects: REGEN_HP multiply -0.15",
+    "enchantments": [ { "values": [ { "value": "REGEN_HP", "multiply": -0.15 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_STILL_BREATH",
+    "name": { "str": "Still Breath" },
+    "points": 1,
+    "description": "You learned to cast without shifting your weight.  You are harder to notice when you keep still.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (tide and Craft); effects: STEALTH_MODIFIER add 15",
+    "enchantments": [ { "values": [ { "value": "STEALTH_MODIFIER", "add": 15 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_EMBER_BORN",
+    "name": { "str": "Ember-born" },
+    "points": 2,
+    "description": "You were born where the air is hot ash.  Cold bothers you less than it should, and heat less still.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (plane heritage); effects: CLIMATE_CONTROL_HEAT add 20",
+    "enchantments": [ { "values": [ { "value": "CLIMATE_CONTROL_HEAT", "add": 20 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_PALE_BORN",
+    "name": { "str": "Pale-born" },
+    "points": 2,
+    "description": "You were born in the cold that keeps the dead.  Chill settles on you and then leaves you alone.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (plane heritage); effects: CLIMATE_CONTROL_CHILL add 20",
+    "enchantments": [ { "values": [ { "value": "CLIMATE_CONTROL_CHILL", "add": 20 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_TIDAL_SWIM",
+    "name": { "str": "Tide-born swimmer" },
+    "points": 2,
+    "description": "You grew up where the road is water half the day.  Swimming costs you less breath.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (plane heritage); effects: MOVECOST_SWIM_MOD multiply -0.2",
+    "enchantments": [ { "values": [ { "value": "MOVECOST_SWIM_MOD", "multiply": -0.2 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_CANOPY_CLIMB",
+    "name": { "str": "Bough-climber" },
+    "points": 2,
+    "description": "You grew up where the floor is a branch.  Rough going and low obstacles slow you less.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (plane heritage); effects: MOVECOST_OBSTACLE_MOD multiply -0.15",
+    "enchantments": [ { "values": [ { "value": "MOVECOST_OBSTACLE_MOD", "multiply": -0.15 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_HOLLOW_EYES",
+    "name": { "str": "Hollow eyes" },
+    "points": 2,
+    "description": "You were raised where the lamps are a kindness, not a given.  Darkness does not close your sight as hard.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (plane heritage); effects: NIGHT_VIS add 8",
+    "enchantments": [ { "values": [ { "value": "NIGHT_VIS", "add": 8 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_SERE_SPARE",
+    "name": { "str": "Salt-spare" },
+    "points": 2,
+    "description": "You grew up counting water.  Thirst comes for you more slowly than it should.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (plane heritage); effects: THIRST multiply -0.2",
+    "enchantments": [ { "values": [ { "value": "THIRST", "multiply": -0.2 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_MARROW_MEND",
+    "name": { "str": "Marrow-knit" },
+    "points": 1,
+    "description": "Your flesh closes the way the living ground does.  It costs you water.  You are often thirsty.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (plane heritage); effects: REGEN_HP multiply 0.2; THIRST multiply 0.15",
+    "enchantments": [
+      {
+        "values": [ { "value": "REGEN_HP", "multiply": 0.2 }, { "value": "THIRST", "multiply": 0.15 } ]
+      }
+    ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_VERGE_TONGUE",
+    "name": { "str": "Verge tongue" },
+    "points": 2,
+    "description": "You learned to talk under a toll and a curfew.  People believe you a little more than they mean to.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (plane heritage); effects: SOCIAL_PERSUADE multiply 0.2",
+    "enchantments": [ { "values": [ { "value": "SOCIAL_PERSUADE", "multiply": 0.2 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_SHOAL_STEP",
+    "name": { "str": "Shoal step" },
+    "points": 1,
+    "description": "You learned to leave before the ground fails.  You are a little quicker, and you do not trust floors.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (plane heritage); effects: SPEED add 8",
+    "enchantments": [ { "values": [ { "value": "SPEED", "add": 8 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "ASTRAL_TRAIT_REACH_MARK",
+    "name": { "str": "Reach-marked" },
+    "points": 2,
+    "description": "You grew up where two peoples watch the same water.  You slip a blow more often than a townsfolk would.",
+    "starting_trait": true,
+    "purifiable": false,
+    "valid": false,
+    "//": "Grok WP-C3 (plane heritage); effects: BONUS_DODGE add 1",
+    "enchantments": [ { "values": [ { "value": "BONUS_DODGE", "add": 1 } ] } ]
+  }
+]

@@ -1,0 +1,309 @@
+[
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_guild_striking",
+    "name": "Guild Apprentice: Striking",
+    "description": "You swept the Striking room and copied diagrams.  You have the first practice rank and a little Lore.  You were not attuned.",
+    "points": 1,
+    "skills": [ { "name": "astral_lore", "level": 1 } ],
+    "proficiencies": [ "astral_prof_striking_1" ],
+    "items": { "both": { "items": [ "astral_prime_primer_striking" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_guild_warding",
+    "name": "Guild Apprentice: Warding",
+    "description": "You swept the Warding room and copied diagrams.  You have the first practice rank and a little Lore.  You were not attuned.",
+    "points": 1,
+    "skills": [ { "name": "astral_lore", "level": 1 } ],
+    "proficiencies": [ "astral_prof_warding_1" ],
+    "items": { "both": { "items": [ "astral_prime_primer_warding" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_guild_calling",
+    "name": "Guild Apprentice: Calling",
+    "description": "You swept the Calling room and copied diagrams.  You have the first practice rank and a little Lore.  You were not attuned.",
+    "points": 1,
+    "skills": [ { "name": "astral_lore", "level": 1 } ],
+    "proficiencies": [ "astral_prof_calling_1" ],
+    "items": { "both": { "items": [ "astral_prime_primer_calling" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_guild_tempering",
+    "name": "Guild Apprentice: Tempering",
+    "description": "You swept the Tempering room and copied diagrams.  You have the first practice rank and a little Lore.  You were not attuned.",
+    "points": 1,
+    "skills": [ { "name": "astral_lore", "level": 1 } ],
+    "proficiencies": [ "astral_prof_tempering_1" ],
+    "items": { "both": { "items": [ "astral_prime_primer_tempering" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_guild_hexing",
+    "name": "Guild Apprentice: Hexing",
+    "description": "You swept the Hexing room and copied diagrams.  You have the first practice rank and a little Lore.  You were not attuned.",
+    "points": 2,
+    "skills": [ { "name": "astral_lore", "level": 1 } ],
+    "proficiencies": [ "astral_prof_hexing_1" ],
+    "items": { "both": { "items": [ "astral_prime_black_primer" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_guild_wayfinding",
+    "name": "Guild Apprentice: Wayfinding",
+    "description": "You swept the Wayfinding room and copied diagrams.  You have the first practice rank and a little Lore.  You were not attuned.",
+    "points": 1,
+    "skills": [ { "name": "astral_lore", "level": 1 } ],
+    "proficiencies": [ "astral_prof_wayfinding_1" ],
+    "items": { "both": { "items": [ "astral_prime_primer_wayfinding" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_guild_mending",
+    "name": "Guild Apprentice: Mending",
+    "description": "You swept the Mending room and copied diagrams.  You have the first practice rank and a little Lore.  You were not attuned.",
+    "points": 1,
+    "skills": [ { "name": "astral_lore", "level": 1 } ],
+    "proficiencies": [ "astral_prof_mending_1" ],
+    "items": { "both": { "items": [ "astral_prime_primer_mending" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_guild_shaping",
+    "name": "Guild Apprentice: Shaping",
+    "description": "You swept the Shaping room and copied diagrams.  You have the first practice rank and a little Lore.  You were not attuned.",
+    "points": 1,
+    "skills": [ { "name": "astral_lore", "level": 1 } ],
+    "proficiencies": [ "astral_prof_shaping_1" ],
+    "items": { "both": { "items": [ "astral_prime_primer_shaping" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_meadow_bred",
+    "name": "Meadow bred",
+    "description": "You grew up on the arrival meadows, among tea, chalk, and gates that hummed and did nothing.",
+    "points": 1,
+    "skills": [ { "name": "survival", "level": 1 } ],
+    "items": {
+      "both": { "items": [ "astral_meadow_hearth_tea", "astral_trail_chalk" ] }
+    }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_drowned_bred",
+    "name": "Drowned bred",
+    "description": "You grew up on stilts over brown water.  You can swim, and you still carry a skin that does not leak.",
+    "points": 1,
+    "skills": [ { "name": "swimming", "level": 1 } ],
+    "items": { "both": { "items": [ "astral_water_skin" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_fungal_bred",
+    "name": "Fungal bred",
+    "description": "You grew up under caps and spores.  A mask was ordinary clothing.  You know which glow is safe to bottle.",
+    "points": 1,
+    "skills": [ { "name": "survival", "level": 1 } ],
+    "items": {
+      "both": { "items": [ "astral_spore_mask", "astral_fungal_glowcap_raw" ] }
+    }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_root_bred",
+    "name": "Root bred",
+    "description": "You grew up in root country, lamp in one hand and a haft in the other.  Dark tunnels do not surprise you.",
+    "points": 1,
+    "skills": [ { "name": "fabrication", "level": 1 } ],
+    "items": {
+      "both": { "items": [ "astral_torch_hearthwood", "astral_root_ironwood_haft" ] }
+    }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_fallow_bred",
+    "name": "Fallow bred",
+    "description": "You grew up on tired fields, burning the stubble and stretching rations.  You can feed yourself from little.",
+    "points": 1,
+    "skills": [ { "name": "cooking", "level": 1 }, { "name": "survival", "level": 1 } ],
+    "items": { "both": { "items": [ "astral_ration", "astral_camp_fire_kit" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_tallgrass_bred",
+    "name": "Tallgrass bred",
+    "description": "You grew up in grass over your head.  You learned to move in it, and to throw, because a bow was a luxury.",
+    "points": 1,
+    "skills": [ { "name": "dodge", "level": 1 }, { "name": "throw", "level": 1 } ],
+    "items": { "both": { "items": [ "sling", "astral_ration" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_hedge_lore",
+    "name": "Hedge lore",
+    "description": "Someone left you an almanac and made you read it aloud.  You know the slow rites exist.  You were never attuned.",
+    "points": 1,
+    "skills": [ { "name": "astral_lore", "level": 1 } ],
+    "items": { "both": { "items": [ "astral_prime_hedge_almanac" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_rune_scratcher",
+    "name": "Rune-scratcher",
+    "description": "You can cut a blank, and you know a rune is a spell made still.  You have never set one into gear.",
+    "points": 1,
+    "skills": [ { "name": "astral_lore", "level": 1 } ],
+    "items": {
+      "both": { "items": [ "astral_prime_rune_blank", "astral_root_heartglass" ] }
+    }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_tide_born",
+    "name": "Tide-born",
+    "description": "You were born in a pocket that was not Earth.  The tide has been weather to you since before you had the words.",
+    "points": 2,
+    "skills": [ { "name": "astral_lore", "level": 1 } ],
+    "traits": [ "ASTRAL_TRAIT_TIDE_SENSITIVE" ]
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_delvers_child",
+    "name": "Delver's child",
+    "description": "A parent walked gates for pay.  You inherited chalk, a ration habit, and the sense to mark a way back.",
+    "points": 1,
+    "skills": [ { "name": "survival", "level": 1 } ],
+    "items": {
+      "both": {
+        "items": [ "astral_trail_chalk", "astral_ration", "astral_field_journal" ]
+      }
+    }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_gate_sick",
+    "name": "Gate-sick",
+    "description": "A crossing went badly and the sickness stayed.  You are slower, and you do not pretend otherwise.",
+    "points": 0,
+    "traits": [ "ASTRAL_TRAIT_GATE_SICK" ]
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_guild_clerk",
+    "name": "Guild clerk",
+    "description": "You kept the hall's books: who was attuned, who owed a rite, which primer was out.  You can talk, and you can read.",
+    "points": 1,
+    "skills": [ { "name": "speech", "level": 2 }, { "name": "astral_lore", "level": 1 } ],
+    "items": { "both": { "items": [ "astral_field_journal" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_caravan_born",
+    "name": "Caravan-born",
+    "description": "You were born on a dry road between wells, Hollow shade one season and Sere sun the next.  You travel light.",
+    "points": 1,
+    "skills": [ { "name": "survival", "level": 1 }, { "name": "speech", "level": 1 } ],
+    "items": { "both": { "items": [ "astral_water_skin", "astral_ration" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_lighthouse",
+    "name": "Lighthouse-raised",
+    "description": "You grew up in a Tidal light, counting the water over the road.  You swim, and you trust a lamp more than a story.",
+    "points": 1,
+    "skills": [ { "name": "swimming", "level": 1 } ],
+    "items": { "both": { "items": [ "astral_waymark_lantern" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_ash_born",
+    "name": "Ash-born",
+    "description": "You were a child of Ember's warm stone.  You know coal, emberstone, and a forge that never quite goes out.",
+    "points": 1,
+    "skills": [ { "name": "fabrication", "level": 1 } ],
+    "items": {
+      "both": { "items": [ "astral_hearthcoal", "astral_root_emberstone" ] }
+    }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_barrow_child",
+    "name": "Barrow-child",
+    "description": "You were raised near Pale barrows.  Salt and quiet were manners.  You do not have the Hexing rite.",
+    "points": 1,
+    "skills": [ { "name": "survival", "level": 1 } ],
+    "items": { "both": { "items": [ "astral_drowned_ghostsalt" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_bough_born",
+    "name": "Bough-born",
+    "description": "You were born up in the Canopy, where a missed step is a long lesson.  You still like a staff in your hand.",
+    "points": 1,
+    "skills": [ { "name": "survival", "level": 1 } ],
+    "items": { "both": { "items": [ "astral_meadow_hearthwood_staff" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_chalk_walker",
+    "name": "Chalk walker",
+    "description": "You marked paths before you could read a proper map.  The chalk rite is yours.  The hall has not attuned you.",
+    "points": 1,
+    "skills": [ { "name": "astral_lore", "level": 1 } ],
+    "proficiencies": [ "astral_prof_wayfinding_1" ],
+    "items": { "both": { "items": [ "astral_trail_chalk" ] } },
+    "spells": [ { "id": "astral_spell_wayfinding_chalk_mark", "level": 1 } ]
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_kiln_watcher",
+    "name": "Kiln watcher",
+    "description": "You watched an Ember kiln and learned the first Striking practice.  They did not trust you with a rod.",
+    "points": 1,
+    "skills": [ { "name": "astral_lore", "level": 1 } ],
+    "proficiencies": [ "astral_prof_striking_1" ],
+    "items": { "both": { "items": [ "astral_root_emberstone" ] } }
+  },
+  {
+    "type": "profession",
+    "subtype": "hobby",
+    "id": "astral_hobby_salt_scribe",
+    "name": "Salt scribe",
+    "description": "You copied ward-circles in salt for people who could cast them.  You have the practice rank, not the rite.",
+    "points": 1,
+    "skills": [ { "name": "astral_lore", "level": 1 } ],
+    "proficiencies": [ "astral_prof_warding_1" ],
+    "items": {
+      "both": { "items": [ "astral_drowned_ghostsalt", "astral_trail_chalk" ] }
+    }
+  }
+]

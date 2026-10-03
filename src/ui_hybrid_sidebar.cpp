@@ -29,6 +29,7 @@
 #include "coordinates.h"
 #include "display.h"
 #include "game.h"
+#include "magic.h"
 #include "map.h"
 #include "messages.h"
 #include "options.h"
@@ -93,6 +94,42 @@ void hp_meter_row( Character &u, const bodypart_id &bp, const char *label )
     }
     if( ImGui::IsItemClicked() ) {
         mouse_toolbar::queue_action( ACTION_MEDICAL );
+    }
+}
+
+/**
+ * Mana row for the Craft: only shown once the character knows a spell. Same
+ * layout as the HP rows (label, bar, value beside it); click opens the spell menu.
+ */
+void mana_meter_row( Character &u )
+{
+    if( !u.magic->knows_spell() ) {
+        return;
+    }
+    const int cur = u.magic->available_mana();
+    const int mx = std::max( 1, u.magic->max_mana( u ) );
+    const float frac = std::clamp( static_cast<float>( cur ) / static_cast<float>( mx ), 0.f, 1.f );
+    char value_buf[32];
+    std::snprintf( value_buf, sizeof( value_buf ), "%d/%d", cur, mx );
+    const std::string label = _( "Mana" );
+
+    ImGui::BeginGroup();
+    ImGui::AlignTextToFramePadding();
+    ImGui::TextColored( sidebar_label_col(), "%-6s", label.c_str() );
+    ImGui::SameLine();
+    const float value_w = ImGui::CalcTextSize( value_buf ).x +
+                          ImGui::GetStyle().ItemSpacing.x;
+    const float bar_w = std::max( 24.f, ImGui::GetContentRegionAvail().x - value_w );
+    ui_hybrid_widgets::meter( "astral_mana", frac, ui_hybrid_widgets::meter_kind::info, std::string(),
+                              bar_w / ui_hybrid_chrome::theme::scale(), 14.f );
+    ImGui::SameLine( 0.f, ImGui::GetStyle().ItemSpacing.x );
+    ImGui::TextColored( ui_hybrid_chrome::palette::text(), "%s", value_buf );
+    ImGui::EndGroup();
+    if( ImGui::IsItemHovered() ) {
+        ImGui::SetTooltip( "%s", _( "Click to cast a spell." ) );
+    }
+    if( ImGui::IsItemClicked() ) {
+        mouse_toolbar::queue_action( ACTION_CAST_SPELL );
     }
 }
 
@@ -279,6 +316,7 @@ class hybrid_sidebar_window : public cataimgui::window
                     hp_meter_row( u, bp, label.c_str() );
                 }
             }
+            mana_meter_row( u );
             if( w::action_button( _( "Health" ), w::button_kind::tertiary, ImVec2( 0, 30.f ), true, nullptr, "hp" ) ) {
                 mouse_toolbar::queue_action( ACTION_MEDICAL );
             }

@@ -14,7 +14,7 @@
     "looks_like": "t_tree",
     "name": "hearthwood tree",
     "description": "Broad pale-barked tree, amber leaves.  Flora from the arrival meadows.",
-    "//": "astral content list critical-core; harvest: chop: astral_meadow_hearthwood_log ×3; bark: astral_hearthwood_tinder ×2; all",
+    "//": "astral content list 00-critical-core; harvest: chop: astral_meadow_hearthwood_log ×3; bark: astral_hearthwood_tinder ×2; all",
     "examine_action": "harvest_ter",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_meadow_hearthwood_tree" }
@@ -43,7 +43,7 @@
     "looks_like": "t_tree",
     "name": "sunken oak",
     "description": "Leaning black trunk half in water.  Flora from the drowned lowlands.",
-    "//": "astral content list critical-core; harvest: chop: astral_drowned_bog_oak_log ×2; all",
+    "//": "astral content list 00-critical-core; harvest: chop: astral_drowned_bog_oak_log ×2; all",
     "examine_action": "harvest_ter",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_drowned_sunken_oak" }
@@ -72,7 +72,7 @@
     "required_str": -1,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
-    "//": "astral content list critical-core; harvest: cut: cordage reeds (vanilla)"
+    "//": "astral content list 00-critical-core; harvest: cut: cordage reeds (vanilla)"
   },
   {
     "type": "harvest",
@@ -91,7 +91,7 @@
     "required_str": -1,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
-    "//": "astral content list critical-core; harvest: astral_drowned_sea_silk_tuft ×1–2; all",
+    "//": "astral content list 00-critical-core; harvest: astral_drowned_sea_silk_tuft ×1–2; all",
     "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_drowned_reed_mussel" }
@@ -109,7 +109,7 @@
     "looks_like": "t_grass_long",
     "name": "fungal carpet",
     "description": "Fleshy pale ground, thread veins.  Flora from the fungal forest.",
-    "//": "astral content list critical-core; harvest: gather: astral_fungal_mycel_fibre ×2; all",
+    "//": "astral content list 00-critical-core; harvest: gather: astral_fungal_mycel_fibre ×2; all",
     "examine_action": "harvest_ter",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_carpet" }
@@ -143,7 +143,7 @@
     "required_str": -1,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
-    "//": "astral content list critical-core; harvest: astral_fungal_glowcap_raw ×2–4; all",
+    "//": "astral content list 00-critical-core; harvest: astral_fungal_glowcap_raw ×2–4; all",
     "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_glowcap_cluster" }
@@ -156,7 +156,7 @@
     "looks_like": "t_tree",
     "name": "cap tree",
     "description": "Towering stalk with a wide fleshy cap.  Flora from the fungal forest.",
-    "//": "astral content list critical-core; harvest: chop: fungal wood (long tail)"
+    "//": "astral content list 00-critical-core; harvest: chop: fungal wood (long tail)"
   },
   {
     "type": "harvest",
@@ -175,7 +175,7 @@
     "required_str": -1,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
-    "//": "astral content list critical-core; harvest: tap: astral_root_heartroot_resin ×1–2; all",
+    "//": "astral content list 00-critical-core; harvest: tap: astral_root_heartroot_resin ×1–2; all",
     "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_heartroot" }
@@ -193,7 +193,7 @@
     "looks_like": "t_tree",
     "name": "ironwood tree",
     "description": "Squat grey tree, metallic bark.  Flora from root country.",
-    "//": "astral content list critical-core; harvest: chop: astral_root_ironwood_log ×2; all",
+    "//": "astral content list 00-critical-core; harvest: chop: astral_root_ironwood_log ×2; all",
     "examine_action": "harvest_ter",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_ironwood_tree" }
@@ -227,7 +227,7 @@
     "required_str": -1,
     "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
     "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
-    "//": "astral content list critical-core; harvest: astral_root_cave_honey ×2; all",
+    "//": "astral content list 00-critical-core; harvest: astral_root_cave_honey ×2; all",
     "examine_action": "harvest_furn",
     "harvest_by_season": [
       { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_honey_comb" }
@@ -240,7 +240,7 @@
     "looks_like": "t_grass_long",
     "name": "tall meadow grass",
     "description": "Waist-high green-gold grass.  Flora from the arrival meadows.",
-    "//": "astral content list critical-core; harvest: cut: plant fibre"
+    "//": "astral content list 00-critical-core; harvest: cut: plant fibre"
   },
   {
     "type": "terrain",
@@ -249,6 +249,1696 @@
     "looks_like": "t_tree",
     "name": "drowned willow",
     "description": "Weeping willow standing in a pool.  Flora from the drowned lowlands.",
-    "//": "astral content list critical-core; harvest: chop: willow log (vanilla)"
+    "//": "astral content list 00-critical-core; harvest: chop: willow log (vanilla)"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_meadow_gateberry_bush",
+    "entries": [ { "drop": "astral_meadow_berry_cluster", "base_num": [ 2, 4 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_meadow_gateberry_bush",
+    "name": "gateberry bush",
+    "description": "Low bush with red gateberries.  Flora from the arrival meadows.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_meadow_berry_cluster ×2–4; summer+autumn",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_meadow_gateberry_bush" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_meadow_clover_patch",
+    "entries": [
+      { "drop": "astral_meadow_clover_honey", "base_num": [ 1, 1 ], "scale_num": [ 0, 0.25 ] },
+      { "drop": "astral_meadow_clover_wax", "base_num": [ 1, 1 ], "scale_num": [ 0, 0.25 ] }
+    ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_meadow_clover_patch",
+    "name": "clover patch",
+    "description": "Dense clover with tiny comb cells.  Flora from the arrival meadows.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_meadow_clover_honey ×1; astral_meadow_clover_wax ×1; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_meadow_clover_patch" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_meadow_healleaf_plant",
+    "entries": [ { "drop": "astral_meadow_healleaf", "base_num": [ 2, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_meadow_healleaf_plant",
+    "name": "healleaf plant",
+    "description": "Broad soft green healing leaf.  Flora from the arrival meadows.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_meadow_healleaf ×2–3; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_meadow_healleaf_plant" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_meadow_feverfew_plant",
+    "entries": [ { "drop": "astral_meadow_feverfew", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_meadow_feverfew_plant",
+    "name": "feverfew plant",
+    "description": "White daisy-like feverfew.  Flora from the arrival meadows.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_meadow_feverfew ×1–2; spring+summer",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_meadow_feverfew_plant" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_meadow_cordgrass_patch",
+    "entries": [ { "drop": "astral_meadow_cordgrass", "base_num": [ 3, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_meadow_cordgrass_patch",
+    "copy-from": "t_grass_long",
+    "looks_like": "t_grass_long",
+    "name": "cordgrass patch",
+    "description": "Waist-high tough cordgrass.  Flora from the arrival meadows.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_meadow_cordgrass ×3; all",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_meadow_cordgrass_patch" }
+    ],
+    "transforms_into": "t_astral_meadow_cordgrass_patch_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_meadow_cordgrass_patch_harvested",
+    "copy-from": "t_astral_meadow_cordgrass_patch",
+    "looks_like": "t_grass_long",
+    "description": "Waist-high tough cordgrass.  Flora from the arrival meadows.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_meadow_cordgrass_patch"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_meadow_willow_shrub",
+    "entries": [ { "drop": "astral_meadow_willowbark", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_meadow_willow_shrub",
+    "name": "willow shrub",
+    "description": "Grey-bark willow shrub.  Flora from the arrival meadows.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_meadow_willowbark ×1–2; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_meadow_willow_shrub" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_meadow_grain_patch",
+    "entries": [ { "drop": "astral_meadow_travel_grain", "base_num": [ 2, 4 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_meadow_grain_patch",
+    "copy-from": "t_grass_long",
+    "looks_like": "t_grass_long",
+    "name": "travel grain patch",
+    "description": "Small golden travel-grain heads.  Flora from the arrival meadows.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_meadow_travel_grain ×2–4; autumn",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_meadow_grain_patch" }
+    ],
+    "transforms_into": "t_astral_meadow_grain_patch_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_meadow_grain_patch_harvested",
+    "copy-from": "t_astral_meadow_grain_patch",
+    "looks_like": "t_grass_long",
+    "description": "Small golden travel-grain heads.  Flora from the arrival meadows.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_meadow_grain_patch"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_meadow_nettle_patch",
+    "entries": [ { "drop": "astral_meadow_nettle", "base_num": [ 2, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_meadow_nettle_patch",
+    "name": "nettle patch",
+    "description": "Stinging green nettle stand.  Flora from the arrival meadows.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_meadow_nettle ×2–3; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_meadow_nettle_patch" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_meadow_button_mushroom",
+    "entries": [ { "drop": "astral_meadow_mushroom_safe", "base_num": [ 2, 4 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_meadow_button_mushroom",
+    "name": "button mushroom ring",
+    "description": "Ring of brown edible buttons.  Flora from the arrival meadows.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_meadow_mushroom_safe ×2–4; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_meadow_button_mushroom" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_meadow_lavender_bush",
+    "entries": [ { "drop": "astral_meadow_lavender", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_meadow_lavender_bush",
+    "name": "lavender bush",
+    "description": "Purple fragrant lavender bush.  Flora from the arrival meadows.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_meadow_lavender ×1–2; summer",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_meadow_lavender_bush" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_meadow_sweetroot_plant",
+    "entries": [ { "drop": "astral_meadow_sweetroot", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_meadow_sweetroot_plant",
+    "name": "sweetroot plant",
+    "description": "Orange-white sweet root tops.  Flora from the arrival meadows.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_meadow_sweetroot ×1–2; autumn",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_meadow_sweetroot_plant" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_meadow_mint_patch",
+    "entries": [ { "drop": "astral_meadow_mint", "base_num": [ 2, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_meadow_mint_patch",
+    "name": "mint patch",
+    "description": "Cool green mint carpet.  Flora from the arrival meadows.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_meadow_mint ×2; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_meadow_mint_patch" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fallow_grain_field",
+    "entries": [
+      { "drop": "astral_fallow_grain_head", "base_num": [ 3, 5 ], "scale_num": [ 0, 0.25 ] },
+      { "drop": "astral_fallow_straw", "base_num": [ 2, 2 ], "scale_num": [ 0, 0.25 ] }
+    ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fallow_grain_field",
+    "copy-from": "t_grass_long",
+    "looks_like": "t_grass_long",
+    "name": "fallow grain field",
+    "description": "Tall golden grain field.  Flora from the Astral planes.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fallow_grain_head ×3–5; astral_fallow_straw ×2; autumn",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fallow_grain_field" }
+    ],
+    "transforms_into": "t_astral_fallow_grain_field_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fallow_grain_field_harvested",
+    "copy-from": "t_astral_fallow_grain_field",
+    "looks_like": "t_grass_long",
+    "description": "Tall golden grain field.  Flora from the Astral planes.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_fallow_grain_field"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fallow_cutting_grain_plant",
+    "entries": [ { "drop": "astral_fallow_cutting_grain", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fallow_cutting_grain_plant",
+    "copy-from": "t_grass_long",
+    "looks_like": "t_grass_long",
+    "name": "cutting grain stand",
+    "description": "Razor-edged grain that cuts back.  Flora from the Astral planes.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fallow_cutting_grain ×1–2; autumn",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fallow_cutting_grain_plant" }
+    ],
+    "transforms_into": "t_astral_fallow_cutting_grain_plant_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fallow_cutting_grain_plant_harvested",
+    "copy-from": "t_astral_fallow_cutting_grain_plant",
+    "looks_like": "t_grass_long",
+    "description": "Razor-edged grain that cuts back.  Flora from the Astral planes.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_fallow_cutting_grain_plant"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fallow_feral_apple",
+    "entries": [ { "drop": "astral_fallow_orchard_apple", "base_num": [ 2, 4 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fallow_feral_apple",
+    "copy-from": "t_tree",
+    "looks_like": "t_tree",
+    "name": "feral apple tree",
+    "description": "Gnarled feral apple tree.  Flora from the Astral planes.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fallow_orchard_apple ×2–4; autumn",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fallow_feral_apple" }
+    ],
+    "transforms_into": "t_astral_fallow_feral_apple_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fallow_feral_apple_harvested",
+    "copy-from": "t_astral_fallow_feral_apple",
+    "looks_like": "t_tree_dead",
+    "description": "Gnarled feral apple tree.  Flora from the Astral planes.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_fallow_feral_apple"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fallow_feral_pear",
+    "entries": [ { "drop": "astral_fallow_orchard_pear", "base_num": [ 2, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fallow_feral_pear",
+    "copy-from": "t_tree",
+    "looks_like": "t_tree",
+    "name": "feral pear tree",
+    "description": "Leaning feral pear tree.  Flora from the Astral planes.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fallow_orchard_pear ×2–3; autumn",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fallow_feral_pear" }
+    ],
+    "transforms_into": "t_astral_fallow_feral_pear_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fallow_feral_pear_harvested",
+    "copy-from": "t_astral_fallow_feral_pear",
+    "looks_like": "t_tree_dead",
+    "description": "Leaning feral pear tree.  Flora from the Astral planes.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_fallow_feral_pear"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fallow_feral_plum",
+    "entries": [ { "drop": "astral_fallow_orchard_plum", "base_num": [ 2, 4 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fallow_feral_plum",
+    "copy-from": "t_tree",
+    "looks_like": "t_tree",
+    "name": "feral plum tree",
+    "description": "Dark-bark feral plum tree.  Flora from the Astral planes.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fallow_orchard_plum ×2–4; autumn",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fallow_feral_plum" }
+    ],
+    "transforms_into": "t_astral_fallow_feral_plum_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fallow_feral_plum_harvested",
+    "copy-from": "t_astral_fallow_feral_plum",
+    "looks_like": "t_tree_dead",
+    "description": "Dark-bark feral plum tree.  Flora from the Astral planes.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_fallow_feral_plum"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fallow_flax_row",
+    "entries": [ { "drop": "astral_fallow_fibre_flax", "base_num": [ 3, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fallow_flax_row",
+    "name": "flax row",
+    "description": "Blue-flower flax row.  Flora from the Astral planes.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fallow_fibre_flax ×3; summer",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fallow_flax_row" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fallow_hemp_patch",
+    "entries": [ { "drop": "astral_fallow_fibre_hemp", "base_num": [ 3, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fallow_hemp_patch",
+    "name": "hedgerow hemp",
+    "description": "Tall tough hemp by hedge.  Flora from the Astral planes.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fallow_fibre_hemp ×3; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fallow_hemp_patch" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fallow_turnip_row",
+    "entries": [ { "drop": "astral_fallow_root_turnip", "base_num": [ 2, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fallow_turnip_row",
+    "name": "turnip row",
+    "description": "Purple-top turnip row.  Flora from the Astral planes.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fallow_root_turnip ×2–3; autumn",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fallow_turnip_row" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fallow_carrot_row",
+    "entries": [ { "drop": "astral_fallow_root_carrot", "base_num": [ 2, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fallow_carrot_row",
+    "name": "carrot row",
+    "description": "Feathery carrot tops.  Flora from the Astral planes.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fallow_root_carrot ×2–3; autumn",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fallow_carrot_row" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fallow_potato_hill",
+    "entries": [ { "drop": "astral_fallow_root_potato", "base_num": [ 2, 4 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fallow_potato_hill",
+    "name": "potato hill",
+    "description": "Mounded potato hill.  Flora from the Astral planes.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fallow_root_potato ×2–4; autumn",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fallow_potato_hill" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fallow_orchard_hive",
+    "entries": [
+      { "drop": "astral_fallow_honeycomb", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] },
+      { "drop": "astral_fallow_beeswax", "base_num": [ 1, 1 ], "scale_num": [ 0, 0.25 ] }
+    ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fallow_orchard_hive",
+    "name": "orchard hive log",
+    "description": "Feral hive in hollow log.  Flora from the Astral planes.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fallow_honeycomb ×1–2; astral_fallow_beeswax ×1; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fallow_orchard_hive" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fallow_hedgerow",
+    "entries": [ { "drop": "astral_fallow_hedgerow_berry", "base_num": [ 2, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fallow_hedgerow",
+    "copy-from": "t_grass_long",
+    "looks_like": "t_grass_long",
+    "name": "feral hedgerow",
+    "description": "Thorny berry hedgerow.  Flora from the Astral planes.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fallow_hedgerow_berry ×2; autumn",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fallow_hedgerow" }
+    ],
+    "transforms_into": "t_astral_fallow_hedgerow_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fallow_hedgerow_harvested",
+    "copy-from": "t_astral_fallow_hedgerow",
+    "looks_like": "t_grass_long",
+    "description": "Thorny berry hedgerow.  Flora from the Astral planes.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_fallow_hedgerow"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_drowned_rush_bed",
+    "entries": [ { "drop": "astral_drowned_rush_fibre", "base_num": [ 3, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_drowned_rush_bed",
+    "name": "rush bed",
+    "description": "Soft rushes in shallows.  Flora from the drowned lowlands.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_drowned_rush_fibre ×3; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_drowned_rush_bed" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_drowned_kelp_bed",
+    "entries": [ { "drop": "astral_drowned_kelp_frond", "base_num": [ 2, 4 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_drowned_kelp_bed",
+    "copy-from": "t_grass_long",
+    "looks_like": "t_grass_long",
+    "name": "kelp bed",
+    "description": "Long kelp in deeper water.  Flora from the drowned lowlands.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_drowned_kelp_frond ×2–4; all",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_drowned_kelp_bed" }
+    ],
+    "transforms_into": "t_astral_drowned_kelp_bed_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_drowned_kelp_bed_harvested",
+    "copy-from": "t_astral_drowned_kelp_bed",
+    "looks_like": "t_grass_long",
+    "description": "Long kelp in deeper water.  Flora from the drowned lowlands.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_drowned_kelp_bed"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_drowned_lily_pad",
+    "entries": [ { "drop": "astral_drowned_water_lily", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_drowned_lily_pad",
+    "name": "water lily",
+    "description": "Broad lily pads with blooms.  Flora from the drowned lowlands.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_drowned_water_lily ×1–2; summer",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_drowned_lily_pad" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_drowned_bog_berry_bush",
+    "entries": [ { "drop": "astral_drowned_bog_berry", "base_num": [ 2, 4 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_drowned_bog_berry_bush",
+    "name": "bog berry bush",
+    "description": "Low bush, tart red berries.  Flora from the drowned lowlands.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_drowned_bog_berry ×2–4; autumn",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_drowned_bog_berry_bush" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_drowned_weed_mat",
+    "entries": [ { "drop": "astral_drowned_canal_weed", "base_num": [ 2, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_drowned_weed_mat",
+    "copy-from": "t_grass_long",
+    "looks_like": "t_grass_long",
+    "name": "canal weed mat",
+    "description": "Slick submerged weed mat.  Flora from the drowned lowlands.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_drowned_canal_weed ×2; all",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_drowned_weed_mat" }
+    ],
+    "transforms_into": "t_astral_drowned_weed_mat_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_drowned_weed_mat_harvested",
+    "copy-from": "t_astral_drowned_weed_mat",
+    "looks_like": "t_grass_long",
+    "description": "Slick submerged weed mat.  Flora from the drowned lowlands.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_drowned_weed_mat"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_drowned_algae_mat",
+    "entries": [ { "drop": "astral_drowned_algae", "base_num": [ 2, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_drowned_algae_mat",
+    "name": "green algae mat",
+    "description": "Slimy green surface algae.  Flora from the drowned lowlands.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_drowned_algae ×2; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_drowned_algae_mat" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_drowned_cranberry_bog",
+    "entries": [ { "drop": "astral_drowned_bog_berry", "base_num": [ 3, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_drowned_cranberry_bog",
+    "name": "bog cranberry",
+    "description": "Low cranberry-like bog plant.  Flora from the drowned lowlands.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_drowned_bog_berry ×3; autumn",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_drowned_cranberry_bog" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_drowned_reed_seed_stand",
+    "entries": [ { "drop": "astral_drowned_reed_seed", "base_num": [ 2, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_drowned_reed_seed_stand",
+    "name": "reed seed stand",
+    "description": "Tall reeds with fluffy seeds.  Flora from the drowned lowlands.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_cattails",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_drowned_reed_seed ×2; autumn",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_drowned_reed_seed_stand" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_drowned_willow_young",
+    "entries": [ { "drop": "astral_drowned_willow_log", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_drowned_willow_young",
+    "copy-from": "t_tree",
+    "looks_like": "t_tree",
+    "name": "young drowned willow",
+    "description": "Smaller willow in a pool.  Flora from the drowned lowlands.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_drowned_willow_log ×1–2; all",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_drowned_willow_young" }
+    ],
+    "transforms_into": "t_astral_drowned_willow_young_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_drowned_willow_young_harvested",
+    "copy-from": "t_astral_drowned_willow_young",
+    "looks_like": "t_tree_dead",
+    "description": "Smaller willow in a pool.  Flora from the drowned lowlands.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_drowned_willow_young"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_drowned_moss_bank",
+    "entries": [ { "drop": "astral_drowned_peat_moss", "base_num": [ 2, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_drowned_moss_bank",
+    "name": "peat moss bank",
+    "description": "Spongy brown peat moss bank.  Flora from the drowned lowlands.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_drowned_peat_moss ×2; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_drowned_moss_bank" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_tallgrass_thatch_stand",
+    "entries": [ { "drop": "astral_tallgrass_thatch_grass", "base_num": [ 4, 4 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_tallgrass_thatch_stand",
+    "copy-from": "t_grass_long",
+    "looks_like": "t_grass_long",
+    "name": "thatch grass stand",
+    "description": "Tall dry thatch grass.  Flora from the Astral planes.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_tallgrass_thatch_grass ×4; all",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_tallgrass_thatch_stand" }
+    ],
+    "transforms_into": "t_astral_tallgrass_thatch_stand_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_tallgrass_thatch_stand_harvested",
+    "copy-from": "t_astral_tallgrass_thatch_stand",
+    "looks_like": "t_grass_long",
+    "description": "Tall dry thatch grass.  Flora from the Astral planes.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_tallgrass_thatch_stand"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_tallgrass_seed_stand",
+    "entries": [ { "drop": "astral_tallgrass_seed_grass", "base_num": [ 3, 5 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_tallgrass_seed_stand",
+    "copy-from": "t_grass_long",
+    "looks_like": "t_grass_long",
+    "name": "seed grass stand",
+    "description": "Heavy seed-grass prairie.  Flora from the Astral planes.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_tallgrass_seed_grass ×3–5; autumn",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_tallgrass_seed_stand" }
+    ],
+    "transforms_into": "t_astral_tallgrass_seed_stand_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_tallgrass_seed_stand_harvested",
+    "copy-from": "t_astral_tallgrass_seed_stand",
+    "looks_like": "t_grass_long",
+    "description": "Heavy seed-grass prairie.  Flora from the Astral planes.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_tallgrass_seed_stand"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_tallgrass_cutting_stand",
+    "entries": [ { "drop": "astral_tallgrass_cutting_grass", "base_num": [ 2, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_tallgrass_cutting_stand",
+    "copy-from": "t_grass_long",
+    "looks_like": "t_grass_long",
+    "name": "cutting grass stand",
+    "description": "Razor-edged cutting grass.  Flora from the Astral planes.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_tallgrass_cutting_grass ×2–3; all",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_tallgrass_cutting_stand" }
+    ],
+    "transforms_into": "t_astral_tallgrass_cutting_stand_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_tallgrass_cutting_stand_harvested",
+    "copy-from": "t_astral_tallgrass_cutting_stand",
+    "looks_like": "t_grass_long",
+    "description": "Razor-edged cutting grass.  Flora from the Astral planes.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_tallgrass_cutting_stand"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_tallgrass_fibre_stand",
+    "entries": [ { "drop": "astral_tallgrass_fibre", "base_num": [ 3, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_tallgrass_fibre_stand",
+    "copy-from": "t_grass_long",
+    "looks_like": "t_grass_long",
+    "name": "prairie fibre stand",
+    "description": "Tough prairie fibre grass.  Flora from the Astral planes.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_tallgrass_fibre ×3; all",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_tallgrass_fibre_stand" }
+    ],
+    "transforms_into": "t_astral_tallgrass_fibre_stand_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_tallgrass_fibre_stand_harvested",
+    "copy-from": "t_astral_tallgrass_fibre_stand",
+    "looks_like": "t_grass_long",
+    "description": "Tough prairie fibre grass.  Flora from the Astral planes.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_tallgrass_fibre_stand"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_tallgrass_lone_tree",
+    "entries": [ { "drop": "astral_tallgrass_lone_log", "base_num": [ 2, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_tallgrass_lone_tree",
+    "copy-from": "t_tree",
+    "looks_like": "t_tree",
+    "name": "lone prairie tree",
+    "description": "Scarce lone prairie tree.  Flora from the Astral planes.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_tallgrass_lone_log ×2; all",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_tallgrass_lone_tree" }
+    ],
+    "transforms_into": "t_astral_tallgrass_lone_tree_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_tallgrass_lone_tree_harvested",
+    "copy-from": "t_astral_tallgrass_lone_tree",
+    "looks_like": "t_tree_dead",
+    "description": "Scarce lone prairie tree.  Flora from the Astral planes.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_tallgrass_lone_tree"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_tallgrass_fire_shrub",
+    "entries": [ { "drop": "astral_tallgrass_char_stump", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_tallgrass_fire_shrub",
+    "name": "fire-adapted shrub",
+    "description": "Blackened shrub that resprouts.  Flora from the Astral planes.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_tallgrass_char_stump ×? after fire; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_tallgrass_fire_shrub" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_tallgrass_sage_patch",
+    "entries": [ { "drop": "astral_tallgrass_prairie_herb", "base_num": [ 2, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_tallgrass_sage_patch",
+    "name": "prairie sage patch",
+    "description": "Silver prairie sage.  Flora from the Astral planes.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_tallgrass_prairie_herb ×2; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_tallgrass_sage_patch" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_tallgrass_coneflower",
+    "entries": [ { "drop": "astral_tallgrass_cone_flower", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_tallgrass_coneflower",
+    "name": "coneflower patch",
+    "description": "Purple prairie coneflowers.  Flora from the Astral planes.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_tallgrass_cone_flower ×1–2; summer",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_tallgrass_coneflower" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_tallgrass_berry_bush",
+    "entries": [ { "drop": "astral_tallgrass_berry", "base_num": [ 2, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_tallgrass_berry_bush",
+    "name": "prairie berry bush",
+    "description": "Low sweet berry bush.  Flora from the Astral planes.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_tallgrass_berry ×2–3; autumn",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_tallgrass_berry_bush" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_tallgrass_onion_patch",
+    "entries": [ { "drop": "astral_tallgrass_wild_onion", "base_num": [ 2, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_tallgrass_onion_patch",
+    "name": "prairie onion patch",
+    "description": "Small prairie onion tops.  Flora from the Astral planes.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_tallgrass_wild_onion ×2; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_tallgrass_onion_patch" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_tallgrass_tuber_plant",
+    "entries": [ { "drop": "astral_tallgrass_root_tuber", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_tallgrass_tuber_plant",
+    "name": "prairie tuber plant",
+    "description": "Starchy tuber greens.  Flora from the Astral planes.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_tallgrass_root_tuber ×1–2; autumn",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_tallgrass_tuber_plant" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fungal_edible_cluster",
+    "entries": [ { "drop": "astral_fungal_edible_cap", "base_num": [ 2, 4 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fungal_edible_cluster",
+    "name": "edible pale cluster",
+    "description": "Cluster of soft pale caps.  Flora from the fungal forest.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fungal_edible_cap ×2–4; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_edible_cluster" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fungal_poison_cluster",
+    "entries": [ { "drop": "astral_fungal_poison_cap", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fungal_poison_cluster",
+    "name": "poison violet cluster",
+    "description": "Violet bitter-smelling caps.  Flora from the fungal forest.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fungal_poison_cap ×1–2; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_poison_cluster" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fungal_dye_cluster",
+    "entries": [ { "drop": "astral_fungal_dye_cap", "base_num": [ 2, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fungal_dye_cluster",
+    "name": "dye crimson cluster",
+    "description": "Deep crimson dye mushrooms.  Flora from the fungal forest.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fungal_dye_cap ×2; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_dye_cluster" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fungal_tea_cluster",
+    "entries": [ { "drop": "astral_fungal_tea_cap", "base_num": [ 2, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fungal_tea_cluster",
+    "name": "tea grey cluster",
+    "description": "Dry grey tea mushrooms.  Flora from the fungal forest.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fungal_tea_cap ×2–3; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_tea_cluster" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fungal_broth_cluster",
+    "entries": [ { "drop": "astral_fungal_broth_cap", "base_num": [ 2, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fungal_broth_cluster",
+    "name": "broth brown cluster",
+    "description": "Meaty brown broth mushrooms.  Flora from the fungal forest.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fungal_broth_cap ×2–3; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_broth_cluster" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fungal_spore_vent_plant",
+    "entries": [ { "drop": "astral_fungal_spore_sac", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fungal_spore_vent_plant",
+    "name": "spore vent fungus",
+    "description": "Puffy sac venting spores.  Flora from the fungal forest.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fungal_spore_sac ×1–2; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_spore_vent_plant" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fungal_shelf_cluster",
+    "entries": [ { "drop": "astral_fungal_shelf_fungus", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fungal_shelf_cluster",
+    "name": "shelf bracket fungus",
+    "description": "Layered shelf on stalk wood.  Flora from the fungal forest.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fungal_shelf_fungus ×1–2; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_shelf_cluster" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fungal_puffball_plant",
+    "entries": [ { "drop": "astral_fungal_puffball", "base_num": [ 1, 1 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fungal_puffball_plant",
+    "name": "puffball",
+    "description": "Round white puffball.  Flora from the fungal forest.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fungal_puffball ×1; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_puffball_plant" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fungal_ink_cluster",
+    "entries": [ { "drop": "astral_fungal_ink_cap", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fungal_ink_cluster",
+    "name": "ink drip cluster",
+    "description": "Black-dripping ink mushrooms.  Flora from the fungal forest.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fungal_ink_cap ×1–2; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_ink_cluster" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fungal_glow_moss_bank",
+    "entries": [ { "drop": "astral_fungal_glow_moss", "base_num": [ 2, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fungal_glow_moss_bank",
+    "name": "glow moss bank",
+    "description": "Faint blue glowing moss.  Flora from the fungal forest.",
+    "symbol": "f",
+    "color": "light_cyan",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fungal_glow_moss ×2; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_glow_moss_bank" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fungal_veil_curtain",
+    "entries": [ { "drop": "astral_fungal_veil", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fungal_veil_curtain",
+    "copy-from": "t_grass_long",
+    "looks_like": "t_grass_long",
+    "name": "veil fungus curtain",
+    "description": "Hanging translucent fungal sheet.  Flora from the fungal forest.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fungal_veil ×1–2; all",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_veil_curtain" }
+    ],
+    "transforms_into": "t_astral_fungal_veil_curtain_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_fungal_veil_curtain_harvested",
+    "copy-from": "t_astral_fungal_veil_curtain",
+    "looks_like": "t_grass_long",
+    "description": "Hanging translucent fungal sheet.  Flora from the fungal forest.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_fungal_veil_curtain"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_fungal_acid_cluster",
+    "entries": [ { "drop": "astral_fungal_acid_cap", "base_num": [ 1, 1 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_fungal_acid_cluster",
+    "name": "acid drip cluster",
+    "description": "Yellow acid-dripping caps.  Flora from the fungal forest.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_fungal_acid_cap ×1; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_fungal_acid_cluster" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_root_arch_vine",
+    "entries": [
+      { "drop": "astral_root_climb_root", "base_num": [ 3, 3 ], "scale_num": [ 0, 0.25 ] },
+      { "drop": "astral_root_vine_thorn", "base_num": [ 1, 1 ], "scale_num": [ 0, 0.25 ] }
+    ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_root_arch_vine",
+    "copy-from": "t_grass_long",
+    "looks_like": "t_grass_long",
+    "name": "root arch vine",
+    "description": "Hanging tough root vines.  Flora from root country.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_root_climb_root ×3; astral_root_vine_thorn ×1; all",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_arch_vine" }
+    ],
+    "transforms_into": "t_astral_root_arch_vine_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_root_arch_vine_harvested",
+    "copy-from": "t_astral_root_arch_vine",
+    "looks_like": "t_grass_long",
+    "description": "Hanging tough root vines.  Flora from root country.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_root_arch_vine"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_root_lichen_mat",
+    "entries": [ { "drop": "astral_root_lichen", "base_num": [ 2, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_root_lichen_mat",
+    "name": "split-ground lichen",
+    "description": "Grey-green lichen on split rock.  Flora from root country.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_root_lichen ×2–3; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_lichen_mat" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_root_cave_moss_bank",
+    "entries": [ { "drop": "astral_root_cave_moss", "base_num": [ 2, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_root_cave_moss_bank",
+    "name": "sinkhole mouth moss",
+    "description": "Soft moss at sinkhole rim.  Flora from root country.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_root_cave_moss ×2; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_cave_moss_bank" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_root_fruit_cluster",
+    "entries": [ { "drop": "astral_root_root_fruit", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_root_fruit_cluster",
+    "name": "root fruit cluster",
+    "description": "Woody sweet fruit on roots.  Flora from root country.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_root_root_fruit ×1–2; autumn",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_fruit_cluster" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_root_mute_moss_bank",
+    "entries": [ { "drop": "astral_root_mute_moss", "base_num": [ 2, 3 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_root_mute_moss_bank",
+    "name": "mute moss bank",
+    "description": "Sound-dampening grey moss.  Flora from root country.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_root_mute_moss ×2–3; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_mute_moss_bank" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_root_sinkhole_fern",
+    "entries": [ { "drop": "astral_root_cave_moss", "base_num": [ 1, 1 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_root_sinkhole_fern",
+    "name": "sinkhole fern",
+    "description": "Pale fern at sinkhole mouth.  Flora from root country.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_root_cave_moss ×1; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_sinkhole_fern" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_root_bone_lichen",
+    "entries": [ { "drop": "astral_root_lichen", "base_num": [ 1, 1 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_root_bone_lichen",
+    "name": "bone lichen",
+    "description": "Lichen growing on fossil bone.  Flora from root country.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_root_lichen ×1; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_bone_lichen" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_root_amber_weep",
+    "entries": [ { "drop": "astral_root_amber_sap", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_root_amber_weep",
+    "name": "amber sap weep",
+    "description": "Slow amber sap on root knee.  Flora from root country.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_root_amber_sap ×1–2; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_amber_weep" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_root_deep_mushroom",
+    "entries": [ { "drop": "astral_root_deep_cap", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_root_deep_mushroom",
+    "name": "deep root mushroom",
+    "description": "Dark mushroom in deep cracks.  Flora from root country.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_root_deep_cap ×1–2; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_deep_mushroom" }
+    ]
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_root_ironwood_sapling",
+    "entries": [ { "drop": "astral_root_ironwood_scrap", "base_num": [ 1, 1 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_root_ironwood_sapling",
+    "copy-from": "t_grass_long",
+    "looks_like": "t_grass_long",
+    "name": "ironwood sapling",
+    "description": "Young grey metallic sapling.  Flora from root country.",
+    "//": "astral content list 23-flora-greenwood; harvest: astral_root_ironwood_scrap ×1; all",
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_ironwood_sapling" }
+    ],
+    "transforms_into": "t_astral_root_ironwood_sapling_harvested"
+  },
+  {
+    "type": "terrain",
+    "id": "t_astral_root_ironwood_sapling_harvested",
+    "copy-from": "t_astral_root_ironwood_sapling",
+    "looks_like": "t_grass_long",
+    "description": "Young grey metallic sapling.  Flora from root country.  It has been picked over recently.",
+    "extend": { "flags": [ "HARVESTED" ] },
+    "examine_action": "harvested_plant",
+    "transforms_into": "t_astral_root_ironwood_sapling"
+  },
+  {
+    "type": "harvest",
+    "id": "astral_harv_astral_root_heartroot_young",
+    "entries": [ { "drop": "astral_root_heartroot_resin", "base_num": [ 1, 1 ], "scale_num": [ 0, 0.25 ] } ]
+  },
+  {
+    "type": "furniture",
+    "id": "f_astral_root_heartroot_young",
+    "name": "young heartroot",
+    "description": "Smaller red-brown root knee.  Flora from root country.",
+    "symbol": "f",
+    "color": "brown",
+    "looks_like": "f_mutpoppy",
+    "move_cost_mod": 1,
+    "required_str": -1,
+    "flags": [ "TRANSPARENT", "TINY", "FLAMMABLE_ASH", "NOCOLLIDE", "ORGANIC" ],
+    "bash": { "str_min": 2, "str_max": 6, "sound": "crunch.", "sound_fail": "whish." },
+    "//": "astral content list 23-flora-greenwood; harvest: astral_root_heartroot_resin ×1; all",
+    "examine_action": "harvest_furn",
+    "harvest_by_season": [
+      { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "astral_harv_astral_root_heartroot_young" }
+    ]
   }
 ]

@@ -1,0 +1,96 @@
+{
+  "id": "assayer",
+  "label": "Assayer",
+  "//": "Stone shopfront with assay and vault behind; living quarters upstairs.",
+  "city_sizes": [
+    11,
+    55
+  ],
+  "wall": "#",
+  "footprint": [
+    1,
+    1
+  ],
+  "ground": {
+    "rooms": [
+      {
+        "kind": "shopfront",
+        "rect": [
+          4,
+          6,
+          14,
+          12
+        ]
+      },
+      {
+        "kind": "assay",
+        "rect": [
+          15,
+          6,
+          20,
+          12
+        ]
+      },
+      {
+        "kind": "vault",
+        "rect": [
+          4,
+          13,
+          20,
+          20
+        ]
+      }
+    ],
+    "hub": 0,
+    "porch": [
+      7,
+      4,
+      11,
+      5
+    ],
+    "doors": [
+      [
+        8,
+        6
+      ],
+      [
+        9,
+        6
+      ]
+    ],
+    "window_step": 4,
+    "path": [
+      9,
+      3,
+      0
+    ],
+    "trees": 0.15
+  },
+  "upper": {
+    "rooms": [
+      {
+        "kind": "landing",
+        "rect": [
+          4,
+          6,
+          20,
+          8
+        ]
+      },
+      {
+        "kind": "quarters",
+        "rect": [
+          4,
+          9,
+          20,
+          20
+        ]
+      }
+    ],
+    "hub": 0,
+    "stairs": [
+      5,
+      8
+    ]
+  }
+}

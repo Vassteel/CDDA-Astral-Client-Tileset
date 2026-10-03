@@ -257,10 +257,17 @@ void dialogue_imgui_impl::draw_controls()
 
 cataimgui::bounds dialogue_imgui_impl::get_bounds()
 {
+#if defined(TILES)
     const ImVec4 b = ui_hybrid_chrome::theme::dialog_bounds();
     window_width = b.z;
     window_height = b.w;
     return { b.x, b.y, window_width, window_height };
+#else
+    const ImVec2 vp = ImGui::GetMainViewport()->Size;
+    window_width = vp.x * 0.9f;
+    window_height = vp.y * 0.9f;
+    return { vp.x * 0.05f, vp.y * 0.05f, window_width, window_height };
+#endif
 }
 
 void dialogue_imgui::draw_dialogue_imgui( bool is_computer, bool is_not_conversation,

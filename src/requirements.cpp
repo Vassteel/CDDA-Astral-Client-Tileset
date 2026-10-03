@@ -1822,8 +1822,8 @@ deduped_requirement_data::deduped_requirement_data( const requirement_data &in,
         static constexpr size_t max_alternatives = 115;
         if( alternatives_.size() + pending.size() > max_alternatives ) {
             debugmsg( "Construction of deduped_requirement_data generated too many alternatives.  "
-                      "The recipe %1s should be simplified.  See the Recipe section in "
-                      "doc/JSON/JSON_INFO.md for more details.  It has %2s alternatives.", context.str(),
+                      "The recipe %1$s should be simplified.  See the Recipe section in "
+                      "doc/JSON/JSON_INFO.md for more details.  It has %2$s alternatives.", context.str(),
                       alternatives_.size() + pending.size() );
             is_too_complex_ = true;
             alternatives_ = { in };

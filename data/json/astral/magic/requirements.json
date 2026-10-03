@@ -1,0 +1,795 @@
+[
+  {
+    "type": "requirement",
+    "id": "astral_req_striking_spark_throw",
+    "components": [ [ [ "astral_meadow_starflint", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_striking_force_dart",
+    "tools": [
+      [
+        [ "astral_prime_striking_rod_1", -1 ],
+        [ "astral_prime_striking_rod_2", -1 ],
+        [ "astral_prime_striking_rod_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_striking_shove",
+    "tools": [
+      [
+        [ "astral_prime_striking_rod_1", -1 ],
+        [ "astral_prime_striking_rod_2", -1 ],
+        [ "astral_prime_striking_rod_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_striking_crackle",
+    "tools": [
+      [
+        [ "astral_prime_striking_rod_1", -1 ],
+        [ "astral_prime_striking_rod_2", -1 ],
+        [ "astral_prime_striking_rod_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_striking_burst",
+    "tools": [ [ [ "astral_prime_striking_rod_2", -1 ], [ "astral_prime_striking_rod_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_tide_dust", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_striking_lance",
+    "tools": [ [ [ "astral_prime_striking_rod_2", -1 ], [ "astral_prime_striking_rod_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_tide_dust", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_striking_thunderclap",
+    "tools": [ [ [ "astral_prime_striking_rod_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_striking_starfall",
+    "tools": [ [ [ "astral_prime_striking_rod_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 2 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_salt_line",
+    "components": [ [ [ "astral_drowned_ghostsalt", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_ward_skin",
+    "tools": [
+      [
+        [ "astral_prime_ward_disc_1", -1 ],
+        [ "astral_prime_ward_disc_2", -1 ],
+        [ "astral_prime_ward_disc_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_sense_tide",
+    "tools": [
+      [
+        [ "astral_prime_ward_disc_1", -1 ],
+        [ "astral_prime_ward_disc_2", -1 ],
+        [ "astral_prime_ward_disc_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_crystallise",
+    "tools": [
+      [
+        [ "astral_prime_ward_disc_1", -1 ],
+        [ "astral_prime_ward_disc_2", -1 ],
+        [ "astral_prime_ward_disc_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_unweave",
+    "tools": [ [ [ "astral_prime_ward_disc_2", -1 ], [ "astral_prime_ward_disc_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_tide_dust", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_ward_circle",
+    "tools": [ [ [ "astral_prime_ward_disc_2", -1 ], [ "astral_prime_ward_disc_3", -1 ] ] ],
+    "components": [ [ [ "astral_drowned_ghostsalt", 2 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_tap",
+    "tools": [ [ [ "astral_prime_ward_disc_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_sanctum",
+    "tools": [ [ [ "astral_prime_ward_disc_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 2 ] ], [ [ "astral_drowned_ghostsalt", 3 ] ] ]
+  },
+  { "type": "requirement", "id": "astral_req_calling_whistle_up", "components": [ [ [ "astral_ration", 1 ] ] ] },
+  {
+    "type": "requirement",
+    "id": "astral_req_calling_conjure_rope",
+    "tools": [
+      [
+        [ "astral_prime_calling_bell_1", -1 ],
+        [ "astral_prime_calling_bell_2", -1 ],
+        [ "astral_prime_calling_bell_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_calling_wisp",
+    "tools": [
+      [
+        [ "astral_prime_calling_bell_1", -1 ],
+        [ "astral_prime_calling_bell_2", -1 ],
+        [ "astral_prime_calling_bell_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_calling_conjure_tool",
+    "tools": [
+      [
+        [ "astral_prime_calling_bell_1", -1 ],
+        [ "astral_prime_calling_bell_2", -1 ],
+        [ "astral_prime_calling_bell_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_calling_hound",
+    "tools": [ [ [ "astral_prime_calling_bell_2", -1 ], [ "astral_prime_calling_bell_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_tide_dust", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_calling_bind",
+    "tools": [ [ [ "astral_prime_calling_bell_2", -1 ], [ "astral_prime_calling_bell_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_calling_warden",
+    "tools": [ [ [ "astral_prime_calling_bell_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_calling_greater_binding",
+    "tools": [ [ [ "astral_prime_calling_bell_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 2 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_tempering_whetstone_rite",
+    "components": [ [ [ "astral_meadow_starflint", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_tempering_sure_foot",
+    "tools": [
+      [
+        [ "astral_prime_temper_nail_1", -1 ],
+        [ "astral_prime_temper_nail_2", -1 ],
+        [ "astral_prime_temper_nail_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_tempering_hawk_eye",
+    "tools": [
+      [
+        [ "astral_prime_temper_nail_1", -1 ],
+        [ "astral_prime_temper_nail_2", -1 ],
+        [ "astral_prime_temper_nail_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_tempering_tempered_skin",
+    "tools": [
+      [
+        [ "astral_prime_temper_nail_1", -1 ],
+        [ "astral_prime_temper_nail_2", -1 ],
+        [ "astral_prime_temper_nail_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_tempering_kindled_edge",
+    "tools": [ [ [ "astral_prime_temper_nail_2", -1 ], [ "astral_prime_temper_nail_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_tide_dust", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_tempering_quicken",
+    "tools": [ [ [ "astral_prime_temper_nail_2", -1 ], [ "astral_prime_temper_nail_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_tide_dust", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_tempering_ox_strength",
+    "tools": [ [ [ "astral_prime_temper_nail_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_tempering_tidebody",
+    "tools": [ [ [ "astral_prime_temper_nail_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 2 ] ] ]
+  },
+  { "type": "requirement", "id": "astral_req_hexing_ill_wish", "components": [ [ [ "bone", 1 ] ] ] },
+  {
+    "type": "requirement",
+    "id": "astral_req_hexing_sap",
+    "tools": [
+      [
+        [ "astral_prime_bone_fetish_1", -1 ],
+        [ "astral_prime_bone_fetish_2", -1 ],
+        [ "astral_prime_bone_fetish_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_hexing_dim",
+    "tools": [
+      [
+        [ "astral_prime_bone_fetish_1", -1 ],
+        [ "astral_prime_bone_fetish_2", -1 ],
+        [ "astral_prime_bone_fetish_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_hexing_slow",
+    "tools": [
+      [
+        [ "astral_prime_bone_fetish_1", -1 ],
+        [ "astral_prime_bone_fetish_2", -1 ],
+        [ "astral_prime_bone_fetish_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_hexing_wither",
+    "tools": [ [ [ "astral_prime_bone_fetish_2", -1 ], [ "astral_prime_bone_fetish_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_grave_dust", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_hexing_grave_voice",
+    "tools": [ [ [ "astral_prime_bone_fetish_2", -1 ], [ "astral_prime_bone_fetish_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_grave_dust", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_hexing_leech",
+    "tools": [ [ [ "astral_prime_bone_fetish_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_hexing_unmaking",
+    "tools": [ [ [ "astral_prime_bone_fetish_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 1 ] ], [ [ "astral_prime_grave_dust", 2 ] ] ]
+  },
+  { "type": "requirement", "id": "astral_req_wayfinding_chalk_mark", "components": [ [ [ "astral_trail_chalk", 1 ] ] ] },
+  {
+    "type": "requirement",
+    "id": "astral_req_wayfinding_bearing",
+    "tools": [
+      [
+        [ "astral_prime_wayfinder_needle_1", -1 ],
+        [ "astral_prime_wayfinder_needle_2", -1 ],
+        [ "astral_prime_wayfinder_needle_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_wayfinding_blink",
+    "tools": [
+      [
+        [ "astral_prime_wayfinder_needle_1", -1 ],
+        [ "astral_prime_wayfinder_needle_2", -1 ],
+        [ "astral_prime_wayfinder_needle_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_wayfinding_survey",
+    "tools": [
+      [
+        [ "astral_prime_wayfinder_needle_1", -1 ],
+        [ "astral_prime_wayfinder_needle_2", -1 ],
+        [ "astral_prime_wayfinder_needle_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_wayfinding_mark",
+    "tools": [ [ [ "astral_prime_wayfinder_needle_2", -1 ], [ "astral_prime_wayfinder_needle_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_tide_dust", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_wayfinding_recall",
+    "tools": [ [ [ "astral_prime_wayfinder_needle_2", -1 ], [ "astral_prime_wayfinder_needle_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_wayfinding_steady",
+    "tools": [ [ [ "astral_prime_wayfinder_needle_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_wayfinding_shortcut",
+    "tools": [ [ [ "astral_prime_wayfinder_needle_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_tide_dust", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_poultice_rite",
+    "components": [ [ [ "astral_meadow_hearth_tea", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_mend",
+    "tools": [
+      [
+        [ "astral_prime_mending_sprig_1", -1 ],
+        [ "astral_prime_mending_sprig_2", -1 ],
+        [ "astral_prime_mending_sprig_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_soothe",
+    "tools": [
+      [
+        [ "astral_prime_mending_sprig_1", -1 ],
+        [ "astral_prime_mending_sprig_2", -1 ],
+        [ "astral_prime_mending_sprig_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_cleanse",
+    "tools": [
+      [
+        [ "astral_prime_mending_sprig_1", -1 ],
+        [ "astral_prime_mending_sprig_2", -1 ],
+        [ "astral_prime_mending_sprig_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_rest_deep",
+    "tools": [ [ [ "astral_prime_mending_sprig_2", -1 ], [ "astral_prime_mending_sprig_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_tide_dust", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_restore",
+    "tools": [ [ [ "astral_prime_mending_sprig_2", -1 ], [ "astral_prime_mending_sprig_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_tide_dust", 2 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_knit",
+    "tools": [ [ [ "astral_prime_mending_sprig_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_second_breath",
+    "tools": [ [ [ "astral_prime_mending_sprig_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 2 ] ] ]
+  },
+  { "type": "requirement", "id": "astral_req_shaping_green_thumb", "components": [ [ [ "astral_hearthcoal", 1 ] ] ] },
+  {
+    "type": "requirement",
+    "id": "astral_req_shaping_soften",
+    "tools": [
+      [
+        [ "astral_prime_shaper_chisel_1", -1 ],
+        [ "astral_prime_shaper_chisel_2", -1 ],
+        [ "astral_prime_shaper_chisel_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_shaping_quickgrow",
+    "tools": [
+      [
+        [ "astral_prime_shaper_chisel_1", -1 ],
+        [ "astral_prime_shaper_chisel_2", -1 ],
+        [ "astral_prime_shaper_chisel_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_shaping_delve",
+    "tools": [
+      [
+        [ "astral_prime_shaper_chisel_1", -1 ],
+        [ "astral_prime_shaper_chisel_2", -1 ],
+        [ "astral_prime_shaper_chisel_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_shaping_stonewright",
+    "tools": [ [ [ "astral_prime_shaper_chisel_2", -1 ], [ "astral_prime_shaper_chisel_3", -1 ] ] ],
+    "components": [ [ [ "astral_meadow_bluemarl", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_shaping_melt",
+    "tools": [ [ [ "astral_prime_shaper_chisel_2", -1 ], [ "astral_prime_shaper_chisel_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_tide_dust", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_shaping_graft",
+    "tools": [ [ [ "astral_prime_shaper_chisel_3", -1 ] ] ],
+    "components": [ [ [ "astral_fungal_chitin_plate", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_shaping_reshape",
+    "tools": [ [ [ "astral_prime_shaper_chisel_3", -1 ] ] ],
+    "components": [ [ [ "astral_prime_crystallised_tide", 2 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_hearth_poultice",
+    "components": [ [ [ "astral_meadow_healleaf", 2 ] ], [ [ "astral_meadow_nettle_cloth", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_close_cut",
+    "tools": [
+      [
+        [ "astral_hearth_mending_sprig_1", -1 ],
+        [ "astral_hearth_mending_sprig_2", -1 ],
+        [ "astral_hearth_mending_sprig_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_ease_ache",
+    "tools": [
+      [
+        [ "astral_hearth_mending_sprig_1", -1 ],
+        [ "astral_hearth_mending_sprig_2", -1 ],
+        [ "astral_hearth_mending_sprig_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_spore_wash",
+    "tools": [
+      [
+        [ "astral_hearth_mending_sprig_1", -1 ],
+        [ "astral_hearth_mending_sprig_2", -1 ],
+        [ "astral_hearth_mending_sprig_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ],
+    "components": [ [ [ "astral_hearth_spore_pinch", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_held_breath",
+    "tools": [ [ [ "astral_hearth_mending_sprig_2", -1 ], [ "astral_hearth_mending_sprig_3", -1 ] ] ],
+    "components": [ [ [ "astral_drowned_eel_oil", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_bless_row",
+    "tools": [ [ [ "astral_hearth_mending_sprig_2", -1 ], [ "astral_hearth_mending_sprig_3", -1 ] ] ],
+    "components": [ [ [ "astral_hearth_harvest_pinch", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_home_knit",
+    "tools": [ [ [ "astral_hearth_mending_sprig_3", -1 ] ] ],
+    "components": [ [ [ "astral_hearth_peace_bead", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_mending_hearth_breath",
+    "tools": [ [ [ "astral_hearth_mending_sprig_3", -1 ] ] ],
+    "components": [ [ [ "astral_hearth_hearthcoal", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_peace_line",
+    "components": [ [ [ "astral_root_ghostsalt_crust", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_hearth_skin",
+    "tools": [
+      [
+        [ "astral_hearth_ward_disc_1", -1 ],
+        [ "astral_hearth_ward_disc_2", -1 ],
+        [ "astral_hearth_ward_disc_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_taste_hearth",
+    "tools": [
+      [
+        [ "astral_hearth_ward_disc_1", -1 ],
+        [ "astral_hearth_ward_disc_2", -1 ],
+        [ "astral_hearth_ward_disc_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_firebreak",
+    "tools": [
+      [
+        [ "astral_hearth_ward_disc_1", -1 ],
+        [ "astral_hearth_ward_disc_2", -1 ],
+        [ "astral_hearth_ward_disc_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ],
+    "components": [ [ [ "astral_tallgrass_fire_paste", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_haze_ward",
+    "tools": [ [ [ "astral_hearth_ward_disc_2", -1 ], [ "astral_hearth_ward_disc_3", -1 ] ] ],
+    "components": [ [ [ "astral_hearth_spore_pinch", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_quiet_circle",
+    "tools": [ [ [ "astral_hearth_ward_disc_2", -1 ], [ "astral_hearth_ward_disc_3", -1 ] ] ],
+    "components": [ [ [ "astral_hearth_mute_pinch", 2 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_dry_camp",
+    "tools": [ [ [ "astral_hearth_ward_disc_3", -1 ] ] ],
+    "components": [ [ [ "astral_drowned_pitch", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_warding_night_hearth",
+    "tools": [ [ [ "astral_hearth_ward_disc_3", -1 ] ] ],
+    "components": [ [ [ "astral_hearth_peace_bead", 2 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_wayfinding_hearth_chalk",
+    "components": [ [ [ "astral_hearth_path_chalk", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_wayfinding_way_home",
+    "tools": [
+      [
+        [ "astral_hearth_needle_1", -1 ],
+        [ "astral_hearth_needle_2", -1 ],
+        [ "astral_hearth_needle_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_wayfinding_dry_path",
+    "tools": [
+      [
+        [ "astral_hearth_needle_1", -1 ],
+        [ "astral_hearth_needle_2", -1 ],
+        [ "astral_hearth_needle_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_wayfinding_haze_sight",
+    "tools": [
+      [
+        [ "astral_hearth_needle_1", -1 ],
+        [ "astral_hearth_needle_2", -1 ],
+        [ "astral_hearth_needle_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ],
+    "components": [ [ [ "astral_fungal_glowcap_raw", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_wayfinding_sink_sense",
+    "tools": [ [ [ "astral_hearth_needle_2", -1 ], [ "astral_hearth_needle_3", -1 ] ] ],
+    "components": [ [ [ "astral_hearth_mute_pinch", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_wayfinding_water_step",
+    "tools": [ [ [ "astral_hearth_needle_2", -1 ], [ "astral_hearth_needle_3", -1 ] ] ],
+    "components": [ [ [ "astral_drowned_eel_oil", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_wayfinding_soft_step",
+    "tools": [ [ [ "astral_hearth_needle_3", -1 ] ] ],
+    "components": [ [ [ "astral_hearth_mute_pinch", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_wayfinding_step_home",
+    "tools": [ [ [ "astral_hearth_needle_3", -1 ] ] ],
+    "components": [ [ [ "astral_hearth_hearthcoal", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_striking_banked_spark",
+    "tools": [
+      [
+        [ "astral_prime_striking_rod_1", -1 ],
+        [ "astral_prime_striking_rod_2", -1 ],
+        [ "astral_prime_striking_rod_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_striking_scare_clap",
+    "tools": [
+      [
+        [ "astral_prime_striking_rod_1", -1 ],
+        [ "astral_prime_striking_rod_2", -1 ],
+        [ "astral_prime_striking_rod_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_calling_herd_whistle",
+    "components": [ [ [ "astral_fallow_seed_bag", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_calling_stand_scarecrow",
+    "tools": [ [ [ "astral_prime_calling_bell_2", -1 ], [ "astral_prime_calling_bell_3", -1 ] ] ],
+    "components": [ [ [ "astral_fallow_scarecrow_scrap", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_tempering_quiet_foot",
+    "tools": [
+      [
+        [ "astral_prime_temper_nail_1", -1 ],
+        [ "astral_prime_temper_nail_2", -1 ],
+        [ "astral_prime_temper_nail_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_tempering_ash_skin",
+    "tools": [ [ [ "astral_prime_temper_nail_2", -1 ], [ "astral_prime_temper_nail_3", -1 ] ] ],
+    "components": [ [ [ "astral_tallgrass_fire_paste", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_hexing_damp_weed",
+    "tools": [
+      [
+        [ "astral_prime_bone_fetish_1", -1 ],
+        [ "astral_prime_bone_fetish_2", -1 ],
+        [ "astral_prime_bone_fetish_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ],
+    "components": [ [ [ "astral_fallow_straw", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_hexing_steal_sound",
+    "tools": [ [ [ "astral_prime_bone_fetish_2", -1 ], [ "astral_prime_bone_fetish_3", -1 ] ] ],
+    "components": [ [ [ "astral_hearth_mute_pinch", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_shaping_cut_fire",
+    "tools": [
+      [
+        [ "astral_prime_shaper_chisel_1", -1 ],
+        [ "astral_prime_shaper_chisel_2", -1 ],
+        [ "astral_prime_shaper_chisel_3", -1 ],
+        [ "astral_prime_wayfarer_staff", -1 ]
+      ]
+    ],
+    "components": [ [ [ "astral_tallgrass_fibre", 1 ] ] ]
+  },
+  {
+    "type": "requirement",
+    "id": "astral_req_shaping_raise_path",
+    "tools": [ [ [ "astral_prime_shaper_chisel_2", -1 ], [ "astral_prime_shaper_chisel_3", -1 ] ] ],
+    "components": [ [ [ "astral_drowned_pitch", 1 ] ] ]
+  }
+]

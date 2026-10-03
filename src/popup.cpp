@@ -26,7 +26,7 @@ static size_t query_button_width( const std::string &text )
 #else
 static size_t query_button_width( const std::string &text )
 {
-    return get_text_width( remove_color_tags( text ) );
+    return static_cast<size_t>( ImGui::CalcTextSize( remove_color_tags( text ).c_str() ).x );
 }
 #endif
 
