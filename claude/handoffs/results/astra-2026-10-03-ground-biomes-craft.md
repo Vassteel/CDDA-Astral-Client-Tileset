@@ -43,3 +43,11 @@ partial — renderer prototype and tests staged; full build, runtime validation 
 ## Status
 
 done — initial implementation pass for 1,3,4,5, with three completed Grok audits. Runtime summer grass and spell menu checked; broader art rollout, terrain transitions, wetland gameplay distribution and missing-tool UI acceptance remain playtest work. Draft PR preparation in progress; no release or installation.
+
+## Delivery
+
+Final identifier rebuild exit0. Feature branch pushed; draft PR: https://github.com/Vassteel/CDDA-Astral-Client-Tileset/pull/7. Source commit58978c585f, review commit4c0faa6a87. Default branch, release tags and live client unchanged. Main persistent handoff appended with this checkpoint. Isolated test character saved and test UI closed after captures. Untracked temporary fixture/sound assets remain only in test worktree, excluded from Git.
+
+## Status
+
+done — initial ordered implementation pass delivered as draft PR7. Remaining gameplay/art acceptance limits are listed above; no live install or release.
