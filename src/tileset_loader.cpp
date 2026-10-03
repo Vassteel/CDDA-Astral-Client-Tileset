@@ -9,6 +9,7 @@
 #include <filesystem>
 #include <fstream>
 #include <functional>
+#include <limits>
 #include <map>
 #include <memory>
 #include <optional>
@@ -471,6 +472,14 @@ atlas_upload_interrupt tileset_cache::loader::load( const std::string &tileset_i
         tile_type &td = it->second;
         process_variations_after_loading( td.fg );
         process_variations_after_loading( td.bg );
+        for( const auto &cells : td.macro.variants ) {
+            if( std::any_of( cells.begin(), cells.end(), [&]( int index ) {
+            return index < 0 || index >= offset;
+        } ) ) {
+                throw std::runtime_error( "macro sprite outside tileset: " + it->first );
+            }
+        }
+
         // All tiles need at least foreground or background data, otherwise they are useless.
         if( td.bg.empty() && td.fg.empty() ) {
             dbg( D_ERROR ) << "tile " << it->first << " has no (valid) foreground nor background";
@@ -949,6 +958,34 @@ tile_type &tileset_cache::loader::load_tile( const JsonObject &entry, const std:
 
     load_tile_spritelists( entry, curr_subtile.fg, "fg" );
     load_tile_spritelists( entry, curr_subtile.bg, "bg" );
+    if( entry.has_member( "macro" ) ) {
+        const JsonObject macro = entry.get_object( "macro" );
+        curr_subtile.macro.size = macro.get_int( "size", 8 );
+        if( !terrain_macro::valid_size( curr_subtile.macro.size ) ) {
+            macro.throw_error( "macro size must be 1..16, excluding 12" );
+        }
+        if( entry.get_bool( "animated", false ) || entry.get_bool( "multitile", false ) ||
+            entry.get_bool( "rotates", false ) ) {
+            macro.throw_error( "macro terrain cannot be animated, multitile or rotated" );
+        }
+        for( JsonArray cells : macro.get_array( "variants" ) ) {
+            std::vector<int> indices;
+            for( int index : cells ) {
+                if( index < 0 || index > std::numeric_limits<int>::max() - sprite_id_offset ) {
+                    macro.throw_error( "macro sprite indices must be nonnegative" );
+                }
+                indices.push_back( index + sprite_id_offset );
+            }
+            if( indices.size() != static_cast<size_t>( curr_subtile.macro.size * curr_subtile.macro.size ) ) {
+                macro.throw_error( "each macro variant must contain size*size row-major sprite indices" );
+            }
+            curr_subtile.macro.variants.push_back( std::move( indices ) );
+        }
+        if( curr_subtile.macro.variants.empty() ) {
+            macro.throw_error( "macro requires at least one variant" );
+        }
+    }
+
 
     return ts.create_tile_type( id, std::move( curr_subtile ) );
 }
