@@ -1,0 +1,629 @@
+[
+  {
+    "type": "mapgen",
+    "method": "json",
+    "om_terrain": "astral_cc_land_dense",
+    "object": {
+      "fill_ter": "t_region_groundcover",
+      "rows": [
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,____,,,,,,,,,,",
+        ",,,,,,,,,,____,,,,,,,,,,",
+        ",,,,,,,,,,____,,,,,,,,,,",
+        ",,,,,,,,,,____,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,"
+      ],
+      "palettes": [ "astral_cc_palette", "astral_cc_dense_palette" ],
+      "place_nested": [
+        {
+          "chunks": [
+            [ "astral_cc_kit_dense_dense_pair_r0", 8 ],
+            [ "astral_cc_kit_dense_dense_pair_r3", 8 ],
+            [ "astral_cc_kit_dense_dense_house_yard_r0", 6 ],
+            [ "astral_cc_kit_dense_dense_house_yard_r3", 6 ],
+            [ "astral_cc_kit_dense_dense_courtyard_r0", 5 ],
+            [ "astral_cc_kit_dense_dense_courtyard_r3", 5 ],
+            [ "astral_cc_kit_dense_dense_shop_row_r0", 4 ],
+            [ "astral_cc_kit_dense_dense_shop_row_r3", 4 ],
+            [ "astral_cc_kit_dense_dense_tower_house_r0", 4 ],
+            [ "astral_cc_kit_dense_dense_tower_house_r3", 4 ],
+            [ "astral_cc_kit_dense_shrine_r0", 2 ],
+            [ "astral_cc_kit_dense_shrine_r3", 2 ],
+            [ "astral_cc_kit_dense_well_r0", 2 ],
+            [ "astral_cc_kit_dense_well_r3", 2 ],
+            [ "astral_cc_kit_dense_market_r0", 2 ],
+            [ "astral_cc_kit_dense_market_r3", 2 ],
+            [ "astral_cc_kit_dense_garden_r0", 2 ],
+            [ "astral_cc_kit_dense_garden_r3", 2 ],
+            [ "astral_cc_kit_dense_plaza_r0", 1 ],
+            [ "astral_cc_kit_dense_plaza_r3", 1 ]
+          ],
+          "x": 0,
+          "y": 0
+        },
+        {
+          "chunks": [
+            [ "astral_cc_kit_dense_dense_pair_r0", 8 ],
+            [ "astral_cc_kit_dense_dense_pair_r1", 8 ],
+            [ "astral_cc_kit_dense_dense_house_yard_r0", 6 ],
+            [ "astral_cc_kit_dense_dense_house_yard_r1", 6 ],
+            [ "astral_cc_kit_dense_dense_courtyard_r0", 5 ],
+            [ "astral_cc_kit_dense_dense_courtyard_r1", 5 ],
+            [ "astral_cc_kit_dense_dense_shop_row_r0", 4 ],
+            [ "astral_cc_kit_dense_dense_shop_row_r1", 4 ],
+            [ "astral_cc_kit_dense_dense_tower_house_r0", 4 ],
+            [ "astral_cc_kit_dense_dense_tower_house_r1", 4 ],
+            [ "astral_cc_kit_dense_shrine_r0", 2 ],
+            [ "astral_cc_kit_dense_shrine_r1", 2 ],
+            [ "astral_cc_kit_dense_well_r0", 2 ],
+            [ "astral_cc_kit_dense_well_r1", 2 ],
+            [ "astral_cc_kit_dense_market_r0", 2 ],
+            [ "astral_cc_kit_dense_market_r1", 2 ],
+            [ "astral_cc_kit_dense_garden_r0", 2 ],
+            [ "astral_cc_kit_dense_garden_r1", 2 ],
+            [ "astral_cc_kit_dense_plaza_r0", 1 ],
+            [ "astral_cc_kit_dense_plaza_r1", 1 ]
+          ],
+          "x": 14,
+          "y": 0
+        },
+        {
+          "chunks": [
+            [ "astral_cc_kit_dense_dense_pair_r2", 8 ],
+            [ "astral_cc_kit_dense_dense_pair_r3", 8 ],
+            [ "astral_cc_kit_dense_dense_house_yard_r2", 6 ],
+            [ "astral_cc_kit_dense_dense_house_yard_r3", 6 ],
+            [ "astral_cc_kit_dense_dense_courtyard_r2", 5 ],
+            [ "astral_cc_kit_dense_dense_courtyard_r3", 5 ],
+            [ "astral_cc_kit_dense_dense_shop_row_r2", 4 ],
+            [ "astral_cc_kit_dense_dense_shop_row_r3", 4 ],
+            [ "astral_cc_kit_dense_dense_tower_house_r2", 4 ],
+            [ "astral_cc_kit_dense_dense_tower_house_r3", 4 ],
+            [ "astral_cc_kit_dense_shrine_r2", 2 ],
+            [ "astral_cc_kit_dense_shrine_r3", 2 ],
+            [ "astral_cc_kit_dense_well_r2", 2 ],
+            [ "astral_cc_kit_dense_well_r3", 2 ],
+            [ "astral_cc_kit_dense_market_r2", 2 ],
+            [ "astral_cc_kit_dense_market_r3", 2 ],
+            [ "astral_cc_kit_dense_garden_r2", 2 ],
+            [ "astral_cc_kit_dense_garden_r3", 2 ],
+            [ "astral_cc_kit_dense_plaza_r2", 1 ],
+            [ "astral_cc_kit_dense_plaza_r3", 1 ]
+          ],
+          "x": 0,
+          "y": 14
+        },
+        {
+          "chunks": [
+            [ "astral_cc_kit_dense_dense_pair_r2", 8 ],
+            [ "astral_cc_kit_dense_dense_pair_r1", 8 ],
+            [ "astral_cc_kit_dense_dense_house_yard_r2", 6 ],
+            [ "astral_cc_kit_dense_dense_house_yard_r1", 6 ],
+            [ "astral_cc_kit_dense_dense_courtyard_r2", 5 ],
+            [ "astral_cc_kit_dense_dense_courtyard_r1", 5 ],
+            [ "astral_cc_kit_dense_dense_shop_row_r2", 4 ],
+            [ "astral_cc_kit_dense_dense_shop_row_r1", 4 ],
+            [ "astral_cc_kit_dense_dense_tower_house_r2", 4 ],
+            [ "astral_cc_kit_dense_dense_tower_house_r1", 4 ],
+            [ "astral_cc_kit_dense_shrine_r2", 2 ],
+            [ "astral_cc_kit_dense_shrine_r1", 2 ],
+            [ "astral_cc_kit_dense_well_r2", 2 ],
+            [ "astral_cc_kit_dense_well_r1", 2 ],
+            [ "astral_cc_kit_dense_market_r2", 2 ],
+            [ "astral_cc_kit_dense_market_r1", 2 ],
+            [ "astral_cc_kit_dense_garden_r2", 2 ],
+            [ "astral_cc_kit_dense_garden_r1", 2 ],
+            [ "astral_cc_kit_dense_plaza_r2", 1 ],
+            [ "astral_cc_kit_dense_plaza_r1", 1 ]
+          ],
+          "x": 14,
+          "y": 14
+        },
+        {
+          "chunks": [ "astral_cc_stub_north_0", "astral_cc_stub_north_1", "astral_cc_stub_north_2" ],
+          "x": 10,
+          "y": 0,
+          "joins": { "north": [ "cc_shore" ] }
+        },
+        {
+          "else_chunks": [
+            [ "astral_cc_stub_north_0", 4 ],
+            [ "astral_cc_stub_north_1", 4 ],
+            [ "astral_cc_stub_north_2", 4 ],
+            [ "null", 3 ]
+          ],
+          "x": 10,
+          "y": 0,
+          "joins": { "north": [ "cc_shore" ] }
+        },
+        {
+          "chunks": [ "astral_cc_stub_east_0", "astral_cc_stub_east_1", "astral_cc_stub_east_2" ],
+          "x": 12,
+          "y": 10,
+          "joins": { "east": [ "cc_shore" ] }
+        },
+        {
+          "else_chunks": [
+            [ "astral_cc_stub_east_0", 4 ],
+            [ "astral_cc_stub_east_1", 4 ],
+            [ "astral_cc_stub_east_2", 4 ],
+            [ "null", 3 ]
+          ],
+          "x": 12,
+          "y": 10,
+          "joins": { "east": [ "cc_shore" ] }
+        },
+        {
+          "chunks": [ "astral_cc_stub_south_0", "astral_cc_stub_south_1", "astral_cc_stub_south_2" ],
+          "x": 10,
+          "y": 12,
+          "joins": { "south": [ "cc_shore" ] }
+        },
+        {
+          "else_chunks": [
+            [ "astral_cc_stub_south_0", 4 ],
+            [ "astral_cc_stub_south_1", 4 ],
+            [ "astral_cc_stub_south_2", 4 ],
+            [ "null", 3 ]
+          ],
+          "x": 10,
+          "y": 12,
+          "joins": { "south": [ "cc_shore" ] }
+        },
+        {
+          "chunks": [ "astral_cc_stub_west_0", "astral_cc_stub_west_1", "astral_cc_stub_west_2" ],
+          "x": 0,
+          "y": 10,
+          "joins": { "west": [ "cc_shore" ] }
+        },
+        {
+          "else_chunks": [
+            [ "astral_cc_stub_west_0", 4 ],
+            [ "astral_cc_stub_west_1", 4 ],
+            [ "astral_cc_stub_west_2", 4 ],
+            [ "null", 3 ]
+          ],
+          "x": 0,
+          "y": 10,
+          "joins": { "west": [ "cc_shore" ] }
+        }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "om_terrain": "astral_cc_land_ord",
+    "object": {
+      "fill_ter": "t_region_groundcover",
+      "rows": [
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,____,,,,,,,,,,",
+        ",,,,,,,,,,____,,,,,,,,,,",
+        ",,,,,,,,,,____,,,,,,,,,,",
+        ",,,,,,,,,,____,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,"
+      ],
+      "palettes": [ "astral_cc_palette", "astral_cc_ord_palette" ],
+      "place_nested": [
+        {
+          "chunks": [
+            [ "astral_cc_kit_ord_ord_house_r0", 8 ],
+            [ "astral_cc_kit_ord_ord_house_r3", 8 ],
+            [ "astral_cc_kit_ord_ord_longhouse_r0", 5 ],
+            [ "astral_cc_kit_ord_ord_longhouse_r3", 5 ],
+            [ "astral_cc_kit_ord_ord_workshop_r0", 3 ],
+            [ "astral_cc_kit_ord_ord_workshop_r3", 3 ],
+            [ "astral_cc_kit_ord_ord_hut_pair_r0", 5 ],
+            [ "astral_cc_kit_ord_ord_hut_pair_r3", 5 ],
+            [ "astral_cc_kit_ord_pen_r0", 3 ],
+            [ "astral_cc_kit_ord_pen_r3", 3 ],
+            [ "astral_cc_kit_ord_garden_r0", 4 ],
+            [ "astral_cc_kit_ord_garden_r3", 4 ],
+            [ "astral_cc_kit_ord_orchard_r0", 3 ],
+            [ "astral_cc_kit_ord_orchard_r3", 3 ],
+            [ "astral_cc_kit_ord_well_r0", 2 ],
+            [ "astral_cc_kit_ord_well_r3", 2 ],
+            [ "astral_cc_kit_ord_shrine_r0", 1 ],
+            [ "astral_cc_kit_ord_shrine_r3", 1 ],
+            [ "astral_cc_kit_ord_market_r0", 1 ],
+            [ "astral_cc_kit_ord_market_r3", 1 ],
+            [ "null", 8 ]
+          ],
+          "x": 0,
+          "y": 0
+        },
+        {
+          "chunks": [
+            [ "astral_cc_kit_ord_ord_house_r0", 8 ],
+            [ "astral_cc_kit_ord_ord_house_r1", 8 ],
+            [ "astral_cc_kit_ord_ord_longhouse_r0", 5 ],
+            [ "astral_cc_kit_ord_ord_longhouse_r1", 5 ],
+            [ "astral_cc_kit_ord_ord_workshop_r0", 3 ],
+            [ "astral_cc_kit_ord_ord_workshop_r1", 3 ],
+            [ "astral_cc_kit_ord_ord_hut_pair_r0", 5 ],
+            [ "astral_cc_kit_ord_ord_hut_pair_r1", 5 ],
+            [ "astral_cc_kit_ord_pen_r0", 3 ],
+            [ "astral_cc_kit_ord_pen_r1", 3 ],
+            [ "astral_cc_kit_ord_garden_r0", 4 ],
+            [ "astral_cc_kit_ord_garden_r1", 4 ],
+            [ "astral_cc_kit_ord_orchard_r0", 3 ],
+            [ "astral_cc_kit_ord_orchard_r1", 3 ],
+            [ "astral_cc_kit_ord_well_r0", 2 ],
+            [ "astral_cc_kit_ord_well_r1", 2 ],
+            [ "astral_cc_kit_ord_shrine_r0", 1 ],
+            [ "astral_cc_kit_ord_shrine_r1", 1 ],
+            [ "astral_cc_kit_ord_market_r0", 1 ],
+            [ "astral_cc_kit_ord_market_r1", 1 ],
+            [ "null", 8 ]
+          ],
+          "x": 14,
+          "y": 0
+        },
+        {
+          "chunks": [
+            [ "astral_cc_kit_ord_ord_house_r2", 8 ],
+            [ "astral_cc_kit_ord_ord_house_r3", 8 ],
+            [ "astral_cc_kit_ord_ord_longhouse_r2", 5 ],
+            [ "astral_cc_kit_ord_ord_longhouse_r3", 5 ],
+            [ "astral_cc_kit_ord_ord_workshop_r2", 3 ],
+            [ "astral_cc_kit_ord_ord_workshop_r3", 3 ],
+            [ "astral_cc_kit_ord_ord_hut_pair_r2", 5 ],
+            [ "astral_cc_kit_ord_ord_hut_pair_r3", 5 ],
+            [ "astral_cc_kit_ord_pen_r2", 3 ],
+            [ "astral_cc_kit_ord_pen_r3", 3 ],
+            [ "astral_cc_kit_ord_garden_r2", 4 ],
+            [ "astral_cc_kit_ord_garden_r3", 4 ],
+            [ "astral_cc_kit_ord_orchard_r2", 3 ],
+            [ "astral_cc_kit_ord_orchard_r3", 3 ],
+            [ "astral_cc_kit_ord_well_r2", 2 ],
+            [ "astral_cc_kit_ord_well_r3", 2 ],
+            [ "astral_cc_kit_ord_shrine_r2", 1 ],
+            [ "astral_cc_kit_ord_shrine_r3", 1 ],
+            [ "astral_cc_kit_ord_market_r2", 1 ],
+            [ "astral_cc_kit_ord_market_r3", 1 ],
+            [ "null", 8 ]
+          ],
+          "x": 0,
+          "y": 14
+        },
+        {
+          "chunks": [
+            [ "astral_cc_kit_ord_ord_house_r2", 8 ],
+            [ "astral_cc_kit_ord_ord_house_r1", 8 ],
+            [ "astral_cc_kit_ord_ord_longhouse_r2", 5 ],
+            [ "astral_cc_kit_ord_ord_longhouse_r1", 5 ],
+            [ "astral_cc_kit_ord_ord_workshop_r2", 3 ],
+            [ "astral_cc_kit_ord_ord_workshop_r1", 3 ],
+            [ "astral_cc_kit_ord_ord_hut_pair_r2", 5 ],
+            [ "astral_cc_kit_ord_ord_hut_pair_r1", 5 ],
+            [ "astral_cc_kit_ord_pen_r2", 3 ],
+            [ "astral_cc_kit_ord_pen_r1", 3 ],
+            [ "astral_cc_kit_ord_garden_r2", 4 ],
+            [ "astral_cc_kit_ord_garden_r1", 4 ],
+            [ "astral_cc_kit_ord_orchard_r2", 3 ],
+            [ "astral_cc_kit_ord_orchard_r1", 3 ],
+            [ "astral_cc_kit_ord_well_r2", 2 ],
+            [ "astral_cc_kit_ord_well_r1", 2 ],
+            [ "astral_cc_kit_ord_shrine_r2", 1 ],
+            [ "astral_cc_kit_ord_shrine_r1", 1 ],
+            [ "astral_cc_kit_ord_market_r2", 1 ],
+            [ "astral_cc_kit_ord_market_r1", 1 ],
+            [ "null", 8 ]
+          ],
+          "x": 14,
+          "y": 14
+        },
+        {
+          "chunks": [ "astral_cc_stub_north_0", "astral_cc_stub_north_1", "astral_cc_stub_north_2" ],
+          "x": 10,
+          "y": 0,
+          "joins": { "north": [ "cc_shore" ] }
+        },
+        {
+          "else_chunks": [
+            [ "astral_cc_stub_north_0", 4 ],
+            [ "astral_cc_stub_north_1", 4 ],
+            [ "astral_cc_stub_north_2", 4 ],
+            [ "null", 3 ]
+          ],
+          "x": 10,
+          "y": 0,
+          "joins": { "north": [ "cc_shore" ] }
+        },
+        {
+          "chunks": [ "astral_cc_stub_east_0", "astral_cc_stub_east_1", "astral_cc_stub_east_2" ],
+          "x": 12,
+          "y": 10,
+          "joins": { "east": [ "cc_shore" ] }
+        },
+        {
+          "else_chunks": [
+            [ "astral_cc_stub_east_0", 4 ],
+            [ "astral_cc_stub_east_1", 4 ],
+            [ "astral_cc_stub_east_2", 4 ],
+            [ "null", 3 ]
+          ],
+          "x": 12,
+          "y": 10,
+          "joins": { "east": [ "cc_shore" ] }
+        },
+        {
+          "chunks": [ "astral_cc_stub_south_0", "astral_cc_stub_south_1", "astral_cc_stub_south_2" ],
+          "x": 10,
+          "y": 12,
+          "joins": { "south": [ "cc_shore" ] }
+        },
+        {
+          "else_chunks": [
+            [ "astral_cc_stub_south_0", 4 ],
+            [ "astral_cc_stub_south_1", 4 ],
+            [ "astral_cc_stub_south_2", 4 ],
+            [ "null", 3 ]
+          ],
+          "x": 10,
+          "y": 12,
+          "joins": { "south": [ "cc_shore" ] }
+        },
+        {
+          "chunks": [ "astral_cc_stub_west_0", "astral_cc_stub_west_1", "astral_cc_stub_west_2" ],
+          "x": 0,
+          "y": 10,
+          "joins": { "west": [ "cc_shore" ] }
+        },
+        {
+          "else_chunks": [
+            [ "astral_cc_stub_west_0", 4 ],
+            [ "astral_cc_stub_west_1", 4 ],
+            [ "astral_cc_stub_west_2", 4 ],
+            [ "null", 3 ]
+          ],
+          "x": 0,
+          "y": 10,
+          "joins": { "west": [ "cc_shore" ] }
+        }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "om_terrain": "astral_cc_land_farm",
+    "object": {
+      "fill_ter": "t_region_groundcover",
+      "rows": [
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,____,,,,,,,,,,",
+        ",,,,,,,,,,____,,,,,,,,,,",
+        ",,,,,,,,,,____,,,,,,,,,,",
+        ",,,,,,,,,,____,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,",
+        ",,,,,,,,,,,,,,,,,,,,,,,,"
+      ],
+      "palettes": [ "astral_cc_palette", "astral_cc_farm_palette" ],
+      "place_nested": [
+        {
+          "chunks": [
+            [ "astral_cc_kit_farm_farm_strips_r0", 8 ],
+            [ "astral_cc_kit_farm_farm_strips_r3", 8 ],
+            [ "astral_cc_kit_farm_farm_strips_v_r0", 6 ],
+            [ "astral_cc_kit_farm_farm_strips_v_r3", 6 ],
+            [ "astral_cc_kit_farm_orchard_r0", 4 ],
+            [ "astral_cc_kit_farm_orchard_r3", 4 ],
+            [ "astral_cc_kit_farm_hayfield_r0", 4 ],
+            [ "astral_cc_kit_farm_hayfield_r3", 4 ],
+            [ "astral_cc_kit_farm_farm_barn_r0", 3 ],
+            [ "astral_cc_kit_farm_farm_barn_r3", 3 ],
+            [ "astral_cc_kit_farm_ord_hut_pair_r0", 3 ],
+            [ "astral_cc_kit_farm_ord_hut_pair_r3", 3 ],
+            [ "astral_cc_kit_farm_pen_r0", 3 ],
+            [ "astral_cc_kit_farm_pen_r3", 3 ],
+            [ "astral_cc_kit_farm_garden_r0", 2 ],
+            [ "astral_cc_kit_farm_garden_r3", 2 ],
+            [ "astral_cc_kit_farm_well_r0", 1 ],
+            [ "astral_cc_kit_farm_well_r3", 1 ],
+            [ "null", 8 ]
+          ],
+          "x": 0,
+          "y": 0
+        },
+        {
+          "chunks": [
+            [ "astral_cc_kit_farm_farm_strips_r0", 8 ],
+            [ "astral_cc_kit_farm_farm_strips_r1", 8 ],
+            [ "astral_cc_kit_farm_farm_strips_v_r0", 6 ],
+            [ "astral_cc_kit_farm_farm_strips_v_r1", 6 ],
+            [ "astral_cc_kit_farm_orchard_r0", 4 ],
+            [ "astral_cc_kit_farm_orchard_r1", 4 ],
+            [ "astral_cc_kit_farm_hayfield_r0", 4 ],
+            [ "astral_cc_kit_farm_hayfield_r1", 4 ],
+            [ "astral_cc_kit_farm_farm_barn_r0", 3 ],
+            [ "astral_cc_kit_farm_farm_barn_r1", 3 ],
+            [ "astral_cc_kit_farm_ord_hut_pair_r0", 3 ],
+            [ "astral_cc_kit_farm_ord_hut_pair_r1", 3 ],
+            [ "astral_cc_kit_farm_pen_r0", 3 ],
+            [ "astral_cc_kit_farm_pen_r1", 3 ],
+            [ "astral_cc_kit_farm_garden_r0", 2 ],
+            [ "astral_cc_kit_farm_garden_r1", 2 ],
+            [ "astral_cc_kit_farm_well_r0", 1 ],
+            [ "astral_cc_kit_farm_well_r1", 1 ],
+            [ "null", 8 ]
+          ],
+          "x": 14,
+          "y": 0
+        },
+        {
+          "chunks": [
+            [ "astral_cc_kit_farm_farm_strips_r2", 8 ],
+            [ "astral_cc_kit_farm_farm_strips_r3", 8 ],
+            [ "astral_cc_kit_farm_farm_strips_v_r2", 6 ],
+            [ "astral_cc_kit_farm_farm_strips_v_r3", 6 ],
+            [ "astral_cc_kit_farm_orchard_r2", 4 ],
+            [ "astral_cc_kit_farm_orchard_r3", 4 ],
+            [ "astral_cc_kit_farm_hayfield_r2", 4 ],
+            [ "astral_cc_kit_farm_hayfield_r3", 4 ],
+            [ "astral_cc_kit_farm_farm_barn_r2", 3 ],
+            [ "astral_cc_kit_farm_farm_barn_r3", 3 ],
+            [ "astral_cc_kit_farm_ord_hut_pair_r2", 3 ],
+            [ "astral_cc_kit_farm_ord_hut_pair_r3", 3 ],
+            [ "astral_cc_kit_farm_pen_r2", 3 ],
+            [ "astral_cc_kit_farm_pen_r3", 3 ],
+            [ "astral_cc_kit_farm_garden_r2", 2 ],
+            [ "astral_cc_kit_farm_garden_r3", 2 ],
+            [ "astral_cc_kit_farm_well_r2", 1 ],
+            [ "astral_cc_kit_farm_well_r3", 1 ],
+            [ "null", 8 ]
+          ],
+          "x": 0,
+          "y": 14
+        },
+        {
+          "chunks": [
+            [ "astral_cc_kit_farm_farm_strips_r2", 8 ],
+            [ "astral_cc_kit_farm_farm_strips_r1", 8 ],
+            [ "astral_cc_kit_farm_farm_strips_v_r2", 6 ],
+            [ "astral_cc_kit_farm_farm_strips_v_r1", 6 ],
+            [ "astral_cc_kit_farm_orchard_r2", 4 ],
+            [ "astral_cc_kit_farm_orchard_r1", 4 ],
+            [ "astral_cc_kit_farm_hayfield_r2", 4 ],
+            [ "astral_cc_kit_farm_hayfield_r1", 4 ],
+            [ "astral_cc_kit_farm_farm_barn_r2", 3 ],
+            [ "astral_cc_kit_farm_farm_barn_r1", 3 ],
+            [ "astral_cc_kit_farm_ord_hut_pair_r2", 3 ],
+            [ "astral_cc_kit_farm_ord_hut_pair_r1", 3 ],
+            [ "astral_cc_kit_farm_pen_r2", 3 ],
+            [ "astral_cc_kit_farm_pen_r1", 3 ],
+            [ "astral_cc_kit_farm_garden_r2", 2 ],
+            [ "astral_cc_kit_farm_garden_r1", 2 ],
+            [ "astral_cc_kit_farm_well_r2", 1 ],
+            [ "astral_cc_kit_farm_well_r1", 1 ],
+            [ "null", 8 ]
+          ],
+          "x": 14,
+          "y": 14
+        },
+        {
+          "chunks": [ "astral_cc_stub_north_0", "astral_cc_stub_north_1", "astral_cc_stub_north_2" ],
+          "x": 10,
+          "y": 0,
+          "joins": { "north": [ "cc_shore" ] }
+        },
+        {
+          "else_chunks": [
+            [ "astral_cc_stub_north_0", 4 ],
+            [ "astral_cc_stub_north_1", 4 ],
+            [ "astral_cc_stub_north_2", 4 ],
+            [ "null", 3 ]
+          ],
+          "x": 10,
+          "y": 0,
+          "joins": { "north": [ "cc_shore" ] }
+        },
+        {
+          "chunks": [ "astral_cc_stub_east_0", "astral_cc_stub_east_1", "astral_cc_stub_east_2" ],
+          "x": 12,
+          "y": 10,
+          "joins": { "east": [ "cc_shore" ] }
+        },
+        {
+          "else_chunks": [
+            [ "astral_cc_stub_east_0", 4 ],
+            [ "astral_cc_stub_east_1", 4 ],
+            [ "astral_cc_stub_east_2", 4 ],
+            [ "null", 3 ]
+          ],
+          "x": 12,
+          "y": 10,
+          "joins": { "east": [ "cc_shore" ] }
+        },
+        {
+          "chunks": [ "astral_cc_stub_south_0", "astral_cc_stub_south_1", "astral_cc_stub_south_2" ],
+          "x": 10,
+          "y": 12,
+          "joins": { "south": [ "cc_shore" ] }
+        },
+        {
+          "else_chunks": [
+            [ "astral_cc_stub_south_0", 4 ],
+            [ "astral_cc_stub_south_1", 4 ],
+            [ "astral_cc_stub_south_2", 4 ],
+            [ "null", 3 ]
+          ],
+          "x": 10,
+          "y": 12,
+          "joins": { "south": [ "cc_shore" ] }
+        },
+        {
+          "chunks": [ "astral_cc_stub_west_0", "astral_cc_stub_west_1", "astral_cc_stub_west_2" ],
+          "x": 0,
+          "y": 10,
+          "joins": { "west": [ "cc_shore" ] }
+        },
+        {
+          "else_chunks": [
+            [ "astral_cc_stub_west_0", 4 ],
+            [ "astral_cc_stub_west_1", 4 ],
+            [ "astral_cc_stub_west_2", 4 ],
+            [ "null", 3 ]
+          ],
+          "x": 0,
+          "y": 10,
+          "joins": { "west": [ "cc_shore" ] }
+        }
+      ]
+    }
+  }
+]

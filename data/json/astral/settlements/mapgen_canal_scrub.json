@@ -1,0 +1,135 @@
+[
+  {
+    "type": "mapgen",
+    "method": "json",
+    "om_terrain": "astral_cc_scrub",
+    "object": {
+      "fill_ter": "t_region_groundcover_swamp",
+      "rows": [
+        "vjjrjjjjvjjmjvjjrjjjjvjj",
+        "jjjjvjjmjvjjrjjjjvjjmjvj",
+        "vjjmjvjjrjjjjvjjmjvjjrjj",
+        "jvjjrjjjjvjjmjvjjrjjjjvj",
+        "rjjjjvjjmjvjjrjjjjvjjmjv",
+        "jvjjmjvjjrjjjjvjjmjvjjrj",
+        "mjvjjrjjjjvjjmjvjjrjjjjv",
+        "jrjjjjvjjmjvjjrjjjjvjjmj",
+        "jjvjjmjvjjrjjjjvjjmjvjjr",
+        "jmjvjjrjjjjvjjmjvjjrjjjj",
+        "jjrjjjjvjjmjvjjrjjjjvjjm",
+        "jjjvjjmjvjjrjjjjvjjmjvjj",
+        "jjmjvjjrjjjjvjjmjvjjrjjj",
+        "vjjrjjjjvjjmjvjjrjjjjvjj",
+        "jjjjvjjmjvjjrjjjjvjjmjvj",
+        "vjjmjvjjrjjjjvjjmjvjjrjj",
+        "jvjjrjjjjvjjmjvjjrjjjjvj",
+        "rjjjjvjjmjvjjrjjjjvjjmjv",
+        "jvjjmjvjjrjjjjvjjmjvjjrj",
+        "mjvjjrjjjjvjjmjvjjrjjjjv",
+        "jrjjjjvjjmjvjjrjjjjvjjmj",
+        "jjvjjmjvjjrjjjjvjjmjvjjr",
+        "jmjvjjrjjjjvjjmjvjjrjjjj",
+        "jjrjjjjvjjmjvjjrjjjjvjjm"
+      ],
+      "palettes": [ "astral_cc_palette" ],
+      "place_nested": [
+        { "chunks": [ "astral_cc_marsh_stub_north" ], "x": 6, "y": 0, "joins": { "north": [ "cc_channel" ] } },
+        { "chunks": [ "astral_cc_marsh_stub_east" ], "x": 12, "y": 6, "joins": { "east": [ "cc_channel" ] } },
+        { "chunks": [ "astral_cc_marsh_stub_south" ], "x": 6, "y": 12, "joins": { "south": [ "cc_channel" ] } },
+        { "chunks": [ "astral_cc_marsh_stub_west" ], "x": 0, "y": 6, "joins": { "west": [ "cc_channel" ] } }
+      ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_marsh_stub_north",
+    "object": {
+      "mapgensize": [ 12, 12 ],
+      "rows": [
+        "~~~~~~~~~~~~",
+        "~~~~~~~~~~~~",
+        "~~~~~~~~~~~~",
+        "~~~~~~~~~~~~",
+        "~~~~~~~~~~~~",
+        "~~~~~~~~~~~~",
+        "~~~~~~~~~~~~",
+        "~~~~~~~~~~~~",
+        "v~v~v~v~v~v~",
+        "~v~v~v~v~v~v",
+        "rvvrvvrvvrvv",
+        "rvvrvvrvvrvv"
+      ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_marsh_stub_east",
+    "object": {
+      "mapgensize": [ 12, 12 ],
+      "rows": [
+        "rr~v~~~~~~~~",
+        "vvv~~~~~~~~~",
+        "vv~v~~~~~~~~",
+        "rrv~~~~~~~~~",
+        "vv~v~~~~~~~~",
+        "vvv~~~~~~~~~",
+        "rr~v~~~~~~~~",
+        "vvv~~~~~~~~~",
+        "vv~v~~~~~~~~",
+        "rrv~~~~~~~~~",
+        "vv~v~~~~~~~~",
+        "vvv~~~~~~~~~"
+      ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_marsh_stub_south",
+    "object": {
+      "mapgensize": [ 12, 12 ],
+      "rows": [
+        "vvrvvrvvrvvr",
+        "vvrvvrvvrvvr",
+        "v~v~v~v~v~v~",
+        "~v~v~v~v~v~v",
+        "~~~~~~~~~~~~",
+        "~~~~~~~~~~~~",
+        "~~~~~~~~~~~~",
+        "~~~~~~~~~~~~",
+        "~~~~~~~~~~~~",
+        "~~~~~~~~~~~~",
+        "~~~~~~~~~~~~",
+        "~~~~~~~~~~~~"
+      ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "nested_mapgen_id": "astral_cc_marsh_stub_west",
+    "object": {
+      "mapgensize": [ 12, 12 ],
+      "rows": [
+        "~~~~~~~~~vvv",
+        "~~~~~~~~v~vv",
+        "~~~~~~~~~vrr",
+        "~~~~~~~~v~vv",
+        "~~~~~~~~~vvv",
+        "~~~~~~~~v~rr",
+        "~~~~~~~~~vvv",
+        "~~~~~~~~v~vv",
+        "~~~~~~~~~vrr",
+        "~~~~~~~~v~vv",
+        "~~~~~~~~~vvv",
+        "~~~~~~~~v~rr"
+      ],
+      "palettes": [ "astral_cc_palette" ]
+    }
+  }
+]
